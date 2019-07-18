@@ -1,0 +1,27 @@
+# Simulations
+
+James Palmer Jr. shot 139 three point attempts and made 43 of them for a .309 shooting percentage last year. Before the tSo far this year, he's 7 for 39 -- a paltry .179. Is something wrong or is this just bad luck? Let's simulate 39 attempts 1000 times with his season long shooting percentage and see if this could just be random chance or something else.  
+
+
+```{r}
+simulations <- rbinom(n = 1000, size = 39, prob = .309)
+
+hist(simulations)
+
+table(simulations)
+```
+
+So what we see is given his season long shooting percentage, it's not out of the realm of randomness that with just 39 attempts for Palmer, he's only hit only 7. Is he below where he should be? Yes. Will he likely improve and soon? Yes. 
+
+### Cold streaks
+
+During the Western Illinois game, the team, shooting .329 on the season from behind the arc, went 0-15 in the second half. How strange is that? 
+
+```{r}
+simulations <- rbinom(n = 1000, size = 15, prob = .329)
+
+hist(simulations)
+
+table(simulations)
+```
+Short answer: Really weird. If you simulate 15 threes 1000 times, sometimes you'll see them miss all of them, but only a few times. Sometimes, they don't go 0-15 even once. So going ice cold is not totally out of the realm of random chance, but it's highly unlikely. That's trouble going into a game with a good team like Clemson. 

@@ -1,0 +1,34 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+Chapters
+
+1 - The very basics
+2 - Data, structures and types
+3 - Aggregates
+4 - Mutating data
+5 - Working with dates
+6 - Filters and selections
+7 - Transforming data
+8 - Simulations and distributions
+9 - Correlations and regressions
+10 - Mulitple regression
+11 - Residuals
+12 - Z Scores
+13 - Intro to ggplot
+14 - Stacked bar charts
+15 - Waffle charts
+16 - Line charts
+17 - Step charts
+18 - Ridge Charts
+19 - Lollipop Charts
+20 - Scatterplots
+21 - Facet Wraps
+22 - Tables
+23 - Rvest
+24 - Advanced Rvest
+25 - Annotations
+26 - Finishing touches
+27 - More finishing touches

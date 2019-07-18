@@ -1,0 +1,152 @@
+# Intro to rvest
+
+Let's grab [a simple, basic HTML table from College Football Stats](http://www.cfbstats.com/2018/leader/national/team/offense/split01/category09/sort01.html). This is scoring offense for 2018. There's nothing particularly strange about this table -- it's simply formatted and easy to scrape. 
+
+First we'll need some libraries. We're going to use a library called `rvest`, which you can get by running `install.packages('rvest')` in the console. 
+
+```{r}
+library(rvest)
+library(tidyverse)
+```
+
+The rvest package has functions that make fetching, reading and parsing HTML simple. The first thing we need to do is specify a url that we're going to scrape.
+
+```{r}
+scoringoffenseurl <- "http://www.cfbstats.com/2018/leader/national/team/offense/split01/category09/sort01.html"
+```
+
+Now, the most difficult part of scraping data from any website is knowing what exact HTML tag you need to grab. In this case, we want a `<table>` tag that has all of our data table in it. But how do you tell R which one that is? Well, it's easy, once you know what to do. But it's not simple. So I've made a short video to show you how to find it. 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kYkSE3zWa9Y" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+When you have simple tables, the code is very simple. You create a variable to receive the data, then pass it the url, read the html that was fetched, find the node you need using your XPath value you just copied and you tell rvest that it's a table. 
+
+```{r}
+scoringoffense <- scoringoffenseurl %>%
+  read_html() %>%
+  html_nodes(xpath = '//*[@id="content"]/div[2]/table') %>%
+  html_table()
+```
+
+What we get from this is ... not a dataframe. It's a list with one element in it, which just so happens to be our dataframe. When you get this, the solution is simple: just overwrite the variable you created with the first list element.
+
+```{r}
+scoringoffense <- scoringoffense[[1]]
+```
+
+And what do we have? 
+
+```{r}
+head(scoringoffense)
+```
+
+We have data, ready for analysis. 
+
+## A slightly more complicated example
+
+What if we want more than one year in our dataframe?
+
+This is a common problem. What if we want to look at every scoring offense going back several years? The website has them going back to 2009. How can we combine them? 
+
+First, we should note, that the data does not have anything in it to indicate what year it comes from. So we're going to have to add that. And we're going to have to figure out a way to stack two dataframes on top of each other. 
+
+So let's grab 2017.
+
+```{r}
+scoringoffenseurl17 <- "http://www.cfbstats.com/2017/leader/national/team/offense/split01/category09/sort01.html"
+
+scoringoffense17 <- scoringoffenseurl17 %>%
+  read_html() %>%
+  html_nodes(xpath = '//*[@id="content"]/div[2]/table') %>%
+  html_table()
+
+scoringoffense17 <- scoringoffense17[[1]]
+```
+
+First, how are we going to know, in the data, which year our data is from? We can use mutate.
+
+```{r error=TRUE}
+scoringoffense18 <- scoringoffense %>% mutate(YEAR = 2018)
+```
+
+Uh oh. Error. What does it say? Column 1 must be named. If you look at our data in the environment tab in the upper right corner, you'll see that indeed, the first column has no name. It's the FBS rank of each team. So we can fix that and mutate in the same step. We'll do that using `rename` and since the field doesn't have a name to rename it, we'll use a position argument. We'll say rename column 1 as Rank. 
+
+```{r}
+scoringoffense18 <- scoringoffense %>% rename(Rank = 1) %>% mutate(YEAR = 2018)
+scoringoffense17 <- scoringoffense17 %>% rename(Rank = 1) %>% mutate(YEAR = 2017)
+```
+
+And now, to combine the two tables together length-wise -- which is something we'll need to do for visualizing the data in future assignments -- we'll use a base R function called `rbind`. The good thing is rbind is simple. The bad part is it can only do two tables at a time, so if you have more than that, you'll need to do it in steps.
+
+```{r}
+combined <- rbind(scoringoffense18, scoringoffense17)
+```
+
+Note in the environment tab we now have a data frame called combined that has 260 observations -- which just so happens to be what 130 from 2018 and 130 from 2017 add up to. 
+
+```{r}
+head(combined)
+```
+
+## An even more complicated example
+
+What do you do when the table has non-standard headers? 
+
+Unfortunately, non-standard means there's no one way to do it -- it's going to depend on the table and the headers. But here's one idea: Don't try to make it work. 
+
+I'll explain.
+
+Let's try to get [season team stats from Sports Reference](https://www.sports-reference.com/cbb/seasons/2019-school-stats.html). If you look at that page, you'll see the problem right away -- the headers span two rows, and they repeat. That's going to be all kinds of no good. 
+First we'll grab the page.
+```{r}
+url <- "https://www.sports-reference.com/cbb/seasons/2019-school-stats.html"
+```
+
+Now, similar to our example above, we'll read the html, use XPath to find the table, and then read that table with a directive passed to it setting the header to FALSE. That tells rvest that there isn't a header row. Just import it as data. 
+```{r}
+stats <- url %>%
+  read_html() %>%
+  html_nodes(xpath = '//*[@id="basic_school_stats"]') %>%
+  html_table(header=FALSE)
+```
+
+What we get back is a list of one element (similar to above). So let's pop it out into a data frame.
+
+```{r}
+stats <- stats[[1]]
+```
+
+And we'll take a look at what we have. 
+
+```{r}
+head(stats)
+```
+
+So, that's not ideal. We have headers and data mixed together, and our columns are named X1 to X34. Also note: They're all character fields. Because the headers are interspersed with data, it all gets called character data. So we've got to first rename each field. 
+
+```{r}
+stats <- stats %>% rename(Rank=X1, School=X2, Games=X3, OverallWins=X4, OverallLosses=X5, WinPct=X6, OverallSRS=X7, OverallSOS=X8, ConferenceWins=X9, ConferenceLosses=X10, HomeWins=X11, HomeLosses=X12, AwayWins=X13, AwayLosses=X14, ForPoints=X15, OppPoints=X16, Blank=X17, Minutes=X18, FieldGoalsMade=X19, FieldGoalsAttempted=X20, FieldGoalPCT=X21, ThreePointMade=X22, ThreePointAttempts=X23, ThreePointPct=X24, FreeThrowsMade=X25, FreeThrowsAttempted=X26, FreeThrowPCT=X27, OffensiveRebounds=X28, TotalRebounds=X29, Assists=X30, Steals=X31, Blocks=X32, Turnovers=X33, PersonalFouls=X34)
+```
+
+Now we have to get rid of those headers interspersed in the data. 
+
+```{r}
+stats <- stats %>% filter(Rank != "Rk" & Games != "Overall") 
+```
+
+And finally, we need to change the file type of all the fields that need it. We're going to use a clever little trick, which goes like this: We're going to use `mutate_at`, which means mutate these fields. The pattern for `mutate_at` is `mutate_at` these variables and do this thing to them. But instead of specifying which of 33 variables we're going to mutate, we're going to specify the one we don't want to change, which is the name of the school. And we just want to convert them to numeric. Here's what it looks like:
+
+```{r}
+stats %>% mutate_at(vars(-School), as.numeric)
+```
+
+And just like that, we have a method for getting up to the minute season stats for every team in Division I. 
+
+#### Assignment
+
+I am a huge Premiere League fan, so I want data on the league. [For now, I just want teams](https://fbref.com/en/comps/9/stats/Premier-League-Stats). Scrape the team data at the top, but before you do, look at the header. Is it one row? Does that make it standard? Nope. So what now? 
+
+##### Rubric
+
+1. Did you scrape the page?
+2. Did you finish with a clean dataset?

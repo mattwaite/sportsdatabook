@@ -1,0 +1,84 @@
+# Working with dates
+
+One of the most frustrating things in data is working with dates. Everyone has a different opinion on how to record them, and every software package on the planet has to sort it out. Dealing with it can be a little ... confusing. And every dataset has something new to throw at you. So consider this an introduction. 
+
+We're going to do this two ways. First I'm going to show you how to use base R to solve a tricky problem. And then we'll use a library called `lubridate` to solve a more common and less tricky problem. And then we'll use a new library to solve most of the common problems before they start. 
+
+### The hard way
+
+First, we'll import `dyplyr` like we always do. But we're going to start using a new library, which is part of the Tidyverse called ReadR. ReadR has some tools built in to solve some common import problems. 
+
+```{r}
+library(dplyr)
+library(readr)
+```
+
+I'll give you an example of how ReadR is going to help later. We're going to use a dataset of [parking tickets at UNL](https://www.dropbox.com/s/gjfde8elm5hg3bd/tickets.csv?dl=0). If we do this the old way, this is what we get:
+
+```{r}
+tickets <- read.csv("../../Data/tickets.csv")
+head(tickets)
+```
+Note the date is a factor. We have to fix that. There's a lot of ways to fix dates. The base R way is to use formatting. The code is ... a little odd ... but you have to strip the date into it's component parts then reassmble it into a date using formatting. 
+
+```{r}
+tickets %>% mutate(
+    CleanDate = as.POSIXct(Date, format="%Y-%m-%d %H:%M:%S")
+)
+```
+
+There is a [library called lubridate](https://cran.r-project.org/web/packages/lubridate/vignettes/lubridate.html) that can parse some common date problems. If it's not already installed, just run `install.packages('lubridate')`
+
+```{r}
+library(lubridate)
+```
+
+Lubridate can handle this tickets data easier with one of it's many functions. The functions parse dates given a basic pattern.
+
+```{r}
+tickets %>% mutate(
+    CleanDate = ymd_hms(Date)
+)
+```
+That's less code and less weirdness, so that's good. 
+
+But to get clean data, I've installed a library and created a new field so I can now start to work with my dates. That seems like a lot, but don't think your data will always be perfect and you won't have to do these things. Still, there's got to be a better way. And there is. 
+
+Fortunately, ReadR anticipates some date formattings and can automatically handle this. The change in your code? After adding the ReadR library, you just use `read_csv` instead of `read.csv`
+
+```{r}
+tickets <- read_csv("../../Data/tickets.csv")
+head(tickets)
+```
+
+And just like that, the dates are formatted correctly. 
+
+But you're not done with lubridate yet. It has some interesting pieces parts we'll use elsewhere. What's a question you might have about parking tickets on campus involving dates? How about what month are the most tickets issued? We could use formatting to create a Month field but that would group all the Aprils ever together. We could create a year and a month together, but that would give us an invalid date object and that would create problems later. Lubridate has something called a floor date that we can use. 
+
+So to follow along here, we're going to use mutate to create a month field, group by to lump them together, summarize to count them up and arrange to order them. We're just chaining things together. 
+
+```{r}
+tickets %>% mutate(
+    Month = floor_date(Date, "month")
+) %>% 
+  group_by(Month) %>% 
+  summarise(
+    total = n()
+  ) %>%
+  arrange(desc(total))
+```
+
+### Assignment 
+
+ReadR doesn't always work, so it's useful to know how to apply it. Take [this data from the Lincoln Police Department](https://www.dropbox.com/s/3xxbr7h104zoenb/LPD_Dispatch_Records.csv?dl=0). Import it and view it with head.  
+
+Note `RPT_Date`. You, as a human, can recognize it as a date. But even ReadR sees it as a number -- an integer. That won't do. So with Lubridate, create a new field with the proper date formatting and then using what you know, I want you to tell me what the 10 highest calls for service days are at the LPD since Jan. 1, 2017. How many of those were Husker home games?
+How many calls for service happened on Saturday?
+
+#### Rubric
+
+1. Did you load the data correctly?
+2. Did you apply the right date parsing formula?
+3. Did you do the group and count correctly?
+4. Did you do the sorts correctly?
+5. Did you describe your steps in Markdown comments?

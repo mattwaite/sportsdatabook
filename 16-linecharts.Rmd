@@ -1,0 +1,107 @@
+# Line charts
+
+Bar charts -- stacked or otherwise -- are good for showing relative size of a thing compared to another thing. Line charts, which we work on here, are good for showing change over time. 
+
+So let's look at how we can answer this question: Why is Nebraska terrible right now?
+
+Let's start getting all that we need. We can use the tidyverse shortcut. 
+
+```{r}
+library(tidyverse)
+```
+
+Now we'll import the data you created. Mine looks like this: 
+
+```{r}
+nu <- read_csv("~/Dropbox/SPMC350-Data-Literacy-and-Analytics-in-Sports/Data/nulogs.csv")
+```
+
+Because this data has just Nebraska data in it, the dates are formatted correctly, and the data is long data (instead of wide), we have what we need to make line charts.
+
+Now we have what we need. Let's chart it. 
+
+```{r}
+ggplot(nu, aes(x=Date, y=TeamFGPCT)) + geom_line()
+```
+
+See a problem here? Note the Y axis doesn't start with zero. That makes this look worse than it is (and it's pretty bad). To make the axis what you want, you can use `scale_x_continuous` or `scale_y_continuous` and pass in a list with the bottom and top value you want. You do that like this:
+
+```{r}
+ggplot(nu, aes(x=Date, y=TeamFGPCT)) + geom_line() + scale_y_continuous(limits = c(0, .6))
+```
+
+Note also that our X axis labels are automated. It knows it's a date and it just labels it by month. 
+
+### This is too simple. 
+
+With datasets, we want to invite comparison. So let's answer the question visually. Let's put two lines on the same chart. How does Nebraska compare to Michigan? Go grab [Michigan's data](https://www.sports-reference.com/cbb/schools/michigan/2019-gamelogs.html) same way you grabbed Nebraska's. Save yourself some pain and copy and paste your field names. 
+
+In this case, because we have two different datasets, we're going to put everything in the geom instead of the ggplot step. We also have to explicitly state what dataset we're using by saying `data=` in the geom step. So import your data. Here's what mine looks like:
+
+```{r}
+michigan <- read_csv("~/Dropbox/SPMC350-Data-Literacy-and-Analytics-in-Sports/Data/michlogs.csv")
+```
+
+First, let's chart Nebraska. Read carefully. First we set the data. Then we set our aesthetic. Unlike bars, we need an X and a Y variable. In this case, our X is the season -- the date data. Y is the thing we want the lines to move with. In this case, the Team Field Goal Percentage -- or whatever you called it in your dataset. 
+
+```{r}
+ggplot() + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red")
+```
+Now, by using +, we can add Michigan to it. REMEMBER COPY AND PASTE IS A THING. Nothing changes except what data you are using.
+
+```{r}
+ggplot() + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + geom_line(data=michigan, aes(x=Date, y=TeamFGPCT), color="Blue")
+```
+
+Let's flatten our lines out by zeroing the Y axis.
+
+```{r}
+ggplot() + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + geom_line(data=michigan, aes(x=Date, y=TeamFGPCT), color="Blue") + scale_y_continuous(limits = c(0, .6))
+```
+
+So visually speaking, Michigan doesn't seem to be having a much better season than we are. Except they're top of the Big Ten right now, and we're ... not.
+
+### But what if I wanted to add a lot of lines. 
+
+Fine. How about all Power Five Schools? This data for example purposes. You don't have to do it. 
+
+```{r}
+logs <- read_csv("~/Dropbox/SPMC350-Data-Literacy-and-Analytics-in-Sports/logs.csv")
+```
+
+I can keep layering on layers all day if I want. And if my dataset has more than one team in it, I need to use the `group` command. And, the layering comes in order -- so if you're going to layer a bunch of lines with a smaller group of lines, you want the bunch on the bottom. So to do that, your code stacks from the bottom. The first geom in the code gets rendered first. The second gets layered on top of that. The third gets layered on that and so on. 
+
+```{r}
+ggplot() + geom_line(data=logs, aes(x=Date, y=TeamFGPCT, group=Team), color="light grey") + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + geom_line(data=michigan, aes(x=Date, y=TeamFGPCT), color="Blue") + scale_y_continuous(limits = c(0, .6))
+```
+
+What do we see here? How has Nebraska and Michigan's season evolved against all the rest of the teams in college basketball?
+
+But how does that compare to the average? We can add that pretty easily by creating a new dataframe with it and add another geom_line. 
+
+```{r}
+average <- logs %>% group_by(Date) %>% summarize(mean_shooting=mean(TeamFGPCT))
+```
+
+```{r}
+ggplot() + geom_line(data=logs, aes(x=Date, y=TeamFGPCT, group=Team), color="light grey") + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + geom_line(data=michigan, aes(x=Date, y=TeamFGPCT), color="Blue") + geom_line(data=average, aes(x=Date, y=mean_shooting), color="black") + scale_y_continuous(limits = c(0, .6))
+```
+
+
+```{r}
+logs %>% arrange(TeamFGPCT)
+```
+
+
+### Assignment
+
+* How does Nebraska's shooting percentage compare to the Big Ten? [I won't make you scrape all of the teams](https://www.dropbox.com/s/pvq9nyao1xorvvd/biglogs.csv?dl=0). But to put the Big Ten on the same chart as Nebraska, you'll need two dataframes, two geoms and with your Big Ten dataframe, you need to use `group` in the aesthetic. 
+
+* After working on this chart, your boss comes in and says they don't care about field goal percentage anymore. They just care about three-point shooting because they read on some blog that three-point shooting was all the rage. Change what you need to change to make your line chart now about how the season has gone behind the three-point line. How does Nebraska compare to the rest of the Big Ten?
+
+#### Rubric
+
+1. Did you gather the data correctly?
+2. Did you import it into R Notebook correctly?
+3. Did you create the data frames needed to chart correctly?
+4. Did you chart both correctly?

@@ -1,0 +1,129 @@
+# Multiple regression
+
+Earlier this semester, we looked at [scatterplots and correlations](http://mattwaite.github.io/sports/SpringScatterplots.html) to predict how one element of a game would predict the score. But we know that a single variable, in all but the rarest instances, are not going to be that predictive. We need more than one. So we need a multiple regression.
+
+That presents it's own problems. So let's get our libraries and our data of [every college basketball game since 2014](https://unl.box.com/s/ugd32b8aid883xjy5na6ak33ni7lix84) loaded up. 
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+logs <- read_csv("~/Box/NCAABasketballData/logs1519.csv")
+```
+
+So one way to show how successful a team was for a game is to show the differential between the team's score and the opponnent's score. Score a lot more than the opponent = good, score a lot less than the opponent = bad. And, relatively speaking, the more the better. So let's create that differential.
+
+```{r}
+logs <- logs %>% mutate(Differential = TeamScore - OpponentScore)
+```
+
+The linear model code we used before is pretty straight forward. Its `field` is predicted by `field`. So all semester, we've looked at team shooting percentage. Here's that linear model. 
+
+```{r}
+shooting <- lm(TeamFGPCT ~ Differential, data=logs)
+summary(shooting)
+```
+
+Remember: There's a lot here, but only some of it we care about. What is the Adjusted R-squared value? What's the p-value and is it less than .05? In this case, we can predict 37 percent of the difference in differential with how well a team shoots the ball. 
+
+To add more predictors to this mix, we merely add them. But it's not that simple, as you'll see in a moment. So first, let's look at adding how well the other team shot to our prediction model:
+
+```{r}
+model1 <- lm(Differential ~ TeamFGPCT + OpponentFGPCT, data=logs)
+summary(model1)
+```
+
+First things first: What is the adjusted R-squared?
+
+Second: what is the p-value and is it less than .05? 
+
+Third: Compare the residual standard error. We went from .05949 to 9.4. The meaning of this is both really opaque and also simple -- we added a lot of error to our model by adding more measures. So the width of our predictive range grew pretty dramatically, but so did the amount of the difference we could predict. It's a trade off. 
+
+One of the more difficult things to understand about multiple regression is the issue of multicollinearity. What that means is that there is significant correlation overlap between two variables, and all you are doing by adding both of them is adding error with no real value to the R-squared. In pure statistics, we don't want any multicollinearity at all. Violating that assumption limits the applicability of what you are doing. So if we have some multicollinearity, it limits our scope of application to college basketball. We can't say this will work for every basketball league and level everywhere. What we need to do is see how correlated each value is to each other and throw out ones that are highly co-correlated.
+
+So to find those, we have to create a correlation matrix that shows us how each value is correlated to our outcome variable, but also with each other. We can do that in the `Hmisc` library. We install that in the console with `install.packages("Hmisc")`
+
+```{r}
+library(Hmisc)
+```
+
+We can pass in everything to the Hmisc library and get a correlation matrix out of it, but since we have a large number of values, we should strip that down and reorder them. So that's what I'm doing here. I'm saying give me differential first, and then columns 9-24, and then 26-41. Why the skip? There's a blank column in the middle of the data. A remnant of the scraper. 
+
+```{r}
+simplelogs <- logs %>% select(Differential, 9:24, 26:41)
+```
+
+Before we proceed, what we're looking to do is follow the Differential column down, looking for correlation values near 1 or -1. Correlations go from -1, meaning perfect negative correlation, to 0, meaning no correlation, to 1, meaning perfect positive correlation. So we're looking for numbers near 1 or -1 for their predictive value. BUT: We then need to see if that value is also highly correlated with something else. If it is, we have a decision to make.
+
+We get our correlation matrix like this:
+
+```{r}
+cormatrix <- rcorr(as.matrix(simplelogs))
+
+cormatrix$r
+```
+
+Notice right away -- TeamFG is highly correlated. But it's also highly correlated with TeamFGPCT. And that makes sense. A team that doesn't shoot many shots is not going to have a high score differential. But the number of shots taken and the field goal percentage are also highly related. So including both of these measures would be pointless -- they would add error without adding much in the way of predictive power. 
+
+What else do you see? 
+
+We can add more just by simply adding them. 
+
+```{r}
+model2 <- lm(Differential ~ TeamFGPCT + OpponentFGPCT + TeamTotalRebounds + OpponentTotalRebounds, data=logs)
+summary(model2)
+```
+
+Go down the list:
+
+What is the Adjusted R-squared now? 
+What is the p-value and is it less than .05?
+What is the Residual standard error? 
+
+The final thing we can do with this is predict things. Look at our coefficients table. See the Estimates? We can build a formula from that, same as we did with linear regressions.
+
+```
+Differential = (TeamFGPCT*100.880013) + (OpponentFGPCT*-97.563291) + (TeamTotalRebounds*0.516176) + (OpponentTotalRebounds*-0.436402) - 3.655461
+```
+So if our goal is to predict a conference champion team, we need to know what those teams did. Here's the regular season conference champions in this dataset. 
+
+```{r}
+logs %>% filter(Team == "Michigan State Spartans" & season == "2018-2019" | Team == "Michigan State Spartans" & season == "2017-2018" | Team == "Purdue Boilermakers" & season == "2016-2017" | Team == "Indiana Hoosiers" & season == "2015-2016" | Team == "Wisconsin Badgers" & season == "2014-2015") %>% summarise(avgfgpct = mean(TeamFGPCT), avgoppfgpct=mean(OpponentFGPCT), avgtotrebound = mean(TeamTotalRebounds), avgopptotrebound=mean(OpponentTotalRebounds))
+```
+
+Now it's just plug and chug. 
+
+```{r}
+(0.4886133*100.880013) + (0.4090221*-97.563291) + (35.29834*0.516176) + (27.20994*-0.436402) - 3.655461
+```
+
+So a team with those numbers is going to average scoring 12 more points per game than their opponent.
+
+How does that compare to Nebraska of this season? 
+
+```{r}
+logs %>% filter(Team == "Nebraska Cornhuskers" & season == "2018-2019") %>% summarise(avgfgpct = mean(TeamFGPCT), avgoppfgpct=mean(OpponentFGPCT), avgtotrebound = mean(TeamTotalRebounds), avgopptotrebound=mean(OpponentTotalRebounds))
+```
+
+```{r}
+(0.4305833*100.880013) + (0.4226667*-97.563291) + (32.5*0.516176) + (34.94444*-0.436402) - 3.655461
+```
+
+By this model, it predicted we would outscore our opponent by .07 points over the season. So we'd win slightly more than we'd lose. Our overall record? 19-17. 
+
+#### Assignment 
+
+You have been hired by Fred Hoiberg to build a team. He's interested in this model, but wants more.
+
+There are more predictors to be added to our model. You are to find two. Two that contribute to the predictive quality of the model without largely overlapping another predictor.
+
+In your notebook, report the adjusted r-squared you achieved. 
+
+You are to generate a new set of coefficients, a new formula and a new set of numbers of what a conference champion would expect in terms of differential. I've done a lot of work for you. Continue it. Add two more predictors and complete the prediction. And compare that to Nebraska of this season.
+
+Turn in your notebook with these answers and comments to the code you added, making sure to add WHY you are doing things. Why did you select those two variables.
+
+
+
+

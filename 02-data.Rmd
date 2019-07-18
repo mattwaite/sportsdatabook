@@ -1,0 +1,37 @@
+# Data, structures and types
+
+One good thing about sports is that there's lots of interest in it. And that means there's outlets that put sports data on the internet. Now I'm going to show you a trick to getting it easily. 
+
+The site sports-reference.com takes NCAA (and other league) stats and puts them online. For instance, [here's their page on Nebraska basketball's game logs](https://www.sports-reference.com/cbb/schools/nebraska/2019-gamelogs.html), which you should open now.
+
+Now, in a new tab, log into Google Docs/Drive and open a new spreadsheet. In the first cell of the first row, copy and paste this formula in:
+
+```
+=IMPORTHTML("https://www.sports-reference.com/cbb/schools/nebraska/2019-gamelogs.html", "table", 1)
+```
+
+If it worked right, you've got the data from that page in a spreadsheet. 
+
+### Cleaning the data
+
+The first thing we need to do is recognize that we don't have data, really. We have the results of a formula. You can tell by putting your cursor on that field, where you'll see the formula again. This screenshot is from a different example, but this is where you'd look:
+
+![Cleaning data screenshot](clean1.png "Cleaning Data Screenshot 1")
+
+The solution is easy:
+
+Edit > Select All (command/control A)
+Edit > Copy (command/control c)
+Edit > Paste Special > Values Only) (command/control shift v)
+
+Now you have data, but your headers are all wrong. You want your headers to be one line -- not two, like they have. And the header names repeat -- first for our team, then for theirs. So you have to change each header name to be UsORB or TeamORB and OpponentORB instead of just ORB.
+
+After you've done that, note we have repeating headers. There's two ways to deal with that -- you could just hightlight it and go up to Edit > Delete Rows XX-XX depending on what rows you highlighted. That's the easy way with our data. 
+
+But what if you had hundreds of repeating headers like that? Deleting them would take a long time. 
+
+You can use sorting to get rid of anything that's not data. So click on Data > Sort Range. You'll want to check the "Data has header row" field. Then hit Sort.
+
+![Cleaning data screenshot](clean3.png "Cleaning Data Screenshot 3")
+
+Now all you need to do is search through the data for where your junk data -- extra headers, blanks, etc. -- got sorted and delete it. After you've done that, you can export it for use in R. Go to File > Download as > Comma Separated Values. Remember to put it in the same directory as your R Notebook file so you can import the data easily.

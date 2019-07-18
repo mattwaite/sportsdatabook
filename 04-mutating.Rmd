@@ -1,0 +1,53 @@
+One of the most common data analysis techniques is to look at change over time. The most common way of comparing change over time is through percent change. The math behind calculating percent change is very simple, and you should know it off the top of your head. The easy way to remember it is:
+
+`(new - old) / old` 
+
+Or new minus old divided by old. Your new number minus the old number, the result of which is divided by the old number. To do that in R, we can use `dplyr` and `mutate` to calculate new metrics in a new field using existing fields of data. 
+
+So first we'll import dyplr.
+
+```{r}
+library(dplyr)
+library(readr)
+```
+
+Now we'll import a common and [simple dataset of total attendance](https://www.dropbox.com/s/m52dkdon3zs3ssq/attendance.csv?dl=0) at NCAA football games over the last few seasons. 
+
+```{r}
+attendance <- read_csv('../../Data/attendance.csv')
+head(attendance)
+```
+The code to calculate percent change is pretty simple. Remember, with `summarize`, we used `n()` to count things. With `mutate`, we use very similar syntax to calculate a new value using other values in our dataset. So in this case, we're trying to do (new-old)/old, but we're doing it with fields. If we look at what we got when we did `head`, you'll see there's \`2017-2018\` as the new data, and we'll use \`2016-2017\` as the old data. So we're looking at one year. Then, to help us, we'll use arrange again to sort it, so we get the fastest growing school over one year. 
+
+```{r}
+attendance %>% mutate(
+  change = (`2017-2018` - `2016-2017`)/`2016-2017`
+) 
+```
+What do we see right away? Do those numbers look like we expect them to? No. They're a decimal expressed as a percentage. So let's fix that by multiplying by 100. 
+
+```{r}
+attendance %>% mutate(
+  change = ((`2017-2018` - `2016-2017`)/`2016-2017`)*100
+) 
+```
+Now, does this ordering do anything for us? No. Let's fix that with arrange. 
+
+```{r}
+attendance %>% mutate(
+  change = ((`2017-2018` - `2016-2017`)/`2016-2017`)*100
+) %>% arrange(desc(change))
+```
+
+### Assignment
+
+Read the Wall Street Journal story about declining attendance -- in Files in Canvas called WSJEmptySeats.pdf. Look at the walkthrough and be ready to talk about similarities and differences on Monday. 
+
+Calculate the percent change in an rushing offense category of your choosing [in this dataset](https://www.dropbox.com/s/bxqmzntkwhqn24e/rushingoffense.csv?dl=0). Do not pick Games. Look at something else. Who gained the most in your category? Who lost the most? Explain your steps, and write a paragraph on what you found. 
+
+#### Rubric
+
+1. Did you import the data correctly?
+2. Did you mutate the data correctly? Did you do it in one step?
+3. Did you sort the data correctly?
+4. Did you explain each step using Markdown?

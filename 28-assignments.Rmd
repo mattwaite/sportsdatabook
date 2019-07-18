@@ -1,0 +1,80 @@
+# Assignments
+
+This is a collection of assignments I've used in my Sports Data Analysis and Visualization course at the University of Nebraska-Lincoln. The overriding philosophy is to have students do lots of small assignments that directly apply what they learned, and often pulling from other assignments. Each small assignment is just a few points each -- I make them 5 points each and make the grading a yes/no decision on 5 different questions -- so a bad grade on one doesn't matter. Then, twice during the semester, I have them create blog posts with visualizations on a topic of their choosing. The topic must have a point of view -- Nebraska's woes on third down are why the team is struggling, for example -- and must be backed up with data. They have to write a completely documented R Notebook explaining what they did and why; they have to write a publicly facing blog post for a general audience and that post has to have at least three graphs backing up their point; and they have to give a lightning talk (no more than five minutes) in class about what they have found. Those two assignments are typically worth 50 percent of the course grade. 
+
+
+**Chapter 1**
+
+Create an R notebook (which you should have done if you were following along). In it, delete all the generated text from it, so you have a blank document. Then, write a sentence in the document telling me what the last thing you did in Swirl was. Then add a code block (see above about inserting) and add two numbers together. Any two numbers. Run that code block. Save the file and submit the .Rmd file created when you save it. 
+
+That's it. Simple.
+
+**Chapter 2**
+
+**Chapter 3**
+
+We're going to put it all together now. We're going to calculate the mean and median salaries of departments at each campus using the salary data. 
+
+Answer these questions:
+
+1. What are the mean and median salaries of each department on each campus? And how many employees are on each department?
+2. What are the median salaries of the largest departments at each campus? And how does that compare to the average salary for that department?
+3. What department has the highest mean salary? How does that compare with the median?
+
+To do this, you'll need to [download the salary data data](https://www.dropbox.com/s/xts9xsim3lpg7qu/nusalaries1819.csv?dl=0).
+
+Rubric
+
+1. Did you read the data into a dataframe? 
+2. Did you use group by syntax correctly? 
+3. Did you use summarize syntax correctly?
+4. Did you use Markdown comments to explain your steps? 
+
+
+**Chapter 4**
+
+**Chapter 5**
+
+**Chapter 6**
+
+**Chapter 7**
+
+**Chapter 8**
+
+**Chapter 9**
+
+**Chapter 10**
+
+**Chapter 11**
+
+**Chapter 12**
+
+**Chapter 13**
+
+**Chapter 14**
+
+**Chapter 15**
+
+**Chapter 16**
+
+**Chapter 17**
+
+**Chapter 18**
+
+**Chapter 19**
+
+**Chapter 20**
+
+**Chapter 21**
+
+**Chapter 22**
+
+**Chapter 23**
+
+**Chapter 24**
+
+**Chapter 25**
+
+**Chapter 26**
+
+**Chapter 27**

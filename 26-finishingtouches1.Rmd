@@ -1,0 +1,250 @@
+# Finishing touches, part 1
+
+The output from ggplot is good, but not great. We need to add some pieces to it. The elements of a good graphic are:
+
+* Headline
+* Chatter
+* The main body
+* Annotations
+* Labels
+* Source line
+* Credit line
+
+That looks like:
+
+![chart](chartannotated.png "A chart, annotated")
+
+### Graphics vs visual stories
+
+While the elements above are nearly required in every chart, they aren't when you are making visual stories. 
+
+* When you have a visual story, things like credit lines can become a byline.
+* In visual stories, source lines are often a note at the end of the story. 
+* Graphics don’t always get headlines – sometimes just labels, letting the visual story headline carry the load.
+
+[An example from The Upshot](https://www.nytimes.com/interactive/2018/02/14/business/economy/inflation-prices.html). Note how the charts don't have headlines, source or credit lines.
+
+### Getting ggplot closer to output
+
+Let's explore fixing up ggplot's output before we send it to a finishing program like Adobe Illustrator. We'll need a graphic to work with first. 
+
+```{r}
+library(rvest)
+library(tidyverse)
+```
+
+
+```{r}
+scoring <- "http://www.cfbstats.com/2018/leader/national/team/offense/split01/category09/sort01.html"
+
+scoringOffense <- scoring %>%
+  read_html() %>%
+  html_nodes(xpath = '//*[@id="content"]/div[2]/table') %>% 
+  html_table()
+
+scoringOffense <- scoringOffense[[1]]
+
+scoringd <- "http://www.cfbstats.com/2018/leader/national/team/defense/split01/category09/sort01.html"
+
+scoringDefense <- scoringd %>%
+  read_html() %>%
+  html_nodes(xpath = '//*[@id="content"]/div[2]/table') %>% 
+  html_table()
+
+scoringDefense <- scoringDefense[[1]]
+
+offense3rd <- "http://www.cfbstats.com/2018/leader/national/team/offense/split01/category25/sort01.html"
+
+offensiveThird <- offense3rd %>%
+  read_html() %>%
+  html_nodes(xpath = '//*[@id="content"]/div[2]/table') %>% 
+  html_table()
+
+offensiveThird <- offensiveThird[[1]]
+
+defense3rd <- "http://www.cfbstats.com/2018/leader/national/team/offense/split01/category25/sort01.html"
+
+defensiveThird <- defense3rd %>%
+  read_html() %>%
+  html_nodes(xpath = '//*[@id="content"]/div[2]/table') %>% 
+  html_table()
+
+defensiveThird <- defensiveThird[[1]]
+
+longplays <- "http://www.cfbstats.com/2018/leader/national/team/offense/split01/category30/sort01.html"
+
+offenseLongPlays <- longplays %>%
+  read_html() %>%
+  html_nodes(xpath = '//*[@id="content"]/div[2]/table') %>% 
+  html_table(header = TRUE)
+
+offenseLongPlays <- offenseLongPlays[[1]]
+
+dlongplays <- "http://www.cfbstats.com/2018/leader/national/team/defense/split01/category30/sort01.html"
+
+defenseLongPlays <- dlongplays %>%
+  read_html() %>%
+  html_nodes(xpath = '//*[@id="content"]/div[2]/table') %>% 
+  html_table(header = TRUE)
+
+defenseLongPlays <- defenseLongPlays[[1]]
+
+scoringOffense <- scoringOffense %>% rename(Rank=1)
+scoringDefense <- scoringDefense %>% rename(Rank=1)
+offensiveThird <- offensiveThird %>% rename(Rank=1)
+defensiveThird <- defensiveThird %>% rename(Rank=1)
+
+#write.csv(offenseLongPlays, "olong.csv")
+#write.csv(defenseLongPlays, "dlong.csv")
+
+offenseLongPlays <- read_csv("olong.csv")
+defenseLongPlays <- read_csv("dlong.csv")
+```
+
+```{r}
+join1 <- left_join(scoringOffense, scoringDefense, by="Name")
+join2 <- left_join(join1, offensiveThird, by="Name")
+join3 <- left_join(join2, defensiveThird, by="Name")
+join4 <- left_join(join3, offenseLongPlays, by="Name")
+join5 <- left_join(join4, defenseLongPlays, by="Name")
+```
+
+```{r}
+
+fbscomposite <- join5 %>% mutate(
+  oppg_z = as.numeric(scale(`Points/G.x`, center=TRUE, scale=TRUE)),
+  dppg_z = as.numeric(-1 * (scale(`Points/G.y`, center=TRUE, scale=TRUE))),
+  othird_z = as.numeric(scale(`Conversion %.x`, center=TRUE, scale=TRUE)),
+  dthird_z = as.numeric(-1 * (scale(`Conversion %.y`, center=TRUE, scale=TRUE))),
+  olong_z = as.numeric(scale(`10+.x`, center=TRUE, scale=TRUE)),
+  dlong_z = as.numeric(-1 * (scale(`10+.y`, center=TRUE, scale=TRUE))),
+  composite = oppg_z + dppg_z + othird_z + dthird_z + olong_z + dlong_z
+)
+
+```
+
+```{r}
+fbscomposite %>% select(Name, composite) %>% arrange(composite)
+```
+
+
+```{r}
+ggplot() + geom_bar(data=fbscomposite, aes(x=reorder(Name, composite), weight=composite)) + coord_flip()
+```
+
+Let's take changing things one by one. The first thing we can do is change the figure size. Sometimes you don't want a square. We can use the `knitr` output settings in our chunk to do this easily in our notebooks. 
+
+```{r fig.width=5, fig.height=12}
+
+ggplot() + geom_bar(data=fbscomposite, aes(x=reorder(Name, composite), weight=composite)) + coord_flip()
+
+```
+
+Now let's add some labeling. 
+
+```{r fig.width=5, fig.height=12}
+
+ggplot() + geom_bar(data=fbscomposite, aes(x=reorder(Name, composite), weight=composite)) + coord_flip() +
+   labs(x="Team", y="Composite Score", title="Nebraska's remaining opponents", subtitle="The only remaining team the Huskers are clearly \nbetter than? Illinois.", caption="Source: cfbstats.com | By Matt Waite")
+```
+
+Off to a good start, but our text has no real heirarchy. We'd want our headline to stand out more. So let's change that. When it comes to changing text, the place to do that is in the theme element. [There are a lot of ways to modify the theme](http://ggplot2.tidyverse.org/reference/theme.html). We'll start easy. Let's make the headline bigger and bold.
+
+```{r fig.width=5, fig.height=12}
+
+ggplot() + geom_bar(data=fbscomposite, aes(x=reorder(Name, composite), weight=composite)) + coord_flip() +
+   labs(x="Team", y="Composite Score", title="Nebraska's remaining opponents", subtitle="The only remaining team the Huskers are clearly \nbetter than? Illinois.", caption="Source: cfbstats.com | By Matt Waite") +
+  theme(
+    plot.title = element_text(size = 16, face = "bold")
+  )
+```
+
+Better. But those axis titles are a bit large. Let's shrink them. 
+
+```{r fig.width=5, fig.height=12}
+
+ggplot() + geom_bar(data=fbscomposite, aes(x=reorder(Name, composite), weight=composite)) + coord_flip() +
+   labs(x="Team", y="Composite Score", title="Nebraska's remaining opponents", subtitle="The only remaining team the Huskers are clearly \nbetter than? Illinois.", caption="Source: cfbstats.com | By Matt Waite") +
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    axis.title = element_text(size = 8)
+  )
+```
+
+Do we even need the y axis titles? 
+
+```{r fig.width=5, fig.height=12}
+
+ggplot() + geom_bar(data=fbscomposite, aes(x=reorder(Name, composite), weight=composite)) + coord_flip() +
+   labs(x="Team", y="Composite Score", title="Nebraska's remaining opponents", subtitle="The only remaining team the Huskers are clearly \nbetter than? Illinois.", caption="Source: cfbstats.com | By Matt Waite") +
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    axis.title = element_text(size = 8),
+    axis.title.y = element_blank()
+  )
+```
+
+And those team names are too big, so they sit on each other. We can shrink those.
+
+```{r fig.width=5, fig.height=12}
+
+ggplot() + geom_bar(data=fbscomposite, aes(x=reorder(Name, composite), weight=composite)) + coord_flip() +
+   labs(x="Team", y="Composite Score", title="Nebraska's remaining opponents", subtitle="The only remaining team the Huskers are clearly \nbetter than? Illinois.", caption="Source: cfbstats.com | By Matt Waite") +
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    axis.title = element_text(size = 10),
+    axis.title.y = element_blank(),
+    axis.text = element_text(size = 7)
+  )
+```
+
+Do we need the tick lines next to the teams? 
+
+```{r fig.width=5, fig.height=12}
+
+ggplot() + geom_bar(data=fbscomposite, aes(x=reorder(Name, composite), weight=composite)) + coord_flip() +
+   labs(x="Team", y="Composite Score", title="Nebraska's remaining opponents", subtitle="The only remaining team the Huskers are clearly \nbetter than? Illinois.", caption="Source: cfbstats.com | By Matt Waite") +
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    axis.title = element_text(size = 10),
+    axis.title.y = element_blank(),
+    axis.text = element_text(size = 7),
+    axis.ticks = element_blank()
+  )
+```
+
+If we want to add one of the premade themes now, we have to do it BEFORE our theme element.
+
+```{r fig.width=5, fig.height=12}
+
+ggplot() + geom_bar(data=fbscomposite, aes(x=reorder(Name, composite), weight=composite)) + coord_flip() +
+   labs(x="Team", y="Composite Score", title="Nebraska's remaining opponents", subtitle="The only remaining team the Huskers are clearly \nbetter than? Illinois.", caption="Source: cfbstats.com | By Matt Waite") +
+  theme_minimal() + 
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    axis.title = element_text(size = 10),
+    axis.title.y = element_blank(),
+    axis.text = element_text(size = 7),
+    axis.ticks = element_blank()
+  )
+```
+
+```{r fig.width=5, fig.height=12}
+
+ggplot() + geom_bar(data=fbscomposite, aes(x=reorder(Name, composite), weight=composite)) + coord_flip() +
+   labs(x="Team", y="Composite Score", title="Nebraska's remaining opponents", subtitle="The only remaining team the Huskers are clearly \nbetter than? Illinois.", caption="Source: cfbstats.com | By Matt Waite") +
+  theme_minimal() + 
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    axis.title = element_text(size = 10),
+    axis.title.y = element_blank(),
+    axis.text = element_text(size = 7),
+    axis.ticks = element_blank()
+  ) + ggsave("plot.png", width=5, height=12)
+```
+
+### Cleaning up in Illustrator
+
+There's some things that are easier to do in Illustrator -- nudging text around for one. Colors can be a mixed bag. 
+
+![finished](plot_fixed.png "Fixed")
