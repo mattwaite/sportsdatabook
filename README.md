@@ -5,3 +5,5 @@ This is an attempt to convert the course materials from the University of Nebras
 The chapters attempt a sort of meta narrative where each chapter is a skill and each skill leads to the next skill. When the visual chapters start, each chapter represents a shape of the data and what it represents. The last chapters are about preparing charts to be publication ready from ggplot. 
 
 This book will evolve as my course does, adding things as I add them. 
+
+If you are an instructor, the last chapter is example assignments for each chapter. The basic philosophy there is to make students answer practical questions that a data analyst might be asked, be it at a news organization or within a sporting organization. 
