@@ -33,7 +33,7 @@ The CSV file we're going to read from is a [Nebraska Game and Parks Commission d
 
 So step 1 is to import the data. The code looks *something* like this, but hold off copying it just yet:
 
-`mountainlions <- read_csv("../Data/mountainlions.csv")`
+`mountainlions <- read_csv("~/Documents/Data/mountainlions.csv")`
 
 Let's unpack that.
 
@@ -41,7 +41,7 @@ The first part -- mountainlions -- is the name of your variable. A variable is j
 
 The <- bit is the variable assignment operator. It's how we know we're assigning something to a word. Think of the arrow as saying "Take everything on the right of this arrow and stuff it into the thing on the left." So we're creating an empty vessel called mountainlions and stuffing all this data into it. 
 
-The `read_csv` bits are pretty obvious, except for one thing. What happens in the quote marks is the path to the data. In there, I have to tell R where it will find the data. The easiest thing to do, if you are confused about how to find your data, is to put your data in the same folder as as your notebook (you'll have to save that notebook first). In my case, I've got a folder called Data that's two levels up from my work folder. So the ../ means move up one level. So move up one level, move up one level, find Data, then in there is a file called mountainlions.csv. Some people -- insane people -- leave the data in their downloads folder. The data path then would be `~/Downloads/nameofthedatafilehere.csv` on PC or Mac.
+The `read_csv` bits are pretty obvious, except for one thing. What happens in the quote marks is the path to the data. In there, I have to tell R where it will find the data. The easiest thing to do, if you are confused about how to find your data, is to put your data in the same folder as as your notebook (you'll have to save that notebook first). If you do that, then you just need to put the name of the file in there (mountainlions.csv). In my case, I've got a folder called Documents in my home directory (that's the `~` part), and in there is a folder called Data that has the file called mountainlions.csv in it. Some people -- insane people -- leave the data in their downloads folder. The data path then would be `~/Downloads/nameofthedatafilehere.csv` on PC or Mac.
 
 **What you put in there will be different from mine**. So your first task is to import the data.
 
@@ -125,7 +125,6 @@ Let's let sort help us.
 salaries %>% arrange(desc(`Budgeted Annual Salary`))
 ```
 
-Oh, right. In this dataset, we pay a football coach $5 million. Extremes influence averages, not medians, and now you have your answer.  
+Oh, right. In this dataset, the university pays a football coach $5 million. Extremes influence averages, not medians, and now you have your answer.  
 
-So when choosing a measure of the middle, you have to ask yourself -- could I have extremes? Because a median won't be sensitive to extremes. It will be the point at which half the numbers are above and half are below. The average or mean will be a measure of the middle, but if you have a bunch of low paid people and then one football coach, the average will be wildly skewed. Here, because there's so few highly paid football coaches, the number is only slightly skewed in the grand scheme, but skewed nonetheless. 
-
+So when choosing a measure of the middle, you have to ask yourself -- could I have extremes? Because a median won't be sensitive to extremes. It will be the point at which half the numbers are above and half are below. The average or mean will be a measure of the middle, but if you have a bunch of low paid people and then one football coach, the average will be wildly skewed. Here, because there's so few highly paid football coaches compared to people who make a normal salary, the number is only slightly skewed in the grand scheme, but skewed nonetheless. 
