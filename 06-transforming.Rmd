@@ -2,23 +2,26 @@
 
 Sometimes long data needs to be wide, and sometimes wide data needs to be long. I'll explain.
 
-You are soon going to discover that long before you can visualize data, you need to have it in a form that the visualization library can deal with. We started that with dates. One of the ways that isn't immediately obvious is how your data is cast. Most of the data you will encounter will be wide -- each row will represent a single entity with multiple measures for that entity. So think of states. Your dataset could have population, average life expectancy and other demographic data. 
+You are soon going to discover that long before you can visualize data, you need to have it in a form that the visualization library can deal with. One of the ways that isn't immediately obvious is how your data is cast. Most of the data you will encounter will be wide -- each row will represent a single entity with multiple measures for that entity. So think of states. Your row of your dataset could have population, average life expectancy and other demographic data. 
 
 But what if your visualization library needs one row for each measure? That's where recasting your data comes in. We can use a library called `tidyr` to `gather` or `spread` the data, depending on what we need.
 
-We'll use our dataset of college basketball games. First we need some libraries. 
+We'll use a dataset of college basketball games. First we need some libraries. 
 
 ```{r}
-library(dplyr)
-library(tidyr)
-library(readr)
+library(tidyverse)
 ```
 
 Now we'll grab the data. 
 
 ```{r}
-logs <- read_csv('~/Dropbox/SPMC350-Data-Literacy-and-Analytics-in-Sports/logs.csv')
+logs <- read_csv('https://raw.githubusercontent.com/mattwaite/sportsdatabook/Master/data/logs19.csv')
 ```
+
+Last season, the Nebraska basketball team came out of the gates on fire. Their first 10 games were blistering. Their last 10? Not so much. But how can we compare a team's first 10 games with their last 10 games? If you look, each game in the dataset is numbered, so getting the first 10 wouldn't be hard. But what about the last five, when every team plays a different number of games? 
+
+To find that, we need to add some data to our table. And that is the maxiumum number of games a team played. So we'll create a new dataframe where we'll group our teams by team name and get the max game number for each team. Then, we'll use something called a join, where we'll connect the max games to the logs data using the common team name to connect them. 
+
 
 ```{r}
 max <- logs %>% group_by(Team) %>% summarize(max_games = max(Game))
@@ -28,18 +31,21 @@ max <- logs %>% group_by(Team) %>% summarize(max_games = max(Game))
 logs <- logs %>% left_join(max)
 ```
 
+Now let's just get Nebraska. 
 
 ```{r}
 nebraska <- logs %>% filter(Team == "Nebraska Cornhuskers")
+
+head(nebraska)
 ```
 
-What we have here is long data. One row, one game. But what if we wanted to calculate the percent change in two variables? Say we wanted to see what the difference in shooting percentage has been between the first 10 games and the last five. Or the percent change in that? To get that, we'd need two fields next to each other so we could mutate our dataframe to calculate that, right? You'll see the problem we have right away. 
+What we have here is long data. One row, one game. But what if we wanted to calculate the percent change in two variables? Say we wanted to see what the difference in shooting percentage has been between the first 10 games and the last ten Or the percent change in that? To get that, we'd need two fields next to each other so we could mutate our dataframe to calculate that, right? You'll see the problem we have right away. 
 
 ```{r}
 nebraska %>% 
   mutate(grouping = case_when(
     Game <=10 ~ "First 10",
-    Game >= (max_games - 5) ~ "Last 5")
+    Game >= (max_games - 10) ~ "Last 10")
     ) %>%
   group_by(Team, grouping) %>%
   summarize(
@@ -56,7 +62,7 @@ So I'm going to take that same code and add spread to the bottom. I want the new
 nebraska %>% 
   mutate(grouping = case_when(
     Game <=10 ~ "First 10",
-    Game >= (max_games - 5) ~ "Last 5")
+    Game >= (max_games - 10) ~ "Last 10")
     ) %>%
   group_by(Team, grouping) %>%
   summarize(
@@ -71,7 +77,7 @@ And now, with it spread out, I can chain another mutate step onto it, adding my 
 nebraska %>% 
   mutate(grouping = case_when(
     Game <=10 ~ "First 10",
-    Game >= (max_games - 5) ~ "Last 5")
+    Game >= (max_games - 10) ~ "Last 10")
     ) %>%
   group_by(Team, grouping) %>%
   summarize(
@@ -79,21 +85,21 @@ nebraska %>%
   ) %>% 
   spread(grouping, shootingPCT) %>%
   mutate(
-    change = ((`Last 5`-`First 10`)/`First 10`)*100,
-    difference = (`First 10` - `Last 5`)*100
+    change = ((`Last 10`-`First 10`)/`First 10`)*100,
+    difference = (`First 10` - `Last 10`)*100
     )
 ```
-So, over Nebraska's first 10 games, they shot almost 48 percent, where over the last five horrid games they're shooting 37 percent. That's an 11 percentage point different or a 24 percent drop from those first 10 games. 
+So, over Nebraska's first 10 games, they shot almost 48 percent, where over the last ten horrid games they're shooting 42 percent. That's an 5.7 percentage point different or a nearly 12 percent drop from those first 10 games. 
 
 We can't shoot the ball anymore.
 
-How bad is that nationally? 
+How bad is that nationally? Just run the same code, but instead of Nebraska, use the logs dataframe.
 
 ```{r}
 logs %>% 
   mutate(grouping = case_when(
     Game <=10 ~ "First 10",
-    Game >= (max_games - 5) ~ "Last 5")
+    Game >= (max_games - 10) ~ "Last 10")
     ) %>%
   group_by(Team, grouping) %>%
   summarize(
@@ -101,14 +107,14 @@ logs %>%
   ) %>% 
   spread(grouping, shootingPCT) %>%
   mutate(
-    change = ((`Last 5`-`First 10`)/`First 10`)*100,
-    difference = (`First 10` - `Last 5`)*100
+    change = ((`Last 10`-`First 10`)/`First 10`)*100,
+    difference = (`First 10` - `Last 10`)*100
     ) %>% arrange(change)
 ```
 
-Third. In all of college basketball. We've had the third biggest dropoff in all of college basketball from our first 10 games to our last five.
+In all of college basketball, Nebraska had the 40th biggest drop in shooting percentage from their first 10 games to their last 10 games. 
 
-Thank God for Indiana.
+And that's a tiny portion of why Tim Miles is no longer the coach.
 
 ### Making wide data long
 
@@ -131,7 +137,7 @@ gatherdata <- nebraska %>%
 head(gatherdata)
 ```
 
-Oh drat, Sports Reference has given me wide data and for a visualization project, I need long data. Whatever will I do? This might seem silly, but two assignments from now, you're going to need long data from wide and wide data from long, so it's good to know. 
+Oh drat, I have wide data and for a visualization project, I need long data. Whatever will I do? This might seem silly, but two assignments from now, you're going to need long data from wide and wide data from long, so it's good to know. 
 
 Gather, unfortunately, isn't as easy as spread. It can take some fiddling to get right. There's a ton of examples online if you Google for them, but here's what you do: You tell `gather` what the new column of data you are creating out of the field names first -- this is called the key -- and you then tell it what the value field is going to be called, which is usually a number. Have more than one thing to name your stuff with? After your key value pair, add it with a negative sign in front of it. 
 
@@ -176,32 +182,9 @@ ggplot(nebraska, aes(x=Date, y=TeamFGPCT)) +
     panel.grid.minor = element_blank(),
     panel.grid.major.x = element_blank(),
     legend.position="bottom"
-  ) + ggsave("nufg.png", width = 7, height = 5)
+  )
 ```
-
-```{r}
-fit <- lm(TeamFGPCT ~ Game, data=nebraska)
-summary(fit)
-confint(fit)
-```
-
-```{r}
-(23 * -0.01094643) + 0.47117205
-```
-
-```{r}
-(23 * -0.002939507) + 0.576334439
-```
-
-
-
-
 Oy. There it is. There's our season.
 
-So I can tell you now, using wide data, that Nebraska's shooting performance over the last five games is down 24 percent from the first 10 games. And using long data, I can show you the story of the season, but without any specific stats to back it up. 
-
-### Assignment
-
-* Read [A Layered Grammar of Graphics](https://byrneslab.net/classes/biol607/readings/wickham_layered-grammar.pdf) by Hadley Wickham. 
-* Watch Wickham, who created the libraries we are using, [work through a data project](https://www.youtube.com/watch?v=go5Au01Jrvs). 
+So I can tell you now, using wide data, that Nebraska's shooting performance over the last five games is down 12 percent from the first 10 games. And using long data, I can show you the story of the season, but without any specific stats to back it up. 
 
