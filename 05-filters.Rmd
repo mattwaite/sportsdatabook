@@ -4,13 +4,12 @@ More often than not, we have more data than we want. Sometimes we need to be rid
 
 **Filtering creates a subset of the data based on criteria**. All records where the count is greater than 10. All records that match "Nebraska". Something like that. 
 
-**Selecting simply returns the fields named**. So if you only want to see School and Attendance, you select those fields. When you look at your data again, you'll have two columns. If you try to use one of your columns that you had before you used select, you'll get an error.  
+**Selecting simply returns only the fields named**. So if you only want to see School and Attendance, you select those fields. When you look at your data again, you'll have two columns. If you try to use one of your columns that you had before you used select, you'll get an error.  
 
 Let's work with our football attendance data to show some examples.
 
 ```{r}
-library(dplyr)
-library(readr)
+library(tidyverse)
 ```
 
 ```{r}
@@ -33,7 +32,7 @@ Or if we want to see schools that had more than half a million people buy ticket
 attendance %>% filter(`2018` >= 500000)
 ```
 
-But what if we want to see all of the Power Five conferences? We *could* use conditional logic in our filter. The conditional logic operators are | for OR and & for AND. NOTE: AND means all conditions have to be met. OR means any of the conditions work. So be careful about boolean logic. 
+But what if we want to see all of the Power Five conferences? We *could* use conditional logic in our filter. The conditional logic operators are `|` for OR and `&` for AND. NOTE: AND means all conditions have to be met. OR means any of the conditions work. So be careful about boolean logic. 
 
 ```{r}
 attendance %>% filter(Conference == "Big 10" | Conference == "SEC" | Conference == "Pac-12" | Conference == "ACC" | Conference == "Big 12")
@@ -54,82 +53,48 @@ Now with a list, we can use the %in% operator. It does what you think it does --
 attendance %>% filter(Conference %in% powerfive)
 ```
 
-### Selecting data to make it easier to read
+## Selecting data to make it easier to read
 
 So now we have our Power Five list. What if we just wanted to see attendance from the most recent season and ignore all the rest? Select to the rescue. 
 
 ```{r}
-attendance %>% filter(Conference %in% powerfive) %>% select(Institution, Conference, `2017-2018`)
+attendance %>% filter(Conference %in% powerfive) %>% select(Institution, Conference, `2018`)
 ```
 
 If you have truly massive data, Select has tools to help you select fields that start_with the same things or ends with a certain word. [The documentation will guide you](https://dplyr.tidyverse.org/reference/select.html) if you need those someday. For 90 plus percent of what we do, just naming the fields will be sufficient. 
 
+## Using conditional filters to set limits
+
+Let's return to the blistering season of Drayton Whiteside. How can we set limits in something like a question of who had the best season? Let's get our Drayton Whiteside data from the previous chapter back up.
+
+```{r}
+players <- read_csv("https://raw.githubusercontent.com/mattwaite/sportsdatabook/Master/data/players19.csv")
+
+players %>%
+  mutate(trueshooting = (PTS/(2*(FGA + (.44*FTA))))*100) %>%
+  arrange(desc(trueshooting))
+```
+
+In most contests like the batting title in Major League Baseball, there's a minimum number of X to qualify. In baseball, it's at bats. In basketball, it attempts. So let's set a floor and see how it changes. What if we said you had to have attempted 100 shots in a season? The top shooters in college basketball attempt 1000 shots in a season. So 100 is not that much. Let's try it and see.
+
+```{r}
+players %>%
+  mutate(trueshooting = (PTS/(2*(FGA + (.44*FTA))))*100) %>%
+  arrange(desc(trueshooting)) %>%
+  filter(FGA > 100)
+```
+
+Now you get UALR Sophomore Kris Bankston, who played in 31 games and was on the floor for 670 minutes. So he played regularly. But in that time, he only attempted 134 shots, and made 81 percent of them. In other words, when he shot, he scored. He just rarely shot. 
+
+So is 100 attempts our level? Here's the truth -- there's not really an answer here. We're picking a cutoff. If you can cite a reason for it and defend it, then it probably works. 
+
 ## Top list
 
-One last little dplyr trick that's nice to have in the back is a shortcut for selecting only the top values for your dataset. Want to make a Top 10 List? Or Top 25? Or Top Whatever You Want? It's easy. 
+One last little dplyr trick that's nice to have in the toolbox is a shortcut for selecting only the top values for your dataset. Want to make a Top 10 List? Or Top 25? Or Top Whatever You Want? It's easy. 
 
 So what are the top 10 Power Five schools by season attendance. All we're doing here is chaining commands together with what we've already got. We're *filtering* by our list of Power Five conferences, we're *selecting* the three fields we need, now we're going to *arrange* it by total attendance and then we'll introduce the new function: `top_n`. The `top_n` function just takes a number. So we want a top 10 list? We do it like this: 
 
 ```{r}
-attendance %>% filter(Conference %in% powerfive) %>% select(Institution, Conference, `2017-2018`) %>% arrange(desc(`2017-2018`)) %>% top_n(10)
+attendance %>% filter(Conference %in% powerfive) %>% select(Institution, Conference, `2018`) %>% arrange(desc(`2018`)) %>% top_n(10)
 ```
 That's all there is to it. Just remember -- for it to work correctly, you need to sort your data BEFORE you run top_n. Otherwise, you're just getting the first 10 values in the list. The function doesn't know what field you want the top values of. You have to do it. 
-
-### Assignment
-
-Let's have some more fun with the [salary database](https://www.dropbox.com/s/xts9xsim3lpg7qu/nusalaries1819.csv?dl=0) is out! Time to use filters, selects and top_n.
-
-For the first question, [use this dataset](https://www.dropbox.com/s/iodsuouf39blbbz/coaches.csv?dl=0) of just coach salaries. The second two questions use the salaries database you already used.
-
-1. What is the average and median salaries for coaches at UNL, UNK and UNO?
-2. Who are the top 10 highest paid employees at UNL (using top_n)?
-3. What is my salary?
-
-### If you're curious how I got the coaches salaries separated out
-
-First, we import the data. 
-
-```{r}
-salaries <- read_csv("../../Data/nusalaries1819.csv")
-```
-
-To filter out positions with the word Coach in it, we're going to have to use a new library that comes with the tidyverse, meaning you have it installed already. It's called StringR and it works with text. 
-
-```{r}
-library(stringr)
-```
-
-We're going to use a function in StringR called str_detect, which does what you think it does -- it detects if a set of characters are in a piece of data. So in this case, we want to find all the coaches, so we're going to look for the word Coach. But, when I do that, I get some people who have coach in their title but aren't coaches. 
-
-```{r}
-salaries %>% filter(str_detect(Position, 'Coach'))
-```
-I don't know about you, but's been a while since I watched a team headed by something called an Early Childhood Coach. Or a Career Coach. So, we need to filter them out. But how do we know which ones to filter? Let's use group by to get us a list of departments. That will be the giveaway -- there aren't sports coaches in the College of Arts and Sciences.
-
-```{r}
-salaries %>% filter(str_detect(Position, 'Coach')) %>% group_by(Department) %>% summarize(total=n())
-```
-
-From that, we can build a list of the non sports related departments. 
-
-```{r}
-noncoach = c("Academic & Career Development Center", "College of Arts & Sciences", "College of Business", "First Year Exp & Transition Programs", "NE Ctr  Rsrch on Youth,Fam & School", "Program in English Second Language")
-```
-
-And we can filter them out by putting a ! in front of the logical statement, which turns it into a negative. So here, we have Department NOT IN our list of non sports departments. 
-
-```{r}
-salaries %>% filter(str_detect(Position, 'Coach')) %>% filter(!Department %in% noncoach)
-```
-
-Let's do ourselves a favor and create a new data frame from this and use that instead:
-
-```{r}
-coaches <- salaries %>% filter(str_detect(Position, 'Coach')) %>% filter(!Department %in% noncoach)
-```
-
-
-
-
-
-

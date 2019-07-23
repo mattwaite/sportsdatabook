@@ -75,4 +75,4 @@ players %>%
 
 You'll be forgiven if you did not hear about Texas Longhorns shooting sensation Drayton Whiteside. He played in six games, took one shot and actually hit it. It happened to be a three pointer, which is one more three pointer than I've hit in college basketball. So props to him. Does that mean he had the best true shooting season in college basketball last year? Not hardly. 
 
-We'll talk about how to narrow the pile and filter out data in coming chapters.
+We'll talk about how to narrow the pile and filter out data in the next chapter.
