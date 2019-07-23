@@ -2,9 +2,9 @@
 
 More often than not, we have more data than we want. Sometimes we need to be rid of that data. In `dplyr`, there's two ways to go about this: filtering and selecting.
 
-Filtering creates a subset of the data based on a criteria. All records where the count is greater than 10. All records that match "Nebraska". 
+**Filtering creates a subset of the data based on criteria**. All records where the count is greater than 10. All records that match "Nebraska". Something like that. 
 
-Selecting simply returns the fields named. So if you only want to see School and Attendance, you select those fields. It does not limit the data, just what you see. 
+**Selecting simply returns the fields named**. So if you only want to see School and Attendance, you select those fields. When you look at your data again, you'll have two columns. If you try to use one of your columns that you had before you used select, you'll get an error.  
 
 Let's work with our football attendance data to show some examples.
 
@@ -14,7 +14,7 @@ library(readr)
 ```
 
 ```{r}
-attendance <- read_csv('../../Data/attendance.csv')
+attendance <- read_csv('https://raw.githubusercontent.com/mattwaite/sportsdatabook/Master/data/attendance.csv')
 ```
 
 So, first things first, let's say we don't care about all this Air Force, Akron, Alabama crap and just want to see Dear Old Nebraska U. We do that with `filter` and then we pass it a condition. 
@@ -30,7 +30,7 @@ attendance %>% filter(Institution == "Nebraska")
 Or if we want to see schools that had more than half a million people buy tickets to a football game in a season, we do the following. NOTE THE BACKTICKS. 
 
 ```{r}
-attendance %>% filter(`2017-2018` >= 500000)
+attendance %>% filter(`2018` >= 500000)
 ```
 
 But what if we want to see all of the Power Five conferences? We *could* use conditional logic in our filter. The conditional logic operators are | for OR and & for AND. NOTE: AND means all conditions have to be met. OR means any of the conditions work. So be careful about boolean logic. 
@@ -64,7 +64,7 @@ attendance %>% filter(Conference %in% powerfive) %>% select(Institution, Confere
 
 If you have truly massive data, Select has tools to help you select fields that start_with the same things or ends with a certain word. [The documentation will guide you](https://dplyr.tidyverse.org/reference/select.html) if you need those someday. For 90 plus percent of what we do, just naming the fields will be sufficient. 
 
-### Top list
+## Top list
 
 One last little dplyr trick that's nice to have in the back is a shortcut for selecting only the top values for your dataset. Want to make a Top 10 List? Or Top 25? Or Top Whatever You Want? It's easy. 
 
