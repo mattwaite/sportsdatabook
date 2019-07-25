@@ -10,56 +10,20 @@ Let's first attach libraries and use rvest to get some data. Note: In the rvest 
 
 ```{r}
 library(tidyverse)
-library(rvest)
 ```
 
 ```{r}
-scoring <- "http://www.cfbstats.com/2018/leader/national/team/offense/split01/category09/sort01.html"
-
-scoringOffense <- scoring %>%
-  read_html() %>%
-  html_nodes(xpath = '//*[@id="content"]/div[2]/table') %>% 
-  html_table()
-
-scoringOffense <- scoringOffense[[1]]
-
-offense3rd <- "http://www.cfbstats.com/2018/leader/national/team/offense/split01/category25/sort01.html"
-
-offensiveThird <- offense3rd %>%
-  read_html() %>%
-  html_nodes(xpath = '//*[@id="content"]/div[2]/table') %>% 
-  html_table()
-
-offensiveThird <- offensiveThird[[1]]
-
-flags <- "http://www.cfbstats.com/2018/leader/national/team/offense/split01/category14/sort01.html"
-
-offensivePenalties <- flags %>%
-  read_html() %>%
-  html_nodes(xpath = '//*[@id="content"]/div[2]/table') %>% 
-  html_table()
-
-offensivePenalties <- offensivePenalties[[1]]
-
-scoringOffense <- scoringOffense %>% rename(Rank=1)
-offensiveThird <- offensiveThird %>% rename(Rank=1)
-offensivePenalties <- offensivePenalties %>% rename(Rank=1)
-
-offense <- left_join(scoringOffense, offensiveThird, by="Name")
-penalties <- left_join(scoringOffense, offensivePenalties, by="Name")
-
+offense <- read_csv("data/correlations.csv")
 ```
-
-### Third downs
 
 First, let's build a linear model and save it as a new dataframe called `fit`. 
 
 ```{r}
-fit <- lm(`Points/G` ~ `Conversion %`, data = offense)
+fit <- lm(`OffPointsG` ~ `OffConversionPct`, data = offense)
 summary(fit)
 ```
 
-We've seen this output before, but let's review because if you are using scatterplots to make a point, you should do this. First, note the Min and Max residual at the top. A team has underperformed the model by 11 points, and a team has overperformed it by 13.5. The median residual, where half are above and half are below, is just slightly under the fit line. Close here is good. 
+We've seen this output before, but let's review because if you are using scatterplots to make a point, you should do this. First, note the Min and Max residual at the top. A team has underperformed the model by 11.4 points, and a team has overperformed it by 13.5. The median residual, where half are above and half are below, is just slightly under the fit line. Close here is good. 
 
 Next: Look at the Adjusted R-squared value. What that says is that 44 percent of a team's scoring output can be predicted by their third down conversion percentage. This is just one year, so that's a little low. If we did this with more years, that would go up. 
 
@@ -77,38 +41,45 @@ Now we can sort our data by those residuals. Sorting in descending order gives u
 ```{r}
 offense %>% arrange(desc(residuals))
 ```
+So looking at this table, what you see here are the teams who scored more than their third down conversion percentage would indicate. Some of those teams were just lucky. Some of those teams were really good at long touchdown plays that didn't need a lot of third downs to get down the field. But these are your overperformers. 
 
-The first thing we want to do is to see if our linear model is appropriate. We do that by plotting the residuals with the predictor. 
+But, before we can bestow any validity on it, we need to see if this linear model is appropriate. We've done that some looking at our p-values and R-squared values. But one more check is to look at the residuals themselves. We do that by plotting the residuals with the predictor. We'll get into plotting soon, but for now just seeing it is enough.
 
-```{r}
-ggplot(offense, aes(x=`Conversion %`, y=residuals)) + geom_point()
+```{r echo=FALSE}
+ggplot(offense, aes(x=OffConversionPct, y=residuals)) + geom_point()
 ```
 
-The lack of a shape here -- the seemingly random nature -- is a good sign that a linear model works for our data. 
+The lack of a shape here -- the seemingly random nature -- is a good sign that a linear model works for our data. If there was a pattern, that would indicate something else was going on in our data and we needed a different model.
 
-Another way to view your residuals is to plot them. How we do that is by connecting the predicted value with the actual value using `geom_segement`. The geom_segment adds two required elements to the `aes`: the `xend` and the `yend`.  
+Another way to view your residuals is by connecting the predicted value with the actual value.
 
-```{r}
-ggplot(data=offense, aes(x=`Conversion %`, y=`Points/G`)) + geom_point() + geom_segment(aes(xend = `Conversion %`, yend = predicted)) + geom_smooth(method=lm, se=FALSE)
+```{r echo=FALSE}
+ggplot(data=offense, aes(x=OffConversionPct, y=OffPointsG)) + geom_point() + geom_segment(aes(xend = OffConversionPct, yend = predicted)) + geom_smooth(method=lm, se=FALSE)
 ```
 
+The blue line here separates underperformers from overperformers.
 
-### Penalties
+## Penalties
 
 Now let's look at it where it doesn't work: Penalties. 
 
 ```{r}
-pfit <- lm(`Points/G` ~ `Yards/G`, data = penalties)
+penalties <- offense
+```
+
+
+```{r}
+pfit <- lm(OffPointsG ~ Yards, data = penalties)
 summary(pfit)
 ```
 
 So from top to bottom:
 
-* Our min and max go from -16.5 to positive 18.5
-* Our adjusted R-squared is ... .007. Not much at all. 
-* Our p-value is ... .16, which is GREATER than .05, which means it's entirely possible the predictive power of our correlation is completely random. 
+* Our min and max go from -16.5 to positive 17.1
+* Our adjusted R-squared is ... .06. Not much at all. 
+* Our p-value is ... .002, which is less than than .05. 
 
-Normally, we'd stop right here -- why bother going forward with a predictive model that isn't predictive? But let's do it anyway. 
+So what we can say about this model is that it's statistically significant but utterly meaningless. Normally, we'd stop right here -- why bother going forward with a predictive model that isn't predictive? But let's do it anyway. 
 
 ```{r}
 penalties$predicted <- predict(pfit)
@@ -119,17 +90,17 @@ penalties$residuals <- residuals(pfit)
 penalties %>% arrange(desc(residuals))
 ```
 
-So our model says Oklahoma *should* only be scoring 29.9 points per game given how many penalty yards per game, but they're really scoring 48.4. Oy. What happens if we plot those residuals? 
+So our model says Oklahoma *should* only be scoring 31.3 points per game given how many penalty yards per game, but they're really scoring 48.4. Oy. What happens if we plot those residuals? 
 
-```{r}
-ggplot(penalties, aes(x=`Yards/G`, y=residuals)) + geom_point()
+```{r echo=FALSE}
+ggplot(penalties, aes(x=Yards, y=residuals)) + geom_point()
 ```
 
 Well ... it actually says that a linear model is appropriate. Which an important lesson -- just because your residual plot says a linear model works here, that doesn't say your linear model is good. There are other measures for that, and you need to use them. 
 
 Here's the segment plot of residuals -- you'll see some really long lines. That's a bad sign. 
 
-```{r}
-ggplot(data=penalties, aes(x=`Yards/G`, y=`Points/G`)) + geom_point() + geom_segment(aes(xend = `Yards/G`, yend = predicted)) + geom_smooth(method=lm, se=FALSE)
+```{r echo=FALSE}
+ggplot(data=penalties, aes(x=Yards, y=OffPointsG)) + geom_point() + geom_segment(aes(xend = Yards, yend = predicted)) + geom_smooth(method=lm, se=FALSE)
 ```
 
