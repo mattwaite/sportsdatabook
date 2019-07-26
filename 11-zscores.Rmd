@@ -6,18 +6,16 @@ We can also use z scores to ask how much better is team A from team B.
 
 So let's use Nebraska basketball, which if you haven't been reading lately is at a bit of a crossroads. 
 
-### What is a Z score
-
 A Z score is a measure of how far a number is from the population mean of that number. An easier way to say that -- how different is my grade from the average grade in the class. The formula for calculating a Z score is `(MyScore - AverageScore)/Standard Deviation of Scores`. The standard deviation is a number calculated to show the amount of variation in a set of data. In a normal distribution, 68 percent of all scores will be within 1 standard deviation, 95 percent will be within 2 and 99 within 3. 
 
-### Calculating a Z score in R
+## Calculating a Z score in R
 
 ```{r}
 library(tidyverse)
 ```
 
 ```{r}
-gamelogs <- read_csv("~/Dropbox/SPMC350-Data-Literacy-and-Analytics-in-Sports/logs.csv")
+gamelogs <- read_csv("data/logs19.csv")
 ```
 
 The first thing we need to do is select some fields we think represent team quality:
@@ -29,7 +27,13 @@ teamquality <- gamelogs %>% select(Conference, Team, TeamFGPCT, TeamTotalRebound
 And since we have individual game data, we need to collapse this into one record for each team. We do that with ... group by.
 
 ```{r}
-teamtotals <- teamquality %>% group_by(Conference, Team) %>% summarize(FGAvg = mean(TeamFGPCT), ReboundAvg = mean(TeamTotalRebounds), OppFGAvg = mean(OpponentFGPCT))
+teamtotals <- teamquality %>% 
+  group_by(Conference, Team) %>% 
+  summarize(
+    FGAvg = mean(TeamFGPCT), 
+    ReboundAvg = mean(TeamTotalRebounds), 
+    OppFGAvg = mean(OpponentFGPCT)
+    )
 ```
 
 To calculate a Z score in R, the easiest way is to use the scale function in base R. To use it, you use `scale(FieldName, center=TRUE, scale=TRUE)`. The center and scale indicate if you want to subtract from the mean and if you want to divide by the standard deviation, respectively. We do.
@@ -67,26 +71,4 @@ But closer to home, how is Nebraska doing.
 teamzscore %>% filter(Conference == "Big Ten") %>% arrange(desc(TotalZscore))
 ```
 
-So, as we can see, with our composite Z Score, Nebraska is ... not bad. This was before the Ohio State game, where we played terrible and lost. But according to our numbers, we're the fourth best team in the Big Ten, but our record says we're tied for ninth. 
-
-And we just lost one of our best players. 
-
-So what's going on? Why would the numbers suggest we're better than we are?
-
-### Assignment
-
-Refine the composite Z Score I started here. Add two more elements to it. What else do you think is important to the success of a basketball team? I've got shooting, rebounds and the opponents shooting. What else would you add? 
-
-In an R Notebook, make your case for the two elements you are adding. Then, follow my steps here until you get to the `teamquality` dataframe step, where you'll need to add the fields you are going to add to the composite. Then you'll need to add your fields to the `teamtotals` dataframe. Then you'll need to adjust `teamzscore`.  
-
-Finally, look at your ranking of Big Ten teams and compare it to mine. Did adding more elements to the composite change anything? Explain the differences in your notebook. Which one do you think is more accurate? I won't be offended if you say yours, but why do you feel that way? 
-
-[The data you'll need is here](https://www.dropbox.com/s/k6s758v5gwy7n4z/logs.csv?dl=0). 
-
-#### Rubric
-
-1. Did you import the data correctly?
-2. Did you mutate the data correctly? 
-3. Did you sort the data correctly?
-4. Did you explain each step using Markdown?
-
+So, as we can see, with our composite Z Score, Nebraska is ... not bad, but not good either: 9 of 14 teams in the Big Ten.
