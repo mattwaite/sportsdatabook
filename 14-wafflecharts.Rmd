@@ -1,14 +1,13 @@
 # Waffle charts
 
-Pie charts are the devil. They are an instant F in this class. I'll give you an example of why.
+Pie charts are the devil. They should be an instant F in any data visualization class. I'll give you an example of why.
 
 What's the racial breakdown of journalism majors at UNL?
 
 Here it is in a pie chart:
 
 ```{r}
-library(dplyr)
-library(ggplot2)
+library(tidyverse)
 
 enrollment <- read.csv("~/Dropbox/JOUR407-Data-Visualization/Data/collegeenrollment.csv")
 
@@ -39,11 +38,11 @@ Now load it:
 library(waffle)
 ```
 
-Let's look at last night's debacle in Ann Arbor with Nebraska basketball. [Here's the box score](https://www.sports-reference.com/cbb/boxscores/2019-02-28-19-michigan.html), which we'll use for this assignment. 
+Let's look at the debacle in Ann Arbor with Nebraska basketball. [Here's the box score](https://www.sports-reference.com/cbb/boxscores/2019-02-28-19-michigan.html), which we'll use for this walkthrough. 
 
 The easiest way to do waffle charts is to make vectors of your data and plug them in. To make a vector, we use the `c` or concatenate function, something we've done before. 
 
-So let's look at ... shooting. We shot like crap last night, they didn't. 
+So let's look at ... shooting. We shot like crap that night, they didn't. 
 
 ```{r}
 nu <- c("Made"=23, "Missed"=44)
@@ -68,7 +67,7 @@ game <- c("Nebraska"=23, "Michigan"=30)
 waffle(game, rows = 5, title="Nebraska vs Michigan: made shots", xlab="1 square = 1 shot", colors = c("red", "dark blue"))
 ```
 
-### Waffle Irons
+## Waffle Irons
 
 So what does it look like if we compare the two teams. Do do that -- and I am not making this up -- you have to create a waffle iron. Get it? Waffle charts? Iron? 
 
@@ -95,15 +94,4 @@ iron(
 )
 ```
 
-### Assignment
-
-Compare Nebraska and Michgan using a Waffle chart and another metric than what I've done above for the game last night.
-
-[Here's the library's documentation](https://github.com/hrbrmstr/waffle).
-[Here's the stats from the game](https://www.sports-reference.com/cbb/boxscores/2019-02-28-19-michigan.html).
-
-Turn in your notebook with your waffle chart. It must contain these two things:
-
-* Your waffle chart
-* A written narrative of what it says. What does your waffle chart say about how that game turned out?
 
