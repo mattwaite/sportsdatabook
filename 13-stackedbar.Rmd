@@ -3,14 +3,12 @@
 One of the elements of data visualization excellence, accoring to Tufte, is inviting comparison. Often that comes in showing what proportion a thing is in relation to the whole thing. With bar charts, if we have information about the parts of the whole, we can stack them on top of each other to compare them. And it's a simple change to what we've already done. 
 
 ```{r}
-library(dplyr)
-library(readr)
-library(ggplot2)
+library(tidyverse)
 ```
-We're going to use a dataset of graduation rates by gender by school in the NCAA. [You can get it here](https://www.dropbox.com/s/m5dq0l852r1rv26/grads.csv?dl=0). 
+We're going to use a dataset of graduation rates by gender by school in the NCAA. [You can get it here](https://unl.box.com/s/3nw1eokvs9zfdjyzvjaj3xdq01rm8sym). 
 
 ```{r}
-grads <- read_csv('../../Data/grads.csv')
+grads <- read_csv('data/grads.csv')
 ```
 What we have here is the name of the school, the conference, the cohort of when they started school, the gender, the number of that gender that graduated and the total number of graduates in that cohort. 
 
@@ -24,7 +22,7 @@ BIG09 <- grads %>% filter(`Primary Conference in Actual Year`=="Big Ten Conferen
 head(BIG09)
 ```
 
-Building on what we learned last time, we know we can turn this into a bar chart with an x value, a weight and a geom_bar. What're going to add is a `fill`. The `fill` will stack bars on each other based on which element it is. In this case, we can fill the bar by Gender, which means it will stack the number of male graduates on top of the number of female graduates and we can see how they compare. 
+Building on what we learned in the last chapter, we know we can turn this into a bar chart with an x value, a weight and a geom_bar. What're going to add is a `fill`. The `fill` will stack bars on each other based on which element it is. In this case, we can fill the bar by Gender, which means it will stack the number of male graduates on top of the number of female graduates and we can see how they compare. 
 
 ```{r}
 ggplot(BIG09, aes(x=reorder(`Institution name`, -Total), weight=`Number of completers`, fill=Gender)) + geom_bar() + coord_flip()
@@ -34,15 +32,4 @@ What's the problem with this chart?
 
 Let me ask a different question -- which schools have larger differences in male and female graduation rates? Can you compare Illnois to Northwestern? Not really. We've charted the total numbers. We need the percentage of the whole. 
 
-This is your task for next class. 
-
-### Assignment
-
-I want you to make this same chart, except I want you to make the weight the percentage of the total number of graduates that gender represents. You'll be mutating a new field to create that percentage. You'll then chart it with the fill. The end result should be a stacked bar chart allowing you to compare genders between universities. 
-
-#### Rubric
-
-1. Did you import the data correctly?
-2. Did you mutate the data correctly?
-3. Did you save that new data to a new data frame?
-4. Did you chart it correctly with fill?
+> **YOUR TURN**: Using what you know -- hint: mutate -- how could you chart this using percents of the whole instead of counts? 
