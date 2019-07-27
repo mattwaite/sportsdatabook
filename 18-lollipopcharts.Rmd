@@ -7,7 +7,7 @@ library(tidyverse)
 ```
 
 ```{r}
-logs <- read_csv("~/Dropbox/SPMC350-Data-Literacy-and-Analytics-in-Sports/logs.csv")
+logs <- read_csv("data/logs19.csv")
 ```
 
 For the first example, let's look at the difference between a team's shooting performance and the conference's shooting performance as a whole. To get this, we're going to add up all the shots made by the conference, all the attempts taken by the conference, and then mutate a percentage based on that. 
@@ -96,17 +96,6 @@ ggplot(big10gt) +
 ```
 
 Short answer: Not really.
-
-#### Assignment
-
-You've been hired by Fred Hoiberg to tell him how to win the Big Ten. He's not impressed with that I came up with. So what else could you look at with lollipop charts? Your call. Your goal is to produce a lollipop chart that tells The Mayor he needs to focus on the gap between X and Y if he wants to win a Big Ten title.
-
-##### Rubric
-
-1. Did you manipulate the data correctly?
-2. Did you produce a lollipop chart?
-3. Does it show a difference?
-
 
 
 

@@ -11,10 +11,10 @@ library(tidyverse)
 library(ggridges)
 ```
 
-So for this, let's look at every basketball game played since the 2014-15 season. That's more than 28,000 basketball games. [Download that data here](https://unl.box.com/s/ugd32b8aid883xjy5na6ak33ni7lix84).
+So for this, let's look at every basketball game played since the 2014-15 season. That's more than 28,000 basketball games. [Download that data here](https://unl.box.com/s/u9407jj007fxtnu1vbkybdawaqg6j3fw).
 
 ```{r}
-logs <- read_csv("~/Box/NCAABasketballData/logs1519.csv")
+logs <- read_csv("data/logs1519.csv")
 ```
 
 So I want to group teams by wins. Wins are the only thing that matter -- ask Tim Miles. So our data has a column called W_L that lists if the team won or lost. The problem is it doens't just say W or L. If the game went to overtime, it lists that. That complicates counting wins. And, with ridgeplots, I want to be be able to separate EVERY GAME by how many wins the team had over a SEASON. So I've got some work to do.
@@ -94,17 +94,3 @@ ggplot(wintotalgroupinglogs, aes(x = TeamFGPCT, y = grouping, fill = grouping)) 
   theme_ridges() + 
   theme(legend.position = "none")
 ```
-
-#### Assignment
-
-You've been hired by Fred Hoiberg to tell him how to win the Big Ten. He's not impressed with that I came up with. So what you need to do is look for a *composite* measure that produces a meaningful ridgeplot. What that means is you're going to mutate `wintotalgroupinglogs` one more time. Is the differential between rebounding meaningful instead of just the total? Or assists? Or something else? Your call. Your goal is to produce a ridgeplot that tells The Mayor he needs to focus on doing X better than the opponent to win a Big Ten title.
-
-##### Rubric
-
-1. Did you mutate the data correctly?
-2. Did you produce a ridgeplot?
-3. Does it show a difference between top teams and the rest?
-
-
-
-
