@@ -13,7 +13,7 @@ library(tidyverse)
 And we'll use our basketball log data. 
 
 ```{r}
-logs <- read_csv("~/Dropbox/SPMC350-Data-Literacy-and-Analytics-in-Sports/logs.csv")
+logs <- read_csv("data/logs19.csv")
 ```
 
 Here we're going to look at the scoring differential of teams. If you score more than your opponent, you win. So it stands to reason that if you score a lot more than your opponent over the course of a season, you should be very good, right? Let's see.
@@ -42,7 +42,7 @@ Let's try a different element of the aesthetic: color, but this time inside the 
 ggplot() + geom_step(data=bigdiff, aes(x=Date, y=CumDiff, group=Team, color=Team))
 ```
 
-From this, we can see three teams in the Big Ten have negative point differentials on the season -- Illinois, Penn State and Rutgers. 
+From this, we can see two teams in the Big Ten have negative point differentials on the season -- Illinois and Rutgers. 
 
 Let's look at those top teams plus Nebraska.
 
@@ -63,18 +63,6 @@ ggplot() +
   geom_step(data=mi, aes(x=Date, y=CumDiff, group=Team), color="blue") + 
   geom_step(data=ms, aes(x=Date, y=CumDiff, group=Team), color="dark green") +
   annotate("text", x=(as.Date("2018-12-10")), y=220, label="Nebraska") +
-  labs(x="Date", y="Cumulative Point Differential", title="Nebraska was among the league's most dominant", subtitle="Before the recent skid, Nebraska was at the top of the Big Ten in point differential", caption="Source: Sports-Reference.com | By Matt Waite") +
+  labs(x="Date", y="Cumulative Point Differential", title="Nebraska was among the league's most dominant", subtitle="Before the misseason skid, Nebraska was at the top of the Big Ten in point differential", caption="Source: Sports-Reference.com | By Matt Waite") +
   theme_minimal()
 ```
-
-### Assignment
-
-Re-make this, but with rebounding. I want you to visualize the differential between our rebounds and their rebounds, and then plot the step chart showing over the course of the season. Highlight Nebraska. Highlight the top team. Add annotation layers to label both of them. 
-
-#### Rubric
-
-1. Did you import the data correctly?
-2. Did you mutate the data correctly? Did you do it in one step?
-3. Did you chart the data correctly?
-4. Did you annotate your data?
-5. Did you explain each step using Markdown?
