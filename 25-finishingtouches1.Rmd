@@ -12,9 +12,11 @@ The output from ggplot is good, but not great. We need to add some pieces to it.
 
 That looks like:
 
-![chart](chartannotated.png "A chart, annotated")
+```{r, echo=FALSE}
+knitr::include_graphics(rep("images/chartannotated.png"))
+```
 
-### Graphics vs visual stories
+## Graphics vs visual stories
 
 While the elements above are nearly required in every chart, they aren't when you are making visual stories. 
 
@@ -24,7 +26,7 @@ While the elements above are nearly required in every chart, they aren't when yo
 
 [An example from The Upshot](https://www.nytimes.com/interactive/2018/02/14/business/economy/inflation-prices.html). Note how the charts don't have headlines, source or credit lines.
 
-### Getting ggplot closer to output
+## Getting ggplot closer to output
 
 Let's explore fixing up ggplot's output before we send it to a finishing program like Adobe Illustrator. We'll need a graphic to work with first. 
 
