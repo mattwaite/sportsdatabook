@@ -1,6 +1,6 @@
 # Annotations
 
-The first day of class, I showed you a chart that asked a provocative question: Are the Chief's Screwed in the Playoffs? The answer ultimately was yes. But when we looked at it first, there was a lot of code that didn't make any sense to you then. Now it will.
+Some of the best sports data visualizations start with a provocative question. At a college just under three hours from Kansas City, my classes are lousy with Chiefs fans. So the first day of classes in the spring of 2019, I asked them: Are the Chief's Screwed in the Playoffs? The answer ultimately was yes, and how I was able to make that argument before a playoff game had even been played is a good example of how labeling and annotations can make a chart much better. 
 
 Going to add a new library to the mix called `ggrepel`. You'll need to install it in the console with `install.packages("ggrepel")`. 
 
@@ -12,9 +12,9 @@ library(ggrepel)
 Now we'll grab the data and join that data together using the Team name as the common element.
 
 ```{r}
-offense <- read_csv("~/Dropbox/SPMC350-Data-Literacy-and-Analytics-in-Sports/FirstDayExample/offense.csv")
+offense <- read_csv("data/nfloffense.csv")
 
-defense <- read_csv("~/Dropbox/SPMC350-Data-Literacy-and-Analytics-in-Sports/FirstDayExample/defense.csv")
+defense <- read_csv("data/nfldefense.csv")
 
 total <- offense %>% left_join(defense, by="Team")
 
