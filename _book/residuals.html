@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 11 Residuals | Sports Data Analysis and Visualization for Journalists and Other Storytellers</title>
+  <meta name="description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC 350 course in the College of Journalism and Mass Communications." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 11 Residuals | Sports Data Analysis and Visualization for Journalists and Other Storytellers" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC 350 course in the College of Journalism and Mass Communications." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 11 Residuals | Sports Data Analysis and Visualization for Journalists and Other Storytellers" />
+  
+  <meta name="twitter:description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC 350 course in the College of Journalism and Mass Communications." />
+  
+
+<meta name="author" content="Matt Waite" />
+
+
+<meta name="date" content="2019-07-28" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="multiple-regression.html">
+<link rel="next" href="z-scores.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Sports Data Analysis and Visualization</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Throwing cold water on hot takes</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#requirements-and-conventions"><i class="fa fa-check"></i><b>1.1</b> Requirements and Conventions</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="Basics.html"><a href="Basics.html"><i class="fa fa-check"></i><b>2</b> The very basics</a><ul>
+<li class="chapter" data-level="2.1" data-path="Basics.html"><a href="Basics.html#adding-libraries-part-1"><i class="fa fa-check"></i><b>2.1</b> Adding libraries, part 1</a></li>
+<li class="chapter" data-level="2.2" data-path="Basics.html"><a href="Basics.html#adding-libraries-part-2"><i class="fa fa-check"></i><b>2.2</b> Adding libraries, part 2</a></li>
+<li class="chapter" data-level="2.3" data-path="Basics.html"><a href="Basics.html#notebooks"><i class="fa fa-check"></i><b>2.3</b> Notebooks</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html"><i class="fa fa-check"></i><b>3</b> Data, structures and types</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#rows-and-columns"><i class="fa fa-check"></i><b>3.1</b> Rows and columns</a></li>
+<li class="chapter" data-level="3.2" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#a-simple-way-to-get-data"><i class="fa fa-check"></i><b>3.2</b> A simple way to get data</a></li>
+<li class="chapter" data-level="3.3" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#cleaning-the-data"><i class="fa fa-check"></i><b>3.3</b> Cleaning the data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="aggregates.html"><a href="aggregates.html"><i class="fa fa-check"></i><b>4</b> Aggregates</a><ul>
+<li class="chapter" data-level="4.1" data-path="aggregates.html"><a href="aggregates.html#basic-data-analysis-group-by-and-count"><i class="fa fa-check"></i><b>4.1</b> Basic data analysis: Group By and Count</a></li>
+<li class="chapter" data-level="4.2" data-path="aggregates.html"><a href="aggregates.html#other-aggregates-mean-and-median"><i class="fa fa-check"></i><b>4.2</b> Other aggregates: Mean and median</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="mutating-data.html"><a href="mutating-data.html"><i class="fa fa-check"></i><b>5</b> Mutating data</a><ul>
+<li class="chapter" data-level="5.1" data-path="mutating-data.html"><a href="mutating-data.html#a-more-complex-example"><i class="fa fa-check"></i><b>5.1</b> A more complex example</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="filters-and-selections.html"><a href="filters-and-selections.html"><i class="fa fa-check"></i><b>6</b> Filters and selections</a><ul>
+<li class="chapter" data-level="6.1" data-path="filters-and-selections.html"><a href="filters-and-selections.html#selecting-data-to-make-it-easier-to-read"><i class="fa fa-check"></i><b>6.1</b> Selecting data to make it easier to read</a></li>
+<li class="chapter" data-level="6.2" data-path="filters-and-selections.html"><a href="filters-and-selections.html#using-conditional-filters-to-set-limits"><i class="fa fa-check"></i><b>6.2</b> Using conditional filters to set limits</a></li>
+<li class="chapter" data-level="6.3" data-path="filters-and-selections.html"><a href="filters-and-selections.html#top-list"><i class="fa fa-check"></i><b>6.3</b> Top list</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="transforming-data.html"><a href="transforming-data.html"><i class="fa fa-check"></i><b>7</b> Transforming data</a><ul>
+<li class="chapter" data-level="7.1" data-path="transforming-data.html"><a href="transforming-data.html#making-wide-data-long"><i class="fa fa-check"></i><b>7.1</b> Making wide data long</a></li>
+<li class="chapter" data-level="7.2" data-path="transforming-data.html"><a href="transforming-data.html#why-this-matters"><i class="fa fa-check"></i><b>7.2</b> Why this matters</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>8</b> Simulations</a><ul>
+<li class="chapter" data-level="8.1" data-path="simulations.html"><a href="simulations.html#cold-streaks"><i class="fa fa-check"></i><b>8.1</b> Cold streaks</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html"><i class="fa fa-check"></i><b>9</b> Correlations and regression</a><ul>
+<li class="chapter" data-level="9.1" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html#a-more-predictive-example"><i class="fa fa-check"></i><b>9.1</b> A more predictive example</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="multiple-regression.html"><a href="multiple-regression.html"><i class="fa fa-check"></i><b>10</b> Multiple regression</a></li>
+<li class="chapter" data-level="11" data-path="residuals.html"><a href="residuals.html"><i class="fa fa-check"></i><b>11</b> Residuals</a><ul>
+<li class="chapter" data-level="11.1" data-path="residuals.html"><a href="residuals.html#penalties"><i class="fa fa-check"></i><b>11.1</b> Penalties</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z scores</a><ul>
+<li class="chapter" data-level="12.1" data-path="z-scores.html"><a href="z-scores.html#calculating-a-z-score-in-r"><i class="fa fa-check"></i><b>12.1</b> Calculating a Z score in R</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html"><i class="fa fa-check"></i><b>13</b> Intro to ggplot</a><ul>
+<li class="chapter" data-level="13.1" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#scales"><i class="fa fa-check"></i><b>13.1</b> Scales</a></li>
+<li class="chapter" data-level="13.2" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#styling"><i class="fa fa-check"></i><b>13.2</b> Styling</a></li>
+<li class="chapter" data-level="13.3" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#one-last-trick-coord-flip"><i class="fa fa-check"></i><b>13.3</b> One last trick: coord flip</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="stacked-bar-charts.html"><a href="stacked-bar-charts.html"><i class="fa fa-check"></i><b>14</b> Stacked bar charts</a></li>
+<li class="chapter" data-level="15" data-path="waffle-charts.html"><a href="waffle-charts.html"><i class="fa fa-check"></i><b>15</b> Waffle charts</a><ul>
+<li class="chapter" data-level="15.1" data-path="waffle-charts.html"><a href="waffle-charts.html#waffle-irons"><i class="fa fa-check"></i><b>15.1</b> Waffle Irons</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="line-charts.html"><a href="line-charts.html"><i class="fa fa-check"></i><b>16</b> Line charts</a><ul>
+<li class="chapter" data-level="16.1" data-path="line-charts.html"><a href="line-charts.html#but-what-if-i-wanted-to-add-a-lot-of-lines."><i class="fa fa-check"></i><b>16.1</b> But what if I wanted to add a lot of lines.</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="step-charts.html"><a href="step-charts.html"><i class="fa fa-check"></i><b>17</b> Step charts</a></li>
+<li class="chapter" data-level="18" data-path="ridge-charts.html"><a href="ridge-charts.html"><i class="fa fa-check"></i><b>18</b> Ridge charts</a></li>
+<li class="chapter" data-level="19" data-path="lollipop-charts.html"><a href="lollipop-charts.html"><i class="fa fa-check"></i><b>19</b> Lollipop charts</a></li>
+<li class="chapter" data-level="20" data-path="scatterplots.html"><a href="scatterplots.html"><i class="fa fa-check"></i><b>20</b> Scatterplots</a></li>
+<li class="chapter" data-level="21" data-path="facet-wraps.html"><a href="facet-wraps.html"><i class="fa fa-check"></i><b>21</b> Facet wraps</a><ul>
+<li class="chapter" data-level="21.1" data-path="facet-wraps.html"><a href="facet-wraps.html#facet-grid-vs-facet-wraps"><i class="fa fa-check"></i><b>21.1</b> Facet grid vs facet wraps</a></li>
+<li class="chapter" data-level="21.2" data-path="facet-wraps.html"><a href="facet-wraps.html#other-types"><i class="fa fa-check"></i><b>21.2</b> Other types</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>22</b> Tables</a><ul>
+<li class="chapter" data-level="22.0.1" data-path="tables.html"><a href="tables.html#exporting-tables"><i class="fa fa-check"></i><b>22.0.1</b> Exporting tables</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html"><i class="fa fa-check"></i><b>23</b> Intro to rvest</a><ul>
+<li class="chapter" data-level="23.1" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html#a-slightly-more-complicated-example"><i class="fa fa-check"></i><b>23.1</b> A slightly more complicated example</a></li>
+<li class="chapter" data-level="23.2" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html#an-even-more-complicated-example"><i class="fa fa-check"></i><b>23.2</b> An even more complicated example</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="advanced-rvest.html"><a href="advanced-rvest.html"><i class="fa fa-check"></i><b>24</b> Advanced rvest</a><ul>
+<li class="chapter" data-level="24.1" data-path="advanced-rvest.html"><a href="advanced-rvest.html#one-last-bit"><i class="fa fa-check"></i><b>24.1</b> One last bit</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="annotations.html"><a href="annotations.html"><i class="fa fa-check"></i><b>25</b> Annotations</a></li>
+<li class="chapter" data-level="26" data-path="finishing-touches-part-1.html"><a href="finishing-touches-part-1.html"><i class="fa fa-check"></i><b>26</b> Finishing touches, part 1</a><ul>
+<li class="chapter" data-level="26.1" data-path="finishing-touches-part-1.html"><a href="finishing-touches-part-1.html#graphics-vs-visual-stories"><i class="fa fa-check"></i><b>26.1</b> Graphics vs visual stories</a></li>
+<li class="chapter" data-level="26.2" data-path="finishing-touches-part-1.html"><a href="finishing-touches-part-1.html#getting-ggplot-closer-to-output"><i class="fa fa-check"></i><b>26.2</b> Getting ggplot closer to output</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="finishing-touches-2.html"><a href="finishing-touches-2.html"><i class="fa fa-check"></i><b>27</b> Finishing Touches 2</a></li>
+<li class="chapter" data-level="28" data-path="assignments.html"><a href="assignments.html"><i class="fa fa-check"></i><b>28</b> Assignments</a><ul>
+<li class="chapter" data-level="28.0.1" data-path="assignments.html"><a href="assignments.html#assignment"><i class="fa fa-check"></i><b>28.0.1</b> Assignment</a></li>
+<li class="chapter" data-level="28.0.2" data-path="assignments.html"><a href="assignments.html#if-youre-curious-how-i-got-the-coaches-salaries-separated-out"><i class="fa fa-check"></i><b>28.0.2</b> If you’re curious how I got the coaches salaries separated out</a></li>
+<li class="chapter" data-level="28.0.3" data-path="assignments.html"><a href="assignments.html#assignment-1"><i class="fa fa-check"></i><b>28.0.3</b> Assignment</a></li>
+<li class="chapter" data-level="28.0.4" data-path="assignments.html"><a href="assignments.html#assignment-2"><i class="fa fa-check"></i><b>28.0.4</b> Assignment</a></li>
+<li class="chapter" data-level="28.1" data-path="assignments.html"><a href="assignments.html#assignment-4"><i class="fa fa-check"></i><b>28.1</b> Assignment</a><ul>
+<li class="chapter" data-level="28.1.1" data-path="assignments.html"><a href="assignments.html#assignment-5"><i class="fa fa-check"></i><b>28.1.1</b> Assignment</a></li>
+<li class="chapter" data-level="28.1.2" data-path="assignments.html"><a href="assignments.html#assignment-6"><i class="fa fa-check"></i><b>28.1.2</b> Assignment</a></li>
+<li class="chapter" data-level="28.1.3" data-path="assignments.html"><a href="assignments.html#assignment-7"><i class="fa fa-check"></i><b>28.1.3</b> Assignment</a></li>
+<li class="chapter" data-level="28.1.4" data-path="assignments.html"><a href="assignments.html#assignment-8"><i class="fa fa-check"></i><b>28.1.4</b> Assignment</a></li>
+<li class="chapter" data-level="28.1.5" data-path="assignments.html"><a href="assignments.html#assignment-9"><i class="fa fa-check"></i><b>28.1.5</b> Assignment</a></li>
+<li class="chapter" data-level="28.1.6" data-path="assignments.html"><a href="assignments.html#assignment-12"><i class="fa fa-check"></i><b>28.1.6</b> Assignment</a></li>
+<li class="chapter" data-level="28.1.7" data-path="assignments.html"><a href="assignments.html#assignment-14"><i class="fa fa-check"></i><b>28.1.7</b> Assignment</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Sports Data Analysis and Visualization for Journalists and Other Storytellers</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="residuals" class="section level1">
+<h1><span class="header-section-number">Chapter 11</span> Residuals</h1>
+<p>When looking at a linear model of your data, there’s a measure you need to be aware of called residuals. The residual is the distance between what the model predicted and what the real outcome is. So if your model predicted a team would score 38 points per game given their third down conversion percentage, and they score 45, then your residual is 7. If they had scored 31, then their residual would be -7.</p>
+<p>Residuals can tell you severals things, but most importantly is if a linear model the right model for your data. If the residuals appear to be random, then a linear model is appropriate. If they have a pattern, it means something else is going on in your data and a linear model isn’t appropriate.</p>
+<p>Residuals can also tell you who is underperforming and overperforming the model. Let’s take a look at an example we’ve used regularly this semester – third down conversion percentage and penalties.</p>
+<p>Let’s first attach libraries and use rvest to get some data. Note: In the rvest steps, I rename the first column because it’s blank on the page and then I merge scoring offense to two different tables – third downs and penalties.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">offense &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/correlations.csv&quot;</span>)</code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   Name = col_character(),
+##   OffPoints = col_double(),
+##   OffPointsG = col_double(),
+##   DefPoints = col_double(),
+##   DefPointsG = col_double(),
+##   Pen. = col_double(),
+##   Yards = col_double(),
+##   `Pen./G` = col_double(),
+##   OffConversions = col_double(),
+##   OffConversionPct = col_double(),
+##   DefConversions = col_double(),
+##   DefConversionPct = col_double()
+## )</code></pre>
+<p>First, let’s build a linear model and save it as a new dataframe called <code>fit</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="st">`</span><span class="dt">OffPointsG</span><span class="st">`</span> <span class="op">~</span><span class="st"> `</span><span class="dt">OffConversionPct</span><span class="st">`</span>, <span class="dt">data =</span> offense)
+<span class="kw">summary</span>(fit)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = OffPointsG ~ OffConversionPct, data = offense)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -11.3861  -3.5411  -0.5885   2.9011  13.5188 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)      -4.74024    3.41041   -1.39    0.167    
+## OffConversionPct  0.85625    0.08479   10.10   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 5.111 on 128 degrees of freedom
+## Multiple R-squared:  0.4434, Adjusted R-squared:  0.4391 
+## F-statistic:   102 on 1 and 128 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>We’ve seen this output before, but let’s review because if you are using scatterplots to make a point, you should do this. First, note the Min and Max residual at the top. A team has underperformed the model by 11.4 points, and a team has overperformed it by 13.5. The median residual, where half are above and half are below, is just slightly under the fit line. Close here is good.</p>
+<p>Next: Look at the Adjusted R-squared value. What that says is that 44 percent of a team’s scoring output can be predicted by their third down conversion percentage. This is just one year, so that’s a little low. If we did this with more years, that would go up.</p>
+<p>Last: Look at the p-value. We are looking for a p-value smaller than .05. At .05, we can say that our correlation didn’t happen at random. And, in this case, it REALLY didn’t happen at random.</p>
+<p>What we want to do now is look at those residuals. We can add them to our dataframe like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">offense<span class="op">$</span>predicted &lt;-<span class="st"> </span><span class="kw">predict</span>(fit)
+offense<span class="op">$</span>residuals &lt;-<span class="st"> </span><span class="kw">residuals</span>(fit)</code></pre></div>
+<p>Now we can sort our data by those residuals. Sorting in descending order gives us the teams that are overperforming the model.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">offense <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="kw">desc</span>(residuals))</code></pre></div>
+<pre><code>## # A tibble: 130 x 14
+##    Name  OffPoints OffPointsG DefPoints DefPointsG  Pen. Yards `Pen./G`
+##    &lt;chr&gt;     &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+##  1 Tole…       525       40.4       397       30.5    99   931      7.6
+##  2 Utah…       618       47.5       289       22.2   101   916      7.8
+##  3 Syra…       523       40.2       351       27      94   768      7.2
+##  4 Okla…       677       48.4       466       33.3    86   855      6.1
+##  5 Clem…       664       44.3       197       13.1    73   674      4.9
+##  6 Hous…       571       43.9       483       37.2    87   683      6.7
+##  7 Miss…       407       33.9       434       36.2    88   802      7.3
+##  8 Neva…       404       31.1       350       26.9    77   738      5.9
+##  9 Bost…       384       32         308       25.7    75   590      6.3
+## 10 West…       483       40.3       326       27.2    85   800      7.1
+## # … with 120 more rows, and 6 more variables: OffConversions &lt;dbl&gt;,
+## #   OffConversionPct &lt;dbl&gt;, DefConversions &lt;dbl&gt;, DefConversionPct &lt;dbl&gt;,
+## #   predicted &lt;dbl&gt;, residuals &lt;dbl&gt;</code></pre>
+<p>So looking at this table, what you see here are the teams who scored more than their third down conversion percentage would indicate. Some of those teams were just lucky. Some of those teams were really good at long touchdown plays that didn’t need a lot of third downs to get down the field. But these are your overperformers.</p>
+<p>But, before we can bestow any validity on it, we need to see if this linear model is appropriate. We’ve done that some looking at our p-values and R-squared values. But one more check is to look at the residuals themselves. We do that by plotting the residuals with the predictor. We’ll get into plotting soon, but for now just seeing it is enough.</p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-87-1.png" width="672" /></p>
+<p>The lack of a shape here – the seemingly random nature – is a good sign that a linear model works for our data. If there was a pattern, that would indicate something else was going on in our data and we needed a different model.</p>
+<p>Another way to view your residuals is by connecting the predicted value with the actual value.</p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-88-1.png" width="672" /></p>
+<p>The blue line here separates underperformers from overperformers.</p>
+<div id="penalties" class="section level2">
+<h2><span class="header-section-number">11.1</span> Penalties</h2>
+<p>Now let’s look at it where it doesn’t work: Penalties.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">penalties &lt;-<span class="st"> </span>offense</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pfit &lt;-<span class="st"> </span><span class="kw">lm</span>(OffPointsG <span class="op">~</span><span class="st"> </span>Yards, <span class="dt">data =</span> penalties)
+<span class="kw">summary</span>(pfit)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = OffPointsG ~ Yards, data = penalties)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -16.5381  -4.5779  -0.5204   4.2418  17.0543 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 20.897213   2.819227   7.412 1.49e-11 ***
+## Yards        0.012220   0.003966   3.082  0.00252 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6.61 on 128 degrees of freedom
+## Multiple R-squared:  0.06907,    Adjusted R-squared:  0.06179 
+## F-statistic: 9.496 on 1 and 128 DF,  p-value: 0.002521</code></pre>
+<p>So from top to bottom:</p>
+<ul>
+<li>Our min and max go from -16.5 to positive 17.1</li>
+<li>Our adjusted R-squared is … .06. Not much at all.</li>
+<li>Our p-value is … .002, which is less than than .05.</li>
+</ul>
+<p>So what we can say about this model is that it’s statistically significant but utterly meaningless. Normally, we’d stop right here – why bother going forward with a predictive model that isn’t predictive? But let’s do it anyway.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">penalties<span class="op">$</span>predicted &lt;-<span class="st"> </span><span class="kw">predict</span>(pfit)
+penalties<span class="op">$</span>residuals &lt;-<span class="st"> </span><span class="kw">residuals</span>(pfit)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">penalties <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="kw">desc</span>(residuals))</code></pre></div>
+<pre><code>## # A tibble: 130 x 14
+##    Name  OffPoints OffPointsG DefPoints DefPointsG  Pen. Yards `Pen./G`
+##    &lt;chr&gt;     &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+##  1 Okla…       677       48.4       466       33.3    86   855      6.1
+##  2 Utah…       618       47.5       289       22.2   101   916      7.8
+##  3 Clem…       664       44.3       197       13.1    73   674      4.9
+##  4 Alab…       684       45.6       271       18.1    87   796      5.8
+##  5 Hous…       571       43.9       483       37.2    87   683      6.7
+##  6 UCF         562       43.2       295       22.7    97   848      7.5
+##  7 Memp…       601       42.9       447       31.9   101   833      7.2
+##  8 Ohio        521       40.1       320       24.6    64   652      4.9
+##  9 Syra…       523       40.2       351       27      94   768      7.2
+## 10 West…       483       40.3       326       27.2    85   800      7.1
+## # … with 120 more rows, and 6 more variables: OffConversions &lt;dbl&gt;,
+## #   OffConversionPct &lt;dbl&gt;, DefConversions &lt;dbl&gt;, DefConversionPct &lt;dbl&gt;,
+## #   predicted &lt;dbl&gt;, residuals &lt;dbl&gt;</code></pre>
+<p>So our model says Oklahoma <em>should</em> only be scoring 31.3 points per game given how many penalty yards per game, but they’re really scoring 48.4. Oy. What happens if we plot those residuals?</p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-93-1.png" width="672" /></p>
+<p>Well … it actually says that a linear model is appropriate. Which an important lesson – just because your residual plot says a linear model works here, that doesn’t say your linear model is good. There are other measures for that, and you need to use them.</p>
+<p>Here’s the segment plot of residuals – you’ll see some really long lines. That’s a bad sign.</p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-94-1.png" width="672" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="multiple-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="z-scores.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["SportsData.pdf", "SportsData.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

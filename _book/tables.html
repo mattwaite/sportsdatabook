@@ -1,0 +1,2183 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 22 Tables | Sports Data Analysis and Visualization for Journalists and Other Storytellers</title>
+  <meta name="description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC 350 course in the College of Journalism and Mass Communications." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 22 Tables | Sports Data Analysis and Visualization for Journalists and Other Storytellers" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC 350 course in the College of Journalism and Mass Communications." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 22 Tables | Sports Data Analysis and Visualization for Journalists and Other Storytellers" />
+  
+  <meta name="twitter:description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC 350 course in the College of Journalism and Mass Communications." />
+  
+
+<meta name="author" content="Matt Waite" />
+
+
+<meta name="date" content="2019-07-28" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="facet-wraps.html">
+<link rel="next" href="intro-to-rvest.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Sports Data Analysis and Visualization</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Throwing cold water on hot takes</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#requirements-and-conventions"><i class="fa fa-check"></i><b>1.1</b> Requirements and Conventions</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="Basics.html"><a href="Basics.html"><i class="fa fa-check"></i><b>2</b> The very basics</a><ul>
+<li class="chapter" data-level="2.1" data-path="Basics.html"><a href="Basics.html#adding-libraries-part-1"><i class="fa fa-check"></i><b>2.1</b> Adding libraries, part 1</a></li>
+<li class="chapter" data-level="2.2" data-path="Basics.html"><a href="Basics.html#adding-libraries-part-2"><i class="fa fa-check"></i><b>2.2</b> Adding libraries, part 2</a></li>
+<li class="chapter" data-level="2.3" data-path="Basics.html"><a href="Basics.html#notebooks"><i class="fa fa-check"></i><b>2.3</b> Notebooks</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html"><i class="fa fa-check"></i><b>3</b> Data, structures and types</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#rows-and-columns"><i class="fa fa-check"></i><b>3.1</b> Rows and columns</a></li>
+<li class="chapter" data-level="3.2" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#a-simple-way-to-get-data"><i class="fa fa-check"></i><b>3.2</b> A simple way to get data</a></li>
+<li class="chapter" data-level="3.3" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#cleaning-the-data"><i class="fa fa-check"></i><b>3.3</b> Cleaning the data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="aggregates.html"><a href="aggregates.html"><i class="fa fa-check"></i><b>4</b> Aggregates</a><ul>
+<li class="chapter" data-level="4.1" data-path="aggregates.html"><a href="aggregates.html#basic-data-analysis-group-by-and-count"><i class="fa fa-check"></i><b>4.1</b> Basic data analysis: Group By and Count</a></li>
+<li class="chapter" data-level="4.2" data-path="aggregates.html"><a href="aggregates.html#other-aggregates-mean-and-median"><i class="fa fa-check"></i><b>4.2</b> Other aggregates: Mean and median</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="mutating-data.html"><a href="mutating-data.html"><i class="fa fa-check"></i><b>5</b> Mutating data</a><ul>
+<li class="chapter" data-level="5.1" data-path="mutating-data.html"><a href="mutating-data.html#a-more-complex-example"><i class="fa fa-check"></i><b>5.1</b> A more complex example</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="filters-and-selections.html"><a href="filters-and-selections.html"><i class="fa fa-check"></i><b>6</b> Filters and selections</a><ul>
+<li class="chapter" data-level="6.1" data-path="filters-and-selections.html"><a href="filters-and-selections.html#selecting-data-to-make-it-easier-to-read"><i class="fa fa-check"></i><b>6.1</b> Selecting data to make it easier to read</a></li>
+<li class="chapter" data-level="6.2" data-path="filters-and-selections.html"><a href="filters-and-selections.html#using-conditional-filters-to-set-limits"><i class="fa fa-check"></i><b>6.2</b> Using conditional filters to set limits</a></li>
+<li class="chapter" data-level="6.3" data-path="filters-and-selections.html"><a href="filters-and-selections.html#top-list"><i class="fa fa-check"></i><b>6.3</b> Top list</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="transforming-data.html"><a href="transforming-data.html"><i class="fa fa-check"></i><b>7</b> Transforming data</a><ul>
+<li class="chapter" data-level="7.1" data-path="transforming-data.html"><a href="transforming-data.html#making-wide-data-long"><i class="fa fa-check"></i><b>7.1</b> Making wide data long</a></li>
+<li class="chapter" data-level="7.2" data-path="transforming-data.html"><a href="transforming-data.html#why-this-matters"><i class="fa fa-check"></i><b>7.2</b> Why this matters</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>8</b> Simulations</a><ul>
+<li class="chapter" data-level="8.1" data-path="simulations.html"><a href="simulations.html#cold-streaks"><i class="fa fa-check"></i><b>8.1</b> Cold streaks</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html"><i class="fa fa-check"></i><b>9</b> Correlations and regression</a><ul>
+<li class="chapter" data-level="9.1" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html#a-more-predictive-example"><i class="fa fa-check"></i><b>9.1</b> A more predictive example</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="multiple-regression.html"><a href="multiple-regression.html"><i class="fa fa-check"></i><b>10</b> Multiple regression</a></li>
+<li class="chapter" data-level="11" data-path="residuals.html"><a href="residuals.html"><i class="fa fa-check"></i><b>11</b> Residuals</a><ul>
+<li class="chapter" data-level="11.1" data-path="residuals.html"><a href="residuals.html#penalties"><i class="fa fa-check"></i><b>11.1</b> Penalties</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z scores</a><ul>
+<li class="chapter" data-level="12.1" data-path="z-scores.html"><a href="z-scores.html#calculating-a-z-score-in-r"><i class="fa fa-check"></i><b>12.1</b> Calculating a Z score in R</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html"><i class="fa fa-check"></i><b>13</b> Intro to ggplot</a><ul>
+<li class="chapter" data-level="13.1" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#scales"><i class="fa fa-check"></i><b>13.1</b> Scales</a></li>
+<li class="chapter" data-level="13.2" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#styling"><i class="fa fa-check"></i><b>13.2</b> Styling</a></li>
+<li class="chapter" data-level="13.3" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#one-last-trick-coord-flip"><i class="fa fa-check"></i><b>13.3</b> One last trick: coord flip</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="stacked-bar-charts.html"><a href="stacked-bar-charts.html"><i class="fa fa-check"></i><b>14</b> Stacked bar charts</a></li>
+<li class="chapter" data-level="15" data-path="waffle-charts.html"><a href="waffle-charts.html"><i class="fa fa-check"></i><b>15</b> Waffle charts</a><ul>
+<li class="chapter" data-level="15.1" data-path="waffle-charts.html"><a href="waffle-charts.html#waffle-irons"><i class="fa fa-check"></i><b>15.1</b> Waffle Irons</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="line-charts.html"><a href="line-charts.html"><i class="fa fa-check"></i><b>16</b> Line charts</a><ul>
+<li class="chapter" data-level="16.1" data-path="line-charts.html"><a href="line-charts.html#but-what-if-i-wanted-to-add-a-lot-of-lines."><i class="fa fa-check"></i><b>16.1</b> But what if I wanted to add a lot of lines.</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="step-charts.html"><a href="step-charts.html"><i class="fa fa-check"></i><b>17</b> Step charts</a></li>
+<li class="chapter" data-level="18" data-path="ridge-charts.html"><a href="ridge-charts.html"><i class="fa fa-check"></i><b>18</b> Ridge charts</a></li>
+<li class="chapter" data-level="19" data-path="lollipop-charts.html"><a href="lollipop-charts.html"><i class="fa fa-check"></i><b>19</b> Lollipop charts</a></li>
+<li class="chapter" data-level="20" data-path="scatterplots.html"><a href="scatterplots.html"><i class="fa fa-check"></i><b>20</b> Scatterplots</a></li>
+<li class="chapter" data-level="21" data-path="facet-wraps.html"><a href="facet-wraps.html"><i class="fa fa-check"></i><b>21</b> Facet wraps</a><ul>
+<li class="chapter" data-level="21.1" data-path="facet-wraps.html"><a href="facet-wraps.html#facet-grid-vs-facet-wraps"><i class="fa fa-check"></i><b>21.1</b> Facet grid vs facet wraps</a></li>
+<li class="chapter" data-level="21.2" data-path="facet-wraps.html"><a href="facet-wraps.html#other-types"><i class="fa fa-check"></i><b>21.2</b> Other types</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>22</b> Tables</a><ul>
+<li class="chapter" data-level="22.0.1" data-path="tables.html"><a href="tables.html#exporting-tables"><i class="fa fa-check"></i><b>22.0.1</b> Exporting tables</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html"><i class="fa fa-check"></i><b>23</b> Intro to rvest</a><ul>
+<li class="chapter" data-level="23.1" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html#a-slightly-more-complicated-example"><i class="fa fa-check"></i><b>23.1</b> A slightly more complicated example</a></li>
+<li class="chapter" data-level="23.2" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html#an-even-more-complicated-example"><i class="fa fa-check"></i><b>23.2</b> An even more complicated example</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="advanced-rvest.html"><a href="advanced-rvest.html"><i class="fa fa-check"></i><b>24</b> Advanced rvest</a><ul>
+<li class="chapter" data-level="24.1" data-path="advanced-rvest.html"><a href="advanced-rvest.html#one-last-bit"><i class="fa fa-check"></i><b>24.1</b> One last bit</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="annotations.html"><a href="annotations.html"><i class="fa fa-check"></i><b>25</b> Annotations</a></li>
+<li class="chapter" data-level="26" data-path="finishing-touches-part-1.html"><a href="finishing-touches-part-1.html"><i class="fa fa-check"></i><b>26</b> Finishing touches, part 1</a><ul>
+<li class="chapter" data-level="26.1" data-path="finishing-touches-part-1.html"><a href="finishing-touches-part-1.html#graphics-vs-visual-stories"><i class="fa fa-check"></i><b>26.1</b> Graphics vs visual stories</a></li>
+<li class="chapter" data-level="26.2" data-path="finishing-touches-part-1.html"><a href="finishing-touches-part-1.html#getting-ggplot-closer-to-output"><i class="fa fa-check"></i><b>26.2</b> Getting ggplot closer to output</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="finishing-touches-2.html"><a href="finishing-touches-2.html"><i class="fa fa-check"></i><b>27</b> Finishing Touches 2</a></li>
+<li class="chapter" data-level="28" data-path="assignments.html"><a href="assignments.html"><i class="fa fa-check"></i><b>28</b> Assignments</a><ul>
+<li class="chapter" data-level="28.0.1" data-path="assignments.html"><a href="assignments.html#assignment"><i class="fa fa-check"></i><b>28.0.1</b> Assignment</a></li>
+<li class="chapter" data-level="28.0.2" data-path="assignments.html"><a href="assignments.html#if-youre-curious-how-i-got-the-coaches-salaries-separated-out"><i class="fa fa-check"></i><b>28.0.2</b> If you’re curious how I got the coaches salaries separated out</a></li>
+<li class="chapter" data-level="28.0.3" data-path="assignments.html"><a href="assignments.html#assignment-1"><i class="fa fa-check"></i><b>28.0.3</b> Assignment</a></li>
+<li class="chapter" data-level="28.0.4" data-path="assignments.html"><a href="assignments.html#assignment-2"><i class="fa fa-check"></i><b>28.0.4</b> Assignment</a></li>
+<li class="chapter" data-level="28.1" data-path="assignments.html"><a href="assignments.html#assignment-4"><i class="fa fa-check"></i><b>28.1</b> Assignment</a><ul>
+<li class="chapter" data-level="28.1.1" data-path="assignments.html"><a href="assignments.html#assignment-5"><i class="fa fa-check"></i><b>28.1.1</b> Assignment</a></li>
+<li class="chapter" data-level="28.1.2" data-path="assignments.html"><a href="assignments.html#assignment-6"><i class="fa fa-check"></i><b>28.1.2</b> Assignment</a></li>
+<li class="chapter" data-level="28.1.3" data-path="assignments.html"><a href="assignments.html#assignment-7"><i class="fa fa-check"></i><b>28.1.3</b> Assignment</a></li>
+<li class="chapter" data-level="28.1.4" data-path="assignments.html"><a href="assignments.html#assignment-8"><i class="fa fa-check"></i><b>28.1.4</b> Assignment</a></li>
+<li class="chapter" data-level="28.1.5" data-path="assignments.html"><a href="assignments.html#assignment-9"><i class="fa fa-check"></i><b>28.1.5</b> Assignment</a></li>
+<li class="chapter" data-level="28.1.6" data-path="assignments.html"><a href="assignments.html#assignment-12"><i class="fa fa-check"></i><b>28.1.6</b> Assignment</a></li>
+<li class="chapter" data-level="28.1.7" data-path="assignments.html"><a href="assignments.html#assignment-14"><i class="fa fa-check"></i><b>28.1.7</b> Assignment</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Sports Data Analysis and Visualization for Journalists and Other Storytellers</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="tables" class="section level1">
+<h1><span class="header-section-number">Chapter 22</span> Tables</h1>
+<p>But not a table. A table with features.</p>
+<p>Sometimes, the best way to show your data is with a table. R has a neat package called <code>formattable</code> and you’ll install it like anything else with <code>install.packages('formattable')</code>.</p>
+<p>So what does it do? Let’s gather our libraries and get some data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(formattable)</code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;formattable&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:scales&#39;:
+## 
+##     comma, percent, scientific</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">offense &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/offensechange.csv&quot;</span>)</code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   Rank = col_double(),
+##   Name = col_character(),
+##   G = col_double(),
+##   `Rush Yards` = col_double(),
+##   `Pass Yards` = col_double(),
+##   Plays = col_double(),
+##   `Total Yards` = col_double(),
+##   `Yards/Play` = col_double(),
+##   `Yards/G` = col_double(),
+##   Year = col_double()
+## )</code></pre>
+<p>Let’s ask this question: Which college football team saw the greatest improvement in yards per game this regular season? The simplest way to calculate that is by percent change.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">changeTotalOffense &lt;-<span class="st"> </span>offense <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(Name, Year, <span class="st">`</span><span class="dt">Yards/G</span><span class="st">`</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">spread</span>(Year, <span class="st">`</span><span class="dt">Yards/G</span><span class="st">`</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Change=</span>(<span class="st">`</span><span class="dt">2018</span><span class="st">`</span><span class="op">-</span><span class="st">`</span><span class="dt">2017</span><span class="st">`</span>)<span class="op">/</span><span class="st">`</span><span class="dt">2017</span><span class="st">`</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(Change)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">top_n</span>(<span class="dv">20</span>)</code></pre></div>
+<pre><code>## Selecting by Change</code></pre>
+<p>We’ve output tables to the screen a thousand times in this class with <code>head</code>, but formattable makes them look good with very little code.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">formattable</span>(changeTotalOffense)</code></pre></div>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:right;">
+Name
+</th>
+<th style="text-align:right;">
+2017
+</th>
+<th style="text-align:right;">
+2018
+</th>
+<th style="text-align:right;">
+Change
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+Illinois
+</td>
+<td style="text-align:right;">
+280.4
+</td>
+<td style="text-align:right;">
+408.7
+</td>
+<td style="text-align:right;">
+0.4575606
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Kent State
+</td>
+<td style="text-align:right;">
+275.2
+</td>
+<td style="text-align:right;">
+383.6
+</td>
+<td style="text-align:right;">
+0.3938953
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+UTEP
+</td>
+<td style="text-align:right;">
+230.5
+</td>
+<td style="text-align:right;">
+307.7
+</td>
+<td style="text-align:right;">
+0.3349241
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Cincinnati
+</td>
+<td style="text-align:right;">
+351.8
+</td>
+<td style="text-align:right;">
+458.5
+</td>
+<td style="text-align:right;">
+0.3032973
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Old Dominion
+</td>
+<td style="text-align:right;">
+332.3
+</td>
+<td style="text-align:right;">
+427.8
+</td>
+<td style="text-align:right;">
+0.2873909
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Florida
+</td>
+<td style="text-align:right;">
+335.9
+</td>
+<td style="text-align:right;">
+426.7
+</td>
+<td style="text-align:right;">
+0.2703185
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+South Carolina
+</td>
+<td style="text-align:right;">
+337.1
+</td>
+<td style="text-align:right;">
+425.6
+</td>
+<td style="text-align:right;">
+0.2625334
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Utah State
+</td>
+<td style="text-align:right;">
+397.4
+</td>
+<td style="text-align:right;">
+497.4
+</td>
+<td style="text-align:right;">
+0.2516356
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Minnesota
+</td>
+<td style="text-align:right;">
+308.5
+</td>
+<td style="text-align:right;">
+379.6
+</td>
+<td style="text-align:right;">
+0.2304700
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Clemson
+</td>
+<td style="text-align:right;">
+429.6
+</td>
+<td style="text-align:right;">
+527.2
+</td>
+<td style="text-align:right;">
+0.2271881
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Ball State
+</td>
+<td style="text-align:right;">
+335.2
+</td>
+<td style="text-align:right;">
+408.6
+</td>
+<td style="text-align:right;">
+0.2189737
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Oregon State
+</td>
+<td style="text-align:right;">
+333.8
+</td>
+<td style="text-align:right;">
+404.8
+</td>
+<td style="text-align:right;">
+0.2127022
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Michigan
+</td>
+<td style="text-align:right;">
+348.9
+</td>
+<td style="text-align:right;">
+419.5
+</td>
+<td style="text-align:right;">
+0.2023502
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Houston
+</td>
+<td style="text-align:right;">
+428.2
+</td>
+<td style="text-align:right;">
+512.5
+</td>
+<td style="text-align:right;">
+0.1968706
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+North Carolina
+</td>
+<td style="text-align:right;">
+369.6
+</td>
+<td style="text-align:right;">
+442.1
+</td>
+<td style="text-align:right;">
+0.1961580
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Nebraska
+</td>
+<td style="text-align:right;">
+385.0
+</td>
+<td style="text-align:right;">
+456.2
+</td>
+<td style="text-align:right;">
+0.1849351
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Alabama
+</td>
+<td style="text-align:right;">
+444.1
+</td>
+<td style="text-align:right;">
+522.0
+</td>
+<td style="text-align:right;">
+0.1754109
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Vanderbilt
+</td>
+<td style="text-align:right;">
+350.8
+</td>
+<td style="text-align:right;">
+411.2
+</td>
+<td style="text-align:right;">
+0.1721779
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Texas A&amp;M
+</td>
+<td style="text-align:right;">
+406.8
+</td>
+<td style="text-align:right;">
+471.6
+</td>
+<td style="text-align:right;">
+0.1592920
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Wyoming
+</td>
+<td style="text-align:right;">
+286.0
+</td>
+<td style="text-align:right;">
+330.8
+</td>
+<td style="text-align:right;">
+0.1566434
+</td>
+</tr>
+</tbody>
+</table>
+<p>So there you have it. Illinois improved the most. Because Nebraska gave them a quarterback, but I digress. First thing I don’t like about formattable tables – the right alignment. Let’s fix that.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">formattable</span>(changeTotalOffense, <span class="dt">align=</span><span class="st">&quot;l&quot;</span>)</code></pre></div>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Name
+</th>
+<th style="text-align:left;">
+2017
+</th>
+<th style="text-align:left;">
+2018
+</th>
+<th style="text-align:left;">
+Change
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Illinois
+</td>
+<td style="text-align:left;">
+280.4
+</td>
+<td style="text-align:left;">
+408.7
+</td>
+<td style="text-align:left;">
+0.4575606
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kent State
+</td>
+<td style="text-align:left;">
+275.2
+</td>
+<td style="text-align:left;">
+383.6
+</td>
+<td style="text-align:left;">
+0.3938953
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+UTEP
+</td>
+<td style="text-align:left;">
+230.5
+</td>
+<td style="text-align:left;">
+307.7
+</td>
+<td style="text-align:left;">
+0.3349241
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cincinnati
+</td>
+<td style="text-align:left;">
+351.8
+</td>
+<td style="text-align:left;">
+458.5
+</td>
+<td style="text-align:left;">
+0.3032973
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Old Dominion
+</td>
+<td style="text-align:left;">
+332.3
+</td>
+<td style="text-align:left;">
+427.8
+</td>
+<td style="text-align:left;">
+0.2873909
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Florida
+</td>
+<td style="text-align:left;">
+335.9
+</td>
+<td style="text-align:left;">
+426.7
+</td>
+<td style="text-align:left;">
+0.2703185
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South Carolina
+</td>
+<td style="text-align:left;">
+337.1
+</td>
+<td style="text-align:left;">
+425.6
+</td>
+<td style="text-align:left;">
+0.2625334
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Utah State
+</td>
+<td style="text-align:left;">
+397.4
+</td>
+<td style="text-align:left;">
+497.4
+</td>
+<td style="text-align:left;">
+0.2516356
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Minnesota
+</td>
+<td style="text-align:left;">
+308.5
+</td>
+<td style="text-align:left;">
+379.6
+</td>
+<td style="text-align:left;">
+0.2304700
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Clemson
+</td>
+<td style="text-align:left;">
+429.6
+</td>
+<td style="text-align:left;">
+527.2
+</td>
+<td style="text-align:left;">
+0.2271881
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ball State
+</td>
+<td style="text-align:left;">
+335.2
+</td>
+<td style="text-align:left;">
+408.6
+</td>
+<td style="text-align:left;">
+0.2189737
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Oregon State
+</td>
+<td style="text-align:left;">
+333.8
+</td>
+<td style="text-align:left;">
+404.8
+</td>
+<td style="text-align:left;">
+0.2127022
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Michigan
+</td>
+<td style="text-align:left;">
+348.9
+</td>
+<td style="text-align:left;">
+419.5
+</td>
+<td style="text-align:left;">
+0.2023502
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Houston
+</td>
+<td style="text-align:left;">
+428.2
+</td>
+<td style="text-align:left;">
+512.5
+</td>
+<td style="text-align:left;">
+0.1968706
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+North Carolina
+</td>
+<td style="text-align:left;">
+369.6
+</td>
+<td style="text-align:left;">
+442.1
+</td>
+<td style="text-align:left;">
+0.1961580
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Nebraska
+</td>
+<td style="text-align:left;">
+385.0
+</td>
+<td style="text-align:left;">
+456.2
+</td>
+<td style="text-align:left;">
+0.1849351
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Alabama
+</td>
+<td style="text-align:left;">
+444.1
+</td>
+<td style="text-align:left;">
+522.0
+</td>
+<td style="text-align:left;">
+0.1754109
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Vanderbilt
+</td>
+<td style="text-align:left;">
+350.8
+</td>
+<td style="text-align:left;">
+411.2
+</td>
+<td style="text-align:left;">
+0.1721779
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Texas A&amp;M
+</td>
+<td style="text-align:left;">
+406.8
+</td>
+<td style="text-align:left;">
+471.6
+</td>
+<td style="text-align:left;">
+0.1592920
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Wyoming
+</td>
+<td style="text-align:left;">
+286.0
+</td>
+<td style="text-align:left;">
+330.8
+</td>
+<td style="text-align:left;">
+0.1566434
+</td>
+</tr>
+</tbody>
+</table>
+<p>Next? I forgot to multiply by 100. No matter. Formattable can fix that for us.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">formattable</span>(
+  changeTotalOffense, 
+  <span class="dt">align=</span><span class="st">&quot;l&quot;</span>,
+  <span class="kw">list</span>(
+    <span class="st">`</span><span class="dt">Change</span><span class="st">`</span> =<span class="st"> </span>percent)
+  )</code></pre></div>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Name
+</th>
+<th style="text-align:left;">
+2017
+</th>
+<th style="text-align:left;">
+2018
+</th>
+<th style="text-align:left;">
+Change
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Illinois
+</td>
+<td style="text-align:left;">
+280.4
+</td>
+<td style="text-align:left;">
+408.7
+</td>
+<td style="text-align:left;">
+45.76%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kent State
+</td>
+<td style="text-align:left;">
+275.2
+</td>
+<td style="text-align:left;">
+383.6
+</td>
+<td style="text-align:left;">
+39.39%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+UTEP
+</td>
+<td style="text-align:left;">
+230.5
+</td>
+<td style="text-align:left;">
+307.7
+</td>
+<td style="text-align:left;">
+33.49%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cincinnati
+</td>
+<td style="text-align:left;">
+351.8
+</td>
+<td style="text-align:left;">
+458.5
+</td>
+<td style="text-align:left;">
+30.33%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Old Dominion
+</td>
+<td style="text-align:left;">
+332.3
+</td>
+<td style="text-align:left;">
+427.8
+</td>
+<td style="text-align:left;">
+28.74%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Florida
+</td>
+<td style="text-align:left;">
+335.9
+</td>
+<td style="text-align:left;">
+426.7
+</td>
+<td style="text-align:left;">
+27.03%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South Carolina
+</td>
+<td style="text-align:left;">
+337.1
+</td>
+<td style="text-align:left;">
+425.6
+</td>
+<td style="text-align:left;">
+26.25%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Utah State
+</td>
+<td style="text-align:left;">
+397.4
+</td>
+<td style="text-align:left;">
+497.4
+</td>
+<td style="text-align:left;">
+25.16%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Minnesota
+</td>
+<td style="text-align:left;">
+308.5
+</td>
+<td style="text-align:left;">
+379.6
+</td>
+<td style="text-align:left;">
+23.05%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Clemson
+</td>
+<td style="text-align:left;">
+429.6
+</td>
+<td style="text-align:left;">
+527.2
+</td>
+<td style="text-align:left;">
+22.72%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ball State
+</td>
+<td style="text-align:left;">
+335.2
+</td>
+<td style="text-align:left;">
+408.6
+</td>
+<td style="text-align:left;">
+21.90%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Oregon State
+</td>
+<td style="text-align:left;">
+333.8
+</td>
+<td style="text-align:left;">
+404.8
+</td>
+<td style="text-align:left;">
+21.27%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Michigan
+</td>
+<td style="text-align:left;">
+348.9
+</td>
+<td style="text-align:left;">
+419.5
+</td>
+<td style="text-align:left;">
+20.24%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Houston
+</td>
+<td style="text-align:left;">
+428.2
+</td>
+<td style="text-align:left;">
+512.5
+</td>
+<td style="text-align:left;">
+19.69%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+North Carolina
+</td>
+<td style="text-align:left;">
+369.6
+</td>
+<td style="text-align:left;">
+442.1
+</td>
+<td style="text-align:left;">
+19.62%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Nebraska
+</td>
+<td style="text-align:left;">
+385.0
+</td>
+<td style="text-align:left;">
+456.2
+</td>
+<td style="text-align:left;">
+18.49%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Alabama
+</td>
+<td style="text-align:left;">
+444.1
+</td>
+<td style="text-align:left;">
+522.0
+</td>
+<td style="text-align:left;">
+17.54%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Vanderbilt
+</td>
+<td style="text-align:left;">
+350.8
+</td>
+<td style="text-align:left;">
+411.2
+</td>
+<td style="text-align:left;">
+17.22%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Texas A&amp;M
+</td>
+<td style="text-align:left;">
+406.8
+</td>
+<td style="text-align:left;">
+471.6
+</td>
+<td style="text-align:left;">
+15.93%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Wyoming
+</td>
+<td style="text-align:left;">
+286.0
+</td>
+<td style="text-align:left;">
+330.8
+</td>
+<td style="text-align:left;">
+15.66%
+</td>
+</tr>
+</tbody>
+</table>
+<p>Something else not great? I can’t really see the magnitude of the 2018 column. A team could improve a lot, but still not gain that many yards (ahem, UTEP). Formattable has embeddable bar charts in the table. They look like this.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">formattable</span>(
+  changeTotalOffense, 
+  <span class="dt">align=</span><span class="st">&quot;l&quot;</span>,
+  <span class="kw">list</span>(
+    <span class="st">`</span><span class="dt">2018</span><span class="st">`</span> =<span class="st"> </span><span class="kw">color_bar</span>(<span class="st">&quot;#FA614B&quot;</span>), 
+    <span class="st">`</span><span class="dt">Change</span><span class="st">`</span> =<span class="st"> </span>percent)
+  )</code></pre></div>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Name
+</th>
+<th style="text-align:left;">
+2017
+</th>
+<th style="text-align:left;">
+2018
+</th>
+<th style="text-align:left;">
+Change
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Illinois
+</td>
+<td style="text-align:left;">
+280.4
+</td>
+<td style="text-align:left;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 77.52%">408.7</span>
+</td>
+<td style="text-align:left;">
+45.76%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kent State
+</td>
+<td style="text-align:left;">
+275.2
+</td>
+<td style="text-align:left;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 72.76%">383.6</span>
+</td>
+<td style="text-align:left;">
+39.39%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+UTEP
+</td>
+<td style="text-align:left;">
+230.5
+</td>
+<td style="text-align:left;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 58.36%">307.7</span>
+</td>
+<td style="text-align:left;">
+33.49%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cincinnati
+</td>
+<td style="text-align:left;">
+351.8
+</td>
+<td style="text-align:left;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 86.97%">458.5</span>
+</td>
+<td style="text-align:left;">
+30.33%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Old Dominion
+</td>
+<td style="text-align:left;">
+332.3
+</td>
+<td style="text-align:left;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 81.15%">427.8</span>
+</td>
+<td style="text-align:left;">
+28.74%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Florida
+</td>
+<td style="text-align:left;">
+335.9
+</td>
+<td style="text-align:left;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 80.94%">426.7</span>
+</td>
+<td style="text-align:left;">
+27.03%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South Carolina
+</td>
+<td style="text-align:left;">
+337.1
+</td>
+<td style="text-align:left;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 80.73%">425.6</span>
+</td>
+<td style="text-align:left;">
+26.25%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Utah State
+</td>
+<td style="text-align:left;">
+397.4
+</td>
+<td style="text-align:left;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 94.35%">497.4</span>
+</td>
+<td style="text-align:left;">
+25.16%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Minnesota
+</td>
+<td style="text-align:left;">
+308.5
+</td>
+<td style="text-align:left;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 72.00%">379.6</span>
+</td>
+<td style="text-align:left;">
+23.05%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Clemson
+</td>
+<td style="text-align:left;">
+429.6
+</td>
+<td style="text-align:left;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 100.00%">527.2</span>
+</td>
+<td style="text-align:left;">
+22.72%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ball State
+</td>
+<td style="text-align:left;">
+335.2
+</td>
+<td style="text-align:left;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 77.50%">408.6</span>
+</td>
+<td style="text-align:left;">
+21.90%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Oregon State
+</td>
+<td style="text-align:left;">
+333.8
+</td>
+<td style="text-align:left;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 76.78%">404.8</span>
+</td>
+<td style="text-align:left;">
+21.27%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Michigan
+</td>
+<td style="text-align:left;">
+348.9
+</td>
+<td style="text-align:left;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 79.57%">419.5</span>
+</td>
+<td style="text-align:left;">
+20.24%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Houston
+</td>
+<td style="text-align:left;">
+428.2
+</td>
+<td style="text-align:left;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 97.21%">512.5</span>
+</td>
+<td style="text-align:left;">
+19.69%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+North Carolina
+</td>
+<td style="text-align:left;">
+369.6
+</td>
+<td style="text-align:left;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 83.86%">442.1</span>
+</td>
+<td style="text-align:left;">
+19.62%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Nebraska
+</td>
+<td style="text-align:left;">
+385.0
+</td>
+<td style="text-align:left;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 86.53%">456.2</span>
+</td>
+<td style="text-align:left;">
+18.49%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Alabama
+</td>
+<td style="text-align:left;">
+444.1
+</td>
+<td style="text-align:left;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 99.01%">522.0</span>
+</td>
+<td style="text-align:left;">
+17.54%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Vanderbilt
+</td>
+<td style="text-align:left;">
+350.8
+</td>
+<td style="text-align:left;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 78.00%">411.2</span>
+</td>
+<td style="text-align:left;">
+17.22%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Texas A&amp;M
+</td>
+<td style="text-align:left;">
+406.8
+</td>
+<td style="text-align:left;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 89.45%">471.6</span>
+</td>
+<td style="text-align:left;">
+15.93%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Wyoming
+</td>
+<td style="text-align:left;">
+286.0
+</td>
+<td style="text-align:left;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 62.75%">330.8</span>
+</td>
+<td style="text-align:left;">
+15.66%
+</td>
+</tr>
+</tbody>
+</table>
+<p>That gives me some more to mess with.</p>
+<p>One thing you can do is set the bar widths to the results of a function. In this case, it returns a number between 0 and 1, with 1 being the max and 0 being the minimum. It gives you some idea how far out UTEP is with their peers.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">unit.scale =<span class="st"> </span><span class="cf">function</span>(x) (x <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(x)) <span class="op">/</span><span class="st"> </span>(<span class="kw">max</span>(x) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(x))
+
+<span class="kw">formattable</span>(
+  changeTotalOffense, 
+  <span class="dt">align=</span><span class="st">&quot;r&quot;</span>,
+  <span class="kw">list</span>(
+    <span class="st">`</span><span class="dt">2018</span><span class="st">`</span> =<span class="st"> </span><span class="kw">color_bar</span>(<span class="st">&quot;#FA614B&quot;</span>, <span class="dt">fun =</span> unit.scale), 
+    <span class="st">`</span><span class="dt">2017</span><span class="st">`</span> =<span class="st"> </span><span class="kw">color_bar</span>(<span class="st">&quot;#FA614B&quot;</span>, <span class="dt">fun =</span> unit.scale), 
+    <span class="st">`</span><span class="dt">Change</span><span class="st">`</span> =<span class="st"> </span>percent)
+  )</code></pre></div>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:right;">
+Name
+</th>
+<th style="text-align:right;">
+2017
+</th>
+<th style="text-align:right;">
+2018
+</th>
+<th style="text-align:right;">
+Change
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+Illinois
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 23.36%">280.4</span>
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 46.01%">408.7</span>
+</td>
+<td style="text-align:right;">
+45.76%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Kent State
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 20.93%">275.2</span>
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 34.58%">383.6</span>
+</td>
+<td style="text-align:right;">
+39.39%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+UTEP
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 0.00%">230.5</span>
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 0.00%">307.7</span>
+</td>
+<td style="text-align:right;">
+33.49%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Cincinnati
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 56.79%">351.8</span>
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 68.70%">458.5</span>
+</td>
+<td style="text-align:right;">
+30.33%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Old Dominion
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 47.66%">332.3</span>
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 54.72%">427.8</span>
+</td>
+<td style="text-align:right;">
+28.74%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Florida
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 49.34%">335.9</span>
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 54.21%">426.7</span>
+</td>
+<td style="text-align:right;">
+27.03%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+South Carolina
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 49.91%">337.1</span>
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 53.71%">425.6</span>
+</td>
+<td style="text-align:right;">
+26.25%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Utah State
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 78.14%">397.4</span>
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 86.42%">497.4</span>
+</td>
+<td style="text-align:right;">
+25.16%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Minnesota
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 36.52%">308.5</span>
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 32.76%">379.6</span>
+</td>
+<td style="text-align:right;">
+23.05%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Clemson
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 93.21%">429.6</span>
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 100.00%">527.2</span>
+</td>
+<td style="text-align:right;">
+22.72%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Ball State
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 49.02%">335.2</span>
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 45.97%">408.6</span>
+</td>
+<td style="text-align:right;">
+21.90%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Oregon State
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 48.36%">333.8</span>
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 44.24%">404.8</span>
+</td>
+<td style="text-align:right;">
+21.27%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Michigan
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 55.43%">348.9</span>
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 50.93%">419.5</span>
+</td>
+<td style="text-align:right;">
+20.24%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Houston
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 92.56%">428.2</span>
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 93.30%">512.5</span>
+</td>
+<td style="text-align:right;">
+19.69%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+North Carolina
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 65.12%">369.6</span>
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 61.23%">442.1</span>
+</td>
+<td style="text-align:right;">
+19.62%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Nebraska
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 72.33%">385.0</span>
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 67.65%">456.2</span>
+</td>
+<td style="text-align:right;">
+18.49%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Alabama
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 100.00%">444.1</span>
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 97.63%">522.0</span>
+</td>
+<td style="text-align:right;">
+17.54%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Vanderbilt
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 56.32%">350.8</span>
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 47.15%">411.2</span>
+</td>
+<td style="text-align:right;">
+17.22%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Texas A&amp;M
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 82.54%">406.8</span>
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 74.67%">471.6</span>
+</td>
+<td style="text-align:right;">
+15.93%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Wyoming
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 25.98%">286.0</span>
+</td>
+<td style="text-align:right;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: #FA614B; width: 10.52%">330.8</span>
+</td>
+<td style="text-align:right;">
+15.66%
+</td>
+</tr>
+</tbody>
+</table>
+<p>Another way to deal with this – color tiles. Change the rectangle that houses the data to a color indicating the intensity of it. Again, UTEP stands out.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">formattable</span>(
+  changeTotalOffense, 
+  <span class="dt">align=</span><span class="st">&quot;r&quot;</span>,
+  <span class="kw">list</span>(
+     <span class="kw">area</span>(<span class="dt">col =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>) <span class="op">~</span><span class="st"> </span><span class="kw">color_tile</span>(<span class="st">&quot;#FFF6F4&quot;</span>, <span class="st">&quot;#FA614B&quot;</span>),
+    <span class="st">`</span><span class="dt">Change</span><span class="st">`</span> =<span class="st"> </span>percent)
+  )</code></pre></div>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:right;">
+Name
+</th>
+<th style="text-align:right;">
+2017
+</th>
+<th style="text-align:right;">
+2018
+</th>
+<th style="text-align:right;">
+Change
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+Illinois
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fedcd7">280.4</span>
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fb9c8e">408.7</span>
+</td>
+<td style="text-align:right;">
+45.76%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Kent State
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fedfda">275.2</span>
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fca99c">383.6</span>
+</td>
+<td style="text-align:right;">
+39.39%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+UTEP
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fff6f4">230.5</span>
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fdcfc8">307.7</span>
+</td>
+<td style="text-align:right;">
+33.49%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Cincinnati
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fcb9ae">351.8</span>
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fb8372">458.5</span>
+</td>
+<td style="text-align:right;">
+30.33%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Old Dominion
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fdc2ba">332.3</span>
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fb9283">427.8</span>
+</td>
+<td style="text-align:right;">
+28.74%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Florida
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fdc1b7">335.9</span>
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fb9384">426.7</span>
+</td>
+<td style="text-align:right;">
+27.03%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+South Carolina
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fdc0b7">337.1</span>
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fb9484">425.6</span>
+</td>
+<td style="text-align:right;">
+26.25%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Utah State
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fca294">397.4</span>
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fa6f5b">497.4</span>
+</td>
+<td style="text-align:right;">
+25.16%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Minnesota
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fdcec7">308.5</span>
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fcab9f">379.6</span>
+</td>
+<td style="text-align:right;">
+23.05%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Clemson
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fb9282">429.6</span>
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fa614b">527.2</span>
+</td>
+<td style="text-align:right;">
+22.72%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Ball State
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fdc1b8">335.2</span>
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fb9c8e">408.6</span>
+</td>
+<td style="text-align:right;">
+21.90%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Oregon State
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fdc2b9">333.8</span>
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fc9e90">404.8</span>
+</td>
+<td style="text-align:right;">
+21.27%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Michigan
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fdbab0">348.9</span>
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fb9788">419.5</span>
+</td>
+<td style="text-align:right;">
+20.24%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Houston
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fb9283">428.2</span>
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fa6853">512.5</span>
+</td>
+<td style="text-align:right;">
+19.69%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+North Carolina
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fcb0a4">369.6</span>
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fb8b7b">442.1</span>
+</td>
+<td style="text-align:right;">
+19.62%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Nebraska
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fca89b">385.0</span>
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fb8473">456.2</span>
+</td>
+<td style="text-align:right;">
+18.49%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Alabama
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fb8a7a">444.1</span>
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fa634d">522.0</span>
+</td>
+<td style="text-align:right;">
+17.54%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Vanderbilt
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fcb9af">350.8</span>
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fb9b8d">411.2</span>
+</td>
+<td style="text-align:right;">
+17.22%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Texas A&amp;M
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fc9d8f">406.8</span>
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fa7c6a">471.6</span>
+</td>
+<td style="text-align:right;">
+15.93%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Wyoming
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fedad4">286.0</span>
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fdc3ba">330.8</span>
+</td>
+<td style="text-align:right;">
+15.66%
+</td>
+</tr>
+</tbody>
+</table>
+<div id="exporting-tables" class="section level3">
+<h3><span class="header-section-number">22.0.1</span> Exporting tables</h3>
+<p>The first thing you need to do is install some libraries – do this in the console, not in an R Studio code block because htmltools get’s a little weird.</p>
+<pre><code>install.packages(&quot;htmltools&quot;)
+install.packages(&quot;webshot&quot;)
+
+webshot::install_phantomjs()</code></pre>
+<p>Now, copy, paste and run this code block entirely. Don’t change anything.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;htmltools&quot;</span>)
+<span class="kw">library</span>(<span class="st">&quot;webshot&quot;</span>)    
+
+export_formattable &lt;-<span class="st"> </span><span class="cf">function</span>(f, file, <span class="dt">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="dt">height =</span> <span class="ot">NULL</span>, 
+                               <span class="dt">background =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">delay =</span> <span class="fl">0.2</span>)
+    {
+      w &lt;-<span class="st"> </span><span class="kw">as.htmlwidget</span>(f, <span class="dt">width =</span> width, <span class="dt">height =</span> height)
+      path &lt;-<span class="st"> </span><span class="kw">html_print</span>(w, <span class="dt">background =</span> background, <span class="dt">viewer =</span> <span class="ot">NULL</span>)
+      url &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;file:///&quot;</span>, <span class="kw">gsub</span>(<span class="st">&quot;</span><span class="ch">\\\\</span><span class="st">&quot;</span>, <span class="st">&quot;/&quot;</span>, <span class="kw">normalizePath</span>(path)))
+      <span class="kw">webshot</span>(url,
+              <span class="dt">file =</span> file,
+              <span class="dt">selector =</span> <span class="st">&quot;.formattable_widget&quot;</span>,
+              <span class="dt">delay =</span> delay)
+    }</code></pre></div>
+<p>Now, save your formattable table to an object using the <code>&lt;-</code> assignment operator.</p>
+<p>After you’ve done that, you can call the function you ran in the previous block to export as a png file. In my case, I created an object called table, which is populated with my formattable table. Then, in export_formattable, I pass in that <code>table</code> object and give it a name.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">table &lt;-<span class="st"> </span><span class="kw">formattable</span>(
+  changeTotalOffense, 
+  <span class="dt">align=</span><span class="st">&quot;r&quot;</span>,
+  <span class="kw">list</span>(
+     <span class="kw">area</span>(<span class="dt">col =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>) <span class="op">~</span><span class="st"> </span><span class="kw">color_tile</span>(<span class="st">&quot;#FFF6F4&quot;</span>, <span class="st">&quot;#FA614B&quot;</span>),
+    <span class="st">`</span><span class="dt">Change</span><span class="st">`</span> =<span class="st"> </span>percent)
+  )
+
+<span class="kw">export_formattable</span>(table,<span class="st">&quot;table.png&quot;</span>)</code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-201-1.png" width="672" /></p>
+<p>For now, pngs are what you need to export. There is a way to export PDFs, but they lose all the formatting when you do that, which is kind of pointless.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="facet-wraps.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="intro-to-rvest.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["SportsData.pdf", "SportsData.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

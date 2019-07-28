@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 26 Finishing touches, part 1 | Sports Data Analysis and Visualization for Journalists and Other Storytellers</title>
+  <meta name="description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC 350 course in the College of Journalism and Mass Communications." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 26 Finishing touches, part 1 | Sports Data Analysis and Visualization for Journalists and Other Storytellers" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC 350 course in the College of Journalism and Mass Communications." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 26 Finishing touches, part 1 | Sports Data Analysis and Visualization for Journalists and Other Storytellers" />
+  
+  <meta name="twitter:description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC 350 course in the College of Journalism and Mass Communications." />
+  
+
+<meta name="author" content="Matt Waite" />
+
+
+<meta name="date" content="2019-07-28" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="annotations.html">
+<link rel="next" href="finishing-touches-2.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Sports Data Analysis and Visualization</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Throwing cold water on hot takes</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#requirements-and-conventions"><i class="fa fa-check"></i><b>1.1</b> Requirements and Conventions</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="Basics.html"><a href="Basics.html"><i class="fa fa-check"></i><b>2</b> The very basics</a><ul>
+<li class="chapter" data-level="2.1" data-path="Basics.html"><a href="Basics.html#adding-libraries-part-1"><i class="fa fa-check"></i><b>2.1</b> Adding libraries, part 1</a></li>
+<li class="chapter" data-level="2.2" data-path="Basics.html"><a href="Basics.html#adding-libraries-part-2"><i class="fa fa-check"></i><b>2.2</b> Adding libraries, part 2</a></li>
+<li class="chapter" data-level="2.3" data-path="Basics.html"><a href="Basics.html#notebooks"><i class="fa fa-check"></i><b>2.3</b> Notebooks</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html"><i class="fa fa-check"></i><b>3</b> Data, structures and types</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#rows-and-columns"><i class="fa fa-check"></i><b>3.1</b> Rows and columns</a></li>
+<li class="chapter" data-level="3.2" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#a-simple-way-to-get-data"><i class="fa fa-check"></i><b>3.2</b> A simple way to get data</a></li>
+<li class="chapter" data-level="3.3" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#cleaning-the-data"><i class="fa fa-check"></i><b>3.3</b> Cleaning the data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="aggregates.html"><a href="aggregates.html"><i class="fa fa-check"></i><b>4</b> Aggregates</a><ul>
+<li class="chapter" data-level="4.1" data-path="aggregates.html"><a href="aggregates.html#basic-data-analysis-group-by-and-count"><i class="fa fa-check"></i><b>4.1</b> Basic data analysis: Group By and Count</a></li>
+<li class="chapter" data-level="4.2" data-path="aggregates.html"><a href="aggregates.html#other-aggregates-mean-and-median"><i class="fa fa-check"></i><b>4.2</b> Other aggregates: Mean and median</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="mutating-data.html"><a href="mutating-data.html"><i class="fa fa-check"></i><b>5</b> Mutating data</a><ul>
+<li class="chapter" data-level="5.1" data-path="mutating-data.html"><a href="mutating-data.html#a-more-complex-example"><i class="fa fa-check"></i><b>5.1</b> A more complex example</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="filters-and-selections.html"><a href="filters-and-selections.html"><i class="fa fa-check"></i><b>6</b> Filters and selections</a><ul>
+<li class="chapter" data-level="6.1" data-path="filters-and-selections.html"><a href="filters-and-selections.html#selecting-data-to-make-it-easier-to-read"><i class="fa fa-check"></i><b>6.1</b> Selecting data to make it easier to read</a></li>
+<li class="chapter" data-level="6.2" data-path="filters-and-selections.html"><a href="filters-and-selections.html#using-conditional-filters-to-set-limits"><i class="fa fa-check"></i><b>6.2</b> Using conditional filters to set limits</a></li>
+<li class="chapter" data-level="6.3" data-path="filters-and-selections.html"><a href="filters-and-selections.html#top-list"><i class="fa fa-check"></i><b>6.3</b> Top list</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="transforming-data.html"><a href="transforming-data.html"><i class="fa fa-check"></i><b>7</b> Transforming data</a><ul>
+<li class="chapter" data-level="7.1" data-path="transforming-data.html"><a href="transforming-data.html#making-wide-data-long"><i class="fa fa-check"></i><b>7.1</b> Making wide data long</a></li>
+<li class="chapter" data-level="7.2" data-path="transforming-data.html"><a href="transforming-data.html#why-this-matters"><i class="fa fa-check"></i><b>7.2</b> Why this matters</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>8</b> Simulations</a><ul>
+<li class="chapter" data-level="8.1" data-path="simulations.html"><a href="simulations.html#cold-streaks"><i class="fa fa-check"></i><b>8.1</b> Cold streaks</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html"><i class="fa fa-check"></i><b>9</b> Correlations and regression</a><ul>
+<li class="chapter" data-level="9.1" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html#a-more-predictive-example"><i class="fa fa-check"></i><b>9.1</b> A more predictive example</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="multiple-regression.html"><a href="multiple-regression.html"><i class="fa fa-check"></i><b>10</b> Multiple regression</a></li>
+<li class="chapter" data-level="11" data-path="residuals.html"><a href="residuals.html"><i class="fa fa-check"></i><b>11</b> Residuals</a><ul>
+<li class="chapter" data-level="11.1" data-path="residuals.html"><a href="residuals.html#penalties"><i class="fa fa-check"></i><b>11.1</b> Penalties</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z scores</a><ul>
+<li class="chapter" data-level="12.1" data-path="z-scores.html"><a href="z-scores.html#calculating-a-z-score-in-r"><i class="fa fa-check"></i><b>12.1</b> Calculating a Z score in R</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html"><i class="fa fa-check"></i><b>13</b> Intro to ggplot</a><ul>
+<li class="chapter" data-level="13.1" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#scales"><i class="fa fa-check"></i><b>13.1</b> Scales</a></li>
+<li class="chapter" data-level="13.2" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#styling"><i class="fa fa-check"></i><b>13.2</b> Styling</a></li>
+<li class="chapter" data-level="13.3" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#one-last-trick-coord-flip"><i class="fa fa-check"></i><b>13.3</b> One last trick: coord flip</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="stacked-bar-charts.html"><a href="stacked-bar-charts.html"><i class="fa fa-check"></i><b>14</b> Stacked bar charts</a></li>
+<li class="chapter" data-level="15" data-path="waffle-charts.html"><a href="waffle-charts.html"><i class="fa fa-check"></i><b>15</b> Waffle charts</a><ul>
+<li class="chapter" data-level="15.1" data-path="waffle-charts.html"><a href="waffle-charts.html#waffle-irons"><i class="fa fa-check"></i><b>15.1</b> Waffle Irons</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="line-charts.html"><a href="line-charts.html"><i class="fa fa-check"></i><b>16</b> Line charts</a><ul>
+<li class="chapter" data-level="16.1" data-path="line-charts.html"><a href="line-charts.html#but-what-if-i-wanted-to-add-a-lot-of-lines."><i class="fa fa-check"></i><b>16.1</b> But what if I wanted to add a lot of lines.</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="step-charts.html"><a href="step-charts.html"><i class="fa fa-check"></i><b>17</b> Step charts</a></li>
+<li class="chapter" data-level="18" data-path="ridge-charts.html"><a href="ridge-charts.html"><i class="fa fa-check"></i><b>18</b> Ridge charts</a></li>
+<li class="chapter" data-level="19" data-path="lollipop-charts.html"><a href="lollipop-charts.html"><i class="fa fa-check"></i><b>19</b> Lollipop charts</a></li>
+<li class="chapter" data-level="20" data-path="scatterplots.html"><a href="scatterplots.html"><i class="fa fa-check"></i><b>20</b> Scatterplots</a></li>
+<li class="chapter" data-level="21" data-path="facet-wraps.html"><a href="facet-wraps.html"><i class="fa fa-check"></i><b>21</b> Facet wraps</a><ul>
+<li class="chapter" data-level="21.1" data-path="facet-wraps.html"><a href="facet-wraps.html#facet-grid-vs-facet-wraps"><i class="fa fa-check"></i><b>21.1</b> Facet grid vs facet wraps</a></li>
+<li class="chapter" data-level="21.2" data-path="facet-wraps.html"><a href="facet-wraps.html#other-types"><i class="fa fa-check"></i><b>21.2</b> Other types</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>22</b> Tables</a><ul>
+<li class="chapter" data-level="22.0.1" data-path="tables.html"><a href="tables.html#exporting-tables"><i class="fa fa-check"></i><b>22.0.1</b> Exporting tables</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html"><i class="fa fa-check"></i><b>23</b> Intro to rvest</a><ul>
+<li class="chapter" data-level="23.1" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html#a-slightly-more-complicated-example"><i class="fa fa-check"></i><b>23.1</b> A slightly more complicated example</a></li>
+<li class="chapter" data-level="23.2" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html#an-even-more-complicated-example"><i class="fa fa-check"></i><b>23.2</b> An even more complicated example</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="advanced-rvest.html"><a href="advanced-rvest.html"><i class="fa fa-check"></i><b>24</b> Advanced rvest</a><ul>
+<li class="chapter" data-level="24.1" data-path="advanced-rvest.html"><a href="advanced-rvest.html#one-last-bit"><i class="fa fa-check"></i><b>24.1</b> One last bit</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="annotations.html"><a href="annotations.html"><i class="fa fa-check"></i><b>25</b> Annotations</a></li>
+<li class="chapter" data-level="26" data-path="finishing-touches-part-1.html"><a href="finishing-touches-part-1.html"><i class="fa fa-check"></i><b>26</b> Finishing touches, part 1</a><ul>
+<li class="chapter" data-level="26.1" data-path="finishing-touches-part-1.html"><a href="finishing-touches-part-1.html#graphics-vs-visual-stories"><i class="fa fa-check"></i><b>26.1</b> Graphics vs visual stories</a></li>
+<li class="chapter" data-level="26.2" data-path="finishing-touches-part-1.html"><a href="finishing-touches-part-1.html#getting-ggplot-closer-to-output"><i class="fa fa-check"></i><b>26.2</b> Getting ggplot closer to output</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="finishing-touches-2.html"><a href="finishing-touches-2.html"><i class="fa fa-check"></i><b>27</b> Finishing Touches 2</a></li>
+<li class="chapter" data-level="28" data-path="assignments.html"><a href="assignments.html"><i class="fa fa-check"></i><b>28</b> Assignments</a><ul>
+<li class="chapter" data-level="28.0.1" data-path="assignments.html"><a href="assignments.html#assignment"><i class="fa fa-check"></i><b>28.0.1</b> Assignment</a></li>
+<li class="chapter" data-level="28.0.2" data-path="assignments.html"><a href="assignments.html#if-youre-curious-how-i-got-the-coaches-salaries-separated-out"><i class="fa fa-check"></i><b>28.0.2</b> If you’re curious how I got the coaches salaries separated out</a></li>
+<li class="chapter" data-level="28.0.3" data-path="assignments.html"><a href="assignments.html#assignment-1"><i class="fa fa-check"></i><b>28.0.3</b> Assignment</a></li>
+<li class="chapter" data-level="28.0.4" data-path="assignments.html"><a href="assignments.html#assignment-2"><i class="fa fa-check"></i><b>28.0.4</b> Assignment</a></li>
+<li class="chapter" data-level="28.1" data-path="assignments.html"><a href="assignments.html#assignment-4"><i class="fa fa-check"></i><b>28.1</b> Assignment</a><ul>
+<li class="chapter" data-level="28.1.1" data-path="assignments.html"><a href="assignments.html#assignment-5"><i class="fa fa-check"></i><b>28.1.1</b> Assignment</a></li>
+<li class="chapter" data-level="28.1.2" data-path="assignments.html"><a href="assignments.html#assignment-6"><i class="fa fa-check"></i><b>28.1.2</b> Assignment</a></li>
+<li class="chapter" data-level="28.1.3" data-path="assignments.html"><a href="assignments.html#assignment-7"><i class="fa fa-check"></i><b>28.1.3</b> Assignment</a></li>
+<li class="chapter" data-level="28.1.4" data-path="assignments.html"><a href="assignments.html#assignment-8"><i class="fa fa-check"></i><b>28.1.4</b> Assignment</a></li>
+<li class="chapter" data-level="28.1.5" data-path="assignments.html"><a href="assignments.html#assignment-9"><i class="fa fa-check"></i><b>28.1.5</b> Assignment</a></li>
+<li class="chapter" data-level="28.1.6" data-path="assignments.html"><a href="assignments.html#assignment-12"><i class="fa fa-check"></i><b>28.1.6</b> Assignment</a></li>
+<li class="chapter" data-level="28.1.7" data-path="assignments.html"><a href="assignments.html#assignment-14"><i class="fa fa-check"></i><b>28.1.7</b> Assignment</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Sports Data Analysis and Visualization for Journalists and Other Storytellers</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="finishing-touches-part-1" class="section level1">
+<h1><span class="header-section-number">Chapter 26</span> Finishing touches, part 1</h1>
+<p>The output from ggplot is good, but not great. We need to add some pieces to it. The elements of a good graphic are:</p>
+<ul>
+<li>Headline</li>
+<li>Chatter</li>
+<li>The main body</li>
+<li>Annotations</li>
+<li>Labels</li>
+<li>Source line</li>
+<li>Credit line</li>
+</ul>
+<p>That looks like:</p>
+<p><img src="images/chartannotated.png" width="467" /></p>
+<div id="graphics-vs-visual-stories" class="section level2">
+<h2><span class="header-section-number">26.1</span> Graphics vs visual stories</h2>
+<p>While the elements above are nearly required in every chart, they aren’t when you are making visual stories.</p>
+<ul>
+<li>When you have a visual story, things like credit lines can become a byline.</li>
+<li>In visual stories, source lines are often a note at the end of the story.</li>
+<li>Graphics don’t always get headlines – sometimes just labels, letting the visual story headline carry the load.</li>
+</ul>
+<p><a href="https://www.nytimes.com/interactive/2018/02/14/business/economy/inflation-prices.html">An example from The Upshot</a>. Note how the charts don’t have headlines, source or credit lines.</p>
+</div>
+<div id="getting-ggplot-closer-to-output" class="section level2">
+<h2><span class="header-section-number">26.2</span> Getting ggplot closer to output</h2>
+<p>Let’s explore fixing up ggplot’s output before we send it to a finishing program like Adobe Illustrator. We’ll need a graphic to work with first.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scoring &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/scoringoffense.csv&quot;</span>)</code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   Name = col_character(),
+##   G = col_double(),
+##   TD = col_double(),
+##   FG = col_double(),
+##   `1XP` = col_double(),
+##   `2XP` = col_double(),
+##   Safety = col_double(),
+##   Points = col_double(),
+##   `Points/G` = col_double(),
+##   Year = col_double()
+## )</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">total &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/totaloffense.csv&quot;</span>)</code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   Name = col_character(),
+##   G = col_double(),
+##   `Rush Yards` = col_double(),
+##   `Pass Yards` = col_double(),
+##   Plays = col_double(),
+##   `Total Yards` = col_double(),
+##   `Yards/Play` = col_double(),
+##   `Yards/G` = col_double(),
+##   Year = col_double()
+## )</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">offense &lt;-<span class="st"> </span>total <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">left_join</span>(scoring, <span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;Name&quot;</span>, <span class="st">&quot;Year&quot;</span>))</code></pre></div>
+<p>We’re going to need this later, so let’s grab Nebraska’s 2018 stats from this dataframe.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nu &lt;-<span class="st"> </span>offense <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Name <span class="op">==</span><span class="st"> &quot;Nebraska&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Year <span class="op">==</span><span class="st"> </span><span class="dv">2018</span>)</code></pre></div>
+<p>We’ll start with the basics.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(offense, <span class="kw">aes</span>(<span class="dt">x=</span><span class="st">`</span><span class="dt">Yards/G</span><span class="st">`</span>, <span class="dt">y=</span><span class="st">`</span><span class="dt">Points/G</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">color=</span><span class="st">&quot;grey&quot;</span>)</code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-236-1.png" width="672" /></p>
+<p>Let’s take changing things one by one. The first thing we can do is change the figure size. Sometimes you don’t want a square. We can use the <code>knitr</code> output settings in our chunk to do this easily in our notebooks.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(offense, <span class="kw">aes</span>(<span class="dt">x=</span><span class="st">`</span><span class="dt">Yards/G</span><span class="st">`</span>, <span class="dt">y=</span><span class="st">`</span><span class="dt">Points/G</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">color=</span><span class="st">&quot;grey&quot;</span>)</code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-237-1.png" width="480" /></p>
+<p>Now let’s add a fit line.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(offense, <span class="kw">aes</span>(<span class="dt">x=</span><span class="st">`</span><span class="dt">Yards/G</span><span class="st">`</span>, <span class="dt">y=</span><span class="st">`</span><span class="dt">Points/G</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">color=</span><span class="st">&quot;grey&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm, <span class="dt">se=</span><span class="ot">FALSE</span>)</code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-238-1.png" width="480" /></p>
+<p>And now some labels.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(offense, <span class="kw">aes</span>(<span class="dt">x=</span><span class="st">`</span><span class="dt">Yards/G</span><span class="st">`</span>, <span class="dt">y=</span><span class="st">`</span><span class="dt">Points/G</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">color=</span><span class="st">&quot;grey&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm, <span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Total yards per game&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Points per game&quot;</span>, <span class="dt">title=</span><span class="st">&quot;Nebraska&#39;s underperforming offense&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;The Husker&#39;s offense was the strength of the team. They underperformed.&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>)</code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-239-1.png" width="480" /></p>
+<p>Let’s get rid of the default plot look and drop the grey background.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(offense, <span class="kw">aes</span>(<span class="dt">x=</span><span class="st">`</span><span class="dt">Yards/G</span><span class="st">`</span>, <span class="dt">y=</span><span class="st">`</span><span class="dt">Points/G</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">color=</span><span class="st">&quot;grey&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm, <span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Total yards per game&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Points per game&quot;</span>, <span class="dt">title=</span><span class="st">&quot;Nebraska&#39;s underperforming offense&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;The Husker&#39;s offense was the strength of the team. They underperformed.&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme_minimal</span>()</code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-240-1.png" width="480" /></p>
+<p>Off to a good start, but our text has no real heirarchy. We’d want our headline to stand out more. So let’s change that. When it comes to changing text, the place to do that is in the theme element. <a href="http://ggplot2.tidyverse.org/reference/theme.html">There are a lot of ways to modify the theme</a>. We’ll start easy. Let’s make the headline bigger and bold.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(offense, <span class="kw">aes</span>(<span class="dt">x=</span><span class="st">`</span><span class="dt">Yards/G</span><span class="st">`</span>, <span class="dt">y=</span><span class="st">`</span><span class="dt">Points/G</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">color=</span><span class="st">&quot;grey&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm, <span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Total yards per game&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Points per game&quot;</span>, <span class="dt">title=</span><span class="st">&quot;Nebraska&#39;s underperforming offense&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;The Husker&#39;s offense was the strength of the team. They underperformed.&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme</span>(
+    <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">16</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>)
+    ) </code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-241-1.png" width="480" /></p>
+<p>Now let’s fix a few other things – like the axis labels being too big, the subtitle could be bigger and lets drop some grid lines.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(offense, <span class="kw">aes</span>(<span class="dt">x=</span><span class="st">`</span><span class="dt">Yards/G</span><span class="st">`</span>, <span class="dt">y=</span><span class="st">`</span><span class="dt">Points/G</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">color=</span><span class="st">&quot;grey&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm, <span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Total yards per game&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Points per game&quot;</span>, <span class="dt">title=</span><span class="st">&quot;Nebraska&#39;s underperforming offense&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;The Husker&#39;s offense was the strength of the team. They underperformed.&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme</span>(
+    <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">16</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>),
+    <span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">8</span>), 
+    <span class="dt">plot.subtitle =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">10</span>), 
+    <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>()
+    ) </code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-242-1.png" width="480" /></p>
+<p>Missing from this graph is the context that the headline promises. Where is Nebraska? We haven’t added it yet. So let’s add a point and a label for it.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(offense, <span class="kw">aes</span>(<span class="dt">x=</span><span class="st">`</span><span class="dt">Yards/G</span><span class="st">`</span>, <span class="dt">y=</span><span class="st">`</span><span class="dt">Points/G</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">color=</span><span class="st">&quot;grey&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm, <span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Total yards per game&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Points per game&quot;</span>, <span class="dt">title=</span><span class="st">&quot;Nebraska&#39;s underperforming offense&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;The Husker&#39;s offense was the strength of the team. They underperformed.&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme</span>(
+    <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">16</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>),
+    <span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">8</span>), 
+    <span class="dt">plot.subtitle =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">10</span>), 
+    <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>()
+    ) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>nu, <span class="kw">aes</span>(<span class="dt">x=</span><span class="st">`</span><span class="dt">Yards/G</span><span class="st">`</span>, <span class="dt">y=</span><span class="st">`</span><span class="dt">Points/G</span><span class="st">`</span>), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_text_repel</span>(<span class="dt">data=</span>nu, <span class="kw">aes</span>(<span class="dt">x=</span><span class="st">`</span><span class="dt">Yards/G</span><span class="st">`</span>, <span class="dt">y=</span><span class="st">`</span><span class="dt">Points/G</span><span class="st">`</span>, <span class="dt">label=</span><span class="st">&quot;Nebraska 2018&quot;</span>))</code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-243-1.png" width="480" /></p>
+<p>If we’re happy with this output – if it meets all of our needs for publication – then we can simply export it as a png file. We do that by adding <code>+ ggsave(&quot;plot.png&quot;, width=5, height=2)</code> to the end of our code. Note the width and the height are from our knitr parameters at the top – you have to repeat them or the graph will export at the default 7x7.</p>
+<p>If there’s more work you want to do with this graph that isn’t easy or possible in R but is in Illustrator, simply change the file extension to <code>pdf</code> instead of <code>png</code>. The pdf will open as a vector file in Illustrator with everything being fully editable.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="annotations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="finishing-touches-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["SportsData.pdf", "SportsData.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
