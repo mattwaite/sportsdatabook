@@ -32,7 +32,7 @@ Now we can get a dataframe together that gives us the total wins for each team, 
 ```{r}
 winlosslogs %>% 
   group_by(Team) %>%
-  summarize(
+  summarise(
     wins = sum(winloss),
     totalFGAttempts = sum(TeamFGA),
     totalFG = sum(TeamFG)

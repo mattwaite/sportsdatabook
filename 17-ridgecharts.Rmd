@@ -32,7 +32,7 @@ winlosslogs <- logs %>% mutate(winloss = case_when(
 Now I'm going to add up all the winlosses for each team, which should give me the number of wins for each team. 
 
 ```{r}
-winlosslogs %>% group_by(Team, Conference, season) %>% summarize(TeamWins = sum(winloss)) -> teamseasonwins
+winlosslogs %>% group_by(Team, Conference, season) %>% summarise(TeamWins = sum(winloss)) -> teamseasonwins
 ```
 
 Now that I have season win totals, I can join that data back to my log data so each game has the total number of wins in each season. 

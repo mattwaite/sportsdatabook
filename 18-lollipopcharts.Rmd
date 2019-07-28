@@ -13,13 +13,13 @@ logs <- read_csv("data/logs19.csv")
 For the first example, let's look at the difference between a team's shooting performance and the conference's shooting performance as a whole. To get this, we're going to add up all the shots made by the conference, all the attempts taken by the conference, and then mutate a percentage based on that. 
 
 ```{r}
-conferenceshooting <- logs %>% group_by(Conference) %>% summarize(totalshots = sum(TeamFG), totalattempts = sum(TeamFGA)) %>% mutate(conferenceshootingpct = totalshots/totalattempts)
+conferenceshooting <- logs %>% group_by(Conference) %>% summarise(totalshots = sum(TeamFG), totalattempts = sum(TeamFGA)) %>% mutate(conferenceshootingpct = totalshots/totalattempts)
 ```
 
 Now I'm going to do the same with teams. 
 
 ```{r}
-teamshooting <- logs %>% group_by(Team, Conference) %>% summarize(totalshots = sum(TeamFG), totalattempts = sum(TeamFGA)) %>% mutate(teamshootingpct = totalshots/totalattempts)
+teamshooting <- logs %>% group_by(Team, Conference) %>% summarise(totalshots = sum(TeamFG), totalattempts = sum(TeamFGA)) %>% mutate(teamshootingpct = totalshots/totalattempts)
 ```
 
 The last thing I need to do is join them together. So each team will have the conference shooting percentage as well as their own. 
@@ -79,7 +79,7 @@ winlosslogs <- logs %>% mutate(winloss = case_when(
 So let's look at turnovers and assists. We'll call it give and take. Does the difference between those two things indicate something when we sort them by wins?
 
 ```{r}
-giveandtake <- winlosslogs %>% group_by(Conference, Team) %>% summarize(turnovers = sum(TeamTurnovers), assists = sum(TeamAssists), wins=sum(winloss)) 
+giveandtake <- winlosslogs %>% group_by(Conference, Team) %>% summarise(turnovers = sum(TeamTurnovers), assists = sum(TeamAssists), wins=sum(winloss)) 
 ```
 
 ```{r}

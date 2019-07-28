@@ -26,7 +26,7 @@ I'm going to set up a point chart that places team on two-axes -- yards per play
 To build the annotations, I want the league average for offensive yards per play and defensive yards per play. We're going to use those as a proxy for quality. If your team averages more yards per play on offense, that's good. If they average fewer yards per play on defense, that too is good. So that sets up a situation where we have four corners, anchored by good at both and bad at both. The averages will create lines to divide those four corners up. 
 
 ```{r}
-league_averages <- total %>% summarize(AvgOffYardsPer = mean(OffYardsPerPlay), AvgDefYardsPer = mean(DefYardPerPlay))
+league_averages <- total %>% summarise(AvgOffYardsPer = mean(OffYardsPerPlay), AvgDefYardsPer = mean(DefYardPerPlay))
 
 league_averages
 ```

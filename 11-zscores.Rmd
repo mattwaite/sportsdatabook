@@ -29,7 +29,7 @@ And since we have individual game data, we need to collapse this into one record
 ```{r}
 teamtotals <- teamquality %>% 
   group_by(Conference, Team) %>% 
-  summarize(
+  summarise(
     FGAvg = mean(TeamFGPCT), 
     ReboundAvg = mean(TeamTotalRebounds), 
     OppFGAvg = mean(OpponentFGPCT)

@@ -110,7 +110,7 @@ In summarize, we can calculate any number of measures. Here, we'll use R's built
 
 ```{r}
 salaries %>%
-  summarize(
+  summarise(
     count = n(),
     mean_salary = mean(`Budgeted Annual Salary`),
     median_salary = median(`Budgeted Annual Salary`)

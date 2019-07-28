@@ -37,7 +37,7 @@ ggplot() + geom_line(data=big10, aes(x=Date, y=TeamFGPCT, group=Team)) + scale_y
 Answer: Not immediately clear, but we can look at this and analyze it. We could add a peice of annotation to help us out. 
 
 ```{r}
-big10 %>% summarize(mean(TeamFGPCT))
+big10 %>% summarise(mean(TeamFGPCT))
 ```
 
 ```{r}

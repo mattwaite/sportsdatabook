@@ -24,7 +24,7 @@ To find that, we need to add some data to our table. And that is the maxiumum nu
 
 
 ```{r}
-max <- logs %>% group_by(Team) %>% summarize(max_games = max(Game))
+max <- logs %>% group_by(Team) %>% summarise(max_games = max(Game))
 ```
 
 ```{r}
@@ -48,7 +48,7 @@ nebraska %>%
     Game >= (max_games - 10) ~ "Last 10")
     ) %>%
   group_by(Team, grouping) %>%
-  summarize(
+  summarise(
     shootingPCT = mean(TeamFGPCT)
   )
 ```
@@ -65,7 +65,7 @@ nebraska %>%
     Game >= (max_games - 10) ~ "Last 10")
     ) %>%
   group_by(Team, grouping) %>%
-  summarize(
+  summarise(
     shootingPCT = mean(TeamFGPCT)
   ) %>% 
   spread(grouping, shootingPCT) 
@@ -80,7 +80,7 @@ nebraska %>%
     Game >= (max_games - 10) ~ "Last 10")
     ) %>%
   group_by(Team, grouping) %>%
-  summarize(
+  summarise(
     shootingPCT = mean(TeamFGPCT)
   ) %>% 
   spread(grouping, shootingPCT) %>%
@@ -102,7 +102,7 @@ logs %>%
     Game >= (max_games - 10) ~ "Last 10")
     ) %>%
   group_by(Team, grouping) %>%
-  summarize(
+  summarise(
     shootingPCT = mean(TeamFGPCT)
   ) %>% 
   spread(grouping, shootingPCT) %>%
@@ -116,7 +116,7 @@ In all of college basketball, Nebraska had the 40th biggest drop in shooting per
 
 And that's a tiny portion of why Tim Miles is no longer the coach.
 
-### Making wide data long
+## Making wide data long
 
 We can reverse this process as well. If we get data that's wide and we want to make it long, we use `gather`. So first, since my data is already long, let me fake a wide dataset using what I just did. 
 
@@ -127,7 +127,7 @@ gatherdata <- nebraska %>%
     Game >= (max_games - 5) ~ "Last 5")
     ) %>%
   group_by(Team, grouping) %>%
-  summarize(
+  summarise(
     shootingPCT = mean(TeamFGPCT)
   ) %>% 
   spread(grouping, shootingPCT)
@@ -147,7 +147,7 @@ gatherdata %>% gather(grouping, shootingPCT, -Team)
 
 And just like that, we're back where we started. 
 
-### Why this matters
+## Why this matters
 
 This matters because certain visualization types need wide or long data. A significant hurdle you will face for the rest of the semester is getting the data in the right format for what you want to do. 
 

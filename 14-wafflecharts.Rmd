@@ -15,7 +15,7 @@ jour <- filter(enrollment, MajorName == "Journalism")
 
 jdf <- jour %>% 
 group_by(Race) %>%
-summarize(
+summarise(
        total=sum(Count)) %>%
 select(Race, total) %>% 
 filter(total != 0)

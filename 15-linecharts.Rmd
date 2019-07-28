@@ -88,7 +88,7 @@ What do we see here? How has Nebraska and Michigan State's season evolved agains
 But how does that compare to the average? We can add that pretty easily by creating a new dataframe with it and add another geom_line. 
 
 ```{r}
-average <- logs %>% group_by(Date) %>% summarize(mean_shooting=mean(TeamFGPCT))
+average <- logs %>% group_by(Date) %>% summarise(mean_shooting=mean(TeamFGPCT))
 ```
 
 ```{r}
