@@ -9,43 +9,23 @@ So what does it do? Let's gather our libraries and get some data.
 ```{r}
 library(tidyverse)
 library(formattable)
-library(rvest)
 ```
+
 
 ```{r}
-total18 <- "http://www.cfbstats.com/2018/leader/national/team/offense/split01/category10/sort01.html"
-
-totalOffense18 <- total18 %>%
-  read_html() %>%
-  html_nodes(xpath = '//*[@id="content"]/div[2]/table') %>% 
-  html_table()
-
-totalOffense18 <- totalOffense18[[1]]
-
-total17 <- "http://www.cfbstats.com/2017/leader/national/team/offense/split01/category10/sort01.html"
-
-totalOffense17 <- total17 %>%
-  read_html() %>%
-  html_nodes(xpath = '//*[@id="content"]/div[2]/table') %>% 
-  html_table()
-
-totalOffense17 <- totalOffense17[[1]]
-
-totalOffense18$Year <- 2018
-
-totalOffense17$Year <- 2017
-
-totalOffense18 <- totalOffense18 %>% rename(Rank=1)
-totalOffense17 <- totalOffense17 %>% rename(Rank=1)
-
-
-totalOffense <- rbind(totalOffense18, totalOffense17)
+offense <- read_csv("data/offensechange.csv")
 ```
+
 
 Let's ask this question: Which college football team saw the greatest improvement in yards per game this regular season? The simplest way to calculate that is by percent change. 
 
 ```{r}
-changeTotalOffense <- totalOffense %>% select(Name, Year, `Yards/G`) %>% spread(Year, `Yards/G`) %>% mutate(Change=(`2018`-`2017`)/`2017`) %>% arrange(desc(Change)) %>% top_n(20)
+changeTotalOffense <- offense %>%
+  select(Name, Year, `Yards/G`) %>% 
+  spread(Year, `Yards/G`) %>% 
+  mutate(Change=(`2018`-`2017`)/`2017`) %>% 
+  arrange(desc(Change)) %>% 
+  top_n(20)
 ```
 We've output tables to the screen a thousand times in this class with `head`, but formattable makes them look good with very little code. 
 
@@ -53,7 +33,7 @@ We've output tables to the screen a thousand times in this class with `head`, bu
 formattable(changeTotalOffense)
 ```
 
-So there you have it. Illinois improved the most. Because we gave them a quarterback. But I digress. First thing I don't like about formattable tables -- the right alignment. Let's fix that. 
+So there you have it. Illinois improved the most. Because Nebraska gave them a quarterback, but I digress. First thing I don't like about formattable tables -- the right alignment. Let's fix that. 
 
 ```{r}
 formattable(changeTotalOffense, align="l")
@@ -156,11 +136,3 @@ export_formattable(table,"table.png")
 ```
 
 For now, pngs are what you need to export. There is a way to export PDFs, but they lose all the formatting when you do that, which is kind of pointless. 
-
-### Assignment
-
-We now have [season logs](https://www.dropbox.com/s/0lpvstsjziz5k6p/logs.csv?dl=0) for every college basketball game played up to the NCAA tournament.
-
-Create a dataframe that shows the 10 best or 10 worst at something. Or rank the Big Ten. Your choice. Then use formattable to show in both a table and visually how the best were different from the worst. 
-
-Export it to a PNG using the example above. Then, in Illustrator, add a headline, chatter, source and credit lines. Turn in the PNG file you export from Illustrator.
