@@ -55,7 +55,7 @@ Not only is it less related, but the relationship is inverted.
 
 So wait, what does that mean? 
 
-It means that the number of penalty yards and penalties is actually positively related to differential. Put anotherr way, teams that have more penalties and penalty yards tend to have better outcomes. The average is barely -- 3 percent -- negatively correlated, meaning that teams with higher averages score fewer points.
+It means that the number of penalty yards and penalties is actually positively related to differential. Put another way, teams that have more penalties and penalty yards tend to have better outcomes. The average is barely -- 3 percent -- negatively correlated, meaning that teams with higher averages score fewer points.
 
 What? That makes no sense. How can that be? 
 
