@@ -1,6 +1,6 @@
 # Advanced rvest
 
-With the last rvest assignment, we learned how to grab one table from one page. But what if you needed more than that? What if you needed hundreds of tables from hundreds of pages? What if you needed to combine one table on one page into a bigger table, but hundreds of times. There's a way to do this, it just takes patience, a lot of logic, a lot of debugging and, for me, a fair bit of swearing. 
+With the chapter, we learned how to grab one table from one page. But what if you needed more than that? What if you needed hundreds of tables from hundreds of pages? What if you needed to combine one table on one page into a bigger table, but hundreds of times. There's a way to do this, it just takes patience, a lot of logic, a lot of debugging and, for me, a fair bit of swearing. 
 
 So what we are after are game by game stats for each college basketball team in America. 
 
@@ -144,7 +144,7 @@ write.csv(logs, "logs.csv")
 
 So with a little programming knowhow, a little bit of problem solving and the stubbornness not to quit on it, you can get a whole lot of data scattered all over the place with not a lot of code. 
 
-### One last bit
+## One last bit
 
 Most tables that Sports Reference sites have are in plain vanilla HTML. But some of them -- particularly player based stuff -- are hidden with a little trick. The site puts the data in a comment -- where a browser will ignore it -- and then uses javascript to interpret the commented data. To a human on the page, it looks the same. To a browswer or a scraper, it's invisible. You'll get errors. How do you get around it? 
 
