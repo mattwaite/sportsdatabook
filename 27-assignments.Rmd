@@ -63,7 +63,7 @@ On Feb. 6, Nebraska's basketball team had a nightmare night shooting the ball. T
 
 **Chapter 9: Correlations and regressions**
 
-The fun of this is that you can test all kinds of theories. Given what we have in our dataset, what do you think predicts Nebraska's win total? Rebounds? Rebound differential? Fouls? Three point shooting? Total up every team's season performance, produce a scatterplot and a linear model and evaluate. Does it? What's your R-squared? What's your P-value? Create a model -- y = mx + b -- and see how Nebraska is performing relative to expectations. 
+Do the same thing described in the chapter, but for defense. Report your R-squared number, your p-value, what those mean and from that, how close does it come to predicting the Iowa Nebraska game?
 
 **Chapter 10: Multiple regression**
 
@@ -78,6 +78,8 @@ You are to generate a new set of coefficients, a new formula and a new set of nu
 Turn in your notebook with these answers and comments to the code you added, making sure to add WHY you are doing things. Why did you select those two variables.
 
 **Chapter 11: Residuals**
+
+Using the same data from the chapter, model defensive third down percentage and defensive points allowed. Which teams are overperforming that model given the residual analysis? 
 
 **Chapter 12: Z scores**
 
@@ -129,12 +131,11 @@ You've been hired by Fred Hoiberg to tell him how to win the Big Ten. He's not i
 
 **Chapter 20: Scatterplot**
 
-
-
-
+Using the data from the walkthrough, model and graph two other elements of Nebraska's season versus wins. How much does your choices of metrics predict the season? What do the scatterplots of what you chose look like? What do the linear models say (r-squared, p-values)? How predictive are they, i.e. using y=mx+b, how close to Nebraska's win total do your models get to?
 
 **Chapter 21: Facet Wraps**
 
+Which Big Ten teams were good a shooting three point shots? Which teams weren't? Using a facet grid, chart each teams three point shooting season against the league average.
 
 **Chapter 22**
 
@@ -150,9 +151,6 @@ I am a huge Premiere League fan, so I want data on the league. [For now, I just 
 
 **Chapter 24: Advanced Rvest**
 
-I don't usually assign an advanced rvest assignment because I don't want to turn 30 students loose on some poor providers servers. 
+I don't usually assign an advanced rvest assignment because I don't want to turn 30 students loose on some poor provider's servers. 
 
-**Chapter 25: Annotations**
-
-
-**Note:** There are no finishing touches assignments. In my classes, I have students present two major visual stories where they have to incorporate the elements of those assignments. 
+**Note:** There are no assignments for annotations and finishing touches. In my classes, I have students present two major visual stories where they have to incorporate the elements of those assignments as part of their grade. 
