@@ -6,7 +6,7 @@ You are soon going to discover that long before you can visualize data, you need
 
 But what if your visualization library needs one row for each measure? That's where recasting your data comes in. We can use a library called `tidyr` to `gather` or `spread` the data, depending on what we need.
 
-We'll use a dataset of college basketball games. First we need some libraries. 
+We'll use a [dataset of college basketball games](https://unl.box.com/s/a8m91bro10t89watsyo13yjegb1fy009). First we need some libraries. 
 
 ```{r}
 library(tidyverse)
@@ -15,7 +15,7 @@ library(tidyverse)
 Now we'll grab the data. 
 
 ```{r}
-logs <- read_csv('https://raw.githubusercontent.com/mattwaite/sportsdatabook/Master/data/logs19.csv')
+logs <- read_csv('data/logs19.csv')
 ```
 
 Last season, the Nebraska basketball team came out of the gates on fire. Their first 10 games were blistering. Their last 10? Not so much. But how can we compare a team's first 10 games with their last 10 games? If you look, each game in the dataset is numbered, so getting the first 10 wouldn't be hard. But what about the last five, when every team plays a different number of games? 

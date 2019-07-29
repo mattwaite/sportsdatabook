@@ -13,7 +13,7 @@ library(tidyverse)
 ```
 
 ```{r}
-attendance <- read_csv('https://raw.githubusercontent.com/mattwaite/sportsdatabook/Master/data/attendance.csv')
+attendance <- read_csv('data/attendance.csv')
 ```
 
 So, first things first, let's say we don't care about all this Air Force, Akron, Alabama crap and just want to see Dear Old Nebraska U. We do that with `filter` and then we pass it a condition. 
@@ -68,7 +68,7 @@ If you have truly massive data, Select has tools to help you select fields that 
 Let's return to the blistering season of Drayton Whiteside. How can we set limits in something like a question of who had the best season? Let's get our Drayton Whiteside data from the previous chapter back up.
 
 ```{r}
-players <- read_csv("https://raw.githubusercontent.com/mattwaite/sportsdatabook/Master/data/players19.csv")
+players <- read_csv("data/players19.csv")
 
 players %>%
   mutate(trueshooting = (PTS/(2*(FGA + (.44*FTA))))*100) %>%
