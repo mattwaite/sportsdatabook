@@ -32,6 +32,7 @@ Let's explore fixing up ggplot's output before we send it to a finishing program
 
 ```{r}
 library(tidyverse)
+library(ggrepel)
 ```
 
 
