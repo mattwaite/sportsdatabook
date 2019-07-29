@@ -34,7 +34,7 @@ Create an R notebook (which you should have done if you were following along). I
 
 **Chapter 3: Data, structures and types**
 
-
+Using what you learned in the chapter, fetch [the list of the Big Ten's leading tacklers](http://www.cfbstats.com/2018/leader/827/player/split01/category19/sort01.html). Submit the CSV file to Canvas. In the comments, label each field type. What are they? Dates? Characters? Numeric?
 
 **Chapter 4: Aggregates**
 
