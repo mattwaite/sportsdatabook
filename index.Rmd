@@ -1,5 +1,6 @@
 --- 
 title: "Sports Data Analysis and Visualization"
+subtitle: "Code, data, visuals and the Tidyverse for journalists and other storytellers"
 author: "By Matt Waite"
 bibliography:
 - packages.bib
