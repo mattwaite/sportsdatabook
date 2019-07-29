@@ -10,6 +10,11 @@ documentclass: book
 link-citations: yes
 site: bookdown::bookdown_site
 biblio-style: apalike
+output:
+  bookdown::gitbook:
+    highlight: tango
+  bookdown::html_book:
+    theme: journal
 ---
 
 # Throwing cold water on hot takes
