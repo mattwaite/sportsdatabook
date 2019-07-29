@@ -1,6 +1,6 @@
 --- 
 title: "Sports Data Analysis and Visualization"
-subtitle: "R, the Tidyverse and data analysis for journalists and other storytellers."
+subtitle: "Code, data, visuals and the Tidyverse for journalists and other storytellers"
 author: "By Matt Waite"
 bibliography:
 - packages.bib
@@ -10,7 +10,6 @@ documentclass: book
 link-citations: yes
 site: bookdown::bookdown_site
 biblio-style: apalike
-github-repo: https://github.com/mattwaite/sportsdatabook
 ---
 
 # Throwing cold water on hot takes

@@ -60,7 +60,7 @@ library(tidyverse)
 
 
 ```r
-attendance <- read_csv('https://raw.githubusercontent.com/mattwaite/sportsdatabook/Master/data/attendance.csv')
+attendance <- read_csv('data/attendance.csv')
 ```
 
 ```
@@ -217,7 +217,7 @@ Let's return to the blistering season of Drayton Whiteside. How can we set limit
 
 
 ```r
-players <- read_csv("https://raw.githubusercontent.com/mattwaite/sportsdatabook/Master/data/players19.csv")
+players <- read_csv("data/players19.csv")
 ```
 
 ```

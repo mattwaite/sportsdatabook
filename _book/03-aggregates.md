@@ -52,7 +52,7 @@ You can keep doing that for as many libraries as you need. I've seen notebooks w
 
 The first thing we need to do is get some data to work with. We do that by reading it in. In our case, we're going to read data from a csv file -- a comma-separated values file.
 
-The CSV file we're going to read from is a [Nebraska Game and Parks Commission dataset](https://www.dropbox.com/s/2l282ril6h78w8e/mountainlions.csv?dl=0) of confirmed mountain lion sightings in Nebraska. There are, on occasion, fierce debates about mountain lions and if they should be hunted in Nebraska. This dataset can tell us some interesting things about that debate. 
+The CSV file we're going to read from is a [Nebraska Game and Parks Commission dataset](https://unl.box.com/s/xjipgkesl9rjmng4weg77vb73xt41apf) of confirmed mountain lion sightings in Nebraska. There are, on occasion, fierce debates about mountain lions and if they should be hunted in Nebraska. This dataset can tell us some interesting things about that debate. 
 
 So step 1 is to import the data. The code looks *something* like this, but hold off copying it just yet:
 
@@ -70,7 +70,7 @@ The `read_csv` bits are pretty obvious, except for one thing. What happens in th
 
 
 ```r
-mountainlions <- read_csv("https://raw.githubusercontent.com/mattwaite/SPMC350-Sports-Data-Analysis-And-Visualization/master/Data/mountainlions.csv")
+mountainlions <- read_csv("data/mountainlions.csv")
 ```
 
 ```
@@ -209,10 +209,11 @@ See it? When you have a field name that has two words, `readr` wraps it in backt
 
 In the last example, we grouped some data together and counted it up, but there's so much more you can do. You can do multiple measures in a single step as well.
 
-Let's look at some salary data from UNL.
+Let's look at some [salary data from the University of Nebraska](https://unl.box.com/s/09t2u4qoncfh6qlv2156flzlxb8ruzpq).
+
 
 ```r
-salaries <- read_csv("https://raw.githubusercontent.com/mattwaite/SPMC350-Sports-Data-Analysis-And-Visualization/master/Data/nusalaries1819.csv")
+salaries <- read_csv("data/nusalaries1819.csv")
 ```
 
 ```

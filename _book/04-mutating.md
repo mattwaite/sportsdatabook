@@ -62,7 +62,7 @@ Now we'll import a common and [simple dataset of total attendance](https://unl.b
 
 
 ```r
-attendance <- read_csv('https://raw.githubusercontent.com/mattwaite/sportsdatabook/Master/data/attendance.csv')
+attendance <- read_csv('data/attendance.csv')
 ```
 
 ```
@@ -178,11 +178,11 @@ There's metric in basketball that's easy to understand -- shooting percentage. I
 
 Basketball nerds, because of these weaknesses, have created a new metric called [True Shooting Percentage](https://en.wikipedia.org/wiki/True_shooting_percentage). True shooting percentage takes into account all aspects of a players shooting to determine who the real shooters are. 
 
-Using `dplyr` and `mutate`, we can calculate true shooting percentage. So let's look at a new dataset, one of every college basketball player's season stats in 2018-19 season. It's a dataset of 5,386 players, and we've got 59 variables -- one of them is True Shooting Percentage, but we're going to ignore that. 
+Using `dplyr` and `mutate`, we can calculate true shooting percentage. So let's look at a new dataset, one of [every college basketball player's season stats in 2018-19 season](https://unl.box.com/s/s1wzw61u9ia50qmirfhuvprgpmmah9rj). It's a dataset of 5,386 players, and we've got 59 variables -- one of them is True Shooting Percentage, but we're going to ignore that. 
 
 
 ```r
-players <- read_csv("https://raw.githubusercontent.com/mattwaite/sportsdatabook/Master/data/players19.csv")
+players <- read_csv("data/players19.csv")
 ```
 
 ```
