@@ -47,11 +47,19 @@ Import [this dataset of every college basketball game in the 2018-19 season](htt
 
 **Chapter 5: Mutating Data**
 
+Import [this dataset of every college basketball game in the 2018-19 season](https://unl.box.com/s/a8m91bro10t89watsyo13yjegb1fy009). Using what you learned in the chapter, mutate a new variable: differential. Differential is the difference between the team score and the opponent score. A positive number means the team in question won. A negative number means the team in question lost. After creating the differential, average them together and sort them in descending order. Which team had the highest average point differential in college basketball? In other words, which team consistently won by the largest margins?
+
 **Chapter 6: Filters and selections**
+
+Import the data of [every college basketball player's season stats in 2018-19 season](https://unl.box.com/s/s1wzw61u9ia50qmirfhuvprgpmmah9rj). Using this data, let's get closer to a real answer to where the cutoff for true shooting season should be from the chapter. First, find the median number of shots attempted in the season, then set the cutoff filter for who had the best true shooting percentage using that number. 
 
 **Chapter 7: Transforming data**
 
+Import this dataset of [college football attendance data from 2013-2018](https://unl.box.com/s/fs3rj0dns1xh2y1dx0c2yc0adh4u3zsy). This data is long data -- one team, one year, one row. We need it to be wide data. Hint: it'll be much easier if you select only the columns you need to make it wide instead of using them all. Submit your notebook.  
+
 **Chapter 8: Simulations**
+
+On Feb. 6, Nebraska's basketball team had a nightmare night shooting the ball. They attempted 57 shots ... and made only 12. The team shot .429 on the season. Simulate 1000 games of them taking 57 shots using their season long .429 as the probability that they'll make a shot. How many times do they make just 12?
 
 **Chapter 9: Correlations and regressions**
 
