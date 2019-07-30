@@ -54,11 +54,20 @@ This book is all in the R statistical language. To follow along, you'll do the f
 Going forward, you'll see passages like this:
 
 
-
 ```r
 install.packages("tidyverse")
 ```
 
 Don't do it now, but that is code that you'll need to run in your R Studio. When you see that, you'll know what to do.
+
+## About this book
+
+This book is the collection of class materials for the author's Sports Data Analysis and Visualization class at the University of Nebraska-Lincoln's College of Journalism and Mass Communications. There's some things you should know about it:
+
+* It is free for students. 
+* The topics will remain the same but the text is going to be constantly tinkered with. 
+* What is the work of the author is copyright Matt Waite 2019.
+* The text is [Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/) Creative Commons licensed. That means you can share it and change it, but only if you share your changes with the same license and it cannot be used for commercial purposes. I'm not making money on this so you can't either.  
+* As such, the whole book -- authored in Bookdown -- is [open sourced on Github](https://github.com/mattwaite/sportsdatabook). Pull requests welcomed! 
 
 
