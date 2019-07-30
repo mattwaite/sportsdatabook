@@ -71,7 +71,7 @@ filter(total != 0)
 ggplot(jdf, aes(x="", y=total, fill=Race)) + geom_bar(width = 1, stat = "identity") + coord_polar("y", start=0)
 ```
 
-<img src="14-wafflecharts_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+![](14-wafflecharts_files/figure-epub3/unnamed-chunk-1-1.png)<!-- -->
 You can see, it's pretty white. But ... what about beyond that? How carefully can you evaluate angles and area?
 
 Not well.
@@ -110,7 +110,7 @@ The waffle library can break this down in a way that's easier on the eyes than a
 waffle(nu, rows = 5, title="Nebraska's shooting night", xlab="1 square = 1 shot", colors = c("black", "red"))
 ```
 
-<img src="14-wafflecharts_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+![](14-wafflecharts_files/figure-epub3/unnamed-chunk-4-1.png)<!-- -->
 
 Or, we could make this two teams in the same chart.
 
@@ -124,7 +124,7 @@ game <- c("Nebraska"=23, "Michigan"=30)
 waffle(game, rows = 5, title="Nebraska vs Michigan: made shots", xlab="1 square = 1 shot", colors = c("red", "dark blue"))
 ```
 
-<img src="14-wafflecharts_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+![](14-wafflecharts_files/figure-epub3/unnamed-chunk-6-1.png)<!-- -->
 
 ## Waffle Irons
 
@@ -138,7 +138,7 @@ iron(
 )
 ```
 
-<img src="14-wafflecharts_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+![](14-wafflecharts_files/figure-epub3/unnamed-chunk-7-1.png)<!-- -->
 
 What do you notice about this chart? Notice how the squares aren't the same size? Well, Michigan only took 54 shots. We took 67. So the squares aren't the same size because the numbers aren't the same. We can fix that by adding an unnamed padding number so the number of shots add up to the same thing. Let's make the total for everyone be 70. So to do that, we need to add a padding of 3 to Nebraska and a padding of 16 to Michigan. REMEMBER: Don't name it or it'll show up in the legend.
 
@@ -158,6 +158,6 @@ iron(
 )
 ```
 
-<img src="14-wafflecharts_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+![](14-wafflecharts_files/figure-epub3/unnamed-chunk-9-1.png)<!-- -->
 
 

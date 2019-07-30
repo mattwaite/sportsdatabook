@@ -121,7 +121,7 @@ ggplot(big10) +
   coord_flip()
 ```
 
-<img src="18-lollipopcharts_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+![](18-lollipopcharts_files/figure-epub3/unnamed-chunk-7-1.png)<!-- -->
 
 We can do better by changing the order of the teams by their shooting performance and giving it some theme love. 
 
@@ -144,7 +144,7 @@ ggplot(big10) +
   )
 ```
 
-<img src="18-lollipopcharts_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+![](18-lollipopcharts_files/figure-epub3/unnamed-chunk-8-1.png)<!-- -->
 
 What if we wanted to order them by wins? Our data has a column called W_L that lists if the team won or lost. The problem is it doens't just say W or L. If the game went to overtime, it lists that. That complicates counting wins. Here's a trick to find a string of text and make that. It's called `grepl` and the basic syntax is grepl for this string in this field and then do what I tell you. In this case, we're going to create a new field called winloss look for W or L (and ignore any OT notation) and give wins a 1 and losses a 0.
 
@@ -179,7 +179,7 @@ ggplot(big10gt) +
   coord_flip()
 ```
 
-<img src="18-lollipopcharts_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+![](18-lollipopcharts_files/figure-epub3/unnamed-chunk-12-1.png)<!-- -->
 
 Short answer: Not really.
 

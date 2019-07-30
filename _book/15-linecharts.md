@@ -102,7 +102,7 @@ Line charts, unlike bar charts, do have a y-axis. So in our ggplot step, we have
 ggplot(nu, aes(x=Date, y=TeamFGPCT)) + geom_line()
 ```
 
-<img src="15-linecharts_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+![](15-linecharts_files/figure-epub3/unnamed-chunk-4-1.png)<!-- -->
 
 See a problem here? Note the Y axis doesn't start with zero. That makes this look worse than it is (and that February swoon is pretty bad). To make the axis what you want, you can use `scale_x_continuous` or `scale_y_continuous` and pass in a list with the bottom and top value you want. You do that like this:
 
@@ -111,7 +111,7 @@ See a problem here? Note the Y axis doesn't start with zero. That makes this loo
 ggplot(nu, aes(x=Date, y=TeamFGPCT)) + geom_line() + scale_y_continuous(limits = c(0, .6))
 ```
 
-<img src="15-linecharts_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+![](15-linecharts_files/figure-epub3/unnamed-chunk-5-1.png)<!-- -->
 
 Note also that our X axis labels are automated. It knows it's a date and it just labels it by month. 
 ## This is too simple. 
@@ -132,7 +132,7 @@ First, let's chart Nebraska. Read carefully. First we set the data. Then we set 
 ggplot() + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red")
 ```
 
-<img src="15-linecharts_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+![](15-linecharts_files/figure-epub3/unnamed-chunk-7-1.png)<!-- -->
 
 Now, by using +, we can add Michigan State to it. REMEMBER COPY AND PASTE IS A THING. Nothing changes except what data you are using.
 
@@ -141,7 +141,7 @@ Now, by using +, we can add Michigan State to it. REMEMBER COPY AND PASTE IS A T
 ggplot() + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + geom_line(data=msu, aes(x=Date, y=TeamFGPCT), color="dark green")
 ```
 
-<img src="15-linecharts_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+![](15-linecharts_files/figure-epub3/unnamed-chunk-8-1.png)<!-- -->
 
 Let's flatten our lines out by zeroing the Y axis.
 
@@ -150,7 +150,7 @@ Let's flatten our lines out by zeroing the Y axis.
 ggplot() + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + geom_line(data=msu, aes(x=Date, y=TeamFGPCT), color="dark green") + scale_y_continuous(limits = c(0, .6))
 ```
 
-<img src="15-linecharts_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+![](15-linecharts_files/figure-epub3/unnamed-chunk-9-1.png)<!-- -->
 
 So visually speaking, the difference between Nebraska and Michigan State's season is that Michigan State stayed mostly on an even keel, and Nebraska went on a two month swoon.
 
@@ -176,7 +176,7 @@ ggplot() + geom_line(data=p5conf, aes(x=Date, y=TeamFGPCT, group=Team), color="l
 ## Warning: Removed 1 rows containing missing values (geom_path).
 ```
 
-<img src="15-linecharts_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+![](15-linecharts_files/figure-epub3/unnamed-chunk-11-1.png)<!-- -->
 
 What do we see here? How has Nebraska and Michigan State's season evolved against all the rest of the teams in college basketball?
 
@@ -196,4 +196,4 @@ ggplot() + geom_line(data=p5conf, aes(x=Date, y=TeamFGPCT, group=Team), color="l
 ## Warning: Removed 1 rows containing missing values (geom_path).
 ```
 
-<img src="15-linecharts_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+![](15-linecharts_files/figure-epub3/unnamed-chunk-13-1.png)<!-- -->

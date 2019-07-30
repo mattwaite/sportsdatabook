@@ -13,7 +13,7 @@ simulations <- rbinom(n = 1000, size = 39, prob = .309)
 hist(simulations)
 ```
 
-<img src="07-simulations_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+![](07-simulations_files/figure-epub3/unnamed-chunk-1-1.png)<!-- -->
 
 ```r
 table(simulations)
@@ -42,7 +42,7 @@ simulations <- rbinom(n = 1000, size = 15, prob = .329)
 hist(simulations)
 ```
 
-<img src="07-simulations_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+![](07-simulations_files/figure-epub3/unnamed-chunk-2-1.png)<!-- -->
 
 ```r
 table(simulations)

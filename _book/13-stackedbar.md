@@ -103,7 +103,7 @@ Building on what we learned in the last chapter, we know we can turn this into a
 ggplot(BIG09, aes(x=reorder(`Institution name`, -Total), weight=`Number of completers`, fill=Gender)) + geom_bar() + coord_flip()
 ```
 
-<img src="13-stackedbar_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+![](13-stackedbar_files/figure-epub3/unnamed-chunk-5-1.png)<!-- -->
 
 What's the problem with this chart? 
 

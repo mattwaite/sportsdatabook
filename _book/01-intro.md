@@ -2,7 +2,7 @@
 
 R is a programming language, one specifically geared toward statistical analysis. Like all programming languages, it has certain built in functions and you can interact with it in multiple ways. The first, and most basic, is the console. 
 
-<img src="images/verybasics1.png" width="683" />
+<img src="images/verybasics1.png" width="1366" />
 
 Think of the console like talking directly to R. It's direct, but it has some drawbacks and some quirks we'll get into later. For now, try typing this into the console and hit enter: 
 
@@ -70,7 +70,7 @@ For the rest of the class, we're going to be working in notebooks. In notebooks,
 
 To start a notebook, you click on the green plus in the top left corner and go down to R Notebook. Do that now. 
 
-<img src="images/verybasics2.png" width="399" />
+<img src="images/verybasics2.png" width="798" />
 
 You will see that the notebook adds a lot of text for you. It tells you how to work in notebooks -- and you should read it. The most important parts are these: 
 

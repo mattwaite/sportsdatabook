@@ -119,7 +119,7 @@ Now let's look at the scatterplot. With a scatterplot, we put what predicts the 
 ggplot(fgmodel, aes(x=fgpct, y=wins)) + geom_point()
 ```
 
-<img src="19-scatterplots_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+![](19-scatterplots_files/figure-epub3/unnamed-chunk-5-1.png)<!-- -->
 
 Let's talk about this. It seems that the data slopes up to the right. That would indicate a positive correlation between shooting percentage and wins. And that makes sense, no? You'd expect teams that shoot the ball well to win. But can we get a better sense of this? Yes, by adding another geom -- `geom_smooth`.
 
@@ -128,7 +128,7 @@ Let's talk about this. It seems that the data slopes up to the right. That would
 ggplot(fgmodel, aes(x=fgpct, y=wins)) + geom_point() + geom_smooth(method=lm, se=TRUE)
 ```
 
-<img src="19-scatterplots_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+![](19-scatterplots_files/figure-epub3/unnamed-chunk-6-1.png)<!-- -->
 
 But ... how strong a relationship is this? How much can shooting percentage explain wins? Can we put some numbers to this?
 

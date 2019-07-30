@@ -163,7 +163,7 @@ ggplot(wintotalgroupinglogs, aes(x = TeamTotalRebounds, y = grouping, fill = gro
 ## Warning: Removed 2 rows containing non-finite values (stat_density_ridges).
 ```
 
-<img src="17-ridgecharts_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+![](17-ridgecharts_files/figure-epub3/unnamed-chunk-7-1.png)<!-- -->
 
 Answer? Not really. Game to game, maybe. Over five seasons? The differences are indistiguishable. 
 
@@ -185,7 +185,7 @@ ggplot(wintotalgroupinglogs, aes(x = TeamAssists, y = grouping, fill = grouping)
 ## Warning: Removed 2 rows containing non-finite values (stat_density_ridges).
 ```
 
-<img src="17-ridgecharts_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+![](17-ridgecharts_files/figure-epub3/unnamed-chunk-8-1.png)<!-- -->
 
 There's a little better, especially between top and bottom.
 
@@ -205,7 +205,7 @@ ggplot(wintotalgroupinglogs, aes(x = Team3PPCT, y = grouping, fill = grouping)) 
 ## Warning: Removed 2 rows containing non-finite values (stat_density_ridges).
 ```
 
-<img src="17-ridgecharts_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+![](17-ridgecharts_files/figure-epub3/unnamed-chunk-9-1.png)<!-- -->
 
 If you've been paying attention this semester, you know what's coming next.
 
@@ -225,4 +225,4 @@ ggplot(wintotalgroupinglogs, aes(x = TeamFGPCT, y = grouping, fill = grouping)) 
 ## Warning: Removed 2 rows containing non-finite values (stat_density_ridges).
 ```
 
-<img src="17-ridgecharts_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+![](17-ridgecharts_files/figure-epub3/unnamed-chunk-10-1.png)<!-- -->

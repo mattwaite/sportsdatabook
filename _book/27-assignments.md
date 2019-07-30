@@ -34,7 +34,7 @@ Create an R notebook (which you should have done if you were following along). I
 
 **Chapter 3: Data, structures and types**
 
-
+Using what you learned in the chapter, fetch [the list of the Big Ten's leading tacklers](http://www.cfbstats.com/2018/leader/827/player/split01/category19/sort01.html). Submit the CSV file to Canvas. In the comments, label each field type. What are they? Dates? Characters? Numeric?
 
 **Chapter 4: Aggregates**
 
@@ -47,15 +47,23 @@ Import [this dataset of every college basketball game in the 2018-19 season](htt
 
 **Chapter 5: Mutating Data**
 
+Import [this dataset of every college basketball game in the 2018-19 season](https://unl.box.com/s/a8m91bro10t89watsyo13yjegb1fy009). Using what you learned in the chapter, mutate a new variable: differential. Differential is the difference between the team score and the opponent score. A positive number means the team in question won. A negative number means the team in question lost. After creating the differential, average them together and sort them in descending order. Which team had the highest average point differential in college basketball? In other words, which team consistently won by the largest margins?
+
 **Chapter 6: Filters and selections**
+
+Import the data of [every college basketball player's season stats in 2018-19 season](https://unl.box.com/s/s1wzw61u9ia50qmirfhuvprgpmmah9rj). Using this data, let's get closer to a real answer to where the cutoff for true shooting season should be from the chapter. First, find the median number of shots attempted in the season, then set the cutoff filter for who had the best true shooting percentage using that number. 
 
 **Chapter 7: Transforming data**
 
+Import this dataset of [college football attendance data from 2013-2018](https://unl.box.com/s/fs3rj0dns1xh2y1dx0c2yc0adh4u3zsy). This data is long data -- one team, one year, one row. We need it to be wide data. Hint: it'll be much easier if you select only the columns you need to make it wide instead of using them all. Submit your notebook.  
+
 **Chapter 8: Simulations**
+
+On Feb. 6, Nebraska's basketball team had a nightmare night shooting the ball. They attempted 57 shots ... and made only 12. The team shot .429 on the season. Simulate 1000 games of them taking 57 shots using their season long .429 as the probability that they'll make a shot. How many times do they make just 12?
 
 **Chapter 9: Correlations and regressions**
 
-The fun of this is that you can test all kinds of theories. Given what we have in our dataset, what do you think predicts Nebraska's win total? Rebounds? Rebound differential? Fouls? Three point shooting? Total up every team's season performance, produce a scatterplot and a linear model and evaluate. Does it? What's your R-squared? What's your P-value? Create a model -- y = mx + b -- and see how Nebraska is performing relative to expectations. 
+Do the same thing described in the chapter, but for defense. Report your R-squared number, your p-value, what those mean and from that, how close does it come to predicting the Iowa Nebraska game?
 
 **Chapter 10: Multiple regression**
 
@@ -70,6 +78,8 @@ You are to generate a new set of coefficients, a new formula and a new set of nu
 Turn in your notebook with these answers and comments to the code you added, making sure to add WHY you are doing things. Why did you select those two variables.
 
 **Chapter 11: Residuals**
+
+Using the same data from the chapter, model defensive third down percentage and defensive points allowed. Which teams are overperforming that model given the residual analysis? 
 
 **Chapter 12: Z scores**
 
@@ -121,12 +131,11 @@ You've been hired by Fred Hoiberg to tell him how to win the Big Ten. He's not i
 
 **Chapter 20: Scatterplot**
 
-
-
-
+Using the data from the walkthrough, model and graph two other elements of Nebraska's season versus wins. How much does your choices of metrics predict the season? What do the scatterplots of what you chose look like? What do the linear models say (r-squared, p-values)? How predictive are they, i.e. using y=mx+b, how close to Nebraska's win total do your models get to?
 
 **Chapter 21: Facet Wraps**
 
+Which Big Ten teams were good a shooting three point shots? Which teams weren't? Using a facet grid, chart each teams three point shooting season against the league average.
 
 **Chapter 22**
 
@@ -142,9 +151,6 @@ I am a huge Premiere League fan, so I want data on the league. [For now, I just 
 
 **Chapter 24: Advanced Rvest**
 
-I don't usually assign an advanced rvest assignment because I don't want to turn 30 students loose on some poor providers servers. 
+I don't usually assign an advanced rvest assignment because I don't want to turn 30 students loose on some poor provider's servers. 
 
-**Chapter 25: Annotations**
-
-
-**Note:** There are no finishing touches assignments. In my classes, I have students present two major visual stories where they have to incorporate the elements of those assignments. 
+**Note:** There are no assignments for annotations and finishing touches. In my classes, I have students present two major visual stories where they have to incorporate the elements of those assignments as part of their grade. 

@@ -1018,6 +1018,6 @@ table <- formattable(
 export_formattable(table,"table.png")
 ```
 
-<img src="21-tables_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+![](21-tables_files/figure-epub3/unnamed-chunk-11-1.png)<!-- -->
 
 For now, pngs are what you need to export. There is a way to export PDFs, but they lose all the formatting when you do that, which is kind of pointless. 

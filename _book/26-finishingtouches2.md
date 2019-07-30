@@ -43,7 +43,7 @@ waffle(nu/10, rows = 5, xlab="1 square = 10 yards", colors = c("black", "red", "
   )
 ```
 
-<img src="26-finishingtouches2_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+![](26-finishingtouches2_files/figure-epub3/unnamed-chunk-3-1.png)<!-- -->
 
 Note: The alignment of text sucks. 
 
@@ -92,7 +92,7 @@ iron(
 ) 
 ```
 
-<img src="26-finishingtouches2_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+![](26-finishingtouches2_files/figure-epub3/unnamed-chunk-5-1.png)<!-- -->
 
 If you try to use ggsave on that, you'll only get the last waffle chart. Like I said, irons aren't really anything, so ggplot ignores them. So to do this, we have to use R's pdf capability. 
 

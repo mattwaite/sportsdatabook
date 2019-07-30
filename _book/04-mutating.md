@@ -213,7 +213,7 @@ The basic true shooting percentage formula is `(Points / (2*(FieldGoalAttempts +
 
 In our data, we need to be able to find the fields so we can complete the formula. To do that, one way is to use the Environment tab in R Studio. In the Environment tab is a listing of all the data you've imported, and if you click the triangle next to it, it'll list all the field names, giving you a bit of information about each one. 
 
-<img src="images/environment.png" width="653" />
+<img src="images/environment.png" width="1306" />
 
 So what does True Shooting Percentage look like in code? 
 

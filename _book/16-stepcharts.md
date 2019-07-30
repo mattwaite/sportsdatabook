@@ -109,7 +109,7 @@ The step chart is it's own geom, so we can employ it just like we have the other
 ggplot() + geom_step(data=bigdiff, aes(x=Date, y=CumDiff, group=Team))
 ```
 
-<img src="16-stepcharts_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+![](16-stepcharts_files/figure-epub3/unnamed-chunk-5-1.png)<!-- -->
 
 Let's try a different element of the aesthetic: color, but this time inside the aesthetic. Last time, we did the color outside. When you put it inside, you pass it a column name and ggplot will color each line based on what thing that is, and it will create a legend that labels each line that thing. 
 
@@ -118,7 +118,7 @@ Let's try a different element of the aesthetic: color, but this time inside the 
 ggplot() + geom_step(data=bigdiff, aes(x=Date, y=CumDiff, group=Team, color=Team))
 ```
 
-<img src="16-stepcharts_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+![](16-stepcharts_files/figure-epub3/unnamed-chunk-6-1.png)<!-- -->
 
 From this, we can see two teams in the Big Ten have negative point differentials on the season -- Illinois and Rutgers. 
 
@@ -147,4 +147,4 @@ ggplot() +
   theme_minimal()
 ```
 
-<img src="16-stepcharts_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+![](16-stepcharts_files/figure-epub3/unnamed-chunk-8-1.png)<!-- -->

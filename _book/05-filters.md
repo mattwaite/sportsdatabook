@@ -213,7 +213,7 @@ If you have truly massive data, Select has tools to help you select fields that 
 
 ## Using conditional filters to set limits
 
-Let's return to the blistering season of Drayton Whiteside. How can we set limits in something like a question of who had the best season? Let's get our Drayton Whiteside data from the previous chapter back up.
+Let's return to the blistering season of Drayton Whiteside using our dataset of [every college basketball player's season stats in 2018-19 season](https://unl.box.com/s/s1wzw61u9ia50qmirfhuvprgpmmah9rj). How can we set limits in something like a question of who had the best season? Let's get our Drayton Whiteside data from the previous chapter back up.
 
 
 ```r

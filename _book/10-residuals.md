@@ -153,13 +153,13 @@ So looking at this table, what you see here are the teams who scored more than t
 
 But, before we can bestow any validity on it, we need to see if this linear model is appropriate. We've done that some looking at our p-values and R-squared values. But one more check is to look at the residuals themselves. We do that by plotting the residuals with the predictor. We'll get into plotting soon, but for now just seeing it is enough.
 
-<img src="10-residuals_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+![](10-residuals_files/figure-epub3/unnamed-chunk-6-1.png)<!-- -->
 
 The lack of a shape here -- the seemingly random nature -- is a good sign that a linear model works for our data. If there was a pattern, that would indicate something else was going on in our data and we needed a different model.
 
 Another way to view your residuals is by connecting the predicted value with the actual value.
 
-<img src="10-residuals_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+![](10-residuals_files/figure-epub3/unnamed-chunk-7-1.png)<!-- -->
 
 The blue line here separates underperformers from overperformers.
 
@@ -240,11 +240,11 @@ penalties %>% arrange(desc(residuals))
 
 So our model says Oklahoma *should* only be scoring 31.3 points per game given how many penalty yards per game, but they're really scoring 48.4. Oy. What happens if we plot those residuals? 
 
-<img src="10-residuals_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+![](10-residuals_files/figure-epub3/unnamed-chunk-12-1.png)<!-- -->
 
 Well ... it actually says that a linear model is appropriate. Which an important lesson -- just because your residual plot says a linear model works here, that doesn't say your linear model is good. There are other measures for that, and you need to use them. 
 
 Here's the segment plot of residuals -- you'll see some really long lines. That's a bad sign. 
 
-<img src="10-residuals_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+![](10-residuals_files/figure-epub3/unnamed-chunk-13-1.png)<!-- -->
 

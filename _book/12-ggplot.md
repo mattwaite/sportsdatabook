@@ -137,7 +137,7 @@ Note: attendace is our data, `aes` means aesthetics, `x=Institution` explicitly 
 ggplot(top10, aes(x=Institution)) + geom_bar()
 ```
 
-<img src="12-ggplot_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+![](12-ggplot_files/figure-epub3/unnamed-chunk-5-1.png)<!-- -->
 
 We get ... weirdness. We expected to see bars of different sizes, but we get all with a count of 1. What gives? Well, this is the default behavior. What we have here is something called a histogram, where `ggplot2` helpfully counted up the number of times the Institution appears and counted them up. Since we only have one record per Institution, the count is always 1. How do we fix this? By adding `weight` to our aesthetic. 
 
@@ -146,7 +146,7 @@ We get ... weirdness. We expected to see bars of different sizes, but we get all
 ggplot(top10, aes(x=Institution, weight=`2018`)) + geom_bar()
 ```
 
-<img src="12-ggplot_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+![](12-ggplot_files/figure-epub3/unnamed-chunk-6-1.png)<!-- -->
 
 Closer. But ... what order is that in? And what happened to our count numbers on the left? Why are they in scientific notation?
 
@@ -157,7 +157,7 @@ Let's deal with the ordering first. `ggplot2`'s default behavior is to sort the 
 ggplot(top10, aes(x=reorder(Institution, `2018`), weight=`2018`)) + geom_bar()
 ```
 
-<img src="12-ggplot_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+![](12-ggplot_files/figure-epub3/unnamed-chunk-7-1.png)<!-- -->
 
 Better. We can argue about if the right order is smallest to largest or largest to smallest. But this gets us close. By the way, to sort it largest to smallest, put a negative sign in front of the sort field. 
 
@@ -166,7 +166,7 @@ Better. We can argue about if the right order is smallest to largest or largest 
 ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + geom_bar()
 ```
 
-<img src="12-ggplot_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+![](12-ggplot_files/figure-epub3/unnamed-chunk-8-1.png)<!-- -->
 
 ## Scales
 
@@ -203,7 +203,7 @@ To alter the scale, we add a piece to our plot with `+` and we tell it which sca
 ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + geom_bar() + scale_y_continuous(labels=comma)
 ```
 
-<img src="12-ggplot_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+![](12-ggplot_files/figure-epub3/unnamed-chunk-10-1.png)<!-- -->
 
 Better. 
 
@@ -216,7 +216,7 @@ We are going to spend a lot more time on styling, but let's add some simple labe
 ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + geom_bar() + scale_y_continuous(labels=comma) + labs(title="Top 10 Football Programs By Attendance", x="School", y="Attendance")
 ```
 
-<img src="12-ggplot_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+![](12-ggplot_files/figure-epub3/unnamed-chunk-11-1.png)<!-- -->
 
 The library has lots and lots of ways to alter the styling -- we can programmatically control nearly every part of the look and feel of the chart. One simple way is to apply themes in the library already. We do that the same way we've done other things -- we add them. Here's the light theme. 
 
@@ -225,7 +225,7 @@ The library has lots and lots of ways to alter the styling -- we can programmati
 ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + geom_bar() + scale_y_continuous(labels=comma) + labs(title="Top 10 Football Programs By Attendance", x="School", y="Attendance") + theme_light()
 ```
 
-<img src="12-ggplot_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+![](12-ggplot_files/figure-epub3/unnamed-chunk-12-1.png)<!-- -->
 
 Or the minimal theme:
 
@@ -234,7 +234,7 @@ Or the minimal theme:
 ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + geom_bar() + scale_y_continuous(labels=comma) + labs(title="Top 10 Football Programs By Attendance", x="School", y="Attendance") + theme_minimal()
 ```
 
-<img src="12-ggplot_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+![](12-ggplot_files/figure-epub3/unnamed-chunk-13-1.png)<!-- -->
 
 Later on, we'll write our own themes. For now, the built in ones will get us closer to something that looks good.
 
@@ -247,4 +247,4 @@ Sometimes, we don't want vertical bars. Maybe we think this would look better ho
 ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + geom_bar() + scale_y_continuous(labels=comma) + labs(title="Top 10 Football Programs By Attendance", x="School", y="Attendance") + theme_minimal() + coord_flip()
 ```
 
-<img src="12-ggplot_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+![](12-ggplot_files/figure-epub3/unnamed-chunk-14-1.png)<!-- -->

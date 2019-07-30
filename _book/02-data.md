@@ -12,9 +12,22 @@ To start with, we need to understand the shape of data.
 
 Data, oversimplifying it a bit, is information organized. Generally speaking, it's organized into rows and columns. Rows, generally, are individual elements. A team. A player. A game. Columns, generally, are components of the data, sometimes called variables. So if each row is a player, the first column might be their name. The second is their position. The third is their batting average. And so on. 
 
-<img src="images/data1.png" width="792" />
+<img src="images/data1.png" width="1584" />
 
 One of the critical components of data analysis, especially for beginners, is having a mental picture of your data. What does each row mean? What does each column in each row signify? How many rows do you have? How many columns? 
+
+## Types
+
+There are scores of data types in the world, and R has them. In this class, we're primarily going to be dealing with data frames, and each element of our data frames will have a data type.
+
+Typically, they'll be one of four types of data:
+
+* Numeric: a number, like the number of touchdown passes in a season or a batting average.
+* Character: Text, like a name, a team, a conference.
+* Date: Fully formed dates -- 2019-01-01 -- have a special date type. Elements of a date, like a year (ex. 2019) are not technically dates, so they'll appear as numeric data types. 
+* Logical: Rare, but every now and then we'll have a data type that's Yes or No, True or False, etc.
+
+**Question:** Is a zip code a number? Is a jersey number a number? Trick question, because the answer is no. Numbers are things we do math on. If the thing you want is not something you're going to do math on -- can you add two phone numbers together? -- then make it a character type. If you don't, most every software system on the planet will drop leading zeros. For example, every zip code in Boston starts with 0. If you record that as a number, your zip code will become a four digit number, which isn't a zip code anymore. 
 
 ## A simple way to get data
 
@@ -34,7 +47,7 @@ If it worked right, you've got the data from that page in a spreadsheet.
 
 The first thing we need to do is recognize that we don't have data, really. We have the results of a formula. You can tell by putting your cursor on that field, where you'll see the formula again. This is where you'd look:
 
-<img src="images/clean1.png" width="1198" />
+<img src="images/clean1.png" width="2396" />
 
 The solution is easy:
 
@@ -44,7 +57,7 @@ Edit > Paste Special > Values Only or type command/control shift v
 
 You can verify that it worked by looking in that same row 1 column A, where you'll see the formula is gone.
 
-<img src="images/clean2.png" width="1325" />
+<img src="images/clean2.png" width="2650" />
 
 Now you have data, but your headers are all wrong. You want your headers to be one line -- not two, like they have. And the header names repeat -- first for our team, then for theirs. So you have to change each header name to be UsORB or TeamORB and OpponentORB instead of just ORB.
 
@@ -54,6 +67,6 @@ But what if you had hundreds of repeating headers like that? Deleting them would
 
 You can use sorting to get rid of anything that's not data. So click on Data > Sort Range. You'll want to check the "Data has header row" field. Then hit Sort.
 
-<img src="images/clean3.png" width="778" />
+<img src="images/clean3.png" width="1556" />
 
 Now all you need to do is search through the data for where your junk data -- extra headers, blanks, etc. -- got sorted and delete it. After you've done that, you can export it for use in R. Go to File > Download as > Comma Separated Values. Remember to put it in the same directory as your R Notebook file so you can import the data easily.

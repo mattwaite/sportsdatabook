@@ -181,7 +181,7 @@ There's three things we need here:
 
 You can see the problem in a graph. On the X axis is penalty yards, on the y is aggregate score. If these elements had a strong relationship, we'd see a clear pattern moving from right to left, sloping down. Onn the left would be the teams with lots of penalty yards and a negative point differential. On right would be teams with low penalty yards and high point differentials. Do you see that below?
 
-<img src="08-correlation_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+![](08-correlation_files/figure-epub3/unnamed-chunk-8-1.png)<!-- -->
 
 > **Your turn**: Try it with the other penalty measures. Total penalties and penalty yards per game. Does anything change? Do either of these meet the .05 threshold for randomness? Are either of these any more predictive?
 

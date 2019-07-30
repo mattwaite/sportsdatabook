@@ -189,4 +189,4 @@ ggplot() +
   )
 ```
 
-<img src="24-annotations_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+![](24-annotations_files/figure-epub3/unnamed-chunk-5-1.png)<!-- -->

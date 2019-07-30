@@ -2,6 +2,7 @@
 title: "Sports Data Analysis and Visualization"
 subtitle: "Code, data, visuals and the Tidyverse for journalists and other storytellers"
 author: "By Matt Waite"
+date: July 29, 2019
 bibliography:
 - packages.bib
 description: This book is the companion to the University of Nebraska-Lincoln's SPMC
@@ -13,8 +14,6 @@ biblio-style: apalike
 output:
   bookdown::gitbook:
     highlight: tango
-  bookdown::html_book:
-    theme: journal
 ---
 
 # Throwing cold water on hot takes

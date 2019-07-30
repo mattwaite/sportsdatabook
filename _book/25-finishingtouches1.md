@@ -12,7 +12,7 @@ The output from ggplot is good, but not great. We need to add some pieces to it.
 
 That looks like:
 
-<img src="images/chartannotated.png" width="467" />
+<img src="images/chartannotated.png" width="934" />
 
 ## Graphics vs visual stories
 
@@ -146,7 +146,7 @@ ggplot(offense, aes(x=`Yards/G`, y=`Points/G`)) +
   geom_point(color="grey")
 ```
 
-<img src="25-finishingtouches1_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+![](25-finishingtouches1_files/figure-epub3/unnamed-chunk-5-1.png)<!-- -->
 
 Let's take changing things one by one. The first thing we can do is change the figure size. Sometimes you don't want a square. We can use the `knitr` output settings in our chunk to do this easily in our notebooks. 
 
@@ -156,7 +156,7 @@ ggplot(offense, aes(x=`Yards/G`, y=`Points/G`)) +
   geom_point(color="grey")
 ```
 
-<img src="25-finishingtouches1_files/figure-html/unnamed-chunk-6-1.png" width="480" />
+![](25-finishingtouches1_files/figure-epub3/unnamed-chunk-6-1.png)<!-- -->
 
 Now let's add a fit line. 
 
@@ -166,7 +166,7 @@ ggplot(offense, aes(x=`Yards/G`, y=`Points/G`)) +
   geom_point(color="grey") + geom_smooth(method=lm, se=FALSE)
 ```
 
-<img src="25-finishingtouches1_files/figure-html/unnamed-chunk-7-1.png" width="480" />
+![](25-finishingtouches1_files/figure-epub3/unnamed-chunk-7-1.png)<!-- -->
 
 And now some labels.
 
@@ -177,7 +177,7 @@ ggplot(offense, aes(x=`Yards/G`, y=`Points/G`)) +
   labs(x="Total yards per game", y="Points per game", title="Nebraska's underperforming offense", subtitle="The Husker's offense was the strength of the team. They underperformed.", caption="Source: NCAA | By Matt Waite")
 ```
 
-<img src="25-finishingtouches1_files/figure-html/unnamed-chunk-8-1.png" width="480" />
+![](25-finishingtouches1_files/figure-epub3/unnamed-chunk-8-1.png)<!-- -->
 
 Let's get rid of the default plot look and drop the grey background. 
 
@@ -189,7 +189,7 @@ ggplot(offense, aes(x=`Yards/G`, y=`Points/G`)) +
   theme_minimal()
 ```
 
-<img src="25-finishingtouches1_files/figure-html/unnamed-chunk-9-1.png" width="480" />
+![](25-finishingtouches1_files/figure-epub3/unnamed-chunk-9-1.png)<!-- -->
 
 Off to a good start, but our text has no real heirarchy. We'd want our headline to stand out more. So let's change that. When it comes to changing text, the place to do that is in the theme element. [There are a lot of ways to modify the theme](http://ggplot2.tidyverse.org/reference/theme.html). We'll start easy. Let's make the headline bigger and bold.
 
@@ -204,7 +204,7 @@ ggplot(offense, aes(x=`Yards/G`, y=`Points/G`)) +
     ) 
 ```
 
-<img src="25-finishingtouches1_files/figure-html/unnamed-chunk-10-1.png" width="480" />
+![](25-finishingtouches1_files/figure-epub3/unnamed-chunk-10-1.png)<!-- -->
 
 Now let's fix a few other things -- like the axis labels being too big, the subtitle could be bigger and lets drop some grid lines.
 
@@ -222,7 +222,7 @@ ggplot(offense, aes(x=`Yards/G`, y=`Points/G`)) +
     ) 
 ```
 
-<img src="25-finishingtouches1_files/figure-html/unnamed-chunk-11-1.png" width="480" />
+![](25-finishingtouches1_files/figure-epub3/unnamed-chunk-11-1.png)<!-- -->
 
 Missing from this graph is the context that the headline promises. Where is Nebraska? We haven't added it yet. So let's add a point and a label for it. 
 
@@ -242,7 +242,7 @@ ggplot(offense, aes(x=`Yards/G`, y=`Points/G`)) +
   geom_text_repel(data=nu, aes(x=`Yards/G`, y=`Points/G`, label="Nebraska 2018"))
 ```
 
-<img src="25-finishingtouches1_files/figure-html/unnamed-chunk-12-1.png" width="480" />
+![](25-finishingtouches1_files/figure-epub3/unnamed-chunk-12-1.png)<!-- -->
 
 If we're happy with this output -- if it meets all of our needs for publication -- then we can simply export it as a png file. We do that by adding `+ ggsave("plot.png", width=5, height=2)` to the end of our code. Note the width and the height are from our knitr parameters at the top -- you have to repeat them or the graph will export at the default 7x7. 
 

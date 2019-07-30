@@ -100,7 +100,7 @@ The first thing we can do is look at a line chart, like we have done in previous
 ggplot() + geom_line(data=big10, aes(x=Date, y=TeamFGPCT, group=Team)) + scale_y_continuous(limits = c(0, .7))
 ```
 
-<img src="20-facetwraps_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+![](20-facetwraps_files/figure-epub3/unnamed-chunk-4-1.png)<!-- -->
 
 And, not surprisingly, we get a hairball. We could color certain lines, but that would limit us to focus on one team. What if we did all of them at once? We do that with a `facet_wrap`. The only thing we MUST pass into a `facet_wrap` is what thing we're going to separate them out by. In this case, we preceed that field with a tilde, so in our case we want the Team field. It looks like this: 
 
@@ -109,7 +109,7 @@ And, not surprisingly, we get a hairball. We could color certain lines, but that
 ggplot() + geom_line(data=big10, aes(x=Date, y=TeamFGPCT, group=Team)) + scale_y_continuous(limits = c(0, .7)) + facet_wrap(~Team)
 ```
 
-<img src="20-facetwraps_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+![](20-facetwraps_files/figure-epub3/unnamed-chunk-5-1.png)<!-- -->
 
 Answer: Not immediately clear, but we can look at this and analyze it. We could add a peice of annotation to help us out. 
 
@@ -130,7 +130,7 @@ big10 %>% summarise(mean(TeamFGPCT))
 ggplot() + geom_hline(yintercept=.4447, color="dark grey") + geom_line(data=big10, aes(x=Date, y=TeamFGPCT, group=Team)) + scale_y_continuous(limits = c(0, .7)) + facet_wrap(~Team)
 ```
 
-<img src="20-facetwraps_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+![](20-facetwraps_files/figure-epub3/unnamed-chunk-7-1.png)<!-- -->
 
 What do you see here? How do teams compare? How do they change over time? I'm not asking you these questions because they're an assignment -- I'm asking because that's exactly what this chart helps answer. Your brain will immediately start making those connections. 
 
@@ -143,7 +143,7 @@ Facet grids allow us to put teams on the same plane, versus just repeating them.
 ggplot() + geom_hline(yintercept=.4447, color="dark grey") + geom_line(data=big10, aes(x=Date, y=TeamFGPCT, group=Team)) + scale_y_continuous(limits = c(0, .7)) + facet_grid(Team ~ .)
 ```
 
-<img src="20-facetwraps_files/figure-html/unnamed-chunk-8-1.png" width="480" />
+![](20-facetwraps_files/figure-epub3/unnamed-chunk-8-1.png)<!-- -->
 
 And here they are next to each other:
 
@@ -152,17 +152,17 @@ And here they are next to each other:
 ggplot() + geom_hline(yintercept=.4447, color="dark grey") + geom_line(data=big10, aes(x=Date, y=TeamFGPCT, group=Team)) + scale_y_continuous(limits = c(0, .7)) + facet_grid(. ~ Team)
 ```
 
-<img src="20-facetwraps_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+![](20-facetwraps_files/figure-epub3/unnamed-chunk-9-1.png)<!-- -->
 
 Note: We'd have some work to do with the labeling on this -- we'll get to that -- but you can see where this is valuable comparing a group of things. One warning: Don't go too crazy with this or it loses it's visual power.
 
 ## Other types
 
-Line charts aren't the only things we can do. We can do any kind of chart in ggplot. Staying with shooting, where are team's winning and losing performances coming fromwhen we talk about team shooting and opponent shooting? 
+Line charts aren't the only things we can do. We can do any kind of chart in ggplot. Staying with shooting, where are team's winning and losing performances coming from when we talk about team shooting and opponent shooting? 
 
 
 ```r
 ggplot() + geom_point(data=big10, aes(x=TeamFGPCT, y=OpponentFGPCT, color=W_L)) + scale_y_continuous(limits = c(0, .7)) + scale_x_continuous(limits = c(0, .7)) + facet_wrap(~Team)
 ```
 
-<img src="20-facetwraps_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+![](20-facetwraps_files/figure-epub3/unnamed-chunk-10-1.png)<!-- -->

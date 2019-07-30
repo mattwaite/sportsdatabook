@@ -357,7 +357,7 @@ ggplot(nebraska, aes(x=Date, y=TeamFGPCT)) +
   )
 ```
 
-<img src="06-transforming_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+![](06-transforming_files/figure-epub3/unnamed-chunk-14-1.png)<!-- -->
 Oy. There it is. There's our season.
 
 So I can tell you now, using wide data, that Nebraska's shooting performance over the last ten games is down 12 percent from the first 10 games. And using long data, I can show you the story of the season, but without any specific stats to back it up. 
