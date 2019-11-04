@@ -4,7 +4,7 @@ But not a table. A table with features.
 
 Sometimes, the best way to show your data is with a table. R has a neat package called `formattable` and you'll install it like anything else with `install.packages('formattable')`. 
 
-So what does it do? Let's gather our libraries and get some data. 
+So what does it do? Let's gather our libraries and [get some data](https://unl.box.com/s/g3eeuogx8bog72ig28enuakhpdlbn394). 
 
 
 ```r
@@ -16,9 +16,9 @@ library(tidyverse)
 ```
 
 ```
-## ✔ ggplot2 3.2.0     ✔ purrr   0.3.2
+## ✔ ggplot2 3.2.1     ✔ purrr   0.3.3
 ## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
-## ✔ tidyr   0.8.3     ✔ stringr 1.4.0
+## ✔ tidyr   1.0.0     ✔ stringr 1.4.0
 ## ✔ readr   1.3.1     ✔ forcats 0.4.0
 ```
 
@@ -83,7 +83,7 @@ offense <- read_csv("data/offensechange.csv")
 ```
 
 
-Let's ask this question: Which college football team saw the greatest improvement in yards per game this regular season? The simplest way to calculate that is by percent change. 
+Let's ask this question: Which college football team saw the greatest improvement in yards per game last regular season? The simplest way to calculate that is by percent change. 
 
 
 ```r
@@ -674,17 +674,15 @@ formattable(
 </table>
 That gives me some more to mess with. 
 
-One thing you can do is set the bar widths to the results of a function. In this case, it returns a number between 0 and 1, with 1 being the max and 0 being the minimum. It gives you some idea how far out UTEP is with their peers. 
+One thing you can do is set the bar widths to make them relative to each other, using a different function called a `normalize_bar`.
 
 ```r
-unit.scale = function(x) (x - min(x)) / (max(x) - min(x))
-
 formattable(
   changeTotalOffense, 
   align="r",
   list(
-    `2018` = color_bar("#FA614B", fun = unit.scale), 
-    `2017` = color_bar("#FA614B", fun = unit.scale), 
+    `2018` = normalize_bar("#FA614B"), 
+    `2017` = normalize_bar("#FA614B"), 
     `Change` = percent)
   )
 ```
@@ -822,6 +820,8 @@ formattable(
   </tr>
 </tbody>
 </table>
+
+Note: bookdown is formatting this weird. Your numbers won't look like this.
 
 Another way to deal with this -- color tiles. Change the rectangle that houses the data to a color indicating the intensity of it. Again, UTEP stands out.
 
@@ -986,6 +986,13 @@ Now, copy, paste and run this code block entirely. Don't change anything.
 
 ```r
 library("htmltools")
+```
+
+```
+## Warning: package 'htmltools' was built under R version 3.5.2
+```
+
+```r
 library("webshot")    
 
 export_formattable <- function(f, file, width = "100%", height = NULL, 

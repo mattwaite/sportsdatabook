@@ -1,6 +1,6 @@
 # The very basics
 
-R is a programming language, one specifically geared toward statistical analysis. Like all programming languages, it has certain built in functions and you can interact with it in multiple ways. The first, and most basic, is the console. 
+R is a programming language, one specifically geared toward statistical analysis. Like all programming languages, it has certain built-in functions and you can interact with it in multiple ways. The first, and most basic, is the console. 
 
 <img src="images/verybasics1.png" width="1366" />
 
