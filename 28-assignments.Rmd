@@ -145,6 +145,13 @@ Create a dataframe that shows the 10 best or 10 worst at something. Or rank the 
 
 Export it to a PNG using the example above. Then, in Illustrator, add a headline, chatter, source and credit lines. Turn in the PNG file you export from Illustrator.
 
+**New Chapter**
+
+Import [this dataset of every college basketball game in the 2018-19 season](https://unl.box.com/s/a8m91bro10t89watsyo13yjegb1fy009). Create a bubble chart looking at two stats to make your scatterplot and a third making the size of your bubble. Make the color the conference name. 
+
+I want to see your bubble chart, but more importantly, I want you to discuss if what you came up with makes an effective bubble chart. Does it tell a story? Does the size of the bubble enhance understanding? No is an acceptable answer. But explain why it did or didn't work. 
+
+
 **Chapter 23: Rvest**
 
 I am a huge Premiere League fan, so I want data on the league. [For now, I just want teams](https://fbref.com/en/comps/9/stats/Premier-League-Stats). Scrape the team data at the top, but before you do, look at the header. Is it one row? Does that make it standard? Nope. So what now?
