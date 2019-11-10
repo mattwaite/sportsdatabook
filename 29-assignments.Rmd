@@ -151,6 +151,12 @@ Import [this dataset of every college basketball game in the 2018-19 season](htt
 
 I want to see your bubble chart, but more importantly, I want you to discuss if what you came up with makes an effective bubble chart. Does it tell a story? Does the size of the bubble enhance understanding? No is an acceptable answer. But explain why it did or didn't work. 
 
+**New Chapter**
+
+Your turn: Let's evaluate the second part of the quote from the chapter: November basketball tells you where you are. 
+
+We've looked at wins. What else could you look at over the course of the season that tells you where you are? Pick a metric. Explain your choice. Make a circular bar chart. Evaluate the result. What does it say?
+
 
 **Chapter 23: Rvest**
 
