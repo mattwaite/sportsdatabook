@@ -167,3 +167,12 @@ I am a huge Premiere League fan, so I want data on the league. [For now, I just 
 I don't usually assign an advanced rvest assignment because I don't want to turn 30 students loose on some poor provider's servers. 
 
 **Note:** There are no assignments for annotations and finishing touches. In my classes, I have students present two major visual stories where they have to incorporate the elements of those assignments as part of their grade. 
+
+**Chapter 30: Plotly**
+
+First, create a simple ggplot like we did above exploring WRAA -- [weighted runs above average](http://m.mlb.com/glossary/advanced-stats/weighted-runs-above-average) -- as your x value and and plate appearances (PA) as your y variable.
+
+Next, create a plotly visualization using the same two variables. Alter the hover elements to show relevant data. If you leave it the same from the chapter, you lose points. 
+
+Export your plotly visualization to plotly's website. Include a link of your viz in your notebook. In your notebook, discuss the relative advantages and disadvantages of this interactive plot versus the static plots we've been doing. 
+
