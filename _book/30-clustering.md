@@ -20,7 +20,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ── tidyverse 1.2.1 ──
+## ── Attaching packages ─────────────────
 ```
 
 ```
@@ -59,7 +59,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Conflicts ───── tidyverse_conflicts() ──
+## ── Conflicts ──────────────────────────
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
 ```
@@ -288,7 +288,7 @@ Not bad, not bad. But who are Cam Mack's peers? If we look at the numbers in Gro
 
 
 ```r
-big10 <- c("Nebraska Cornhuskers", "Iowa Hawkeyes", "Minnesota Golden Gophers", "Illinois Fighting Illini", "Northwestern Wildcats", "Wisconsin Badgers", "Indiana Hoosiers", "Purdue Boilermakers", "Ohio State Buckeyes", "Michigan Wolverines", "Mighigan State Spartans", "Penn State Nittany Lions", "Rutgers Scarlet Knights", "Maryland Terrapins")
+big10 <- c("Nebraska Cornhuskers", "Iowa Hawkeyes", "Minnesota Golden Gophers", "Illinois Fighting Illini", "Northwestern Wildcats", "Wisconsin Badgers", "Indiana Hoosiers", "Purdue Boilermakers", "Ohio State Buckeyes", "Michigan Wolverines", "Michigan State Spartans", "Penn State Nittany Lions", "Rutgers Scarlet Knights", "Maryland Terrapins")
 
 playercluster %>% filter(k5.cluster == 1) %>% filter(Team %in% big10) %>% arrange(desc(MP))
 ```
@@ -300,9 +300,10 @@ playercluster %>% filter(k5.cluster == 1) %>% filter(Team %in% big10) %>% arrang
 ## 3    Andres Feliz Illinois Fighting Illini   G 134 0.477 0.200  14  15  64
 ## 4       Geo Baker  Rutgers Scarlet Knights   G 128 0.444 0.280  16   7  53
 ## 5 Eric Hunter Jr.      Purdue Boilermakers   G 127 0.400 0.313  16   7  43
-## 6    Cameron Mack     Nebraska Cornhuskers   G 109 0.415 0.294  18   6  48
-## 7  Zavier Simpson      Michigan Wolverines   G  98 0.467 0.273  22  12  34
-## 8     D.J. Carton      Ohio State Buckeyes   G  93 0.593 0.444  16   9  43
+## 6 Cassius Winston  Michigan State Spartans   G 111 0.407 0.370  27  12  70
+## 7    Cameron Mack     Nebraska Cornhuskers   G 109 0.415 0.294  18   6  48
+## 8  Zavier Simpson      Michigan Wolverines   G  98 0.467 0.273  22  12  34
+## 9     D.J. Carton      Ohio State Buckeyes   G  93 0.593 0.444  16   9  43
 ##   k5.cluster
 ## 1          1
 ## 2          1
@@ -312,6 +313,7 @@ playercluster %>% filter(k5.cluster == 1) %>% filter(Team %in% big10) %>% arrang
 ## 6          1
 ## 7          1
 ## 8          1
+## 9          1
 ```
 
 So there are the 8 guards most like Cam Mack in the Big Ten. It'll be interesting to watch this evolve over the season. Fred Hoiberg and others think he might be one of the best guards in the league. We'll see, using cluster analysis. 
@@ -497,69 +499,71 @@ playeradvcluster %>% filter(advk5.cluster == 5) %>% filter(Team %in% big10) %>% 
 
 ```
 ##              Player                     Team Pos  PER   TS. PProd  AST.
-## 1       Marcus Carr Minnesota Golden Gophers   G 16.1 0.413    68  39.0
-## 2      Andres Feliz Illinois Fighting Illini   G 19.3 0.568    63  22.1
-## 3      Brad Davison        Wisconsin Badgers   G 24.2 0.668    58  14.3
-## 4    Jahaad Proctor      Purdue Boilermakers   G 22.8 0.551    58  17.3
-## 5     Aljami Durham         Indiana Hoosiers   G 25.6 0.804    56  13.0
-## 6       Ayo Dosunmu Illinois Fighting Illini   G 11.1 0.507    54  23.4
-## 7         Geo Baker  Rutgers Scarlet Knights   G 20.4 0.548    51  25.3
-## 8      Cameron Mack     Nebraska Cornhuskers   G 21.2 0.499    51  37.2
-## 9   Eric Hunter Jr.      Purdue Boilermakers   G 14.4 0.502    47  22.2
-## 10   Zavier Simpson      Michigan Wolverines   G 16.7 0.518    46  38.6
-## 11      D.J. Carton      Ohio State Buckeyes   G 22.9 0.657    44  34.2
-## 12    Payton Willis Minnesota Golden Gophers   G 13.8 0.530    43  15.1
-## 13    Anthony Cowan       Maryland Terrapins   G 20.2 0.542    42  29.3
-## 14     Myreon Jones Penn State Nittany Lions   G 22.1 0.709    41  25.4
-## 15      Myles Dread Penn State Nittany Lions   G 23.7 0.578    38  26.7
-## 16       Eli Brooks      Michigan Wolverines   G 16.7 0.644    38  13.7
-## 17     Rob Phinisee         Indiana Hoosiers   G 20.3 0.554    38  39.0
-## 18    Trent Frazier Illinois Fighting Illini   G 10.9 0.539    37   9.8
-## 19   Ron Harper Jr.  Rutgers Scarlet Knights   G 22.7 0.554    36   5.9
-## 20        Kobe King        Wisconsin Badgers   G 17.1 0.532    35  10.3
-## 21      Jacob Young  Rutgers Scarlet Knights   G 10.9 0.446    35  28.9
-## 22        CJ Walker      Ohio State Buckeyes   G 16.3 0.560    35  33.9
-## 23    Montez Mathis  Rutgers Scarlet Knights   G 20.4 0.490    34  11.6
-## 24   D'Mitrik Trice        Wisconsin Badgers   G 10.8 0.501    32  14.5
-## 25    Aaron Wiggins       Maryland Terrapins   G 21.6 0.460    32  14.6
-## 26     Joe Wieskamp            Iowa Hawkeyes   G 15.3 0.514    31  12.2
-## 27       Eric Ayala       Maryland Terrapins   G 12.4 0.528    30  16.7
-## 28 Connor McCaffery            Iowa Hawkeyes   G 17.8 0.678    29  28.7
-## 29  Caleb McConnell  Rutgers Scarlet Knights   G 18.8 0.515    28  13.0
-## 30      Pat Spencer    Northwestern Wildcats   G 16.8 0.482    21  32.9
-## 31       Tommy Luce      Purdue Boilermakers   G 30.7 0.500     4 100.0
+## 1   Cassius Winston  Michigan State Spartans   G 23.3 0.551    71  42.6
+## 2       Marcus Carr Minnesota Golden Gophers   G 16.1 0.413    68  39.0
+## 3      Andres Feliz Illinois Fighting Illini   G 19.3 0.568    63  22.1
+## 4      Brad Davison        Wisconsin Badgers   G 24.2 0.668    58  14.3
+## 5    Jahaad Proctor      Purdue Boilermakers   G 22.8 0.551    58  17.3
+## 6     Aljami Durham         Indiana Hoosiers   G 25.6 0.804    56  13.0
+## 7       Ayo Dosunmu Illinois Fighting Illini   G 11.1 0.507    54  23.4
+## 8         Geo Baker  Rutgers Scarlet Knights   G 20.4 0.548    51  25.3
+## 9      Cameron Mack     Nebraska Cornhuskers   G 21.2 0.499    51  37.2
+## 10  Eric Hunter Jr.      Purdue Boilermakers   G 14.4 0.502    47  22.2
+## 11   Zavier Simpson      Michigan Wolverines   G 16.7 0.518    46  38.6
+## 12      D.J. Carton      Ohio State Buckeyes   G 22.9 0.657    44  34.2
+## 13    Payton Willis Minnesota Golden Gophers   G 13.8 0.530    43  15.1
+## 14    Anthony Cowan       Maryland Terrapins   G 20.2 0.542    42  29.3
+## 15     Myreon Jones Penn State Nittany Lions   G 22.1 0.709    41  25.4
+## 16      Myles Dread Penn State Nittany Lions   G 23.7 0.578    38  26.7
+## 17       Eli Brooks      Michigan Wolverines   G 16.7 0.644    38  13.7
+## 18     Rob Phinisee         Indiana Hoosiers   G 20.3 0.554    38  39.0
+## 19    Trent Frazier Illinois Fighting Illini   G 10.9 0.539    37   9.8
+## 20   Ron Harper Jr.  Rutgers Scarlet Knights   G 22.7 0.554    36   5.9
+## 21        Kobe King        Wisconsin Badgers   G 17.1 0.532    35  10.3
+## 22      Jacob Young  Rutgers Scarlet Knights   G 10.9 0.446    35  28.9
+## 23        CJ Walker      Ohio State Buckeyes   G 16.3 0.560    35  33.9
+## 24    Montez Mathis  Rutgers Scarlet Knights   G 20.4 0.490    34  11.6
+## 25   D'Mitrik Trice        Wisconsin Badgers   G 10.8 0.501    32  14.5
+## 26    Aaron Wiggins       Maryland Terrapins   G 21.6 0.460    32  14.6
+## 27     Joe Wieskamp            Iowa Hawkeyes   G 15.3 0.514    31  12.2
+## 28       Eric Ayala       Maryland Terrapins   G 12.4 0.528    30  16.7
+## 29 Connor McCaffery            Iowa Hawkeyes   G 17.8 0.678    29  28.7
+## 30  Caleb McConnell  Rutgers Scarlet Knights   G 18.8 0.515    28  13.0
+## 31      Pat Spencer    Northwestern Wildcats   G 16.8 0.482    21  32.9
+## 32       Tommy Luce      Purdue Boilermakers   G 30.7 0.500     4 100.0
 ##    WS.40  BPM advk5.cluster
-## 1  0.119  8.4             5
-## 2  0.175  7.4             5
-## 3  0.255 11.9             5
-## 4  0.241  4.6             5
-## 5  0.276  8.0             5
-## 6  0.096  2.9             5
-## 7  0.204  6.0             5
-## 8  0.166  6.8             5
-## 9  0.159  1.2             5
-## 10 0.142  4.5             5
-## 11 0.272 11.4             5
-## 12 0.157  7.4             5
-## 13 0.247  8.5             5
-## 14 0.281  3.4             5
-## 15 0.315  8.4             5
-## 16 0.162  5.2             5
-## 17 0.215  0.8             5
-## 18 0.145  6.3             5
-## 19 0.229  4.9             5
-## 20 0.170  7.0             5
-## 21 0.083 -3.8             5
-## 22 0.232  6.9             5
-## 23 0.199  2.9             5
-## 24 0.105  5.9             5
-## 25 0.232 13.3             5
-## 26 0.123  3.8             5
-## 27 0.154  2.2             5
-## 28 0.185  2.9             5
-## 29 0.196  5.2             5
-## 30 0.133  4.6             5
-## 31 0.251 -3.7             5
+## 1  0.269  5.9             5
+## 2  0.119  8.4             5
+## 3  0.175  7.4             5
+## 4  0.255 11.9             5
+## 5  0.241  4.6             5
+## 6  0.276  8.0             5
+## 7  0.096  2.9             5
+## 8  0.204  6.0             5
+## 9  0.166  6.8             5
+## 10 0.159  1.2             5
+## 11 0.142  4.5             5
+## 12 0.272 11.4             5
+## 13 0.157  7.4             5
+## 14 0.247  8.5             5
+## 15 0.281  3.4             5
+## 16 0.315  8.4             5
+## 17 0.162  5.2             5
+## 18 0.215  0.8             5
+## 19 0.145  6.3             5
+## 20 0.229  4.9             5
+## 21 0.170  7.0             5
+## 22 0.083 -3.8             5
+## 23 0.232  6.9             5
+## 24 0.199  2.9             5
+## 25 0.105  5.9             5
+## 26 0.232 13.3             5
+## 27 0.123  3.8             5
+## 28 0.154  2.2             5
+## 29 0.185  2.9             5
+## 30 0.196  5.2             5
+## 31 0.133  4.6             5
+## 32 0.251 -3.7             5
 ```
 
 Sorting on Points Produced, Cam Mack is eighth out of the 31 guards in the Big Ten who land in Cluster 5. 

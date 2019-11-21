@@ -176,3 +176,10 @@ Next, create a plotly visualization using the same two variables. Alter the hove
 
 Export your plotly visualization to plotly's website. Include a link of your viz in your notebook. In your notebook, discuss the relative advantages and disadvantages of this interactive plot versus the static plots we've been doing. 
 
+**Chapter 31: Clustering**
+
+We looked at who Cam Mack's peers are, but what about the team? Use k-means clustering on a [dataset of every college basketball team's season stats](https://unl.box.com/s/qdqu5rbz7f9jtk04fhuiqrb9p0nx5a0z) and determine who Nebraska's peers are.
+
+To complete this assignment, you'll need to pick the metrics you want to measure teams by. One note -- teams haven't played the same number of games, so it would be wise to either focus on the per game or percentage metrics, either using them or creating them yourself. You'll then need to scale them. You'll need to decide the optimal number of clusters (k) and then run them. Combine the data back, determine which cluster Nebraska is in in your clustering and then show Nebraska's peers. 
+
+In your notebook, write a few sentences and answering this question: Is the peer group Nebraska is in fair? 
