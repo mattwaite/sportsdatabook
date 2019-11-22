@@ -73,7 +73,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ─────────────────
+## ── Attaching packages ───────────────
 ```
 
 ```
@@ -112,7 +112,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Conflicts ──────────────────────────
+## ── Conflicts ────────────────────────
 ## ✖ dplyr::filter()  masks stats::filter()
 ## ✖ purrr::flatten() masks rtweet::flatten()
 ## ✖ dplyr::lag()     masks stats::lag()

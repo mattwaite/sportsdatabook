@@ -28,7 +28,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ─────────────────
+## ── Attaching packages ───────────────
 ```
 
 ```
@@ -67,7 +67,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Conflicts ──────────────────────────
+## ── Conflicts ────────────────────────
 ## ✖ dplyr::filter()         masks stats::filter()
 ## ✖ readr::guess_encoding() masks rvest::guess_encoding()
 ## ✖ dplyr::lag()            masks stats::lag()

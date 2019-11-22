@@ -20,7 +20,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ─────────────────
+## ── Attaching packages ───────────────
 ```
 
 ```
@@ -59,7 +59,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Conflicts ──────────────────────────
+## ── Conflicts ────────────────────────
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
 ```
@@ -119,7 +119,10 @@ Now, k-means clustering doesn't work as well with data that can be on different 
 
 
 ```r
-playersscaled <- playersselected %>% select(MP, `FG%`, `3P%`, AST, TOV, PTS) %>% mutate_all(scale) %>% na.omit()
+playersscaled <- playersselected %>% 
+  select(MP, `FG%`, `3P%`, AST, TOV, PTS) %>% 
+  mutate_all(scale) %>% 
+  na.omit()
 ```
 
 With k-means clustering, we decide how many clusters we want. Most often, researchers will try a handful of different cluster numbers and see what works. But there are methods for finding the optimal number. One method is called the Elbow method. One implementation of this, [borrowed from the University of Cincinnati's Business Analytics program](https://uc-r.github.io/kmeans_clustering), does this quite nicely with a graph that will help you decide for yourself. 
@@ -494,7 +497,10 @@ Now who are his Big Ten peers?
 
 
 ```r
-playeradvcluster %>% filter(advk5.cluster == 5) %>% filter(Team %in% big10) %>% arrange(desc(PProd))
+playeradvcluster %>% 
+  filter(advk5.cluster == 5) %>% 
+  filter(Team %in% big10) %>% 
+  arrange(desc(PProd))
 ```
 
 ```

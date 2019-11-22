@@ -41,7 +41,10 @@ playersselected <- players %>%
 Now, k-means clustering doesn't work as well with data that can be on different scales. So comparing a percentage to a count metric -- shooting percentage to points -- would create chaos because shooting percentages are a fraction of 1 and points, depending on when they are in the season, could be quite large. So we have to scale each metric -- put them on a similar basis using the distance from the max value as our guide. Also, k-means clustering won't work with text data, so we need to create a dataframe that's just the numbers, but scaled. We can do that with another select, and using mutate_all with the scale function. The `na.omit()` means get rid of any blanks, because they too will cause errors. 
 
 ```{r}
-playersscaled <- playersselected %>% select(MP, `FG%`, `3P%`, AST, TOV, PTS) %>% mutate_all(scale) %>% na.omit()
+playersscaled <- playersselected %>% 
+  select(MP, `FG%`, `3P%`, AST, TOV, PTS) %>% 
+  mutate_all(scale) %>% 
+  na.omit()
 ```
 
 With k-means clustering, we decide how many clusters we want. Most often, researchers will try a handful of different cluster numbers and see what works. But there are methods for finding the optimal number. One method is called the Elbow method. One implementation of this, [borrowed from the University of Cincinnati's Business Analytics program](https://uc-r.github.io/kmeans_clustering), does this quite nicely with a graph that will help you decide for yourself. 
@@ -176,7 +179,10 @@ Cluster 5 on my dataset. So three games in, we can say he's in a big group of pl
 Now who are his Big Ten peers?
 
 ```{r}
-playeradvcluster %>% filter(advk5.cluster == 5) %>% filter(Team %in% big10) %>% arrange(desc(PProd))
+playeradvcluster %>% 
+  filter(advk5.cluster == 5) %>% 
+  filter(Team %in% big10) %>% 
+  arrange(desc(PProd))
 
 ```
 
