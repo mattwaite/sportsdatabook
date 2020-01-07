@@ -6,7 +6,7 @@ It's a tempting phrase to believe, especially a day after Nebraska lost the firs
 
 But does November basketball really not matter?
 
-Let's look, using a new form of chart called a circular bar plot. It's a chart type that combines several forms we've used before: bar charts to show magnitude, stacked bar charts to show proportion, but we're going to add bending the chart around a circle to add some visual interstingness to it. We're also going to use time as an x-axis value to make a not subtle circle of time reference. 
+Let's look, using a new form of chart called a circular bar plot. It's a chart type that combines several forms we've used before: bar charts to show magnitude, stacked bar charts to show proportion, but we're going to add bending the chart around a circle to add some visual interstingness to it. We're also going to use time as an x-axis value to make a not subtle circle of time reference -- a common technique with circular bar charts. 
 
 First we need some libraries.
 
@@ -23,7 +23,7 @@ logs <- read_csv("data/logs19.csv")
 
 So let's test the notion of November Basketball Doesn't Matter. What matters in basketball? Let's start simple: Wins.
 
-Sports Reference's win columns are weird, so we need to scan through them and find W and L and we'll give them numbers using `case_when`. 
+Sports Reference's win columns are weird, so we need to scan through them and find W and L and we'll give them numbers using `case_when`. I'm also going to filter out tournament basketball.
 
 ```{r}
 winlosslogs <- logs %>% mutate(winloss = case_when(
