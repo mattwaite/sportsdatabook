@@ -1,6 +1,6 @@
 # Multiple regression
 
-Last chapter, we looked at correlations and linear regression to predict how one element of a game would predict the score. But we know that a single variable, in all but the rarest instances, are not going to be that predictive. We need more than one. Enter multiple regression. Multiple regression lets us add -- wait for it -- mulitiple predictors to our equation to help us get a better 
+Last chapter, we looked at correlations and linear regression to predict how one element of a game would predict the score. But we know that a single variable, in all but the rarest instances, are not going to be that predictive. We need more than one. Enter multiple regression. Multiple regression lets us add -- wait for it -- multiple predictors to our equation to help us get a better 
 
 That presents it's own problems. So let's get our libraries and our data, this time of [every college basketball game since the 2014-15 season](https://unl.box.com/s/u9407jj007fxtnu1vbkybdawaqg6j3fw) loaded up. 
 
@@ -12,7 +12,7 @@ library(tidyverse)
 logs <- read_csv("data/logs1519.csv")
 ```
 
-So one way to show how successful a basketball team was for a game is to show the differential between the team's score and the opponnent's score. Score a lot more than the opponent = good, score a lot less than the opponent = bad. And, relatively speaking, the more the better. So let's create that differential.
+So one way to show how successful a basketball team was for a game is to show the differential between the team's score and the opponent's score. Score a lot more than the opponent = good, score a lot less than the opponent = bad. And, relatively speaking, the more the better. So let's create that differential.
 
 ```{r}
 logs <- logs %>% mutate(Differential = TeamScore - OpponentScore)
@@ -25,7 +25,7 @@ shooting <- lm(TeamFGPCT ~ Differential, data=logs)
 summary(shooting)
 ```
 
-Remember: There's a lot here, but only some of it we care about. What is the Adjusted R-squared value? What's the p-value and is it less than .05? In this case, we can predict 37 percent of the difference in differential with how well a team shoots the ball. 
+Remember: There's a lot here, but only some of it we care about. What is the Adjusted R-squared value? What's the p-value and is it less than .05? In this case, we can predict 37 percent of the difference in differential with how well a team shoots the ball.
 
 To add more predictors to this mix, we merely add them. But it's not that simple, as you'll see in a moment. So first, let's look at adding how well the other team shot to our prediction model:
 
@@ -106,7 +106,16 @@ So a team with those numbers is going to average scoring 12 more points per game
 How does that compare to Nebraska of this past season? The last of the Tim Miles era? 
 
 ```{r}
-logs %>% filter(Team == "Nebraska Cornhuskers" & season == "2018-2019") %>% summarise(avgfgpct = mean(TeamFGPCT), avgoppfgpct=mean(OpponentFGPCT), avgtotrebound = mean(TeamTotalRebounds), avgopptotrebound=mean(OpponentTotalRebounds))
+logs %>% 
+  filter(
+    Team == "Nebraska Cornhuskers" & season == "2018-2019"
+    ) %>% 
+  summarise(
+    avgfgpct = mean(TeamFGPCT), 
+    avgoppfgpct = mean(OpponentFGPCT), 
+    avgtotrebound = mean(TeamTotalRebounds),
+    avgopptotrebound = mean(OpponentTotalRebounds)
+    )
 ```
 
 ```{r}

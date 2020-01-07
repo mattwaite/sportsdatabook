@@ -1,6 +1,6 @@
 # Stacked bar charts
 
-One of the elements of data visualization excellence, accoring to Tufte, is inviting comparison. Often that comes in showing what proportion a thing is in relation to the whole thing. With bar charts, if we have information about the parts of the whole, we can stack them on top of each other to compare them. And it's a simple change to what we've already done. 
+One of the elements of data visualization excellence is **inviting comparison**. Often that comes in showing **what proportion a thing is in relation to the whole thing**. With bar charts, we're showing magnitude of the whole thing. If we have information about the parts of the whole, **we can stack them on top of each other to compare them, showing both the whole and the components**. And it's a simple change to what we've already done. 
 
 ```{r}
 library(tidyverse)
@@ -17,6 +17,8 @@ Let's pretend for a moment we're looking at the graduation rates of men and wome
 ```{r}
 BIG09 <- grads %>% filter(`Primary Conference in Actual Year`=="Big Ten Conference") %>% filter(`Cohort year` == 2009)
 ```
+
+Reminder: `head()` will give you a quick look at what your data looks like, but **it will only show you the first six rows**.
 
 ```{r}
 head(BIG09)

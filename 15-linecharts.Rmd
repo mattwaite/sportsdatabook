@@ -1,8 +1,10 @@
 # Line charts
 
-Bar charts -- stacked or otherwise -- are good for showing relative size of a thing compared to another thing. Line charts, which we work on here, are good for showing change over time. 
+So far, we've talked about bar charts -- stacked or otherwise -- are good for showing relative size of a thing compared to another thing. Stacked Bars and Waffle charts are good at showing proportions of a whole. 
 
-So let's look at how we can answer this question: Why was Nebraska terrible last season?
+**Line charts are good for showing change over time.** 
+
+Let's look at how we can answer this question: Why was Nebraska terrible at basketball last season?
 
 Let's start getting all that we need. We can use the tidyverse shortcut. 
 

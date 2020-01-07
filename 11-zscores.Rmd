@@ -14,14 +14,17 @@ A Z score is a measure of how far a number is from the population mean of that n
 library(tidyverse)
 ```
 
+Let's look at the current state of Nebraska basketball using the [same logs data we've been using, but for this season so far](). 
+
 ```{r}
-gamelogs <- read_csv("data/logs19.csv")
+gamelogs <- read_csv("data/logs20.csv")
 ```
 
 The first thing we need to do is select some fields we think represent team quality:
 
 ```{r}
-teamquality <- gamelogs %>% select(Conference, Team, TeamFGPCT, TeamTotalRebounds, OpponentFGPCT)
+teamquality <- gamelogs %>% 
+  select(Conference, Team, TeamFGPCT, TeamTotalRebounds, OpponentFGPCT, OpponentTotalRebounds)
 ```
 
 And since we have individual game data, we need to collapse this into one record for each team. We do that with ... group by.
@@ -32,20 +35,23 @@ teamtotals <- teamquality %>%
   summarise(
     FGAvg = mean(TeamFGPCT), 
     ReboundAvg = mean(TeamTotalRebounds), 
-    OppFGAvg = mean(OpponentFGPCT)
+    OppFGAvg = mean(OpponentFGPCT),
+    OffRebAvg = mean(OpponentTotalRebounds)
     )
 ```
 
 To calculate a Z score in R, the easiest way is to use the scale function in base R. To use it, you use `scale(FieldName, center=TRUE, scale=TRUE)`. The center and scale indicate if you want to subtract from the mean and if you want to divide by the standard deviation, respectively. We do.
 
-When we have multiple Z Scores, it's pretty standard practice to add them together into a composite score. That's what we're doing at the end here with `TotalZscore`. Note: We have to invert OppZscore by multiplying it by a negative 1 because the lower someone's opponent shooting percentage is, the better. 
+When we have multiple Z Scores, it's pretty standard practice to add them together into a composite score. That's what we're doing at the end here with `TotalZscore`. Note: We have to invert OppZscore and OppRebZScore by multiplying it by a negative 1 because the lower someone's opponent number is, the better. 
 
 ```{r}
-teamzscore <- teamtotals %>% mutate(
-  FGzscore = as.numeric(scale(FGAvg, center = TRUE, scale = TRUE)),
-  RebZscore = as.numeric(scale(ReboundAvg, center = TRUE, scale = TRUE)),
-  OppZscore = as.numeric(scale(OppFGAvg, center = TRUE, scale = TRUE)) * -1,
-  TotalZscore = FGzscore + RebZscore + OppZscore
+teamzscore <- teamtotals %>% 
+  mutate(
+    FGzscore = as.numeric(scale(FGAvg, center = TRUE, scale = TRUE)),
+    RebZscore = as.numeric(scale(ReboundAvg, center = TRUE, scale = TRUE)),
+    OppZscore = as.numeric(scale(OppFGAvg, center = TRUE, scale = TRUE)) * -1,
+    OppRebZScore = as.numeric(scale(OffRebAvg, center = TRUE, scale = TRUE)) * -1,
+    TotalZscore = FGzscore + RebZscore + OppZscore + OppRebZScore
   )  
 ```
 
@@ -63,12 +69,14 @@ So who are the best teams in the country?
 teamzscore %>% arrange(desc(TotalZscore))
 ```
 
-Don't sleep on South Dakota State come tournament time!
+Don't sleep on the Anteaters come tournament time!
 
 But closer to home, how is Nebraska doing.
 
 ```{r}
-teamzscore %>% filter(Conference == "Big Ten") %>% arrange(desc(TotalZscore))
+teamzscore %>% 
+  filter(Conference == "Big Ten") %>% 
+  arrange(desc(TotalZscore))
 ```
 
-So, as we can see, with our composite Z Score, Nebraska is ... not bad, but not good either: 9 of 14 teams in the Big Ten.
+So, as we can see, with our composite Z Score, Nebraska is ... not good. Not good at all. 
