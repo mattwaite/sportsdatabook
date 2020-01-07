@@ -13,13 +13,19 @@ logs <- read_csv("data/logs19.csv")
 For the first example, let's look at the difference between a team's shooting performance and the conference's shooting performance as a whole. To get this, we're going to add up all the shots made by the conference, all the attempts taken by the conference, and then mutate a percentage based on that. 
 
 ```{r}
-conferenceshooting <- logs %>% group_by(Conference) %>% summarise(totalshots = sum(TeamFG), totalattempts = sum(TeamFGA)) %>% mutate(conferenceshootingpct = totalshots/totalattempts)
+conferenceshooting <- logs %>%
+  group_by(Conference) %>% 
+  summarise(totalshots = sum(TeamFG), totalattempts = sum(TeamFGA)) %>%
+  mutate(conferenceshootingpct = totalshots/totalattempts)
 ```
 
 Now I'm going to do the same with teams. 
 
 ```{r}
-teamshooting <- logs %>% group_by(Team, Conference) %>% summarise(totalshots = sum(TeamFG), totalattempts = sum(TeamFGA)) %>% mutate(teamshootingpct = totalshots/totalattempts)
+teamshooting <- logs %>%
+  group_by(Team, Conference) %>% 
+  summarise(totalshots = sum(TeamFG), totalattempts = sum(TeamFGA)) %>%
+  mutate(teamshootingpct = totalshots/totalattempts)
 ```
 
 The last thing I need to do is join them together. So each team will have the conference shooting percentage as well as their own. 
@@ -86,7 +92,6 @@ giveandtake <- winlosslogs %>% group_by(Conference, Team) %>% summarise(turnover
 big10gt <- giveandtake %>% filter(Conference == "Big Ten")
 ```
 
-
 ```{r}
 ggplot(big10gt) +
   geom_segment(aes(x=reorder(Team, wins), xend=Team, y=turnovers, yend=assists), color="grey") + 
@@ -95,7 +100,7 @@ ggplot(big10gt) +
   coord_flip()
 ```
 
-Short answer: Not really.
+Short answer: Not really. Something you need to get used to in data visualization -- not everything works. Sometimes you find things, sometimes you don't. Don't publish a graphic that doesn't find anything. Let it stay in your notebook as an idea that didn't pan out.
 
 
 

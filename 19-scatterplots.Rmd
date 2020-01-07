@@ -16,7 +16,7 @@ logs <- read_csv("data/logs19.csv")
 
 To do this, we need all teams and their season stats. How much, over the course of a season, does a thing matter? That's the question you're going to answer. 
 
-In our case, we want to know how much does shooting percentage influence wins? How much different can we explain in wins with shooting percentage? We're going to total up the number of wins each team has and their season shooting percentage in one swoop.
+In our case, we want to know how much does shooting percentage influence wins? How much difference can we explain in wins with shooting percentage? We're going to total up the number of wins each team has and their season shooting percentage in one swoop.
 
 Let's borrow from our ridgecharts work to get the correct wins and losses totals for each team. 
 
@@ -54,20 +54,20 @@ ggplot(fgmodel, aes(x=fgpct, y=wins)) + geom_point() + geom_smooth(method=lm, se
 
 But ... how strong a relationship is this? How much can shooting percentage explain wins? Can we put some numbers to this?
 
-Of course we can. We can apply a linear model to this -- remember Chapter 8? We're going to create an object called fit, and then we're going to put into that object a linear model -- `lm` -- and the way to read this is "wins are predicted by field goal percentage". Then we just want the summary of that model.
+Of course we can. We can apply a linear model to this -- remember Chapter 9? We're going to create an object called fit, and then we're going to put into that object a linear model -- `lm` -- and the way to read this is "wins are predicted by field goal percentage". Then we just want the summary of that model.
 
 ```{r}
 fit <- lm(wins ~ fgpct, data = fgmodel)
 summary(fit)
 ```
 
-Remember from Chapter 8: There's just a few things you really need.
+Remember from Chapter 9: There's just a few things you really need.
 
 The first thing: R-squared. In this case, the Adjusted R-squared value is .3462, which we can interpret as shooting percentage predicts about 35 percent of the variance in wins. Which sounds not great, but in social science, that's huge. That's great. A psychology major would murder for that R-squared.
 
 Second: The P-value. We want anything less than .05. If it's above .05, the change between them is not statistically significant -- it's probably explained by random chance. In our case, we have 2.2e-16, which is to say 2.2 with 16 zeros in front of it, or .000000000000000022. Is that less than .05? Yes. Yes it is. So this is not random. Again, we would expect this, so it's a good logic test.
 
-Third: The coefficient. In this case, the coefficient for fgpct is 149.416. Since I didn't convert percentages to decimals, what this says is that for every perentage point improvement in shooting percentage, we can expect the team to win 1.49 more games plus or minus some error. 
+Third: The coefficient. In this case, the coefficient for fgpct is 149.416. Since I didn't convert percentages to decimals, what this says is that for every percentage point improvement in shooting percentage, we can expect the team to win 1.49 more games plus or minus some error. 
 
 And we can use this to predict a team's wins: remember your algebra and y = mx + b. In this case, y is the wins, m is the coefficient, x is the shooting percentage and b is the intercept. 
 
@@ -77,4 +77,4 @@ Let's use Nebraska as an example. They shot about .43 on the season (.4294421 to
 
 y = 149.416 * .4294421 - 49.217 or 14.95 wins. How many wins did Nebraska have? 19. 
 
-What does that mean? It means that as disappointing a season as it was, Nebraska actually OVERPERFORMED it's season shooting percentage. They shouldn't have won as many games as they did. 
+What does that mean? It means that as disappointing a season as it was, Nebraska actually OVERPERFORMED it's season shooting percentage. They shouldn't have won as many games as they did, according to our model. 

@@ -17,7 +17,7 @@ So for this, let's look at every basketball game played since the 2014-15 season
 logs <- read_csv("data/logs1519.csv")
 ```
 
-So I want to group teams by wins. Wins are the only thing that matter -- ask Tim Miles. So our data has a column called W_L that lists if the team won or lost. The problem is it doens't just say W or L. If the game went to overtime, it lists that. That complicates counting wins. And, with ridgeplots, I want to be be able to separate EVERY GAME by how many wins the team had over a SEASON. So I've got some work to do.
+So I want to group teams by wins. Wins are the only thing that matter -- ask Tim Miles. So our data has a column called W_L that lists if the team won or lost. The problem is it doesn't just say W or L. If the game went to overtime, it lists that. That complicates counting wins. And, with ridgeplots, I want to be be able to separate EVERY GAME by how many wins the team had over a SEASON. So I've got some work to do.
 
 First, here's a trick to find a string of text and make that. It's called `grepl` and the basic syntax is grepl for this string in this field and then do what I tell you. In this case, we're going to create a new field called winloss look for W or L (and ignore any OT notation) and give wins a 1 and losses a 0. 
 
@@ -43,6 +43,8 @@ winlosslogs %>% left_join(teamseasonwins, by=c("Team", "Conference", "season")) 
 
 Now I can use that same `case_when` logic to create some groupings. So I want to group teams together by how many wins they had over the season. For no good reason, I started with more than 25 wins, then did groups of 5 down to 10 wins. If you had fewer than 10 wins, God help your program. 
 
+The way to create a new field based on groupings like that is to use `case_when`, which says, basically, when This Thing Is True, Do This. So in our case, we're going to pass a couple of logical statements that when they are both true, our data gets labeled how we want to label it. So we `mutate` a field called grouping and then use `case_when`.
+
 ```{r}
 wintotallogs %>% mutate(grouping = case_when(
   TeamWins > 25 ~ "More than 25 wins",
@@ -66,7 +68,7 @@ ggplot(wintotalgroupinglogs, aes(x = TeamTotalRebounds, y = grouping, fill = gro
   theme(legend.position = "none")
 ```
 
-Answer? Not really. Game to game, maybe. Over five seasons? The differences are indistiguishable. 
+Answer? Not really. Game to game, maybe. Over five seasons? The differences are indistinguishable. 
 
 How about assists?
 

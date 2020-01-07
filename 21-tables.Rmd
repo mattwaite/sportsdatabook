@@ -2,7 +2,7 @@
 
 But not a table. A table with features. 
 
-Sometimes, the best way to show your data is with a table. R has a neat package called `formattable` and you'll install it like anything else with `install.packages('formattable')`. 
+Sometimes, the best way to show your data is with a table -- simple rows and columns. It allows a reader to compare whatever they want to compare a little easier than a graph where you've chosen what to highlight. R has a neat package called `formattable` and you'll install it like anything else with `install.packages('formattable')`. 
 
 So what does it do? Let's gather our libraries and [get some data](https://unl.box.com/s/g3eeuogx8bog72ig28enuakhpdlbn394). 
 
@@ -23,7 +23,7 @@ Let's ask this question: Which college football team saw the greatest improvemen
 changeTotalOffense <- offense %>%
   select(Name, Year, `Yards/G`) %>% 
   spread(Year, `Yards/G`) %>% 
-  mutate(Change=(`2018`-`2017`)/`2017`) %>% 
+  mutate(Change=(`2019`-`2018`)/`2018`) %>% 
   arrange(desc(Change)) %>% 
   top_n(20)
 ```
@@ -33,7 +33,7 @@ We've output tables to the screen a thousand times in this class with `head`, bu
 formattable(changeTotalOffense)
 ```
 
-So there you have it. Illinois improved the most. Because Nebraska gave them a quarterback, but I digress. First thing I don't like about formattable tables -- the right alignment. Let's fix that. 
+So there you have it. Central Michigan improved the most (but look at who came in second!). First thing I don't like about formattable tables -- the right alignment. Let's fix that. 
 
 ```{r}
 formattable(changeTotalOffense, align="l")
@@ -50,14 +50,14 @@ formattable(
   )
 ```
 
-Something else not great? I can't really see the magnitude of the 2018 column. A team could improve a lot, but still not gain that many yards (ahem, UTEP). Formattable has embeddable bar charts in the table. They look like this. 
+Something else not great? I can't really see the magnitude of the 2019 column. A team could improve a lot, but still not gain that many yards. Formattable has embeddable bar charts in the table. They look like this. 
 
 ```{r}
 formattable(
   changeTotalOffense, 
   align="l",
   list(
-    `2018` = color_bar("#FA614B"), 
+    `2019` = color_bar("#FA614B"), 
     `Change` = percent)
   )
 ```
@@ -69,15 +69,15 @@ formattable(
   changeTotalOffense, 
   align="r",
   list(
+    `2019` = normalize_bar("#FA614B"), 
     `2018` = normalize_bar("#FA614B"), 
-    `2017` = normalize_bar("#FA614B"), 
     `Change` = percent)
   )
 ```
 
 Note: bookdown is formatting this weird. Your numbers won't look like this.
 
-Another way to deal with this -- color tiles. Change the rectangle that houses the data to a color indicating the intensity of it. Again, UTEP stands out.
+Another way to deal with this -- color tiles. Change the rectangle that houses the data to a color indicating the intensity of it.
 
 ```{r}
 formattable(
