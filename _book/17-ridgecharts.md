@@ -12,14 +12,18 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ───────────────
+## Warning: package 'tidyverse' was built under R version 3.5.2
 ```
 
 ```
-## ✔ ggplot2 3.2.1     ✔ purrr   0.3.3
-## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
-## ✔ tidyr   1.0.0     ✔ stringr 1.4.0
-## ✔ readr   1.3.1     ✔ forcats 0.4.0
+## ── Attaching packages ────── tidyverse 1.3.0 ──
+```
+
+```
+## ✓ ggplot2 3.2.1     ✓ purrr   0.3.3
+## ✓ tibble  2.1.3     ✓ dplyr   0.8.3
+## ✓ tidyr   1.0.0     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.4.0
 ```
 
 ```
@@ -51,9 +55,9 @@ library(tidyverse)
 ```
 
 ```
-## ── Conflicts ────────────────────────
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
+## ── Conflicts ───────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
 ```
 
 ```r
@@ -101,7 +105,7 @@ logs <- read_csv("data/logs1519.csv")
 ## See spec(...) for full column specifications.
 ```
 
-So I want to group teams by wins. Wins are the only thing that matter -- ask Tim Miles. So our data has a column called W_L that lists if the team won or lost. The problem is it doens't just say W or L. If the game went to overtime, it lists that. That complicates counting wins. And, with ridgeplots, I want to be be able to separate EVERY GAME by how many wins the team had over a SEASON. So I've got some work to do.
+So I want to group teams by wins. Wins are the only thing that matter -- ask Tim Miles. So our data has a column called W_L that lists if the team won or lost. The problem is it doesn't just say W or L. If the game went to overtime, it lists that. That complicates counting wins. And, with ridgeplots, I want to be be able to separate EVERY GAME by how many wins the team had over a SEASON. So I've got some work to do.
 
 First, here's a trick to find a string of text and make that. It's called `grepl` and the basic syntax is grepl for this string in this field and then do what I tell you. In this case, we're going to create a new field called winloss look for W or L (and ignore any OT notation) and give wins a 1 and losses a 0. 
 
@@ -129,6 +133,8 @@ winlosslogs %>% left_join(teamseasonwins, by=c("Team", "Conference", "season")) 
 ```
 
 Now I can use that same `case_when` logic to create some groupings. So I want to group teams together by how many wins they had over the season. For no good reason, I started with more than 25 wins, then did groups of 5 down to 10 wins. If you had fewer than 10 wins, God help your program. 
+
+The way to create a new field based on groupings like that is to use `case_when`, which says, basically, when This Thing Is True, Do This. So in our case, we're going to pass a couple of logical statements that when they are both true, our data gets labeled how we want to label it. So we `mutate` a field called grouping and then use `case_when`.
 
 
 ```r
@@ -165,7 +171,7 @@ ggplot(wintotalgroupinglogs, aes(x = TeamTotalRebounds, y = grouping, fill = gro
 
 ![](17-ridgecharts_files/figure-epub3/unnamed-chunk-7-1.png)<!-- -->
 
-Answer? Not really. Game to game, maybe. Over five seasons? The differences are indistiguishable. 
+Answer? Not really. Game to game, maybe. Over five seasons? The differences are indistinguishable. 
 
 How about assists?
 

@@ -1,8 +1,10 @@
 # Line charts
 
-Bar charts -- stacked or otherwise -- are good for showing relative size of a thing compared to another thing. Line charts, which we work on here, are good for showing change over time. 
+So far, we've talked about bar charts -- stacked or otherwise -- are good for showing relative size of a thing compared to another thing. Stacked Bars and Waffle charts are good at showing proportions of a whole. 
 
-So let's look at how we can answer this question: Why was Nebraska terrible last season?
+**Line charts are good for showing change over time.** 
+
+Let's look at how we can answer this question: Why was Nebraska terrible at basketball last season?
 
 Let's start getting all that we need. We can use the tidyverse shortcut. 
 
@@ -12,14 +14,18 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ───────────────
+## Warning: package 'tidyverse' was built under R version 3.5.2
 ```
 
 ```
-## ✔ ggplot2 3.2.1     ✔ purrr   0.3.3
-## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
-## ✔ tidyr   1.0.0     ✔ stringr 1.4.0
-## ✔ readr   1.3.1     ✔ forcats 0.4.0
+## ── Attaching packages ────── tidyverse 1.3.0 ──
+```
+
+```
+## ✓ ggplot2 3.2.1     ✓ purrr   0.3.3
+## ✓ tibble  2.1.3     ✓ dplyr   0.8.3
+## ✓ tidyr   1.0.0     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.4.0
 ```
 
 ```
@@ -51,9 +57,9 @@ library(tidyverse)
 ```
 
 ```
-## ── Conflicts ────────────────────────
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
+## ── Conflicts ───────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
 ```
 
 Now we'll import the data you created. Mine looks like this: 

@@ -8,7 +8,7 @@ With `ggplot2`, we dive into the world of programmatic data visualization. The `
 * facets - which means how we might graph many elements of the same dataset in the same space
 * layers - which means how we might lay multiple geometries over top of each other to reveal new information.
 
-Hadley Wickam, who is behind all of the libaries we have used in this course to date, wrote about his layered grammar of graphics in [this 2009 paper that is worth your time to read](http://byrneslab.net/classes/biol607/readings/wickham_layered-grammar.pdf). 
+Hadley Wickam, who is behind all of the libraries we have used in this course to date, wrote about his layered grammar of graphics in [this 2009 paper that is worth your time to read](http://byrneslab.net/classes/biol607/readings/wickham_layered-grammar.pdf). 
 
 Here are some `ggplot2` resources you'll want to keep handy: 
 
@@ -25,14 +25,18 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ───────────────
+## Warning: package 'tidyverse' was built under R version 3.5.2
 ```
 
 ```
-## ✔ ggplot2 3.2.1     ✔ purrr   0.3.3
-## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
-## ✔ tidyr   1.0.0     ✔ stringr 1.4.0
-## ✔ readr   1.3.1     ✔ forcats 0.4.0
+## ── Attaching packages ────── tidyverse 1.3.0 ──
+```
+
+```
+## ✓ ggplot2 3.2.1     ✓ purrr   0.3.3
+## ✓ tibble  2.1.3     ✓ dplyr   0.8.3
+## ✓ tidyr   1.0.0     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.4.0
 ```
 
 ```
@@ -64,9 +68,9 @@ library(tidyverse)
 ```
 
 ```
-## ── Conflicts ────────────────────────
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
+## ── Conflicts ───────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
 ```
 
 
@@ -92,7 +96,10 @@ First, let's get a top 10 list by announced attendance this last season. We'll u
 
 
 ```r
-attendance %>% arrange(desc(`2018`)) %>% top_n(10) %>% select(Institution, `2018`)
+attendance %>% 
+  arrange(desc(`2018`)) %>% 
+  top_n(10) %>% 
+  select(Institution, `2018`)
 ```
 
 ```
@@ -119,18 +126,25 @@ That looks good, so let's save it to a new data frame and use that data frame in
 
 
 ```r
-top10 <- attendance %>% arrange(desc(`2018`)) %>% top_n(10) %>% select(Institution, `2018`)
+top10 <- attendance %>%
+  arrange(desc(`2018`)) %>% 
+  top_n(10) %>% 
+  select(Institution, `2018`)
 ```
 
 ```
 ## Selecting by 2018
 ```
 
-The easiest thing we can do is create a simple bar chart of our data. We could, for instance, create a bar chart of the total attendance. To do that, we simply tell `ggplot2` what our dataset is, what element of the data we want to make the bar chart out of (which is the aesthetic), and the geometry type (which is the geom). It looks like this:
+## The bar chart
+
+The easiest thing we can do is create a simple bar chart of our data. **Bar charts show magnitude. They invite you to compare how much more or less one thing is compared to others.**
+
+We could, for instance, create a bar chart of the total attendance. To do that, we simply tell `ggplot2` what our dataset is, what element of the data we want to make the bar chart out of (which is the aesthetic), and the geometry type (which is the geom). It looks like this:
 
 `ggplot(top10, aes(x=Institution)) + geom_bar()` 
 
-Note: attendace is our data, `aes` means aesthetics, `x=Institution` explicitly tells `ggplot2` that our x value -- our horizontal value -- is the Instituition field from the data, and then we add on the `geom_bar()` as the geometry. And what do we get when we run that? 
+Note: attendance is our data, `aes` means aesthetics, `x=Institution` explicitly tells `ggplot2` that our x value -- our horizontal value -- is the Institution field from the data, and then we add on the `geom_bar()` as the geometry. And what do we get when we run that? 
 
 
 ```r
@@ -143,7 +157,8 @@ We get ... weirdness. We expected to see bars of different sizes, but we get all
 
 
 ```r
-ggplot(top10, aes(x=Institution, weight=`2018`)) + geom_bar()
+ggplot(top10, aes(x=Institution, weight=`2018`)) + 
+  geom_bar()
 ```
 
 ![](12-ggplot_files/figure-epub3/unnamed-chunk-6-1.png)<!-- -->
@@ -170,13 +185,17 @@ ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + geom_bar()
 
 ## Scales
 
-To fix the axis labels, we need try one of the other main elements of the `ggplot2` library, which is transform a scale. More often that not, that means doing something like putting it on a logarithmic scale or soem other kind of transformation. In this case, we're just changing how it's represented. The default in `ggplot2` for large values is to express them as scientific notation. Rarely ever is that useful in our line of work. So we have to transform them into human readable numbers. 
+To fix the axis labels, we need try one of the other main elements of the `ggplot2` library, which is transform a scale. More often that not, that means doing something like putting it on a logarithmic scale or some other kind of transformation. In this case, we're just changing how it's represented. The default in `ggplot2` for large values is to express them as scientific notation. Rarely ever is that useful in our line of work. So we have to transform them into human readable numbers. 
 
 The easiest way to do this is to use a library called `scales` and it's already installed.
 
 
 ```r
 library(scales)
+```
+
+```
+## Warning: package 'scales' was built under R version 3.5.2
 ```
 
 ```
@@ -200,7 +219,9 @@ To alter the scale, we add a piece to our plot with `+` and we tell it which sca
 
 
 ```r
-ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + geom_bar() + scale_y_continuous(labels=comma)
+ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + 
+  geom_bar() + 
+  scale_y_continuous(labels=comma)
 ```
 
 ![](12-ggplot_files/figure-epub3/unnamed-chunk-10-1.png)<!-- -->
@@ -213,7 +234,10 @@ We are going to spend a lot more time on styling, but let's add some simple labe
 
 
 ```r
-ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + geom_bar() + scale_y_continuous(labels=comma) + labs(title="Top 10 Football Programs By Attendance", x="School", y="Attendance")
+ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + 
+  geom_bar() + 
+  scale_y_continuous(labels=comma) + 
+  labs(title="Top 10 Football Programs By Attendance", x="School", y="Attendance")
 ```
 
 ![](12-ggplot_files/figure-epub3/unnamed-chunk-11-1.png)<!-- -->
@@ -222,7 +246,11 @@ The library has lots and lots of ways to alter the styling -- we can programmati
 
 
 ```r
-ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + geom_bar() + scale_y_continuous(labels=comma) + labs(title="Top 10 Football Programs By Attendance", x="School", y="Attendance") + theme_light()
+ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + 
+  geom_bar() + 
+  scale_y_continuous(labels=comma) + 
+  labs(title="Top 10 Football Programs By Attendance", x="School", y="Attendance") + 
+  theme_light()
 ```
 
 ![](12-ggplot_files/figure-epub3/unnamed-chunk-12-1.png)<!-- -->
@@ -231,7 +259,11 @@ Or the minimal theme:
 
 
 ```r
-ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + geom_bar() + scale_y_continuous(labels=comma) + labs(title="Top 10 Football Programs By Attendance", x="School", y="Attendance") + theme_minimal()
+ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + 
+  geom_bar() + 
+  scale_y_continuous(labels=comma) + 
+  labs(title="Top 10 Football Programs By Attendance", x="School", y="Attendance") + 
+  theme_minimal()
 ```
 
 ![](12-ggplot_files/figure-epub3/unnamed-chunk-13-1.png)<!-- -->
@@ -244,7 +276,12 @@ Sometimes, we don't want vertical bars. Maybe we think this would look better ho
 
 
 ```r
-ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + geom_bar() + scale_y_continuous(labels=comma) + labs(title="Top 10 Football Programs By Attendance", x="School", y="Attendance") + theme_minimal() + coord_flip()
+ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + 
+  geom_bar() + 
+  scale_y_continuous(labels=comma) + 
+  labs(title="Top 10 Football Programs By Attendance", x="School", y="Attendance") + 
+  theme_minimal() + 
+  coord_flip()
 ```
 
 ![](12-ggplot_files/figure-epub3/unnamed-chunk-14-1.png)<!-- -->

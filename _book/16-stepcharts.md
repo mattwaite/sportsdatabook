@@ -1,6 +1,8 @@
 # Step charts
 
-Step charts are a method of showing progress toward something. There's been two great examples lately. First is the Washignton Post looking at [Lebron passing Jordan's career point total](https://www.washingtonpost.com/graphics/sports/lebron-james-michael-jordan-nba-scoring-list/?utm_term=.481074150849). Another is John Burn-Murdoch's work at the Financial Times (which is paywalled) about soccer stars. [Here's an example of his work outside the paywall](http://johnburnmurdoch.github.io/projects/goal-lines/CL/).
+Step charts are **a method of showing progress** toward something. They combine showing change over time -- **cumulative change over time** -- with magnitude. They're good at inviting comparison. 
+
+There's great examples out there. First is the Washignton Post looking at [Lebron passing Jordan's career point total](https://www.washingtonpost.com/graphics/sports/lebron-james-michael-jordan-nba-scoring-list/?utm_term=.481074150849). Another is John Burn-Murdoch's work at the Financial Times (which is paywalled) about soccer stars. [Here's an example of his work outside the paywall](http://johnburnmurdoch.github.io/projects/goal-lines/CL/).
 
 To replicate this, we need cumulative data -- data that is the running total of data at a given point. So think of it this way -- Nebraska scores 50 points in a basketball game and then 50 more the next, their cumulative total at two games is 100 points. 
 
@@ -12,14 +14,18 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ───────────────
+## Warning: package 'tidyverse' was built under R version 3.5.2
 ```
 
 ```
-## ✔ ggplot2 3.2.1     ✔ purrr   0.3.3
-## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
-## ✔ tidyr   1.0.0     ✔ stringr 1.4.0
-## ✔ readr   1.3.1     ✔ forcats 0.4.0
+## ── Attaching packages ────── tidyverse 1.3.0 ──
+```
+
+```
+## ✓ ggplot2 3.2.1     ✓ purrr   0.3.3
+## ✓ tibble  2.1.3     ✓ dplyr   0.8.3
+## ✓ tidyr   1.0.0     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.4.0
 ```
 
 ```
@@ -51,9 +57,9 @@ library(tidyverse)
 ```
 
 ```
-## ── Conflicts ────────────────────────
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
+## ── Conflicts ───────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
 ```
 
 And we'll use our basketball log data. 
@@ -88,11 +94,14 @@ logs <- read_csv("data/logs19.csv")
 
 Here we're going to look at the scoring differential of teams. If you score more than your opponent, you win. So it stands to reason that if you score a lot more than your opponent over the course of a season, you should be very good, right? Let's see.
 
-The first thing we're going to do is calculate that differential. Then, we'll group it by the team. After that, we're going to summarize using a new function called `cumsum` or cumulative sum -- the sum for each game as we go forward.
+The first thing we're going to do is calculate that differential. Then, we'll group it by the team. After that, we're going to summarize using a new function called `cumsum` or cumulative sum -- the sum for each game as we go forward. So game 1's cumsum is the differential of that game. Game 2's cumsum is Game 1 + Game 2. Game 3 is Game 1 + 2 + 3 and so on. 
 
 
 ```r
-difflogs <- logs %>% mutate(Differential = TeamScore - OpponentScore) %>% group_by(Team) %>% mutate(CumDiff = cumsum(Differential))
+difflogs <- logs %>% 
+  mutate(Differential = TeamScore - OpponentScore) %>% 
+  group_by(Team) %>% 
+  mutate(CumDiff = cumsum(Differential))
 ```
 
 Now that we have the cumulative sum for each, let's filter it down to just Big Ten teams.
@@ -102,7 +111,7 @@ Now that we have the cumulative sum for each, let's filter it down to just Big T
 bigdiff <- difflogs %>% filter(Conference == "Big Ten")
 ```
 
-The step chart is it's own geom, so we can employ it just like we have the others. It works almost exactly the same as a line chart, but it just has to use the cumulative sum instead of a regular value.
+The step chart is it's own geom, so we can employ it just like we have the others. It works almost exactly the same as a line chart, but it uses the cumulative sum instead of a regular value and, as the name implies, creates a step like shape to the line instead of a curve.
 
 
 ```r
@@ -120,7 +129,7 @@ ggplot() + geom_step(data=bigdiff, aes(x=Date, y=CumDiff, group=Team, color=Team
 
 ![](16-stepcharts_files/figure-epub3/unnamed-chunk-6-1.png)<!-- -->
 
-From this, we can see two teams in the Big Ten have negative point differentials on the season -- Illinois and Rutgers. 
+From this, we can see two teams in the Big Ten had negative point differentials last season -- Illinois and Rutgers. 
 
 Let's look at those top teams plus Nebraska.
 
@@ -141,7 +150,7 @@ ggplot() +
   geom_step(data=bigdiff, aes(x=Date, y=CumDiff, group=Team), color="light grey") +
   geom_step(data=nu, aes(x=Date, y=CumDiff, group=Team), color="red") + 
   geom_step(data=mi, aes(x=Date, y=CumDiff, group=Team), color="blue") + 
-  geom_step(data=ms, aes(x=Date, y=CumDiff, group=Team), color="dark green") +
+  geom_step(data=ms, aes(x=Date, y=CumDiff, group=Team), color="green") +
   annotate("text", x=(as.Date("2018-12-10")), y=220, label="Nebraska") +
   labs(x="Date", y="Cumulative Point Differential", title="Nebraska was among the league's most dominant", subtitle="Before the misseason skid, Nebraska was at the top of the Big Ten in point differential", caption="Source: Sports-Reference.com | By Matt Waite") +
   theme_minimal()

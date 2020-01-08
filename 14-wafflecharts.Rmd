@@ -9,7 +9,7 @@ Here it is in a pie chart:
 ```{r}
 library(tidyverse)
 
-enrollment <- read.csv("~/Dropbox/JOUR407-Data-Visualization/Data/collegeenrollment.csv")
+enrollment <- read.csv("~/Box/Courses/JOUR407-Data-Visualization/Data/collegeenrollment.csv")
 
 jour <- filter(enrollment, MajorName == "Journalism")
 

@@ -15,7 +15,7 @@ Think of the console like talking directly to R. It's direct, but it has some dr
 ## [1] 4
 ```
 
-Congrats, you've run some code. It's not very complex, and you knew the answer before hand, but you get the idea. We can compute things. We can also store things. In programming languages, these are called variables or objects. We can assign things to variables using `<-`. And then we can do things with them. Try this in your console. 
+Congrats, you've run some code. It's not very complex, and you knew the answer before hand, but you get the idea. We can compute things. We can also store things. **In programming languages, these are called variables**. We can assign things to variables using `<-`. And then we can do things with them. **The `<-` is a called an assignment operator**.
 
 
 ```r
@@ -28,7 +28,9 @@ number * number
 ## [1] 4
 ```
 
-We can have as many variables as we can name. We can even reuse them (but be careful you know you're doing that or you'll introduce errors). Try this in your console.
+Now assign a different number to the variable number. Try run `number * number` again. Get what you expected?
+
+We can have as many variables as we can name. **We can even reuse them (but be careful you know you're doing that or you'll introduce errors)**. Try this in your console.
 
 
 ```r
@@ -42,7 +44,7 @@ secondnumber <-2
 ## [1] 6
 ```
 
-We can store anything in a variable. A whole table. An array of numbers. A single word. A whole book. All the books of the 18th century. They're really powerful. We'll exlore them at length. 
+**We can store anything in a variable**. A whole table. An array of numbers. A single word. A whole book. All the books of the 18th century. They're really powerful. We'll explore them at length. 
 
 ## Adding libraries, part 1
 
@@ -54,7 +56,7 @@ The first library we're going to use is called Swirl. So in the console, type `i
 
 Now, to use the library, type `library(swirl)` and hit enter. That loads swirl. Then type `swirl()` and hit enter. Now you're running swirl. Follow the directions on the screen. When you are asked, you want to install course 1 R Programming: The basics of programming in R. Then, when asked, you want to do option 1, R Programming, in that course. 
 
-When you are finished with the course -- it will take just a few minutes -- type 0 to exit (it will not be clear that's what you do when you are done). 
+When you are finished with the course -- it will take just a few minutes -- it will first ask you if you want credit on Coursera. You do not. Then type 0 to exit (it will not be very clear that's what you do when you are done). 
 
 ## Adding libraries, part 2
 

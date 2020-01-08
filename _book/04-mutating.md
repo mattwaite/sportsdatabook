@@ -14,14 +14,18 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ───────────────
+## Warning: package 'tidyverse' was built under R version 3.5.2
 ```
 
 ```
-## ✔ ggplot2 3.2.1     ✔ purrr   0.3.3
-## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
-## ✔ tidyr   1.0.0     ✔ stringr 1.4.0
-## ✔ readr   1.3.1     ✔ forcats 0.4.0
+## ── Attaching packages ────── tidyverse 1.3.0 ──
+```
+
+```
+## ✓ ggplot2 3.2.1     ✓ purrr   0.3.3
+## ✓ tibble  2.1.3     ✓ dplyr   0.8.3
+## ✓ tidyr   1.0.0     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.4.0
 ```
 
 ```
@@ -53,9 +57,9 @@ library(tidyverse)
 ```
 
 ```
-## ── Conflicts ────────────────────────
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
+## ── Conflicts ───────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
 ```
 
 Now we'll import a common and [simple dataset of total attendance](https://unl.box.com/s/hvxmnxhr41x4ikgt3vk38aczcbrf97pn) at NCAA football games over the last few seasons. 
@@ -105,19 +109,19 @@ attendance %>% mutate(
 
 ```
 ## # A tibble: 150 x 9
-##    Institution Conference `2013` `2014` `2015` `2016` `2017` `2018`
-##    <chr>       <chr>       <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>
-##  1 Air Force   MWC        228562 168967 156158 177519 174924 166205
-##  2 Akron       MAC        107101  55019 108588  62021 117416  92575
-##  3 Alabama     SEC        710538 710736 707786 712747 712053 710931
-##  4 Appalachia… FBS Indep… 149366     NA     NA     NA     NA     NA
-##  5 Appalachia… Sun Belt       NA 138995 128755 156916 154722 131716
-##  6 Arizona     Pac-12     285713 354973 308355 338017 255791 318051
-##  7 Arizona St. Pac-12     501509 343073 368985 286417 359660 291091
-##  8 Arkansas    SEC        431174 399124 471279 487067 442569 367748
-##  9 Arkansas S… Sun Belt   149477 149163 138043 136200 119538 119001
-## 10 Army West … FBS Indep… 169781 171310 185946 163267 185543 190156
-## # … with 140 more rows, and 1 more variable: change <dbl>
+##    Institution   Conference   `2013` `2014` `2015` `2016` `2017` `2018`   change
+##    <chr>         <chr>         <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>    <dbl>
+##  1 Air Force     MWC          228562 168967 156158 177519 174924 166205 -0.0498 
+##  2 Akron         MAC          107101  55019 108588  62021 117416  92575 -0.212  
+##  3 Alabama       SEC          710538 710736 707786 712747 712053 710931 -0.00158
+##  4 Appalachian … FBS Indepen… 149366     NA     NA     NA     NA     NA NA      
+##  5 Appalachian … Sun Belt         NA 138995 128755 156916 154722 131716 -0.149  
+##  6 Arizona       Pac-12       285713 354973 308355 338017 255791 318051  0.243  
+##  7 Arizona St.   Pac-12       501509 343073 368985 286417 359660 291091 -0.191  
+##  8 Arkansas      SEC          431174 399124 471279 487067 442569 367748 -0.169  
+##  9 Arkansas St.  Sun Belt     149477 149163 138043 136200 119538 119001 -0.00449
+## 10 Army West Po… FBS Indepen… 169781 171310 185946 163267 185543 190156  0.0249 
+## # … with 140 more rows
 ```
 What do we see right away? Do those numbers look like we expect them to? No. They're a decimal expressed as a percentage. So let's fix that by multiplying by 100. 
 
@@ -130,18 +134,18 @@ attendance %>% mutate(
 
 ```
 ## # A tibble: 150 x 9
-##    Institution Conference `2013` `2014` `2015` `2016` `2017` `2018`  change
-##    <chr>       <chr>       <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>   <dbl>
-##  1 Air Force   MWC        228562 168967 156158 177519 174924 166205  -4.98 
-##  2 Akron       MAC        107101  55019 108588  62021 117416  92575 -21.2  
-##  3 Alabama     SEC        710538 710736 707786 712747 712053 710931  -0.158
-##  4 Appalachia… FBS Indep… 149366     NA     NA     NA     NA     NA  NA    
-##  5 Appalachia… Sun Belt       NA 138995 128755 156916 154722 131716 -14.9  
-##  6 Arizona     Pac-12     285713 354973 308355 338017 255791 318051  24.3  
-##  7 Arizona St. Pac-12     501509 343073 368985 286417 359660 291091 -19.1  
-##  8 Arkansas    SEC        431174 399124 471279 487067 442569 367748 -16.9  
-##  9 Arkansas S… Sun Belt   149477 149163 138043 136200 119538 119001  -0.449
-## 10 Army West … FBS Indep… 169781 171310 185946 163267 185543 190156   2.49 
+##    Institution    Conference   `2013` `2014` `2015` `2016` `2017` `2018`  change
+##    <chr>          <chr>         <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>   <dbl>
+##  1 Air Force      MWC          228562 168967 156158 177519 174924 166205  -4.98 
+##  2 Akron          MAC          107101  55019 108588  62021 117416  92575 -21.2  
+##  3 Alabama        SEC          710538 710736 707786 712747 712053 710931  -0.158
+##  4 Appalachian S… FBS Indepen… 149366     NA     NA     NA     NA     NA  NA    
+##  5 Appalachian S… Sun Belt         NA 138995 128755 156916 154722 131716 -14.9  
+##  6 Arizona        Pac-12       285713 354973 308355 338017 255791 318051  24.3  
+##  7 Arizona St.    Pac-12       501509 343073 368985 286417 359660 291091 -19.1  
+##  8 Arkansas       SEC          431174 399124 471279 487067 442569 367748 -16.9  
+##  9 Arkansas St.   Sun Belt     149477 149163 138043 136200 119538 119001  -0.449
+## 10 Army West Poi… FBS Indepen… 169781 171310 185946 163267 185543 190156   2.49 
 ## # … with 140 more rows
 ```
 Now, does this ordering do anything for us? No. Let's fix that with arrange. 
@@ -155,18 +159,18 @@ attendance %>% mutate(
 
 ```
 ## # A tibble: 150 x 9
-##    Institution  Conference `2013` `2014` `2015` `2016` `2017` `2018` change
-##    <chr>        <chr>       <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>
-##  1 Ga. Southern Sun Belt       NA 105510 124681 104095  61031 100814   65.2
-##  2 La.-Monroe   Sun Belt    85177  90540  58659  67057  49640  71048   43.1
-##  3 Louisiana    Sun Belt   129878 154652 129577 121346  78754 111303   41.3
-##  4 Hawaii       MWC        185931 192159 164031 170299 145463 205455   41.2
-##  5 Buffalo      MAC        136418 122418 110743 104957  80102 110280   37.7
-##  6 California   Pac-12     345303 286051 292797 279769 219290 300061   36.8
-##  7 UCF          AAC        252505 226869 180388 214814 257924 352148   36.5
-##  8 UTSA         C-USA      175282 165458 138048 138226 114104 148257   29.9
-##  9 Eastern Mic… MAC         20255  75127  29381 106064  73649  95632   29.8
-## 10 Louisville   ACC            NA 317829 294413 324391 276957 351755   27.0
+##    Institution   Conference `2013` `2014` `2015` `2016` `2017` `2018` change
+##    <chr>         <chr>       <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>
+##  1 Ga. Southern  Sun Belt       NA 105510 124681 104095  61031 100814   65.2
+##  2 La.-Monroe    Sun Belt    85177  90540  58659  67057  49640  71048   43.1
+##  3 Louisiana     Sun Belt   129878 154652 129577 121346  78754 111303   41.3
+##  4 Hawaii        MWC        185931 192159 164031 170299 145463 205455   41.2
+##  5 Buffalo       MAC        136418 122418 110743 104957  80102 110280   37.7
+##  6 California    Pac-12     345303 286051 292797 279769 219290 300061   36.8
+##  7 UCF           AAC        252505 226869 180388 214814 257924 352148   36.5
+##  8 UTSA          C-USA      175282 165458 138048 138226 114104 148257   29.9
+##  9 Eastern Mich. MAC         20255  75127  29381 106064  73649  95632   29.8
+## 10 Louisville    ACC            NA 317829 294413 324391 276957 351755   27.0
 ## # … with 140 more rows
 ```
 
@@ -242,15 +246,14 @@ players %>%
 ## 10   266 Wash… Pac-12     Reaga…    34 FR    F     6-6       225 Santa A…
 ## # … with 5,376 more rows, and 50 more variables: `High School` <chr>,
 ## #   Summary <chr>, Rk.x <dbl>, G <dbl>, GS <dbl>, MP <dbl>, FG <dbl>,
-## #   FGA <dbl>, `FG%` <dbl>, `2P` <dbl>, `2PA` <dbl>, `2P%` <dbl>,
-## #   `3P` <dbl>, `3PA` <dbl>, `3P%` <dbl>, FT <dbl>, FTA <dbl>,
-## #   `FT%` <dbl>, ORB <dbl>, DRB <dbl>, TRB <dbl>, AST <dbl>, STL <dbl>,
-## #   BLK <dbl>, TOV <dbl>, PF <dbl>, PTS <dbl>, Rk.y <dbl>, PER <dbl>,
-## #   `TS%` <dbl>, `eFG%` <dbl>, `3PAr` <dbl>, FTr <dbl>, PProd <dbl>,
-## #   `ORB%` <dbl>, `DRB%` <dbl>, `TRB%` <dbl>, `AST%` <dbl>, `STL%` <dbl>,
-## #   `BLK%` <dbl>, `TOV%` <dbl>, `USG%` <dbl>, OWS <dbl>, DWS <dbl>,
-## #   WS <dbl>, `WS/40` <dbl>, OBPM <dbl>, DBPM <dbl>, BPM <dbl>,
-## #   trueshooting <dbl>
+## #   FGA <dbl>, `FG%` <dbl>, `2P` <dbl>, `2PA` <dbl>, `2P%` <dbl>, `3P` <dbl>,
+## #   `3PA` <dbl>, `3P%` <dbl>, FT <dbl>, FTA <dbl>, `FT%` <dbl>, ORB <dbl>,
+## #   DRB <dbl>, TRB <dbl>, AST <dbl>, STL <dbl>, BLK <dbl>, TOV <dbl>, PF <dbl>,
+## #   PTS <dbl>, Rk.y <dbl>, PER <dbl>, `TS%` <dbl>, `eFG%` <dbl>, `3PAr` <dbl>,
+## #   FTr <dbl>, PProd <dbl>, `ORB%` <dbl>, `DRB%` <dbl>, `TRB%` <dbl>,
+## #   `AST%` <dbl>, `STL%` <dbl>, `BLK%` <dbl>, `TOV%` <dbl>, `USG%` <dbl>,
+## #   OWS <dbl>, DWS <dbl>, WS <dbl>, `WS/40` <dbl>, OBPM <dbl>, DBPM <dbl>,
+## #   BPM <dbl>, trueshooting <dbl>
 ```
 
 You'll be forgiven if you did not hear about Texas Longhorns shooting sensation Drayton Whiteside. He played in six games, took one shot and actually hit it. It happened to be a three pointer, which is one more three pointer than I've hit in college basketball. So props to him. Does that mean he had the best true shooting season in college basketball last year? Not hardly. 

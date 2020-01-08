@@ -2,11 +2,11 @@
 
 Sometimes long data needs to be wide, and sometimes wide data needs to be long. I'll explain.
 
-You are soon going to discover that long before you can visualize data, you need to have it in a form that the visualization library can deal with. One of the ways that isn't immediately obvious is how your data is cast. Most of the data you will encounter will be wide -- each row will represent a single entity with multiple measures for that entity. So think of states. Your row of your dataset could have population, average life expectancy and other demographic data. 
+You are soon going to discover that long before you can visualize data, **you need to have it in a form that the visualization library can deal with**. One of the ways that isn't immediately obvious is **how your data is cast**. Most of the data you will encounter will be **wide -- each row will represent a single entity with multiple measures for that entity**. So think of states. Your row of your dataset could have the state name, population, average life expectancy and other demographic data. 
 
-But what if your visualization library needs one row for each measure? That's where recasting your data comes in. We can use a library called `tidyr` to `gather` or `spread` the data, depending on what we need.
+But what if your visualization library needs one row for each measure? So state, data type and the data. Nebraska, Population, 1,929,000. That's one row. Then the next row is Nebraska, Average Life Expectancy, 76. That's the next row. That's where recasting your data comes in. 
 
-We'll use a [dataset of college basketball games](https://unl.box.com/s/a8m91bro10t89watsyo13yjegb1fy009). First we need some libraries. 
+We can use a library called `tidyr` to `pivot_longer` or `pivot_wider` the data, depending on what we need. We'll use a [dataset of college football attendance](https://unl.box.com/s/hvxmnxhr41x4ikgt3vk38aczcbrf97pn) to demonstrate. First we need some libraries. 
 
 
 ```r
@@ -14,14 +14,18 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ───────────────
+## Warning: package 'tidyverse' was built under R version 3.5.2
 ```
 
 ```
-## ✔ ggplot2 3.2.1     ✔ purrr   0.3.3
-## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
-## ✔ tidyr   1.0.0     ✔ stringr 1.4.0
-## ✔ readr   1.3.1     ✔ forcats 0.4.0
+## ── Attaching packages ────── tidyverse 1.3.0 ──
+```
+
+```
+## ✓ ggplot2 3.2.1     ✓ purrr   0.3.3
+## ✓ tibble  2.1.3     ✓ dplyr   0.8.3
+## ✓ tidyr   1.0.0     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.4.0
 ```
 
 ```
@@ -53,297 +57,163 @@ library(tidyverse)
 ```
 
 ```
-## ── Conflicts ────────────────────────
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
+## ── Conflicts ───────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
 ```
 
-Now we'll grab the data. 
+Now we'll load the data. 
 
 
 ```r
-logs <- read_csv('data/logs19.csv')
-```
-
-```
-## Warning: Missing column names filled in: 'X1' [1]
+attendance <- read_csv('data/attendance.csv')
 ```
 
 ```
 ## Parsed with column specification:
 ## cols(
-##   .default = col_double(),
-##   Date = col_date(format = ""),
-##   HomeAway = col_character(),
-##   Opponent = col_character(),
-##   W_L = col_character(),
-##   Blank = col_logical(),
-##   Team = col_character(),
+##   Institution = col_character(),
 ##   Conference = col_character(),
-##   season = col_character()
+##   `2013` = col_double(),
+##   `2014` = col_double(),
+##   `2015` = col_double(),
+##   `2016` = col_double(),
+##   `2017` = col_double(),
+##   `2018` = col_double()
 ## )
 ```
 
+
+```r
+attendance
 ```
-## See spec(...) for full column specifications.
+
+```
+## # A tibble: 150 x 8
+##    Institution     Conference      `2013` `2014` `2015` `2016` `2017` `2018`
+##    <chr>           <chr>            <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>
+##  1 Air Force       MWC             228562 168967 156158 177519 174924 166205
+##  2 Akron           MAC             107101  55019 108588  62021 117416  92575
+##  3 Alabama         SEC             710538 710736 707786 712747 712053 710931
+##  4 Appalachian St. FBS Independent 149366     NA     NA     NA     NA     NA
+##  5 Appalachian St. Sun Belt            NA 138995 128755 156916 154722 131716
+##  6 Arizona         Pac-12          285713 354973 308355 338017 255791 318051
+##  7 Arizona St.     Pac-12          501509 343073 368985 286417 359660 291091
+##  8 Arkansas        SEC             431174 399124 471279 487067 442569 367748
+##  9 Arkansas St.    Sun Belt        149477 149163 138043 136200 119538 119001
+## 10 Army West Point FBS Independent 169781 171310 185946 163267 185543 190156
+## # … with 140 more rows
 ```
 
-Last season, the Nebraska basketball team came out of the gates on fire. Their first 10 games were blistering. Their last 10? Not so much. But how can we compare a team's first 10 games with their last 10 games? If you look, each game in the dataset is numbered, so getting the first 10 wouldn't be hard. But what about the last five, when every team plays a different number of games? 
+So as you can see, each row represents a school, and then each column represents a year. This is great for calculating the percent change -- we can subtract a column from a column and divide by that column. But later, when we want to chart each school's attendance over the years, we have to have each row be one team for one year. Nebraska in 2013, then Nebraska in 2014, and Nebraska in 2015 and so on. 
 
-To find that, we need to add some data to our table. And that is the maxiumum number of games a team played. So we'll create a new dataframe where we'll group our teams by team name and get the max game number for each team. Then, we'll use something called a join, where we'll connect the max games to the logs data using the common team name to connect them. 
-
+To do that, we use `pivot_longer` because we're making wide data long. Since all of the columns we want to make rows start with 20, we can use that in our `cols` directive. Then we give that column a name -- Year -- and the values for each year need a name too. Those are the attendance figure. We can see right away how this works.  
 
 
 ```r
-max <- logs %>% group_by(Team) %>% summarise(max_games = max(Game))
+attendance %>% pivot_longer(cols = starts_with("20"), names_to = "Year", values_to = "Attendance")
 ```
+
+```
+## # A tibble: 900 x 4
+##    Institution Conference Year  Attendance
+##    <chr>       <chr>      <chr>      <dbl>
+##  1 Air Force   MWC        2013      228562
+##  2 Air Force   MWC        2014      168967
+##  3 Air Force   MWC        2015      156158
+##  4 Air Force   MWC        2016      177519
+##  5 Air Force   MWC        2017      174924
+##  6 Air Force   MWC        2018      166205
+##  7 Akron       MAC        2013      107101
+##  8 Akron       MAC        2014       55019
+##  9 Akron       MAC        2015      108588
+## 10 Akron       MAC        2016       62021
+## # … with 890 more rows
+```
+
+We've gone from 150 rows to 900, but that's expected when we have 6 years for each team. 
+
+## Making long data wide
+
+We can reverse this process using `pivot_wider`, which makes long data wide.
+
+Why do any of this? 
+
+In some cases, you're going to be given long data and you need to calculate some metric using two of the years -- a percent change for instance. So you'll need to make the data wide to do that. You might then have to re-lengthen the data now with the percent change. Some project require you to do all kinds of flexing like this. It just depends on the data.
+
+So let's take what we made above and turn it back into wide data.
 
 
 ```r
-logs <- logs %>% left_join(max)
+longdata <- attendance %>% pivot_longer(cols = starts_with("20"), names_to = "Year", values_to = "Attendance")
+
+longdata
 ```
 
 ```
-## Joining, by = "Team"
+## # A tibble: 900 x 4
+##    Institution Conference Year  Attendance
+##    <chr>       <chr>      <chr>      <dbl>
+##  1 Air Force   MWC        2013      228562
+##  2 Air Force   MWC        2014      168967
+##  3 Air Force   MWC        2015      156158
+##  4 Air Force   MWC        2016      177519
+##  5 Air Force   MWC        2017      174924
+##  6 Air Force   MWC        2018      166205
+##  7 Akron       MAC        2013      107101
+##  8 Akron       MAC        2014       55019
+##  9 Akron       MAC        2015      108588
+## 10 Akron       MAC        2016       62021
+## # … with 890 more rows
 ```
 
-Now let's just get Nebraska. 
+To `pivot_wider`, we just need to say where our column names are coming from -- the Year -- and where the data under it should come from -- Attendance. 
 
 
 ```r
-nebraska <- logs %>% filter(Team == "Nebraska Cornhuskers")
-
-head(nebraska)
+longdata %>% pivot_wider(names_from = Year, values_from = Attendance)
 ```
 
 ```
-## # A tibble: 6 x 45
-##      X1  Game Date       HomeAway Opponent W_L   TeamScore OpponentScore
-##   <dbl> <dbl> <date>     <chr>    <chr>    <chr>     <dbl>         <dbl>
-## 1  6449     1 2018-11-06 <NA>     Mississ… W           106            37
-## 2  6450     2 2018-11-11 <NA>     Southea… W            87            35
-## 3  6451     3 2018-11-14 <NA>     Seton H… W            80            57
-## 4  6452     4 2018-11-19 N        Missour… W            85            62
-## 5  6453     5 2018-11-20 N        Texas T… L            52            70
-## 6  6454     6 2018-11-24 <NA>     Western… W            73            49
-## # … with 37 more variables: TeamFG <dbl>, TeamFGA <dbl>, TeamFGPCT <dbl>,
-## #   Team3P <dbl>, Team3PA <dbl>, Team3PPCT <dbl>, TeamFT <dbl>,
-## #   TeamFTA <dbl>, TeamFTPCT <dbl>, TeamOffRebounds <dbl>,
-## #   TeamTotalRebounds <dbl>, TeamAssists <dbl>, TeamSteals <dbl>,
-## #   TeamBlocks <dbl>, TeamTurnovers <dbl>, TeamPersonalFouls <dbl>,
-## #   Blank <lgl>, OpponentFG <dbl>, OpponentFGA <dbl>, OpponentFGPCT <dbl>,
-## #   Opponent3P <dbl>, Opponent3PA <dbl>, Opponent3PPCT <dbl>,
-## #   OpponentFT <dbl>, OpponentFTA <dbl>, OpponentFTPCT <dbl>,
-## #   OpponentOffRebounds <dbl>, OpponentTotalRebounds <dbl>,
-## #   OpponentAssists <dbl>, OpponentSteals <dbl>, OpponentBlocks <dbl>,
-## #   OpponentTurnovers <dbl>, OpponentPersonalFouls <dbl>, Team <chr>,
-## #   Conference <chr>, season <chr>, max_games <dbl>
+## # A tibble: 150 x 8
+##    Institution     Conference      `2013` `2014` `2015` `2016` `2017` `2018`
+##    <chr>           <chr>            <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>
+##  1 Air Force       MWC             228562 168967 156158 177519 174924 166205
+##  2 Akron           MAC             107101  55019 108588  62021 117416  92575
+##  3 Alabama         SEC             710538 710736 707786 712747 712053 710931
+##  4 Appalachian St. FBS Independent 149366     NA     NA     NA     NA     NA
+##  5 Appalachian St. Sun Belt            NA 138995 128755 156916 154722 131716
+##  6 Arizona         Pac-12          285713 354973 308355 338017 255791 318051
+##  7 Arizona St.     Pac-12          501509 343073 368985 286417 359660 291091
+##  8 Arkansas        SEC             431174 399124 471279 487067 442569 367748
+##  9 Arkansas St.    Sun Belt        149477 149163 138043 136200 119538 119001
+## 10 Army West Point FBS Independent 169781 171310 185946 163267 185543 190156
+## # … with 140 more rows
 ```
 
-What we have here is long data. One row, one game. But what if we wanted to calculate the percent change in two variables? Say we wanted to see what the difference in shooting percentage has been between the first 10 games and the last ten Or the percent change in that? To get that, we'd need two fields next to each other so we could mutate our dataframe to calculate that, right? You'll see the problem we have right away. 
-
-
-```r
-nebraska %>% 
-  mutate(grouping = case_when(
-    Game <=10 ~ "First 10",
-    Game >= (max_games - 10) ~ "Last 10")
-    ) %>%
-  group_by(Team, grouping) %>%
-  summarise(
-    shootingPCT = mean(TeamFGPCT)
-  )
-```
-
-```
-## # A tibble: 3 x 3
-## # Groups:   Team [1]
-##   Team                 grouping shootingPCT
-##   <chr>                <chr>          <dbl>
-## 1 Nebraska Cornhuskers First 10       0.479
-## 2 Nebraska Cornhuskers Last 10        0.422
-## 3 Nebraska Cornhuskers <NA>           0.404
-```
-How do you write a mutate step to calulate the percent change when they're stacked on top of each other like that? Answer: You don't. You have to move the data around. 
-
-To take long data and make it wide, we need to `spread` the data. That's the new verb. To spread the data, we tell spread what the new columns will be and what the data values that will go with them. Spread does the rest. 
-
-So I'm going to take that same code and add spread to the bottom. I want the new columns to be my `grouping` and the data to be the `shootingPCT`.
-
-
-```r
-nebraska %>% 
-  mutate(grouping = case_when(
-    Game <=10 ~ "First 10",
-    Game >= (max_games - 10) ~ "Last 10")
-    ) %>%
-  group_by(Team, grouping) %>%
-  summarise(
-    shootingPCT = mean(TeamFGPCT)
-  ) %>% 
-  spread(grouping, shootingPCT) 
-```
-
-```
-## # A tibble: 1 x 4
-## # Groups:   Team [1]
-##   Team                 `First 10` `Last 10` `<NA>`
-##   <chr>                     <dbl>     <dbl>  <dbl>
-## 1 Nebraska Cornhuskers      0.479     0.422  0.404
-```
-
-And now, with it spread out, I can chain another mutate step onto it, adding my difference and my percent change. 
-
-
-```r
-nebraska %>% 
-  mutate(grouping = case_when(
-    Game <=10 ~ "First 10",
-    Game >= (max_games - 10) ~ "Last 10")
-    ) %>%
-  group_by(Team, grouping) %>%
-  summarise(
-    shootingPCT = mean(TeamFGPCT)
-  ) %>% 
-  spread(grouping, shootingPCT) %>%
-  mutate(
-    change = ((`Last 10`-`First 10`)/`First 10`)*100,
-    difference = (`First 10` - `Last 10`)*100
-    )
-```
-
-```
-## # A tibble: 1 x 6
-## # Groups:   Team [1]
-##   Team                 `First 10` `Last 10` `<NA>` change difference
-##   <chr>                     <dbl>     <dbl>  <dbl>  <dbl>      <dbl>
-## 1 Nebraska Cornhuskers      0.479     0.422  0.404  -12.0       5.73
-```
-So, over Nebraska's first 10 games, they shot almost 48 percent, where over the last ten horrid games they're shooting 42 percent. That's an 5.7 percentage point different or a nearly 12 percent drop from those first 10 games. 
-
-We can't shoot the ball anymore.
-
-How bad is that nationally? Just run the same code, but instead of Nebraska, use the logs dataframe.
-
-
-```r
-logs %>% 
-  mutate(grouping = case_when(
-    Game <=10 ~ "First 10",
-    Game >= (max_games - 10) ~ "Last 10")
-    ) %>%
-  group_by(Team, grouping) %>%
-  summarise(
-    shootingPCT = mean(TeamFGPCT)
-  ) %>% 
-  spread(grouping, shootingPCT) %>%
-  mutate(
-    change = ((`Last 10`-`First 10`)/`First 10`)*100,
-    difference = (`First 10` - `Last 10`)*100
-    ) %>% arrange(change)
-```
-
-```
-## # A tibble: 353 x 6
-## # Groups:   Team [353]
-##    Team                    `First 10` `Last 10` `<NA>` change difference
-##    <chr>                        <dbl>     <dbl>  <dbl>  <dbl>      <dbl>
-##  1 North Texas Mean Green       0.484     0.391  0.439  -19.2       9.29
-##  2 Miami (OH) RedHawks          0.465     0.379  0.424  -18.6       8.66
-##  3 NC State Wolfpack            0.515     0.423  0.437  -18.0       9.29
-##  4 Ohio State Buckeyes          0.477     0.392  0.441  -17.9       8.57
-##  5 Vanderbilt Commodores        0.459     0.379  0.423  -17.5       8.02
-##  6 Pacific Tigers               0.467     0.385  0.417  -17.4       8.13
-##  7 Indiana Hoosiers             0.515     0.427  0.447  -17.2       8.89
-##  8 UNC Greensboro Spartans      0.510     0.422  0.442  -17.2       8.78
-##  9 Cincinnati Bearcats          0.474     0.394  0.432  -16.8       7.94
-## 10 Seattle Redhawks             0.481     0.401  0.431  -16.6       8.00
-## # … with 343 more rows
-```
-
-In all of college basketball, Nebraska had the 40th biggest drop in shooting percentage from their first 10 games to their last 10 games. 
-
-And that's a tiny portion of why Tim Miles is no longer the coach.
-
-## Making wide data long
-
-We can reverse this process as well. If we get data that's wide and we want to make it long, we use `gather`. So first, since my data is already long, let me fake a wide dataset using what I just did. 
-
-
-```r
-gatherdata <- nebraska %>% 
-  mutate(grouping = case_when(
-    Game <=10 ~ "First 10",
-    Game >= (max_games - 5) ~ "Last 5")
-    ) %>%
-  group_by(Team, grouping) %>%
-  summarise(
-    shootingPCT = mean(TeamFGPCT)
-  ) %>% 
-  spread(grouping, shootingPCT)
-```
-
-
-```r
-head(gatherdata)
-```
-
-```
-## # A tibble: 1 x 4
-## # Groups:   Team [1]
-##   Team                 `First 10` `Last 5` `<NA>`
-##   <chr>                     <dbl>    <dbl>  <dbl>
-## 1 Nebraska Cornhuskers      0.479    0.444  0.402
-```
-
-Oh drat, I have wide data and for a visualization project, I need long data. Whatever will I do? This might seem silly, but two assignments from now, you're going to need long data from wide and wide data from long, so it's good to know. 
-
-Gather, unfortunately, isn't as easy as spread. It can take some fiddling to get right. There's a ton of examples online if you Google for them, but here's what you do: You tell `gather` what the new column of data you are creating out of the field names first -- this is called the key -- and you then tell it what the value field is going to be called, which is usually a number. Have more than one thing to name your stuff with? After your key value pair, add it with a negative sign in front of it. 
-
-
-```r
-gatherdata %>% gather(grouping, shootingPCT, -Team)
-```
-
-```
-## # A tibble: 3 x 3
-## # Groups:   Team [1]
-##   Team                 grouping shootingPCT
-##   <chr>                <chr>          <dbl>
-## 1 Nebraska Cornhuskers First 10       0.479
-## 2 Nebraska Cornhuskers Last 5         0.444
-## 3 Nebraska Cornhuskers <NA>           0.402
-```
-
-And just like that, we're back where we started. 
+And just like that, we're back. 
 
 ## Why this matters
 
 This matters because certain visualization types need wide or long data. A significant hurdle you will face for the rest of the semester is getting the data in the right format for what you want to do. 
 
-So let me walk you through an example using this data. If I asked you to describe Nebraska's shooting performance over the season, we can do that by what we just did -- grouping them into the first 10 games when people actually talked about this team in the Sweet 16 and the last five when we aren't going to get an NIT bid. We can look at that shooting percentage, how it has changed, and that work makes for a perfect paragraph to write out. So to do that, you need wide data. 
+So let me walk you through an example using this data. 
 
-But to visualize it, you need long. 
-
-First, let's load our charting library, `ggplot2` which you're going to learn a lot more about soon.
+Let's look at Nebraska's attendance over the time period. In order to do that, I need long data because that's what the charting library, `ggplot2`, needs. You're going to learn a lot more about ggplot later.
 
 
 ```r
-library(ggplot2)
+nebraska <- longdata %>% filter(Institution == "Nebraska")
 ```
 
-Now I'm going to use that data and put the date of the game on the x axis, the shooting percentage on the y axis and then, for giggles, I'm going to add a best fit line that describes our season using a simple regression and the equation of a line. 
+Now that we have long data for just Nebraska, we can chart it.
 
 
 ```r
-ggplot(nebraska, aes(x=Date, y=TeamFGPCT)) + 
-  geom_smooth(method='lm', se=FALSE, color="grey") + 
+ggplot(nebraska, aes(x=Year, y=Attendance, group=1)) + 
   geom_line() + 
-  annotate("text", x=(as.Date("2018-12-08")), y=0.545, label="vs Creighton") + 
-  annotate("text", x=(as.Date("2019-01-10")), y=0.502, label="vs Penn State") + 
-  geom_point(aes(color = W_L)) + 
-  scale_y_continuous(labels = scales::percent) + 
-  labs(x="Date", y="FG percentage", title="Nebraska's season, visualized", subtitle="As the season goes by, the Huskers are getting worse at shooting the ball.", caption="Source: NCAA | By Matt Waite", color = "Outcome") +
+  scale_y_continuous(labels = scales::comma) + 
+  labs(x="Year", y="Attendance", title="We'll all stick together?", subtitle="It's not as bad as you think -- they widened the seats, cutting the number.", caption="Source: NCAA | By Matt Waite", color = "Outcome") +
   theme_minimal() + 
   theme(
     plot.title = element_text(size = 16, face = "bold"),
@@ -357,8 +227,5 @@ ggplot(nebraska, aes(x=Date, y=TeamFGPCT)) +
   )
 ```
 
-![](06-transforming_files/figure-epub3/unnamed-chunk-14-1.png)<!-- -->
-Oy. There it is. There's our season.
-
-So I can tell you now, using wide data, that Nebraska's shooting performance over the last ten games is down 12 percent from the first 10 games. And using long data, I can show you the story of the season, but without any specific stats to back it up. 
+![](06-transforming_files/figure-epub3/unnamed-chunk-8-1.png)<!-- -->
 

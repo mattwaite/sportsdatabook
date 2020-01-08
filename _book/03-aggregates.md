@@ -288,8 +288,7 @@ salaries %>% arrange(desc(`Budgeted Annual Salary`))
 ##  8 William… Head Co… UNL    Athletics            626750               NA
 ##  9 Bounds,… Preside… UNCA   Office of…           540000           540000
 ## 10 Austin … Assista… UNL    Athletics            475000               NA
-## # … with 13,029 more rows, and 1 more variable: `Salary from Other
-## #   Funds` <dbl>
+## # … with 13,029 more rows, and 1 more variable: `Salary from Other Funds` <dbl>
 ```
 
 Oh, right. In this dataset, the university pays a football coach $5 million. Extremes influence averages, not medians, and now you have your answer.  

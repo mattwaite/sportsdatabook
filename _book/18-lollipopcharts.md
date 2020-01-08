@@ -8,14 +8,18 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ───────────────
+## Warning: package 'tidyverse' was built under R version 3.5.2
 ```
 
 ```
-## ✔ ggplot2 3.2.1     ✔ purrr   0.3.3
-## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
-## ✔ tidyr   1.0.0     ✔ stringr 1.4.0
-## ✔ readr   1.3.1     ✔ forcats 0.4.0
+## ── Attaching packages ────── tidyverse 1.3.0 ──
+```
+
+```
+## ✓ ggplot2 3.2.1     ✓ purrr   0.3.3
+## ✓ tibble  2.1.3     ✓ dplyr   0.8.3
+## ✓ tidyr   1.0.0     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.4.0
 ```
 
 ```
@@ -47,9 +51,9 @@ library(tidyverse)
 ```
 
 ```
-## ── Conflicts ────────────────────────
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
+## ── Conflicts ───────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
 ```
 
 
@@ -84,14 +88,20 @@ For the first example, let's look at the difference between a team's shooting pe
 
 
 ```r
-conferenceshooting <- logs %>% group_by(Conference) %>% summarise(totalshots = sum(TeamFG), totalattempts = sum(TeamFGA)) %>% mutate(conferenceshootingpct = totalshots/totalattempts)
+conferenceshooting <- logs %>%
+  group_by(Conference) %>% 
+  summarise(totalshots = sum(TeamFG), totalattempts = sum(TeamFGA)) %>%
+  mutate(conferenceshootingpct = totalshots/totalattempts)
 ```
 
 Now I'm going to do the same with teams. 
 
 
 ```r
-teamshooting <- logs %>% group_by(Team, Conference) %>% summarise(totalshots = sum(TeamFG), totalattempts = sum(TeamFGA)) %>% mutate(teamshootingpct = totalshots/totalattempts)
+teamshooting <- logs %>%
+  group_by(Team, Conference) %>% 
+  summarise(totalshots = sum(TeamFG), totalattempts = sum(TeamFGA)) %>%
+  mutate(teamshootingpct = totalshots/totalattempts)
 ```
 
 The last thing I need to do is join them together. So each team will have the conference shooting percentage as well as their own. 
@@ -170,7 +180,6 @@ big10gt <- giveandtake %>% filter(Conference == "Big Ten")
 ```
 
 
-
 ```r
 ggplot(big10gt) +
   geom_segment(aes(x=reorder(Team, wins), xend=Team, y=turnovers, yend=assists), color="grey") + 
@@ -181,7 +190,7 @@ ggplot(big10gt) +
 
 ![](18-lollipopcharts_files/figure-epub3/unnamed-chunk-12-1.png)<!-- -->
 
-Short answer: Not really.
+Short answer: Not really. Something you need to get used to in data visualization -- not everything works. Sometimes you find things, sometimes you don't. Don't publish a graphic that doesn't find anything. Let it stay in your notebook as an idea that didn't pan out.
 
 
 

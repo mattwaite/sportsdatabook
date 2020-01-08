@@ -14,14 +14,18 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ───────────────
+## Warning: package 'tidyverse' was built under R version 3.5.2
 ```
 
 ```
-## ✔ ggplot2 3.2.1     ✔ purrr   0.3.3
-## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
-## ✔ tidyr   1.0.0     ✔ stringr 1.4.0
-## ✔ readr   1.3.1     ✔ forcats 0.4.0
+## ── Attaching packages ────── tidyverse 1.3.0 ──
+```
+
+```
+## ✓ ggplot2 3.2.1     ✓ purrr   0.3.3
+## ✓ tibble  2.1.3     ✓ dplyr   0.8.3
+## ✓ tidyr   1.0.0     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.4.0
 ```
 
 ```
@@ -53,9 +57,9 @@ library(tidyverse)
 ```
 
 ```
-## ── Conflicts ────────────────────────
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
+## ── Conflicts ───────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
 ```
 
 
@@ -266,57 +270,55 @@ players %>%
 ## 10   266 Wash… Pac-12     Reaga…    34 FR    F     6-6       225 Santa A…
 ## # … with 5,376 more rows, and 50 more variables: `High School` <chr>,
 ## #   Summary <chr>, Rk.x <dbl>, G <dbl>, GS <dbl>, MP <dbl>, FG <dbl>,
-## #   FGA <dbl>, `FG%` <dbl>, `2P` <dbl>, `2PA` <dbl>, `2P%` <dbl>,
-## #   `3P` <dbl>, `3PA` <dbl>, `3P%` <dbl>, FT <dbl>, FTA <dbl>,
-## #   `FT%` <dbl>, ORB <dbl>, DRB <dbl>, TRB <dbl>, AST <dbl>, STL <dbl>,
-## #   BLK <dbl>, TOV <dbl>, PF <dbl>, PTS <dbl>, Rk.y <dbl>, PER <dbl>,
-## #   `TS%` <dbl>, `eFG%` <dbl>, `3PAr` <dbl>, FTr <dbl>, PProd <dbl>,
-## #   `ORB%` <dbl>, `DRB%` <dbl>, `TRB%` <dbl>, `AST%` <dbl>, `STL%` <dbl>,
-## #   `BLK%` <dbl>, `TOV%` <dbl>, `USG%` <dbl>, OWS <dbl>, DWS <dbl>,
-## #   WS <dbl>, `WS/40` <dbl>, OBPM <dbl>, DBPM <dbl>, BPM <dbl>,
-## #   trueshooting <dbl>
+## #   FGA <dbl>, `FG%` <dbl>, `2P` <dbl>, `2PA` <dbl>, `2P%` <dbl>, `3P` <dbl>,
+## #   `3PA` <dbl>, `3P%` <dbl>, FT <dbl>, FTA <dbl>, `FT%` <dbl>, ORB <dbl>,
+## #   DRB <dbl>, TRB <dbl>, AST <dbl>, STL <dbl>, BLK <dbl>, TOV <dbl>, PF <dbl>,
+## #   PTS <dbl>, Rk.y <dbl>, PER <dbl>, `TS%` <dbl>, `eFG%` <dbl>, `3PAr` <dbl>,
+## #   FTr <dbl>, PProd <dbl>, `ORB%` <dbl>, `DRB%` <dbl>, `TRB%` <dbl>,
+## #   `AST%` <dbl>, `STL%` <dbl>, `BLK%` <dbl>, `TOV%` <dbl>, `USG%` <dbl>,
+## #   OWS <dbl>, DWS <dbl>, WS <dbl>, `WS/40` <dbl>, OBPM <dbl>, DBPM <dbl>,
+## #   BPM <dbl>, trueshooting <dbl>
 ```
 
-In most contests like the batting title in Major League Baseball, there's a minimum number of X to qualify. In baseball, it's at bats. In basketball, it attempts. So let's set a floor and see how it changes. What if we said you had to have attempted 100 shots in a season? The top shooters in college basketball attempt 1000 shots in a season. So 100 is not that much. Let's try it and see.
+In most contests like the batting title in Major League Baseball, there's a minimum number of X to qualify. In baseball, it's at bats. In basketball, it attempts. So let's set a floor and see how it changes. What if we said you had to have played 100 minutes in a season? The top players in college basketball play more than 1000 minutes in a season. So 100 is not that much. Let's try it and see.
 
 
 ```r
 players %>%
   mutate(trueshooting = (PTS/(2*(FGA + (.44*FTA))))*100) %>%
   arrange(desc(trueshooting)) %>%
-  filter(FGA > 100)
+  filter(MP > 100)
 ```
 
 ```
-## # A tibble: 2,469 x 60
+## # A tibble: 3,659 x 60
 ##       X1 Team  Conference Player   `#` Class Pos   Height Weight Hometown
 ##    <dbl> <chr> <chr>      <chr>  <dbl> <chr> <chr> <chr>   <dbl> <chr>   
-##  1  5175 Litt… Sun Belt   Kris …    32 SO    F     6-8       194 Dewitt,…
-##  2   570 Texa… Big 12     Jaxso…    10 FR    F     6-11      220 Lovelan…
-##  3  5040 Bayl… Big 12     Trist…    25 SO    F     6-9       240 San Ant…
-##  4  1600 Prin… Ivy        Richm…    34 JR    C     6-9       230 Ewing, …
-##  5  3557 Hofs… CAA        Jacqu…    23 SR    F     6-10      235 Cambrid…
-##  6   709 Texa… SEC        Josh …    32 JR    F     6-9       244 Houston…
-##  7  3314 Purd… Summit     Matt …    33 SO    G     6-1       180 New Con…
-##  8  2205 Norf… MEAC       Derri…    35 SR    G     6-5       180 Detroit…
-##  9  4140 Duke… ACC        Zion …     1 FR    F     6-7       285 Spartan…
-## 10  4219 Denv… Summit     David…     1 FR    F     6-9       240 Fort Wo…
-## # … with 2,459 more rows, and 50 more variables: `High School` <chr>,
+##  1  4634 Cent… Southland  Jorda…    33 JR    G     6-1       185 Harriso…
+##  2  3623 Hart… AEC        Max T…    20 SR    G     6-5       200 Rye, NY 
+##  3  2675 Mich… Big Ten    Thoma…    15 FR    F     6-8       225 Clarkst…
+##  4  5175 Litt… Sun Belt   Kris …    32 SO    F     6-8       194 Dewitt,…
+##  5  5205 Ariz… Pac-12     De'Qu…    32 SR    F     6-10      225 St. Tho…
+##  6  4099 ETSU… Southern   Lucas…    25 JR    C     7-0       220 De Lier…
+##  7  3006 Loui… Sun Belt   Brand…     0 SR    G     6-4       180 Hawthor…
+##  8   570 Texa… Big 12     Jaxso…    10 FR    F     6-11      220 Lovelan…
+##  9  1704 Pepp… WCC        Victo…    34 FR    C     6-9       200 Owerri,…
+## 10  4056 East… MAC        Jalen…    30 SO    F     6-9       215 Pasco, …
+## # … with 3,649 more rows, and 50 more variables: `High School` <chr>,
 ## #   Summary <chr>, Rk.x <dbl>, G <dbl>, GS <dbl>, MP <dbl>, FG <dbl>,
-## #   FGA <dbl>, `FG%` <dbl>, `2P` <dbl>, `2PA` <dbl>, `2P%` <dbl>,
-## #   `3P` <dbl>, `3PA` <dbl>, `3P%` <dbl>, FT <dbl>, FTA <dbl>,
-## #   `FT%` <dbl>, ORB <dbl>, DRB <dbl>, TRB <dbl>, AST <dbl>, STL <dbl>,
-## #   BLK <dbl>, TOV <dbl>, PF <dbl>, PTS <dbl>, Rk.y <dbl>, PER <dbl>,
-## #   `TS%` <dbl>, `eFG%` <dbl>, `3PAr` <dbl>, FTr <dbl>, PProd <dbl>,
-## #   `ORB%` <dbl>, `DRB%` <dbl>, `TRB%` <dbl>, `AST%` <dbl>, `STL%` <dbl>,
-## #   `BLK%` <dbl>, `TOV%` <dbl>, `USG%` <dbl>, OWS <dbl>, DWS <dbl>,
-## #   WS <dbl>, `WS/40` <dbl>, OBPM <dbl>, DBPM <dbl>, BPM <dbl>,
-## #   trueshooting <dbl>
+## #   FGA <dbl>, `FG%` <dbl>, `2P` <dbl>, `2PA` <dbl>, `2P%` <dbl>, `3P` <dbl>,
+## #   `3PA` <dbl>, `3P%` <dbl>, FT <dbl>, FTA <dbl>, `FT%` <dbl>, ORB <dbl>,
+## #   DRB <dbl>, TRB <dbl>, AST <dbl>, STL <dbl>, BLK <dbl>, TOV <dbl>, PF <dbl>,
+## #   PTS <dbl>, Rk.y <dbl>, PER <dbl>, `TS%` <dbl>, `eFG%` <dbl>, `3PAr` <dbl>,
+## #   FTr <dbl>, PProd <dbl>, `ORB%` <dbl>, `DRB%` <dbl>, `TRB%` <dbl>,
+## #   `AST%` <dbl>, `STL%` <dbl>, `BLK%` <dbl>, `TOV%` <dbl>, `USG%` <dbl>,
+## #   OWS <dbl>, DWS <dbl>, WS <dbl>, `WS/40` <dbl>, OBPM <dbl>, DBPM <dbl>,
+## #   BPM <dbl>, trueshooting <dbl>
 ```
 
-Now you get UALR Sophomore Kris Bankston, who played in 31 games and was on the floor for 670 minutes. So he played regularly. But in that time, he only attempted 134 shots, and made 81 percent of them. In other words, when he shot, he scored. He just rarely shot. 
+Now you get Central Arkansas Bears Junior Jordan Grant, who played in 25 games and was on the floor for 152 minutes. So he played regularly. But in that time, he only attempted 16 shots, and made 68 percent of them. In other words, when he shot, he probably scored. He just rarely shot. 
 
-So is 100 attempts our level? Here's the truth -- there's not really an answer here. We're picking a cutoff. If you can cite a reason for it and defend it, then it probably works. 
+So is 100 minutes our level? Here's the truth -- there's not really an answer here. We're picking a cutoff. If you can cite a reason for it and defend it, then it probably works. 
 
 ## Top list
 

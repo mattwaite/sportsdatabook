@@ -1,6 +1,6 @@
 # Multiple regression
 
-Last chapter, we looked at correlations and linear regression to predict how one element of a game would predict the score. But we know that a single variable, in all but the rarest instances, are not going to be that predictive. We need more than one. Enter multiple regression. Multiple regression lets us add -- wait for it -- mulitiple predictors to our equation to help us get a better 
+Last chapter, we looked at correlations and linear regression to predict how one element of a game would predict the score. But we know that a single variable, in all but the rarest instances, are not going to be that predictive. We need more than one. Enter multiple regression. Multiple regression lets us add -- wait for it -- multiple predictors to our equation to help us get a better 
 
 That presents it's own problems. So let's get our libraries and our data, this time of [every college basketball game since the 2014-15 season](https://unl.box.com/s/u9407jj007fxtnu1vbkybdawaqg6j3fw) loaded up. 
 
@@ -10,14 +10,18 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ───────────────
+## Warning: package 'tidyverse' was built under R version 3.5.2
 ```
 
 ```
-## ✔ ggplot2 3.2.1     ✔ purrr   0.3.3
-## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
-## ✔ tidyr   1.0.0     ✔ stringr 1.4.0
-## ✔ readr   1.3.1     ✔ forcats 0.4.0
+## ── Attaching packages ────── tidyverse 1.3.0 ──
+```
+
+```
+## ✓ ggplot2 3.2.1     ✓ purrr   0.3.3
+## ✓ tibble  2.1.3     ✓ dplyr   0.8.3
+## ✓ tidyr   1.0.0     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.4.0
 ```
 
 ```
@@ -49,9 +53,9 @@ library(tidyverse)
 ```
 
 ```
-## ── Conflicts ────────────────────────
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
+## ── Conflicts ───────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
 ```
 
 
@@ -82,7 +86,7 @@ logs <- read_csv("data/logs1519.csv")
 ## See spec(...) for full column specifications.
 ```
 
-So one way to show how successful a basketball team was for a game is to show the differential between the team's score and the opponnent's score. Score a lot more than the opponent = good, score a lot less than the opponent = bad. And, relatively speaking, the more the better. So let's create that differential.
+So one way to show how successful a basketball team was for a game is to show the differential between the team's score and the opponent's score. Score a lot more than the opponent = good, score a lot less than the opponent = bad. And, relatively speaking, the more the better. So let's create that differential.
 
 
 ```r
@@ -119,7 +123,7 @@ summary(shooting)
 ## F-statistic: 3.341e+04 on 1 and 57514 DF,  p-value: < 2.2e-16
 ```
 
-Remember: There's a lot here, but only some of it we care about. What is the Adjusted R-squared value? What's the p-value and is it less than .05? In this case, we can predict 37 percent of the difference in differential with how well a team shoots the ball. 
+Remember: There's a lot here, but only some of it we care about. What is the Adjusted R-squared value? What's the p-value and is it less than .05? In this case, we can predict 37 percent of the difference in differential with how well a team shoots the ball.
 
 To add more predictors to this mix, we merely add them. But it's not that simple, as you'll see in a moment. So first, let's look at adding how well the other team shot to our prediction model:
 
@@ -325,244 +329,210 @@ cormatrix$r
 ## OpponentBlocks        -0.053973588 -0.041175463    0.1571812909
 ## OpponentTurnovers      0.169704736 -0.035463921    0.1154717115
 ## OpponentPersonalFouls  0.866395092  0.018757079    0.1240631120
-##                       TeamTotalRebounds   TeamAssists   TeamSteals
-## Differential                0.470722398  0.5403980088  0.277670288
-## TeamFG                      0.328460524  0.6640577242  0.210221346
-## TeamFGA                     0.470719037  0.2846591045  0.208743124
-## TeamFGPCT                   0.018581908  0.5661529279  0.080191710
-## Team3P                      0.038344971  0.5195300862  0.016545254
-## Team3PA                     0.120956819  0.2878613903  0.045984003
-## Team3PPCT                  -0.062897001  0.4326950943 -0.024665729
-## TeamFT                      0.190691619 -0.0163433697  0.088535320
-## TeamFTA                     0.231278690 -0.0282892019  0.111199125
-## TeamFTPCT                  -0.037356471  0.0259480253 -0.025969502
-## TeamOffRebounds             0.637302789  0.0509277222  0.119558104
-## TeamTotalRebounds           1.000000000  0.2321524530  0.027446991
-## TeamAssists                 0.232152453  1.0000000000  0.164837110
-## TeamSteals                  0.027446991  0.1648371104  1.000000000
-## TeamBlocks                  0.265518873  0.1447645615  0.065539758
-## TeamTurnovers               0.109155292 -0.0789200586  0.078278779
-## TeamPersonalFouls          -0.007423332 -0.1050900267  0.005151965
-## OpponentFG                 -0.229331788 -0.0022308763 -0.138728115
-## OpponentFGA                 0.360268614  0.1863368268 -0.120696505
-## OpponentFGPCT              -0.530432484 -0.1397140493 -0.068951590
-## Opponent3P                 -0.053371243  0.0354785684 -0.062074442
-## Opponent3PA                 0.232049186  0.1116023406 -0.039184667
-## Opponent3PPCT              -0.273572339 -0.0502063543 -0.047114732
-## OpponentFT                 -0.095266106 -0.0835716395 -0.034152581
-## OpponentFTA                -0.022971823 -0.0841605708 -0.022178476
-## OpponentFTPCT              -0.194279344 -0.0278263543 -0.041125993
-## OpponentOffRebounds        -0.052416263 -0.0333847454  0.016707012
-## OpponentTotalRebounds      -0.059965631 -0.2225952122  0.035155522
-## OpponentAssists            -0.218597433  0.0006884142 -0.053327136
-## OpponentSteals              0.066119486 -0.0288668673  0.055697260
-## OpponentBlocks              0.013924890 -0.1657235463 -0.002230784
-## OpponentTurnovers          -0.034355689  0.1314533533  0.730885169
-## OpponentPersonalFouls       0.189144014 -0.0267820830  0.071442012
-##                         TeamBlocks TeamTurnovers TeamPersonalFouls
-## Differential           0.257608076  -0.180578328      -0.194427271
-## TeamFG                 0.140856644  -0.143210529      -0.014722266
-## TeamFGA                0.074555286  -0.223971265       0.107325560
-## TeamFGPCT              0.107327505   0.001901048      -0.094653222
-## Team3P                 0.004747719  -0.088374940      -0.024028303
-## Team3PA               -0.028953212  -0.108839191       0.024995197
-## Team3PPCT              0.029427739  -0.020943383      -0.049816585
-## TeamFT                 0.092392379   0.051609207       0.217846416
-## TeamFTA                0.104112579   0.072070652       0.250787085
-## TeamFTPCT             -0.001425412  -0.034614485      -0.025827923
-## TeamOffRebounds        0.106016388   0.037172871       0.054233799
-## TeamTotalRebounds      0.265518873   0.109155292      -0.007423332
-## TeamAssists            0.144764562  -0.078920059      -0.105090027
-## TeamSteals             0.065539758   0.078278779       0.005151965
-## TeamBlocks             1.000000000   0.032775757      -0.054105029
-## TeamTurnovers          0.032775757   1.000000000       0.220285924
-## TeamPersonalFouls     -0.054105029   0.220285924       1.000000000
-## OpponentFG            -0.143969401   0.081879049      -0.015422966
-## OpponentFGA            0.257245080   0.155947902      -0.122639976
-## OpponentFGPCT         -0.353110391  -0.023017156       0.078411084
-## Opponent3P            -0.103465578  -0.018088322      -0.126817358
-## Opponent3PA           -0.042234814   0.041669476      -0.167647391
-## Opponent3PPCT         -0.099440199  -0.063187150      -0.015909552
-## OpponentFT            -0.070920662   0.123594852       0.793147614
-## OpponentFTA           -0.056095076   0.154110278       0.865844664
-## OpponentFTPCT         -0.052504157  -0.034267574       0.026877590
-## OpponentOffRebounds    0.178200671   0.074131214       0.122282037
-## OpponentTotalRebounds  0.037788375  -0.106168146       0.195017438
-## OpponentAssists       -0.151146052   0.072644677      -0.022619097
-## OpponentSteals         0.028453380   0.709987911       0.064446997
-## OpponentBlocks        -0.038978593   0.006463872       0.087211248
-## OpponentTurnovers      0.031375703   0.188537020       0.101693555
-## OpponentPersonalFouls  0.080582762   0.131539040       0.322258517
-##                         OpponentFG  OpponentFGA OpponentFGPCT   Opponent3P
-## Differential          -0.538515115  0.001768386  -0.614427717 -0.283754971
-## TeamFG                 0.144061400  0.302143806  -0.058571888  0.131517138
-## TeamFGA                0.256737262  0.301593528   0.068034775  0.135290090
-## TeamFGPCT             -0.020183466  0.126415534  -0.114791403  0.053105214
-## Team3P                 0.123800594  0.148931744   0.029908235  0.079455775
-## Team3PA                0.156380301  0.130628244   0.080577258  0.074825900
-## Team3PPCT              0.029691341  0.081223790  -0.026484376  0.040201241
-## TeamFT                 0.057853338  0.193116094  -0.075399282  0.024228311
-## TeamFTA                0.043602296  0.193466766  -0.091897172  0.009600704
-## TeamFTPCT              0.036986356  0.040334507   0.012864509  0.031763685
-## TeamOffRebounds       -0.046469434  0.024235364  -0.068883375 -0.006371032
-## TeamTotalRebounds     -0.229331788  0.360268614  -0.530432484 -0.053371243
-## TeamAssists           -0.002230876  0.186336827  -0.139714049  0.035478568
-## TeamSteals            -0.138728115 -0.120696505  -0.068951590 -0.062074442
-## TeamBlocks            -0.143969401  0.257245080  -0.353110391 -0.103465578
-## TeamTurnovers          0.081879049  0.155947902  -0.023017156 -0.018088322
-## TeamPersonalFouls     -0.015422966 -0.122639976   0.078411084 -0.126817358
-## OpponentFG             1.000000000  0.515517123   0.754791141  0.399027442
-## OpponentFGA            0.515517123  1.000000000  -0.161220379  0.193563166
-## OpponentFGPCT          0.754791141 -0.161220379   1.000000000  0.312295571
-## Opponent3P             0.399027442  0.193563166   0.312295571  1.000000000
-## Opponent3PA            0.144074778  0.418730422  -0.149367436  0.691451820
-## Opponent3PPCT          0.395540055 -0.118020866   0.552279238  0.709404126
-## OpponentFT            -0.013421944 -0.156152803   0.106226566 -0.106344743
-## OpponentFTA           -0.027151720 -0.151706668   0.086625216 -0.140194309
-## OpponentFTPCT          0.037049836 -0.043324702   0.076650746  0.053774302
-## OpponentOffRebounds    0.120715447  0.519792207  -0.251623986 -0.085432899
-## OpponentTotalRebounds  0.275438081  0.424276325  -0.005789348  0.005903551
-## OpponentAssists        0.638304131  0.231851475   0.553535793  0.513869716
-## OpponentSteals         0.140823916  0.165329579   0.036468797 -0.011661373
-## OpponentBlocks         0.129076992  0.045565883   0.111935521 -0.004746412
-## OpponentTurnovers     -0.183558009 -0.215633733  -0.048082678 -0.095218199
-## OpponentPersonalFouls  0.015334210  0.136789046  -0.081776664 -0.011247805
-##                         Opponent3PA Opponent3PPCT   OpponentFT
-## Differential           0.0139102958 -0.3824278411 -0.269300868
-## TeamFG                 0.1911319274  0.0080266219  0.019511923
-## TeamFGA                0.1384457845  0.0572617563  0.157025930
-## TeamFGPCT              0.1187238045 -0.0313705446 -0.091558712
-## Team3P                 0.0857043764  0.0296662353  0.009796521
-## Team3PA                0.0592729911  0.0463467602  0.063163000
-## Team3PPCT              0.0601150176  0.0005076038 -0.039087364
-## TeamFT                 0.0798949051 -0.0354784876  0.161311559
-## TeamFTA                0.0711931792 -0.0471368607  0.180010001
-## TeamFTPCT              0.0325547961  0.0139968801 -0.009352580
-## TeamOffRebounds        0.0003753868 -0.0056578317  0.043439990
-## TeamTotalRebounds      0.2320491861 -0.2735723395 -0.095266106
-## TeamAssists            0.1116023406 -0.0502063543 -0.083571639
-## TeamSteals            -0.0391846669 -0.0471147320 -0.034152581
-## TeamBlocks            -0.0422348142 -0.0994401990 -0.070920662
-## TeamTurnovers          0.0416694763 -0.0631871498  0.123594852
-## TeamPersonalFouls     -0.1676473908 -0.0159095518  0.793147614
-## OpponentFG             0.1440747785  0.3955400546 -0.013421944
-## OpponentFGA            0.4187304220 -0.1180208656 -0.156152803
-## OpponentFGPCT         -0.1493674362  0.5522792378  0.106226566
-## Opponent3P             0.6914518201  0.7094041257 -0.106344743
-## Opponent3PA            1.0000000000  0.0303822862 -0.174340043
-## Opponent3PPCT          0.0303822862  1.0000000000  0.016928291
-## OpponentFT            -0.1743400433  0.0169282910  1.000000000
-## OpponentFTA           -0.1972872368 -0.0080249496  0.928286066
-## OpponentFTPCT          0.0101886734  0.0623587723  0.393203255
-## OpponentOffRebounds    0.0978389488 -0.2013096986  0.086671729
-## OpponentTotalRebounds  0.0810576009 -0.0680836101  0.197591588
-## OpponentAssists        0.2641728450  0.4428640799 -0.012378006
-## OpponentSteals         0.0214481397 -0.0383569868  0.077614062
-## OpponentBlocks        -0.0495426307  0.0354134646  0.101422181
-## OpponentTurnovers     -0.0944428800 -0.0421344973  0.015778567
-## OpponentPersonalFouls  0.0396475169 -0.0466461289  0.215609923
-##                        OpponentFTA OpponentFTPCT OpponentOffRebounds
-## Differential          -0.226064714  -0.175223632        -0.089347536
-## TeamFG                 0.012937366   0.007923359        -0.036316958
-## TeamFGA                0.159529646   0.023732217         0.002848058
-## TeamFGPCT             -0.101685664  -0.006190565        -0.042399744
-## Team3P                -0.002503282   0.022780414        -0.007870292
-## Team3PA                0.054748838   0.025878762        -0.018950808
-## Team3PPCT             -0.048073272   0.008651286         0.008677682
-## TeamFT                 0.183801456  -0.015688533         0.064938518
-## TeamFTA                0.213209437  -0.032862991         0.077003661
-## TeamFTPCT             -0.025707797   0.028078614        -0.016936223
-## TeamOffRebounds        0.058466904  -0.031903278        -0.014332575
-## TeamTotalRebounds     -0.022971823  -0.194279344        -0.052416263
-## TeamAssists           -0.084160571  -0.027826354        -0.033384745
-## TeamSteals            -0.022178476  -0.041125993         0.016707012
-## TeamBlocks            -0.056095076  -0.052504157         0.178200671
-## TeamTurnovers          0.154110278  -0.034267574         0.074131214
-## TeamPersonalFouls      0.865844664   0.026877590         0.122282037
-## OpponentFG            -0.027151720   0.037049836         0.120715447
-## OpponentFGA           -0.151706668  -0.043324702         0.519792207
-## OpponentFGPCT          0.086625216   0.076650746        -0.251623986
-## Opponent3P            -0.140194309   0.053774302        -0.085432899
-## Opponent3PA           -0.197287237   0.010188673         0.097838949
-## Opponent3PPCT         -0.008024950   0.062358772        -0.201309699
-## OpponentFT             0.928286066   0.393203255         0.086671729
-## OpponentFTA            1.000000000   0.063446167         0.136423744
-## OpponentFTPCT          0.063446167   1.000000000        -0.082982260
-## OpponentOffRebounds    0.136423744  -0.082982260         1.000000000
-## OpponentTotalRebounds  0.232447345  -0.021281750         0.622115242
-## OpponentAssists       -0.031205800   0.041793598         0.009549774
-## OpponentSteals         0.097206119  -0.022196700         0.081573888
-## OpponentBlocks         0.110063752   0.008946765         0.096186044
-## OpponentTurnovers      0.038679394  -0.052040732         0.017562976
-## OpponentPersonalFouls  0.251289640  -0.029978048         0.071468553
-##                       OpponentTotalRebounds OpponentAssists OpponentSteals
-## Differential                   -0.420010794   -0.4916760300   -0.187754380
-## TeamFG                         -0.225202127    0.0045585394   -0.102436608
-## TeamFGA                         0.316139528    0.1493200670   -0.131734964
-## TeamFGPCT                      -0.512983306   -0.1062526818   -0.021724636
-## Team3P                         -0.062384273    0.0294135821   -0.053878305
-## Team3PA                         0.202896760    0.0825450568   -0.052980367
-## Team3PPCT                      -0.263884541   -0.0320289494   -0.025131672
-## TeamFT                         -0.064969878   -0.0577300621   -0.001883349
-## TeamFTA                         0.004736343   -0.0638753907    0.006758108
-## TeamFTPCT                      -0.177541483   -0.0074012062   -0.022033431
-## TeamOffRebounds                -0.060389134   -0.0386521955    0.032697776
-## TeamTotalRebounds              -0.059965631   -0.2185974327    0.066119486
-## TeamAssists                    -0.222595212    0.0006884142   -0.028866867
-## TeamSteals                      0.035155522   -0.0533271359    0.055697260
-## TeamBlocks                      0.037788375   -0.1511460518    0.028453380
-## TeamTurnovers                  -0.106168146    0.0726446766    0.709987911
-## TeamPersonalFouls               0.195017438   -0.0226190966    0.064446997
-## OpponentFG                      0.275438081    0.6383041307    0.140823916
-## OpponentFGA                     0.424276325    0.2318514751    0.165329579
-## OpponentFGPCT                  -0.005789348    0.5535357935    0.036468797
-## Opponent3P                      0.005903551    0.5138697156   -0.011661373
-## Opponent3PA                     0.081057601    0.2641728450    0.021448140
-## Opponent3PPCT                  -0.068083610    0.4428640799   -0.038356987
-## OpponentFT                      0.197591588   -0.0123780062    0.077614062
-## OpponentFTA                     0.232447345   -0.0312058003    0.097206119
-## OpponentFTPCT                  -0.021281750    0.0417935976   -0.022196700
-## OpponentOffRebounds             0.622115242    0.0095497736    0.081573888
-## OpponentTotalRebounds           1.000000000    0.1792668711   -0.038673692
-## OpponentAssists                 0.179266871    1.0000000000    0.106822346
-## OpponentSteals                 -0.038673692    0.1068223463    1.000000000
-## OpponentBlocks                  0.258597044    0.1337215898    0.044367220
-## OpponentTurnovers               0.073936193   -0.1060361856    0.074067854
-## OpponentPersonalFouls           0.020500608   -0.0849725350    0.030766974
-##                       OpponentBlocks OpponentTurnovers
-## Differential           -0.2622526274      0.2743269542
-## TeamFG                 -0.1604696630      0.1552932747
-## TeamFGA                 0.2184838647      0.1981279705
-## TeamFGPCT              -0.3562550337      0.0242548332
-## Team3P                 -0.1117820624      0.0092841059
-## Team3PA                -0.0580421730      0.0638351465
-## Team3PPCT              -0.0965607977     -0.0488449748
-## TeamFT                 -0.0650555225      0.1369220844
-## TeamFTA                -0.0539735876      0.1697047361
-## TeamFTPCT              -0.0411754626     -0.0354639208
-## TeamOffRebounds         0.1571812909      0.1154717115
-## TeamTotalRebounds       0.0139248895     -0.0343556886
-## TeamAssists            -0.1657235463      0.1314533533
-## TeamSteals             -0.0022307839      0.7308851693
-## TeamBlocks             -0.0389785933      0.0313757033
-## TeamTurnovers           0.0064638717      0.1885370196
-## TeamPersonalFouls       0.0872112484      0.1016935547
-## OpponentFG              0.1290769921     -0.1835580089
-## OpponentFGA             0.0455658832     -0.2156337333
-## OpponentFGPCT           0.1119355214     -0.0480826780
-## Opponent3P             -0.0047464115     -0.0952181989
-## Opponent3PA            -0.0495426307     -0.0944428800
-## Opponent3PPCT           0.0354134646     -0.0421344973
-## OpponentFT              0.1014221807      0.0157785673
-## OpponentFTA             0.1100637520      0.0386793945
-## OpponentFTPCT           0.0089467648     -0.0520407316
-## OpponentOffRebounds     0.0961860439      0.0175629757
-## OpponentTotalRebounds   0.2585970440      0.0739361927
-## OpponentAssists         0.1337215898     -0.1060361856
-## OpponentSteals          0.0443672204      0.0740678539
-## OpponentBlocks          1.0000000000      0.0001223389
-## OpponentTurnovers       0.0001223389      1.0000000000
-## OpponentPersonalFouls  -0.0514541037      0.2252310703
+##                       TeamTotalRebounds   TeamAssists   TeamSteals   TeamBlocks
+## Differential                0.470722398  0.5403980088  0.277670288  0.257608076
+## TeamFG                      0.328460524  0.6640577242  0.210221346  0.140856644
+## TeamFGA                     0.470719037  0.2846591045  0.208743124  0.074555286
+## TeamFGPCT                   0.018581908  0.5661529279  0.080191710  0.107327505
+## Team3P                      0.038344971  0.5195300862  0.016545254  0.004747719
+## Team3PA                     0.120956819  0.2878613903  0.045984003 -0.028953212
+## Team3PPCT                  -0.062897001  0.4326950943 -0.024665729  0.029427739
+## TeamFT                      0.190691619 -0.0163433697  0.088535320  0.092392379
+## TeamFTA                     0.231278690 -0.0282892019  0.111199125  0.104112579
+## TeamFTPCT                  -0.037356471  0.0259480253 -0.025969502 -0.001425412
+## TeamOffRebounds             0.637302789  0.0509277222  0.119558104  0.106016388
+## TeamTotalRebounds           1.000000000  0.2321524530  0.027446991  0.265518873
+## TeamAssists                 0.232152453  1.0000000000  0.164837110  0.144764562
+## TeamSteals                  0.027446991  0.1648371104  1.000000000  0.065539758
+## TeamBlocks                  0.265518873  0.1447645615  0.065539758  1.000000000
+## TeamTurnovers               0.109155292 -0.0789200586  0.078278779  0.032775757
+## TeamPersonalFouls          -0.007423332 -0.1050900267  0.005151965 -0.054105029
+## OpponentFG                 -0.229331788 -0.0022308763 -0.138728115 -0.143969401
+## OpponentFGA                 0.360268614  0.1863368268 -0.120696505  0.257245080
+## OpponentFGPCT              -0.530432484 -0.1397140493 -0.068951590 -0.353110391
+## Opponent3P                 -0.053371243  0.0354785684 -0.062074442 -0.103465578
+## Opponent3PA                 0.232049186  0.1116023406 -0.039184667 -0.042234814
+## Opponent3PPCT              -0.273572339 -0.0502063543 -0.047114732 -0.099440199
+## OpponentFT                 -0.095266106 -0.0835716395 -0.034152581 -0.070920662
+## OpponentFTA                -0.022971823 -0.0841605708 -0.022178476 -0.056095076
+## OpponentFTPCT              -0.194279344 -0.0278263543 -0.041125993 -0.052504157
+## OpponentOffRebounds        -0.052416263 -0.0333847454  0.016707012  0.178200671
+## OpponentTotalRebounds      -0.059965631 -0.2225952122  0.035155522  0.037788375
+## OpponentAssists            -0.218597433  0.0006884142 -0.053327136 -0.151146052
+## OpponentSteals              0.066119486 -0.0288668673  0.055697260  0.028453380
+## OpponentBlocks              0.013924890 -0.1657235463 -0.002230784 -0.038978593
+## OpponentTurnovers          -0.034355689  0.1314533533  0.730885169  0.031375703
+## OpponentPersonalFouls       0.189144014 -0.0267820830  0.071442012  0.080582762
+##                       TeamTurnovers TeamPersonalFouls   OpponentFG  OpponentFGA
+## Differential           -0.180578328      -0.194427271 -0.538515115  0.001768386
+## TeamFG                 -0.143210529      -0.014722266  0.144061400  0.302143806
+## TeamFGA                -0.223971265       0.107325560  0.256737262  0.301593528
+## TeamFGPCT               0.001901048      -0.094653222 -0.020183466  0.126415534
+## Team3P                 -0.088374940      -0.024028303  0.123800594  0.148931744
+## Team3PA                -0.108839191       0.024995197  0.156380301  0.130628244
+## Team3PPCT              -0.020943383      -0.049816585  0.029691341  0.081223790
+## TeamFT                  0.051609207       0.217846416  0.057853338  0.193116094
+## TeamFTA                 0.072070652       0.250787085  0.043602296  0.193466766
+## TeamFTPCT              -0.034614485      -0.025827923  0.036986356  0.040334507
+## TeamOffRebounds         0.037172871       0.054233799 -0.046469434  0.024235364
+## TeamTotalRebounds       0.109155292      -0.007423332 -0.229331788  0.360268614
+## TeamAssists            -0.078920059      -0.105090027 -0.002230876  0.186336827
+## TeamSteals              0.078278779       0.005151965 -0.138728115 -0.120696505
+## TeamBlocks              0.032775757      -0.054105029 -0.143969401  0.257245080
+## TeamTurnovers           1.000000000       0.220285924  0.081879049  0.155947902
+## TeamPersonalFouls       0.220285924       1.000000000 -0.015422966 -0.122639976
+## OpponentFG              0.081879049      -0.015422966  1.000000000  0.515517123
+## OpponentFGA             0.155947902      -0.122639976  0.515517123  1.000000000
+## OpponentFGPCT          -0.023017156       0.078411084  0.754791141 -0.161220379
+## Opponent3P             -0.018088322      -0.126817358  0.399027442  0.193563166
+## Opponent3PA             0.041669476      -0.167647391  0.144074778  0.418730422
+## Opponent3PPCT          -0.063187150      -0.015909552  0.395540055 -0.118020866
+## OpponentFT              0.123594852       0.793147614 -0.013421944 -0.156152803
+## OpponentFTA             0.154110278       0.865844664 -0.027151720 -0.151706668
+## OpponentFTPCT          -0.034267574       0.026877590  0.037049836 -0.043324702
+## OpponentOffRebounds     0.074131214       0.122282037  0.120715447  0.519792207
+## OpponentTotalRebounds  -0.106168146       0.195017438  0.275438081  0.424276325
+## OpponentAssists         0.072644677      -0.022619097  0.638304131  0.231851475
+## OpponentSteals          0.709987911       0.064446997  0.140823916  0.165329579
+## OpponentBlocks          0.006463872       0.087211248  0.129076992  0.045565883
+## OpponentTurnovers       0.188537020       0.101693555 -0.183558009 -0.215633733
+## OpponentPersonalFouls   0.131539040       0.322258517  0.015334210  0.136789046
+##                       OpponentFGPCT   Opponent3P   Opponent3PA Opponent3PPCT
+## Differential           -0.614427717 -0.283754971  0.0139102958 -0.3824278411
+## TeamFG                 -0.058571888  0.131517138  0.1911319274  0.0080266219
+## TeamFGA                 0.068034775  0.135290090  0.1384457845  0.0572617563
+## TeamFGPCT              -0.114791403  0.053105214  0.1187238045 -0.0313705446
+## Team3P                  0.029908235  0.079455775  0.0857043764  0.0296662353
+## Team3PA                 0.080577258  0.074825900  0.0592729911  0.0463467602
+## Team3PPCT              -0.026484376  0.040201241  0.0601150176  0.0005076038
+## TeamFT                 -0.075399282  0.024228311  0.0798949051 -0.0354784876
+## TeamFTA                -0.091897172  0.009600704  0.0711931792 -0.0471368607
+## TeamFTPCT               0.012864509  0.031763685  0.0325547961  0.0139968801
+## TeamOffRebounds        -0.068883375 -0.006371032  0.0003753868 -0.0056578317
+## TeamTotalRebounds      -0.530432484 -0.053371243  0.2320491861 -0.2735723395
+## TeamAssists            -0.139714049  0.035478568  0.1116023406 -0.0502063543
+## TeamSteals             -0.068951590 -0.062074442 -0.0391846669 -0.0471147320
+## TeamBlocks             -0.353110391 -0.103465578 -0.0422348142 -0.0994401990
+## TeamTurnovers          -0.023017156 -0.018088322  0.0416694763 -0.0631871498
+## TeamPersonalFouls       0.078411084 -0.126817358 -0.1676473908 -0.0159095518
+## OpponentFG              0.754791141  0.399027442  0.1440747785  0.3955400546
+## OpponentFGA            -0.161220379  0.193563166  0.4187304220 -0.1180208656
+## OpponentFGPCT           1.000000000  0.312295571 -0.1493674362  0.5522792378
+## Opponent3P              0.312295571  1.000000000  0.6914518201  0.7094041257
+## Opponent3PA            -0.149367436  0.691451820  1.0000000000  0.0303822862
+## Opponent3PPCT           0.552279238  0.709404126  0.0303822862  1.0000000000
+## OpponentFT              0.106226566 -0.106344743 -0.1743400433  0.0169282910
+## OpponentFTA             0.086625216 -0.140194309 -0.1972872368 -0.0080249496
+## OpponentFTPCT           0.076650746  0.053774302  0.0101886734  0.0623587723
+## OpponentOffRebounds    -0.251623986 -0.085432899  0.0978389488 -0.2013096986
+## OpponentTotalRebounds  -0.005789348  0.005903551  0.0810576009 -0.0680836101
+## OpponentAssists         0.553535793  0.513869716  0.2641728450  0.4428640799
+## OpponentSteals          0.036468797 -0.011661373  0.0214481397 -0.0383569868
+## OpponentBlocks          0.111935521 -0.004746412 -0.0495426307  0.0354134646
+## OpponentTurnovers      -0.048082678 -0.095218199 -0.0944428800 -0.0421344973
+## OpponentPersonalFouls  -0.081776664 -0.011247805  0.0396475169 -0.0466461289
+##                         OpponentFT  OpponentFTA OpponentFTPCT
+## Differential          -0.269300868 -0.226064714  -0.175223632
+## TeamFG                 0.019511923  0.012937366   0.007923359
+## TeamFGA                0.157025930  0.159529646   0.023732217
+## TeamFGPCT             -0.091558712 -0.101685664  -0.006190565
+## Team3P                 0.009796521 -0.002503282   0.022780414
+## Team3PA                0.063163000  0.054748838   0.025878762
+## Team3PPCT             -0.039087364 -0.048073272   0.008651286
+## TeamFT                 0.161311559  0.183801456  -0.015688533
+## TeamFTA                0.180010001  0.213209437  -0.032862991
+## TeamFTPCT             -0.009352580 -0.025707797   0.028078614
+## TeamOffRebounds        0.043439990  0.058466904  -0.031903278
+## TeamTotalRebounds     -0.095266106 -0.022971823  -0.194279344
+## TeamAssists           -0.083571639 -0.084160571  -0.027826354
+## TeamSteals            -0.034152581 -0.022178476  -0.041125993
+## TeamBlocks            -0.070920662 -0.056095076  -0.052504157
+## TeamTurnovers          0.123594852  0.154110278  -0.034267574
+## TeamPersonalFouls      0.793147614  0.865844664   0.026877590
+## OpponentFG            -0.013421944 -0.027151720   0.037049836
+## OpponentFGA           -0.156152803 -0.151706668  -0.043324702
+## OpponentFGPCT          0.106226566  0.086625216   0.076650746
+## Opponent3P            -0.106344743 -0.140194309   0.053774302
+## Opponent3PA           -0.174340043 -0.197287237   0.010188673
+## Opponent3PPCT          0.016928291 -0.008024950   0.062358772
+## OpponentFT             1.000000000  0.928286066   0.393203255
+## OpponentFTA            0.928286066  1.000000000   0.063446167
+## OpponentFTPCT          0.393203255  0.063446167   1.000000000
+## OpponentOffRebounds    0.086671729  0.136423744  -0.082982260
+## OpponentTotalRebounds  0.197591588  0.232447345  -0.021281750
+## OpponentAssists       -0.012378006 -0.031205800   0.041793598
+## OpponentSteals         0.077614062  0.097206119  -0.022196700
+## OpponentBlocks         0.101422181  0.110063752   0.008946765
+## OpponentTurnovers      0.015778567  0.038679394  -0.052040732
+## OpponentPersonalFouls  0.215609923  0.251289640  -0.029978048
+##                       OpponentOffRebounds OpponentTotalRebounds OpponentAssists
+## Differential                 -0.089347536          -0.420010794   -0.4916760300
+## TeamFG                       -0.036316958          -0.225202127    0.0045585394
+## TeamFGA                       0.002848058           0.316139528    0.1493200670
+## TeamFGPCT                    -0.042399744          -0.512983306   -0.1062526818
+## Team3P                       -0.007870292          -0.062384273    0.0294135821
+## Team3PA                      -0.018950808           0.202896760    0.0825450568
+## Team3PPCT                     0.008677682          -0.263884541   -0.0320289494
+## TeamFT                        0.064938518          -0.064969878   -0.0577300621
+## TeamFTA                       0.077003661           0.004736343   -0.0638753907
+## TeamFTPCT                    -0.016936223          -0.177541483   -0.0074012062
+## TeamOffRebounds              -0.014332575          -0.060389134   -0.0386521955
+## TeamTotalRebounds            -0.052416263          -0.059965631   -0.2185974327
+## TeamAssists                  -0.033384745          -0.222595212    0.0006884142
+## TeamSteals                    0.016707012           0.035155522   -0.0533271359
+## TeamBlocks                    0.178200671           0.037788375   -0.1511460518
+## TeamTurnovers                 0.074131214          -0.106168146    0.0726446766
+## TeamPersonalFouls             0.122282037           0.195017438   -0.0226190966
+## OpponentFG                    0.120715447           0.275438081    0.6383041307
+## OpponentFGA                   0.519792207           0.424276325    0.2318514751
+## OpponentFGPCT                -0.251623986          -0.005789348    0.5535357935
+## Opponent3P                   -0.085432899           0.005903551    0.5138697156
+## Opponent3PA                   0.097838949           0.081057601    0.2641728450
+## Opponent3PPCT                -0.201309699          -0.068083610    0.4428640799
+## OpponentFT                    0.086671729           0.197591588   -0.0123780062
+## OpponentFTA                   0.136423744           0.232447345   -0.0312058003
+## OpponentFTPCT                -0.082982260          -0.021281750    0.0417935976
+## OpponentOffRebounds           1.000000000           0.622115242    0.0095497736
+## OpponentTotalRebounds         0.622115242           1.000000000    0.1792668711
+## OpponentAssists               0.009549774           0.179266871    1.0000000000
+## OpponentSteals                0.081573888          -0.038673692    0.1068223463
+## OpponentBlocks                0.096186044           0.258597044    0.1337215898
+## OpponentTurnovers             0.017562976           0.073936193   -0.1060361856
+## OpponentPersonalFouls         0.071468553           0.020500608   -0.0849725350
+##                       OpponentSteals OpponentBlocks OpponentTurnovers
+## Differential            -0.187754380  -0.2622526274      0.2743269542
+## TeamFG                  -0.102436608  -0.1604696630      0.1552932747
+## TeamFGA                 -0.131734964   0.2184838647      0.1981279705
+## TeamFGPCT               -0.021724636  -0.3562550337      0.0242548332
+## Team3P                  -0.053878305  -0.1117820624      0.0092841059
+## Team3PA                 -0.052980367  -0.0580421730      0.0638351465
+## Team3PPCT               -0.025131672  -0.0965607977     -0.0488449748
+## TeamFT                  -0.001883349  -0.0650555225      0.1369220844
+## TeamFTA                  0.006758108  -0.0539735876      0.1697047361
+## TeamFTPCT               -0.022033431  -0.0411754626     -0.0354639208
+## TeamOffRebounds          0.032697776   0.1571812909      0.1154717115
+## TeamTotalRebounds        0.066119486   0.0139248895     -0.0343556886
+## TeamAssists             -0.028866867  -0.1657235463      0.1314533533
+## TeamSteals               0.055697260  -0.0022307839      0.7308851693
+## TeamBlocks               0.028453380  -0.0389785933      0.0313757033
+## TeamTurnovers            0.709987911   0.0064638717      0.1885370196
+## TeamPersonalFouls        0.064446997   0.0872112484      0.1016935547
+## OpponentFG               0.140823916   0.1290769921     -0.1835580089
+## OpponentFGA              0.165329579   0.0455658832     -0.2156337333
+## OpponentFGPCT            0.036468797   0.1119355214     -0.0480826780
+## Opponent3P              -0.011661373  -0.0047464115     -0.0952181989
+## Opponent3PA              0.021448140  -0.0495426307     -0.0944428800
+## Opponent3PPCT           -0.038356987   0.0354134646     -0.0421344973
+## OpponentFT               0.077614062   0.1014221807      0.0157785673
+## OpponentFTA              0.097206119   0.1100637520      0.0386793945
+## OpponentFTPCT           -0.022196700   0.0089467648     -0.0520407316
+## OpponentOffRebounds      0.081573888   0.0961860439      0.0175629757
+## OpponentTotalRebounds   -0.038673692   0.2585970440      0.0739361927
+## OpponentAssists          0.106822346   0.1337215898     -0.1060361856
+## OpponentSteals           1.000000000   0.0443672204      0.0740678539
+## OpponentBlocks           0.044367220   1.0000000000      0.0001223389
+## OpponentTurnovers        0.074067854   0.0001223389      1.0000000000
+## OpponentPersonalFouls    0.030766974  -0.0514541037      0.2252310703
 ##                       OpponentPersonalFouls
 ## Differential                     0.16902573
 ## TeamFG                          -0.02311662
@@ -682,7 +652,16 @@ How does that compare to Nebraska of this past season? The last of the Tim Miles
 
 
 ```r
-logs %>% filter(Team == "Nebraska Cornhuskers" & season == "2018-2019") %>% summarise(avgfgpct = mean(TeamFGPCT), avgoppfgpct=mean(OpponentFGPCT), avgtotrebound = mean(TeamTotalRebounds), avgopptotrebound=mean(OpponentTotalRebounds))
+logs %>% 
+  filter(
+    Team == "Nebraska Cornhuskers" & season == "2018-2019"
+    ) %>% 
+  summarise(
+    avgfgpct = mean(TeamFGPCT), 
+    avgoppfgpct = mean(OpponentFGPCT), 
+    avgtotrebound = mean(TeamTotalRebounds),
+    avgopptotrebound = mean(OpponentTotalRebounds)
+    )
 ```
 
 ```

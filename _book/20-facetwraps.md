@@ -1,8 +1,8 @@
 # Facet wraps
 
-Sometimes the easiest way to spot a trend is to chart a bunch of small things side by side. Edward Tufte calls this "small multiples" where ggplot calls this a facet wrap or a facet grid, depending. 
+Sometimes the easiest way to spot a trend is to chart a bunch of small things side by side. Edward Tufte, one of the most well known data visualization thinkers on the planet, calls this "small multiples" where ggplot calls this a facet wrap or a facet grid, depending. 
 
-One thing we noticed earlier in the semester -- it seems that a lot of teams shoot worse as the season goes on. Do they? We could answer this a number of ways, but the best way to show people would be visually. Let's use Small Mulitples.
+One thing we noticed earlier in the semester -- it seems that a lot of teams shoot worse as the season goes on. Do they? We could answer this a number of ways, but the best way to show people would be visually. Let's use Small Multiples.
 
 As always, we start with libraries. 
 
@@ -12,14 +12,18 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ───────────────
+## Warning: package 'tidyverse' was built under R version 3.5.2
 ```
 
 ```
-## ✔ ggplot2 3.2.1     ✔ purrr   0.3.3
-## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
-## ✔ tidyr   1.0.0     ✔ stringr 1.4.0
-## ✔ readr   1.3.1     ✔ forcats 0.4.0
+## ── Attaching packages ────── tidyverse 1.3.0 ──
+```
+
+```
+## ✓ ggplot2 3.2.1     ✓ purrr   0.3.3
+## ✓ tibble  2.1.3     ✓ dplyr   0.8.3
+## ✓ tidyr   1.0.0     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.4.0
 ```
 
 ```
@@ -51,9 +55,9 @@ library(tidyverse)
 ```
 
 ```
-## ── Conflicts ────────────────────────
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
+## ── Conflicts ───────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
 ```
 
 Now data.
@@ -102,7 +106,7 @@ ggplot() + geom_line(data=big10, aes(x=Date, y=TeamFGPCT, group=Team)) + scale_y
 
 ![](20-facetwraps_files/figure-epub3/unnamed-chunk-4-1.png)<!-- -->
 
-And, not surprisingly, we get a hairball. We could color certain lines, but that would limit us to focus on one team. What if we did all of them at once? We do that with a `facet_wrap`. The only thing we MUST pass into a `facet_wrap` is what thing we're going to separate them out by. In this case, we preceed that field with a tilde, so in our case we want the Team field. It looks like this: 
+And, not surprisingly, we get a hairball. We could color certain lines, but that would limit us to focus on one team. What if we did all of them at once? We do that with a `facet_wrap`. The only thing we MUST pass into a `facet_wrap` is what thing we're going to separate them out by. In this case, we precede that field with a tilde, so in our case we want the Team field. It looks like this: 
 
 
 ```r
@@ -111,7 +115,7 @@ ggplot() + geom_line(data=big10, aes(x=Date, y=TeamFGPCT, group=Team)) + scale_y
 
 ![](20-facetwraps_files/figure-epub3/unnamed-chunk-5-1.png)<!-- -->
 
-Answer: Not immediately clear, but we can look at this and analyze it. We could add a peice of annotation to help us out. 
+Answer: Not immediately clear, but we can look at this and analyze it. We could add a piece of annotation to help us out. 
 
 
 ```r
@@ -127,7 +131,7 @@ big10 %>% summarise(mean(TeamFGPCT))
 
 
 ```r
-ggplot() + geom_hline(yintercept=.4447, color="dark grey") + geom_line(data=big10, aes(x=Date, y=TeamFGPCT, group=Team)) + scale_y_continuous(limits = c(0, .7)) + facet_wrap(~Team)
+ggplot() + geom_hline(yintercept=.4447, color="blue") + geom_line(data=big10, aes(x=Date, y=TeamFGPCT, group=Team)) + scale_y_continuous(limits = c(0, .7)) + facet_wrap(~Team)
 ```
 
 ![](20-facetwraps_files/figure-epub3/unnamed-chunk-7-1.png)<!-- -->
@@ -140,7 +144,7 @@ Facet grids allow us to put teams on the same plane, versus just repeating them.
 
 
 ```r
-ggplot() + geom_hline(yintercept=.4447, color="dark grey") + geom_line(data=big10, aes(x=Date, y=TeamFGPCT, group=Team)) + scale_y_continuous(limits = c(0, .7)) + facet_grid(Team ~ .)
+ggplot() + geom_hline(yintercept=.4447, color="blue") + geom_line(data=big10, aes(x=Date, y=TeamFGPCT, group=Team)) + scale_y_continuous(limits = c(0, .7)) + facet_grid(Team ~ .)
 ```
 
 ![](20-facetwraps_files/figure-epub3/unnamed-chunk-8-1.png)<!-- -->
@@ -149,7 +153,7 @@ And here they are next to each other:
 
 
 ```r
-ggplot() + geom_hline(yintercept=.4447, color="dark grey") + geom_line(data=big10, aes(x=Date, y=TeamFGPCT, group=Team)) + scale_y_continuous(limits = c(0, .7)) + facet_grid(. ~ Team)
+ggplot() + geom_hline(yintercept=.4447, color="blue") + geom_line(data=big10, aes(x=Date, y=TeamFGPCT, group=Team)) + scale_y_continuous(limits = c(0, .7)) + facet_grid(. ~ Team)
 ```
 
 ![](20-facetwraps_files/figure-epub3/unnamed-chunk-9-1.png)<!-- -->

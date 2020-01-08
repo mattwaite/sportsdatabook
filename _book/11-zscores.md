@@ -16,14 +16,18 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ───────────────
+## Warning: package 'tidyverse' was built under R version 3.5.2
 ```
 
 ```
-## ✔ ggplot2 3.2.1     ✔ purrr   0.3.3
-## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
-## ✔ tidyr   1.0.0     ✔ stringr 1.4.0
-## ✔ readr   1.3.1     ✔ forcats 0.4.0
+## ── Attaching packages ────── tidyverse 1.3.0 ──
+```
+
+```
+## ✓ ggplot2 3.2.1     ✓ purrr   0.3.3
+## ✓ tibble  2.1.3     ✓ dplyr   0.8.3
+## ✓ tidyr   1.0.0     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.4.0
 ```
 
 ```
@@ -55,18 +59,16 @@ library(tidyverse)
 ```
 
 ```
-## ── Conflicts ────────────────────────
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
+## ── Conflicts ───────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
 ```
+
+Let's look at the current state of Nebraska basketball using the [same logs data we've been using, but for this season so far](). 
 
 
 ```r
-gamelogs <- read_csv("data/logs19.csv")
-```
-
-```
-## Warning: Missing column names filled in: 'X1' [1]
+gamelogs <- read_csv("data/logs20.csv")
 ```
 
 ```
@@ -92,7 +94,8 @@ The first thing we need to do is select some fields we think represent team qual
 
 
 ```r
-teamquality <- gamelogs %>% select(Conference, Team, TeamFGPCT, TeamTotalRebounds, OpponentFGPCT)
+teamquality <- gamelogs %>% 
+  select(Conference, Team, TeamFGPCT, TeamTotalRebounds, OpponentFGPCT, OpponentTotalRebounds)
 ```
 
 And since we have individual game data, we need to collapse this into one record for each team. We do that with ... group by.
@@ -104,21 +107,24 @@ teamtotals <- teamquality %>%
   summarise(
     FGAvg = mean(TeamFGPCT), 
     ReboundAvg = mean(TeamTotalRebounds), 
-    OppFGAvg = mean(OpponentFGPCT)
+    OppFGAvg = mean(OpponentFGPCT),
+    OffRebAvg = mean(OpponentTotalRebounds)
     )
 ```
 
 To calculate a Z score in R, the easiest way is to use the scale function in base R. To use it, you use `scale(FieldName, center=TRUE, scale=TRUE)`. The center and scale indicate if you want to subtract from the mean and if you want to divide by the standard deviation, respectively. We do.
 
-When we have multiple Z Scores, it's pretty standard practice to add them together into a composite score. That's what we're doing at the end here with `TotalZscore`. Note: We have to invert OppZscore by multiplying it by a negative 1 because the lower someone's opponent shooting percentage is, the better. 
+When we have multiple Z Scores, it's pretty standard practice to add them together into a composite score. That's what we're doing at the end here with `TotalZscore`. Note: We have to invert OppZscore and OppRebZScore by multiplying it by a negative 1 because the lower someone's opponent number is, the better. 
 
 
 ```r
-teamzscore <- teamtotals %>% mutate(
-  FGzscore = as.numeric(scale(FGAvg, center = TRUE, scale = TRUE)),
-  RebZscore = as.numeric(scale(ReboundAvg, center = TRUE, scale = TRUE)),
-  OppZscore = as.numeric(scale(OppFGAvg, center = TRUE, scale = TRUE)) * -1,
-  TotalZscore = FGzscore + RebZscore + OppZscore
+teamzscore <- teamtotals %>% 
+  mutate(
+    FGzscore = as.numeric(scale(FGAvg, center = TRUE, scale = TRUE)),
+    RebZscore = as.numeric(scale(ReboundAvg, center = TRUE, scale = TRUE)),
+    OppZscore = as.numeric(scale(OppFGAvg, center = TRUE, scale = TRUE)) * -1,
+    OppRebZScore = as.numeric(scale(OffRebAvg, center = TRUE, scale = TRUE)) * -1,
+    TotalZscore = FGzscore + RebZscore + OppZscore + OppRebZScore
   )  
 ```
 
@@ -130,17 +136,18 @@ head(teamzscore)
 ```
 
 ```
-## # A tibble: 6 x 9
+## # A tibble: 6 x 11
 ## # Groups:   Conference [1]
-##   Conference Team  FGAvg ReboundAvg OppFGAvg FGzscore RebZscore OppZscore
-##   <chr>      <chr> <dbl>      <dbl>    <dbl>    <dbl>     <dbl>     <dbl>
-## 1 A-10       Davi… 0.453       32.2    0.409    0.606    0.106      1.000
-## 2 A-10       Dayt… 0.506       32.1    0.415    2.42     0.0525     0.753
-## 3 A-10       Duqu… 0.427       32.7    0.444   -0.286    0.339     -0.511
-## 4 A-10       Ford… 0.402       31      0.436   -1.12    -0.432     -0.169
-## 5 A-10       Geor… 0.443       32      0.441    0.278    0.0248    -0.380
-## 6 A-10       Geor… 0.409       31.3    0.445   -0.891   -0.308     -0.559
-## # … with 1 more variable: TotalZscore <dbl>
+##   Conference Team  FGAvg ReboundAvg OppFGAvg OffRebAvg FGzscore RebZscore
+##   <chr>      <chr> <dbl>      <dbl>    <dbl>     <dbl>    <dbl>     <dbl>
+## 1 A-10       Davi… 0.454       28.8    0.447      30.4    0.513   -1.50  
+## 2 A-10       Dayt… 0.530       31.9    0.421      28      2.68    -0.352 
+## 3 A-10       Duqu… 0.452       32.5    0.412      29.5    0.441   -0.0997
+## 4 A-10       Ford… 0.394       32.2    0.396      32.1   -1.22    -0.214 
+## 5 A-10       Geor… 0.423       36      0.407      33.1   -0.397    1.18  
+## 6 A-10       Geor… 0.418       30.8    0.441      32.9   -0.529   -0.726 
+## # … with 3 more variables: OppZscore <dbl>, OppRebZScore <dbl>,
+## #   TotalZscore <dbl>
 ```
 
 A way to read this -- a team at zero is precisely average. The larger the positive number, the more exceptional they are. The larger the negative number, the more truly terrible they are. 
@@ -153,52 +160,56 @@ teamzscore %>% arrange(desc(TotalZscore))
 ```
 
 ```
-## # A tibble: 353 x 9
+## # A tibble: 353 x 11
 ## # Groups:   Conference [32]
-##    Conference Team  FGAvg ReboundAvg OppFGAvg FGzscore RebZscore OppZscore
-##    <chr>      <chr> <dbl>      <dbl>    <dbl>    <dbl>     <dbl>     <dbl>
-##  1 WCC        Gonz… 0.531       36.3    0.386    2.25      2.02       2.23
-##  2 Big Ten    Mich… 0.486       38.1    0.378    2.13      2.22       1.86
-##  3 Summit     Sout… 0.501       35.1    0.419    1.89      1.68       2.27
-##  4 Ivy        Yale… 0.494       36.2    0.414    1.84      1.80       1.42
-##  5 AAC        Hous… 0.447       37.2    0.370    0.530     2.14       2.22
-##  6 SEC        Kent… 0.479       36.2    0.399    1.31      1.48       2.08
-##  7 SEC        Tenn… 0.496       34.7    0.400    2.08      0.775      2.01
-##  8 SWAC       Gram… 0.451       34.7    0.395    1.18      1.19       2.26
-##  9 Big West   UC-I… 0.457       36.5    0.382    0.774     1.55       2.29
-## 10 OVC        Belm… 0.501       36.2    0.423    1.91      1.46       1.09
-## # … with 343 more rows, and 1 more variable: TotalZscore <dbl>
+##    Conference Team  FGAvg ReboundAvg OppFGAvg OffRebAvg FGzscore RebZscore
+##    <chr>      <chr> <dbl>      <dbl>    <dbl>     <dbl>    <dbl>     <dbl>
+##  1 Big West   UC-I… 0.460       38.2    0.379      28      0.815     1.99 
+##  2 Southland  Step… 0.500       35.9    0.423      26.3    1.84      1.57 
+##  3 OVC        Murr… 0.482       37.2    0.391      26.9    1.24      1.28 
+##  4 SWAC       Gram… 0.463       34.6    0.433      30.9    1.85      1.16 
+##  5 Horizon    Wrig… 0.467       38.4    0.417      32.9    1.45      2.23 
+##  6 A-Sun      Libe… 0.484       31.6    0.363      27.2    1.74     -0.837
+##  7 MEAC       Morg… 0.433       34.2    0.420      29.6    1.14      1.12 
+##  8 Big 12     Kans… 0.506       35.5    0.375      28.7    2.34      0.275
+##  9 ACC        Loui… 0.476       38.1    0.372      29.9    1.31      1.30 
+## 10 NEC        Sacr… 0.442       37.8    0.413      33.4    1.01      1.58 
+## # … with 343 more rows, and 3 more variables: OppZscore <dbl>,
+## #   OppRebZScore <dbl>, TotalZscore <dbl>
 ```
 
-Don't sleep on South Dakota State come tournament time!
+Don't sleep on the Anteaters come tournament time!
 
 But closer to home, how is Nebraska doing.
 
 
 ```r
-teamzscore %>% filter(Conference == "Big Ten") %>% arrange(desc(TotalZscore))
+teamzscore %>% 
+  filter(Conference == "Big Ten") %>% 
+  arrange(desc(TotalZscore))
 ```
 
 ```
-## # A tibble: 14 x 9
+## # A tibble: 14 x 11
 ## # Groups:   Conference [1]
-##    Conference Team  FGAvg ReboundAvg OppFGAvg FGzscore RebZscore OppZscore
-##    <chr>      <chr> <dbl>      <dbl>    <dbl>    <dbl>     <dbl>     <dbl>
-##  1 Big Ten    Mich… 0.486       38.1    0.378    2.13     2.22     1.86   
-##  2 Big Ten    Mary… 0.451       36.1    0.398    0.439    1.31     0.996  
-##  3 Big Ten    Mich… 0.451       32.4    0.397    0.480   -0.414    1.02   
-##  4 Big Ten    Wisc… 0.450       32.4    0.397    0.421   -0.430    1.01   
-##  5 Big Ten    Purd… 0.450       34.1    0.416    0.421    0.354    0.218  
-##  6 Big Ten    Indi… 0.460       33.4    0.421    0.911    0.0431   0.0192 
-##  7 Big Ten    Rutg… 0.419       35.9    0.425   -1.06     1.20    -0.147  
-##  8 Big Ten    Iowa… 0.457       32.7    0.450    0.726   -0.251   -1.22   
-##  9 Big Ten    Nebr… 0.431       32.5    0.423   -0.509   -0.363   -0.0525 
-## 10 Big Ten    Ohio… 0.436       31.9    0.426   -0.264   -0.632   -0.185  
-## 11 Big Ten    Minn… 0.435       32.7    0.439   -0.277   -0.261   -0.757  
-## 12 Big Ten    Penn… 0.418       33.1    0.442   -1.09    -0.0897  -0.891  
-## 13 Big Ten    Nort… 0.403       30.9    0.421   -1.84    -1.10     0.00345
-## 14 Big Ten    Illi… 0.431       29.8    0.466   -0.489   -1.60    -1.88   
-## # … with 1 more variable: TotalZscore <dbl>
+##    Conference Team  FGAvg ReboundAvg OppFGAvg OffRebAvg FGzscore RebZscore
+##    <chr>      <chr> <dbl>      <dbl>    <dbl>     <dbl>    <dbl>     <dbl>
+##  1 Big Ten    Mich… 0.466       39.7    0.374      28.6   0.556     1.47  
+##  2 Big Ten    Ohio… 0.473       36      0.359      27.9   0.870     0.0613
+##  3 Big Ten    Rutg… 0.476       37.7    0.375      28.2   0.962     0.712 
+##  4 Big Ten    Indi… 0.471       36.8    0.410      27.4   0.767     0.359 
+##  5 Big Ten    Illi… 0.469       37.7    0.425      27     0.701     0.712 
+##  6 Big Ten    Mary… 0.415       40.1    0.377      31.4  -1.56      1.61  
+##  7 Big Ten    Penn… 0.455       37.4    0.393      32.7   0.0969    0.576 
+##  8 Big Ten    Mich… 0.494       33.8    0.412      30.4   1.72     -0.785 
+##  9 Big Ten    Purd… 0.428       35.4    0.390      29.1  -0.993    -0.183 
+## 10 Big Ten    Iowa… 0.460       35.3    0.424      31.3   0.319    -0.210 
+## 11 Big Ten    Minn… 0.444       35.4    0.408      31.7  -0.357    -0.172 
+## 12 Big Ten    Wisc… 0.436       31.6    0.409      29    -0.703    -1.62  
+## 13 Big Ten    Nort… 0.423       31.6    0.426      30.9  -1.21     -1.61  
+## 14 Big Ten    Nebr… 0.424       33.4    0.427      43.7  -1.16     -0.914 
+## # … with 3 more variables: OppZscore <dbl>, OppRebZScore <dbl>,
+## #   TotalZscore <dbl>
 ```
 
-So, as we can see, with our composite Z Score, Nebraska is ... not bad, but not good either: 9 of 14 teams in the Big Ten.
+So, as we can see, with our composite Z Score, Nebraska is ... not good. Not good at all. 

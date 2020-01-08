@@ -1,6 +1,6 @@
 # Bubble charts
 
-Here is the real talk: Bubble charts are hard. The reason they are hard is not because of the code, or the complexity or anything like that. They're a scatterplot with one or two elements added to them. The hard part is seeing when a bubble chart works and when it doesn't. 
+Here is the real talk: Bubble charts are hard. The reason they are hard is not because of the code, or the complexity or anything like that. They're a scatterplot with magnitude added -- the size of the dot in the scatterplot has meaning. The hard part is seeing when a bubble chart works and when it doesn't. 
 
 If you want to see it work spectacularly well, [watch a semi-famous Ted Talk](https://www.youtube.com/watch?v=hVimVzgtD6w) by Hans Rosling from 2006 where bubble charts were the centerpiece. It's worth watching. It'll change your perspective on the world. No seriously. It will.
 
@@ -16,14 +16,18 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ───────────────
+## Warning: package 'tidyverse' was built under R version 3.5.2
 ```
 
 ```
-## ✔ ggplot2 3.2.1     ✔ purrr   0.3.3
-## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
-## ✔ tidyr   1.0.0     ✔ stringr 1.4.0
-## ✔ readr   1.3.1     ✔ forcats 0.4.0
+## ── Attaching packages ────── tidyverse 1.3.0 ──
+```
+
+```
+## ✓ ggplot2 3.2.1     ✓ purrr   0.3.3
+## ✓ tibble  2.1.3     ✓ dplyr   0.8.3
+## ✓ tidyr   1.0.0     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.4.0
 ```
 
 ```
@@ -55,9 +59,9 @@ library(tidyverse)
 ```
 
 ```
-## ── Conflicts ────────────────────────
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
+## ── Conflicts ───────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
 ```
 
 ```r
@@ -169,7 +173,7 @@ ggplot() + geom_point(data=offense, aes(x=`Yards/G`, y=`Points/G`, size=`Total L
 
 Before we do any more work, let's return to the earlier question: What story does this tell? Can you discern a story from the bubbles? Are teams with lots of turnovers doing poorly and teams with few turnovers doing well? The problem is, you can't really tell. So this is a dead end for a bubble chart. If you get a big mess, it's a dead giveaway that you probably don't have a bubble chart.
 
-So let's look at something else. Let's look at something that isn't directly correlated -- we'll look at offensive points per game vs defensive points per game. It's similar to the same quandrant chart we've used to look at NFL teams. 
+So let's look at something else. Let's look at something that isn't directly correlated -- we'll look at offensive points per game vs defensive points per game. 
 
 I'm going to edit the same rvest code to grab those points per game stats and merge it all together. When it's done, I'll have a dataframe called `football` and we can look at where good teams fall on the chart with turnover margin as a scaled dot.
 
@@ -242,7 +246,7 @@ Let's add some annotations. Let's look at the top two turnover margin teams and 
 
 
 ```r
-topteams <- football %>% filter(Name == "Oregon" | Name == "Alabama")
+topteams <- football %>% filter(Name == "LSU" | Name == "Alabama")
 ```
 
 
@@ -286,7 +290,7 @@ ggplot() +
   geom_point(data=nu, aes(x=`Offensive Points Per Game`, y=`Defensive Points Per Game`, size=Margin), alpha=.2) +
   geom_text_repel(data=nu, aes(x=`Offensive Points Per Game`, y=`Defensive Points Per Game`, label=Name)) +
   scale_size(range = c(0, 6), name="Turnovers") +
-  labs(title="Same song, different year", subtitle="The Husker's turnover margin is in negative territory, putting them miles from the top.", caption="Source: NCAA | By Matt Waite")  + theme_minimal() + 
+  labs(title="Same song, different year", subtitle="The Husker's turnover margin is zero, putting them miles from the top.", caption="Source: NCAA | By Matt Waite")  + theme_minimal() + 
   theme(
     plot.title = element_text(size = 16, face = "bold"),
     axis.title = element_text(size = 8), 
