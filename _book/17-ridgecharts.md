@@ -65,14 +65,7 @@ library(ggridges)
 ```
 
 ```
-## 
-## Attaching package: 'ggridges'
-```
-
-```
-## The following object is masked from 'package:ggplot2':
-## 
-##     scale_discrete_manual
+## Warning: package 'ggridges' was built under R version 3.5.2
 ```
 
 So for this, let's look at every basketball game played since the 2014-15 season. That's more than 28,000 basketball games. [Download that data here](https://unl.box.com/s/u9407jj007fxtnu1vbkybdawaqg6j3fw).

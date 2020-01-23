@@ -115,10 +115,10 @@ head(scoringoffense)
 
 ```
 ##           Name  G TD FG 1XP 2XP Safety Points Points/G
-## 1 1        LSU 14 89 21  83   1      1    684     48.9
+## 1 1        LSU 15 95 21  89   1      1    726     48.4
 ## 2 2    Alabama 13 83 12  80   0      0    614     47.2
 ## 3 3 Ohio State 14 88 13  87   0      1    656     46.9
-## 4 4    Clemson 14 85 13  83   1      0    634     45.3
+## 4 4    Clemson 15 88 14  85   2      0    659     43.9
 ## 5 5        UCF 13 74 15  71   1      1    564     43.4
 ## 6 6   Oklahoma 14 76 19  75   1      0    590     42.1
 ```
@@ -183,10 +183,10 @@ head(combined)
 
 ```
 ##   Rank       Name  G TD FG 1XP 2XP Safety Points Points/G YEAR
-## 1    1        LSU 14 89 21  83   1      1    684     48.9 2019
+## 1    1        LSU 15 95 21  89   1      1    726     48.4 2019
 ## 2    2    Alabama 13 83 12  80   0      0    614     47.2 2019
 ## 3    3 Ohio State 14 88 13  87   0      1    656     46.9 2019
-## 4    4    Clemson 14 85 13  83   1      0    634     45.3 2019
+## 4    4    Clemson 15 88 14  85   2      0    659     43.9 2019
 ## 5    5        UCF 13 74 15  71   1      1    564     43.4 2019
 ## 6    6   Oklahoma 14 76 19  75   1      0    590     42.1 2019
 ```

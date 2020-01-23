@@ -294,3 +294,41 @@ salaries %>% arrange(desc(`Budgeted Annual Salary`))
 Oh, right. In this dataset, the university pays a football coach $5 million. Extremes influence averages, not medians, and now you have your answer.  
 
 So when choosing a measure of the middle, you have to ask yourself -- could I have extremes? Because a median won't be sensitive to extremes. It will be the point at which half the numbers are above and half are below. The average or mean will be a measure of the middle, but if you have a bunch of low paid people and then one football coach, the average will be wildly skewed. Here, because there's so few highly paid football coaches compared to people who make a normal salary, the number is only slightly skewed in the grand scheme, but skewed nonetheless. 
+
+## Even more aggregates
+
+There's a ton of things we can do in summarize -- we'll work with more of them as the course progresses -- but here's a few other questions you can ask.
+
+Which department on campus has the highest wage bill? And what is the highest and lowest salary in the department? And how wide is the spread between salaries? We can find that with `sum` to add up the salaries to get the total wage bill, `min` to find the minumum salary, `max` to find the maximum salary and `sd` to find the standard deviation in the numbers. 
+
+
+```r
+salaries %>% 
+  group_by(Campus, Department) %>% 
+  summarize(
+    total = sum(`Budgeted Annual Salary`), 
+    avgsalary = mean(`Budgeted Annual Salary`), 
+    minsalary = min(`Budgeted Annual Salary`),
+    maxsalary = max(`Budgeted Annual Salary`),
+    stdev = sd(`Budgeted Annual Salary`)) %>% arrange(desc(total))
+```
+
+```
+## # A tibble: 804 x 7
+## # Groups:   Campus [5]
+##    Campus Department                  total avgsalary minsalary maxsalary  stdev
+##    <chr>  <chr>                       <dbl>     <dbl>     <dbl>     <dbl>  <dbl>
+##  1 UNL    Athletics                  3.56e7   118508.     12925   5000000 3.33e5
+##  2 UNMC   Pathology/Microbiology     1.36e7    63158.      1994    186925 3.41e4
+##  3 UNL    Agronomy & Horticulture    8.98e6    66496.      5000    208156 4.01e4
+##  4 UNMC   Anesthesiology             7.90e6    78237.     10000    245174 3.59e4
+##  5 UNL    School of Natural Resour…  6.86e6    65995.      2400    194254 3.28e4
+##  6 UNL    College of Law             6.70e6    77953.      1000    326400 7.23e4
+##  7 UNL    University Television      6.44e6    55542.     16500    221954 2.75e4
+##  8 UNL    University Libraries       6.27e6    51390.      1200    215917 2.68e4
+##  9 UNMC   Pharmacology/Exp Neurosc…  6.24e6    58911.      2118    248139 4.29e4
+## 10 UNMC   CON-Omaha Division         6.11e6    78304.      3000    172522 4.48e4
+## # … with 794 more rows
+```
+
+So again, no surprise, the UNL athletic department has the single largest wage bill at nearly $36 million. The average salary in the department is \$118,508 -- more than double the univeristy as a whole, again thanks to Scott Frost's paycheck. 
