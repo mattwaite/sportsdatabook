@@ -14,7 +14,7 @@ A Z score is a measure of how far a number is from the population mean of that n
 library(tidyverse)
 ```
 
-Let's look at the current state of Nebraska basketball using the [same logs data we've been using, but for this season so far](). 
+Let's look at the current state of Nebraska basketball using the [same logs data we've been using, but for this season so far](https://unl.box.com/s/wnlh0u9low1yh56enion8zjmu8r7dc8p). 
 
 ```{r}
 gamelogs <- read_csv("data/logs20.csv")
