@@ -12,7 +12,7 @@ So first we'll import the tidyverse so we can read in our data and begin to work
 library(tidyverse)
 ```
 
-Now we'll import a common and [simple dataset of total attendance](https://unl.box.com/s/hvxmnxhr41x4ikgt3vk38aczcbrf97pn) at NCAA football games over the last few seasons. 
+Now we'll import a common and [simple dataset of total attendance](https://unl.box.com/s/etqna5bfvf3b0gsnw0kcjjn1rxx9335s) at NCAA football games over the last few seasons. 
 
 ```{r}
 attendance <- read_csv('data/attendance.csv')

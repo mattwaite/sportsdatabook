@@ -51,7 +51,9 @@ turnovers19 <- turnoversurl %>%
 turnovers19 <- turnovers19[[1]] %>% select(Name, `Total Lost`)
 
 
-offense <- yards19 %>% left_join(points19, by=c("Name")) %>% left_join(turnovers19, by=c("Name"))
+offense <- yards19 %>%
+  left_join(points19, by=c("Name")) %>%
+  left_join(turnovers19, by=c("Name"))
 ```
 
 A bubble chart is just a scatterplot with one additional element in the aesthetic -- a size. Here's the scatterplot version. 
@@ -106,7 +108,10 @@ turnovers19 <- turnoversurl %>%
 
 turnovers19 <- turnovers19[[1]] %>% select(Name, Margin)
 
-football <- o19 %>% left_join(d19, by=c("Name")) %>% left_join(turnovers19, by=c("Name")) %>% rename(`Offensive Points Per Game` = `Points/G.x`, `Defensive Points Per Game`=`Points/G.y`)
+football <- o19 %>% 
+  left_join(d19, by=c("Name")) %>% 
+  left_join(turnovers19, by=c("Name")) %>% 
+  rename(`Offensive Points Per Game` = `Points/G.x`, `Defensive Points Per Game`=`Points/G.y`)
 ```
 
 Now we can do the bubble chart.

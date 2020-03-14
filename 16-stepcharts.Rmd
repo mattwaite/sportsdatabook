@@ -12,7 +12,7 @@ Step charts can be used for all kinds of things -- showing how a player's career
 library(tidyverse)
 ```
 
-And we'll use our basketball log data. 
+And we'll use [our basketball log data](https://unl.box.com/s/a8m91bro10t89watsyo13yjegb1fy009). 
 
 ```{r}
 logs <- read_csv("data/logs19.csv")

@@ -6,7 +6,7 @@ Residuals can tell you severals things, but most importantly is if a linear mode
 
 Residuals can also tell you who is underperforming and overperforming the model. Let's take a look at an example we've used regularly this semester -- third down conversion percentage and penalties. 
 
-Let's first attach libraries and use rvest to get some data. Note: In the rvest steps, I rename the first column because it's blank on the page and then I merge scoring offense to two different tables -- third downs and penalties. 
+Let's first attach libraries and [get some data](https://unl.box.com/s/zlxoptqixkt98gubk3i6316qun99l49r). Note: In the rvest steps, I rename the first column because it's blank on the page and then I merge scoring offense to two different tables -- third downs and penalties. 
 
 ```{r}
 library(tidyverse)

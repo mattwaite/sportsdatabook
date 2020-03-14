@@ -17,7 +17,7 @@ Here are some `ggplot2` resources you'll want to keep handy:
 
 Let's dive in using data we've already seen before -- football attendance. This workflow will represent a clear picture of what your work in this class will be like for much of the rest of the semester. One way to think of this workflow is that your R Notebook is now your digital sketchbook, where you will try different types of visualizations to find ones that work. Then, you will export your work into a program like Illustrator to finish the work. 
 
-To begin, we'll import the `ggplot2` and `dplyr` libraries. We'll read in the data, then create a new dataframe that represents our attendance data, similar to what we've done before. 
+To begin, we'll import the `ggplot2` and `dplyr` libraries. We'll read in the data, then create a new dataframe that represents [our attendance data](https://unl.box.com/s/etqna5bfvf3b0gsnw0kcjjn1rxx9335s), similar to what we've done before. 
 
 ```{r}
 library(tidyverse)

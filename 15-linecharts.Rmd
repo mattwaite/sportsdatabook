@@ -12,7 +12,7 @@ Let's start getting all that we need. We can use the tidyverse shortcut.
 library(tidyverse)
 ```
 
-Now we'll import the data you created. Mine looks like this: 
+Now we'll [import the data you need](https://unl.box.com/s/a8m91bro10t89watsyo13yjegb1fy009). Mine looks like this: 
 
 ```{r}
 logs <- read_csv("data/logs19.csv")
@@ -38,7 +38,8 @@ See a problem here? Note the Y axis doesn't start with zero. That makes this loo
 ggplot(nu, aes(x=Date, y=TeamFGPCT)) + geom_line() + scale_y_continuous(limits = c(0, .6))
 ```
 
-Note also that our X axis labels are automated. It knows it's a date and it just labels it by month. 
+Note also that our X axis labels are automated. It knows it's a date and it just labels it by month.
+
 ## This is too simple. 
 
 With datasets, we want to invite comparison. So let's answer the question visually. Let's put two lines on the same chart. How does Nebraska compare to Michigan State and Purdue, the eventual regular season co-champions? 
