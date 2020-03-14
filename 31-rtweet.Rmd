@@ -124,7 +124,6 @@ To provide a little context, I pulled the data in this chapter on Sunday, Novemb
 To make it easier to work with, I am going to combine these two data sets into one using the `bind_rows()` function from `dplyr`. There is a slight problem though, some people may have had a tweet that contained both the __#huskers__ and __#GBR__ hashtags in their tweet. So if we combine these two data sets, there might be duplicate data. To dedupe the data, we can apply a `distinct(text, .keep_all = TRUE)` to remove any duplicates. The `.keep_all = TRUE` argument just tells R to keep all columns in the data frame after our data has been deduped.  
 
 ```{r}
-
 tweet_data <- bind_rows(huskerTweets, gbrTweets) %>% 
   distinct(text, .keep_all = TRUE)
 

@@ -20,7 +20,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ─── tidyverse 1.3.0 ──
+## ── Attaching packages ─────────────── tidyverse 1.3.0 ──
 ```
 
 ```
@@ -59,7 +59,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Conflicts ────── tidyverse_conflicts() ──
+## ── Conflicts ────────────────── tidyverse_conflicts() ──
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
 ```
@@ -140,12 +140,12 @@ head(teamzscore)
 ## # Groups:   Conference [1]
 ##   Conference Team  FGAvg ReboundAvg OppFGAvg OffRebAvg FGzscore RebZscore
 ##   <chr>      <chr> <dbl>      <dbl>    <dbl>     <dbl>    <dbl>     <dbl>
-## 1 A-10       Davi… 0.454       30.7    0.431      31.4    0.508    -0.835
-## 2 A-10       Dayt… 0.526       32.4    0.420      28.5    2.57     -0.127
-## 3 A-10       Duqu… 0.446       33.1    0.413      31.1    0.277     0.158
-## 4 A-10       Ford… 0.383       29.8    0.411      33.2   -1.55     -1.21 
-## 5 A-10       Geor… 0.415       34.2    0.43       32.5   -0.616     0.615
-## 6 A-10       Geor… 0.428       30.7    0.442      32.8   -0.231    -0.825
+## 1 A-10       Davi… 0.454       31.1    0.437      30.4    0.507   -0.623 
+## 2 A-10       Dayt… 0.525       32.5    0.413      29.0    2.56     0.0380
+## 3 A-10       Duqu… 0.444       32.4    0.427      32.4    0.222   -0.0145
+## 4 A-10       Ford… 0.380       30.0    0.403      34.1   -1.61    -1.14  
+## 5 A-10       Geor… 0.422       33.5    0.441      30.7   -0.398    0.480 
+## 6 A-10       Geor… 0.424       30.5    0.451      32.7   -0.341   -0.904 
 ## # … with 3 more variables: OppZscore <dbl>, OppRebZScore <dbl>,
 ## #   TotalZscore <dbl>
 ```
@@ -164,16 +164,16 @@ teamzscore %>% arrange(desc(TotalZscore))
 ## # Groups:   Conference [32]
 ##    Conference Team  FGAvg ReboundAvg OppFGAvg OffRebAvg FGzscore RebZscore
 ##    <chr>      <chr> <dbl>      <dbl>    <dbl>     <dbl>    <dbl>     <dbl>
-##  1 Big West   UC-I… 0.468       38.0    0.378      27.5    1.32      2.24 
-##  2 Big 12     Kans… 0.487       35.7    0.378      29.0    2.36      0.892
-##  3 OVC        Murr… 0.487       35.5    0.400      27.7    1.43      1.11 
-##  4 ACC        Loui… 0.468       37.4    0.374      30.3    1.41      1.43 
-##  5 Ivy        Yale… 0.472       37.4    0.369      31.0    1.23      1.52 
-##  6 WCC        Gonz… 0.513       37.9    0.418      28.8    1.48      1.92 
-##  7 Big South  Wint… 0.463       37.7    0.426      30.8    1.06      2.18 
-##  8 Summit     Sout… 0.488       35.9    0.421      31.4    1.45      1.51 
-##  9 A-10       Dayt… 0.526       32.4    0.420      28.5    2.57     -0.127
-## 10 NEC        Sacr… 0.442       37.1    0.414      31.7    0.770     1.70 
+##  1 Big West   UC-I… 0.473       36.6    0.390      27.1    1.60     2.23  
+##  2 Big 12     Kans… 0.482       35.9    0.378      29.0    2.38     1.12  
+##  3 WCC        Gonz… 0.517       37.6    0.422      28.4    1.65     1.94  
+##  4 Big Ten    Mich… 0.460       37.8    0.379      29.7    1.41     1.59  
+##  5 Southland  Step… 0.490       34.2    0.427      26.6    1.71     1.02  
+##  6 OVC        Murr… 0.477       35.3    0.401      29.2    1.31     1.36  
+##  7 Summit     Sout… 0.492       35.5    0.423      31.3    1.51     1.60  
+##  8 A-10       Sain… 0.457       37.4    0.403      30.5    0.598    2.23  
+##  9 A-10       Dayt… 0.525       32.5    0.413      29.0    2.56     0.0380
+## 10 Horizon    Wrig… 0.463       37.1    0.416      33.5    1.53     2.28  
 ## # … with 343 more rows, and 3 more variables: OppZscore <dbl>,
 ## #   OppRebZScore <dbl>, TotalZscore <dbl>
 ```
@@ -194,20 +194,20 @@ teamzscore %>%
 ## # Groups:   Conference [1]
 ##    Conference Team  FGAvg ReboundAvg OppFGAvg OffRebAvg FGzscore RebZscore
 ##    <chr>      <chr> <dbl>      <dbl>    <dbl>     <dbl>    <dbl>     <dbl>
-##  1 Big Ten    Mich… 0.457       38.3    0.379      28.8    1.02     1.52  
-##  2 Big Ten    Rutg… 0.448       37.4    0.380      30.6    0.494    1.16  
-##  3 Big Ten    Ohio… 0.454       34.0    0.384      28.5    0.843   -0.319 
-##  4 Big Ten    Illi… 0.457       36.5    0.411      28.1    0.975    0.779 
-##  5 Big Ten    Indi… 0.453       35.6    0.416      28.0    0.765    0.393 
-##  6 Big Ten    Mary… 0.411       37.5    0.386      31.7   -1.58     1.20  
-##  7 Big Ten    Penn… 0.442       35.7    0.394      34      0.185    0.413 
-##  8 Big Ten    Mich… 0.464       33.0    0.430      32.0    1.40    -0.705 
-##  9 Big Ten    Purd… 0.426       33.7    0.410      28.7   -0.738   -0.447 
-## 10 Big Ten    Iowa… 0.451       34.8    0.433      31.6    0.641    0.0501
-## 11 Big Ten    Minn… 0.422       35.0    0.406      33.1   -0.928    0.143 
-## 12 Big Ten    Wisc… 0.422       31.3    0.410      31.7   -0.975   -1.44  
-## 13 Big Ten    Nort… 0.420       30.6    0.420      31.9   -1.06    -1.75  
-## 14 Big Ten    Nebr… 0.420       32.4    0.441      42.7   -1.05    -0.994 
+##  1 Big Ten    Mich… 0.460       37.8    0.379      29.7    1.41     1.59  
+##  2 Big Ten    Rutg… 0.449       37      0.385      31.1    0.789    1.20  
+##  3 Big Ten    Ohio… 0.446       33.8    0.397      28.2    0.639   -0.307 
+##  4 Big Ten    Illi… 0.442       36.4    0.416      29.1    0.402    0.895 
+##  5 Big Ten    Indi… 0.442       34.7    0.423      29.3    0.377    0.0934
+##  6 Big Ten    Mich… 0.463       33.4    0.423      32.0    1.60    -0.513 
+##  7 Big Ten    Mary… 0.415       36.4    0.399      32.3   -1.20     0.895 
+##  8 Big Ten    Penn… 0.432       35.6    0.411      34.2   -0.195    0.522 
+##  9 Big Ten    Iowa… 0.451       34.3    0.428      32.6    0.892   -0.0698
+## 10 Big Ten    Purd… 0.418       33.8    0.410      29.3   -0.994   -0.304 
+## 11 Big Ten    Minn… 0.422       35.1    0.412      33.4   -0.758    0.312 
+## 12 Big Ten    Wisc… 0.426       31.3    0.410      32.0   -0.552   -1.53  
+## 13 Big Ten    Nort… 0.417       30.6    0.423      34.6   -1.08    -1.84  
+## 14 Big Ten    Nebr… 0.412       32.5    0.446      42     -1.34    -0.939 
 ## # … with 3 more variables: OppZscore <dbl>, OppRebZScore <dbl>,
 ## #   TotalZscore <dbl>
 ```
