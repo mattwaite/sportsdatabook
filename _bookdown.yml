@@ -1,6 +1,5 @@
 book_filename: "SportsData"
-delete_merged_file: true
 language:
   ui:
-    chapter_name: ""
-new_session: yes
+    chapter_name: "Chapter "
+delete_merged_file: true

@@ -139,7 +139,7 @@ Which department on campus has the highest wage bill? And what is the highest an
 ```{r}
 salaries %>% 
   group_by(Campus, Department) %>% 
-  summarize(
+  summarise(
     total = sum(`Budgeted Annual Salary`), 
     avgsalary = mean(`Budgeted Annual Salary`), 
     minsalary = min(`Budgeted Annual Salary`),

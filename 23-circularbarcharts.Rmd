@@ -35,7 +35,7 @@ winlosslogs <- logs %>% mutate(winloss = case_when(
 Now we can group by date and conference and sum up the wins. How many wins by day does each conference get?
 
 ```{r}
-dates <- winlosslogs %>% group_by(Date, Conference) %>% summarize(wins = sum(winloss))
+dates <- winlosslogs %>% group_by(Date, Conference) %>% summarise(wins = sum(winloss))
 ```
 
 Earlier, we did stacked bar charts. We have what we need to do that now.
@@ -59,7 +59,7 @@ p5 <- c("SEC", "Big Ten", "Pac-12", "Big 12", "ACC")
 To get months, we're going to use a function in the library `lubridate` called `floor_date`, which combine with mutate will give us a field of just months.
 
 ```{r}
-wins <- winlosslogs %>% mutate(month = floor_date(Date, unit="months")) %>% group_by(month, Conference) %>% summarize(wins=sum(winloss)) %>% filter(Conference %in% p5) 
+wins <- winlosslogs %>% mutate(month = floor_date(Date, unit="months")) %>% group_by(month, Conference) %>% summarise(wins=sum(winloss)) %>% filter(Conference %in% p5) 
 ```
 
 Now we can use wins to make our circular bar chart of wins by month in the Power Five.
@@ -71,7 +71,7 @@ ggplot() + geom_bar(data=wins, aes(x=month, weight=wins, fill=Conference)) + the
 Yikes. That looks a lot like a broken pie chart. So months are too thick of a slice. Let's use weeks in our floor date to see what that gives us.
 
 ```{r}
-wins <- winlosslogs %>% mutate(week = floor_date(Date, unit="weeks")) %>% group_by(week, Conference) %>% summarize(wins=sum(winloss)) %>% filter(Conference %in% p5) 
+wins <- winlosslogs %>% mutate(week = floor_date(Date, unit="weeks")) %>% group_by(week, Conference) %>% summarise(wins=sum(winloss)) %>% filter(Conference %in% p5) 
 ```
 
 ```{r}

@@ -34,7 +34,7 @@ newcorrelations <- correlations %>%
 In R, there is a `cor` function, and it works much the same as `mean` or `median`. So we want to see if `differential` is correlated with `Yards`, which is the yards of penalties a team gets in a game. We do that by referenceing `differential` and `Yards` and specifying we want a `pearson` correlation. The number we get back is the correlation coefficient.
 
 ```{r}
-newcorrelations %>% summarize(correlation = cor(differential, Yards, method="pearson"))
+newcorrelations %>% summarise(correlation = cor(differential, Yards, method="pearson"))
 ```
 
 So on a scale of 0 to 1, penalty yards and whether or not the team scores more points than it give up are at .2. You could say they're 20 percent related. Another way to say it? They're 80 percent not related.
@@ -43,13 +43,13 @@ What about the number of penalties instead of the yards?
 
 ```{r}
 newcorrelations %>% 
-  summarize(correlation = cor(differential, `Pen.`, method="pearson"))
+  summarise(correlation = cor(differential, `Pen.`, method="pearson"))
 ```
 
 Even less related. What about looking at the average? Penalty yards per game?
 
 ```{r}
-newcorrelations %>% summarize(correlation = cor(differential, `Pen./G`, method="pearson"))
+newcorrelations %>% summarise(correlation = cor(differential, `Pen./G`, method="pearson"))
 ```
 
 Not only is it less related, but the relationship is inverted. 
@@ -91,7 +91,7 @@ So we've firmly established that penalties aren't predictive. But what is? One m
 
 ```{r}
 newcorrelations %>% 
-  summarize(correlation = cor(OffPointsG, OffConversionPct, method="pearson"))
+  summarise(correlation = cor(OffPointsG, OffConversionPct, method="pearson"))
 ```
 
 Answer: 67 percent. More than three times more related than penalty yards. But how meaningful is that relationship and how predictive is it?
