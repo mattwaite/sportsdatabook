@@ -14,7 +14,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ────── tidyverse 1.3.0 ──
+## ── Attaching packages ─── tidyverse 1.3.0 ──
 ```
 
 ```
@@ -53,7 +53,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Conflicts ───────── tidyverse_conflicts() ──
+## ── Conflicts ────── tidyverse_conflicts() ──
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
 ```
@@ -680,4 +680,4 @@ logs %>%
 ## [1] 0.07093015
 ```
 
-By this model, it predicted we would outscore our opponent by .07 points over the season. So we'd win slightly more than we'd lose. Nebraska's overall record? 19-17. 
+By this model, it predicted we would outscore our opponent by .07 points over the season. So we'd win slightly more than we'd lose. Nebraska's overall record? 19-17.

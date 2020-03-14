@@ -18,7 +18,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ────── tidyverse 1.3.0 ──
+## ── Attaching packages ─── tidyverse 1.3.0 ──
 ```
 
 ```
@@ -57,7 +57,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Conflicts ───────── tidyverse_conflicts() ──
+## ── Conflicts ────── tidyverse_conflicts() ──
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
 ```
@@ -144,7 +144,7 @@ Now, by using +, we can add Michigan State to it. REMEMBER COPY AND PASTE IS A T
 
 
 ```r
-ggplot() + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + geom_line(data=msu, aes(x=Date, y=TeamFGPCT), color="dark green")
+ggplot() + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + geom_line(data=msu, aes(x=Date, y=TeamFGPCT), color="green")
 ```
 
 ![](15-linecharts_files/figure-epub3/unnamed-chunk-8-1.png)<!-- -->
@@ -153,7 +153,7 @@ Let's flatten our lines out by zeroing the Y axis.
 
 
 ```r
-ggplot() + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + geom_line(data=msu, aes(x=Date, y=TeamFGPCT), color="dark green") + scale_y_continuous(limits = c(0, .6))
+ggplot() + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + geom_line(data=msu, aes(x=Date, y=TeamFGPCT), color="green") + scale_y_continuous(limits = c(0, .65))
 ```
 
 ![](15-linecharts_files/figure-epub3/unnamed-chunk-9-1.png)<!-- -->
@@ -175,11 +175,7 @@ I can keep layering on layers all day if I want. And if my dataset has more than
 
 
 ```r
-ggplot() + geom_line(data=p5conf, aes(x=Date, y=TeamFGPCT, group=Team), color="light grey") + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + geom_line(data=msu, aes(x=Date, y=TeamFGPCT), color="dark green") + scale_y_continuous(limits = c(0, .6))
-```
-
-```
-## Warning: Removed 1 rows containing missing values (geom_path).
+ggplot() + geom_line(data=p5conf, aes(x=Date, y=TeamFGPCT, group=Team), color="grey") + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + geom_line(data=msu, aes(x=Date, y=TeamFGPCT), color="green") + scale_y_continuous(limits = c(0, .65))
 ```
 
 ![](15-linecharts_files/figure-epub3/unnamed-chunk-11-1.png)<!-- -->
@@ -195,11 +191,7 @@ average <- logs %>% group_by(Date) %>% summarise(mean_shooting=mean(TeamFGPCT))
 
 
 ```r
-ggplot() + geom_line(data=p5conf, aes(x=Date, y=TeamFGPCT, group=Team), color="light grey") + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + geom_line(data=msu, aes(x=Date, y=TeamFGPCT), color="dark green") + geom_line(data=average, aes(x=Date, y=mean_shooting), color="black") + scale_y_continuous(limits = c(0, .6))
-```
-
-```
-## Warning: Removed 1 rows containing missing values (geom_path).
+ggplot() + geom_line(data=p5conf, aes(x=Date, y=TeamFGPCT, group=Team), color="grey") + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + geom_line(data=msu, aes(x=Date, y=TeamFGPCT), color="green") + geom_line(data=average, aes(x=Date, y=mean_shooting), color="black") + scale_y_continuous(limits = c(0, .65))
 ```
 
 ![](15-linecharts_files/figure-epub3/unnamed-chunk-13-1.png)<!-- -->

@@ -6,7 +6,7 @@ You are soon going to discover that long before you can visualize data, **you ne
 
 But what if your visualization library needs one row for each measure? So state, data type and the data. Nebraska, Population, 1,929,000. That's one row. Then the next row is Nebraska, Average Life Expectancy, 76. That's the next row. That's where recasting your data comes in. 
 
-We can use a library called `tidyr` to `pivot_longer` or `pivot_wider` the data, depending on what we need. We'll use a [dataset of college football attendance](https://unl.box.com/s/hvxmnxhr41x4ikgt3vk38aczcbrf97pn) to demonstrate. First we need some libraries. 
+We can use a library called `tidyr` to `pivot_longer` or `pivot_wider` the data, depending on what we need. We'll use a [dataset of college football attendance](https://unl.box.com/s/fs3rj0dns1xh2y1dx0c2yc0adh4u3zsy) to demonstrate. First we need some libraries. 
 
 
 ```r
@@ -18,7 +18,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ────── tidyverse 1.3.0 ──
+## ── Attaching packages ─── tidyverse 1.3.0 ──
 ```
 
 ```
@@ -57,7 +57,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Conflicts ───────── tidyverse_conflicts() ──
+## ── Conflicts ────── tidyverse_conflicts() ──
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
 ```

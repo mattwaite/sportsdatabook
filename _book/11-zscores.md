@@ -20,7 +20,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ────── tidyverse 1.3.0 ──
+## ── Attaching packages ─── tidyverse 1.3.0 ──
 ```
 
 ```
@@ -59,12 +59,12 @@ library(tidyverse)
 ```
 
 ```
-## ── Conflicts ───────── tidyverse_conflicts() ──
+## ── Conflicts ────── tidyverse_conflicts() ──
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
 ```
 
-Let's look at the current state of Nebraska basketball using the [same logs data we've been using, but for this season so far](). 
+Let's look at the current state of Nebraska basketball using the [same logs data we've been using, but for this season so far](https://unl.box.com/s/wnlh0u9low1yh56enion8zjmu8r7dc8p). 
 
 
 ```r
@@ -140,12 +140,12 @@ head(teamzscore)
 ## # Groups:   Conference [1]
 ##   Conference Team  FGAvg ReboundAvg OppFGAvg OffRebAvg FGzscore RebZscore
 ##   <chr>      <chr> <dbl>      <dbl>    <dbl>     <dbl>    <dbl>     <dbl>
-## 1 A-10       Davi… 0.454       28.8    0.447      30.4    0.513   -1.50  
-## 2 A-10       Dayt… 0.530       31.9    0.421      28      2.68    -0.352 
-## 3 A-10       Duqu… 0.452       32.5    0.412      29.5    0.441   -0.0997
-## 4 A-10       Ford… 0.394       32.2    0.396      32.1   -1.22    -0.214 
-## 5 A-10       Geor… 0.423       36      0.407      33.1   -0.397    1.18  
-## 6 A-10       Geor… 0.418       30.8    0.441      32.9   -0.529   -0.726 
+## 1 A-10       Davi… 0.454       30.7    0.431      31.4    0.508    -0.835
+## 2 A-10       Dayt… 0.526       32.4    0.420      28.5    2.57     -0.127
+## 3 A-10       Duqu… 0.446       33.1    0.413      31.1    0.277     0.158
+## 4 A-10       Ford… 0.383       29.8    0.411      33.2   -1.55     -1.21 
+## 5 A-10       Geor… 0.415       34.2    0.43       32.5   -0.616     0.615
+## 6 A-10       Geor… 0.428       30.7    0.442      32.8   -0.231    -0.825
 ## # … with 3 more variables: OppZscore <dbl>, OppRebZScore <dbl>,
 ## #   TotalZscore <dbl>
 ```
@@ -164,16 +164,16 @@ teamzscore %>% arrange(desc(TotalZscore))
 ## # Groups:   Conference [32]
 ##    Conference Team  FGAvg ReboundAvg OppFGAvg OffRebAvg FGzscore RebZscore
 ##    <chr>      <chr> <dbl>      <dbl>    <dbl>     <dbl>    <dbl>     <dbl>
-##  1 Big West   UC-I… 0.460       38.2    0.379      28      0.815     1.99 
-##  2 Southland  Step… 0.500       35.9    0.423      26.3    1.84      1.57 
-##  3 OVC        Murr… 0.482       37.2    0.391      26.9    1.24      1.28 
-##  4 SWAC       Gram… 0.463       34.6    0.433      30.9    1.85      1.16 
-##  5 Horizon    Wrig… 0.467       38.4    0.417      32.9    1.45      2.23 
-##  6 A-Sun      Libe… 0.484       31.6    0.363      27.2    1.74     -0.837
-##  7 MEAC       Morg… 0.433       34.2    0.420      29.6    1.14      1.12 
-##  8 Big 12     Kans… 0.506       35.5    0.375      28.7    2.34      0.275
-##  9 ACC        Loui… 0.476       38.1    0.372      29.9    1.31      1.30 
-## 10 NEC        Sacr… 0.442       37.8    0.413      33.4    1.01      1.58 
+##  1 Big West   UC-I… 0.468       38.0    0.378      27.5    1.32      2.24 
+##  2 Big 12     Kans… 0.487       35.7    0.378      29.0    2.36      0.892
+##  3 OVC        Murr… 0.487       35.5    0.400      27.7    1.43      1.11 
+##  4 ACC        Loui… 0.468       37.4    0.374      30.3    1.41      1.43 
+##  5 Ivy        Yale… 0.472       37.4    0.369      31.0    1.23      1.52 
+##  6 WCC        Gonz… 0.513       37.9    0.418      28.8    1.48      1.92 
+##  7 Big South  Wint… 0.463       37.7    0.426      30.8    1.06      2.18 
+##  8 Summit     Sout… 0.488       35.9    0.421      31.4    1.45      1.51 
+##  9 A-10       Dayt… 0.526       32.4    0.420      28.5    2.57     -0.127
+## 10 NEC        Sacr… 0.442       37.1    0.414      31.7    0.770     1.70 
 ## # … with 343 more rows, and 3 more variables: OppZscore <dbl>,
 ## #   OppRebZScore <dbl>, TotalZscore <dbl>
 ```
@@ -194,20 +194,20 @@ teamzscore %>%
 ## # Groups:   Conference [1]
 ##    Conference Team  FGAvg ReboundAvg OppFGAvg OffRebAvg FGzscore RebZscore
 ##    <chr>      <chr> <dbl>      <dbl>    <dbl>     <dbl>    <dbl>     <dbl>
-##  1 Big Ten    Mich… 0.466       39.7    0.374      28.6   0.556     1.47  
-##  2 Big Ten    Ohio… 0.473       36      0.359      27.9   0.870     0.0613
-##  3 Big Ten    Rutg… 0.476       37.7    0.375      28.2   0.962     0.712 
-##  4 Big Ten    Indi… 0.471       36.8    0.410      27.4   0.767     0.359 
-##  5 Big Ten    Illi… 0.469       37.7    0.425      27     0.701     0.712 
-##  6 Big Ten    Mary… 0.415       40.1    0.377      31.4  -1.56      1.61  
-##  7 Big Ten    Penn… 0.455       37.4    0.393      32.7   0.0969    0.576 
-##  8 Big Ten    Mich… 0.494       33.8    0.412      30.4   1.72     -0.785 
-##  9 Big Ten    Purd… 0.428       35.4    0.390      29.1  -0.993    -0.183 
-## 10 Big Ten    Iowa… 0.460       35.3    0.424      31.3   0.319    -0.210 
-## 11 Big Ten    Minn… 0.444       35.4    0.408      31.7  -0.357    -0.172 
-## 12 Big Ten    Wisc… 0.436       31.6    0.409      29    -0.703    -1.62  
-## 13 Big Ten    Nort… 0.423       31.6    0.426      30.9  -1.21     -1.61  
-## 14 Big Ten    Nebr… 0.424       33.4    0.427      43.7  -1.16     -0.914 
+##  1 Big Ten    Mich… 0.457       38.3    0.379      28.8    1.02     1.52  
+##  2 Big Ten    Rutg… 0.448       37.4    0.380      30.6    0.494    1.16  
+##  3 Big Ten    Ohio… 0.454       34.0    0.384      28.5    0.843   -0.319 
+##  4 Big Ten    Illi… 0.457       36.5    0.411      28.1    0.975    0.779 
+##  5 Big Ten    Indi… 0.453       35.6    0.416      28.0    0.765    0.393 
+##  6 Big Ten    Mary… 0.411       37.5    0.386      31.7   -1.58     1.20  
+##  7 Big Ten    Penn… 0.442       35.7    0.394      34      0.185    0.413 
+##  8 Big Ten    Mich… 0.464       33.0    0.430      32.0    1.40    -0.705 
+##  9 Big Ten    Purd… 0.426       33.7    0.410      28.7   -0.738   -0.447 
+## 10 Big Ten    Iowa… 0.451       34.8    0.433      31.6    0.641    0.0501
+## 11 Big Ten    Minn… 0.422       35.0    0.406      33.1   -0.928    0.143 
+## 12 Big Ten    Wisc… 0.422       31.3    0.410      31.7   -0.975   -1.44  
+## 13 Big Ten    Nort… 0.420       30.6    0.420      31.9   -1.06    -1.75  
+## 14 Big Ten    Nebr… 0.420       32.4    0.441      42.7   -1.05    -0.994 
 ## # … with 3 more variables: OppZscore <dbl>, OppRebZScore <dbl>,
 ## #   TotalZscore <dbl>
 ```

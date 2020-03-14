@@ -58,13 +58,13 @@ ggplot() + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red")
 Now, by using +, we can add Michigan State to it. REMEMBER COPY AND PASTE IS A THING. Nothing changes except what data you are using.
 
 ```{r}
-ggplot() + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + geom_line(data=msu, aes(x=Date, y=TeamFGPCT), color="dark green")
+ggplot() + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + geom_line(data=msu, aes(x=Date, y=TeamFGPCT), color="green")
 ```
 
 Let's flatten our lines out by zeroing the Y axis.
 
 ```{r}
-ggplot() + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + geom_line(data=msu, aes(x=Date, y=TeamFGPCT), color="dark green") + scale_y_continuous(limits = c(0, .6))
+ggplot() + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + geom_line(data=msu, aes(x=Date, y=TeamFGPCT), color="green") + scale_y_continuous(limits = c(0, .65))
 ```
 
 So visually speaking, the difference between Nebraska and Michigan State's season is that Michigan State stayed mostly on an even keel, and Nebraska went on a two month swoon.
@@ -82,7 +82,7 @@ p5conf <- logs %>% filter(Conference %in% powerfive)
 I can keep layering on layers all day if I want. And if my dataset has more than one team in it, I need to use the `group` command. And, the layering comes in order -- so if you're going to layer a bunch of lines with a smaller group of lines, you want the bunch on the bottom. So to do that, your code stacks from the bottom. The first geom in the code gets rendered first. The second gets layered on top of that. The third gets layered on that and so on. 
 
 ```{r}
-ggplot() + geom_line(data=p5conf, aes(x=Date, y=TeamFGPCT, group=Team), color="light grey") + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + geom_line(data=msu, aes(x=Date, y=TeamFGPCT), color="dark green") + scale_y_continuous(limits = c(0, .6))
+ggplot() + geom_line(data=p5conf, aes(x=Date, y=TeamFGPCT, group=Team), color="grey") + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + geom_line(data=msu, aes(x=Date, y=TeamFGPCT), color="green") + scale_y_continuous(limits = c(0, .65))
 ```
 
 What do we see here? How has Nebraska and Michigan State's season evolved against all the rest of the teams in college basketball?
@@ -94,5 +94,5 @@ average <- logs %>% group_by(Date) %>% summarise(mean_shooting=mean(TeamFGPCT))
 ```
 
 ```{r}
-ggplot() + geom_line(data=p5conf, aes(x=Date, y=TeamFGPCT, group=Team), color="light grey") + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + geom_line(data=msu, aes(x=Date, y=TeamFGPCT), color="dark green") + geom_line(data=average, aes(x=Date, y=mean_shooting), color="black") + scale_y_continuous(limits = c(0, .6))
+ggplot() + geom_line(data=p5conf, aes(x=Date, y=TeamFGPCT, group=Team), color="grey") + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + geom_line(data=msu, aes(x=Date, y=TeamFGPCT), color="green") + geom_line(data=average, aes(x=Date, y=mean_shooting), color="black") + scale_y_continuous(limits = c(0, .65))
 ```
