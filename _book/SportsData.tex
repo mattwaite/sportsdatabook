@@ -753,7 +753,7 @@ So first we'll import the tidyverse so we can read in our data and begin to work
 \end{Highlighting}
 \end{Shaded}
 
-Now we'll import a common and \href{https://unl.box.com/s/hvxmnxhr41x4ikgt3vk38aczcbrf97pn}{simple dataset of total attendance} at NCAA football games over the last few seasons.
+Now we'll import a common and \href{https://unl.box.com/s/etqna5bfvf3b0gsnw0kcjjn1rxx9335s}{simple dataset of total attendance} at NCAA football games over the last few seasons.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -972,7 +972,7 @@ More often than not, we have more data than we want. Sometimes we need to be rid
 
 \textbf{Selecting simply returns only the fields named}. So if you only want to see School and Attendance, you select those fields. When you look at your data again, you'll have two columns. If you try to use one of your columns that you had before you used select, you'll get an error.
 
-Let's work with our football attendance data to show some examples.
+Let's work with our \href{https://unl.box.com/s/etqna5bfvf3b0gsnw0kcjjn1rxx9335s}{football attendance} data to show some examples.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1296,7 +1296,7 @@ You are soon going to discover that long before you can visualize data, \textbf{
 
 But what if your visualization library needs one row for each measure? So state, data type and the data. Nebraska, Population, 1,929,000. That's one row. Then the next row is Nebraska, Average Life Expectancy, 76. That's the next row. That's where recasting your data comes in.
 
-We can use a library called \texttt{tidyr} to \texttt{pivot\_longer} or \texttt{pivot\_wider} the data, depending on what we need. We'll use a \href{https://unl.box.com/s/fs3rj0dns1xh2y1dx0c2yc0adh4u3zsy}{dataset of college football attendance} to demonstrate. First we need some libraries.
+We can use a library called \texttt{tidyr} to \texttt{pivot\_longer} or \texttt{pivot\_wider} the data, depending on what we need. We'll use a \href{https://unl.box.com/s/etqna5bfvf3b0gsnw0kcjjn1rxx9335s}{dataset of college football attendance} to demonstrate. First we need some libraries.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2417,7 +2417,7 @@ Residuals can tell you severals things, but most importantly is if a linear mode
 
 Residuals can also tell you who is underperforming and overperforming the model. Let's take a look at an example we've used regularly this semester -- third down conversion percentage and penalties.
 
-Let's first attach libraries and use rvest to get some data. Note: In the rvest steps, I rename the first column because it's blank on the page and then I merge scoring offense to two different tables -- third downs and penalties.
+Let's first attach libraries and \href{https://unl.box.com/s/zlxoptqixkt98gubk3i6316qun99l49r}{get some data}. Note: In the rvest steps, I rename the first column because it's blank on the page and then I merge scoring offense to two different tables -- third downs and penalties.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2840,7 +2840,7 @@ Here are some \texttt{ggplot2} resources you'll want to keep handy:
 
 Let's dive in using data we've already seen before -- football attendance. This workflow will represent a clear picture of what your work in this class will be like for much of the rest of the semester. One way to think of this workflow is that your R Notebook is now your digital sketchbook, where you will try different types of visualizations to find ones that work. Then, you will export your work into a program like Illustrator to finish the work.
 
-To begin, we'll import the \texttt{ggplot2} and \texttt{dplyr} libraries. We'll read in the data, then create a new dataframe that represents our attendance data, similar to what we've done before.
+To begin, we'll import the \texttt{ggplot2} and \texttt{dplyr} libraries. We'll read in the data, then create a new dataframe that represents \href{https://unl.box.com/s/etqna5bfvf3b0gsnw0kcjjn1rxx9335s}{our attendance data}, similar to what we've done before.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3297,7 +3297,7 @@ Let's start getting all that we need. We can use the tidyverse shortcut.
 \end{Highlighting}
 \end{Shaded}
 
-Now we'll import the data you created. Mine looks like this:
+Now we'll \href{https://unl.box.com/s/a8m91bro10t89watsyo13yjegb1fy009}{import the data you need}. Mine looks like this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3359,7 +3359,9 @@ See a problem here? Note the Y axis doesn't start with zero. That makes this loo
 \includegraphics{SportsData_files/figure-latex/unnamed-chunk-133-1.pdf}
 
 Note also that our X axis labels are automated. It knows it's a date and it just labels it by month.
-\#\# This is too simple.
+
+\hypertarget{this-is-too-simple.}{%
+\section{This is too simple.}\label{this-is-too-simple.}}
 
 With datasets, we want to invite comparison. So let's answer the question visually. Let's put two lines on the same chart. How does Nebraska compare to Michigan State and Purdue, the eventual regular season co-champions?
 
@@ -3461,7 +3463,7 @@ Step charts can be used for all kinds of things -- showing how a player's career
 \end{Highlighting}
 \end{Shaded}
 
-And we'll use our basketball log data.
+And we'll use \href{https://unl.box.com/s/a8m91bro10t89watsyo13yjegb1fy009}{our basketball log data}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5434,7 +5436,9 @@ Using Rvest, I'm going to grab total offense rankings, scoring offense rankings 
 \NormalTok{turnovers19 <-}\StringTok{ }\NormalTok{turnovers19[[}\DecValTok{1}\NormalTok{]] }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(Name, }\StringTok{`}\DataTypeTok{Total Lost}\StringTok{`}\NormalTok{)}
 
 
-\NormalTok{offense <-}\StringTok{ }\NormalTok{yards19 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{left_join}\NormalTok{(points19, }\DataTypeTok{by=}\KeywordTok{c}\NormalTok{(}\StringTok{"Name"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{left_join}\NormalTok{(turnovers19, }\DataTypeTok{by=}\KeywordTok{c}\NormalTok{(}\StringTok{"Name"}\NormalTok{))}
+\NormalTok{offense <-}\StringTok{ }\NormalTok{yards19 }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{left_join}\NormalTok{(points19, }\DataTypeTok{by=}\KeywordTok{c}\NormalTok{(}\StringTok{"Name"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{left_join}\NormalTok{(turnovers19, }\DataTypeTok{by=}\KeywordTok{c}\NormalTok{(}\StringTok{"Name"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5503,7 +5507,10 @@ I'm going to edit the same rvest code to grab those points per game stats and me
 
 \NormalTok{turnovers19 <-}\StringTok{ }\NormalTok{turnovers19[[}\DecValTok{1}\NormalTok{]] }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(Name, Margin)}
 
-\NormalTok{football <-}\StringTok{ }\NormalTok{o19 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{left_join}\NormalTok{(d19, }\DataTypeTok{by=}\KeywordTok{c}\NormalTok{(}\StringTok{"Name"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{left_join}\NormalTok{(turnovers19, }\DataTypeTok{by=}\KeywordTok{c}\NormalTok{(}\StringTok{"Name"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rename}\NormalTok{(}\StringTok{`}\DataTypeTok{Offensive Points Per Game}\StringTok{`}\NormalTok{ =}\StringTok{ `}\DataTypeTok{Points/G.x}\StringTok{`}\NormalTok{, }\StringTok{`}\DataTypeTok{Defensive Points Per Game}\StringTok{`}\NormalTok{=}\StringTok{`}\DataTypeTok{Points/G.y}\StringTok{`}\NormalTok{)}
+\NormalTok{football <-}\StringTok{ }\NormalTok{o19 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{left_join}\NormalTok{(d19, }\DataTypeTok{by=}\KeywordTok{c}\NormalTok{(}\StringTok{"Name"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{left_join}\NormalTok{(turnovers19, }\DataTypeTok{by=}\KeywordTok{c}\NormalTok{(}\StringTok{"Name"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{rename}\NormalTok{(}\StringTok{`}\DataTypeTok{Offensive Points Per Game}\StringTok{`}\NormalTok{ =}\StringTok{ `}\DataTypeTok{Points/G.x}\StringTok{`}\NormalTok{, }\StringTok{`}\DataTypeTok{Defensive Points Per Game}\StringTok{`}\NormalTok{=}\StringTok{`}\DataTypeTok{Points/G.y}\StringTok{`}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
