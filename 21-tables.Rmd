@@ -2,13 +2,13 @@
 
 But not a table. A table with features. 
 
-Sometimes, the best way to show your data is with a table -- simple rows and columns. It allows a reader to compare whatever they want to compare a little easier than a graph where you've chosen what to highlight. R has a neat package called `formattable` and you'll install it like anything else with `install.packages('formattable')`. 
+Sometimes, the best way to show your data is with a table -- simple rows and columns. It allows a reader to compare whatever they want to compare a little easier than a graph where you've chosen what to highlight. R has a neat package called `kableExtra` and you'll install it like anything else with `install.packages('kableExtra')`. 
 
 So what does it do? Let's gather our libraries and [get some data](https://unl.box.com/s/g3eeuogx8bog72ig28enuakhpdlbn394). 
 
 ```{r}
 library(tidyverse)
-library(formattable)
+library(kableExtra)
 ```
 
 
@@ -16,123 +16,125 @@ library(formattable)
 offense <- read_csv("data/offensechange.csv")
 ```
 
-
 Let's ask this question: Which college football team saw the greatest improvement in yards per game last regular season? The simplest way to calculate that is by percent change. 
 
 ```{r}
 changeTotalOffense <- offense %>%
-  select(Name, Year, `Yards/G`) %>% 
-  spread(Year, `Yards/G`) %>% 
-  mutate(Change=(`2019`-`2018`)/`2018`) %>% 
-  arrange(desc(Change)) %>% 
-  top_n(20)
+  select(Name, Year, `Yards/G`) %>% # picking what we need.
+  pivot_wider(names_from = Year, values_from = `Yards/G`) %>% # making it wide 
+  mutate(Change=(`2019`-`2018`)/`2018`) %>% # so we can calculate percent change
+  arrange(desc(Change)) %>%  
+  top_n(10) # just want a top 10 list
 ```
-We've output tables to the screen a thousand times in this class with `head`, but formattable makes them look good with very little code. 
+We've output tables to the screen a thousand times in this class with `head`, but kable makes them look decent with very little code. 
 
 ```{r}
-formattable(changeTotalOffense)
+changeTotalOffense %>% kable()
 ```
 
-So there you have it. Central Michigan improved the most (but look at who came in second!). First thing I don't like about formattable tables -- the right alignment. Let's fix that. 
+So there you have it. Central Michigan improved the most (but look at who came in second!). Kable has a mountain of customization options. The good news is that it works in a very familiar pattern. We'll start with default styling.
 
 ```{r}
-formattable(changeTotalOffense, align="l")
+changeTotalOffense %>% 
+  kable() %>% 
+  kable_styling()
 ```
-
-Next? I forgot to multiply by 100. No matter. Formattable can fix that for us. 
+Let's do more than the defaults, which you can see are pretty decent. Let's stripe every other row with a little bit of grey, and let's smush the width of the rows.
 
 ```{r}
-formattable(
-  changeTotalOffense, 
-  align="l",
-  list(
-    `Change` = percent)
-  )
+changeTotalOffense %>% 
+  kable() %>% 
+  kable_styling(bootstrap_options = c("striped", "condensed"))
 ```
 
-Something else not great? I can't really see the magnitude of the 2019 column. A team could improve a lot, but still not gain that many yards. Formattable has embeddable bar charts in the table. They look like this. 
+Throughout the semester, we've been using color and other signals to highlight things. Let's pretend we're doing a project on LSU. We can use row_spec to highlight things.
+
+What row_spec is doing here is we're specifying which row -- 2 -- and making all the text on that row bold. We're making the color of the text white, because we're going to set the background to a color -- in this case, the hex color for LSU purple.
 
 ```{r}
-formattable(
-  changeTotalOffense, 
-  align="l",
-  list(
-    `2019` = color_bar("#FA614B"), 
-    `Change` = percent)
-  )
-```
-That gives me some more to mess with. 
-
-One thing you can do is set the bar widths to make them relative to each other, using a different function called a `normalize_bar`.
-```{r}
-formattable(
-  changeTotalOffense, 
-  align="r",
-  list(
-    `2019` = normalize_bar("#FA614B"), 
-    `2018` = normalize_bar("#FA614B"), 
-    `Change` = percent)
-  )
+changeTotalOffense %>% 
+  kable() %>% 
+  kable_styling(bootstrap_options = c("striped", "condensed")) %>%
+  row_spec(2, bold = T, color = "white", background = "#461D7C")
 ```
 
-Note: bookdown is formatting this weird. Your numbers won't look like this.
-
-Another way to deal with this -- color tiles. Change the rectangle that houses the data to a color indicating the intensity of it.
+There's also something called column_spec where we can change the styling on individual columns. What if we wanted to make all the team names bold?
 
 ```{r}
-formattable(
-  changeTotalOffense, 
-  align="r",
-  list(
-     area(col = 2:3) ~ color_tile("#FFF6F4", "#FA614B"),
-    `Change` = percent)
-  )
+changeTotalOffense %>% 
+  kable() %>% 
+  kable_styling(bootstrap_options = c("striped", "condensed")) %>%
+  row_spec(2, bold = T, color = "white", background = "#461D7C") %>%
+  column_spec(1, bold=T)
 ```
 
-### Exporting tables
+Honestly, this is really good right here. You'd see this published ... except for one thing: the percentages.
 
-The first thing you need to do is install some libraries -- do this in the console, not in an R Studio code block because htmltools get's a little weird. 
+We could go back up to the top and multiply by 100, but we'd still be missing the percent sign. Well, there's another library for making interesting tables that, in my opinion, has some flaws but does some interesting things too called `formattable`. 
 
-```
-install.packages("htmltools")
-install.packages("webshot")
-
-webshot::install_phantomjs()
-```
-
-Now, copy, paste and run this code block entirely. Don't change anything. 
+Go to the console and install `formattable` with `install.packages("formattable")`. 
 
 ```{r}
-library("htmltools")
-library("webshot")    
-
-export_formattable <- function(f, file, width = "100%", height = NULL, 
-                               background = "white", delay = 0.2)
-    {
-      w <- as.htmlwidget(f, width = width, height = height)
-      path <- html_print(w, background = background, viewer = NULL)
-      url <- paste0("file:///", gsub("\\\\", "/", normalizePath(path)))
-      webshot(url,
-              file = file,
-              selector = ".formattable_widget",
-              delay = delay)
-    }
+library(formattable)
 ```
 
-Now, save your formattable table to an object using the `<-` assignment operator. 
-
-After you've done that, you can call the function you ran in the previous block to export as a png file. In my case, I created an object called table, which is populated with my formattable table. Then, in export_formattable, I pass in that `table` object and give it a name. 
+Then, we're going to use mutate here to use formattables `percent()` function to fix Change. Because it uses some HTML wizardry under the hood, we have to set kable to not `escape` the HTML.
 
 ```{r}
-table <- formattable(
-  changeTotalOffense, 
-  align="r",
-  list(
-     area(col = 2:3) ~ color_tile("#FFF6F4", "#FA614B"),
-    `Change` = percent)
-  )
-
-export_formattable(table,"table.png")
+changeTotalOffense %>% 
+  mutate(Change = percent(Change)) %>%
+  kable(escape=F) %>% 
+  kable_styling(bootstrap_options = c("striped", "condensed")) %>%
+  row_spec(2, bold = T, color = "white", background = "#461D7C") %>%
+  column_spec(1, bold=T)
 ```
 
-For now, pngs are what you need to export. There is a way to export PDFs, but they lose all the formatting when you do that, which is kind of pointless. 
+Another way to highlight things: color ramps. We can change the color of the box covering the percentage using another mutate like this:
+
+```{r}
+changeTotalOffense %>% 
+  mutate(Change = percent(Change)) %>%
+  mutate(Change = cell_spec(
+    Change, color = "white", bold = T,
+    background = spec_color(1:10, end = 0.75, option = "B", direction = -1)
+  )) %>%
+  kable(escape=F) %>% 
+  kable_styling(bootstrap_options = c("striped", "condensed")) %>%
+  row_spec(2, bold = T, color = "white", background = "#461D7C") %>%
+  column_spec(1, bold=T)
+```
+
+If this is intersting to you, [there's more you can do](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html#overview).
+
+## Exporting tables
+
+One of the major shortcomings with `formattable` is a very limited ability to export tables. Fortunately, `kable` appears to have solved that problem.
+
+But, for this to be a finished product, we need to add a headline, credit line and source line. 
+
+Good news bad news: The bad news is that `kable` doesn't have a good way to add a headline. The good news is we can do that in illustrator pretty easily.
+
+The other good news bad news: `kable` isn't going to export this as an actual vector file. It's going to make it an image and embed that into a pdf. That has consequences if we want to edit it.
+
+To export it, we merely add a save_kable to the end and give it a file path.
+
+```{r eval=FALSE}
+changeTotalOffense %>% 
+  mutate(Change = percent(Change)) %>%
+  mutate(Change = cell_spec(
+    Change, color = "white", bold = T,
+    background = spec_color(1:10, end = 0.75, option = "B", direction = -1)
+  )) %>%
+  kable(escape=F) %>% 
+  kable_styling(bootstrap_options = c("striped", "condensed")) %>%
+  row_spec(2, bold = T, color = "white", background = "#461D7C") %>%
+  column_spec(1, bold=T) %>%
+  save_kable("lsu.pdf")
+```
+To fix this, we need to pull it into Illustrator. In there, we're going to expand the artboard, add a headline and chatter, then add source and credit lines at the bottom, and finish with touching up the artboards.
+
+Here's a video walkthrough:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/AeZ5uiCpJro" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
