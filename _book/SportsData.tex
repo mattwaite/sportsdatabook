@@ -4191,14 +4191,14 @@ Line charts aren't the only things we can do. We can do any kind of chart in ggp
 
 But not a table. A table with features.
 
-Sometimes, the best way to show your data is with a table -- simple rows and columns. It allows a reader to compare whatever they want to compare a little easier than a graph where you've chosen what to highlight. R has a neat package called \texttt{formattable} and you'll install it like anything else with \texttt{install.packages(\textquotesingle{}formattable\textquotesingle{})}.
+Sometimes, the best way to show your data is with a table -- simple rows and columns. It allows a reader to compare whatever they want to compare a little easier than a graph where you've chosen what to highlight. R has a neat package called \texttt{kableExtra} and you'll install it like anything else with \texttt{install.packages(\textquotesingle{}kableExtra\textquotesingle{})}.
 
 So what does it do? Let's gather our libraries and \href{https://unl.box.com/s/g3eeuogx8bog72ig28enuakhpdlbn394}{get some data}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(tidyverse)}
-\KeywordTok{library}\NormalTok{(formattable)}
+\KeywordTok{library}\NormalTok{(kableExtra)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4228,11 +4228,11 @@ Let's ask this question: Which college football team saw the greatest improvemen
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{changeTotalOffense <-}\StringTok{ }\NormalTok{offense }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(Name, Year, }\StringTok{`}\DataTypeTok{Yards/G}\StringTok{`}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{spread}\NormalTok{(Year, }\StringTok{`}\DataTypeTok{Yards/G}\StringTok{`}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Change=}\NormalTok{(}\StringTok{`}\DataTypeTok{2019}\StringTok{`}\OperatorTok{-}\StringTok{`}\DataTypeTok{2018}\StringTok{`}\NormalTok{)}\OperatorTok{/}\StringTok{`}\DataTypeTok{2018}\StringTok{`}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(Change)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{top_n}\NormalTok{(}\DecValTok{20}\NormalTok{)}
+\StringTok{  }\KeywordTok{select}\NormalTok{(Name, Year, }\StringTok{`}\DataTypeTok{Yards/G}\StringTok{`}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# picking what we need.}
+\StringTok{  }\KeywordTok{pivot_wider}\NormalTok{(}\DataTypeTok{names_from =}\NormalTok{ Year, }\DataTypeTok{values_from =} \StringTok{`}\DataTypeTok{Yards/G}\StringTok{`}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# making it wide }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Change=}\NormalTok{(}\StringTok{`}\DataTypeTok{2019}\StringTok{`}\OperatorTok{-}\StringTok{`}\DataTypeTok{2018}\StringTok{`}\NormalTok{)}\OperatorTok{/}\StringTok{`}\DataTypeTok{2018}\StringTok{`}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# so we can calculate percent change}
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(Change)) }\OperatorTok{%>%}\StringTok{  }
+\StringTok{  }\KeywordTok{top_n}\NormalTok{(}\DecValTok{10}\NormalTok{) }\CommentTok{# just want a top 10 list}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4240,1144 +4240,751 @@ Let's ask this question: Which college football team saw the greatest improvemen
 ## Selecting by Change
 \end{verbatim}
 
-We've output tables to the screen a thousand times in this class with \texttt{head}, but formattable makes them look good with very little code.
+We've output tables to the screen a thousand times in this class with \texttt{head}, but kable makes them look decent with very little code.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{formattable}\NormalTok{(changeTotalOffense)}
+\NormalTok{changeTotalOffense }\OperatorTok{%>%}\StringTok{ }\KeywordTok{kable}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
 Name
 
-2018
-
 2019
+
+2018
 
 Change
 
 Central Michigan
 
-254.7
-
 433.6
+
+254.7
 
 0.7023950
 
 LSU
 
-402.1
-
 564.1
+
+402.1
 
 0.4028849
 
 UTSA
 
-247.1
-
 344.9
+
+247.1
 
 0.3957912
 
 San Jose State
 
-323.7
-
 427.4
+
+323.7
 
 0.3203584
 
 Navy
 
-349.3
-
 455.8
+
+349.3
 
 0.3048955
 
 Louisville
 
-352.6
-
 447.3
+
+352.6
 
 0.2685763
 
 SMU
 
-387.2
-
 489.8
+
+387.2
 
 0.2649793
 
 BYU
 
-364.9
-
 443.8
+
+364.9
 
 0.2162236
 
 New Mexico
 
-330.0
-
 400.3
+
+330.0
 
 0.2130303
 
 Charlotte
 
-343.1
-
 411.8
+
+343.1
 
 0.2002332
 
-Iowa State
-
-371.0
-
-444.3
-
-0.1975741
-
-USC
-
-382.6
-
-454.0
-
-0.1866179
-
-Troy
-
-389.4
-
-456.3
-
-0.1718028
-
-Louisiana-Lafayette
-
-424.3
-
-494.1
-
-0.1645062
-
-Georgia State
-
-378.2
-
-439.8
-
-0.1628768
-
-Louisiana Tech
-
-379.3
-
-436.8
-
-0.1515950
-
-Minnesota
-
-379.6
-
-432.0
-
-0.1380400
-
-Ball State
-
-408.6
-
-463.0
-
-0.1331375
-
-Texas
-
-411.6
-
-465.8
-
-0.1316812
-
-Florida State
-
-361.2
-
-408.3
-
-0.1303987
-
-So there you have it. Central Michigan improved the most (but look at who came in second!). First thing I don't like about formattable tables -- the right alignment. Let's fix that.
+So there you have it. Central Michigan improved the most (but look at who came in second!). Kable has a mountain of customization options. The good news is that it works in a very familiar pattern. We'll start with default styling.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{formattable}\NormalTok{(changeTotalOffense, }\DataTypeTok{align=}\StringTok{"l"}\NormalTok{)}
+\NormalTok{changeTotalOffense }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{kable}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{kable_styling}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
 Name
 
-2018
-
 2019
+
+2018
 
 Change
 
 Central Michigan
 
-254.7
-
 433.6
+
+254.7
 
 0.7023950
 
 LSU
 
-402.1
-
 564.1
+
+402.1
 
 0.4028849
 
 UTSA
 
-247.1
-
 344.9
+
+247.1
 
 0.3957912
 
 San Jose State
 
-323.7
-
 427.4
+
+323.7
 
 0.3203584
 
 Navy
 
-349.3
-
 455.8
+
+349.3
 
 0.3048955
 
 Louisville
 
-352.6
-
 447.3
+
+352.6
 
 0.2685763
 
 SMU
 
-387.2
-
 489.8
+
+387.2
 
 0.2649793
 
 BYU
 
-364.9
-
 443.8
+
+364.9
 
 0.2162236
 
 New Mexico
 
-330.0
-
 400.3
+
+330.0
 
 0.2130303
 
 Charlotte
 
-343.1
-
 411.8
+
+343.1
 
 0.2002332
 
-Iowa State
-
-371.0
-
-444.3
-
-0.1975741
-
-USC
-
-382.6
-
-454.0
-
-0.1866179
-
-Troy
-
-389.4
-
-456.3
-
-0.1718028
-
-Louisiana-Lafayette
-
-424.3
-
-494.1
-
-0.1645062
-
-Georgia State
-
-378.2
-
-439.8
-
-0.1628768
-
-Louisiana Tech
-
-379.3
-
-436.8
-
-0.1515950
-
-Minnesota
-
-379.6
-
-432.0
-
-0.1380400
-
-Ball State
-
-408.6
-
-463.0
-
-0.1331375
-
-Texas
-
-411.6
-
-465.8
-
-0.1316812
-
-Florida State
-
-361.2
-
-408.3
-
-0.1303987
-
-Next? I forgot to multiply by 100. No matter. Formattable can fix that for us.
+Let's do more than the defaults, which you can see are pretty decent. Let's stripe every other row with a little bit of grey, and let's smush the width of the rows.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{formattable}\NormalTok{(}
-\NormalTok{  changeTotalOffense, }
-  \DataTypeTok{align=}\StringTok{"l"}\NormalTok{,}
-  \KeywordTok{list}\NormalTok{(}
-    \StringTok{`}\DataTypeTok{Change}\StringTok{`}\NormalTok{ =}\StringTok{ }\NormalTok{percent)}
-\NormalTok{  )}
+\NormalTok{changeTotalOffense }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{kable}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{kable_styling}\NormalTok{(}\DataTypeTok{bootstrap_options =} \KeywordTok{c}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }\StringTok{"condensed"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
 Name
 
-2018
-
 2019
+
+2018
 
 Change
 
 Central Michigan
-
-254.7
 
 433.6
 
-70.24\%
+254.7
+
+0.7023950
 
 LSU
-
-402.1
 
 564.1
 
-40.29\%
+402.1
+
+0.4028849
 
 UTSA
-
-247.1
 
 344.9
 
-39.58\%
+247.1
+
+0.3957912
 
 San Jose State
-
-323.7
 
 427.4
 
-32.04\%
+323.7
+
+0.3203584
 
 Navy
-
-349.3
 
 455.8
 
-30.49\%
+349.3
+
+0.3048955
 
 Louisville
-
-352.6
 
 447.3
 
-26.86\%
+352.6
+
+0.2685763
 
 SMU
-
-387.2
 
 489.8
 
-26.50\%
+387.2
+
+0.2649793
 
 BYU
-
-364.9
 
 443.8
 
-21.62\%
+364.9
+
+0.2162236
 
 New Mexico
-
-330.0
 
 400.3
 
-21.30\%
+330.0
+
+0.2130303
 
 Charlotte
-
-343.1
 
 411.8
 
-20.02\%
+343.1
 
-Iowa State
+0.2002332
 
-371.0
+Throughout the semester, we've been using color and other signals to highlight things. Let's pretend we're doing a project on LSU. We can use row\_spec to highlight things.
 
-444.3
-
-19.76\%
-
-USC
-
-382.6
-
-454.0
-
-18.66\%
-
-Troy
-
-389.4
-
-456.3
-
-17.18\%
-
-Louisiana-Lafayette
-
-424.3
-
-494.1
-
-16.45\%
-
-Georgia State
-
-378.2
-
-439.8
-
-16.29\%
-
-Louisiana Tech
-
-379.3
-
-436.8
-
-15.16\%
-
-Minnesota
-
-379.6
-
-432.0
-
-13.80\%
-
-Ball State
-
-408.6
-
-463.0
-
-13.31\%
-
-Texas
-
-411.6
-
-465.8
-
-13.17\%
-
-Florida State
-
-361.2
-
-408.3
-
-13.04\%
-
-Something else not great? I can't really see the magnitude of the 2019 column. A team could improve a lot, but still not gain that many yards. Formattable has embeddable bar charts in the table. They look like this.
+What row\_spec is doing here is we're specifying which row -- 2 -- and making all the text on that row bold. We're making the color of the text white, because we're going to set the background to a color -- in this case, the hex color for LSU purple.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{formattable}\NormalTok{(}
-\NormalTok{  changeTotalOffense, }
-  \DataTypeTok{align=}\StringTok{"l"}\NormalTok{,}
-  \KeywordTok{list}\NormalTok{(}
-    \StringTok{`}\DataTypeTok{2019}\StringTok{`}\NormalTok{ =}\StringTok{ }\KeywordTok{color_bar}\NormalTok{(}\StringTok{"#FA614B"}\NormalTok{), }
-    \StringTok{`}\DataTypeTok{Change}\StringTok{`}\NormalTok{ =}\StringTok{ }\NormalTok{percent)}
-\NormalTok{  )}
+\NormalTok{changeTotalOffense }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{kable}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{kable_styling}\NormalTok{(}\DataTypeTok{bootstrap_options =} \KeywordTok{c}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }\StringTok{"condensed"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{row_spec}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DataTypeTok{bold =}\NormalTok{ T, }\DataTypeTok{color =} \StringTok{"white"}\NormalTok{, }\DataTypeTok{background =} \StringTok{"#461D7C"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 Name
 
-2018
-
 2019
+
+2018
 
 Change
 
 Central Michigan
+
+433.6
 
 254.7
 
-{433.6}
-
-70.24\%
+0.7023950
 
 LSU
+
+564.1
 
 402.1
 
-{564.1}
-
-40.29\%
+0.4028849
 
 UTSA
+
+344.9
 
 247.1
 
-{344.9}
-
-39.58\%
+0.3957912
 
 San Jose State
+
+427.4
 
 323.7
 
-{427.4}
-
-32.04\%
+0.3203584
 
 Navy
+
+455.8
 
 349.3
 
-{455.8}
-
-30.49\%
+0.3048955
 
 Louisville
+
+447.3
 
 352.6
 
-{447.3}
-
-26.86\%
+0.2685763
 
 SMU
+
+489.8
 
 387.2
 
-{489.8}
-
-26.50\%
+0.2649793
 
 BYU
+
+443.8
 
 364.9
 
-{443.8}
-
-21.62\%
+0.2162236
 
 New Mexico
+
+400.3
 
 330.0
 
-{400.3}
-
-21.30\%
+0.2130303
 
 Charlotte
+
+411.8
 
 343.1
 
-{411.8}
+0.2002332
 
-20.02\%
-
-Iowa State
-
-371.0
-
-{444.3}
-
-19.76\%
-
-USC
-
-382.6
-
-{454.0}
-
-18.66\%
-
-Troy
-
-389.4
-
-{456.3}
-
-17.18\%
-
-Louisiana-Lafayette
-
-424.3
-
-{494.1}
-
-16.45\%
-
-Georgia State
-
-378.2
-
-{439.8}
-
-16.29\%
-
-Louisiana Tech
-
-379.3
-
-{436.8}
-
-15.16\%
-
-Minnesota
-
-379.6
-
-{432.0}
-
-13.80\%
-
-Ball State
-
-408.6
-
-{463.0}
-
-13.31\%
-
-Texas
-
-411.6
-
-{465.8}
-
-13.17\%
-
-Florida State
-
-361.2
-
-{408.3}
-
-13.04\%
-
-That gives me some more to mess with.
-
-One thing you can do is set the bar widths to make them relative to each other, using a different function called a \texttt{normalize\_bar}.
+There's also something called column\_spec where we can change the styling on individual columns. What if we wanted to make all the team names bold?
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{formattable}\NormalTok{(}
-\NormalTok{  changeTotalOffense, }
-  \DataTypeTok{align=}\StringTok{"r"}\NormalTok{,}
-  \KeywordTok{list}\NormalTok{(}
-    \StringTok{`}\DataTypeTok{2019}\StringTok{`}\NormalTok{ =}\StringTok{ }\KeywordTok{normalize_bar}\NormalTok{(}\StringTok{"#FA614B"}\NormalTok{), }
-    \StringTok{`}\DataTypeTok{2018}\StringTok{`}\NormalTok{ =}\StringTok{ }\KeywordTok{normalize_bar}\NormalTok{(}\StringTok{"#FA614B"}\NormalTok{), }
-    \StringTok{`}\DataTypeTok{Change}\StringTok{`}\NormalTok{ =}\StringTok{ }\NormalTok{percent)}
-\NormalTok{  )}
+\NormalTok{changeTotalOffense }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{kable}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{kable_styling}\NormalTok{(}\DataTypeTok{bootstrap_options =} \KeywordTok{c}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }\StringTok{"condensed"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{row_spec}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DataTypeTok{bold =}\NormalTok{ T, }\DataTypeTok{color =} \StringTok{"white"}\NormalTok{, }\DataTypeTok{background =} \StringTok{"#461D7C"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{column_spec}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{bold=}\NormalTok{T)}
 \end{Highlighting}
 \end{Shaded}
 
 Name
 
-2018
-
 2019
+
+2018
 
 Change
 
 Central Michigan
 
-{254.7}
+433.6
 
-{433.6}
+254.7
 
-70.24\%
+0.7023950
 
 LSU
 
-{402.1}
+564.1
 
-{564.1}
+402.1
 
-40.29\%
+0.4028849
 
 UTSA
 
-{247.1}
+344.9
 
-{344.9}
+247.1
 
-39.58\%
+0.3957912
 
 San Jose State
 
-{323.7}
+427.4
 
-{427.4}
+323.7
 
-32.04\%
+0.3203584
 
 Navy
 
-{349.3}
+455.8
 
-{455.8}
+349.3
 
-30.49\%
+0.3048955
 
 Louisville
 
-{352.6}
+447.3
 
-{447.3}
+352.6
 
-26.86\%
+0.2685763
 
 SMU
 
-{387.2}
+489.8
 
-{489.8}
+387.2
 
-26.50\%
+0.2649793
 
 BYU
 
-{364.9}
+443.8
 
-{443.8}
+364.9
 
-21.62\%
+0.2162236
 
 New Mexico
 
-{330.0}
+400.3
 
-{400.3}
+330.0
 
-21.30\%
+0.2130303
 
 Charlotte
 
-{343.1}
+411.8
 
-{411.8}
+343.1
 
-20.02\%
+0.2002332
 
-Iowa State
+Honestly, this is really good right here. You'd see this published \ldots{} except for one thing: the percentages.
 
-{371.0}
+We could go back up to the top and multiply by 100, but we'd still be missing the percent sign. Well, there's another library for making interesting tables that, in my opinion, has some flaws but does some interesting things too called \texttt{formattable}.
 
-{444.3}
-
-19.76\%
-
-USC
-
-{382.6}
-
-{454.0}
-
-18.66\%
-
-Troy
-
-{389.4}
-
-{456.3}
-
-17.18\%
-
-Louisiana-Lafayette
-
-{424.3}
-
-{494.1}
-
-16.45\%
-
-Georgia State
-
-{378.2}
-
-{439.8}
-
-16.29\%
-
-Louisiana Tech
-
-{379.3}
-
-{436.8}
-
-15.16\%
-
-Minnesota
-
-{379.6}
-
-{432.0}
-
-13.80\%
-
-Ball State
-
-{408.6}
-
-{463.0}
-
-13.31\%
-
-Texas
-
-{411.6}
-
-{465.8}
-
-13.17\%
-
-Florida State
-
-{361.2}
-
-{408.3}
-
-13.04\%
-
-Note: bookdown is formatting this weird. Your numbers won't look like this.
-
-Another way to deal with this -- color tiles. Change the rectangle that houses the data to a color indicating the intensity of it.
+Go to the console and install \texttt{formattable} with \texttt{install.packages("formattable")}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{formattable}\NormalTok{(}
-\NormalTok{  changeTotalOffense, }
-  \DataTypeTok{align=}\StringTok{"r"}\NormalTok{,}
-  \KeywordTok{list}\NormalTok{(}
-     \KeywordTok{area}\NormalTok{(}\DataTypeTok{col =} \DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{) }\OperatorTok{~}\StringTok{ }\KeywordTok{color_tile}\NormalTok{(}\StringTok{"#FFF6F4"}\NormalTok{, }\StringTok{"#FA614B"}\NormalTok{),}
-    \StringTok{`}\DataTypeTok{Change}\StringTok{`}\NormalTok{ =}\StringTok{ }\NormalTok{percent)}
-\NormalTok{  )}
+\KeywordTok{library}\NormalTok{(formattable)}
+\end{Highlighting}
+\end{Shaded}
+
+Then, we're going to use mutate here to use formattables \texttt{percent()} function to fix Change. Because it uses some HTML wizardry under the hood, we have to set kable to not \texttt{escape} the HTML.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{changeTotalOffense }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Change =} \KeywordTok{percent}\NormalTok{(Change)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{kable}\NormalTok{(}\DataTypeTok{escape=}\NormalTok{F) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{kable_styling}\NormalTok{(}\DataTypeTok{bootstrap_options =} \KeywordTok{c}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }\StringTok{"condensed"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{row_spec}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DataTypeTok{bold =}\NormalTok{ T, }\DataTypeTok{color =} \StringTok{"white"}\NormalTok{, }\DataTypeTok{background =} \StringTok{"#461D7C"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{column_spec}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{bold=}\NormalTok{T)}
 \end{Highlighting}
 \end{Shaded}
 
 Name
 
-2018
-
 2019
+
+2018
 
 Change
 
 Central Michigan
 
-{254.7}
+433.6
 
-{433.6}
+254.7
 
 70.24\%
 
 LSU
 
-{402.1}
+564.1
 
-{564.1}
+402.1
 
 40.29\%
 
 UTSA
 
-{247.1}
+344.9
 
-{344.9}
+247.1
 
 39.58\%
 
 San Jose State
 
-{323.7}
+427.4
 
-{427.4}
+323.7
 
 32.04\%
 
 Navy
 
-{349.3}
+455.8
 
-{455.8}
+349.3
 
 30.49\%
 
 Louisville
 
-{352.6}
+447.3
 
-{447.3}
+352.6
 
 26.86\%
 
 SMU
 
-{387.2}
+489.8
 
-{489.8}
+387.2
 
 26.50\%
 
 BYU
 
-{364.9}
+443.8
 
-{443.8}
+364.9
 
 21.62\%
 
 New Mexico
 
-{330.0}
+400.3
 
-{400.3}
+330.0
 
 21.30\%
 
 Charlotte
 
-{343.1}
+411.8
 
-{411.8}
+343.1
 
 20.02\%
 
-Iowa State
+Another way to highlight things: color ramps. We can change the color of the box covering the percentage using another mutate like this:
 
-{371.0}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{changeTotalOffense }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Change =} \KeywordTok{percent}\NormalTok{(Change)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Change =} \KeywordTok{cell_spec}\NormalTok{(}
+\NormalTok{    Change, }\DataTypeTok{color =} \StringTok{"white"}\NormalTok{, }\DataTypeTok{bold =}\NormalTok{ T,}
+    \DataTypeTok{background =} \KeywordTok{spec_color}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{, }\DataTypeTok{end =} \FloatTok{0.75}\NormalTok{, }\DataTypeTok{option =} \StringTok{"B"}\NormalTok{, }\DataTypeTok{direction =} \DecValTok{-1}\NormalTok{)}
+\NormalTok{  )) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{kable}\NormalTok{(}\DataTypeTok{escape=}\NormalTok{F) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{kable_styling}\NormalTok{(}\DataTypeTok{bootstrap_options =} \KeywordTok{c}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }\StringTok{"condensed"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{row_spec}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DataTypeTok{bold =}\NormalTok{ T, }\DataTypeTok{color =} \StringTok{"white"}\NormalTok{, }\DataTypeTok{background =} \StringTok{"#461D7C"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{column_spec}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{bold=}\NormalTok{T)}
+\end{Highlighting}
+\end{Shaded}
 
-{444.3}
+Name
 
-19.76\%
+2019
 
-USC
+2018
 
-{382.6}
+Change
 
-{454.0}
+Central Michigan
 
-18.66\%
+433.6
 
-Troy
+254.7
 
-{389.4}
+{70.24\%}
 
-{456.3}
+LSU
 
-17.18\%
+564.1
 
-Louisiana-Lafayette
+402.1
 
-{424.3}
+{40.29\%}
 
-{494.1}
+UTSA
 
-16.45\%
+344.9
 
-Georgia State
+247.1
 
-{378.2}
+{39.58\%}
 
-{439.8}
+San Jose State
 
-16.29\%
+427.4
 
-Louisiana Tech
+323.7
 
-{379.3}
+{32.04\%}
 
-{436.8}
+Navy
 
-15.16\%
+455.8
 
-Minnesota
+349.3
 
-{379.6}
+{30.49\%}
 
-{432.0}
+Louisville
 
-13.80\%
+447.3
 
-Ball State
+352.6
 
-{408.6}
+{26.86\%}
 
-{463.0}
+SMU
 
-13.31\%
+489.8
 
-Texas
+387.2
 
-{411.6}
+{26.50\%}
 
-{465.8}
+BYU
 
-13.17\%
+443.8
 
-Florida State
+364.9
 
-{361.2}
+{21.62\%}
 
-{408.3}
+New Mexico
 
-13.04\%
+400.3
+
+330.0
+
+{21.30\%}
+
+Charlotte
+
+411.8
+
+343.1
+
+{20.02\%}
+
+If this is intersting to you, \href{https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html\#overview}{there's more you can do}.
 
 \hypertarget{exporting-tables}{%
-\subsection{Exporting tables}\label{exporting-tables}}
+\section{Exporting tables}\label{exporting-tables}}
 
-The first thing you need to do is install some libraries -- do this in the console, not in an R Studio code block because htmltools get's a little weird.
+One of the major shortcomings with \texttt{formattable} is a very limited ability to export tables. Fortunately, \texttt{kable} appears to have solved that problem.
 
-\begin{verbatim}
-install.packages("htmltools")
-install.packages("webshot")
+But, for this to be a finished product, we need to add a headline, credit line and source line.
 
-webshot::install_phantomjs()
-\end{verbatim}
+Good news bad news: The bad news is that \texttt{kable} doesn't have a good way to add a headline. The good news is we can do that in illustrator pretty easily.
 
-Now, copy, paste and run this code block entirely. Don't change anything.
+The other good news bad news: \texttt{kable} isn't going to export this as an actual vector file. It's going to make it an image and embed that into a pdf. That has consequences if we want to edit it.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(}\StringTok{"htmltools"}\NormalTok{)}
-\KeywordTok{library}\NormalTok{(}\StringTok{"webshot"}\NormalTok{)    }
-
-\NormalTok{export_formattable <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(f, file, }\DataTypeTok{width =} \StringTok{"100%"}\NormalTok{, }\DataTypeTok{height =} \OtherTok{NULL}\NormalTok{, }
-                               \DataTypeTok{background =} \StringTok{"white"}\NormalTok{, }\DataTypeTok{delay =} \FloatTok{0.2}\NormalTok{)}
-\NormalTok{    \{}
-\NormalTok{      w <-}\StringTok{ }\KeywordTok{as.htmlwidget}\NormalTok{(f, }\DataTypeTok{width =}\NormalTok{ width, }\DataTypeTok{height =}\NormalTok{ height)}
-\NormalTok{      path <-}\StringTok{ }\KeywordTok{html_print}\NormalTok{(w, }\DataTypeTok{background =}\NormalTok{ background, }\DataTypeTok{viewer =} \OtherTok{NULL}\NormalTok{)}
-\NormalTok{      url <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\StringTok{"file:///"}\NormalTok{, }\KeywordTok{gsub}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}\textbackslash{}\textbackslash{}}\StringTok{"}\NormalTok{, }\StringTok{"/"}\NormalTok{, }\KeywordTok{normalizePath}\NormalTok{(path)))}
-      \KeywordTok{webshot}\NormalTok{(url,}
-              \DataTypeTok{file =}\NormalTok{ file,}
-              \DataTypeTok{selector =} \StringTok{".formattable_widget"}\NormalTok{,}
-              \DataTypeTok{delay =}\NormalTok{ delay)}
-\NormalTok{    \}}
-\end{Highlighting}
-\end{Shaded}
-
-Now, save your formattable table to an object using the \texttt{\textless{}-} assignment operator.
-
-After you've done that, you can call the function you ran in the previous block to export as a png file. In my case, I created an object called table, which is populated with my formattable table. Then, in export\_formattable, I pass in that \texttt{table} object and give it a name.
+To export it, we merely add a save\_kable to the end and give it a file path.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{table <-}\StringTok{ }\KeywordTok{formattable}\NormalTok{(}
-\NormalTok{  changeTotalOffense, }
-  \DataTypeTok{align=}\StringTok{"r"}\NormalTok{,}
-  \KeywordTok{list}\NormalTok{(}
-     \KeywordTok{area}\NormalTok{(}\DataTypeTok{col =} \DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{) }\OperatorTok{~}\StringTok{ }\KeywordTok{color_tile}\NormalTok{(}\StringTok{"#FFF6F4"}\NormalTok{, }\StringTok{"#FA614B"}\NormalTok{),}
-    \StringTok{`}\DataTypeTok{Change}\StringTok{`}\NormalTok{ =}\StringTok{ }\NormalTok{percent)}
-\NormalTok{  )}
-
-\KeywordTok{export_formattable}\NormalTok{(table,}\StringTok{"table.png"}\NormalTok{)}
+\NormalTok{changeTotalOffense }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Change =} \KeywordTok{percent}\NormalTok{(Change)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Change =} \KeywordTok{cell_spec}\NormalTok{(}
+\NormalTok{    Change, }\DataTypeTok{color =} \StringTok{"white"}\NormalTok{, }\DataTypeTok{bold =}\NormalTok{ T,}
+    \DataTypeTok{background =} \KeywordTok{spec_color}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{, }\DataTypeTok{end =} \FloatTok{0.75}\NormalTok{, }\DataTypeTok{option =} \StringTok{"B"}\NormalTok{, }\DataTypeTok{direction =} \DecValTok{-1}\NormalTok{)}
+\NormalTok{  )) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{kable}\NormalTok{(}\DataTypeTok{escape=}\NormalTok{F) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{kable_styling}\NormalTok{(}\DataTypeTok{bootstrap_options =} \KeywordTok{c}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }\StringTok{"condensed"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{row_spec}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DataTypeTok{bold =}\NormalTok{ T, }\DataTypeTok{color =} \StringTok{"white"}\NormalTok{, }\DataTypeTok{background =} \StringTok{"#461D7C"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{column_spec}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{bold=}\NormalTok{T) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{save_kable}\NormalTok{(}\StringTok{"lsu.pdf"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-199-1.png}
+To fix this, we need to pull it into Illustrator. In there, we're going to expand the artboard, add a headline and chatter, then add source and credit lines at the bottom, and finish with touching up the artboards.
 
-For now, pngs are what you need to export. There is a way to export PDFs, but they lose all the formatting when you do that, which is kind of pointless.
+Here's a video walkthrough:
 
 \hypertarget{bubble-charts}{%
 \chapter{Bubble charts}\label{bubble-charts}}
@@ -5450,7 +5057,7 @@ A bubble chart is just a scatterplot with one additional element in the aestheti
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-202-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-203-1.pdf}
 
 As expected, yards per game pretty tightly predicts points per game, but you could have guessed that without a chart. So let's add the size element.
 
@@ -5460,7 +5067,7 @@ As expected, yards per game pretty tightly predicts points per game, but you cou
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-203-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-204-1.pdf}
 
 Eh. What does this chart tell you? Trick question, there's not much new here. The dots are too big. Also, we can't see when they overlap. We can fix that by adding an alpha element outside the aesthetic -- alpha in this case is transparency -- and we can manually change the size of the dots by adding \texttt{scale\_size} and a \texttt{range}.
 
@@ -5470,7 +5077,7 @@ Eh. What does this chart tell you? Trick question, there's not much new here. Th
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-204-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-205-1.pdf}
 
 Before we do any more work, let's return to the earlier question: What story does this tell? Can you discern a story from the bubbles? Are teams with lots of turnovers doing poorly and teams with few turnovers doing well? The problem is, you can't really tell. So this is a dead end for a bubble chart. If you get a big mess, it's a dead giveaway that you probably don't have a bubble chart.
 
@@ -5522,7 +5129,7 @@ Now we can do the bubble chart.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-206-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-207-1.pdf}
 
 Better! Teams are spread out a little more. Bottom right quadrant -- the good defense, good offense quadrant -- have some large dots. The upper left quadrant -- bad defense, bad offense -- have some very small dots, meaning they have a really terrible turnover margin.
 
@@ -5546,7 +5153,7 @@ Now we can add \texttt{color=PositiveNegative} to the aesthetic and our dots wil
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-208-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-209-1.pdf}
 
 Now we're getting somewhere. What's the story that this chart tells? Blue dots -- positive turnover margins -- are all drifting toward that good offense, good defense quadrant. Green dots -- negative turnover margins -- are drifting toward that bad defense, bad offense quadrant.
 
@@ -5567,7 +5174,7 @@ Let's add some annotations. Let's look at the top two turnover margin teams and 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-210-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-211-1.pdf}
 
 No surprise there. What about Nebraska?
 
@@ -5588,7 +5195,7 @@ No surprise there. What about Nebraska?
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-212-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-213-1.pdf}
 
 Sadly, no surprise there either.
 
@@ -5612,7 +5219,7 @@ The last things we need to do? Add some labels, apply our finishing touches.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-213-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-214-1.pdf}
 
 \hypertarget{circular-bar-plots}{%
 \chapter{Circular bar plots}\label{circular-bar-plots}}
@@ -5694,7 +5301,7 @@ Earlier, we did stacked bar charts. We have what we need to do that now.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-218-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-219-1.pdf}
 
 Eeek. This is already looking not great. But to make it a circular bar chart, we add \texttt{coord\_polar()} to our chart.
 
@@ -5704,7 +5311,7 @@ Eeek. This is already looking not great. But to make it a circular bar chart, we
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-219-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-220-1.pdf}
 
 Based on that, the day is probably too thin a slice, and there's way too many conferences in college basketball. Let's group this by months and filter out all but the power five conferences.
 
@@ -5730,7 +5337,7 @@ Now we can use wins to make our circular bar chart of wins by month in the Power
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-222-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-223-1.pdf}
 
 Yikes. That looks a lot like a broken pie chart. So months are too thick of a slice. Let's use weeks in our floor date to see what that gives us.
 
@@ -5746,7 +5353,7 @@ Yikes. That looks a lot like a broken pie chart. So months are too thick of a sl
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-224-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-225-1.pdf}
 
 That looks better. But what does it say? Does November basketball matter? What this is saying is \ldots{} yeah, it kinda does. The reason? Lots of wins get piled up in November and December, during non-conference play. So if you are a team with NCAA tournament dreams, you need to win games in November to make sure your tournament resume is where it needs to be come March. Does an individual win or loss matter? Probably not. But your record in November does.
 
@@ -8829,7 +8436,7 @@ The rest is just adding labels and messing with the theme.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-254-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-255-1.pdf}
 
 \hypertarget{finishing-touches-part-1}{%
 \chapter{Finishing touches, part 1}\label{finishing-touches-part-1}}
@@ -8953,7 +8560,7 @@ We'll start with the basics.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-259-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-260-1.pdf}
 
 Let's take changing things one by one. The first thing we can do is change the figure size. Sometimes you don't want a square. We can use the \texttt{knitr} output settings in our chunk to do this easily in our notebooks.
 
@@ -8964,7 +8571,7 @@ Let's take changing things one by one. The first thing we can do is change the f
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-260-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-261-1.pdf}
 
 Now let's add a fit line.
 
@@ -8975,7 +8582,7 @@ Now let's add a fit line.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-261-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-262-1.pdf}
 
 And now some labels.
 
@@ -8987,7 +8594,7 @@ And now some labels.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-262-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-263-1.pdf}
 
 Let's get rid of the default plot look and drop the grey background.
 
@@ -9000,7 +8607,7 @@ Let's get rid of the default plot look and drop the grey background.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-263-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-264-1.pdf}
 
 Off to a good start, but our text has no real heirarchy. We'd want our headline to stand out more. So let's change that. When it comes to changing text, the place to do that is in the theme element. \href{http://ggplot2.tidyverse.org/reference/theme.html}{There are a lot of ways to modify the theme}. We'll start easy. Let's make the headline bigger and bold.
 
@@ -9016,7 +8623,7 @@ Off to a good start, but our text has no real heirarchy. We'd want our headline 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-264-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-265-1.pdf}
 
 Now let's fix a few other things -- like the axis labels being too big, the subtitle could be bigger and lets drop some grid lines.
 
@@ -9035,7 +8642,7 @@ Now let's fix a few other things -- like the axis labels being too big, the subt
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-265-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-266-1.pdf}
 
 Missing from this graph is the context that the headline promises. Where is Nebraska? We haven't added it yet. So let's add a point and a label for it.
 
@@ -9056,7 +8663,7 @@ Missing from this graph is the context that the headline promises. Where is Nebr
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-266-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-267-1.pdf}
 
 If we're happy with this output -- if it meets all of our needs for publication -- then we can simply export it as a png file. We do that by adding \texttt{+\ ggsave("plot.png",\ width=5,\ height=2)} to the end of our code. Note the width and the height are from our knitr parameters at the top -- you have to repeat them or the graph will export at the default 7x7.
 
@@ -9103,7 +8710,7 @@ We can add labels and themes, but you have to be careful. The waffle library is 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-269-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-270-1.pdf}
 
 Note: The alignment of text sucks.
 
@@ -9160,7 +8767,7 @@ Here is a full example. I start with my waffle iron code, but note that each waf
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-271-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-272-1.pdf}
 
 If you try to use ggsave on that, you'll only get the last waffle chart. Like I said, irons aren't really anything, so ggplot ignores them. So to do this, we have to use R's pdf capability.
 
@@ -9245,7 +8852,7 @@ Let's look at the relationship between a player's batting average and wRC+ (\hre
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-275-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-276-1.pdf}
 
 You can obviously add more aesthetics to make it look better, but you get the picture. If I'm a fan of sports though, obviously I want to see who the outlier points are or just scroll through and see each player at an individual location. We can always annotate data, but that process can be tedious.
 
@@ -9273,7 +8880,7 @@ Let's start simple with just the minimum needed for a scatterplot. For that, we 
 ##   Read more about this attribute -> https://plot.ly/r/reference/#scatter-mode
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-276-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-277-1.pdf}
 
 We get a chart, but hover over a point. Recognize those players? You can't unless you know each player's specific stats to divine who they are. That isn't very friendly, so let's add a hover element. Then we want to specify what we want our users to see when they hover over a data point, hence hoverinfo = ``text''. The next step will be to define what our text is. How that gets done is a little bit of HTML and a little bit of R. What is in quotes is what the users are going to see directly, what's after the quotes is what data is going to appear. So ``Player:'', Name translates to something like Player: Christian Yelich when the user hovers above Yelich's data point.
 
@@ -9304,7 +8911,7 @@ Then we add the HTML, \texttt{\textless{}br\textgreater{}}, or break. All this m
 ##   Read more about this attribute -> https://plot.ly/r/reference/#scatter-mode
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-277-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-278-1.pdf}
 
 Now we can see each player a little better. If you look at the players on the farthest right, you'll find Mike Trout (shocker), Yordan Alvarez and Christian Yelich.
 
@@ -9340,7 +8947,7 @@ To finish, we're going to fix the layout a bit, very similar to how we've been d
 ##   Read more about this attribute -> https://plot.ly/r/reference/#scatter-mode
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-278-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-279-1.pdf}
 
 \hypertarget{publishing-using-plotly}{%
 \section{Publishing using Plotly}\label{publishing-using-plotly}}
@@ -9505,7 +9112,7 @@ All you need to do in this code is change out the data frame -- \texttt{playerss
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-286-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-287-1.pdf}
 
 The Elbow method -- so named because you're looking for the ``elbow'' where the line flattens out. In this case, it looks like a K of 5 is ideal. So let's try that. We're going to use the kmeans function, saving it to an object called k5. We just need to tell it our dataframe name, how many centers (k) we want, and we'll use a sensible default for how many different configurations to try.
 
@@ -9646,7 +9253,7 @@ We now have a dataset and can plot it like anything else. Let's get Cam Mack and
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-291-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-292-1.pdf}
 
 Not bad, not bad. But who are Cam Mack's peers? If we look at the numbers in Group 1, there's 335 of them. So let's limit them to just Big Ten guards. Unfortunately, my scraper didn't quite work and in the place of Conference is the coach's name. So I'm going to have to do this the hard way and make a list of Big Ten teams and filter on that. Then I'll sort by minutes played.
 
@@ -9739,7 +9346,7 @@ Let's find the optimal number of clusters.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-295-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-296-1.pdf}
 
 Looks like 5 again.
 
@@ -10264,7 +9871,7 @@ One question we might have pertains to the number of tweets that occur during th
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-310-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-311-1.pdf}
 
 There you have it. A trend line plotting tweet volume throughout the course of the event. Do you see any areas where the match might have had a significant number of tweets?
 
@@ -10334,7 +9941,7 @@ Now that we have a tidied textual data set, all we need to do is apply our senti
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-312-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-313-1.pdf}
 
 When looking at this trend line, you can see that during the volleyball game, tweets using the \#husker and \#gbr hashtags had some wide variation in sentiment. Overall it seems that tweets during the volleyball match were mostly positive, where at times it dipped negative. Why might this be the case? Well, unfortunately, even though this was a big game for Husker volleyball, not many people were tweeting during the match (take a look at the number of tweets chart above). So if there was one word used in a tweet that was ranked as very negative in sentiment, it would have easily drove our average sentiment into the negative region quickly.
 
@@ -10373,7 +9980,7 @@ Now, let's just get a sense of the number of tweets that occurred at certain poi
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-314-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-315-1.pdf}
 
 Looking at this plot, we can see the tweet volume is a lot higher than that of the volleyball match. In fact, it looks like towards the end of the game there was a five minute interval where \textasciitilde{}80 or so tweets occurred. Given the outcome of the game, I assume people were not real happy during this spike in activity. Well we have the tools to answer this question.
 
@@ -10432,7 +10039,7 @@ You can then use the \texttt{ggplot} code to plot sentiment over time, introduce
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-316-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-317-1.pdf}
 
 As you can see, it started out pretty positive. Then, it started to go negative throughout the first half. However, there was a bump, which was around the time D-Lineman, Darrion Daniels almost scored a pick six. Around halftime, we can see a little bit of a bump towards positive sentiment. This was probably most likely due to people cheering on the Huskers to come out strong after the half. As the second half progressed, you can see things turned for the worst again, and sentiment became negative up until the end of the game, most likely because people realized they were going to get another L on the schedule. You can relive all this excitement again by catching the game recap \href{https://www.youtube.com/watch?v=m0hKH6Zb0vY\&feature=onebox}{here}.
 
@@ -10515,7 +10122,7 @@ With cowplot, we can use a function called \texttt{plot\_grid} to arrange the ch
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-323-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-324-1.pdf}
 
 We can also stack them on top of each other:
 
@@ -10525,7 +10132,7 @@ We can also stack them on top of each other:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-324-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-325-1.pdf}
 
 To make these publishable, we should add headlines, chatter, decent labels, credit lines, etc. But to do this, we'll have to figure out which labels go on which charts, so we can make it look decent. For example -- both charts don't need x or y labels. If you don't have a title and subtitle on both, the spacing is off, so you need to leave one blank or the other blank. You'll just have to fiddle with it until you get it looking right.
 
@@ -10565,7 +10172,7 @@ Saving a cowplot plot\_grid is the same as anything else we did in the class:
 ## Saving 6.5 x 4.5 in image
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-327-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-328-1.pdf}
 
 \hypertarget{assignments}{%
 \chapter{Assignments}\label{assignments}}
