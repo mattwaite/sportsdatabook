@@ -141,7 +141,12 @@ stats <- stats %>% filter(Rank != "Rk" & Games != "Overall")
 And finally, we need to change the file type of all the fields that need it. We're going to use a clever little trick, which goes like this: We're going to use `mutate_at`, which means mutate these fields. The pattern for `mutate_at` is `mutate_at` these variables and do this thing to them. But instead of specifying which of 33 variables we're going to mutate, we're going to specify the one we don't want to change, which is the name of the school. And we just want to convert them to numeric. Here's what it looks like:
 
 ```{r}
-stats %>% mutate_at(vars(-School), as.numeric)
+stats <- stats %>% mutate_at(vars(-School), as.numeric)
 ```
 
 And just like that, we have a method for getting up to the minute season stats for every team in Division I. 
+
+```{r}
+head(stats)
+```
+

@@ -15,10 +15,10 @@ library(tidyverse)
 library(lubridate)
 ```
 
-Let's import [every basketball game from last year](https://unl.box.com/s/a8m91bro10t89watsyo13yjegb1fy009). 
+Let's import [every basketball game from this year](https://unl.box.com/s/wnlh0u9low1yh56enion8zjmu8r7dc8p). 
 
 ```{r}
-logs <- read_csv("data/logs19.csv")
+logs <- read_csv("data/logs20.csv")
 ```
 
 So let's test the notion of November Basketball Doesn't Matter. What matters in basketball? Let's start simple: Wins.
@@ -29,7 +29,7 @@ Sports Reference's win columns are weird, so we need to scan through them and fi
 winlosslogs <- logs %>% mutate(winloss = case_when(
   grepl("W", W_L) ~ 1, 
   grepl("L", W_L) ~ 0)
-) %>% filter(Date < "2019-03-19")
+) 
 ```
 
 Now we can group by date and conference and sum up the wins. How many wins by day does each conference get?
@@ -79,5 +79,3 @@ ggplot() + geom_bar(data=wins, aes(x=week, weight=wins, fill=Conference)) + them
 ```
 
 That looks better. But what does it say? Does November basketball matter? What this is saying is ... yeah, it kinda does. The reason? Lots of wins get piled up in November and December, during non-conference play. So if you are a team with NCAA tournament dreams, you need to win games in November to make sure your tournament resume is where it needs to be come March. Does an individual win or loss matter? Probably not. But your record in November does.
-
-
