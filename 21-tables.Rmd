@@ -2,9 +2,19 @@
 
 But not a table. A table with features. 
 
-Sometimes, the best way to show your data is with a table -- simple rows and columns. It allows a reader to compare whatever they want to compare a little easier than a graph where you've chosen what to highlight. R has a neat package called `kableExtra` and you'll install it like anything else with `install.packages('kableExtra')`. 
+Sometimes, the best way to show your data is with a table -- simple rows and columns. It allows a reader to compare whatever they want to compare a little easier than a graph where you've chosen what to highlight. R has a neat package called `kableExtra`.
 
-So what does it do? Let's gather our libraries and [get some data](https://unl.box.com/s/g3eeuogx8bog72ig28enuakhpdlbn394). 
+For this assignment, we're going to need a bunch of new libraries. Go over to the console and run these: 
+
+```
+install.packages("kableExtra")
+install.packages("formattable")
+install.packages("htmltools")
+install.packages("webshot")
+webshot::install_phantomjs()
+```
+
+So what does all of these libraries do? Let's gather a few and [get some data](https://unl.box.com/s/g3eeuogx8bog72ig28enuakhpdlbn394). 
 
 ```{r}
 library(tidyverse)
