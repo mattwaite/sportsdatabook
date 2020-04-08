@@ -6,9 +6,9 @@ There's better ways.
 
 In this chapter, we're going to use a method that sounds advanced but it really quite simple called k-means clustering. It's based on the concept of the k-nearest neighbor algorithm. You're probably already scared. Don't be. 
 
-Imagine two dots on a scatterplot. If you took a ruler out and measured the distance between those dots, you'd know how far apart they are. In math, that's called the Euclidean distance. It's just the space between them in numbers. Where k-nearest neighbor comes in, you have lots of dots and you want measure the distance between all of them. What does k-means clustering do? It lumps them into groups based on the average distance between them. Players who are good on offense but bad on defense are over here, good offense good defense are over here. And using the Eucliean distance between them, we can decide who is in and who is out of those groups.
+Imagine two dots on a scatterplot. If you took a ruler out and measured the distance between those dots, you'd know how far apart they are. In math, that's called the Euclidean distance. It's just the space between them in numbers. Where k-nearest neighbor comes in, you have lots of dots and you want measure the distance between all of them. What does k-means clustering do? It lumps them into groups based on the average distance between them. Players who are good on offense but bad on defense are over here, good offense good defense are over here. And using the Euclidean distance between them, we can decide who is in and who is out of those groups.
 
-For this exercise, I want to look at Cam Mack, Nebraska's point guard and probably the most interesting player on Fred Hoiberg's first team. This is Mack's first year in major college basketball -- he played a year at a community college -- so we don't have much to go on. But with three games in the books, who does Cam Mack compare to? 
+For this exercise, I want to look at Cam Mack, Nebraska's point guard and probably the most interesting player on Fred Hoiberg's first team. This is Mack's first year in major college basketball -- he played a year at a community college -- so we don't have much to go on. But with a season in the books, who does Cam Mack compare to? 
 
 To answer this, we'll use k-means clustering. 
 
@@ -81,7 +81,7 @@ Let's look at what we get.
 k5
 ```
 
-Interpreting this output, the very first thing you need to know is that **the cluster numbers are meaningless**. They aren't ranks. They aren't anything. After you have taken that on board, look at the cluster sizes at the top. Clusters 3 and 5 are pretty large compared to others. That's notable. Then we can look at the cluster means. For reference, 0 is going to be average. So group 1 are well above average on minutes played. Group 3 is slightly above, group 5 is slightly below. In fact, group 5 is below average on every metric. Group 3 is slightly above average on all metrics. 
+Interpreting this output, the very first thing you need to know is that **the cluster numbers are meaningless**. They aren't ranks. They aren't anything. After you have taken that on board, look at the cluster sizes at the top. Clusters 1 and 2 are pretty large compared to others. That's notable. Then we can look at the cluster means. For reference, 0 is going to be average. So group 1 is below average on minutes played. Group 2 is slightly above, group 5 is well above. 
 
 So which group is Cam Mack in? Well, first we have to put our data back together again. In K5, there is a list of cluster assignments in the same order we put them in, but recall we have no names. So we need to re-combine them with our original data. We can do that with the following:
 
@@ -94,8 +94,12 @@ Now we have a dataframe called playercluster that has our player names and what 
 We now have a dataset and can plot it like anything else. Let's get Cam Mack and then plot him against the rest of college basketball on assists versus minutes played. 
 
 ```{r}
-cm <- playercluster %>% filter(Player == "Cameron Mack")
+cm <- playercluster %>% filter(Player == "Cam Mack")
+
+cm
 ```
+
+So Cam's in cluster 5, which if you look at our clusters, puts him in the cluster with all above average metrics. What does that look like? We know Cam was an assist machine, so where do group 5 people grade out on assists?
 
 ```{r}
 ggplot() + 
@@ -103,15 +107,15 @@ ggplot() +
   geom_point(data=cm, aes(x=MP, y=AST), color="red")
 ```
 
-Not bad, not bad. But who are Cam Mack's peers? If we look at the numbers in Group 1, there's 335 of them. So let's limit them to just Big Ten guards. Unfortunately, my scraper didn't quite work and in the place of Conference is the coach's name. So I'm going to have to do this the hard way and make a list of Big Ten teams and filter on that. Then I'll sort by minutes played. 
+Not bad, not bad. But who are Cam Mack's peers? If we look at the numbers in Group 5, there's 495 of them. So let's limit them to just Big Ten guards. Unfortunately, my scraper didn't quite work and in the place of Conference is the coach's name. So I'm going to have to do this the hard way and make a list of Big Ten teams and filter on that. Then I'll sort by minutes played. 
 
 ```{r}
 big10 <- c("Nebraska Cornhuskers", "Iowa Hawkeyes", "Minnesota Golden Gophers", "Illinois Fighting Illini", "Northwestern Wildcats", "Wisconsin Badgers", "Indiana Hoosiers", "Purdue Boilermakers", "Ohio State Buckeyes", "Michigan Wolverines", "Michigan State Spartans", "Penn State Nittany Lions", "Rutgers Scarlet Knights", "Maryland Terrapins")
 
-playercluster %>% filter(k5.cluster == 4) %>% filter(Team %in% big10) %>% arrange(desc(MP))
+playercluster %>% filter(k5.cluster == 5) %>% filter(Team %in% big10) %>% arrange(desc(MP))
 ```
 
-So there are the 8 guards most like Cam Mack in the Big Ten. It'll be interesting to watch this evolve over the season. Fred Hoiberg and others think he might be one of the best guards in the league. We'll see, using cluster analysis. 
+So there are the 11 guards most like Cam Mack in the Big Ten. Safe to say, these are the 11 best guards in the conference. 
 
 ## Advanced metrics
 
@@ -168,24 +172,29 @@ What do we have here?
 advk5
 ```
 
-Looks like this time, cluster 1 is all below average and cluster 5 is all above. Which cluster is Cam Mack in?
+Looks like this time, cluster 1 is all below average and cluster 5 is mostly above. Which cluster is Cam Mack in?
 
 ```{r}
 playeradvcluster <- data.frame(playersadvanced, advk5$cluster) 
 ```
 
-Cluster 5 on my dataset. So three games in, we can say he's in a big group of players who are all above average on these advanced metrics. 
+```{r}
+cmadv <- playeradvcluster %>% filter(Player == "Cam Mack")
+
+cmadv
+```
+
+
+Cluster 3 on my dataset. So in this season, we can say he's in a big group of players who are all above average on these advanced metrics. 
 
 Now who are his Big Ten peers?
 
 ```{r}
 playeradvcluster %>% 
-  filter(advk5.cluster == 5) %>% 
+  filter(advk5.cluster == 3) %>% 
   filter(Team %in% big10) %>% 
   arrange(desc(PProd))
 
 ```
 
-Sorting on Points Produced, Cam Mack is eighth out of the 31 guards in the Big Ten who land in Cluster 5. 
-
-It's early goings, but watch this player. He's fun to watch and the stats back it up. 
+Sorting on Points Produced, Cam Mack is sixth out of the 35 guards in the Big Ten who land in Cluster 3. Seems advanced metrics take a little bit of the shine off of Cam. But then, so does leaving the program after one suspension-riddled season.
