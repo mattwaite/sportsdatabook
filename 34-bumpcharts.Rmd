@@ -1,0 +1,144 @@
+# Bump charts
+
+Not every library is on CRAN, which if you didn't know is the place where all the libraries we've installed up to this point are coming from. CRAN is a global repository of libraries, but they're libraries that are ready for a global audience of users, meaning they've been tested thoroughly and most of the bugs are out of them. 
+
+Developers are constantly working on new libraries, and some of them are interesting enough to try and stable enough to make a go of it. If you can handle a little uncertainty and understand that what you want to do might not work totally right, you can install those libraries from another code repository, GitHub. GitHub is a massive repository of all kinds of code developers want to share. [This book is on GitHub](https://github.com/mattwaite/sportsdatabook), for instance.
+
+To install a library from GitHub requires a couple of steps. The first is you need a set of tools to get them, called `devtools`. So go over to the console and install `devtools` like this: 
+
+`install.packages("devtools")`
+
+The package we're going to try is called ggbump and it makes bump charts. Bump charts are like a subway map for rankings that change over time. We're going to make a bump chart of the college football playoff rankings this last season.
+
+To get ggbump, run this in the console: `devtools::install_github("davidsjoberg/ggbump")`
+
+Now we'll load up our libraries.
+
+```{r}
+library(tidyverse)
+library(ggbump)
+```
+
+[Here's the dataset](https://unl.box.com/s/18mzeypa3pgg5pw2xxgawfbhyryo3z3a) we'll use, which I scraped out of the college football playoff [website](https://collegefootballplayoff.com/rankings.aspx): 
+
+```{r}
+rankings <- read_csv("data/cfbranking.csv")
+```
+
+The point of a bump chart is to show how the ranking of something changed over time -- you could do this with the top 25 in football or basketball. I've seen it done with European soccer league standings over a season. The requirements are that you have a row of data for a team, in that week, with their rank. So if you have 5 weeks of playoff rankings, like we do, you're going to have five rows of LSU, and five rows of Ohio State. you can see the basic look of the data by using head()
+
+```{r}
+head(rankings)
+```
+
+So Baylor was ranked in the 13th, 14th and 15th week, 9th, 7th and 7th, respectively. So our data is in the form we need it to be. Now we can make a bump chart. We'll start simple.
+
+```{r}
+ggplot() + geom_bump(data=rankings, aes(x=Week, y=Rank, color=Team))
+```
+
+Well, it's a start. I'm immediately annoyed by the top teams being at the bottom. I learned a neat trick from ggbump that's been in ggplot all along -- `scale_y_reverse()`
+
+```{r}
+ggplot() + geom_bump(data=rankings, aes(x=Week, y=Rank, color=Team)) + scale_y_reverse()
+```
+
+Better. But, still not great. Let's add a point at each week.
+
+```{r}
+ggplot() + 
+  geom_bump(data=rankings, aes(x=Week, y=Rank, color=Team)) + 
+  geom_point(data=rankings, aes(x=Week, y=Rank, color=Team), size = 4) +
+  scale_y_reverse() 
+```
+
+Another step. That makes it more subway map like. But the colors are all wrong. To fix this, we're going to use `scale_color_manual` and we're going to Google the hex codes for each team. The legend will tell you what order your `scale_color_manual` needs to be.
+
+```{r}
+ggplot() + 
+  geom_bump(data=rankings, aes(x=Week, y=Rank, color=Team)) + 
+  geom_point(data=rankings, aes(x=Week, y=Rank, color=Team), size = 4) + 
+  scale_color_manual(values = c("#003015","#F66733", "#461D7C", "#bb0000", "#041E42", "#AF002A","#0021A5", "#BA0C2F", "#7A0019", "#841617", "#154733", "#CC0000", "#c5050c")) +
+  scale_y_reverse() 
+```
+
+Another step. But the legend is annoying. And trying to find which red is Alabama vs Ohio State is hard. So what if we labeled each dot at the beginning and end? We can do that with some clever usage of geom_text and a little dplyr filtering inside the data step. We filter out the first and last weeks, then use hjust -- horizontal justification -- to move them left or right. 
+```{r}
+ggplot() + 
+  geom_bump(data=rankings, aes(x=Week, y=Rank, color=Team)) + 
+  geom_point(data=rankings, aes(x=Week, y=Rank, color=Team), size = 4) +   
+  geom_text(data = rankings %>% filter(Week == min(Week)), aes(x = Week - .2, y=Rank, label = ShortTeam), size = 3, hjust = 1) +
+  geom_text(data = rankings %>% filter(Week == max(Week)), aes(x = Week + .2, y=Rank, label = ShortTeam), size = 3, hjust = 0) +
+  scale_color_manual(values = c("#003015","#F66733", "#461D7C", "#bb0000", "#041E42", "#AF002A","#0021A5", "#BA0C2F", "#7A0019", "#841617", "#154733", "#CC0000", "#c5050c")) +
+  scale_y_reverse() 
+```
+
+Better, but the legend is still there. We can drop it in a theme directive by saying `legend.position = "none"`. We'll also throw a theme_minimal on there to drop the default grey, and we'll add some better labeling.
+
+```{r}
+ggplot() + 
+  geom_bump(data=rankings, aes(x=Week, y=Rank, color=Team)) + 
+  geom_point(data=rankings, aes(x=Week, y=Rank, color=Team), size = 4) +   
+  geom_text(data = rankings %>% filter(Week == min(Week)), aes(x = Week - .2, y=Rank, label = ShortTeam), size = 3, hjust = 1) +
+  geom_text(data = rankings %>% filter(Week == max(Week)), aes(x = Week + .2, y=Rank, label = ShortTeam), size = 3, hjust = 0) +
+  labs(title="The race to the playoffs", subtitle="LSU and Ohio State were never out of the top two spots. LSU deserved it.", y= "Rank", x = "Week") +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    panel.grid.major = element_blank()
+    ) +
+  scale_color_manual(values = c("#003015","#F66733", "#461D7C", "#bb0000", "#041E42", "#AF002A","#0021A5", "#BA0C2F", "#7A0019", "#841617", "#154733", "#CC0000", "#c5050c")) +
+  scale_y_reverse() 
+```
+
+Now let's fix our text hierarchy.
+
+```{r}
+ggplot() + 
+  geom_bump(data=rankings, aes(x=Week, y=Rank, color=Team)) + 
+  geom_point(data=rankings, aes(x=Week, y=Rank, color=Team), size = 4) +   
+  geom_text(data = rankings %>% filter(Week == min(Week)), aes(x = Week - .2, y=Rank, label = ShortTeam), size = 3, hjust = 1) +
+  geom_text(data = rankings %>% filter(Week == max(Week)), aes(x = Week + .2, y=Rank, label = ShortTeam), size = 3, hjust = 0) +
+  labs(title="The race to the playoffs", subtitle="LSU and Ohio State were never out of the top two spots. LSU deserved it.", y= "Rank", x = "Week") +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    panel.grid.major = element_blank(),
+    plot.title = element_text(size = 16, face = "bold"),
+    axis.title = element_text(size = 8), 
+    plot.subtitle = element_text(size=10), 
+    panel.grid.minor = element_blank()
+    ) +
+  scale_color_manual(values = c("#003015","#F66733", "#461D7C", "#bb0000", "#041E42", "#AF002A","#0021A5", "#BA0C2F", "#7A0019", "#841617", "#154733", "#CC0000", "#c5050c")) +
+  scale_y_reverse() 
+```
+
+And the last thing: anyone else annoyed at 7.5th place on the left? We can fix that too by specifying the breaks in scale_y_reverse. We can do that with the x axis as well, but since we haven't reversed it, we do that in `scale_x_continuous` with the same breaks. Also: forgot my source and credit line. 
+
+One last thing: Let's change the width of the chart to make Ohio State and Penn State fit. We can do that by adding `fig.width=X` in the `{r}` setup in your block. So something like this: 
+
+```
+{r fig.width=8}
+```
+
+```{r fig.width=8}
+ggplot() + 
+  geom_bump(data=rankings, aes(x=Week, y=Rank, color=Team)) + 
+  geom_point(data=rankings, aes(x=Week, y=Rank, color=Team), size = 4) +   
+  geom_text(data = rankings %>% filter(Week == min(Week)), aes(x = Week - .2, y=Rank, label = ShortTeam), size = 3, hjust = 1) +
+  geom_text(data = rankings %>% filter(Week == max(Week)), aes(x = Week + .2, y=Rank, label = ShortTeam), size = 3, hjust = 0) +
+  labs(title="The race to the playoffs", subtitle="LSU and Ohio State were never out of the top two spots. LSU deserved it.", y= "Rank", x = "Week", caption="Source: College Football Playoff Committee | Chart by Matt Waite") +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    panel.grid.major = element_blank(),
+    plot.title = element_text(size = 16, face = "bold"),
+    axis.title = element_text(size = 8), 
+    plot.subtitle = element_text(size=10), 
+    panel.grid.minor = element_blank()
+    ) +
+  scale_color_manual(values = c("#003015","#F66733", "#461D7C", "#bb0000", "#041E42", "#AF002A","#0021A5", "#BA0C2F", "#7A0019", "#841617", "#154733", "#CC0000", "#c5050c")) +
+  scale_x_continuous(breaks=c(10,11,12,13,14,15)) + 
+  scale_y_reverse(breaks=c(1,2,3,4,5,6,7,8,9,10))
+```
+

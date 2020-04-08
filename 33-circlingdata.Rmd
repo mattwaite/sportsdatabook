@@ -1,0 +1,127 @@
+# Encircling points on a scatterplot
+
+One thing we've talked about all semester is drawing attention to the thing you want to draw attention to. We've used color and labels to do that so far. Let's add another layer to it -- a shape around the points you want to highlight. 
+
+Remember: The point of all of this is to draw the eye to what you are trying to show your reader. You want people to see the story you are trying to tell. 
+
+It's not hard to draw a shape in ggplot -- it is a challenge to put it in the right place. But, there is a library to the rescue that makes this super easy -- `ggalt`. 
+
+Install it in the console with `install.packages("ggalt")`
+
+There's a bunch of things that `ggalt` does, but one of the most useful for us is the function `encircle`. Let's dive in.
+
+```{r}
+library(tidyverse)
+library(ggalt)
+```
+
+Let's say we want to highlight the top scorers in college basketball. So let's load up [our player data](https://unl.box.com/s/0g56ve61y6hakyxzr1u4t534721bqvg8) and while we're at it, let's filter out anyone who hasn't played. 
+
+```{r}
+players <- read_csv("data/players20.csv") %>% filter(MP > 0)
+```
+
+We've done this before, but let's make a standard scatterplot of minutes and points. 
+
+```{r}
+ggplot() + geom_point(data=players, aes(x=MP, y=PTS))
+```
+
+So we can see right away that there are some dots at the very top that we'd want to highlight. Who are these scoring machines? 
+
+Like we have done in the past, let's make a dataframe of top scorers. We'll set the cutoff at 650 points in a season. 
+
+```{r}
+topscorers <- players %>% filter(PTS > 650)
+```
+
+And like we've done in the past, we can add it to the chart with another geom_point. We'll make all the players grey, we'll make all the top scorers black.
+
+```{r}
+ggplot() + geom_point(data=players, aes(x=MP, y=PTS), color="grey") + geom_point(data=topscorers, aes(x=MP, y=PTS), color="black")
+```
+
+And like that, we're on the path to something publishable. We'll need to label those dots with `ggrepel` and we'll need to drop the default grey and add some headlines and all that. And, for the most part, we've got a solid chart. 
+
+But what if we could really draw the eye to those players. Let's draw a circle around them. 
+In `ggalt`, there is a new geom called `geom_encircle`, which ... does what you think it does. It encircles all the dots in a dataset. 
+
+So let's add geom_encircle and we'll just copy the data and the aes from our topscorers geom_point. Then, we need to give the encirclement a shape using s_shape -- which is a number between 0 and 1 -- and then how far away from the dots to draw the circle using expand, which is another number between 0 and 1.
+
+Let's start with `s_shape` 1 and `expand` 1.
+
+```{r}
+ggplot() + 
+  geom_point(data=players, aes(x=MP, y=PTS), color="grey") + 
+  geom_point(data=topscorers, aes(x=MP, y=PTS), color="black") + 
+  geom_encircle(data=topscorers, aes(x=MP, y=PTS), s_shape=1, expand=1, colour="red")
+```
+
+Whoa. That's ... not good.
+
+Let's go the opposite direction. 
+
+```{r}
+ggplot() + 
+  geom_point(data=players, aes(x=MP, y=PTS), color="grey") + 
+  geom_point(data=topscorers, aes(x=MP, y=PTS), color="black") + 
+  geom_encircle(data=topscorers, aes(x=MP, y=PTS), s_shape=0, expand=0, colour="red")
+```
+
+Better, but ... the circle cuts through multiple dots. 
+
+This takes a little bit of finessing, but a shape of .5 means the line will have some bend to it -- it'll look more like someone circled it with a pen. Then, the expand is better if you use hundredths instead of tenths. So .01 instead of .1. Here's mine after fiddling with it for a bit.
+
+```{r}
+ggplot() + 
+  geom_point(data=players, aes(x=MP, y=PTS), color="grey") + 
+  geom_point(data=topscorers, aes(x=MP, y=PTS), color="black") + 
+  geom_encircle(data=topscorers, aes(x=MP, y=PTS), s_shape=.5, expand=.03, colour="red")
+```
+
+Now let's clean this up and make it presentable. If you look at the top scorers, only two were Wooden Award finalists. So here's what a chart telling that story might look like.
+
+```{r}
+ggplot() + 
+  geom_point(data=players, aes(x=MP, y=PTS), color="grey") + 
+  geom_point(data=topscorers, aes(x=MP, y=PTS), color="black") + 
+  geom_encircle(data=topscorers, aes(x=MP, y=PTS), s_shape=.5, expand=.03, colour="red") +
+  geom_text(aes(x=725, y=700, label="Top scorers")) + 
+  labs(title="Only two top scorers are Wooden Award candidates", subtitle="Iowa's Garza and Marquette's Howard are the only two looking at postseason hardware.", x="Minutes", y="Points") + 
+  theme_minimal() + 
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    axis.title = element_text(size = 8), 
+    plot.subtitle = element_text(size=10), 
+    panel.grid.minor = element_blank()
+    )
+```
+
+## A different, more local example
+
+You can use circling outside of the top of something. It's a bit obvious that the previous dots were top scorers. What about when they aren't at the top?
+
+Works the same way -- use layering and color smartly and tell the story with all your tools.
+
+Let's grab the top three point attempt takers on the Nebraska roster. As of now, only one will be coming back. 
+
+```{r}
+nutop <- players %>% filter(Team == "Nebraska Cornhuskers") %>% top_n(3, `3PA`)
+```
+
+And just like above, we can plug in our players geom, our nutop dataframe into another geom, then encircle that dataframe. Slap some headlines and annotations on it and here's what we get:
+
+```{r}
+ggplot() + geom_point(data=players, aes(x=MP, y=`3PA`), color="grey") + geom_point(data=nutop, aes(x=MP, y=`3PA`), color="red") + geom_encircle(data=nutop, aes(x=MP, y=`3PA`), s_shape=.02, expand=.18, colour="red") +
+  geom_text(aes(x=400, y=100, label="Nebraska's top three shooters")) + 
+  labs(title="Did Hoiberg install his system?", subtitle="Nebraska's top three point shooters were nowhere near the tops in college basketball", x="Minutes", y="Three point attempts") + 
+  theme_minimal() + 
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    axis.title = element_text(size = 8), 
+    plot.subtitle = element_text(size=10), 
+    panel.grid.minor = element_blank()
+    )
+```
+
+The dot on the far right? Cam Mack. Oh what could have been. 

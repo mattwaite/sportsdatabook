@@ -78,7 +78,7 @@ plot_ly(data=batting, x= ~`wRC+`, y= ~`AVG`, color= ~`Division`,
 
 ## Publishing using Plotly
 
-We want to now export our plotly visualization.  First, you'll need to sign up for a [free plotly account](https://plot.ly/).  Then you'll need to register your plotly username and your API key.
+We want to now export our plotly visualization.  First, you'll need to sign up for a [free plotly account](https://chart-studio.plotly.com/Auth/login/#/).  Then you'll need to register your plotly username and your API key.
 
 More info about how to do that can be [found on Plotly's website](https://plot.ly/r/getting-started/#initialization-for-online-plotting).
 
