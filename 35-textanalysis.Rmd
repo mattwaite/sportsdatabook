@@ -1,0 +1,157 @@
+# Text cleaning 
+
+
+```{r}
+library(tidyverse)
+```
+
+
+
+## Stripping out text
+
+Throughout this class, we've used data from Sports Reference. If you've used their Share > CSV method to copy data from a table, you may have noticed some extra cruft in the player name field. If you haven't seen it, I'll give you an example -- [here's a dataset of NBA players and their advanced metrics](https://unl.box.com/s/bx89eg0ooccpovm3ii7jnbjj3xaby2qd).
+
+```{r}
+nbaplayers <- read_csv("data/nbaplayers.csv")
+```
+
+Let's take a look:
+
+```{r}
+head(nbaplayers)
+```
+
+For starters, see the two empty columns that don't have any names? X20 and X25. We can get rid of them. They're empty. 
+
+```{r}
+nbaplayers <- nbaplayers %>% select(-X20, -X25)
+```
+
+Now let's look at those names:
+
+```{r}
+head(nbaplayers)
+```
+
+You can see that every players name is their name, then two backslashes, then some version of their name that must have meaning to Sports Reference, but not to us. So we need to get rid of that. 
+
+To do this, we're going to use a little regular expression magic. REgular expressions are a programmatic way to find any pattern in text. What we're looking for is that `\\` business. But, that presents a problem, because the `\` is a special character. It's called an escape character. That escape character means what comes next is potentially special. For instance, if you see `\n`, that's a newline character. So normally, if you see that, it would add a return. 
+
+So for us to get rid of the `\` we're going to have to escape the escape character with an escape character. And we have two of them. So we have to do it twice. 
+
+Yes. Really.
+
+So if we wanted to find two backslashes, we need `\\\\`. Then, using regular expressions, we can say "and then everything else after this" with this: .* 
+
+No really. That's it. So we're looking for `\\\\.*`. That'll find two backslashes and then everything after it. If you think this is hard ... you're right. Regular expressions are an entire month of a programming course by themselves. They are EXTREMELY powerful. 
+
+To find something in text, we'll use a function called `gsub`. The pattern in `gsub` is `pattern, what we want to replace it with, what column this can all be found in`. So in our example, the pattern is `\\\\.*`, what we want to replace it with is ... nothing, and this is all in the Player column. Here's the code. 
+
+```{r}
+nbaplayers %>% mutate(Player=gsub("\\\\.*","",Player)) %>% head()
+```
+
+Just like that, the trash is gone.
+
+## Another example: splitting columns
+
+Text cleaning is really just a set of logic puzzles. What do I need to do? How can I get there step by step?
+
+The NCAA does some very interesting things with data, making it pretty useless. [Here's an example](https://unl.box.com/s/kxjh8k7bm95i8eeovao18nqiky860j1s). 
+
+Let's import it and take a look.
+
+```{r}
+kills <- read_csv("data/killsperset.csv")
+```
+
+```{r}
+head(kills)
+```
+
+First things first, Player isn't just player, it's player, school and conference, all in one. And Ht is a character field -- and in feet and inches.
+
+So ... this is a mess. But there is a pattern. See it? A comma after the player's name. The Conference is in parens. We can use that. 
+
+For this, we're going to use a `tidyr` function called `separate` to split columns into multiple columns based on a character. We'll do this step by step.
+
+First, let's use that comma to split the player and the rest. Ignore the head at the end. That's just to keep it from showing you all 150.
+
+```{r}
+kills %>% separate(Player, into=c("Player", "School"), sep=",") %>% head()
+```
+
+Good start.
+
+Now, let's get the conference separated. A problem is going to crop up here -- the paren is a special character, so we have to escape it with the `\\`. 
+
+```{r}
+kills %>% 
+  separate(Player, into=c("Player", "School"), sep=",") %>%
+  separate(School, into=c("School", "Conference"), sep="\\(") %>% 
+  head()
+```
+
+Uh oh. Says we have problems in rows 15, 42 and 83. What are they? The NCAA has decided to put (FL), (NY) and (PA) into three teams to tell you they're in Florida, New York and Pennslyvania respectively. Well, we can fix that with some gsub and we'll use a switch called `fixed`, which when set to TRUE it means this literal string, no special characters.
+
+```{r}
+kills %>% 
+  separate(Player, into=c("Player", "School"), sep=",") %>% 
+  mutate(School = gsub("(FL)", "FL", School, fixed=TRUE)) %>%
+  mutate(School = gsub("(NY)", "NY", School, fixed=TRUE)) %>%
+  mutate(School = gsub("(PA)", "PA", School, fixed=TRUE)) %>%
+  separate(School, into=c("School", "Conference"), sep="\\(") %>% 
+  head()
+```
+
+One last thing: see the trailing paren?
+
+```{r}
+kills %>% 
+  separate(Player, into=c("Player", "School"), sep=",") %>% 
+  mutate(School = gsub("(FL)", "FL", School, fixed=TRUE)) %>%
+  mutate(School = gsub("(NY)", "NY", School, fixed=TRUE)) %>%
+  mutate(School = gsub("(PA)", "PA", School, fixed=TRUE)) %>%
+  separate(School, into=c("School", "Conference"), sep="\\(") %>% 
+  mutate(Conference=gsub(")", "", Conference)) %>%
+  head()
+```
+
+Looking good, no errors.
+
+Now, what should we do about Ht? 6-2 is not going to tell me much when I want to run a regression of height to kills per set. And it's a character field. So we need to convert it to numbers.
+
+Separate again comes to the rescue.
+
+```{r}
+kills %>% 
+  separate(Player, into=c("Player", "School"), sep=",") %>% 
+  mutate(School = gsub("(FL)", "FL", School, fixed=TRUE)) %>%
+  mutate(School = gsub("(NY)", "NY", School, fixed=TRUE)) %>%
+  mutate(School = gsub("(PA)", "PA", School, fixed=TRUE)) %>%
+  separate(School, into=c("School", "Conference"), sep="\\(") %>% 
+  mutate(Conference=gsub(")", "", Conference)) %>%
+  separate(Ht, into=c("Feet", "Inches"), sep="-") %>%
+  mutate(Feet = as.numeric(Feet), Inches = as.numeric(Inches)) %>%
+  head()
+```
+
+But how do we turn that into a height? Math!
+
+```{r}
+kills %>% 
+  separate(Player, into=c("Player", "School"), sep=",") %>% 
+  mutate(School = gsub("(FL)", "FL", School, fixed=TRUE)) %>%
+  mutate(School = gsub("(NY)", "NY", School, fixed=TRUE)) %>%
+  mutate(School = gsub("(PA)", "PA", School, fixed=TRUE)) %>%
+  separate(School, into=c("School", "Conference"), sep="\\(") %>% 
+  mutate(Conference=gsub(")", "", Conference)) %>%
+  separate(Ht, into=c("Feet", "Inches"), sep="-") %>%
+  mutate(Feet = as.numeric(Feet), Inches = as.numeric(Inches)) %>%
+  mutate(Height = (Feet*12)+Inches) %>%
+  head()
+```
+
+And now, in 10 lines of code, using separate, mutate and gsub, we've turned the mess that is the NCAA's data into actually useful data we can analyze. 
+
+These patterns of thought come in handy when facing messed up data.
