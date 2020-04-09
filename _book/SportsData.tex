@@ -2531,6 +2531,10 @@ The lack of a shape here -- the seemingly random nature -- is a good sign that a
 
 Another way to view your residuals is by connecting the predicted value with the actual value.
 
+\begin{verbatim}
+## `geom_smooth()` using formula 'y ~ x'
+\end{verbatim}
+
 \includegraphics{SportsData_files/figure-latex/unnamed-chunk-85-1.pdf}
 
 The blue line here separates underperformers from overperformers.
@@ -2627,6 +2631,10 @@ So our model says Oklahoma \emph{should} only be scoring 31.3 points per game gi
 Well \ldots{} it actually says that a linear model is appropriate. Which an important lesson -- just because your residual plot says a linear model works here, that doesn't say your linear model is good. There are other measures for that, and you need to use them.
 
 Here's the segment plot of residuals -- you'll see some really long lines. That's a bad sign.
+
+\begin{verbatim}
+## `geom_smooth()` using formula 'y ~ x'
+\end{verbatim}
 
 \includegraphics{SportsData_files/figure-latex/unnamed-chunk-91-1.pdf}
 
@@ -3996,6 +4004,10 @@ Let's talk about this. It seems that the data slopes up to the right. That would
 \KeywordTok{ggplot}\NormalTok{(fgmodel, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{fgpct, }\DataTypeTok{y=}\NormalTok{wins)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method=}\NormalTok{lm, }\DataTypeTok{se=}\OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula 'y ~ x'
+\end{verbatim}
 
 \includegraphics{SportsData_files/figure-latex/unnamed-chunk-177-1.pdf}
 
@@ -5462,7 +5474,6 @@ First, how are we going to know, in the data, which year our data is from? We ca
 
 \begin{verbatim}
 ## Error: Column 1 must be named.
-## Use .name_repair to specify repair.
 \end{verbatim}
 
 Uh oh. Error. What does it say? Column 1 must be named. If you look at our data in the environment tab in the upper right corner, you'll see that indeed, the first column has no name. It's the FBS rank of each team. So we can fix that and mutate in the same step. We'll do that using \texttt{rename} and since the field doesn't have a name to rename it, we'll use a position argument. We'll say rename column 1 as Rank.
@@ -6158,6 +6169,10 @@ Now let's add a fit line.
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+## `geom_smooth()` using formula 'y ~ x'
+\end{verbatim}
+
 \includegraphics{SportsData_files/figure-latex/unnamed-chunk-263-1.pdf}
 
 And now some labels.
@@ -6169,6 +6184,10 @@ And now some labels.
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x=}\StringTok{"Total yards per game"}\NormalTok{, }\DataTypeTok{y=}\StringTok{"Points per game"}\NormalTok{, }\DataTypeTok{title=}\StringTok{"Nebraska's underperforming offense"}\NormalTok{, }\DataTypeTok{subtitle=}\StringTok{"The Husker's offense was the strength of the team. They underperformed."}\NormalTok{, }\DataTypeTok{caption=}\StringTok{"Source: NCAA | By Matt Waite"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula 'y ~ x'
+\end{verbatim}
 
 \includegraphics{SportsData_files/figure-latex/unnamed-chunk-264-1.pdf}
 
@@ -6182,6 +6201,10 @@ Let's get rid of the default plot look and drop the grey background.
 \StringTok{  }\KeywordTok{theme_minimal}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula 'y ~ x'
+\end{verbatim}
 
 \includegraphics{SportsData_files/figure-latex/unnamed-chunk-265-1.pdf}
 
@@ -6198,6 +6221,10 @@ Off to a good start, but our text has no real heirarchy. We'd want our headline 
 \NormalTok{    ) }
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula 'y ~ x'
+\end{verbatim}
 
 \includegraphics{SportsData_files/figure-latex/unnamed-chunk-266-1.pdf}
 
@@ -6217,6 +6244,10 @@ Now let's fix a few other things -- like the axis labels being too big, the subt
 \NormalTok{    ) }
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula 'y ~ x'
+\end{verbatim}
 
 \includegraphics{SportsData_files/figure-latex/unnamed-chunk-267-1.pdf}
 
@@ -6238,6 +6269,10 @@ Missing from this graph is the context that the headline promises. Where is Nebr
 \StringTok{  }\KeywordTok{geom_text_repel}\NormalTok{(}\DataTypeTok{data=}\NormalTok{nu, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\StringTok{`}\DataTypeTok{Yards/G}\StringTok{`}\NormalTok{, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{Points/G}\StringTok{`}\NormalTok{, }\DataTypeTok{label=}\StringTok{"Nebraska 2018"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula 'y ~ x'
+\end{verbatim}
 
 \includegraphics{SportsData_files/figure-latex/unnamed-chunk-268-1.pdf}
 
@@ -6428,6 +6463,10 @@ Let's look at the relationship between a player's batting average and wRC+ (\hre
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+## `geom_smooth()` using formula 'y ~ x'
+\end{verbatim}
+
 \includegraphics{SportsData_files/figure-latex/unnamed-chunk-277-1.pdf}
 
 You can obviously add more aesthetics to make it look better, but you get the picture. If I'm a fan of sports though, obviously I want to see who the outlier points are or just scroll through and see each player at an individual location. We can always annotate data, but that process can be tedious.
@@ -6528,7 +6567,7 @@ To finish, we're going to fix the layout a bit, very similar to how we've been d
 \hypertarget{publishing-using-plotly}{%
 \section{Publishing using Plotly}\label{publishing-using-plotly}}
 
-We want to now export our plotly visualization. First, you'll need to sign up for a \href{https://plot.ly/}{free plotly account}. Then you'll need to register your plotly username and your API key.
+We want to now export our plotly visualization. First, you'll need to sign up for a \href{https://chart-studio.plotly.com/Auth/login/\#/}{free plotly account}. Then you'll need to register your plotly username and your API key.
 
 More info about how to do that can be \href{https://plot.ly/r/getting-started/\#initialization-for-online-plotting}{found on Plotly's website}.
 
@@ -6582,9 +6621,9 @@ There's better ways.
 
 In this chapter, we're going to use a method that sounds advanced but it really quite simple called k-means clustering. It's based on the concept of the k-nearest neighbor algorithm. You're probably already scared. Don't be.
 
-Imagine two dots on a scatterplot. If you took a ruler out and measured the distance between those dots, you'd know how far apart they are. In math, that's called the Euclidean distance. It's just the space between them in numbers. Where k-nearest neighbor comes in, you have lots of dots and you want measure the distance between all of them. What does k-means clustering do? It lumps them into groups based on the average distance between them. Players who are good on offense but bad on defense are over here, good offense good defense are over here. And using the Eucliean distance between them, we can decide who is in and who is out of those groups.
+Imagine two dots on a scatterplot. If you took a ruler out and measured the distance between those dots, you'd know how far apart they are. In math, that's called the Euclidean distance. It's just the space between them in numbers. Where k-nearest neighbor comes in, you have lots of dots and you want measure the distance between all of them. What does k-means clustering do? It lumps them into groups based on the average distance between them. Players who are good on offense but bad on defense are over here, good offense good defense are over here. And using the Euclidean distance between them, we can decide who is in and who is out of those groups.
 
-For this exercise, I want to look at Cam Mack, Nebraska's point guard and probably the most interesting player on Fred Hoiberg's first team. This is Mack's first year in major college basketball -- he played a year at a community college -- so we don't have much to go on. But with three games in the books, who does Cam Mack compare to?
+For this exercise, I want to look at Cam Mack, Nebraska's point guard and probably the most interesting player on Fred Hoiberg's first team. This is Mack's first year in major college basketball -- he played a year at a community college -- so we don't have much to go on. But with a season in the books, who does Cam Mack compare to?
 
 To answer this, we'll use k-means clustering.
 
@@ -6801,7 +6840,7 @@ Let's look at what we get.
 ## [6] "betweenss"    "size"         "iter"         "ifault"
 \end{verbatim}
 
-Interpreting this output, the very first thing you need to know is that \textbf{the cluster numbers are meaningless}. They aren't ranks. They aren't anything. After you have taken that on board, look at the cluster sizes at the top. Clusters 3 and 5 are pretty large compared to others. That's notable. Then we can look at the cluster means. For reference, 0 is going to be average. So group 1 are well above average on minutes played. Group 3 is slightly above, group 5 is slightly below. In fact, group 5 is below average on every metric. Group 3 is slightly above average on all metrics.
+Interpreting this output, the very first thing you need to know is that \textbf{the cluster numbers are meaningless}. They aren't ranks. They aren't anything. After you have taken that on board, look at the cluster sizes at the top. Clusters 1 and 2 are pretty large compared to others. That's notable. Then we can look at the cluster means. For reference, 0 is going to be average. So group 1 is below average on minutes played. Group 2 is slightly above, group 5 is well above.
 
 So which group is Cam Mack in? Well, first we have to put our data back together again. In K5, there is a list of cluster assignments in the same order we put them in, but recall we have no names. So we need to re-combine them with our original data. We can do that with the following:
 
@@ -6817,9 +6856,18 @@ We now have a dataset and can plot it like anything else. Let's get Cam Mack and
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{cm <-}\StringTok{ }\NormalTok{playercluster }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Player }\OperatorTok{==}\StringTok{ "Cameron Mack"}\NormalTok{)}
+\NormalTok{cm <-}\StringTok{ }\NormalTok{playercluster }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Player }\OperatorTok{==}\StringTok{ "Cam Mack"}\NormalTok{)}
+
+\NormalTok{cm}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+##     Player                 Team Pos  MP  FG.  X3P. AST TOV PTS k5.cluster
+## 1 Cam Mack Nebraska Cornhuskers   G 931 0.39 0.339 172  71 324          5
+\end{verbatim}
+
+So Cam's in cluster 5, which if you look at our clusters, puts him in the cluster with all above average metrics. What does that look like? We know Cam was an assist machine, so where do group 5 people grade out on assists?
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6831,32 +6879,44 @@ We now have a dataset and can plot it like anything else. Let's get Cam Mack and
 
 \includegraphics{SportsData_files/figure-latex/unnamed-chunk-293-1.pdf}
 
-Not bad, not bad. But who are Cam Mack's peers? If we look at the numbers in Group 1, there's 335 of them. So let's limit them to just Big Ten guards. Unfortunately, my scraper didn't quite work and in the place of Conference is the coach's name. So I'm going to have to do this the hard way and make a list of Big Ten teams and filter on that. Then I'll sort by minutes played.
+Not bad, not bad. But who are Cam Mack's peers? If we look at the numbers in Group 5, there's 495 of them. So let's limit them to just Big Ten guards. Unfortunately, my scraper didn't quite work and in the place of Conference is the coach's name. So I'm going to have to do this the hard way and make a list of Big Ten teams and filter on that. Then I'll sort by minutes played.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{big10 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Nebraska Cornhuskers"}\NormalTok{, }\StringTok{"Iowa Hawkeyes"}\NormalTok{, }\StringTok{"Minnesota Golden Gophers"}\NormalTok{, }\StringTok{"Illinois Fighting Illini"}\NormalTok{, }\StringTok{"Northwestern Wildcats"}\NormalTok{, }\StringTok{"Wisconsin Badgers"}\NormalTok{, }\StringTok{"Indiana Hoosiers"}\NormalTok{, }\StringTok{"Purdue Boilermakers"}\NormalTok{, }\StringTok{"Ohio State Buckeyes"}\NormalTok{, }\StringTok{"Michigan Wolverines"}\NormalTok{, }\StringTok{"Michigan State Spartans"}\NormalTok{, }\StringTok{"Penn State Nittany Lions"}\NormalTok{, }\StringTok{"Rutgers Scarlet Knights"}\NormalTok{, }\StringTok{"Maryland Terrapins"}\NormalTok{)}
 
-\NormalTok{playercluster }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(k5.cluster }\OperatorTok{==}\StringTok{ }\DecValTok{4}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Team }\OperatorTok{%in%}\StringTok{ }\NormalTok{big10) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(MP))}
+\NormalTok{playercluster }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(k5.cluster }\OperatorTok{==}\StringTok{ }\DecValTok{5}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Team }\OperatorTok{%in%}\StringTok{ }\NormalTok{big10) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(MP))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##          Player                    Team Pos MP   FG.  X3P. AST TOV PTS
-## 1   Cole Bajema     Michigan Wolverines   G 35 0.750 0.571   0   2  24
-## 2    Reese Mona      Maryland Terrapins   G 30 1.000 1.000   2   1   9
-## 3   Joey Downes Rutgers Scarlet Knights   G 10 0.667 1.000   0   1   8
-## 4 Travis Valmon      Maryland Terrapins   G  8 0.500 1.000   0   0   4
-## 5  Cooper Bybee        Indiana Hoosiers   G  4 1.000 1.000   0   0   3
-##   k5.cluster
-## 1          4
-## 2          4
-## 3          4
-## 4          4
-## 5          4
+##             Player                     Team Pos   MP   FG.  X3P. AST TOV PTS
+## 1      Marcus Carr Minnesota Golden Gophers   G 1004 0.377 0.341 181  76 419
+## 2    Anthony Cowan       Maryland Terrapins   G  965 0.379 0.331 133  59 454
+## 3         Cam Mack     Nebraska Cornhuskers   G  931 0.390 0.339 172  71 324
+## 4  Eric Hunter Jr.      Purdue Boilermakers   G  907 0.419 0.373  77  57 297
+## 5   Zavier Simpson      Michigan Wolverines   G  907 0.472 0.354 213  85 351
+## 6      Ayo Dosunmu Illinois Fighting Illini   G  891 0.483 0.295  86  72 443
+## 7   D'Mitrik Trice        Wisconsin Badgers   G  883 0.397 0.390 116  50 289
+## 8  Cassius Winston  Michigan State Spartans   G  868 0.432 0.409 157  85 497
+## 9        CJ Walker      Ohio State Buckeyes   G  795 0.420 0.338  94  47 227
+## 10     Pat Spencer    Northwestern Wildcats   G  787 0.458 0.250 103  63 286
+## 11       Geo Baker  Rutgers Scarlet Knights   G  736 0.389 0.261  91  45 273
+##    k5.cluster
+## 1           5
+## 2           5
+## 3           5
+## 4           5
+## 5           5
+## 6           5
+## 7           5
+## 8           5
+## 9           5
+## 10          5
+## 11          5
 \end{verbatim}
 
-So there are the 8 guards most like Cam Mack in the Big Ten. It'll be interesting to watch this evolve over the season. Fred Hoiberg and others think he might be one of the best guards in the league. We'll see, using cluster analysis.
+So there are the 11 guards most like Cam Mack in the Big Ten. Safe to say, these are the 11 best guards in the conference.
 
 \hypertarget{advanced-metrics}{%
 \section{Advanced metrics}\label{advanced-metrics}}
@@ -7038,7 +7098,7 @@ What do we have here?
 ## [6] "betweenss"    "size"         "iter"         "ifault"
 \end{verbatim}
 
-Looks like this time, cluster 1 is all below average and cluster 5 is all above. Which cluster is Cam Mack in?
+Looks like this time, cluster 1 is all below average and cluster 5 is mostly above. Which cluster is Cam Mack in?
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7046,28 +7106,110 @@ Looks like this time, cluster 1 is all below average and cluster 5 is all above.
 \end{Highlighting}
 \end{Shaded}
 
-Cluster 5 on my dataset. So three games in, we can say he's in a big group of players who are all above average on these advanced metrics.
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cmadv <-}\StringTok{ }\NormalTok{playeradvcluster }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Player }\OperatorTok{==}\StringTok{ "Cam Mack"}\NormalTok{)}
+
+\NormalTok{cmadv}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     Player                 Team Pos  PER   TS. PProd AST. WS.40 BPM
+## 1 Cam Mack Nebraska Cornhuskers   G 15.9 0.481   382 36.4 0.081 3.9
+##   advk5.cluster
+## 1             3
+\end{verbatim}
+
+Cluster 3 on my dataset. So in this season, we can say he's in a big group of players who are all above average on these advanced metrics.
 
 Now who are his Big Ten peers?
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{playeradvcluster }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{filter}\NormalTok{(advk5.cluster }\OperatorTok{==}\StringTok{ }\DecValTok{5}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(advk5.cluster }\OperatorTok{==}\StringTok{ }\DecValTok{3}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{filter}\NormalTok{(Team }\OperatorTok{%in%}\StringTok{ }\NormalTok{big10) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(PProd))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] Player        Team          Pos           PER           TS.          
-##  [6] PProd         AST.          WS.40         BPM           advk5.cluster
-## <0 rows> (or 0-length row.names)
+##                  Player                     Team Pos  PER   TS. PProd AST.
+## 1       Cassius Winston  Michigan State Spartans   G 22.5 0.567   495 37.2
+## 2           Marcus Carr Minnesota Golden Gophers   G 18.1 0.491   468 37.0
+## 3         Anthony Cowan       Maryland Terrapins   G 21.1 0.551   466 29.2
+## 4        Zavier Simpson      Michigan Wolverines   G 19.7 0.535   436 43.6
+## 5           Ayo Dosunmu Illinois Fighting Illini   G 19.6 0.551   411 21.1
+## 6              Cam Mack     Nebraska Cornhuskers   G 15.9 0.481   382 36.4
+## 7          Joe Wieskamp            Iowa Hawkeyes   G 19.7 0.566   368  9.3
+## 8        Ron Harper Jr.  Rutgers Scarlet Knights   G 20.4 0.541   318  7.6
+## 9        D'Mitrik Trice        Wisconsin Badgers   G 16.2 0.531   312 27.5
+## 10      Haanif Cheatham     Nebraska Cornhuskers   G 15.6 0.551   308  9.1
+## 11         Andres Feliz Illinois Fighting Illini   G 20.1 0.542   306 22.1
+## 12          Pat Spencer    Northwestern Wildcats   G 15.9 0.527   299 28.6
+## 13      Eric Hunter Jr.      Purdue Boilermakers   G 14.0 0.524   297 17.0
+## 14         Myreon Jones Penn State Nittany Lions   G 21.0 0.589   288 20.0
+## 15           Eli Brooks      Michigan Wolverines   G 13.8 0.521   283 11.2
+## 16            Geo Baker  Rutgers Scarlet Knights   G 16.5 0.483   282 23.6
+## 17        Aaron Wiggins       Maryland Terrapins   G 14.5 0.496   282 11.0
+## 18        Aljami Durham         Indiana Hoosiers   G 14.3 0.573   262 18.3
+## 19       Darryl Morsell       Maryland Terrapins   G 13.4 0.518   252 17.0
+## 20       Jahaad Proctor      Purdue Boilermakers   G 15.5 0.506   249 13.9
+## 21        Devonte Green         Indiana Hoosiers   G 16.1 0.507   249 19.6
+## 22            CJ Walker      Ohio State Buckeyes   G 13.9 0.534   247 23.3
+## 23 Duane Washington Jr.      Ohio State Buckeyes   G 16.6 0.544   244 13.4
+## 24          Myles Dread Penn State Nittany Lions   G 13.7 0.498   237 15.6
+## 25           Eric Ayala       Maryland Terrapins   G 10.3 0.470   237 17.8
+## 26             Boo Buie    Northwestern Wildcats   G 12.7 0.475   223 22.8
+## 27          CJ Fredrick            Iowa Hawkeyes   G 17.2 0.649   218 16.9
+## 28     Connor McCaffery            Iowa Hawkeyes   G 12.5 0.491   214 20.5
+## 29          D.J. Carton      Ohio State Buckeyes   G 17.8 0.593   208 27.0
+## 30        Joe Toussaint            Iowa Hawkeyes   G 13.4 0.466   206 26.9
+## 31         Rob Phinisee         Indiana Hoosiers   G 11.5 0.480   175 25.8
+## 32         Jack Hoiberg  Michigan State Spartans   G 25.3 0.509    24 50.7
+## 33           Tommy Luce      Purdue Boilermakers   G 14.0 0.385    12 43.0
+## 34         Tino Malnati    Northwestern Wildcats   G 24.3 0.500     3 40.4
+## 35  Rico Ozuna-Harrison      Michigan Wolverines   G 29.3 1.000     3 44.5
+##    WS.40 BPM advk5.cluster
+## 1  0.203 8.0             3
+## 2  0.146 6.7             3
+## 3  0.204 9.4             3
+## 4  0.157 7.3             3
+## 5  0.161 6.2             3
+## 6  0.081 3.9             3
+## 7  0.149 7.3             3
+## 8  0.186 7.4             3
+## 9  0.133 6.8             3
+## 10 0.091 2.5             3
+## 11 0.185 7.3             3
+## 12 0.076 3.0             3
+## 13 0.120 5.9             3
+## 14 0.183 8.4             3
+## 15 0.107 5.8             3
+## 16 0.139 6.9             3
+## 17 0.123 6.2             3
+## 18 0.122 4.6             3
+## 19 0.115 5.5             3
+## 20 0.139 5.0             3
+## 21 0.114 4.9             3
+## 22 0.142 6.9             3
+## 23 0.151 4.4             3
+## 24 0.129 6.5             3
+## 25 0.089 3.3             3
+## 26 0.039 0.2             3
+## 27 0.133 6.7             3
+## 28 0.109 6.5             3
+## 29 0.152 6.6             3
+## 30 0.071 2.5             3
+## 31 0.080 3.3             3
+## 32 0.268 6.2             3
+## 33 0.102 2.2             3
+## 34 0.161 7.8             3
+## 35 0.307 8.7             3
 \end{verbatim}
 
-Sorting on Points Produced, Cam Mack is eighth out of the 31 guards in the Big Ten who land in Cluster 5.
-
-It's early goings, but watch this player. He's fun to watch and the stats back it up.
+Sorting on Points Produced, Cam Mack is sixth out of the 35 guards in the Big Ten who land in Cluster 3. Seems advanced metrics take a little bit of the shine off of Cam. But then, so does leaving the program after one suspension-riddled season.
 
 \hypertarget{rtweet-and-text-analysis}{%
 \chapter{Rtweet and Text Analysis}\label{rtweet-and-text-analysis}}
@@ -7298,8 +7440,8 @@ It's important to remember these tweets can come from accounts that are people, 
 \end{Shaded}
 
 \begin{verbatim}
-## Observations: 11,523
-## Variables: 90
+## Rows: 11,523
+## Columns: 90
 ## $ user_id                 <chr> "x17636179", "x17636179", "x17636179", "x15...
 ## $ status_id               <chr> "x1191100304940396544", "x11908526509059440...
 ## $ created_at              <dttm> 2019-11-03 21:10:16, 2019-11-03 04:46:11, ...
@@ -7447,7 +7589,7 @@ One question we might have pertains to the number of tweets that occur during th
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-312-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-313-1.pdf}
 
 There you have it. A trend line plotting tweet volume throughout the course of the event. Do you see any areas where the match might have had a significant number of tweets?
 
@@ -7517,7 +7659,7 @@ Now that we have a tidied textual data set, all we need to do is apply our senti
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-314-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-315-1.pdf}
 
 When looking at this trend line, you can see that during the volleyball game, tweets using the \#husker and \#gbr hashtags had some wide variation in sentiment. Overall it seems that tweets during the volleyball match were mostly positive, where at times it dipped negative. Why might this be the case? Well, unfortunately, even though this was a big game for Husker volleyball, not many people were tweeting during the match (take a look at the number of tweets chart above). So if there was one word used in a tweet that was ranked as very negative in sentiment, it would have easily drove our average sentiment into the negative region quickly.
 
@@ -7556,7 +7698,7 @@ Now, let's just get a sense of the number of tweets that occurred at certain poi
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-316-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-317-1.pdf}
 
 Looking at this plot, we can see the tweet volume is a lot higher than that of the volleyball match. In fact, it looks like towards the end of the game there was a five minute interval where \textasciitilde{}80 or so tweets occurred. Given the outcome of the game, I assume people were not real happy during this spike in activity. Well we have the tools to answer this question.
 
@@ -7615,7 +7757,7 @@ You can then use the \texttt{ggplot} code to plot sentiment over time, introduce
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-318-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-319-1.pdf}
 
 As you can see, it started out pretty positive. Then, it started to go negative throughout the first half. However, there was a bump, which was around the time D-Lineman, Darrion Daniels almost scored a pick six. Around halftime, we can see a little bit of a bump towards positive sentiment. This was probably most likely due to people cheering on the Huskers to come out strong after the half. As the second half progressed, you can see things turned for the worst again, and sentiment became negative up until the end of the game, most likely because people realized they were going to get another L on the schedule. You can relive all this excitement again by catching the game recap \href{https://www.youtube.com/watch?v=m0hKH6Zb0vY\&feature=onebox}{here}.
 
@@ -7698,7 +7840,7 @@ With cowplot, we can use a function called \texttt{plot\_grid} to arrange the ch
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-325-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-326-1.pdf}
 
 We can also stack them on top of each other:
 
@@ -7708,7 +7850,7 @@ We can also stack them on top of each other:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-326-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-327-1.pdf}
 
 To make these publishable, we should add headlines, chatter, decent labels, credit lines, etc. But to do this, we'll have to figure out which labels go on which charts, so we can make it look decent. For example -- both charts don't need x or y labels. If you don't have a title and subtitle on both, the spacing is off, so you need to leave one blank or the other blank. You'll just have to fiddle with it until you get it looking right.
 
@@ -7748,7 +7890,758 @@ Saving a cowplot plot\_grid is the same as anything else we did in the class:
 ## Saving 6.5 x 4.5 in image
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-329-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-330-1.pdf}
+
+\hypertarget{encircling-points-on-a-scatterplot}{%
+\chapter{Encircling points on a scatterplot}\label{encircling-points-on-a-scatterplot}}
+
+One thing we've talked about all semester is drawing attention to the thing you want to draw attention to. We've used color and labels to do that so far. Let's add another layer to it -- a shape around the points you want to highlight.
+
+Remember: The point of all of this is to draw the eye to what you are trying to show your reader. You want people to see the story you are trying to tell.
+
+It's not hard to draw a shape in ggplot -- it is a challenge to put it in the right place. But, there is a library to the rescue that makes this super easy -- \texttt{ggalt}.
+
+Install it in the console with \texttt{install.packages("ggalt")}
+
+There's a bunch of things that \texttt{ggalt} does, but one of the most useful for us is the function \texttt{encircle}. Let's dive in.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{library}\NormalTok{(ggalt)}
+\end{Highlighting}
+\end{Shaded}
+
+Let's say we want to highlight the top scorers in college basketball. So let's load up \href{https://unl.box.com/s/0g56ve61y6hakyxzr1u4t534721bqvg8}{our player data} and while we're at it, let's filter out anyone who hasn't played.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{players <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/players20.csv"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(MP }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   .default = col_double(),
+##   Team = col_character(),
+##   Player = col_character(),
+##   Class = col_character(),
+##   Pos = col_character(),
+##   Height = col_character(),
+##   Hometown = col_character(),
+##   `High School` = col_character(),
+##   Summary = col_character()
+## )
+\end{verbatim}
+
+\begin{verbatim}
+## See spec(...) for full column specifications.
+\end{verbatim}
+
+We've done this before, but let's make a standard scatterplot of minutes and points.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{players, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{MP, }\DataTypeTok{y=}\NormalTok{PTS))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-333-1.pdf}
+
+So we can see right away that there are some dots at the very top that we'd want to highlight. Who are these scoring machines?
+
+Like we have done in the past, let's make a dataframe of top scorers. We'll set the cutoff at 650 points in a season.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{topscorers <-}\StringTok{ }\NormalTok{players }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(PTS }\OperatorTok{>}\StringTok{ }\DecValTok{650}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+And like we've done in the past, we can add it to the chart with another geom\_point. We'll make all the players grey, we'll make all the top scorers black.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{players, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{MP, }\DataTypeTok{y=}\NormalTok{PTS), }\DataTypeTok{color=}\StringTok{"grey"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{topscorers, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{MP, }\DataTypeTok{y=}\NormalTok{PTS), }\DataTypeTok{color=}\StringTok{"black"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-335-1.pdf}
+
+And like that, we're on the path to something publishable. We'll need to label those dots with \texttt{ggrepel} and we'll need to drop the default grey and add some headlines and all that. And, for the most part, we've got a solid chart.
+
+But what if we could really draw the eye to those players. Let's draw a circle around them.
+In \texttt{ggalt}, there is a new geom called \texttt{geom\_encircle}, which \ldots{} does what you think it does. It encircles all the dots in a dataset.
+
+So let's add geom\_encircle and we'll just copy the data and the aes from our topscorers geom\_point. Then, we need to give the encirclement a shape using s\_shape -- which is a number between 0 and 1 -- and then how far away from the dots to draw the circle using expand, which is another number between 0 and 1.
+
+Let's start with \texttt{s\_shape} 1 and \texttt{expand} 1.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{players, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{MP, }\DataTypeTok{y=}\NormalTok{PTS), }\DataTypeTok{color=}\StringTok{"grey"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{topscorers, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{MP, }\DataTypeTok{y=}\NormalTok{PTS), }\DataTypeTok{color=}\StringTok{"black"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_encircle}\NormalTok{(}\DataTypeTok{data=}\NormalTok{topscorers, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{MP, }\DataTypeTok{y=}\NormalTok{PTS), }\DataTypeTok{s_shape=}\DecValTok{1}\NormalTok{, }\DataTypeTok{expand=}\DecValTok{1}\NormalTok{, }\DataTypeTok{colour=}\StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-336-1.pdf}
+
+Whoa. That's \ldots{} not good.
+
+Let's go the opposite direction.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{players, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{MP, }\DataTypeTok{y=}\NormalTok{PTS), }\DataTypeTok{color=}\StringTok{"grey"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{topscorers, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{MP, }\DataTypeTok{y=}\NormalTok{PTS), }\DataTypeTok{color=}\StringTok{"black"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_encircle}\NormalTok{(}\DataTypeTok{data=}\NormalTok{topscorers, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{MP, }\DataTypeTok{y=}\NormalTok{PTS), }\DataTypeTok{s_shape=}\DecValTok{0}\NormalTok{, }\DataTypeTok{expand=}\DecValTok{0}\NormalTok{, }\DataTypeTok{colour=}\StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-337-1.pdf}
+
+Better, but \ldots{} the circle cuts through multiple dots.
+
+This takes a little bit of finessing, but a shape of .5 means the line will have some bend to it -- it'll look more like someone circled it with a pen. Then, the expand is better if you use hundredths instead of tenths. So .01 instead of .1. Here's mine after fiddling with it for a bit.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{players, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{MP, }\DataTypeTok{y=}\NormalTok{PTS), }\DataTypeTok{color=}\StringTok{"grey"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{topscorers, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{MP, }\DataTypeTok{y=}\NormalTok{PTS), }\DataTypeTok{color=}\StringTok{"black"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_encircle}\NormalTok{(}\DataTypeTok{data=}\NormalTok{topscorers, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{MP, }\DataTypeTok{y=}\NormalTok{PTS), }\DataTypeTok{s_shape=}\NormalTok{.}\DecValTok{5}\NormalTok{, }\DataTypeTok{expand=}\NormalTok{.}\DecValTok{03}\NormalTok{, }\DataTypeTok{colour=}\StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-338-1.pdf}
+
+Now let's clean this up and make it presentable. If you look at the top scorers, only two were Wooden Award finalists. So here's what a chart telling that story might look like.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{players, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{MP, }\DataTypeTok{y=}\NormalTok{PTS), }\DataTypeTok{color=}\StringTok{"grey"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{topscorers, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{MP, }\DataTypeTok{y=}\NormalTok{PTS), }\DataTypeTok{color=}\StringTok{"black"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_encircle}\NormalTok{(}\DataTypeTok{data=}\NormalTok{topscorers, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{MP, }\DataTypeTok{y=}\NormalTok{PTS), }\DataTypeTok{s_shape=}\NormalTok{.}\DecValTok{5}\NormalTok{, }\DataTypeTok{expand=}\NormalTok{.}\DecValTok{03}\NormalTok{, }\DataTypeTok{colour=}\StringTok{"red"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_text}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\DecValTok{725}\NormalTok{, }\DataTypeTok{y=}\DecValTok{700}\NormalTok{, }\DataTypeTok{label=}\StringTok{"Top scorers"}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title=}\StringTok{"Only two top scorers are Wooden Award candidates"}\NormalTok{, }\DataTypeTok{subtitle=}\StringTok{"Iowa's Garza and Marquette's Howard are the only two looking at postseason hardware."}\NormalTok{, }\DataTypeTok{x=}\StringTok{"Minutes"}\NormalTok{, }\DataTypeTok{y=}\StringTok{"Points"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}
+    \DataTypeTok{plot.title =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{16}\NormalTok{, }\DataTypeTok{face =} \StringTok{"bold"}\NormalTok{),}
+    \DataTypeTok{axis.title =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{8}\NormalTok{), }
+    \DataTypeTok{plot.subtitle =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size=}\DecValTok{10}\NormalTok{), }
+    \DataTypeTok{panel.grid.minor =} \KeywordTok{element_blank}\NormalTok{()}
+\NormalTok{    )}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-339-1.pdf}
+
+\hypertarget{a-different-more-local-example}{%
+\section{A different, more local example}\label{a-different-more-local-example}}
+
+You can use circling outside of the top of something. It's a bit obvious that the previous dots were top scorers. What about when they aren't at the top?
+
+Works the same way -- use layering and color smartly and tell the story with all your tools.
+
+Let's grab the top three point attempt takers on the Nebraska roster. As of now, only one will be coming back.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nutop <-}\StringTok{ }\NormalTok{players }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Team }\OperatorTok{==}\StringTok{ "Nebraska Cornhuskers"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{top_n}\NormalTok{(}\DecValTok{3}\NormalTok{, }\StringTok{`}\DataTypeTok{3PA}\StringTok{`}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+And just like above, we can plug in our players geom, our nutop dataframe into another geom, then encircle that dataframe. Slap some headlines and annotations on it and here's what we get:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{players, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{MP, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{3PA}\StringTok{`}\NormalTok{), }\DataTypeTok{color=}\StringTok{"grey"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{nutop, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{MP, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{3PA}\StringTok{`}\NormalTok{), }\DataTypeTok{color=}\StringTok{"red"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_encircle}\NormalTok{(}\DataTypeTok{data=}\NormalTok{nutop, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{MP, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{3PA}\StringTok{`}\NormalTok{), }\DataTypeTok{s_shape=}\NormalTok{.}\DecValTok{02}\NormalTok{, }\DataTypeTok{expand=}\NormalTok{.}\DecValTok{18}\NormalTok{, }\DataTypeTok{colour=}\StringTok{"red"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_text}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\DecValTok{400}\NormalTok{, }\DataTypeTok{y=}\DecValTok{100}\NormalTok{, }\DataTypeTok{label=}\StringTok{"Nebraska's top three shooters"}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title=}\StringTok{"Did Hoiberg install his system?"}\NormalTok{, }\DataTypeTok{subtitle=}\StringTok{"Nebraska's top three point shooters were nowhere near the tops in college basketball"}\NormalTok{, }\DataTypeTok{x=}\StringTok{"Minutes"}\NormalTok{, }\DataTypeTok{y=}\StringTok{"Three point attempts"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}
+    \DataTypeTok{plot.title =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{16}\NormalTok{, }\DataTypeTok{face =} \StringTok{"bold"}\NormalTok{),}
+    \DataTypeTok{axis.title =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{8}\NormalTok{), }
+    \DataTypeTok{plot.subtitle =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size=}\DecValTok{10}\NormalTok{), }
+    \DataTypeTok{panel.grid.minor =} \KeywordTok{element_blank}\NormalTok{()}
+\NormalTok{    )}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-341-1.pdf}
+
+The dot on the far right? Cam Mack. Oh what could have been.
+
+\hypertarget{bump-charts}{%
+\chapter{Bump charts}\label{bump-charts}}
+
+Not every library is on CRAN, which if you didn't know is the place where all the libraries we've installed up to this point are coming from. CRAN is a global repository of libraries, but they're libraries that are ready for a global audience of users, meaning they've been tested thoroughly and most of the bugs are out of them.
+
+Developers are constantly working on new libraries, and some of them are interesting enough to try and stable enough to make a go of it. If you can handle a little uncertainty and understand that what you want to do might not work totally right, you can install those libraries from another code repository, GitHub. GitHub is a massive repository of all kinds of code developers want to share. \href{https://github.com/mattwaite/sportsdatabook}{This book is on GitHub}, for instance.
+
+To install a library from GitHub requires a couple of steps. The first is you need a set of tools to get them, called \texttt{devtools}. So go over to the console and install \texttt{devtools} like this:
+
+\texttt{install.packages("devtools")}
+
+The package we're going to try is called ggbump and it makes bump charts. Bump charts are like a subway map for rankings that change over time. We're going to make a bump chart of the college football playoff rankings this last season.
+
+To get ggbump, run this in the console: \texttt{devtools::install\_github("davidsjoberg/ggbump")}
+
+Now we'll load up our libraries.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{library}\NormalTok{(ggbump)}
+\end{Highlighting}
+\end{Shaded}
+
+\href{https://unl.box.com/s/18mzeypa3pgg5pw2xxgawfbhyryo3z3a}{Here's the dataset} we'll use, which I scraped out of the college football playoff \href{https://collegefootballplayoff.com/rankings.aspx}{website}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rankings <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/cfbranking.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   Rank = col_double(),
+##   Team = col_character(),
+##   Record = col_character(),
+##   Week = col_double(),
+##   ShortTeam = col_character()
+## )
+\end{verbatim}
+
+The point of a bump chart is to show how the ranking of something changed over time -- you could do this with the top 25 in football or basketball. I've seen it done with European soccer league standings over a season. The requirements are that you have a row of data for a team, in that week, with their rank. So if you have 5 weeks of playoff rankings, like we do, you're going to have five rows of LSU, and five rows of Ohio State. you can see the basic look of the data by using head()
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(rankings)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 5
+##    Rank Team               Record  Week ShortTeam
+##   <dbl> <chr>              <chr>  <dbl> <chr>    
+## 1     9 Baylor University  1-Oct     13 Baylor   
+## 2     7 Baylor University  1-Nov     14 Baylor   
+## 3     7 Baylor University  2-Nov     15 Baylor   
+## 4     5 Clemson University Sep-00    10 Clem.    
+## 5     3 Clemson University Oct-00    11 Clem.    
+## 6     3 Clemson University Nov-00    12 Clem.
+\end{verbatim}
+
+So Baylor was ranked in the 13th, 14th and 15th week, 9th, 7th and 7th, respectively. So our data is in the form we need it to be. Now we can make a bump chart. We'll start simple.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_bump}\NormalTok{(}\DataTypeTok{data=}\NormalTok{rankings, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Week, }\DataTypeTok{y=}\NormalTok{Rank, }\DataTypeTok{color=}\NormalTok{Team))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-345-1.pdf}
+
+Well, it's a start. I'm immediately annoyed by the top teams being at the bottom. I learned a neat trick from ggbump that's been in ggplot all along -- \texttt{scale\_y\_reverse()}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_bump}\NormalTok{(}\DataTypeTok{data=}\NormalTok{rankings, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Week, }\DataTypeTok{y=}\NormalTok{Rank, }\DataTypeTok{color=}\NormalTok{Team)) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_y_reverse}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-346-1.pdf}
+
+Better. But, still not great. Let's add a point at each week.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_bump}\NormalTok{(}\DataTypeTok{data=}\NormalTok{rankings, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Week, }\DataTypeTok{y=}\NormalTok{Rank, }\DataTypeTok{color=}\NormalTok{Team)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{rankings, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Week, }\DataTypeTok{y=}\NormalTok{Rank, }\DataTypeTok{color=}\NormalTok{Team), }\DataTypeTok{size =} \DecValTok{4}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_y_reverse}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-347-1.pdf}
+
+Another step. That makes it more subway map like. But the colors are all wrong. To fix this, we're going to use \texttt{scale\_color\_manual} and we're going to Google the hex codes for each team. The legend will tell you what order your \texttt{scale\_color\_manual} needs to be.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_bump}\NormalTok{(}\DataTypeTok{data=}\NormalTok{rankings, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Week, }\DataTypeTok{y=}\NormalTok{Rank, }\DataTypeTok{color=}\NormalTok{Team)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{rankings, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Week, }\DataTypeTok{y=}\NormalTok{Rank, }\DataTypeTok{color=}\NormalTok{Team), }\DataTypeTok{size =} \DecValTok{4}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{scale_color_manual}\NormalTok{(}\DataTypeTok{values =} \KeywordTok{c}\NormalTok{(}\StringTok{"#003015"}\NormalTok{,}\StringTok{"#F66733"}\NormalTok{, }\StringTok{"#461D7C"}\NormalTok{, }\StringTok{"#bb0000"}\NormalTok{, }\StringTok{"#041E42"}\NormalTok{, }\StringTok{"#AF002A"}\NormalTok{,}\StringTok{"#0021A5"}\NormalTok{, }\StringTok{"#BA0C2F"}\NormalTok{, }\StringTok{"#7A0019"}\NormalTok{, }\StringTok{"#841617"}\NormalTok{, }\StringTok{"#154733"}\NormalTok{, }\StringTok{"#CC0000"}\NormalTok{, }\StringTok{"#c5050c"}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_y_reverse}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-348-1.pdf}
+
+Another step. But the legend is annoying. And trying to find which red is Alabama vs Ohio State is hard. So what if we labeled each dot at the beginning and end? We can do that with some clever usage of geom\_text and a little dplyr filtering inside the data step. We filter out the first and last weeks, then use hjust -- horizontal justification -- to move them left or right.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_bump}\NormalTok{(}\DataTypeTok{data=}\NormalTok{rankings, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Week, }\DataTypeTok{y=}\NormalTok{Rank, }\DataTypeTok{color=}\NormalTok{Team)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{rankings, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Week, }\DataTypeTok{y=}\NormalTok{Rank, }\DataTypeTok{color=}\NormalTok{Team), }\DataTypeTok{size =} \DecValTok{4}\NormalTok{) }\OperatorTok{+}\StringTok{   }
+\StringTok{  }\KeywordTok{geom_text}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ rankings }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Week }\OperatorTok{==}\StringTok{ }\KeywordTok{min}\NormalTok{(Week)), }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Week }\OperatorTok{-}\StringTok{ }\FloatTok{.2}\NormalTok{, }\DataTypeTok{y=}\NormalTok{Rank, }\DataTypeTok{label =}\NormalTok{ ShortTeam), }\DataTypeTok{size =} \DecValTok{3}\NormalTok{, }\DataTypeTok{hjust =} \DecValTok{1}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_text}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ rankings }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Week }\OperatorTok{==}\StringTok{ }\KeywordTok{max}\NormalTok{(Week)), }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Week }\OperatorTok{+}\StringTok{ }\FloatTok{.2}\NormalTok{, }\DataTypeTok{y=}\NormalTok{Rank, }\DataTypeTok{label =}\NormalTok{ ShortTeam), }\DataTypeTok{size =} \DecValTok{3}\NormalTok{, }\DataTypeTok{hjust =} \DecValTok{0}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_color_manual}\NormalTok{(}\DataTypeTok{values =} \KeywordTok{c}\NormalTok{(}\StringTok{"#003015"}\NormalTok{,}\StringTok{"#F66733"}\NormalTok{, }\StringTok{"#461D7C"}\NormalTok{, }\StringTok{"#bb0000"}\NormalTok{, }\StringTok{"#041E42"}\NormalTok{, }\StringTok{"#AF002A"}\NormalTok{,}\StringTok{"#0021A5"}\NormalTok{, }\StringTok{"#BA0C2F"}\NormalTok{, }\StringTok{"#7A0019"}\NormalTok{, }\StringTok{"#841617"}\NormalTok{, }\StringTok{"#154733"}\NormalTok{, }\StringTok{"#CC0000"}\NormalTok{, }\StringTok{"#c5050c"}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_y_reverse}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-349-1.pdf}
+
+Better, but the legend is still there. We can drop it in a theme directive by saying \texttt{legend.position\ =\ "none"}. We'll also throw a theme\_minimal on there to drop the default grey, and we'll add some better labeling.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_bump}\NormalTok{(}\DataTypeTok{data=}\NormalTok{rankings, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Week, }\DataTypeTok{y=}\NormalTok{Rank, }\DataTypeTok{color=}\NormalTok{Team)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{rankings, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Week, }\DataTypeTok{y=}\NormalTok{Rank, }\DataTypeTok{color=}\NormalTok{Team), }\DataTypeTok{size =} \DecValTok{4}\NormalTok{) }\OperatorTok{+}\StringTok{   }
+\StringTok{  }\KeywordTok{geom_text}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ rankings }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Week }\OperatorTok{==}\StringTok{ }\KeywordTok{min}\NormalTok{(Week)), }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Week }\OperatorTok{-}\StringTok{ }\FloatTok{.2}\NormalTok{, }\DataTypeTok{y=}\NormalTok{Rank, }\DataTypeTok{label =}\NormalTok{ ShortTeam), }\DataTypeTok{size =} \DecValTok{3}\NormalTok{, }\DataTypeTok{hjust =} \DecValTok{1}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_text}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ rankings }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Week }\OperatorTok{==}\StringTok{ }\KeywordTok{max}\NormalTok{(Week)), }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Week }\OperatorTok{+}\StringTok{ }\FloatTok{.2}\NormalTok{, }\DataTypeTok{y=}\NormalTok{Rank, }\DataTypeTok{label =}\NormalTok{ ShortTeam), }\DataTypeTok{size =} \DecValTok{3}\NormalTok{, }\DataTypeTok{hjust =} \DecValTok{0}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title=}\StringTok{"The race to the playoffs"}\NormalTok{, }\DataTypeTok{subtitle=}\StringTok{"LSU and Ohio State were never out of the top two spots. LSU deserved it."}\NormalTok{, }\DataTypeTok{y=} \StringTok{"Rank"}\NormalTok{, }\DataTypeTok{x =} \StringTok{"Week"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}
+    \DataTypeTok{legend.position =} \StringTok{"none"}\NormalTok{,}
+    \DataTypeTok{panel.grid.major =} \KeywordTok{element_blank}\NormalTok{()}
+\NormalTok{    ) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_color_manual}\NormalTok{(}\DataTypeTok{values =} \KeywordTok{c}\NormalTok{(}\StringTok{"#003015"}\NormalTok{,}\StringTok{"#F66733"}\NormalTok{, }\StringTok{"#461D7C"}\NormalTok{, }\StringTok{"#bb0000"}\NormalTok{, }\StringTok{"#041E42"}\NormalTok{, }\StringTok{"#AF002A"}\NormalTok{,}\StringTok{"#0021A5"}\NormalTok{, }\StringTok{"#BA0C2F"}\NormalTok{, }\StringTok{"#7A0019"}\NormalTok{, }\StringTok{"#841617"}\NormalTok{, }\StringTok{"#154733"}\NormalTok{, }\StringTok{"#CC0000"}\NormalTok{, }\StringTok{"#c5050c"}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_y_reverse}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-350-1.pdf}
+
+Now let's fix our text hierarchy.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_bump}\NormalTok{(}\DataTypeTok{data=}\NormalTok{rankings, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Week, }\DataTypeTok{y=}\NormalTok{Rank, }\DataTypeTok{color=}\NormalTok{Team)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{rankings, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Week, }\DataTypeTok{y=}\NormalTok{Rank, }\DataTypeTok{color=}\NormalTok{Team), }\DataTypeTok{size =} \DecValTok{4}\NormalTok{) }\OperatorTok{+}\StringTok{   }
+\StringTok{  }\KeywordTok{geom_text}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ rankings }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Week }\OperatorTok{==}\StringTok{ }\KeywordTok{min}\NormalTok{(Week)), }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Week }\OperatorTok{-}\StringTok{ }\FloatTok{.2}\NormalTok{, }\DataTypeTok{y=}\NormalTok{Rank, }\DataTypeTok{label =}\NormalTok{ ShortTeam), }\DataTypeTok{size =} \DecValTok{3}\NormalTok{, }\DataTypeTok{hjust =} \DecValTok{1}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_text}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ rankings }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Week }\OperatorTok{==}\StringTok{ }\KeywordTok{max}\NormalTok{(Week)), }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Week }\OperatorTok{+}\StringTok{ }\FloatTok{.2}\NormalTok{, }\DataTypeTok{y=}\NormalTok{Rank, }\DataTypeTok{label =}\NormalTok{ ShortTeam), }\DataTypeTok{size =} \DecValTok{3}\NormalTok{, }\DataTypeTok{hjust =} \DecValTok{0}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title=}\StringTok{"The race to the playoffs"}\NormalTok{, }\DataTypeTok{subtitle=}\StringTok{"LSU and Ohio State were never out of the top two spots. LSU deserved it."}\NormalTok{, }\DataTypeTok{y=} \StringTok{"Rank"}\NormalTok{, }\DataTypeTok{x =} \StringTok{"Week"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}
+    \DataTypeTok{legend.position =} \StringTok{"none"}\NormalTok{,}
+    \DataTypeTok{panel.grid.major =} \KeywordTok{element_blank}\NormalTok{(),}
+    \DataTypeTok{plot.title =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{16}\NormalTok{, }\DataTypeTok{face =} \StringTok{"bold"}\NormalTok{),}
+    \DataTypeTok{axis.title =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{8}\NormalTok{), }
+    \DataTypeTok{plot.subtitle =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size=}\DecValTok{10}\NormalTok{), }
+    \DataTypeTok{panel.grid.minor =} \KeywordTok{element_blank}\NormalTok{()}
+\NormalTok{    ) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_color_manual}\NormalTok{(}\DataTypeTok{values =} \KeywordTok{c}\NormalTok{(}\StringTok{"#003015"}\NormalTok{,}\StringTok{"#F66733"}\NormalTok{, }\StringTok{"#461D7C"}\NormalTok{, }\StringTok{"#bb0000"}\NormalTok{, }\StringTok{"#041E42"}\NormalTok{, }\StringTok{"#AF002A"}\NormalTok{,}\StringTok{"#0021A5"}\NormalTok{, }\StringTok{"#BA0C2F"}\NormalTok{, }\StringTok{"#7A0019"}\NormalTok{, }\StringTok{"#841617"}\NormalTok{, }\StringTok{"#154733"}\NormalTok{, }\StringTok{"#CC0000"}\NormalTok{, }\StringTok{"#c5050c"}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_y_reverse}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-351-1.pdf}
+
+And the last thing: anyone else annoyed at 7.5th place on the left? We can fix that too by specifying the breaks in scale\_y\_reverse. We can do that with the x axis as well, but since we haven't reversed it, we do that in \texttt{scale\_x\_continuous} with the same breaks. Also: forgot my source and credit line.
+
+One last thing: Let's change the width of the chart to make Ohio State and Penn State fit. We can do that by adding \texttt{fig.width=X} in the \texttt{\{r\}} setup in your block. So something like this:
+
+\begin{verbatim}
+{r fig.width=8}
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_bump}\NormalTok{(}\DataTypeTok{data=}\NormalTok{rankings, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Week, }\DataTypeTok{y=}\NormalTok{Rank, }\DataTypeTok{color=}\NormalTok{Team)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{rankings, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Week, }\DataTypeTok{y=}\NormalTok{Rank, }\DataTypeTok{color=}\NormalTok{Team), }\DataTypeTok{size =} \DecValTok{4}\NormalTok{) }\OperatorTok{+}\StringTok{   }
+\StringTok{  }\KeywordTok{geom_text}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ rankings }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Week }\OperatorTok{==}\StringTok{ }\KeywordTok{min}\NormalTok{(Week)), }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Week }\OperatorTok{-}\StringTok{ }\FloatTok{.2}\NormalTok{, }\DataTypeTok{y=}\NormalTok{Rank, }\DataTypeTok{label =}\NormalTok{ ShortTeam), }\DataTypeTok{size =} \DecValTok{3}\NormalTok{, }\DataTypeTok{hjust =} \DecValTok{1}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_text}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ rankings }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Week }\OperatorTok{==}\StringTok{ }\KeywordTok{max}\NormalTok{(Week)), }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Week }\OperatorTok{+}\StringTok{ }\FloatTok{.2}\NormalTok{, }\DataTypeTok{y=}\NormalTok{Rank, }\DataTypeTok{label =}\NormalTok{ ShortTeam), }\DataTypeTok{size =} \DecValTok{3}\NormalTok{, }\DataTypeTok{hjust =} \DecValTok{0}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title=}\StringTok{"The race to the playoffs"}\NormalTok{, }\DataTypeTok{subtitle=}\StringTok{"LSU and Ohio State were never out of the top two spots. LSU deserved it."}\NormalTok{, }\DataTypeTok{y=} \StringTok{"Rank"}\NormalTok{, }\DataTypeTok{x =} \StringTok{"Week"}\NormalTok{, }\DataTypeTok{caption=}\StringTok{"Source: College Football Playoff Committee | Chart by Matt Waite"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}
+    \DataTypeTok{legend.position =} \StringTok{"none"}\NormalTok{,}
+    \DataTypeTok{panel.grid.major =} \KeywordTok{element_blank}\NormalTok{(),}
+    \DataTypeTok{plot.title =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{16}\NormalTok{, }\DataTypeTok{face =} \StringTok{"bold"}\NormalTok{),}
+    \DataTypeTok{axis.title =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{8}\NormalTok{), }
+    \DataTypeTok{plot.subtitle =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size=}\DecValTok{10}\NormalTok{), }
+    \DataTypeTok{panel.grid.minor =} \KeywordTok{element_blank}\NormalTok{()}
+\NormalTok{    ) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_color_manual}\NormalTok{(}\DataTypeTok{values =} \KeywordTok{c}\NormalTok{(}\StringTok{"#003015"}\NormalTok{,}\StringTok{"#F66733"}\NormalTok{, }\StringTok{"#461D7C"}\NormalTok{, }\StringTok{"#bb0000"}\NormalTok{, }\StringTok{"#041E42"}\NormalTok{, }\StringTok{"#AF002A"}\NormalTok{,}\StringTok{"#0021A5"}\NormalTok{, }\StringTok{"#BA0C2F"}\NormalTok{, }\StringTok{"#7A0019"}\NormalTok{, }\StringTok{"#841617"}\NormalTok{, }\StringTok{"#154733"}\NormalTok{, }\StringTok{"#CC0000"}\NormalTok{, }\StringTok{"#c5050c"}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{breaks=}\KeywordTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{11}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{13}\NormalTok{,}\DecValTok{14}\NormalTok{,}\DecValTok{15}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{scale_y_reverse}\NormalTok{(}\DataTypeTok{breaks=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{10}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-352-1.pdf}
+
+\hypertarget{text-cleaning}{%
+\chapter{Text cleaning}\label{text-cleaning}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{stripping-out-text}{%
+\section{Stripping out text}\label{stripping-out-text}}
+
+Throughout this class, we've used data from Sports Reference. If you've used their Share \textgreater{} CSV method to copy data from a table, you may have noticed some extra cruft in the player name field. If you haven't seen it, I'll give you an example -- \href{https://unl.box.com/s/bx89eg0ooccpovm3ii7jnbjj3xaby2qd}{here's a dataset of NBA players and their advanced metrics}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nbaplayers <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/nbaplayers.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Missing column names filled in: 'X20' [20], 'X25' [25]
+\end{verbatim}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   .default = col_double(),
+##   Player = col_character(),
+##   Pos = col_character(),
+##   Tm = col_character(),
+##   X20 = col_logical(),
+##   X25 = col_logical()
+## )
+\end{verbatim}
+
+\begin{verbatim}
+## See spec(...) for full column specifications.
+\end{verbatim}
+
+Let's take a look:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(nbaplayers)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 29
+##      Rk Player Pos     Age Tm        G    MP   PER `TS%` `3PAr`   FTr `ORB%`
+##   <dbl> <chr>  <chr> <dbl> <chr> <dbl> <dbl> <dbl> <dbl>  <dbl> <dbl>  <dbl>
+## 1     1 "Stev~ C        26 OKC      58  1564  20.8 0.605  0.007 0.413   14.4
+## 2     2 "Bam ~ PF       22 MIA      65  2235  20.6 0.606  0.018 0.476    8.7
+## 3     3 "LaMa~ C        34 SAS      53  1754  19.8 0.571  0.198 0.241    6.3
+## 4     4 "Nick~ SG       21 NOP      41   501   7.6 0.441  0.515 0.123    1.7
+## 5     5 "Gray~ SG       24 MEM      30   498  11.4 0.577  0.517 0.199    1.1
+## 6     6 "Jarr~ C        21 BRK      64  1647  20.3 0.658  0.012 0.574   12.5
+## # ... with 17 more variables: `DRB%` <dbl>, `TRB%` <dbl>, `AST%` <dbl>,
+## #   `STL%` <dbl>, `BLK%` <dbl>, `TOV%` <dbl>, `USG%` <dbl>, X20 <lgl>,
+## #   OWS <dbl>, DWS <dbl>, WS <dbl>, `WS/48` <dbl>, X25 <lgl>, OBPM <dbl>,
+## #   DBPM <dbl>, BPM <dbl>, VORP <dbl>
+\end{verbatim}
+
+For starters, see the two empty columns that don't have any names? X20 and X25. We can get rid of them. They're empty.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nbaplayers <-}\StringTok{ }\NormalTok{nbaplayers }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{X20, }\OperatorTok{-}\NormalTok{X25)}
+\end{Highlighting}
+\end{Shaded}
+
+Now let's look at those names:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(nbaplayers)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 27
+##      Rk Player Pos     Age Tm        G    MP   PER `TS%` `3PAr`   FTr `ORB%`
+##   <dbl> <chr>  <chr> <dbl> <chr> <dbl> <dbl> <dbl> <dbl>  <dbl> <dbl>  <dbl>
+## 1     1 "Stev~ C        26 OKC      58  1564  20.8 0.605  0.007 0.413   14.4
+## 2     2 "Bam ~ PF       22 MIA      65  2235  20.6 0.606  0.018 0.476    8.7
+## 3     3 "LaMa~ C        34 SAS      53  1754  19.8 0.571  0.198 0.241    6.3
+## 4     4 "Nick~ SG       21 NOP      41   501   7.6 0.441  0.515 0.123    1.7
+## 5     5 "Gray~ SG       24 MEM      30   498  11.4 0.577  0.517 0.199    1.1
+## 6     6 "Jarr~ C        21 BRK      64  1647  20.3 0.658  0.012 0.574   12.5
+## # ... with 15 more variables: `DRB%` <dbl>, `TRB%` <dbl>, `AST%` <dbl>,
+## #   `STL%` <dbl>, `BLK%` <dbl>, `TOV%` <dbl>, `USG%` <dbl>, OWS <dbl>,
+## #   DWS <dbl>, WS <dbl>, `WS/48` <dbl>, OBPM <dbl>, DBPM <dbl>, BPM <dbl>,
+## #   VORP <dbl>
+\end{verbatim}
+
+You can see that every players name is their name, then two backslashes, then some version of their name that must have meaning to Sports Reference, but not to us. So we need to get rid of that.
+
+To do this, we're going to use a little regular expression magic. REgular expressions are a programmatic way to find any pattern in text. What we're looking for is that \texttt{\textbackslash{}\textbackslash{}} business. But, that presents a problem, because the \texttt{\textbackslash{}} is a special character. It's called an escape character. That escape character means what comes next is potentially special. For instance, if you see \texttt{\textbackslash{}n}, that's a newline character. So normally, if you see that, it would add a return.
+
+So for us to get rid of the \texttt{\textbackslash{}} we're going to have to escape the escape character with an escape character. And we have two of them. So we have to do it twice.
+
+Yes. Really.
+
+So if we wanted to find two backslashes, we need \texttt{\textbackslash{}\textbackslash{}\textbackslash{}\textbackslash{}}. Then, using regular expressions, we can say ``and then everything else after this'' with this: .*
+
+No really. That's it. So we're looking for \texttt{\textbackslash{}\textbackslash{}\textbackslash{}\textbackslash{}.*}. That'll find two backslashes and then everything after it. If you think this is hard \ldots{} you're right. Regular expressions are an entire month of a programming course by themselves. They are EXTREMELY powerful.
+
+To find something in text, we'll use a function called \texttt{gsub}. The pattern in \texttt{gsub} is \texttt{pattern,\ what\ we\ want\ to\ replace\ it\ with,\ what\ column\ this\ can\ all\ be\ found\ in}. So in our example, the pattern is \texttt{\textbackslash{}\textbackslash{}\textbackslash{}\textbackslash{}.*}, what we want to replace it with is \ldots{} nothing, and this is all in the Player column. Here's the code.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nbaplayers }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Player=}\KeywordTok{gsub}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}\textbackslash{}\textbackslash{}}\StringTok{.*"}\NormalTok{,}\StringTok{""}\NormalTok{,Player)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{head}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 27
+##      Rk Player Pos     Age Tm        G    MP   PER `TS%` `3PAr`   FTr `ORB%`
+##   <dbl> <chr>  <chr> <dbl> <chr> <dbl> <dbl> <dbl> <dbl>  <dbl> <dbl>  <dbl>
+## 1     1 Steve~ C        26 OKC      58  1564  20.8 0.605  0.007 0.413   14.4
+## 2     2 Bam A~ PF       22 MIA      65  2235  20.6 0.606  0.018 0.476    8.7
+## 3     3 LaMar~ C        34 SAS      53  1754  19.8 0.571  0.198 0.241    6.3
+## 4     4 Nicke~ SG       21 NOP      41   501   7.6 0.441  0.515 0.123    1.7
+## 5     5 Grays~ SG       24 MEM      30   498  11.4 0.577  0.517 0.199    1.1
+## 6     6 Jarre~ C        21 BRK      64  1647  20.3 0.658  0.012 0.574   12.5
+## # ... with 15 more variables: `DRB%` <dbl>, `TRB%` <dbl>, `AST%` <dbl>,
+## #   `STL%` <dbl>, `BLK%` <dbl>, `TOV%` <dbl>, `USG%` <dbl>, OWS <dbl>,
+## #   DWS <dbl>, WS <dbl>, `WS/48` <dbl>, OBPM <dbl>, DBPM <dbl>, BPM <dbl>,
+## #   VORP <dbl>
+\end{verbatim}
+
+Just like that, the trash is gone.
+
+\hypertarget{another-example-splitting-columns}{%
+\section{Another example: splitting columns}\label{another-example-splitting-columns}}
+
+Text cleaning is really just a set of logic puzzles. What do I need to do? How can I get there step by step?
+
+The NCAA does some very interesting things with data, making it pretty useless. \href{https://unl.box.com/s/kxjh8k7bm95i8eeovao18nqiky860j1s}{Here's an example}.
+
+Let's import it and take a look.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{kills <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/killsperset.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   Rank = col_double(),
+##   Player = col_character(),
+##   Cl = col_character(),
+##   Ht = col_character(),
+##   Pos = col_character(),
+##   S = col_double(),
+##   Kills = col_double(),
+##   `Per Set` = col_double(),
+##   Season = col_character()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(kills)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 9
+##    Rank Player                   Cl    Ht    Pos       S Kills `Per Set` Season 
+##   <dbl> <chr>                    <chr> <chr> <chr> <dbl> <dbl>     <dbl> <chr>  
+## 1     1 Lindsey Ruddins, UC San~ So.   6-2   OH       90   526      5.84 2017-2~
+## 2     2 Pilar Victoria, Arkansa~ Sr.   5-11  OH      116   634      5.47 2017-2~
+## 3     3 Laura Milos, Oral Rober~ Sr.   5-10  OH      106   560      5.28 2017-2~
+## 4     4 Carlyle Nusbaum, Lipsco~ Jr.   5-10  OH      100   522      5.22 2017-2~
+## 5     5 Veronica Jones-Perry, B~ Jr.   6-0   OH      118   569      4.82 2017-2~
+## 6     6 Torrey Van Winden, Cal ~ So.   6-3   OH      101   477      4.72 2017-2~
+\end{verbatim}
+
+First things first, Player isn't just player, it's player, school and conference, all in one. And Ht is a character field -- and in feet and inches.
+
+So \ldots{} this is a mess. But there is a pattern. See it? A comma after the player's name. The Conference is in parens. We can use that.
+
+For this, we're going to use a \texttt{tidyr} function called \texttt{separate} to split columns into multiple columns based on a character. We'll do this step by step.
+
+First, let's use that comma to split the player and the rest. Ignore the head at the end. That's just to keep it from showing you all 150.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{kills }\OperatorTok{%>%}\StringTok{ }\KeywordTok{separate}\NormalTok{(Player, }\DataTypeTok{into=}\KeywordTok{c}\NormalTok{(}\StringTok{"Player"}\NormalTok{, }\StringTok{"School"}\NormalTok{), }\DataTypeTok{sep=}\StringTok{","}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{head}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 10
+##    Rank Player     School         Cl    Ht    Pos       S Kills `Per Set` Season
+##   <dbl> <chr>      <chr>          <chr> <chr> <chr> <dbl> <dbl>     <dbl> <chr> 
+## 1     1 Lindsey R~ " UC Santa Ba~ So.   6-2   OH       90   526      5.84 2017-~
+## 2     2 Pilar Vic~ " Arkansas (S~ Sr.   5-11  OH      116   634      5.47 2017-~
+## 3     3 Laura Mil~ " Oral Robert~ Sr.   5-10  OH      106   560      5.28 2017-~
+## 4     4 Carlyle N~ " Lipscomb (A~ Jr.   5-10  OH      100   522      5.22 2017-~
+## 5     5 Veronica ~ " BYU (WCC)"   Jr.   6-0   OH      118   569      4.82 2017-~
+## 6     6 Torrey Va~ " Cal Poly (B~ So.   6-3   OH      101   477      4.72 2017-~
+\end{verbatim}
+
+Good start.
+
+Now, let's get the conference separated. A problem is going to crop up here -- the paren is a special character, so we have to escape it with the \texttt{\textbackslash{}\textbackslash{}}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{kills }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{separate}\NormalTok{(Player, }\DataTypeTok{into=}\KeywordTok{c}\NormalTok{(}\StringTok{"Player"}\NormalTok{, }\StringTok{"School"}\NormalTok{), }\DataTypeTok{sep=}\StringTok{","}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{separate}\NormalTok{(School, }\DataTypeTok{into=}\KeywordTok{c}\NormalTok{(}\StringTok{"School"}\NormalTok{, }\StringTok{"Conference"}\NormalTok{), }\DataTypeTok{sep=}\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{("}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{head}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Expected 2 pieces. Additional pieces discarded in 3 rows [15, 42, 83].
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 6 x 11
+##    Rank Player  School Conference Cl    Ht    Pos       S Kills `Per Set` Season
+##   <dbl> <chr>   <chr>  <chr>      <chr> <chr> <chr> <dbl> <dbl>     <dbl> <chr> 
+## 1     1 Lindse~ " UC ~ Big West)  So.   6-2   OH       90   526      5.84 2017-~
+## 2     2 Pilar ~ " Ark~ SEC)       Sr.   5-11  OH      116   634      5.47 2017-~
+## 3     3 Laura ~ " Ora~ Summit Le~ Sr.   5-10  OH      106   560      5.28 2017-~
+## 4     4 Carlyl~ " Lip~ ASUN)      Jr.   5-10  OH      100   522      5.22 2017-~
+## 5     5 Veroni~ " BYU~ WCC)       Jr.   6-0   OH      118   569      4.82 2017-~
+## 6     6 Torrey~ " Cal~ Big West)  So.   6-3   OH      101   477      4.72 2017-~
+\end{verbatim}
+
+Uh oh. Says we have problems in rows 15, 42 and 83. What are they? The NCAA has decided to put (FL), (NY) and (PA) into three teams to tell you they're in Florida, New York and Pennslyvania respectively. Well, we can fix that with some gsub and we'll use a switch called \texttt{fixed}, which when set to TRUE it means this literal string, no special characters.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{kills }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{separate}\NormalTok{(Player, }\DataTypeTok{into=}\KeywordTok{c}\NormalTok{(}\StringTok{"Player"}\NormalTok{, }\StringTok{"School"}\NormalTok{), }\DataTypeTok{sep=}\StringTok{","}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{School =} \KeywordTok{gsub}\NormalTok{(}\StringTok{"(FL)"}\NormalTok{, }\StringTok{"FL"}\NormalTok{, School, }\DataTypeTok{fixed=}\OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{School =} \KeywordTok{gsub}\NormalTok{(}\StringTok{"(NY)"}\NormalTok{, }\StringTok{"NY"}\NormalTok{, School, }\DataTypeTok{fixed=}\OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{School =} \KeywordTok{gsub}\NormalTok{(}\StringTok{"(PA)"}\NormalTok{, }\StringTok{"PA"}\NormalTok{, School, }\DataTypeTok{fixed=}\OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{separate}\NormalTok{(School, }\DataTypeTok{into=}\KeywordTok{c}\NormalTok{(}\StringTok{"School"}\NormalTok{, }\StringTok{"Conference"}\NormalTok{), }\DataTypeTok{sep=}\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{("}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{head}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 11
+##    Rank Player  School Conference Cl    Ht    Pos       S Kills `Per Set` Season
+##   <dbl> <chr>   <chr>  <chr>      <chr> <chr> <chr> <dbl> <dbl>     <dbl> <chr> 
+## 1     1 Lindse~ " UC ~ Big West)  So.   6-2   OH       90   526      5.84 2017-~
+## 2     2 Pilar ~ " Ark~ SEC)       Sr.   5-11  OH      116   634      5.47 2017-~
+## 3     3 Laura ~ " Ora~ Summit Le~ Sr.   5-10  OH      106   560      5.28 2017-~
+## 4     4 Carlyl~ " Lip~ ASUN)      Jr.   5-10  OH      100   522      5.22 2017-~
+## 5     5 Veroni~ " BYU~ WCC)       Jr.   6-0   OH      118   569      4.82 2017-~
+## 6     6 Torrey~ " Cal~ Big West)  So.   6-3   OH      101   477      4.72 2017-~
+\end{verbatim}
+
+One last thing: see the trailing paren?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{kills }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{separate}\NormalTok{(Player, }\DataTypeTok{into=}\KeywordTok{c}\NormalTok{(}\StringTok{"Player"}\NormalTok{, }\StringTok{"School"}\NormalTok{), }\DataTypeTok{sep=}\StringTok{","}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{School =} \KeywordTok{gsub}\NormalTok{(}\StringTok{"(FL)"}\NormalTok{, }\StringTok{"FL"}\NormalTok{, School, }\DataTypeTok{fixed=}\OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{School =} \KeywordTok{gsub}\NormalTok{(}\StringTok{"(NY)"}\NormalTok{, }\StringTok{"NY"}\NormalTok{, School, }\DataTypeTok{fixed=}\OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{School =} \KeywordTok{gsub}\NormalTok{(}\StringTok{"(PA)"}\NormalTok{, }\StringTok{"PA"}\NormalTok{, School, }\DataTypeTok{fixed=}\OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{separate}\NormalTok{(School, }\DataTypeTok{into=}\KeywordTok{c}\NormalTok{(}\StringTok{"School"}\NormalTok{, }\StringTok{"Conference"}\NormalTok{), }\DataTypeTok{sep=}\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{("}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Conference=}\KeywordTok{gsub}\NormalTok{(}\StringTok{")"}\NormalTok{, }\StringTok{""}\NormalTok{, Conference)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{head}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 11
+##    Rank Player  School Conference Cl    Ht    Pos       S Kills `Per Set` Season
+##   <dbl> <chr>   <chr>  <chr>      <chr> <chr> <chr> <dbl> <dbl>     <dbl> <chr> 
+## 1     1 Lindse~ " UC ~ Big West   So.   6-2   OH       90   526      5.84 2017-~
+## 2     2 Pilar ~ " Ark~ SEC        Sr.   5-11  OH      116   634      5.47 2017-~
+## 3     3 Laura ~ " Ora~ Summit Le~ Sr.   5-10  OH      106   560      5.28 2017-~
+## 4     4 Carlyl~ " Lip~ ASUN       Jr.   5-10  OH      100   522      5.22 2017-~
+## 5     5 Veroni~ " BYU~ WCC        Jr.   6-0   OH      118   569      4.82 2017-~
+## 6     6 Torrey~ " Cal~ Big West   So.   6-3   OH      101   477      4.72 2017-~
+\end{verbatim}
+
+Looking good, no errors.
+
+Now, what should we do about Ht? 6-2 is not going to tell me much when I want to run a regression of height to kills per set. And it's a character field. So we need to convert it to numbers.
+
+Separate again comes to the rescue.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{kills }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{separate}\NormalTok{(Player, }\DataTypeTok{into=}\KeywordTok{c}\NormalTok{(}\StringTok{"Player"}\NormalTok{, }\StringTok{"School"}\NormalTok{), }\DataTypeTok{sep=}\StringTok{","}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{School =} \KeywordTok{gsub}\NormalTok{(}\StringTok{"(FL)"}\NormalTok{, }\StringTok{"FL"}\NormalTok{, School, }\DataTypeTok{fixed=}\OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{School =} \KeywordTok{gsub}\NormalTok{(}\StringTok{"(NY)"}\NormalTok{, }\StringTok{"NY"}\NormalTok{, School, }\DataTypeTok{fixed=}\OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{School =} \KeywordTok{gsub}\NormalTok{(}\StringTok{"(PA)"}\NormalTok{, }\StringTok{"PA"}\NormalTok{, School, }\DataTypeTok{fixed=}\OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{separate}\NormalTok{(School, }\DataTypeTok{into=}\KeywordTok{c}\NormalTok{(}\StringTok{"School"}\NormalTok{, }\StringTok{"Conference"}\NormalTok{), }\DataTypeTok{sep=}\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{("}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Conference=}\KeywordTok{gsub}\NormalTok{(}\StringTok{")"}\NormalTok{, }\StringTok{""}\NormalTok{, Conference)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{separate}\NormalTok{(Ht, }\DataTypeTok{into=}\KeywordTok{c}\NormalTok{(}\StringTok{"Feet"}\NormalTok{, }\StringTok{"Inches"}\NormalTok{), }\DataTypeTok{sep=}\StringTok{"-"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Feet =} \KeywordTok{as.numeric}\NormalTok{(Feet), }\DataTypeTok{Inches =} \KeywordTok{as.numeric}\NormalTok{(Inches)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{head}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 12
+##    Rank Player School Conference Cl     Feet Inches Pos       S Kills `Per Set`
+##   <dbl> <chr>  <chr>  <chr>      <chr> <dbl>  <dbl> <chr> <dbl> <dbl>     <dbl>
+## 1     1 Linds~ " UC ~ Big West   So.       6      2 OH       90   526      5.84
+## 2     2 Pilar~ " Ark~ SEC        Sr.       5     11 OH      116   634      5.47
+## 3     3 Laura~ " Ora~ Summit Le~ Sr.       5     10 OH      106   560      5.28
+## 4     4 Carly~ " Lip~ ASUN       Jr.       5     10 OH      100   522      5.22
+## 5     5 Veron~ " BYU~ WCC        Jr.       6      0 OH      118   569      4.82
+## 6     6 Torre~ " Cal~ Big West   So.       6      3 OH      101   477      4.72
+## # ... with 1 more variable: Season <chr>
+\end{verbatim}
+
+But how do we turn that into a height? Math!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{kills }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{separate}\NormalTok{(Player, }\DataTypeTok{into=}\KeywordTok{c}\NormalTok{(}\StringTok{"Player"}\NormalTok{, }\StringTok{"School"}\NormalTok{), }\DataTypeTok{sep=}\StringTok{","}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{School =} \KeywordTok{gsub}\NormalTok{(}\StringTok{"(FL)"}\NormalTok{, }\StringTok{"FL"}\NormalTok{, School, }\DataTypeTok{fixed=}\OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{School =} \KeywordTok{gsub}\NormalTok{(}\StringTok{"(NY)"}\NormalTok{, }\StringTok{"NY"}\NormalTok{, School, }\DataTypeTok{fixed=}\OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{School =} \KeywordTok{gsub}\NormalTok{(}\StringTok{"(PA)"}\NormalTok{, }\StringTok{"PA"}\NormalTok{, School, }\DataTypeTok{fixed=}\OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{separate}\NormalTok{(School, }\DataTypeTok{into=}\KeywordTok{c}\NormalTok{(}\StringTok{"School"}\NormalTok{, }\StringTok{"Conference"}\NormalTok{), }\DataTypeTok{sep=}\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{("}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Conference=}\KeywordTok{gsub}\NormalTok{(}\StringTok{")"}\NormalTok{, }\StringTok{""}\NormalTok{, Conference)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{separate}\NormalTok{(Ht, }\DataTypeTok{into=}\KeywordTok{c}\NormalTok{(}\StringTok{"Feet"}\NormalTok{, }\StringTok{"Inches"}\NormalTok{), }\DataTypeTok{sep=}\StringTok{"-"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Feet =} \KeywordTok{as.numeric}\NormalTok{(Feet), }\DataTypeTok{Inches =} \KeywordTok{as.numeric}\NormalTok{(Inches)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Height =}\NormalTok{ (Feet}\OperatorTok{*}\DecValTok{12}\NormalTok{)}\OperatorTok{+}\NormalTok{Inches) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{head}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 13
+##    Rank Player School Conference Cl     Feet Inches Pos       S Kills `Per Set`
+##   <dbl> <chr>  <chr>  <chr>      <chr> <dbl>  <dbl> <chr> <dbl> <dbl>     <dbl>
+## 1     1 Linds~ " UC ~ Big West   So.       6      2 OH       90   526      5.84
+## 2     2 Pilar~ " Ark~ SEC        Sr.       5     11 OH      116   634      5.47
+## 3     3 Laura~ " Ora~ Summit Le~ Sr.       5     10 OH      106   560      5.28
+## 4     4 Carly~ " Lip~ ASUN       Jr.       5     10 OH      100   522      5.22
+## 5     5 Veron~ " BYU~ WCC        Jr.       6      0 OH      118   569      4.82
+## 6     6 Torre~ " Cal~ Big West   So.       6      3 OH      101   477      4.72
+## # ... with 2 more variables: Season <chr>, Height <dbl>
+\end{verbatim}
+
+And now, in 10 lines of code, using separate, mutate and gsub, we've turned the mess that is the NCAA's data into actually useful data we can analyze.
+
+These patterns of thought come in handy when facing messed up data.
 
 \hypertarget{assignments}{%
 \chapter{Assignments}\label{assignments}}
