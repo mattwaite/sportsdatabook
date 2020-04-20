@@ -1,11 +1,16 @@
 # Text cleaning 
 
+On occasion, you'll get some data from someone that ... isn't quite what you need it to be. There's something flawed in it. Some extra text, some choice that the data provider made that you just don't agree with. 
+
+There's a ton of tools in the tidyverse to fix this, and you already have some tools in your toolboxt. Let's take a look at a couple. 
+
+First, you know what you need.
 
 ```{r}
 library(tidyverse)
 ```
 
-
+Now, two examples.
 
 ## Stripping out text
 
