@@ -1,39 +1,46 @@
-\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 %
-\documentclass[]{book}
+\documentclass[
+]{book}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-  \usepackage{textcomp} % provides euro and other symbols
-\else % if luatex or xelatex
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
   \usepackage{unicode-math}
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-% use upquote if available, for straight quotes in verbatim environments
+% Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage[]{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
-\usepackage{hyperref}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-            pdftitle={Sports Data Analysis and Visualization},
-            pdfauthor={By Matt Waite},
-            pdfborder={0 0 0},
-            breaklinks=true}
-\urlstyle{same}  % don't use monospace font for urls
+  pdftitle={Sports Data Analysis and Visualization},
+  pdfauthor={By Matt Waite},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -75,8 +82,14 @@
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
-% Fix footnotes in tables (requires footnote package)
-\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{longtable}}{}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -86,37 +99,25 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{5}
-% Redefines (sub)paragraphs to behave more like sections
-\ifx\paragraph\undefined\else
-\let\oldparagraph\paragraph
-\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-\fi
-\ifx\subparagraph\undefined\else
-\let\oldsubparagraph\subparagraph
-\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-\fi
-
-% set default figure placement to htbp
+% Set default figure placement to htbp
 \makeatletter
 \def\fps@figure{htbp}
 \makeatother
-
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
 \usepackage{booktabs}
+\usepackage[]{natbib}
+\bibliographystyle{apalike}
+
+\title{Sports Data Analysis and Visualization}
 \usepackage{etoolbox}
 \makeatletter
 \providecommand{\subtitle}[1]{% add subtitle to \maketitle
   \apptocmd{\@title}{\par {\large #1 \par}}{}{}
 }
 \makeatother
-\usepackage[]{natbib}
-\bibliographystyle{apalike}
-
-\title{Sports Data Analysis and Visualization}
-\providecommand{\subtitle}[1]{}
 \subtitle{Code, data, visuals and the Tidyverse for journalists and other storytellers}
 \author{By Matt Waite}
 \date{July 29, 2019}
@@ -407,7 +408,7 @@ R is a statistical programming language that is purpose built for data analysis.
 
 Base R does a lot, but there are a mountain of external libraries that do things to make R better/easier/more fully featured. We already installed the tidyverse -- or you should have if you followed the instructions for the last assignment -- which isn't exactly a library, but a collection of libraries. Together, they make up the tidyverse. Individually, they are extraordinarily useful for what they do. We can load them all at once using the tidyverse name, or we can load them individually. Let's start with individually.
 
-The two libraries we are going to need for this assignement are \texttt{readr} and \texttt{dplyr}. The library \texttt{readr} reads different types of data in. For this assignment, we're going to read in csv data or Comma Separated Values data. That's data that has a comma between each column of data.
+The two libraries we are going to need for this assignment are \texttt{readr} and \texttt{dplyr}. The library \texttt{readr} reads different types of data in as a dataframe. For this assignment, we're going to read in csv data or Comma Separated Values data. That's data that has a comma between each column of data.
 
 Then we're going to use \texttt{dplyr} to analyze it.
 
@@ -432,85 +433,111 @@ To load them both, you need to run that code twice:
 
 You can keep doing that for as many libraries as you need. I've seen notebooks with 10 or more library imports.
 
+But the tidyverse has a neat little trick. We can load most of the libraries we'll need for the whole semester with one line:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{From now on, if that's not the first line of your notebook, you're probably doing it wrong.}
+
 \hypertarget{basic-data-analysis-group-by-and-count}{%
 \section{Basic data analysis: Group By and Count}\label{basic-data-analysis-group-by-and-count}}
 
 The first thing we need to do is get some data to work with. We do that by reading it in. In our case, we're going to read data from a csv file -- a comma-separated values file.
 
-The CSV file we're going to read from is a \href{https://unl.box.com/s/xjipgkesl9rjmng4weg77vb73xt41apf}{Nebraska Game and Parks Commission dataset} of confirmed mountain lion sightings in Nebraska. There are, on occasion, fierce debates about mountain lions and if they should be hunted in Nebraska. This dataset can tell us some interesting things about that debate.
+The CSV file we're going to read from is a \href{https://www.basketball-reference.com/leagues/NBA_2020_advanced.html}{Basketball Reference} of advanced metrics for NBA players this season. The Sports Reference sites are a godsend of data, a trove of stuff, and we're going to use it a lot in this class.
 
-So step 1 is to import the data. The code looks \emph{something} like this, but hold off copying it just yet:
+So step 2, after setting up our libraries, is most often going to be importing data. In order to analyze data, we need data, so it stands to reason that this would be something we'd do very early.
 
-\texttt{mountainlions\ \textless{}-\ read\_csv("\textasciitilde{}/Documents/Data/mountainlions.csv")}
+The code looks \emph{something} like this, but hold off copying it just yet:
+
+\texttt{nbaplayers\ \textless{}-\ read\_csv("\textasciitilde{}/Box/SportsData/nbaadvancedplayers1920.csv")}
 
 Let's unpack that.
 
-The first part -- mountainlions -- is the name of your variable. A variable is just a name of a thing. In this case, our variable is a data frame, which is R's way of storing data. We can call this whatever we want. I always want to name data frames after what is in it. In this case, we're going to import a dataset of mountain lion sightings from the Nebraska Game and Parks Commission. Variable names, by convention are one word all lower case. You can end a variable with a number, but you can't start one with a number.
+The first part -- nbaplayers -- is the name of your variable. A variable is just a name of a thing that stores stuff. In this case, our variable is a data frame, which is R's way of storing data (technically it's a tibble, which is the tidyverse way of storing data, but the differences aren't important and people use them interchangeably). \textbf{We can call this whatever we want.} I always want to name data frames after what is in it. In this case, we're going to import a dataset of NBA players. Variable names, by convention are one word all lower case. You can end a variable with a number, but you can't start one with a number.
 
-The \textless{}- bit is the variable assignment operator. It's how we know we're assigning something to a word. Think of the arrow as saying ``Take everything on the right of this arrow and stuff it into the thing on the left.'' So we're creating an empty vessel called mountainlions and stuffing all this data into it.
+The \textless- bit is the variable assignment operator. It's how we know we're assigning something to a word. Think of the arrow as saying ``Take everything on the right of this arrow and stuff it into the thing on the left.'' So we're creating an empty vessel called \texttt{nbaplayers} and stuffing all this data into it.
 
-The \texttt{read\_csv} bits are pretty obvious, except for one thing. What happens in the quote marks is the path to the data. In there, I have to tell R where it will find the data. The easiest thing to do, if you are confused about how to find your data, is to put your data in the same folder as as your notebook (you'll have to save that notebook first). If you do that, then you just need to put the name of the file in there (mountainlions.csv). In my case, I've got a folder called Documents in my home directory (that's the \texttt{\textasciitilde{}} part), and in there is a folder called Data that has the file called mountainlions.csv in it. Some people -- insane people -- leave the data in their downloads folder. The data path then would be \texttt{\textasciitilde{}/Downloads/nameofthedatafilehere.csv} on PC or Mac.
+The \texttt{read\_csv} bits are pretty obvious, except for one thing. What happens in the quote marks is the path to the data. In there, I have to tell R where it will find the data. The easiest thing to do, if you are confused about how to find your data, is to put your data in the same folder as as your notebook (you'll have to save that notebook first). If you do that, then you just need to put the name of the file in there (nbaadvancedplayers1920.csv). In my case, I've got a folder called Box in my home directory (that's the \texttt{\textasciitilde{}} part), and in there is a folder called SportsData that has the file called nbaadvancedplayers1920.csv in it. Some people -- insane people -- leave the data in their downloads folder. The data path then would be \texttt{\textasciitilde{}/Downloads/nameofthedatafilehere.csv} on PC or Mac.
 
 \textbf{What you put in there will be different from mine}. So your first task is to import the data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mountainlions <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/mountainlions.csv"}\NormalTok{)}
+\NormalTok{nbaplayers <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/nbaadvancedplayers1920.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## Parsed with column specification:
 ## cols(
-##   ID = col_double(),
-##   `Cofirm Type` = col_character(),
-##   COUNTY = col_character(),
-##   Date = col_character()
+##   .default = col_double(),
+##   Player = col_character(),
+##   Pos = col_character(),
+##   Tm = col_character()
 ## )
 \end{verbatim}
 
-Now we can inspect the data we imported. What does it look like? To do that, we use \texttt{head(mountainlions)} to show the headers and the first six rows of data. If we wanted to see them all, we could just simply enter \texttt{mountainlions} and run it.
+\begin{verbatim}
+## See spec(...) for full column specifications.
+\end{verbatim}
 
-To get the number of records in our dataset, we run \texttt{nrow(mountainlions)}
+Now we can inspect the data we imported. What does it look like? To do that, we use \texttt{head(nbaplayers)} to show the headers and \textbf{the first six rows of data}. If we wanted to see them all, we could just simply enter \texttt{mountainlions} and run it.
+
+To get the number of records in our dataset, we run \texttt{nrow(nbaplayers)}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{head}\NormalTok{(mountainlions)}
+\KeywordTok{head}\NormalTok{(nbaplayers)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 6 x 4
-##      ID `Cofirm Type` COUNTY       Date    
-##   <dbl> <chr>         <chr>        <chr>   
-## 1     1 Track         Dawes        9/14/91 
-## 2     2 Mortality     Sioux        11/10/91
-## 3     3 Mortality     Scotts Bluff 4/21/96 
-## 4     4 Mortality     Sioux        5/9/99  
-## 5     5 Mortality     Box Butte    9/29/99 
-## 6     6 Track         Scotts Bluff 11/12/99
+## # A tibble: 6 x 27
+##      Rk Player Pos     Age Tm        G    MP   PER `TS%` `3PAr`   FTr `ORB%`
+##   <dbl> <chr>  <chr> <dbl> <chr> <dbl> <dbl> <dbl> <dbl>  <dbl> <dbl>  <dbl>
+## 1     1 Steve~ C        26 OKC      63  1680  20.5 0.604  0.006 0.421   14  
+## 2     2 Bam A~ PF       22 MIA      72  2417  20.3 0.598  0.018 0.484    8.5
+## 3     3 LaMar~ C        34 SAS      53  1754  19.7 0.571  0.198 0.241    6.3
+## 4     4 Kyle ~ PF       23 MIA       2    13   4.7 0.5    0     0       17.9
+## 5     5 Nicke~ SG       21 NOP      47   591   8.9 0.473  0.5   0.139    1.6
+## 6     6 Grays~ SG       24 MEM      38   718  12   0.609  0.562 0.179    1.2
+## # ... with 15 more variables: `DRB%` <dbl>, `TRB%` <dbl>, `AST%` <dbl>,
+## #   `STL%` <dbl>, `BLK%` <dbl>, `TOV%` <dbl>, `USG%` <dbl>, OWS <dbl>,
+## #   DWS <dbl>, WS <dbl>, `WS/48` <dbl>, OBPM <dbl>, DBPM <dbl>, BPM <dbl>,
+## #   VORP <dbl>
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{nrow}\NormalTok{(mountainlions)}
+\KeywordTok{nrow}\NormalTok{(nbaplayers)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 393
+## [1] 651
 \end{verbatim}
 
-So what if we wanted to know how many mountain lion sightings there were in each county? To do that by hand, we'd have to take each of the 393 records and sort them into a pile. We'd put them in groups and then count them.
+Another way to look at nrow -- we have 651 players from this season in our dataset.
 
-\texttt{dplyr} has a group by function in it that does just this. A massive amount of data analysis involves grouping like things together at some point. So it's a good place to start.
+What if we wanted to know how many players there were by position? To do that by hand, we'd have to take each of the 651 records and sort them into a pile. We'd put them in groups and then count them.
 
-So to do this, we'll take our dataset and we'll introduce a new operator: \%\textgreater{}\%. The best way to read that operator, in my opinion, is to interpret that as ``and then do this.'' Here's the code:
+\texttt{dplyr} has a \textbf{group by} function in it that does just this. A massive amount of data analysis involves grouping like things together at some point. So it's a good place to start.
+
+So to do this, we'll take our dataset and we'll introduce a new operator: \%\textgreater\%. The best way to read that operator, in my opinion, is to interpret that as ``and then do this.''
+
+After we group them together, we need to count them. We do that first by saying we want to summarize our data (a count is a part of a summary). To get a summary, we have to tell it what we want. So in this case, we want a count. To get that, let's create a thing called total and set it equal to n(), which is \texttt{dplyr}s way of counting something.
+
+Here's the code:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mountainlions }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(COUNTY) }\OperatorTok{%>%}
+\NormalTok{nbaplayers }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(Pos) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{summarise}\NormalTok{(}
     \DataTypeTok{total =} \KeywordTok{n}\NormalTok{()}
 \NormalTok{  )}
@@ -518,151 +545,142 @@ So to do this, we'll take our dataset and we'll introduce a new operator: \%\tex
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 42 x 2
-##    COUNTY    total
-##    <chr>     <int>
-##  1 Banner        6
-##  2 Blaine        3
-##  3 Box Butte     4
-##  4 Brown        15
-##  5 Buffalo       3
-##  6 Cedar         1
-##  7 Cherry       30
-##  8 Custer        8
-##  9 Dakota        3
-## 10 Dawes       111
-## # ... with 32 more rows
+## `summarise()` ungrouping output (override with `.groups` argument)
 \end{verbatim}
 
-So let's walk through that. We start with our dataset -- \texttt{mountainlions} -- and then we tell it to group the data by a given field in the data. In this case, we wanted to group together all the counties, signified by the field name COUNTY, which you could get from looking at \texttt{head(mountainlions)}. After we group the data, we need to count them up. In dplyr, we use \texttt{summarize} \href{http://dplyr.tidyverse.org/reference/summarise.html}{which can do more than just count things}. Inside the parentheses in summarize, we set up the summaries we want. In this case, we just want a count of the counties: \texttt{count\ =\ n(),} says create a new field, called \texttt{total} and set it equal to \texttt{n()}, which might look weird, but it's common in stats. The number of things in a dataset? Statisticians call in n. There are n number of incidents in this dataset. So \texttt{n()} is a function that counts the number of things there are.
+\begin{verbatim}
+## # A tibble: 9 x 2
+##   Pos   total
+##   <chr> <int>
+## 1 C       111
+## 2 C-PF      2
+## 3 PF      135
+## 4 PF-C      2
+## 5 PG      111
+## 6 SF      113
+## 7 SF-PF     4
+## 8 SF-SG     3
+## 9 SG      170
+\end{verbatim}
 
-And when we run that, we get a list of counties with a count next to them. But it's not in any order. So we'll add another And Then Do This \%\textgreater{}\% and use \texttt{arrange}. Arrange does what you think it does -- it arranges data in order. By default, it's in ascending order -- smallest to largest. But if we want to know the county with the most mountain lion sightings, we need to sort it in descending order. That looks like this:
+So let's walk through that. We start with our dataset -- \texttt{nbaplayers} -- and then we tell it to group the data by a given field in the data which we get by looking at either the output of \texttt{head} or you can look in the environment where you'll see \texttt{nbaplayers}.
+
+In this case, we wanted to group together positions, signified by the field name Pos. After we group the data, we need to count them up. In dplyr, we use \texttt{summarize} \href{http://dplyr.tidyverse.org/reference/summarise.html}{which can do more than just count things}. Inside the parentheses in summarize, we set up the summaries we want. In this case, we just want a count of the positions: \texttt{total\ =\ n(),} says create a new field, called \texttt{total} and set it equal to \texttt{n()}, which might look weird, but it's common in stats. The number of things in a dataset? Statisticians call in n.~There are n number of players in this dataset. So \texttt{n()} is a function that counts the number of things there are.
+
+And when we run that, we get a list of positions with a count next to them. But it's not in any order. So we'll add another And Then Do This \%\textgreater\% and use \texttt{arrange}. Arrange does what you think it does -- it arranges data in order. By default, it's in ascending order -- smallest to largest. But if we want to know the county with the most mountain lion sightings, we need to sort it in descending order. That looks like this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mountainlions }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(COUNTY) }\OperatorTok{%>%}
+\NormalTok{nbaplayers }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(Pos) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{summarise}\NormalTok{(}
-    \DataTypeTok{count =} \KeywordTok{n}\NormalTok{()}
-\NormalTok{  ) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(count))}
+    \DataTypeTok{total =} \KeywordTok{n}\NormalTok{()}
+\NormalTok{  ) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(total))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 42 x 2
-##    COUNTY       count
-##    <chr>        <int>
-##  1 Dawes          111
-##  2 Sioux           52
-##  3 Sheridan        35
-##  4 Cherry          30
-##  5 Scotts Bluff    26
-##  6 Keya Paha       20
-##  7 Brown           15
-##  8 Rock            11
-##  9 Lincoln         10
-## 10 Custer           8
-## # ... with 32 more rows
+## `summarise()` ungrouping output (override with `.groups` argument)
 \end{verbatim}
 
-We can, if we want, group by more than one thing. So how are these sightings being confirmed? To do that, we can group by County and ``Cofirm Type'', which is how the state misspelled Confirm. But note something in this example below:
+\begin{verbatim}
+## # A tibble: 9 x 2
+##   Pos   total
+##   <chr> <int>
+## 1 SG      170
+## 2 PF      135
+## 3 SF      113
+## 4 C       111
+## 5 PG      111
+## 6 SF-PF     4
+## 7 SF-SG     3
+## 8 C-PF      2
+## 9 PF-C      2
+\end{verbatim}
+
+So the most common position in the NBA? Shooting guard, followed by power forward.
+
+We can, if we want, group by more than one thing. Which team has the most of a single position? To do that, we can group by the team -- called Tm in the data -- and position, or Pos in the data:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mountainlions }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(COUNTY, }\StringTok{`}\DataTypeTok{Cofirm Type}\StringTok{`}\NormalTok{) }\OperatorTok{%>%}
+\NormalTok{nbaplayers }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(Tm, Pos) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{summarise}\NormalTok{(}
-    \DataTypeTok{count =} \KeywordTok{n}\NormalTok{()}
-\NormalTok{  ) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(count))}
+    \DataTypeTok{total =} \KeywordTok{n}\NormalTok{()}
+\NormalTok{  ) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(total))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 93 x 3
-## # Groups:   COUNTY [42]
-##    COUNTY       `Cofirm Type`      count
-##    <chr>        <chr>              <int>
-##  1 Dawes        Trail Camera Photo    41
-##  2 Sioux        Trail Camera Photo    40
-##  3 Dawes        Track                 19
-##  4 Keya Paha    Trail Camera Photo    18
-##  5 Cherry       Trail Camera Photo    17
-##  6 Dawes        Mortality             17
-##  7 Sheridan     Trail Camera Photo    16
-##  8 Dawes        Photo                 13
-##  9 Dawes        DNA                   11
-## 10 Scotts Bluff Trail Camera Photo    11
-## # ... with 83 more rows
+## `summarise()` regrouping output by 'Tm' (override with `.groups` argument)
 \end{verbatim}
 
-See it? When you have a field name that has two words, \texttt{readr} wraps it in backticks, which is next to the 1 key on your keyboard. You can figure out which fields have backticks around it by looking at the output of \texttt{readr}. Pay attention to that, because it's coming up again in the next section and will be a part of your homework.
+\begin{verbatim}
+## # A tibble: 159 x 3
+## # Groups:   Tm [31]
+##    Tm    Pos   total
+##    <chr> <chr> <int>
+##  1 TOT   PF       13
+##  2 TOT   SG       13
+##  3 SAC   PF        9
+##  4 TOT   SF        9
+##  5 BRK   SG        8
+##  6 LAL   SG        8
+##  7 TOT   PG        8
+##  8 ATL   SG        7
+##  9 BRK   SF        7
+## 10 DAL   SG        7
+## # ... with 149 more rows
+\end{verbatim}
+
+So wait, what team is TOT?
+
+Valuable lesson: whoever collects the data has opinions on how to solve problems. In this case, Basketball Reference, when a player get's traded, records stats for the player's first team, their second team, and a combined season total for a team called TOT, meaning Total. Is there a team abbreviated TOT? No.~So ignore them here.
+
+Sacramento has 9 power forward. Brooklyn has 8 shooting guards, as do the Lakers. You can learn a bit about how a team is assembled by looking at these simple counts.
 
 \hypertarget{other-aggregates-mean-and-median}{%
 \section{Other aggregates: Mean and median}\label{other-aggregates-mean-and-median}}
 
 In the last example, we grouped some data together and counted it up, but there's so much more you can do. You can do multiple measures in a single step as well.
 
-Let's look at some \href{https://unl.box.com/s/09t2u4qoncfh6qlv2156flzlxb8ruzpq}{salary data from the University of Nebraska}.
+Sticking with our NBA player data, we can calculate any number of measures inside summarize. Here, we'll use R's built in mean and median functions to calculate \ldots{} well, you get the idea.
+
+Let's look just a the number of minutes each position gets.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{salaries <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/nusalaries1819.csv"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Parsed with column specification:
-## cols(
-##   Employee = col_character(),
-##   Position = col_character(),
-##   Campus = col_character(),
-##   Department = col_character(),
-##   `Budgeted Annual Salary` = col_number(),
-##   `Salary from State Aided Funds` = col_number(),
-##   `Salary from Other Funds` = col_number()
-## )
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{head}\NormalTok{(salaries)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 6 x 7
-##   Employee Position Campus Department `Budgeted Annua~ `Salary from St~
-##   <chr>    <chr>    <chr>  <chr>                 <dbl>            <dbl>
-## 1 Abbey, ~ Associa~ UNK    Kinesiolo~            61276            61276
-## 2 Abbott,~ Staff S~ UNL    FM&P Faci~            37318               NA
-## 3 Abboud,~ Adminis~ UNMC   Surgery-U~            76400            76400
-## 4 Abdalla~ Asst Pr~ UNMC   Pathology~            74774            71884
-## 5 Abdelka~ Post-Do~ UNMC   Surgery-T~            43516               NA
-## 6 Abdel-M~ Researc~ UNL    Public Po~            58502               NA
-## # ... with 1 more variable: `Salary from Other Funds` <dbl>
-\end{verbatim}
-
-In summarize, we can calculate any number of measures. Here, we'll use R's built in mean and median functions to calculate \ldots{} well, you get the idea.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{salaries }\OperatorTok{%>%}
+\NormalTok{nbaplayers }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(Pos) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{summarise}\NormalTok{(}
     \DataTypeTok{count =} \KeywordTok{n}\NormalTok{(),}
-    \DataTypeTok{mean_salary =} \KeywordTok{mean}\NormalTok{(}\StringTok{`}\DataTypeTok{Budgeted Annual Salary}\StringTok{`}\NormalTok{),}
-    \DataTypeTok{median_salary =} \KeywordTok{median}\NormalTok{(}\StringTok{`}\DataTypeTok{Budgeted Annual Salary}\StringTok{`}\NormalTok{)}
+    \DataTypeTok{mean_minutes =} \KeywordTok{mean}\NormalTok{(MP),}
+    \DataTypeTok{median_median =} \KeywordTok{median}\NormalTok{(MP)}
 \NormalTok{  )}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 1 x 3
-##   count mean_salary median_salary
-##   <int>       <dbl>         <dbl>
-## 1 13039      62065.         51343
+## `summarise()` ungrouping output (override with `.groups` argument)
 \end{verbatim}
 
-So there's 13,039 employees in the database, spread across four campuses plus the system office. The mean or average salary is about \$62,000, but the median salary is slightly more than \$51,000.
+\begin{verbatim}
+## # A tibble: 9 x 4
+##   Pos   count mean_minutes median_median
+##   <chr> <int>        <dbl>         <dbl>
+## 1 C       111         891.          887 
+## 2 C-PF      2         316.          316.
+## 3 PF      135         790.          567 
+## 4 PF-C      2        1548.         1548.
+## 5 PG      111         944.          850 
+## 6 SF      113         877.          754 
+## 7 SF-PF     4         638.          286.
+## 8 SF-SG     3        1211          1688 
+## 9 SG      170         843.          654.
+\end{verbatim}
+
+So there's 651 players in the data. Let's look at shooting guards. The average shooting guard plays 842 minutes and the median is 653.5 minutes.
 
 Why?
 
@@ -670,71 +688,76 @@ Let's let sort help us.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{salaries }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(}\StringTok{`}\DataTypeTok{Budgeted Annual Salary}\StringTok{`}\NormalTok{))}
+\NormalTok{nbaplayers }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(MP))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 13,039 x 7
-##    Employee Position Campus Department `Budgeted Annua~ `Salary from St~
-##    <chr>    <chr>    <chr>  <chr>                 <dbl>            <dbl>
-##  1 Frost, ~ Head Co~ UNL    Athletics           5000000               NA
-##  2 Miles, ~ Head Co~ UNL    Athletics           2375000               NA
-##  3 Moos, W~ Athleti~ UNL    Athletics           1000000               NA
-##  4 Gold, J~ Chancel~ UNMC   Office of~           853338           853338
-##  5 Chinand~ Assista~ UNL    Athletics            800000               NA
-##  6 Walters~ Assista~ UNL    Athletics            700000               NA
-##  7 Cook, J~ Head Co~ UNL    Athletics            675000               NA
-##  8 William~ Head Co~ UNL    Athletics            626750               NA
-##  9 Bounds,~ Preside~ UNCA   Office of~           540000           540000
-## 10 Austin ~ Assista~ UNL    Athletics            475000               NA
-## # ... with 13,029 more rows, and 1 more variable: `Salary from Other
-## #   Funds` <dbl>
+## # A tibble: 651 x 27
+##       Rk Player Pos     Age Tm        G    MP   PER `TS%` `3PAr`   FTr `ORB%`
+##    <dbl> <chr>  <chr> <dbl> <chr> <dbl> <dbl> <dbl> <dbl>  <dbl> <dbl>  <dbl>
+##  1   323 CJ Mc~ SG       28 POR      70  2556  17   0.541  0.378 0.136    1.9
+##  2    55 Devin~ SG       23 PHO      70  2512  20.6 0.618  0.31  0.397    1.3
+##  3   198 James~ SG       30 HOU      68  2483  29.1 0.626  0.557 0.528    2.9
+##  4    27 Harri~ PF       27 SAC      72  2482  13.3 0.574  0.338 0.337    3.4
+##  5   297 Damia~ PG       29 POR      66  2474  26.9 0.627  0.5   0.384    1.4
+##  6   204 Tobia~ PF       27 PHI      72  2469  17.2 0.556  0.304 0.184    3.1
+##  7   479 P.J. ~ PF       34 HOU      72  2467   8.3 0.559  0.702 0.113    4.7
+##  8   175 Shai ~ SG       21 OKC      70  2428  17.7 0.568  0.247 0.352    2.2
+##  9     2 Bam A~ PF       22 MIA      72  2417  20.3 0.598  0.018 0.484    8.5
+## 10   343 Donov~ SG       23 UTA      69  2364  18.8 0.558  0.352 0.24     2.6
+## # ... with 641 more rows, and 15 more variables: `DRB%` <dbl>, `TRB%` <dbl>,
+## #   `AST%` <dbl>, `STL%` <dbl>, `BLK%` <dbl>, `TOV%` <dbl>, `USG%` <dbl>,
+## #   OWS <dbl>, DWS <dbl>, WS <dbl>, `WS/48` <dbl>, OBPM <dbl>, DBPM <dbl>,
+## #   BPM <dbl>, VORP <dbl>
 \end{verbatim}
 
-Oh, right. In this dataset, the university pays a football coach \$5 million. Extremes influence averages, not medians, and now you have your answer.
+The player with the most minutes on the floor is a shooting guard. Shooting guard is the most common position, so that means there's CJ McCollum rolling up 2,556 minutes in a season, and then there's Cleveland Cavalier's sensation J.P. Macura. Never heard of J.P. Macura? Might be because he logged one minute in one game this season.
 
-So when choosing a measure of the middle, you have to ask yourself -- could I have extremes? Because a median won't be sensitive to extremes. It will be the point at which half the numbers are above and half are below. The average or mean will be a measure of the middle, but if you have a bunch of low paid people and then one football coach, the average will be wildly skewed. Here, because there's so few highly paid football coaches compared to people who make a normal salary, the number is only slightly skewed in the grand scheme, but skewed nonetheless.
+That's a huge difference.
+
+So when choosing a measure of the middle, you have to ask yourself -- could I have extremes? Because a median won't be sensitive to extremes. It will be the point at which half the numbers are above and half are below. The average or mean will be a measure of the middle, but if you have a bunch of pine riders and then one ironman superstar, the average will be wildly skewed.
 
 \hypertarget{even-more-aggregates}{%
 \section{Even more aggregates}\label{even-more-aggregates}}
 
 There's a ton of things we can do in summarize -- we'll work with more of them as the course progresses -- but here's a few other questions you can ask.
 
-Which department on campus has the highest wage bill? And what is the highest and lowest salary in the department? And how wide is the spread between salaries? We can find that with \texttt{sum} to add up the salaries to get the total wage bill, \texttt{min} to find the minumum salary, \texttt{max} to find the maximum salary and \texttt{sd} to find the standard deviation in the numbers.
+Which position in the NBA plays the most minutes? And what is the highest and lowest minute total for that position? And how wide is the spread between minutes? We can find that with \texttt{sum} to add up the minutes to get the total minutes, \texttt{min} to find the minimum minutes, \texttt{max} to find the maximum minutes and \texttt{sd} to find the standard deviation in the numbers.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{salaries }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(Campus, Department) }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{nbaplayers }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(Pos) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{summarise}\NormalTok{(}
-    \DataTypeTok{total =} \KeywordTok{sum}\NormalTok{(}\StringTok{`}\DataTypeTok{Budgeted Annual Salary}\StringTok{`}\NormalTok{), }
-    \DataTypeTok{avgsalary =} \KeywordTok{mean}\NormalTok{(}\StringTok{`}\DataTypeTok{Budgeted Annual Salary}\StringTok{`}\NormalTok{), }
-    \DataTypeTok{minsalary =} \KeywordTok{min}\NormalTok{(}\StringTok{`}\DataTypeTok{Budgeted Annual Salary}\StringTok{`}\NormalTok{),}
-    \DataTypeTok{maxsalary =} \KeywordTok{max}\NormalTok{(}\StringTok{`}\DataTypeTok{Budgeted Annual Salary}\StringTok{`}\NormalTok{),}
-    \DataTypeTok{stdev =} \KeywordTok{sd}\NormalTok{(}\StringTok{`}\DataTypeTok{Budgeted Annual Salary}\StringTok{`}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(total))}
+    \DataTypeTok{total =} \KeywordTok{sum}\NormalTok{(MP), }
+    \DataTypeTok{avgminutes =} \KeywordTok{mean}\NormalTok{(MP), }
+    \DataTypeTok{minminutes =} \KeywordTok{min}\NormalTok{(MP),}
+    \DataTypeTok{maxminutes =} \KeywordTok{max}\NormalTok{(MP),}
+    \DataTypeTok{stdev =} \KeywordTok{sd}\NormalTok{(MP)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(total))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 804 x 7
-## # Groups:   Campus [5]
-##    Campus Department                  total avgsalary minsalary maxsalary  stdev
-##    <chr>  <chr>                       <dbl>     <dbl>     <dbl>     <dbl>  <dbl>
-##  1 UNL    Athletics                  3.56e7   118508.     12925   5000000 3.33e5
-##  2 UNMC   Pathology/Microbiology     1.36e7    63158.      1994    186925 3.41e4
-##  3 UNL    Agronomy & Horticulture    8.98e6    66496.      5000    208156 4.01e4
-##  4 UNMC   Anesthesiology             7.90e6    78237.     10000    245174 3.59e4
-##  5 UNL    School of Natural Resour~  6.86e6    65995.      2400    194254 3.28e4
-##  6 UNL    College of Law             6.70e6    77953.      1000    326400 7.23e4
-##  7 UNL    University Television      6.44e6    55542.     16500    221954 2.75e4
-##  8 UNL    University Libraries       6.27e6    51390.      1200    215917 2.68e4
-##  9 UNMC   Pharmacology/Exp Neurosc~  6.24e6    58911.      2118    248139 4.29e4
-## 10 UNMC   CON-Omaha Division         6.11e6    78304.      3000    172522 4.48e4
-## # ... with 794 more rows
+## `summarise()` ungrouping output (override with `.groups` argument)
 \end{verbatim}
 
-So again, no surprise, the UNL athletic department has the single largest wage bill at nearly \$36 million. The average salary in the department is \$118,508 -- more than double the univeristy as a whole, again thanks to Scott Frost's paycheck.
+\begin{verbatim}
+## # A tibble: 9 x 6
+##   Pos    total avgminutes minminutes maxminutes stdev
+##   <chr>  <dbl>      <dbl>      <dbl>      <dbl> <dbl>
+## 1 SG    143229       843.          1       2556 735. 
+## 2 PF    106654       790.          5       2482 719. 
+## 3 PG    104745       944.          8       2474 727. 
+## 4 SF     99109       877.         11       2316 709. 
+## 5 C      98914       891.          3       2336 619. 
+## 6 SF-SG   3633      1211          87       1858 977. 
+## 7 PF-C    3097      1548.        960       2137 832. 
+## 8 SF-PF   2553       638.         46       1936 873. 
+## 9 C-PF     633       316.        256        377  85.6
+\end{verbatim}
+
+So again, no surprise, shooting guards spend the most minutes on the floor in the NBA. They average 842 minutes, but we noted why that's trouble. The minimum is the J.P. Macura Award, max is the Trailblazer's failing at load management, and the standard deviation is a measure of how spread out the data is. In this case, not the highest spread among positions, but pretty high. So you know you've got some huge minutes players and a bunch of bench players.
 
 \hypertarget{mutating-data}{%
 \chapter{Mutating data}\label{mutating-data}}
@@ -1002,7 +1025,7 @@ Let's work with our \href{https://unl.box.com/s/etqna5bfvf3b0gsnw0kcjjn1rxx9335s
 
 So, first things first, let's say we don't care about all this Air Force, Akron, Alabama crap and just want to see Dear Old Nebraska U. We do that with \texttt{filter} and then we pass it a condition.
 
-Before we do that, a note about conditions. Most of the conditional operators you'll understand -- greater than and less than are \textgreater{} and \textless{}. The tough one to remember is equal to. In conditional statements, equal to is == not =. If you haven't noticed, = is a variable assignment operator, not a conditional statement. So equal is == and NOT equal is !=.
+Before we do that, a note about conditions. Most of the conditional operators you'll understand -- greater than and less than are \textgreater{} and \textless. The tough one to remember is equal to. In conditional statements, equal to is == not =. If you haven't noticed, = is a variable assignment operator, not a conditional statement. So equal is == and NOT equal is !=.
 
 So if you want to see Institutions equal to Nebraska, you do this:
 
@@ -1285,7 +1308,7 @@ So what are the top 10 Power Five schools by season attendance. All we're doing 
 ## 10 Oklahoma    Big 12     607146
 \end{verbatim}
 
-That's all there is to it. Just remember -- for it to work correctly, you need to sort your data BEFORE you run top\_n. Otherwise, you're just getting the first 10 values in the list. The function doesn't know what field you want the top values of. You have to do it.
+That's all there is to it. Just remember -- for it to work correctly, you need to sort your data BEFORE you run top\_n.~Otherwise, you're just getting the first 10 values in the list. The function doesn't know what field you want the top values of. You have to do it.
 
 \hypertarget{transforming-data}{%
 \chapter{Transforming data}\label{transforming-data}}
@@ -1478,7 +1501,7 @@ Now that we have long data for just Nebraska, we can chart it.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-49-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-50-1.pdf}
 
 \hypertarget{simulations}{%
 \chapter{Simulations}\label{simulations}}
@@ -1530,7 +1553,7 @@ During the Western Illinois game, the team, shooting .329 on the season from beh
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-53-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-54-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1690,7 +1713,7 @@ Here's an example of using linear modeling to look at yards. Think of the \textt
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 140 on 128 degrees of freedom
-## Multiple R-squared:  0.04035,    Adjusted R-squared:  0.03285 
+## Multiple R-squared:  0.04035,	Adjusted R-squared:  0.03285 
 ## F-statistic: 5.382 on 1 and 128 DF,  p-value: 0.02193
 \end{verbatim}
 
@@ -1709,7 +1732,7 @@ There's three things we need here:
 
 You can see the problem in a graph. On the X axis is penalty yards, on the y is aggregate score. If these elements had a strong relationship, we'd see a clear pattern moving from right to left, sloping down. On the left would be the teams with lots of penalty yards and a negative point differential. On right would be teams with low penalty yards and high point differentials. Do you see that below?
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-61-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-62-1.pdf}
 
 \begin{quote}
 \textbf{Your turn}: Try it with the other penalty measures. Total penalties and penalty yards per game. Does anything change? Do either of these meet the .05 threshold for randomness? Are either of these any more predictive?
@@ -1760,7 +1783,7 @@ Answer: 67 percent. More than three times more related than penalty yards. But h
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 5.111 on 128 degrees of freedom
-## Multiple R-squared:  0.4434, Adjusted R-squared:  0.4391 
+## Multiple R-squared:  0.4434,	Adjusted R-squared:  0.4391 
 ## F-statistic:   102 on 1 and 128 DF,  p-value: < 2.2e-16
 \end{verbatim}
 
@@ -1871,7 +1894,7 @@ The linear model code we used before is pretty straight forward. Its \texttt{fie
 ## 
 ## Residual standard error: 0.05949 on 57514 degrees of freedom
 ##   (4 observations deleted due to missingness)
-## Multiple R-squared:  0.3675, Adjusted R-squared:  0.3674 
+## Multiple R-squared:  0.3675,	Adjusted R-squared:  0.3674 
 ## F-statistic: 3.341e+04 on 1 and 57514 DF,  p-value: < 2.2e-16
 \end{verbatim}
 
@@ -1905,7 +1928,7 @@ To add more predictors to this mix, we merely add them. But it's not that simple
 ## 
 ## Residual standard error: 9.407 on 57513 degrees of freedom
 ##   (4 observations deleted due to missingness)
-## Multiple R-squared:  0.6683, Adjusted R-squared:  0.6683 
+## Multiple R-squared:  0.6683,	Adjusted R-squared:  0.6683 
 ## F-statistic: 5.793e+04 on 2 and 57513 DF,  p-value: < 2.2e-16
 \end{verbatim}
 
@@ -2325,7 +2348,7 @@ We can add more just by simply adding them.
 ## 
 ## Residual standard error: 8.501 on 57511 degrees of freedom
 ##   (4 observations deleted due to missingness)
-## Multiple R-squared:  0.7291, Adjusted R-squared:  0.7291 
+## Multiple R-squared:  0.7291,	Adjusted R-squared:  0.7291 
 ## F-statistic: 3.87e+04 on 4 and 57511 DF,  p-value: < 2.2e-16
 \end{verbatim}
 
@@ -2475,7 +2498,7 @@ First, let's build a linear model and save it as a new dataframe called \texttt{
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 5.111 on 128 degrees of freedom
-## Multiple R-squared:  0.4434, Adjusted R-squared:  0.4391 
+## Multiple R-squared:  0.4434,	Adjusted R-squared:  0.4391 
 ## F-statistic:   102 on 1 and 128 DF,  p-value: < 2.2e-16
 \end{verbatim}
 
@@ -2525,7 +2548,7 @@ So looking at this table, what you see here are the teams who scored more than t
 
 But, before we can bestow any validity on it, we need to see if this linear model is appropriate. We've done that some looking at our p-values and R-squared values. But one more check is to look at the residuals themselves. We do that by plotting the residuals with the predictor. We'll get into plotting soon, but for now just seeing it is enough.
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-84-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-85-1.pdf}
 
 The lack of a shape here -- the seemingly random nature -- is a good sign that a linear model works for our data. If there was a pattern, that would indicate something else was going on in our data and we needed a different model.
 
@@ -2535,7 +2558,7 @@ Another way to view your residuals is by connecting the predicted value with the
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-85-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-86-1.pdf}
 
 The blue line here separates underperformers from overperformers.
 
@@ -2574,7 +2597,7 @@ Now let's look at it where it doesn't work: Penalties.
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 6.61 on 128 degrees of freedom
-## Multiple R-squared:  0.06907,    Adjusted R-squared:  0.06179 
+## Multiple R-squared:  0.06907,	Adjusted R-squared:  0.06179 
 ## F-statistic: 9.496 on 1 and 128 DF,  p-value: 0.002521
 \end{verbatim}
 
@@ -2626,7 +2649,7 @@ So what we can say about this model is that it's statistically significant but u
 
 So our model says Oklahoma \emph{should} only be scoring 31.3 points per game given how many penalty yards per game, but they're really scoring 48.4. Oy. What happens if we plot those residuals?
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-90-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-91-1.pdf}
 
 Well \ldots{} it actually says that a linear model is appropriate. Which an important lesson -- just because your residual plot says a linear model works here, that doesn't say your linear model is good. There are other measures for that, and you need to use them.
 
@@ -2636,7 +2659,7 @@ Here's the segment plot of residuals -- you'll see some really long lines. That'
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-91-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-92-1.pdf}
 
 \hypertarget{z-scores}{%
 \chapter{Z scores}\label{z-scores}}
@@ -2708,6 +2731,10 @@ And since we have individual game data, we need to collapse this into one record
 \NormalTok{    )}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## `summarise()` regrouping output by 'Conference' (override with `.groups` argument)
+\end{verbatim}
 
 To calculate a Z score in R, the easiest way is to use the scale function in base R. To use it, you use \texttt{scale(FieldName,\ center=TRUE,\ scale=TRUE)}. The center and scale indicate if you want to subtract from the mean and if you want to divide by the standard deviation, respectively. We do.
 
@@ -2939,7 +2966,7 @@ Note: attendance is our data, \texttt{aes} means aesthetics, \texttt{x=Instituti
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-104-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-105-1.pdf}
 
 We get \ldots{} weirdness. We expected to see bars of different sizes, but we get all with a count of 1. What gives? Well, this is the default behavior. What we have here is something called a histogram, where \texttt{ggplot2} helpfully counted up the number of times the Institution appears and counted them up. Since we only have one record per Institution, the count is always 1. How do we fix this? By adding \texttt{weight} to our aesthetic.
 
@@ -2950,7 +2977,7 @@ We get \ldots{} weirdness. We expected to see bars of different sizes, but we ge
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-105-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-106-1.pdf}
 
 Closer. But \ldots{} what order is that in? And what happened to our count numbers on the left? Why are they in scientific notation?
 
@@ -2962,7 +2989,7 @@ Let's deal with the ordering first. \texttt{ggplot2}'s default behavior is to so
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-106-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-107-1.pdf}
 
 Better. We can argue about if the right order is smallest to largest or largest to smallest. But this gets us close. By the way, to sort it largest to smallest, put a negative sign in front of the sort field.
 
@@ -2972,7 +2999,7 @@ Better. We can argue about if the right order is smallest to largest or largest 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-107-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-108-1.pdf}
 
 \hypertarget{scales}{%
 \section{Scales}\label{scales}}
@@ -2997,7 +3024,7 @@ To alter the scale, we add a piece to our plot with \texttt{+} and we tell it wh
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-109-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-110-1.pdf}
 
 Better.
 
@@ -3015,7 +3042,7 @@ We are going to spend a lot more time on styling, but let's add some simple labe
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-110-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-111-1.pdf}
 
 The library has lots and lots of ways to alter the styling -- we can programmatically control nearly every part of the look and feel of the chart. One simple way is to apply themes in the library already. We do that the same way we've done other things -- we add them. Here's the light theme.
 
@@ -3029,7 +3056,7 @@ The library has lots and lots of ways to alter the styling -- we can programmati
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-111-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-112-1.pdf}
 
 Or the minimal theme:
 
@@ -3043,7 +3070,7 @@ Or the minimal theme:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-112-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-113-1.pdf}
 
 Later on, we'll write our own themes. For now, the built in ones will get us closer to something that looks good.
 
@@ -3063,7 +3090,7 @@ Sometimes, we don't want vertical bars. Maybe we think this would look better ho
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-113-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-114-1.pdf}
 
 \hypertarget{stacked-bar-charts}{%
 \chapter{Stacked bar charts}\label{stacked-bar-charts}}
@@ -3134,7 +3161,7 @@ Building on what we learned in the last chapter, we know we can turn this into a
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-118-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-119-1.pdf}
 
 What's the problem with this chart?
 
@@ -3167,12 +3194,20 @@ Here it is in a pie chart:
        \DataTypeTok{total=}\KeywordTok{sum}\NormalTok{(Count)) }\OperatorTok{%>%}
 \KeywordTok{select}\NormalTok{(Race, total) }\OperatorTok{%>%}\StringTok{ }
 \KeywordTok{filter}\NormalTok{(total }\OperatorTok{!=}\StringTok{ }\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{verbatim}
+## `summarise()` ungrouping output (override with `.groups` argument)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \KeywordTok{ggplot}\NormalTok{(jdf, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\StringTok{""}\NormalTok{, }\DataTypeTok{y=}\NormalTok{total, }\DataTypeTok{fill=}\NormalTok{Race)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{width =} \DecValTok{1}\NormalTok{, }\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{coord_polar}\NormalTok{(}\StringTok{"y"}\NormalTok{, }\DataTypeTok{start=}\DecValTok{0}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-119-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-120-1.pdf}
 
 You can see, it's pretty white. But \ldots{} what about beyond that? How carefully can you evaluate angles and area?
 
@@ -3217,7 +3252,7 @@ The waffle library can break this down in a way that's easier on the eyes than a
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-122-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-123-1.pdf}
 
 Or, we could make this two teams in the same chart.
 
@@ -3233,7 +3268,7 @@ Or, we could make this two teams in the same chart.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-124-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-125-1.pdf}
 
 \hypertarget{waffle-irons}{%
 \section{Waffle Irons}\label{waffle-irons}}
@@ -3249,7 +3284,7 @@ So what does it look like if we compare the two teams using the two vectors in t
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-125-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-126-1.pdf}
 
 What do you notice about this chart? Notice how the squares aren't the same size? Well, Ohio State outgained Nebraska by a long way. So the squares aren't the same size because the numbers aren't the same. We can fix that by adding an unnamed padding number so the number of shots add up to the same thing. Let's make the total for everyone be 580, Ohio State's total yards of offense. So to do that, we need to add a padding of 349 to Nebraska. REMEMBER: Don't name it or it'll show up in the legend.
 
@@ -3271,7 +3306,7 @@ Now, in our waffle iron, if we don't give that padding a color, we'll get an err
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-127-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-128-1.pdf}
 
 One last thing we can do is change the 1 square = 1 yard bit -- which makes the squares really small in this case -- by dividing our vector. Remember what you learned in Swirl about math on vectors?
 
@@ -3284,7 +3319,7 @@ One last thing we can do is change the 1 square = 1 yard bit -- which makes the 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-128-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-129-1.pdf}
 
 News flash: Ohio State crushed Nebraska.
 
@@ -3354,7 +3389,7 @@ Line charts, unlike bar charts, do have a y-axis. So in our ggplot step, we have
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-132-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-133-1.pdf}
 
 See a problem here? Note the Y axis doesn't start with zero. That makes this look worse than it is (and that February swoon is pretty bad). To make the axis what you want, you can use \texttt{scale\_x\_continuous} or \texttt{scale\_y\_continuous} and pass in a list with the bottom and top value you want. You do that like this:
 
@@ -3364,7 +3399,7 @@ See a problem here? Note the Y axis doesn't start with zero. That makes this loo
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-133-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-134-1.pdf}
 
 Note also that our X axis labels are automated. It knows it's a date and it just labels it by month.
 
@@ -3389,7 +3424,7 @@ First, let's chart Nebraska. Read carefully. First we set the data. Then we set 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-135-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-136-1.pdf}
 
 Now, by using +, we can add Michigan State to it. REMEMBER COPY AND PASTE IS A THING. Nothing changes except what data you are using.
 
@@ -3399,7 +3434,7 @@ Now, by using +, we can add Michigan State to it. REMEMBER COPY AND PASTE IS A T
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-136-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-137-1.pdf}
 
 Let's flatten our lines out by zeroing the Y axis.
 
@@ -3409,7 +3444,7 @@ Let's flatten our lines out by zeroing the Y axis.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-137-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-138-1.pdf}
 
 So visually speaking, the difference between Nebraska and Michigan State's season is that Michigan State stayed mostly on an even keel, and Nebraska went on a two month swoon.
 
@@ -3434,7 +3469,7 @@ I can keep layering on layers all day if I want. And if my dataset has more than
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-139-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-140-1.pdf}
 
 What do we see here? How has Nebraska and Michigan State's season evolved against all the rest of the teams in college basketball?
 
@@ -3446,13 +3481,17 @@ But how does that compare to the average? We can add that pretty easily by creat
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+## `summarise()` ungrouping output (override with `.groups` argument)
+\end{verbatim}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_line}\NormalTok{(}\DataTypeTok{data=}\NormalTok{p5conf, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Date, }\DataTypeTok{y=}\NormalTok{TeamFGPCT, }\DataTypeTok{group=}\NormalTok{Team), }\DataTypeTok{color=}\StringTok{"grey"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_line}\NormalTok{(}\DataTypeTok{data=}\NormalTok{nu, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Date, }\DataTypeTok{y=}\NormalTok{TeamFGPCT), }\DataTypeTok{color=}\StringTok{"red"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_line}\NormalTok{(}\DataTypeTok{data=}\NormalTok{msu, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Date, }\DataTypeTok{y=}\NormalTok{TeamFGPCT), }\DataTypeTok{color=}\StringTok{"green"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_line}\NormalTok{(}\DataTypeTok{data=}\NormalTok{average, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Date, }\DataTypeTok{y=}\NormalTok{mean_shooting), }\DataTypeTok{color=}\StringTok{"black"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{.65}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-141-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-142-1.pdf}
 
 \hypertarget{step-charts}{%
 \chapter{Step charts}\label{step-charts}}
@@ -3531,7 +3570,7 @@ The step chart is it's own geom, so we can employ it just like we have the other
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-146-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-147-1.pdf}
 
 Let's try a different element of the aesthetic: color, but this time inside the aesthetic. Last time, we did the color outside. When you put it inside, you pass it a column name and ggplot will color each line based on what thing that is, and it will create a legend that labels each line that thing.
 
@@ -3541,7 +3580,7 @@ Let's try a different element of the aesthetic: color, but this time inside the 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-147-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-148-1.pdf}
 
 From this, we can see two teams in the Big Ten had negative point differentials last season -- Illinois and Rutgers.
 
@@ -3572,7 +3611,7 @@ The second thing I'm going to add is the annotation layer. In this case, I am ad
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-149-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-150-1.pdf}
 
 \hypertarget{ridge-charts}{%
 \chapter{Ridge charts}\label{ridge-charts}}
@@ -3642,6 +3681,10 @@ Now I'm going to add up all the winlosses for each team, which should give me th
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+## `summarise()` regrouping output by 'Team', 'Conference' (override with `.groups` argument)
+\end{verbatim}
+
 Now that I have season win totals, I can join that data back to my log data so each game has the total number of wins in each season.
 
 \begin{Shaded}
@@ -3689,7 +3732,7 @@ The answer might surprise you.
 ## Warning: Removed 2 rows containing non-finite values (stat_density_ridges).
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-156-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-157-1.pdf}
 
 Answer? Not really. Game to game, maybe. Over five seasons? The differences are indistinguishable.
 
@@ -3712,7 +3755,7 @@ How about assists?
 ## Warning: Removed 2 rows containing non-finite values (stat_density_ridges).
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-157-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-158-1.pdf}
 
 There's a little better, especially between top and bottom.
 
@@ -3733,7 +3776,7 @@ There's a little better, especially between top and bottom.
 ## Warning: Removed 2 rows containing non-finite values (stat_density_ridges).
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-158-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-159-1.pdf}
 
 If you've been paying attention this semester, you know what's coming next.
 
@@ -3754,7 +3797,7 @@ If you've been paying attention this semester, you know what's coming next.
 ## Warning: Removed 2 rows containing non-finite values (stat_density_ridges).
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-159-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-160-1.pdf}
 
 \hypertarget{lollipop-charts}{%
 \chapter{Lollipop charts}\label{lollipop-charts}}
@@ -3807,6 +3850,10 @@ For the first example, let's look at the difference between a team's shooting pe
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+## `summarise()` ungrouping output (override with `.groups` argument)
+\end{verbatim}
+
 Now I'm going to do the same with teams.
 
 \begin{Shaded}
@@ -3817,6 +3864,10 @@ Now I'm going to do the same with teams.
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{teamshootingpct =}\NormalTok{ totalshots}\OperatorTok{/}\NormalTok{totalattempts)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## `summarise()` regrouping output by 'Team' (override with `.groups` argument)
+\end{verbatim}
 
 The last thing I need to do is join them together. So each team will have the conference shooting percentage as well as their own.
 
@@ -3848,7 +3899,7 @@ A lollipop chart is made up of two things -- a line between two points, and two 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-166-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-167-1.pdf}
 
 We can do better by changing the order of the teams by their shooting performance and giving it some theme love.
 
@@ -3872,7 +3923,7 @@ We can do better by changing the order of the teams by their shooting performanc
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-167-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-168-1.pdf}
 
 What if we wanted to order them by wins? Our data has a column called W\_L that lists if the team won or lost. The problem is it doens't just say W or L. If the game went to overtime, it lists that. That complicates counting wins. Here's a trick to find a string of text and make that. It's called \texttt{grepl} and the basic syntax is grepl for this string in this field and then do what I tell you. In this case, we're going to create a new field called winloss look for W or L (and ignore any OT notation) and give wins a 1 and losses a 0.
 
@@ -3893,6 +3944,10 @@ So let's look at turnovers and assists. We'll call it give and take. Does the di
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+## `summarise()` regrouping output by 'Conference' (override with `.groups` argument)
+\end{verbatim}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{big10gt <-}\StringTok{ }\NormalTok{giveandtake }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Conference }\OperatorTok{==}\StringTok{ "Big Ten"}\NormalTok{)}
@@ -3909,7 +3964,7 @@ So let's look at turnovers and assists. We'll call it give and take. Does the di
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-171-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-172-1.pdf}
 
 Short answer: Not really. Something you need to get used to in data visualization -- not everything works. Sometimes you find things, sometimes you don't. Don't publish a graphic that doesn't find anything. Let it stay in your notebook as an idea that didn't pan out.
 
@@ -3987,6 +4042,10 @@ Now we can get a dataframe together that gives us the total wins for each team, 
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+## `summarise()` ungrouping output (override with `.groups` argument)
+\end{verbatim}
+
 Now let's look at the scatterplot. With a scatterplot, we put what predicts the thing on the X axis, and the thing being predicted on the Y axis. In this case, X is our shooting percentage, y is our wins.
 
 \begin{Shaded}
@@ -3995,7 +4054,7 @@ Now let's look at the scatterplot. With a scatterplot, we put what predicts the 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-176-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-177-1.pdf}
 
 Let's talk about this. It seems that the data slopes up to the right. That would indicate a positive correlation between shooting percentage and wins. And that makes sense, no? You'd expect teams that shoot the ball well to win. But can we get a better sense of this? Yes, by adding another geom -- \texttt{geom\_smooth}.
 
@@ -4009,7 +4068,7 @@ Let's talk about this. It seems that the data slopes up to the right. That would
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-177-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-178-1.pdf}
 
 But \ldots{} how strong a relationship is this? How much can shooting percentage explain wins? Can we put some numbers to this?
 
@@ -4039,7 +4098,7 @@ Of course we can. We can apply a linear model to this -- remember Chapter 9? We'
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 5.035 on 351 degrees of freedom
-## Multiple R-squared:  0.348,  Adjusted R-squared:  0.3462 
+## Multiple R-squared:  0.348,	Adjusted R-squared:  0.3462 
 ## F-statistic: 187.4 on 1 and 351 DF,  p-value: < 2.2e-16
 \end{verbatim}
 
@@ -4123,7 +4182,7 @@ The first thing we can do is look at a line chart, like we have done in previous
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-182-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-183-1.pdf}
 
 And, not surprisingly, we get a hairball. We could color certain lines, but that would limit us to focus on one team. What if we did all of them at once? We do that with a \texttt{facet\_wrap}. The only thing we MUST pass into a \texttt{facet\_wrap} is what thing we're going to separate them out by. In this case, we precede that field with a tilde, so in our case we want the Team field. It looks like this:
 
@@ -4133,7 +4192,7 @@ And, not surprisingly, we get a hairball. We could color certain lines, but that
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-183-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-184-1.pdf}
 
 Answer: Not immediately clear, but we can look at this and analyze it. We could add a piece of annotation to help us out.
 
@@ -4156,7 +4215,7 @@ Answer: Not immediately clear, but we can look at this and analyze it. We could 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-185-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-186-1.pdf}
 
 What do you see here? How do teams compare? How do they change over time? I'm not asking you these questions because they're an assignment -- I'm asking because that's exactly what this chart helps answer. Your brain will immediately start making those connections.
 
@@ -4171,7 +4230,7 @@ Facet grids allow us to put teams on the same plane, versus just repeating them.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-186-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-187-1.pdf}
 
 And here they are next to each other:
 
@@ -4181,7 +4240,7 @@ And here they are next to each other:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-187-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-188-1.pdf}
 
 Note: We'd have some work to do with the labeling on this -- we'll get to that -- but you can see where this is valuable comparing a group of things. One warning: Don't go too crazy with this or it loses it's visual power.
 
@@ -4196,7 +4255,7 @@ Line charts aren't the only things we can do. We can do any kind of chart in ggp
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-188-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-189-1.pdf}
 
 \hypertarget{tables}{%
 \chapter{Tables}\label{tables}}
@@ -5079,7 +5138,7 @@ A bubble chart is just a scatterplot with one additional element in the aestheti
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-203-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-204-1.pdf}
 
 As expected, yards per game pretty tightly predicts points per game, but you could have guessed that without a chart. So let's add the size element.
 
@@ -5089,7 +5148,7 @@ As expected, yards per game pretty tightly predicts points per game, but you cou
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-204-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-205-1.pdf}
 
 Eh. What does this chart tell you? Trick question, there's not much new here. The dots are too big. Also, we can't see when they overlap. We can fix that by adding an alpha element outside the aesthetic -- alpha in this case is transparency -- and we can manually change the size of the dots by adding \texttt{scale\_size} and a \texttt{range}.
 
@@ -5099,7 +5158,7 @@ Eh. What does this chart tell you? Trick question, there's not much new here. Th
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-205-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-206-1.pdf}
 
 Before we do any more work, let's return to the earlier question: What story does this tell? Can you discern a story from the bubbles? Are teams with lots of turnovers doing poorly and teams with few turnovers doing well? The problem is, you can't really tell. So this is a dead end for a bubble chart. If you get a big mess, it's a dead giveaway that you probably don't have a bubble chart.
 
@@ -5151,7 +5210,7 @@ Now we can do the bubble chart.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-207-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-208-1.pdf}
 
 Better! Teams are spread out a little more. Bottom right quadrant -- the good defense, good offense quadrant -- have some large dots. The upper left quadrant -- bad defense, bad offense -- have some very small dots, meaning they have a really terrible turnover margin.
 
@@ -5175,7 +5234,7 @@ Now we can add \texttt{color=PositiveNegative} to the aesthetic and our dots wil
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-209-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-210-1.pdf}
 
 Now we're getting somewhere. What's the story that this chart tells? Blue dots -- positive turnover margins -- are all drifting toward that good offense, good defense quadrant. Green dots -- negative turnover margins -- are drifting toward that bad defense, bad offense quadrant.
 
@@ -5196,7 +5255,7 @@ Let's add some annotations. Let's look at the top two turnover margin teams and 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-211-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-212-1.pdf}
 
 No surprise there. What about Nebraska?
 
@@ -5217,7 +5276,7 @@ No surprise there. What about Nebraska?
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-213-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-214-1.pdf}
 
 Sadly, no surprise there either.
 
@@ -5241,7 +5300,7 @@ The last things we need to do? Add some labels, apply our finishing touches.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-214-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-215-1.pdf}
 
 \hypertarget{circular-bar-plots}{%
 \chapter{Circular bar plots}\label{circular-bar-plots}}
@@ -5311,6 +5370,10 @@ Now we can group by date and conference and sum up the wins. How many wins by da
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+## `summarise()` regrouping output by 'Date' (override with `.groups` argument)
+\end{verbatim}
+
 Earlier, we did stacked bar charts. We have what we need to do that now.
 
 \begin{Shaded}
@@ -5319,7 +5382,7 @@ Earlier, we did stacked bar charts. We have what we need to do that now.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-219-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-220-1.pdf}
 
 Eeek. This is already looking not great. But to make it a circular bar chart, we add \texttt{coord\_polar()} to our chart.
 
@@ -5329,7 +5392,7 @@ Eeek. This is already looking not great. But to make it a circular bar chart, we
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-220-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-221-1.pdf}
 
 Based on that, the day is probably too thin a slice, and there's way too many conferences in college basketball. Let's group this by months and filter out all but the power five conferences.
 
@@ -5347,6 +5410,10 @@ To get months, we're going to use a function in the library \texttt{lubridate} c
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+## `summarise()` regrouping output by 'month' (override with `.groups` argument)
+\end{verbatim}
+
 Now we can use wins to make our circular bar chart of wins by month in the Power Five.
 
 \begin{Shaded}
@@ -5355,7 +5422,7 @@ Now we can use wins to make our circular bar chart of wins by month in the Power
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-223-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-224-1.pdf}
 
 Yikes. That looks a lot like a broken pie chart. So months are too thick of a slice. Let's use weeks in our floor date to see what that gives us.
 
@@ -5365,13 +5432,17 @@ Yikes. That looks a lot like a broken pie chart. So months are too thick of a sl
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+## `summarise()` regrouping output by 'week' (override with `.groups` argument)
+\end{verbatim}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{data=}\NormalTok{wins, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{week, }\DataTypeTok{weight=}\NormalTok{wins, }\DataTypeTok{fill=}\NormalTok{Conference)) }\OperatorTok{+}\StringTok{ }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{coord_polar}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-225-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-226-1.pdf}
 
 That looks better. But what does it say? Does November basketball matter? What this is saying is \ldots{} yeah, it kinda does. The reason? Lots of wins get piled up in November and December, during non-conference play. So if you are a team with NCAA tournament dreams, you need to win games in November to make sure your tournament resume is where it needs to be come March. Does an individual win or loss matter? Probably not. But your record in November does.
 
@@ -5473,7 +5544,7 @@ First, how are we going to know, in the data, which year our data is from? We ca
 \end{Shaded}
 
 \begin{verbatim}
-## Error: Column 1 must be named.
+## Error in env_bind_lazy(private$bindings, !!!set_names(promises, names_bindings)): attempt to use zero-length variable name
 \end{verbatim}
 
 Uh oh. Error. What does it say? Column 1 must be named. If you look at our data in the environment tab in the upper right corner, you'll see that indeed, the first column has no name. It's the FBS rank of each team. So we can fix that and mutate in the same step. We'll do that using \texttt{rename} and since the field doesn't have a name to rename it, we'll use a position argument. We'll say rename column 1 as Rank.
@@ -5558,41 +5629,34 @@ And we'll take a look at what we have.
 \end{Shaded}
 
 \begin{verbatim}
-##   X1                     X2      X3      X4      X5      X6      X7      X8
-## 1                           Overall Overall Overall Overall Overall Overall
-## 2 Rk                 School       G       W       L    W-L%     SRS     SOS
-## 3  1 Abilene Christian NCAA      34      27       7    .794   -1.91   -7.34
-## 4  2              Air Force      32      14      18    .438   -4.28    0.24
-## 5  3                  Akron      33      17      16    .515    4.86    1.09
-## 6  4            Alabama A&M      32       5      27    .156  -19.23   -8.38
-##      X9   X10  X11  X12  X13  X14    X15    X16 X17           X18           X19
-## 1 Conf. Conf. Home Home Away Away Points Points  NA School Totals School Totals
-## 2     W     L    W    L    W    L    Tm.   Opp.  NA            MP            FG
-## 3    14     4   13    2   10    4   2502   2161  NA          1370           897
-## 4     8    10    9    6    3    9   2179   2294  NA          1300           802
-## 5     8    10   14    3    1   10   2271   2107  NA          1325           797
-## 6     4    14    4    7    0   18   1938   2285  NA          1295           736
-##             X20           X21           X22           X23           X24
-## 1 School Totals School Totals School Totals School Totals School Totals
-## 2           FGA           FG%            3P           3PA           3P%
-## 3          1911          .469           251           660          .380
-## 4          1776          .452           234           711          .329
-## 5          1948          .409           297           929          .320
-## 6          1809          .407           182           578          .315
-##             X25           X26           X27           X28           X29
-## 1 School Totals School Totals School Totals School Totals School Totals
-## 2            FT           FTA           FT%           ORB           TRB
-## 3           457           642          .712           325          1110
-## 4           341           503          .678           253          1077
-## 5           380           539          .705           312          1204
-## 6           284           453          .627           314          1032
-##             X30           X31           X32           X33           X34
-## 1 School Totals School Totals School Totals School Totals School Totals
-## 2           AST           STL           BLK           TOV            PF
-## 3           525           297            93           407           635
-## 4           434           154            57           423           543
-## 5           399           185           106           388           569
-## 6           385           234            50           487           587
+##   X1                     X2      X3      X4      X5      X6      X7      X8 X9
+## 1                           Overall Overall Overall Overall Overall Overall NA
+## 2 Rk                 School       G       W       L    W-L%     SRS     SOS NA
+## 3  1 Abilene Christian NCAA      34      27       7    .794   -1.91   -7.34 NA
+## 4  2              Air Force      32      14      18    .438   -4.28    0.24 NA
+## 5  3                  Akron      33      17      16    .515    4.86    1.09 NA
+## 6  4            Alabama A&M      32       5      27    .156  -19.23   -8.38 NA
+##     X10   X11 X12  X13  X14 X15  X16  X17 X18    X19    X20 X21    X22    X23
+## 1 Conf. Conf.  NA Home Home  NA Away Away  NA Points Points  NA Totals Totals
+## 2     W     L  NA    W    L  NA    W    L  NA    Tm.   Opp.  NA     MP     FG
+## 3    14     4  NA   13    2  NA   10    4  NA   2502   2161  NA   1370    897
+## 4     8    10  NA    9    6  NA    3    9  NA   2179   2294  NA   1300    802
+## 5     8    10  NA   14    3  NA    1   10  NA   2271   2107  NA   1325    797
+## 6     4    14  NA    4    7  NA    0   18  NA   1938   2285  NA   1295    736
+##      X24    X25    X26    X27    X28    X29    X30    X31    X32    X33    X34
+## 1 Totals Totals Totals Totals Totals Totals Totals Totals Totals Totals Totals
+## 2    FGA    FG%     3P    3PA    3P%     FT    FTA    FT%    ORB    TRB    AST
+## 3   1911   .469    251    660   .380    457    642   .712    325   1110    525
+## 4   1776   .452    234    711   .329    341    503   .678    253   1077    434
+## 5   1948   .409    297    929   .320    380    539   .705    312   1204    399
+## 6   1809   .407    182    578   .315    284    453   .627    314   1032    385
+##      X35    X36    X37    X38
+## 1 Totals Totals Totals Totals
+## 2    STL    BLK    TOV     PF
+## 3    297     93    407    635
+## 4    154     57    423    543
+## 5    185    106    388    569
+## 6    234     50    487    587
 \end{verbatim}
 
 So, that's not ideal. We have headers and data mixed together, and our columns are named X1 to X34. Also note: They're all character fields. Because the headers are interspersed with data, it all gets called character data. So we've got to first rename each field.
@@ -5636,40 +5700,47 @@ And just like that, we have a method for getting up to the minute season stats f
 ## 5    5     Alabama-Birmingham    35          20            15  0.571       0.36
 ## 6    6          Alabama State    31          12            19  0.387     -15.60
 ##   OverallSOS ConferenceWins ConferenceLosses HomeWins HomeLosses AwayWins
-## 1      -7.34             14                4       13          2       10
-## 2       0.24              8               10        9          6        3
-## 3       1.09              8               10       14          3        1
-## 4      -8.38              4               14        4          7        0
-## 5      -1.52             10                8       11          5        6
-## 6      -7.84              9                9        8          3        3
+## 1      -7.34             NA               14        4         NA       13
+## 2       0.24             NA                8       10         NA        9
+## 3       1.09             NA                8       10         NA       14
+## 4      -8.38             NA                4       14         NA        4
+## 5      -1.52             NA               10        8         NA       11
+## 6      -7.84             NA                9        9         NA        8
 ##   AwayLosses ForPoints OppPoints Blank Minutes FieldGoalsMade
-## 1          4      2502      2161    NA    1370            897
-## 2          9      2179      2294    NA    1300            802
-## 3         10      2271      2107    NA    1325            797
-## 4         18      1938      2285    NA    1295            736
-## 5          6      2470      2370    NA    1410            906
-## 6         13      2086      2235    NA    1250            712
+## 1          2        NA        10     4      NA           2502
+## 2          6        NA         3     9      NA           2179
+## 3          3        NA         1    10      NA           2271
+## 4          7        NA         0    18      NA           1938
+## 5          5        NA         6     6      NA           2470
+## 6          3        NA         3    13      NA           2086
 ##   FieldGoalsAttempted FieldGoalPCT ThreePointMade ThreePointAttempts
-## 1                1911        0.469            251                660
-## 2                1776        0.452            234                711
-## 3                1948        0.409            297                929
-## 4                1809        0.407            182                578
-## 5                2003        0.452            234                694
-## 6                1764        0.404            216                673
+## 1                2161           NA           1370                897
+## 2                2294           NA           1300                802
+## 3                2107           NA           1325                797
+## 4                2285           NA           1295                736
+## 5                2370           NA           1410                906
+## 6                2235           NA           1250                712
 ##   ThreePointPct FreeThrowsMade FreeThrowsAttempted FreeThrowPCT
-## 1         0.380            457                 642        0.712
-## 2         0.329            341                 503        0.678
-## 3         0.320            380                 539        0.705
-## 4         0.315            284                 453        0.627
-## 5         0.337            424                 630        0.673
-## 6         0.321            446                 684        0.652
+## 1          1911          0.469                 251          660
+## 2          1776          0.452                 234          711
+## 3          1948          0.409                 297          929
+## 4          1809          0.407                 182          578
+## 5          2003          0.452                 234          694
+## 6          1764          0.404                 216          673
 ##   OffensiveRebounds TotalRebounds Assists Steals Blocks Turnovers PersonalFouls
-## 1               325          1110     525    297     93       407           635
-## 2               253          1077     434    154     57       423           543
-## 3               312          1204     399    185    106       388           569
-## 4               314          1032     385    234     50       487           587
-## 5               367          1279     401    218     82       399           578
-## 6               365          1094     313    203    102       451           565
+## 1             0.380           457     642  0.712    325      1110           525
+## 2             0.329           341     503  0.678    253      1077           434
+## 3             0.320           380     539  0.705    312      1204           399
+## 4             0.315           284     453  0.627    314      1032           385
+## 5             0.337           424     630  0.673    367      1279           401
+## 6             0.321           446     684  0.652    365      1094           313
+##   X35 X36 X37 X38
+## 1 297  93 407 635
+## 2 154  57 423 543
+## 3 185 106 388 569
+## 4 234  50 487 587
+## 5 218  82 399 578
+## 6 203 102 451 565
 \end{verbatim}
 
 \hypertarget{advanced-rvest}{%
@@ -6023,7 +6094,7 @@ The rest is just adding labels and messing with the theme.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-256-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-257-1.pdf}
 
 \hypertarget{finishing-touches-part-1}{%
 \chapter{Finishing touches, part 1}\label{finishing-touches-part-1}}
@@ -6147,7 +6218,7 @@ We'll start with the basics.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-261-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-262-1.pdf}
 
 Let's take changing things one by one. The first thing we can do is change the figure size. Sometimes you don't want a square. We can use the \texttt{knitr} output settings in our chunk to do this easily in our notebooks.
 
@@ -6158,7 +6229,7 @@ Let's take changing things one by one. The first thing we can do is change the f
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-262-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-263-1.pdf}
 
 Now let's add a fit line.
 
@@ -6173,7 +6244,7 @@ Now let's add a fit line.
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-263-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-264-1.pdf}
 
 And now some labels.
 
@@ -6189,7 +6260,7 @@ And now some labels.
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-264-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-265-1.pdf}
 
 Let's get rid of the default plot look and drop the grey background.
 
@@ -6206,7 +6277,7 @@ Let's get rid of the default plot look and drop the grey background.
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-265-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-266-1.pdf}
 
 Off to a good start, but our text has no real heirarchy. We'd want our headline to stand out more. So let's change that. When it comes to changing text, the place to do that is in the theme element. \href{http://ggplot2.tidyverse.org/reference/theme.html}{There are a lot of ways to modify the theme}. We'll start easy. Let's make the headline bigger and bold.
 
@@ -6226,7 +6297,7 @@ Off to a good start, but our text has no real heirarchy. We'd want our headline 
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-266-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-267-1.pdf}
 
 Now let's fix a few other things -- like the axis labels being too big, the subtitle could be bigger and lets drop some grid lines.
 
@@ -6249,7 +6320,7 @@ Now let's fix a few other things -- like the axis labels being too big, the subt
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-267-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-268-1.pdf}
 
 Missing from this graph is the context that the headline promises. Where is Nebraska? We haven't added it yet. So let's add a point and a label for it.
 
@@ -6274,7 +6345,7 @@ Missing from this graph is the context that the headline promises. Where is Nebr
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-268-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-269-1.pdf}
 
 If we're happy with this output -- if it meets all of our needs for publication -- then we can simply export it as a png file. We do that by adding \texttt{+\ ggsave("plot.png",\ width=5,\ height=2)} to the end of our code. Note the width and the height are from our knitr parameters at the top -- you have to repeat them or the graph will export at the default 7x7.
 
@@ -6321,7 +6392,7 @@ We can add labels and themes, but you have to be careful. The waffle library is 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-271-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-272-1.pdf}
 
 Note: The alignment of text sucks.
 
@@ -6378,7 +6449,7 @@ Here is a full example. I start with my waffle iron code, but note that each waf
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-273-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-274-1.pdf}
 
 If you try to use ggsave on that, you'll only get the last waffle chart. Like I said, irons aren't really anything, so ggplot ignores them. So to do this, we have to use R's pdf capability.
 
@@ -6467,7 +6538,7 @@ Let's look at the relationship between a player's batting average and wRC+ (\hre
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-277-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-278-1.pdf}
 
 You can obviously add more aesthetics to make it look better, but you get the picture. If I'm a fan of sports though, obviously I want to see who the outlier points are or just scroll through and see each player at an individual location. We can always annotate data, but that process can be tedious.
 
@@ -6495,7 +6566,7 @@ Let's start simple with just the minimum needed for a scatterplot. For that, we 
 ##   Read more about this attribute -> https://plot.ly/r/reference/#scatter-mode
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-278-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-279-1.pdf}
 
 We get a chart, but hover over a point. Recognize those players? You can't unless you know each player's specific stats to divine who they are. That isn't very friendly, so let's add a hover element. Then we want to specify what we want our users to see when they hover over a data point, hence hoverinfo = ``text''. The next step will be to define what our text is. How that gets done is a little bit of HTML and a little bit of R. What is in quotes is what the users are going to see directly, what's after the quotes is what data is going to appear. So ``Player:'', Name translates to something like Player: Christian Yelich when the user hovers above Yelich's data point.
 
@@ -6526,7 +6597,7 @@ Then we add the HTML, \texttt{\textless{}br\textgreater{}}, or break. All this m
 ##   Read more about this attribute -> https://plot.ly/r/reference/#scatter-mode
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-279-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-280-1.pdf}
 
 Now we can see each player a little better. If you look at the players on the farthest right, you'll find Mike Trout (shocker), Yordan Alvarez and Christian Yelich.
 
@@ -6562,7 +6633,7 @@ To finish, we're going to fix the layout a bit, very similar to how we've been d
 ##   Read more about this attribute -> https://plot.ly/r/reference/#scatter-mode
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-280-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-281-1.pdf}
 
 \hypertarget{publishing-using-plotly}{%
 \section{Publishing using Plotly}\label{publishing-using-plotly}}
@@ -6716,6 +6787,12 @@ All you need to do in this code is change out the data frame -- \texttt{playerss
 ## Warning: did not converge in 10 iterations
 
 ## Warning: did not converge in 10 iterations
+
+## Warning: did not converge in 10 iterations
+
+## Warning: did not converge in 10 iterations
+
+## Warning: did not converge in 10 iterations
 \end{verbatim}
 
 \begin{Shaded}
@@ -6727,7 +6804,7 @@ All you need to do in this code is change out the data frame -- \texttt{playerss
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-288-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-289-1.pdf}
 
 The Elbow method -- so named because you're looking for the ``elbow'' where the line flattens out. In this case, it looks like a K of 5 is ideal. So let's try that. We're going to use the kmeans function, saving it to an object called k5. We just need to tell it our dataframe name, how many centers (k) we want, and we'll use a sensible default for how many different configurations to try.
 
@@ -6746,92 +6823,92 @@ Let's look at what we get.
 \end{Shaded}
 
 \begin{verbatim}
-## K-means clustering with 5 clusters of sizes 863, 989, 242, 58, 495
+## K-means clustering with 5 clusters of sizes 242, 58, 495, 989, 863
 ## 
 ## Cluster means:
 ##           MP         FG%         3P%        AST        TOV        PTS
-## 1 -0.8549890  0.02411493 -0.04833668 -0.7090093 -0.7700257 -0.7982928
-## 2  0.5451701  0.14083415  0.12854961  0.1392254  0.2539075  0.3248641
-## 3 -1.3602270 -1.98012908 -1.65325745 -0.9392522 -1.1172744 -1.1417360
-## 4 -1.3785814  3.22934178  3.92207534 -0.9251265 -1.1485250 -1.1077564
-## 5  1.2279089  0.26624900  0.17613521  1.5255303  1.5159849  1.4306790
+## 1 -1.3602270 -1.98012908 -1.65325745 -0.9392522 -1.1172744 -1.1417360
+## 2 -1.3785814  3.22934178  3.92207534 -0.9251265 -1.1485250 -1.1077564
+## 3  1.2279089  0.26624900  0.17613521  1.5255303  1.5159849  1.4306790
+## 4  0.5451701  0.14083415  0.12854961  0.1392254  0.2539075  0.3248641
+## 5 -0.8549890  0.02411493 -0.04833668 -0.7090093 -0.7700257 -0.7982928
 ## 
 ## Clustering vector:
-##    [1] 5 2 2 2 2 1 1 1 1 2 2 5 2 1 1 1 5 2 1 1 3 3 5 2 2 2 2 2 1 4 2 2 5 2 2 1 3
-##   [38] 5 5 2 2 1 2 1 1 5 2 2 2 1 1 2 5 2 2 2 2 1 1 3 2 5 1 2 2 1 1 1 1 1 2 2 5 2
-##   [75] 2 1 3 1 3 5 2 2 2 1 1 1 1 5 2 2 2 2 1 3 5 2 2 1 1 1 5 2 1 2 1 1 1 1 4 2 2
-##  [112] 1 1 1 2 1 3 5 2 2 2 1 1 1 5 2 2 1 3 3 5 2 2 1 1 1 5 2 2 2 2 1 1 5 5 2 2 2
-##  [149] 2 3 5 2 2 2 1 1 1 3 5 2 2 2 2 5 1 3 5 5 2 2 2 2 1 1 2 2 2 2 1 1 1 1 1 1 5
-##  [186] 2 3 3 5 2 2 2 1 1 3 1 5 5 2 2 1 1 1 4 3 5 2 2 5 2 2 1 1 1 3 5 2 1 1 1 3 3
-##  [223] 5 5 2 2 2 2 2 3 5 2 2 5 1 5 2 5 2 2 1 1 1 2 2 2 2 2 1 3 5 5 5 2 2 2 1 1 3
-##  [260] 3 5 5 2 2 2 1 1 1 3 5 5 2 2 2 1 1 1 5 2 2 2 3 5 5 2 2 1 3 2 5 5 2 5 2 1 1
-##  [297] 5 2 2 2 1 1 1 1 1 5 2 2 1 3 1 3 3 5 5 2 2 1 1 5 5 2 2 2 1 1 2 2 2 2 1 1 1
-##  [334] 5 5 2 2 2 2 1 5 5 2 1 1 1 3 5 2 2 2 2 1 3 5 5 2 1 2 1 1 3 3 5 2 2 2 2 1 1
-##  [371] 1 5 5 2 2 1 1 1 1 1 1 1 5 5 2 5 2 1 1 1 3 5 5 2 1 1 5 5 2 2 1 3 5 5 1 1 1
-##  [408] 5 5 2 1 1 3 5 2 2 2 2 1 1 1 4 5 2 2 2 2 1 1 1 5 5 2 1 1 2 5 2 2 2 2 1 3 5
-##  [445] 5 2 2 1 1 1 1 5 5 2 2 1 3 5 2 2 2 1 1 1 1 2 5 2 2 2 1 1 1 5 2 2 1 1 1 1 3
-##  [482] 5 5 2 2 1 1 3 3 5 5 2 1 1 2 1 5 5 2 2 2 1 3 3 2 2 2 5 1 1 5 2 2 2 2 1 3 5
-##  [519] 2 2 2 1 1 4 1 5 5 2 2 2 1 3 4 5 5 2 5 1 1 1 3 5 2 2 2 2 1 1 1 1 5 5 2 1 1
-##  [556] 1 5 5 2 2 2 1 1 3 2 2 2 2 1 3 3 3 2 2 2 1 1 1 3 5 5 5 1 1 1 1 3 3 5 5 2 2
-##  [593] 1 2 5 5 2 2 2 2 1 1 4 5 2 2 1 3 3 3 5 2 2 2 2 1 1 3 3 5 5 2 2 1 5 2 2 2 1
-##  [630] 1 3 5 2 5 2 1 1 3 5 2 2 2 1 4 3 5 2 2 2 2 1 2 2 2 2 2 2 1 1 1 5 2 5 1 1 1
-##  [667] 5 2 2 5 1 1 1 3 4 5 2 2 1 1 1 5 5 2 2 2 1 1 1 3 5 2 2 2 5 1 1 2 2 2 1 3 3
-##  [704] 3 2 5 2 2 2 2 4 1 3 2 5 5 2 5 1 3 5 5 2 2 1 1 3 1 2 5 2 1 1 2 2 5 2 2 1 2
-##  [741] 1 1 5 5 2 1 5 5 2 1 1 1 1 4 3 5 2 2 1 1 5 2 2 2 2 1 1 5 5 5 2 2 1 4 2 2 2
-##  [778] 1 1 1 1 1 5 2 2 2 2 1 1 3 3 2 2 2 2 2 4 1 4 1 1 2 2 5 2 2 2 1 5 2 2 2 1 1
-##  [815] 1 2 5 5 2 2 3 1 3 3 5 2 2 2 1 3 5 2 2 1 1 1 1 1 1 2 2 2 2 2 1 3 3 5 2 2 2
-##  [852] 1 1 2 1 5 2 2 2 1 5 2 1 1 1 5 2 2 2 1 1 1 5 5 2 2 1 1 1 4 5 2 2 2 3 2 5 2
-##  [889] 1 2 1 1 1 4 5 2 2 3 1 1 3 2 5 2 2 1 2 2 5 2 1 1 3 3 3 5 5 2 2 1 3 3 5 2 1
-##  [926] 1 1 2 2 2 2 1 2 1 1 1 1 5 5 2 5 1 1 1 1 1 5 2 2 2 1 1 5 2 2 2 1 1 1 5 2 2
-##  [963] 2 2 1 1 5 2 2 1 1 1 3 3 5 5 2 2 2 1 1 1 3 5 5 2 1 1 1 1 1 1 5 5 2 1 2 3 5
-## [1000] 2 2 1 1 1 3 5 5 2 2 1 1 1 1 1 5 2 2 2 2 2 1 1 3 2 5 2 2 2 2 2 1 4 3 5 5 2
-## [1037] 2 3 1 5 2 2 2 1 3 1 2 5 2 1 2 1 2 3 2 5 2 2 2 1 3 5 2 5 5 2 1 1 3 5 2 5 1
-## [1074] 1 3 3 5 2 5 2 1 1 1 1 1 1 1 5 2 2 1 1 1 1 5 5 5 2 1 1 1 1 3 5 2 2 2 1 2 1
-## [1111] 1 4 5 5 1 2 1 1 1 1 5 5 2 2 2 1 2 1 1 1 3 2 2 2 1 2 2 1 1 4 1 3 5 2 2 2 1
-## [1148] 1 5 5 5 2 1 3 5 5 2 2 1 3 2 5 2 2 2 1 1 1 5 5 2 2 2 1 3 1 5 2 2 1 1 4 3 1
-## [1185] 3 5 2 5 1 3 1 3 5 2 2 1 3 1 3 1 3 5 2 2 2 1 1 1 3 1 5 2 5 2 2 1 5 5 2 2 1
-## [1222] 5 5 2 1 1 2 5 2 2 2 1 1 5 5 2 2 2 3 1 4 5 2 2 2 1 1 3 2 2 2 2 1 2 1 1 5 5
-## [1259] 2 1 1 3 3 1 5 5 5 2 1 1 3 5 2 2 2 2 3 5 2 2 1 3 3 5 5 2 2 2 1 4 1 2 5 5 2
-## [1296] 2 1 3 5 2 2 2 1 4 3 5 2 1 1 1 1 3 3 5 2 2 2 2 1 1 2 2 2 2 2 1 5 2 2 2 2 1
-## [1333] 1 3 1 5 5 2 2 2 1 1 1 2 2 2 5 2 1 1 2 5 2 1 2 2 1 1 2 5 1 2 1 1 4 3 5 5 2
-## [1370] 2 2 1 3 3 5 2 2 2 1 3 4 4 2 2 2 2 1 2 1 3 5 2 2 1 1 1 1 3 5 5 2 1 1 1 5 2
-## [1407] 5 1 1 4 5 2 2 2 1 1 3 3 2 2 2 2 2 1 3 4 3 5 1 1 1 1 1 3 5 5 2 2 2 1 1 4 3
-## [1444] 3 3 2 1 1 1 1 5 2 2 2 1 1 1 3 2 2 2 2 2 1 5 2 2 2 2 1 1 3 1 5 5 1 1 1 1 1
-## [1481] 5 2 2 1 1 1 3 5 5 2 1 1 1 1 1 5 5 2 2 1 1 5 5 5 2 2 1 4 3 2 5 2 2 2 1 1 2
-## [1518] 2 2 2 1 1 1 1 1 2 2 2 2 1 1 1 5 5 2 2 1 3 3 5 5 5 2 2 1 5 2 2 1 1 1 1 2 2
-## [1555] 2 2 2 5 2 3 2 5 5 1 5 2 2 2 1 1 1 5 2 1 1 1 1 1 3 5 2 5 2 1 1 1 1 4 5 2 2
-## [1592] 2 1 5 2 5 1 3 1 1 2 2 2 2 2 2 1 3 3 2 2 2 2 2 2 1 1 3 5 2 5 2 1 1 2 1 1 4
-## [1629] 3 3 3 5 5 5 2 2 1 5 2 2 2 2 1 3 2 2 2 2 2 1 1 3 5 5 2 1 2 1 1 4 3 5 2 2 2
-## [1666] 1 3 3 2 2 2 1 4 5 5 2 2 2 1 1 1 2 5 2 2 2 1 1 1 5 2 2 2 1 3 1 5 2 2 2 1 2
-## [1703] 1 1 1 5 5 2 2 1 5 2 2 2 2 1 1 1 5 2 2 1 1 1 1 4 5 5 2 2 2 1 1 1 2 5 2 5 2
-## [1740] 5 2 2 2 2 1 3 5 2 2 1 1 3 4 5 5 2 2 1 1 3 5 2 2 2 2 3 2 5 2 2 1 1 5 2 2 1
-## [1777] 1 1 1 3 2 5 5 2 1 1 1 5 2 2 2 4 1 1 1 3 5 5 5 2 2 2 1 4 5 5 2 2 1 5 2 2 2
-## [1814] 1 2 1 3 1 4 3 2 5 5 1 1 1 5 5 2 2 1 1 3 3 5 5 2 2 1 1 1 5 5 5 5 2 3 5 2 5
-## [1851] 2 2 1 1 1 1 2 2 2 5 5 1 4 5 2 5 1 1 1 1 3 5 2 2 2 1 3 2 5 5 1 2 1 4 3 5 2
-## [1888] 5 1 1 1 3 2 2 2 2 2 2 1 3 1 2 2 2 1 2 1 1 5 2 2 1 1 2 5 2 2 1 1 1 4 5 2 2
-## [1925] 2 2 1 1 1 5 2 5 2 1 1 3 3 5 2 2 1 1 1 2 5 2 1 2 1 5 2 2 1 1 1 3 2 2 2 2 1
-## [1962] 5 2 2 2 2 2 1 4 4 5 5 5 2 2 1 1 3 3 3 5 2 2 5 2 1 1 1 1 1 2 2 1 2 1 1 3 5
-## [1999] 5 2 2 1 1 1 5 2 2 5 1 2 1 1 1 5 5 5 2 2 3 5 2 2 2 2 1 1 5 2 2 2 3 3 4 4 5
-## [2036] 2 1 2 3 5 5 2 1 3 5 2 2 2 2 2 1 1 4 3 5 2 2 1 1 3 5 2 1 1 1 3 3 1 5 5 2 2
-## [2073] 1 1 1 1 5 5 5 1 1 1 3 5 5 2 2 2 1 1 1 3 5 2 2 5 1 1 1 3 5 5 2 2 2 1 1 4 3
-## [2110] 2 2 2 2 2 1 1 1 5 5 5 2 1 1 1 1 2 2 1 1 1 3 2 5 2 2 2 2 1 1 5 2 5 2 2 1 3
-## [2147] 5 2 2 2 1 1 3 1 5 5 2 2 1 1 1 5 5 2 2 2 1 1 4 5 2 2 1 1 4 3 4 5 5 2 2 1 1
-## [2184] 5 2 2 2 1 1 1 3 2 5 2 2 2 2 1 1 4 1 2 2 5 2 2 1 1 1 1 1 2 2 2 5 2 1 1 3 5
-## [2221] 2 2 2 1 1 1 1 5 2 2 1 1 5 5 2 2 1 1 1 1 1 5 5 2 2 2 1 1 3 1 5 2 2 2 1 1 1
-## [2258] 3 2 2 5 2 2 1 1 5 2 5 2 2 1 1 1 2 2 2 2 1 2 1 3 1 5 5 5 2 1 1 1 2 5 2 2 1
-## [2295] 1 2 2 2 2 2 1 1 1 4 5 2 2 2 1 1 3 5 2 2 2 1 1 2 2 2 2 1 2 1 1 5 2 2 1 1 1
-## [2332] 2 5 2 2 2 2 1 1 1 1 5 2 5 2 1 1 1 4 5 5 5 1 3 5 5 2 1 1 4 3 2 5 2 2 2 2 2
-## [2369] 2 2 2 3 3 5 5 1 1 5 5 2 2 1 3 5 2 2 1 1 1 5 5 2 2 2 3 1 5 2 1 1 1 1 3 3 5
-## [2406] 5 2 2 2 1 1 1 4 5 2 2 2 3 1 1 2 2 5 2 2 2 1 1 1 2 5 2 2 2 1 1 1 3 5 5 2 1
-## [2443] 1 5 5 2 2 2 1 1 4 5 2 2 2 1 1 1 5 2 2 2 2 2 1 4 5 5 2 2 1 1 1 1 5 2 5 2 2
-## [2480] 1 3 3 5 5 2 2 1 1 3 5 5 2 5 2 2 1 1 1 5 5 1 1 1 3 1 5 5 2 2 1 1 3 1 3 5 2
-## [2517] 2 2 2 5 5 2 2 2 2 3 3 1 1 2 1 1 1 1 1 3 5 2 2 2 1 1 1 3 5 2 2 2 1 1 5 2 2
-## [2554] 1 1 1 1 5 2 2 1 1 1 3 3 3 5 2 2 2 1 1 3 3 5 5 2 2 1 1 1 3 5 5 2 2 2 1 3 1
-## [2591] 5 5 2 2 1 1 5 2 2 2 2 1 1 1 1 1 1 5 5 5 1 1 1 1 3 2 2 5 2 3 1 3 3 5 5 2 1
-## [2628] 3 3 5 2 2 2 1 1 1 1 1 1 5 2 2 2 1 1 1 1
+##    [1] 3 4 4 4 4 5 5 5 5 4 4 3 4 5 5 5 3 4 5 5 1 1 3 4 4 4 4 4 5 2 4 4 3 4 4 5 1
+##   [38] 3 3 4 4 5 4 5 5 3 4 4 4 5 5 4 3 4 4 4 4 5 5 1 4 3 5 4 4 5 5 5 5 5 4 4 3 4
+##   [75] 4 5 1 5 1 3 4 4 4 5 5 5 5 3 4 4 4 4 5 1 3 4 4 5 5 5 3 4 5 4 5 5 5 5 2 4 4
+##  [112] 5 5 5 4 5 1 3 4 4 4 5 5 5 3 4 4 5 1 1 3 4 4 5 5 5 3 4 4 4 4 5 5 3 3 4 4 4
+##  [149] 4 1 3 4 4 4 5 5 5 1 3 4 4 4 4 3 5 1 3 3 4 4 4 4 5 5 4 4 4 4 5 5 5 5 5 5 3
+##  [186] 4 1 1 3 4 4 4 5 5 1 5 3 3 4 4 5 5 5 2 1 3 4 4 3 4 4 5 5 5 1 3 4 5 5 5 1 1
+##  [223] 3 3 4 4 4 4 4 1 3 4 4 3 5 3 4 3 4 4 5 5 5 4 4 4 4 4 5 1 3 3 3 4 4 4 5 5 1
+##  [260] 1 3 3 4 4 4 5 5 5 1 3 3 4 4 4 5 5 5 3 4 4 4 1 3 3 4 4 5 1 4 3 3 4 3 4 5 5
+##  [297] 3 4 4 4 5 5 5 5 5 3 4 4 5 1 5 1 1 3 3 4 4 5 5 3 3 4 4 4 5 5 4 4 4 4 5 5 5
+##  [334] 3 3 4 4 4 4 5 3 3 4 5 5 5 1 3 4 4 4 4 5 1 3 3 4 5 4 5 5 1 1 3 4 4 4 4 5 5
+##  [371] 5 3 3 4 4 5 5 5 5 5 5 5 3 3 4 3 4 5 5 5 1 3 3 4 5 5 3 3 4 4 5 1 3 3 5 5 5
+##  [408] 3 3 4 5 5 1 3 4 4 4 4 5 5 5 2 3 4 4 4 4 5 5 5 3 3 4 5 5 4 3 4 4 4 4 5 1 3
+##  [445] 3 4 4 5 5 5 5 3 3 4 4 5 1 3 4 4 4 5 5 5 5 4 3 4 4 4 5 5 5 3 4 4 5 5 5 5 1
+##  [482] 3 3 4 4 5 5 1 1 3 3 4 5 5 4 5 3 3 4 4 4 5 1 1 4 4 4 3 5 5 3 4 4 4 4 5 1 3
+##  [519] 4 4 4 5 5 2 5 3 3 4 4 4 5 1 2 3 3 4 3 5 5 5 1 3 4 4 4 4 5 5 5 5 3 3 4 5 5
+##  [556] 5 3 3 4 4 4 5 5 1 4 4 4 4 5 1 1 1 4 4 4 5 5 5 1 3 3 3 5 5 5 5 1 1 3 3 4 4
+##  [593] 5 4 3 3 4 4 4 4 5 5 2 3 4 4 5 1 1 1 3 4 4 4 4 5 5 1 1 3 3 4 4 5 3 4 4 4 5
+##  [630] 5 1 3 4 3 4 5 5 1 3 4 4 4 5 2 1 3 4 4 4 4 5 4 4 4 4 4 4 5 5 5 3 4 3 5 5 5
+##  [667] 3 4 4 3 5 5 5 1 2 3 4 4 5 5 5 3 3 4 4 4 5 5 5 1 3 4 4 4 3 5 5 4 4 4 5 1 1
+##  [704] 1 4 3 4 4 4 4 2 5 1 4 3 3 4 3 5 1 3 3 4 4 5 5 1 5 4 3 4 5 5 4 4 3 4 4 5 4
+##  [741] 5 5 3 3 4 5 3 3 4 5 5 5 5 2 1 3 4 4 5 5 3 4 4 4 4 5 5 3 3 3 4 4 5 2 4 4 4
+##  [778] 5 5 5 5 5 3 4 4 4 4 5 5 1 1 4 4 4 4 4 2 5 2 5 5 4 4 3 4 4 4 5 3 4 4 4 5 5
+##  [815] 5 4 3 3 4 4 1 5 1 1 3 4 4 4 5 1 3 4 4 5 5 5 5 5 5 4 4 4 4 4 5 1 1 3 4 4 4
+##  [852] 5 5 4 5 3 4 4 4 5 3 4 5 5 5 3 4 4 4 5 5 5 3 3 4 4 5 5 5 2 3 4 4 4 1 4 3 4
+##  [889] 5 4 5 5 5 2 3 4 4 1 5 5 1 4 3 4 4 5 4 4 3 4 5 5 1 1 1 3 3 4 4 5 1 1 3 4 5
+##  [926] 5 5 4 4 4 4 5 4 5 5 5 5 3 3 4 3 5 5 5 5 5 3 4 4 4 5 5 3 4 4 4 5 5 5 3 4 4
+##  [963] 4 4 5 5 3 4 4 5 5 5 1 1 3 3 4 4 4 5 5 5 1 3 3 4 5 5 5 5 5 5 3 3 4 5 4 1 3
+## [1000] 4 4 5 5 5 1 3 3 4 4 5 5 5 5 5 3 4 4 4 4 4 5 5 1 4 3 4 4 4 4 4 5 2 1 3 3 4
+## [1037] 4 1 5 3 4 4 4 5 1 5 4 3 4 5 4 5 4 1 4 3 4 4 4 5 1 3 4 3 3 4 5 5 1 3 4 3 5
+## [1074] 5 1 1 3 4 3 4 5 5 5 5 5 5 5 3 4 4 5 5 5 5 3 3 3 4 5 5 5 5 1 3 4 4 4 5 4 5
+## [1111] 5 2 3 3 5 4 5 5 5 5 3 3 4 4 4 5 4 5 5 5 1 4 4 4 5 4 4 5 5 2 5 1 3 4 4 4 5
+## [1148] 5 3 3 3 4 5 1 3 3 4 4 5 1 4 3 4 4 4 5 5 5 3 3 4 4 4 5 1 5 3 4 4 5 5 2 1 5
+## [1185] 1 3 4 3 5 1 5 1 3 4 4 5 1 5 1 5 1 3 4 4 4 5 5 5 1 5 3 4 3 4 4 5 3 3 4 4 5
+## [1222] 3 3 4 5 5 4 3 4 4 4 5 5 3 3 4 4 4 1 5 2 3 4 4 4 5 5 1 4 4 4 4 5 4 5 5 3 3
+## [1259] 4 5 5 1 1 5 3 3 3 4 5 5 1 3 4 4 4 4 1 3 4 4 5 1 1 3 3 4 4 4 5 2 5 4 3 3 4
+## [1296] 4 5 1 3 4 4 4 5 2 1 3 4 5 5 5 5 1 1 3 4 4 4 4 5 5 4 4 4 4 4 5 3 4 4 4 4 5
+## [1333] 5 1 5 3 3 4 4 4 5 5 5 4 4 4 3 4 5 5 4 3 4 5 4 4 5 5 4 3 5 4 5 5 2 1 3 3 4
+## [1370] 4 4 5 1 1 3 4 4 4 5 1 2 2 4 4 4 4 5 4 5 1 3 4 4 5 5 5 5 1 3 3 4 5 5 5 3 4
+## [1407] 3 5 5 2 3 4 4 4 5 5 1 1 4 4 4 4 4 5 1 2 1 3 5 5 5 5 5 1 3 3 4 4 4 5 5 2 1
+## [1444] 1 1 4 5 5 5 5 3 4 4 4 5 5 5 1 4 4 4 4 4 5 3 4 4 4 4 5 5 1 5 3 3 5 5 5 5 5
+## [1481] 3 4 4 5 5 5 1 3 3 4 5 5 5 5 5 3 3 4 4 5 5 3 3 3 4 4 5 2 1 4 3 4 4 4 5 5 4
+## [1518] 4 4 4 5 5 5 5 5 4 4 4 4 5 5 5 3 3 4 4 5 1 1 3 3 3 4 4 5 3 4 4 5 5 5 5 4 4
+## [1555] 4 4 4 3 4 1 4 3 3 5 3 4 4 4 5 5 5 3 4 5 5 5 5 5 1 3 4 3 4 5 5 5 5 2 3 4 4
+## [1592] 4 5 3 4 3 5 1 5 5 4 4 4 4 4 4 5 1 1 4 4 4 4 4 4 5 5 1 3 4 3 4 5 5 4 5 5 2
+## [1629] 1 1 1 3 3 3 4 4 5 3 4 4 4 4 5 1 4 4 4 4 4 5 5 1 3 3 4 5 4 5 5 2 1 3 4 4 4
+## [1666] 5 1 1 4 4 4 5 2 3 3 4 4 4 5 5 5 4 3 4 4 4 5 5 5 3 4 4 4 5 1 5 3 4 4 4 5 4
+## [1703] 5 5 5 3 3 4 4 5 3 4 4 4 4 5 5 5 3 4 4 5 5 5 5 2 3 3 4 4 4 5 5 5 4 3 4 3 4
+## [1740] 3 4 4 4 4 5 1 3 4 4 5 5 1 2 3 3 4 4 5 5 1 3 4 4 4 4 1 4 3 4 4 5 5 3 4 4 5
+## [1777] 5 5 5 1 4 3 3 4 5 5 5 3 4 4 4 2 5 5 5 1 3 3 3 4 4 4 5 2 3 3 4 4 5 3 4 4 4
+## [1814] 5 4 5 1 5 2 1 4 3 3 5 5 5 3 3 4 4 5 5 1 1 3 3 4 4 5 5 5 3 3 3 3 4 1 3 4 3
+## [1851] 4 4 5 5 5 5 4 4 4 3 3 5 2 3 4 3 5 5 5 5 1 3 4 4 4 5 1 4 3 3 5 4 5 2 1 3 4
+## [1888] 3 5 5 5 1 4 4 4 4 4 4 5 1 5 4 4 4 5 4 5 5 3 4 4 5 5 4 3 4 4 5 5 5 2 3 4 4
+## [1925] 4 4 5 5 5 3 4 3 4 5 5 1 1 3 4 4 5 5 5 4 3 4 5 4 5 3 4 4 5 5 5 1 4 4 4 4 5
+## [1962] 3 4 4 4 4 4 5 2 2 3 3 3 4 4 5 5 1 1 1 3 4 4 3 4 5 5 5 5 5 4 4 5 4 5 5 1 3
+## [1999] 3 4 4 5 5 5 3 4 4 3 5 4 5 5 5 3 3 3 4 4 1 3 4 4 4 4 5 5 3 4 4 4 1 1 2 2 3
+## [2036] 4 5 4 1 3 3 4 5 1 3 4 4 4 4 4 5 5 2 1 3 4 4 5 5 1 3 4 5 5 5 1 1 5 3 3 4 4
+## [2073] 5 5 5 5 3 3 3 5 5 5 1 3 3 4 4 4 5 5 5 1 3 4 4 3 5 5 5 1 3 3 4 4 4 5 5 2 1
+## [2110] 4 4 4 4 4 5 5 5 3 3 3 4 5 5 5 5 4 4 5 5 5 1 4 3 4 4 4 4 5 5 3 4 3 4 4 5 1
+## [2147] 3 4 4 4 5 5 1 5 3 3 4 4 5 5 5 3 3 4 4 4 5 5 2 3 4 4 5 5 2 1 2 3 3 4 4 5 5
+## [2184] 3 4 4 4 5 5 5 1 4 3 4 4 4 4 5 5 2 5 4 4 3 4 4 5 5 5 5 5 4 4 4 3 4 5 5 1 3
+## [2221] 4 4 4 5 5 5 5 3 4 4 5 5 3 3 4 4 5 5 5 5 5 3 3 4 4 4 5 5 1 5 3 4 4 4 5 5 5
+## [2258] 1 4 4 3 4 4 5 5 3 4 3 4 4 5 5 5 4 4 4 4 5 4 5 1 5 3 3 3 4 5 5 5 4 3 4 4 5
+## [2295] 5 4 4 4 4 4 5 5 5 2 3 4 4 4 5 5 1 3 4 4 4 5 5 4 4 4 4 5 4 5 5 3 4 4 5 5 5
+## [2332] 4 3 4 4 4 4 5 5 5 5 3 4 3 4 5 5 5 2 3 3 3 5 1 3 3 4 5 5 2 1 4 3 4 4 4 4 4
+## [2369] 4 4 4 1 1 3 3 5 5 3 3 4 4 5 1 3 4 4 5 5 5 3 3 4 4 4 1 5 3 4 5 5 5 5 1 1 3
+## [2406] 3 4 4 4 5 5 5 2 3 4 4 4 1 5 5 4 4 3 4 4 4 5 5 5 4 3 4 4 4 5 5 5 1 3 3 4 5
+## [2443] 5 3 3 4 4 4 5 5 2 3 4 4 4 5 5 5 3 4 4 4 4 4 5 2 3 3 4 4 5 5 5 5 3 4 3 4 4
+## [2480] 5 1 1 3 3 4 4 5 5 1 3 3 4 3 4 4 5 5 5 3 3 5 5 5 1 5 3 3 4 4 5 5 1 5 1 3 4
+## [2517] 4 4 4 3 3 4 4 4 4 1 1 5 5 4 5 5 5 5 5 1 3 4 4 4 5 5 5 1 3 4 4 4 5 5 3 4 4
+## [2554] 5 5 5 5 3 4 4 5 5 5 1 1 1 3 4 4 4 5 5 1 1 3 3 4 4 5 5 5 1 3 3 4 4 4 5 1 5
+## [2591] 3 3 4 4 5 5 3 4 4 4 4 5 5 5 5 5 5 3 3 3 5 5 5 5 1 4 4 3 4 1 5 1 1 3 3 4 5
+## [2628] 1 1 3 4 4 4 5 5 5 5 5 5 3 4 4 4 5 5 5 5
 ## 
 ## Within cluster sum of squares by cluster:
-## [1] 1430.7781 1341.0495  319.4278  250.5515 1094.8283
+## [1]  319.4278  250.5515 1094.8283 1341.0495 1430.7781
 ##  (between_SS / total_SS =  72.1 %)
 ## 
 ## Available components:
@@ -6864,7 +6941,7 @@ We now have a dataset and can plot it like anything else. Let's get Cam Mack and
 
 \begin{verbatim}
 ##     Player                 Team Pos  MP  FG.  X3P. AST TOV PTS k5.cluster
-## 1 Cam Mack Nebraska Cornhuskers   G 931 0.39 0.339 172  71 324          5
+## 1 Cam Mack Nebraska Cornhuskers   G 931 0.39 0.339 172  71 324          3
 \end{verbatim}
 
 So Cam's in cluster 5, which if you look at our clusters, puts him in the cluster with all above average metrics. What does that look like? We know Cam was an assist machine, so where do group 5 people grade out on assists?
@@ -6877,7 +6954,7 @@ So Cam's in cluster 5, which if you look at our clusters, puts him in the cluste
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-293-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-294-1.pdf}
 
 Not bad, not bad. But who are Cam Mack's peers? If we look at the numbers in Group 5, there's 495 of them. So let's limit them to just Big Ten guards. Unfortunately, my scraper didn't quite work and in the place of Conference is the coach's name. So I'm going to have to do this the hard way and make a list of Big Ten teams and filter on that. Then I'll sort by minutes played.
 
@@ -6890,18 +6967,32 @@ Not bad, not bad. But who are Cam Mack's peers? If we look at the numbers in Gro
 \end{Shaded}
 
 \begin{verbatim}
-##             Player                     Team Pos   MP   FG.  X3P. AST TOV PTS
-## 1      Marcus Carr Minnesota Golden Gophers   G 1004 0.377 0.341 181  76 419
-## 2    Anthony Cowan       Maryland Terrapins   G  965 0.379 0.331 133  59 454
-## 3         Cam Mack     Nebraska Cornhuskers   G  931 0.390 0.339 172  71 324
-## 4  Eric Hunter Jr.      Purdue Boilermakers   G  907 0.419 0.373  77  57 297
-## 5   Zavier Simpson      Michigan Wolverines   G  907 0.472 0.354 213  85 351
-## 6      Ayo Dosunmu Illinois Fighting Illini   G  891 0.483 0.295  86  72 443
-## 7   D'Mitrik Trice        Wisconsin Badgers   G  883 0.397 0.390 116  50 289
-## 8  Cassius Winston  Michigan State Spartans   G  868 0.432 0.409 157  85 497
-## 9        CJ Walker      Ohio State Buckeyes   G  795 0.420 0.338  94  47 227
-## 10     Pat Spencer    Northwestern Wildcats   G  787 0.458 0.250 103  63 286
-## 11       Geo Baker  Rutgers Scarlet Knights   G  736 0.389 0.261  91  45 273
+##               Player                     Team Pos  MP   FG.  X3P. AST TOV PTS
+## 1  Da'Monte Williams Illinois Fighting Illini   G 592 0.302 0.211  37  20  64
+## 2      Tre' Williams Minnesota Golden Gophers   G 445 0.286 0.263  23  24  84
+## 3    Armaan Franklin         Indiana Hoosiers   G 407 0.346 0.241  37  28 106
+## 4    Trevor Anderson        Wisconsin Badgers   G 341 0.349 0.280  37  16  48
+## 5        Matej Kavas     Nebraska Cornhuskers   G 320 0.384 0.338  12   8 116
+## 6        Kyle Ahrens  Michigan State Spartans   G 318 0.433 0.417  13  19  88
+## 7     Anthony Gaines    Northwestern Wildcats   G 265 0.375 0.313  17  11  59
+## 8    Jordan Bohannon            Iowa Hawkeyes   G 250 0.298 0.328  33  11  88
+## 9     Charlie Easley     Nebraska Cornhuskers   G 239 0.318 0.192  10  10  46
+## 10      Foster Loyer  Michigan State Spartans   G 226 0.446 0.462  29  14  88
+## 11   Serrel Smith Jr       Maryland Terrapins   G 191 0.240 0.250  12  14  34
+## 12      Adrien Nunez      Michigan Wolverines   G 164 0.294 0.256   2   6  42
+## 13        Ryan Greer    Northwestern Wildcats   G 160 0.304 0.333  18   4  19
+## 14      Walt McGrory        Wisconsin Badgers   G  57 0.385 0.286   5   1  15
+## 15     Samari Curtis     Nebraska Cornhuskers   G  49 0.400 0.444   1   2  14
+## 16     Conner George  Michigan State Spartans   G  48 0.333 0.286   1   2  15
+## 17   Tyler Underwood Illinois Fighting Illini   G  45 0.222 0.333   3   1   9
+## 18      Jack Hoiberg  Michigan State Spartans   G  41 0.333 0.250  12   2  19
+## 19      Danny Hummer      Ohio State Buckeyes   G  37 0.300 0.286   5   3   9
+## 20        Tommy Luce      Purdue Boilermakers   G  29 0.308 0.333   6   2  10
+## 21        Austin Ash            Iowa Hawkeyes   G  24 0.250 0.273   2   2  12
+## 22     Jared Wulbrun      Purdue Boilermakers   G  17 0.500 0.500   2   2   3
+## 23      Tino Malnati    Northwestern Wildcats   G  10 0.500 0.000   2   0   2
+## 24       Nick Brooks  Rutgers Scarlet Knights   G   8 0.500 0.000   1   1   2
+## 25   Stephen Beattie Penn State Nittany Lions   G   7 0.500 0.500   0   0   6
 ##    k5.cluster
 ## 1           5
 ## 2           5
@@ -6914,6 +7005,20 @@ Not bad, not bad. But who are Cam Mack's peers? If we look at the numbers in Gro
 ## 9           5
 ## 10          5
 ## 11          5
+## 12          5
+## 13          5
+## 14          5
+## 15          5
+## 16          5
+## 17          5
+## 18          5
+## 19          5
+## 20          5
+## 21          5
+## 22          5
+## 23          5
+## 24          5
+## 25          5
 \end{verbatim}
 
 So there are the 11 guards most like Cam Mack in the Big Ten. Safe to say, these are the 11 best guards in the conference.
@@ -6960,21 +7065,7 @@ Let's find the optimal number of clusters.
 
 \CommentTok{# extract wss for 2-15 clusters}
 \NormalTok{wss_values <-}\StringTok{ }\KeywordTok{map_dbl}\NormalTok{(k.values, wss)}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{verbatim}
-## Warning: did not converge in 10 iterations
-
-## Warning: did not converge in 10 iterations
-
-## Warning: did not converge in 10 iterations
-
-## Warning: did not converge in 10 iterations
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \KeywordTok{plot}\NormalTok{(k.values, wss_values,}
        \DataTypeTok{type=}\StringTok{"b"}\NormalTok{, }\DataTypeTok{pch =} \DecValTok{19}\NormalTok{, }\DataTypeTok{frame =} \OtherTok{FALSE}\NormalTok{, }
        \DataTypeTok{xlab=}\StringTok{"Number of clusters K"}\NormalTok{,}
@@ -6982,7 +7073,7 @@ Let's find the optimal number of clusters.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-297-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-298-1.pdf}
 
 Looks like 5 again.
 
@@ -7001,95 +7092,95 @@ What do we have here?
 \end{Shaded}
 
 \begin{verbatim}
-## K-means clustering with 5 clusters of sizes 104, 632, 766, 1253, 9
+## K-means clustering with 5 clusters of sizes 104, 1253, 9, 632, 766
 ## 
 ## Cluster means:
 ##          PER        TS%      PProd       AST%      WS/40        BPM
 ## 1 -2.6922417 -2.6802561 -1.1497380 -1.0109009 -2.8398288 -2.8455990
-## 2 -0.6089002 -0.6736304 -0.8322766 -0.2324539 -0.5651578 -0.6493960
-## 3  0.5022214  0.2566711  1.2288970  0.7362004  0.4083263  0.5004325
-## 4  0.1594366  0.3741799 -0.2279088 -0.2650562  0.2130658  0.2118878
-## 5  8.9269330  4.3359455 -1.1326482  2.2478231  8.0858448  6.3926472
+## 2  0.1594366  0.3741799 -0.2279088 -0.2650562  0.2130658  0.2118878
+## 3  8.9269330  4.3359455 -1.1326482  2.2478231  8.0858448  6.3926472
+## 4 -0.6089002 -0.6736304 -0.8322766 -0.2324539 -0.5651578 -0.6493960
+## 5  0.5022214  0.2566711  1.2288970  0.7362004  0.4083263  0.5004325
 ## 
 ## Clustering vector:
-##    [1] 3 4 4 4 4 2 4 2 4 3 4 3 4 4 2 4 3 4 4 4 2 2 4 1 3 4 4 4 4 2 4 4 3 3 3 4 4
-##   [38] 4 2 3 3 4 4 4 4 4 2 2 3 4 4 4 4 4 4 1 3 3 4 4 3 4 4 4 4 3 3 3 4 4 4 2 2 2
-##   [75] 2 2 3 4 3 4 3 2 1 4 2 3 4 4 4 4 2 4 2 3 3 4 4 4 2 2 3 3 4 2 2 2 2 3 4 4 4
-##  [112] 4 4 2 2 4 3 3 4 4 4 4 2 2 3 3 4 2 4 2 2 3 3 4 4 2 4 5 1 3 4 4 4 2 4 3 4 4
-##  [149] 4 4 2 4 1 3 3 4 4 3 4 2 3 3 4 2 4 2 5 2 1 3 3 4 4 4 3 4 2 3 3 4 3 4 4 4 2
-##  [186] 3 3 3 4 4 4 4 4 4 2 3 3 2 2 3 4 4 4 2 4 2 4 3 3 4 4 2 4 4 5 2 3 4 4 3 4 4
-##  [223] 4 2 4 2 3 4 4 4 4 2 2 3 3 4 4 4 4 4 2 3 4 3 3 4 3 4 3 4 4 4 4 4 2 1 3 3 3
-##  [260] 4 2 4 1 3 3 3 4 4 4 4 4 2 3 1 1 3 3 4 4 4 4 4 2 2 3 3 4 4 4 4 4 4 4 3 4 4
-##  [297] 4 3 2 3 3 3 4 2 1 3 3 3 4 3 4 4 4 3 3 4 3 4 4 4 4 4 3 4 2 2 2 2 2 2 3 3 4
-##  [334] 4 2 2 3 3 4 4 2 4 4 3 4 2 4 2 4 2 3 3 4 4 2 4 4 3 3 4 2 2 2 2 3 4 3 2 4 2
-##  [371] 2 3 3 4 4 2 2 2 2 2 3 4 3 4 3 4 4 3 3 3 4 4 4 4 2 2 2 2 4 2 3 3 4 3 2 4 2
-##  [408] 4 1 3 3 4 4 2 2 3 3 3 4 4 4 1 3 3 2 2 1 4 1 3 3 4 4 2 2 2 3 4 4 4 2 2 2 2
-##  [445] 4 3 3 4 3 4 4 4 2 3 3 4 4 4 2 3 3 4 4 4 4 4 1 1 3 3 4 4 2 2 2 2 3 3 4 4 2
-##  [482] 2 1 3 4 4 4 2 2 4 2 3 3 4 4 4 4 2 2 3 3 2 2 2 2 2 2 1 3 3 4 4 2 4 2 1 3 3
-##  [519] 4 4 3 2 2 3 3 3 4 2 2 2 2 2 3 4 4 3 2 2 2 1 1 3 4 4 2 2 2 2 3 4 4 4 2 2 4
-##  [556] 4 3 3 4 4 4 4 2 4 3 3 3 3 4 4 2 1 3 4 4 4 3 4 4 2 4 3 3 4 4 2 4 3 3 4 4 2
-##  [593] 4 4 2 3 4 4 2 4 2 2 1 3 3 4 4 4 2 4 1 3 3 3 4 4 2 4 2 1 3 3 4 4 4 4 2 3 3
-##  [630] 4 4 4 4 2 2 4 3 4 4 4 2 1 1 3 3 3 4 4 4 2 2 2 3 3 3 4 4 3 3 4 4 4 2 4 1 3
-##  [667] 4 3 4 4 4 2 3 4 2 2 2 5 1 2 3 3 4 4 3 4 4 4 4 3 4 3 2 4 2 1 3 4 3 4 4 4 3
-##  [704] 3 4 3 4 4 4 2 5 3 4 4 4 2 2 3 3 4 4 4 2 4 2 4 4 1 3 4 3 4 3 2 4 4 4 3 3 4
-##  [741] 2 2 2 3 3 4 4 4 4 4 2 1 3 3 3 4 3 4 2 1 3 3 4 4 4 2 2 2 3 3 3 4 4 4 2 3 3
-##  [778] 3 3 2 4 4 2 4 3 3 3 4 3 3 4 4 4 4 2 4 2 3 3 4 2 2 1 3 3 4 4 4 3 4 3 3 3 4
-##  [815] 4 4 3 3 3 4 4 4 2 4 2 3 4 4 3 2 4 2 4 2 3 4 4 4 4 4 2 4 2 2 3 1 3 3 3 4 4
-##  [852] 2 2 3 3 4 4 4 4 2 3 3 3 4 4 2 4 2 2 2 3 4 2 4 4 2 1 3 4 4 4 4 4 2 4 4 3 4
-##  [889] 3 4 4 4 2 4 3 4 3 4 4 4 3 4 3 3 3 4 4 3 4 4 4 2 2 3 3 4 4 2 4 4 3 3 3 4 2
-##  [926] 2 2 4 3 4 4 4 4 1 3 3 4 4 2 2 4 2 4 3 4 4 2 2 2 2 3 3 3 4 4 3 4 2 4 2 2 2
-##  [963] 2 2 3 3 4 3 4 2 2 3 3 4 2 3 4 4 4 3 4 2 2 4 4 2 3 3 3 3 4 2 2 4 4 3 3 3 4
-## [1000] 4 4 3 4 4 4 4 4 2 3 3 4 4 4 4 2 3 4 4 4 2 4 2 1 3 3 3 4 4 4 4 4 2 3 3 4 4
-## [1037] 4 4 4 4 4 3 3 4 4 4 1 3 3 4 4 2 4 2 3 3 4 4 4 4 4 2 4 3 3 4 4 4 4 2 4 2 3
-## [1074] 3 3 4 4 4 2 4 4 2 3 3 3 4 2 2 3 4 3 4 4 2 4 4 3 2 4 4 4 2 1 2 3 4 4 4 2 2
-## [1111] 3 3 3 3 2 4 2 2 2 3 3 3 4 2 2 1 3 3 3 3 4 4 2 4 2 4 4 3 4 2 4 2 2 2 3 3 3
-## [1148] 4 4 4 4 4 2 3 3 4 4 4 2 4 2 4 3 3 4 4 4 2 4 2 3 3 4 4 4 4 3 4 4 4 4 3 3 4
-## [1185] 4 4 4 4 3 4 4 1 3 4 3 4 4 4 3 3 3 3 2 1 3 3 3 4 4 4 1 3 3 4 4 4 4 2 4 3 3
-## [1222] 4 4 4 2 2 2 3 4 3 2 4 5 2 4 2 3 4 3 4 2 4 2 3 4 3 2 2 2 2 2 1 3 4 4 4 4 4
-## [1259] 2 2 4 3 4 3 3 4 2 3 3 4 4 2 3 3 4 2 2 3 3 3 4 4 2 2 3 3 4 4 2 2 4 4 3 4 4
-## [1296] 4 2 2 4 4 3 4 4 4 4 4 4 3 3 4 4 4 4 2 2 3 3 3 2 2 2 1 3 3 4 3 4 2 3 4 4 2
-## [1333] 2 1 3 3 4 4 4 4 4 2 3 3 3 3 4 4 2 3 3 4 4 2 4 2 3 3 4 4 4 3 4 2 2 3 3 3 4
-## [1370] 4 2 4 3 3 3 4 3 4 2 3 4 4 4 4 2 2 2 3 3 3 4 4 4 4 2 4 3 4 4 3 3 4 2 3 3 3
-## [1407] 4 4 4 4 4 3 3 4 4 4 2 2 4 2 3 3 4 4 2 4 2 1 3 3 3 3 2 2 4 4 4 2 2 2 2 2 2
-## [1444] 2 2 3 4 3 4 3 2 4 2 3 3 4 4 2 4 3 3 3 4 4 4 3 4 4 4 2 2 1 2 1 4 3 3 4 4 4
-## [1481] 2 5 4 1 3 4 2 2 2 2 2 3 3 4 3 4 2 2 2 2 1 1 4 4 4 2 2 3 3 4 4 4 4 4 2 1 4
-## [1518] 3 3 4 4 4 4 3 4 3 3 4 4 4 2 4 3 3 4 4 2 2 2 3 3 4 4 2 4 2 3 3 4 4 2 2 2 2
-## [1555] 3 3 4 4 4 2 3 3 4 4 3 2 4 2 3 3 4 2 4 4 4 3 4 4 4 2 4 2 2 2 3 3 4 4 4 4 2
-## [1592] 4 3 3 4 4 2 2 1 3 3 3 4 4 2 3 3 4 4 4 4 4 4 4 4 4 4 3 4 1 3 3 3 4 4 3 3 3
-## [1629] 4 4 4 4 3 2 2 2 2 2 2 2 3 3 3 4 4 4 4 4 4 3 4 4 3 2 3 3 3 2 2 2 2 4 4 4 4
-## [1666] 4 2 2 2 2 3 4 4 4 4 4 4 4 2 3 3 3 4 2 4 2 2 2 5 2 2 1 3 3 3 2 2 2 2 3 4 4
-## [1703] 4 4 2 1 3 3 3 3 4 4 4 1 3 3 4 4 4 2 4 4 4 2 3 4 3 4 2 2 1 1 3 3 3 4 4 1 3
-## [1740] 3 3 4 4 2 4 4 2 1 4 3 3 4 4 2 2 2 4 3 3 4 4 4 2 2 3 4 4 4 4 4 4 2 4 3 3 4
-## [1777] 4 4 3 4 4 2 4 4 2 4 2 3 4 4 2 3 2 4 4 3 3 4 4 3 2 2 2 3 3 3 3 4 3 4 2 2 4
-## [1814] 4 2 3 2 3 2 2 2 2 3 3 3 4 2 4 2 4 1 3 4 4 4 2 2 4 3 3 4 4 4 2 3 4 4 4 4 4
-## [1851] 4 1 3 4 3 4 4 2 4 3 3 4 2 4 4 2 2 2 4 1 3 3 3 3 4 4 4 4 3 3 4 4 2 3 4 4 4
-## [1888] 4 2 4 2 4 4 2 3 3 3 4 4 4 3 3 4 4 4 4 2 1 3 3 4 4 2 2 3 3 3 3 3 3 4 2 1 3
-## [1925] 3 3 3 4 2 4 4 2 4 3 3 4 3 3 4 2 2 3 4 3 4 2 2 4 2 3 3 4 4 4 2 2 1 3 3 3 2
-## [1962] 4 2 4 1 3 3 3 4 4 2 4 1 3 4 4 3 3 4 4 2 2 3 4 4 4 4 2 2 3 4 4 4 2 4 3 3 4
-## [1999] 4 4 4 4 3 2 2 3 4 4 4 4 4 4 2 2 3 4 3 4 4 4 2 1 3 4 3 2 4 2 3 3 4 4 2 4 4
-## [2036] 3 3 4 4 4 2 2 4 3 4 4 4 3 4 4 2 4 4 4 3 4 2 3 3 3 4 4 2 2 2 1 1 3 3 4 3 4
-## [2073] 4 4 4 4 2 4 4 4 4 4 4 4 1 3 3 4 4 4 2 4 3 3 3 3 4 4 4 2 2 3 3 3 3 4 1 3 4
-## [2110] 4 4 2 2 2 4 1 3 3 4 4 2 2 4 4 3 3 4 4 2 3 3 4 4 2 3 4 4 4 4 4 4 4 4 2 3 4
-## [2147] 4 4 2 1 3 4 4 4 4 2 2 2 2 3 3 2 2 2 4 2 4 3 3 3 4 4 4 1 3 2 4 4 4 4 2 2 2
-## [2184] 3 3 4 3 4 4 4 4 4 1 3 3 4 4 4 4 4 4 2 3 4 4 4 4 4 4 2 3 3 3 3 4 4 4 4 4 3
-## [2221] 4 4 4 4 2 2 3 3 4 4 2 2 4 2 4 3 3 3 4 4 4 1 1 3 4 4 4 2 2 2 2 2 3 3 3 4 2
-## [2258] 4 4 3 3 4 4 4 4 4 4 3 3 4 2 2 2 2 5 3 3 4 4 4 2 4 4 3 4 4 4 4 4 2 2 4 3 4
-## [2295] 2 4 2 2 2 4 4 3 3 4 4 4 4 4 4 4 4 3 4 4 3 4 4 2 1 3 3 4 4 2 4 2 2 3 4 2 2
-## [2332] 2 3 3 4 4 4 3 2 2 2 3 3 4 4 4 4 2 2 2 3 3 3 4 4 2 4 2 4 3 3 4 4 4 2 3 4 3
-## [2369] 4 4 4 4 2 4 4 2 4 2 2 2 2 2 3 3 3 4 2 2 2 3 3 4 2 2 4 3 3 4 4 4 4 4 2 4 3
-## [2406] 4 3 2 4 4 1 3 3 4 4 4 4 4 4 4 3 4 2 4 2 3 3 4 2 4 2 3 3 4 3 4 4 4 2 2 4 3
-## [2443] 4 3 4 4 4 4 4 3 3 3 2 2 3 3 4 2 4 4 2 4 3 4 4 4 3 4 4 4 4 2 4 3 3 2 4 3 3
-## [2480] 4 4 4 2 1 1 3 4 3 4 2 2 3 3 4 4 3 2 3 3 4 2 2 4 2 2 2 3 3 4 4 4 2 4 4 4 2
-## [2517] 3 3 4 4 2 4 4 3 3 3 4 4 3 2 4 4 4 3 3 4 4 4 4 2 2 1 1 3 3 4 2 2 1 1 3 3 4
-## [2554] 4 4 4 3 4 3 4 4 2 4 4 4 3 4 4 3 4 4 4 4 3 3 4 4 4 4 4 4 2 3 3 3 4 4 4 2 1
-## [2591] 3 3 4 4 4 4 2 3 3 4 3 3 4 4 4 4 3 3 4 4 2 2 4 1 3 4 4 4 2 2 2 4 1 3 3 3 4
-## [2628] 4 1 3 3 3 4 4 4 2 1 2 2 2 2 4 2 4 2 4 2 1 3 4 3 4 4 2 4 1 3 3 4 3 4 4 3 3
-## [2665] 4 4 4 4 2 4 3 3 4 2 4 2 2 2 1 3 4 4 4 4 4 1 2 3 3 4 4 4 4 2 4 1 3 3 4 4 4
-## [2702] 2 2 2 3 3 3 4 4 2 3 4 2 4 4 4 2 2 4 2 2 3 3 3 4 4 2 4 1 1 3 4 3 2 2 2 2 1
-## [2739] 3 3 4 2 2 4 2 3 4 4 4 4 4 4 4 2 4 4 3 3 3 2 4 4 4 4
+##    [1] 5 2 2 2 2 4 2 4 2 5 2 5 2 2 4 2 5 2 2 2 4 4 2 1 5 2 2 2 2 4 2 2 5 5 5 2 2
+##   [38] 2 4 5 5 2 2 2 2 2 4 4 5 2 2 2 2 2 2 1 5 5 2 2 5 2 2 2 2 5 5 5 2 2 2 4 4 4
+##   [75] 4 4 5 2 5 2 5 4 1 2 4 5 2 2 2 2 4 2 4 5 5 2 2 2 4 4 5 5 2 4 4 4 4 5 2 2 2
+##  [112] 2 2 4 4 2 5 5 2 2 2 2 4 4 5 5 2 4 2 4 4 5 5 2 2 4 2 3 1 5 2 2 2 4 2 5 2 2
+##  [149] 2 2 4 2 1 5 5 2 2 5 2 4 5 5 2 4 2 4 3 4 1 5 5 2 2 2 5 2 4 5 5 2 5 2 2 2 4
+##  [186] 5 5 5 2 2 2 2 2 2 4 5 5 4 4 5 2 2 2 4 2 4 2 5 5 2 2 4 2 2 3 4 5 2 2 5 2 2
+##  [223] 2 4 2 4 5 2 2 2 2 4 4 5 5 2 2 2 2 2 4 5 2 5 5 2 5 2 5 2 2 2 2 2 4 1 5 5 5
+##  [260] 2 4 2 1 5 5 5 2 2 2 2 2 4 5 1 1 5 5 2 2 2 2 2 4 4 5 5 2 2 2 2 2 2 2 5 2 2
+##  [297] 2 5 4 5 5 5 2 4 1 5 5 5 2 5 2 2 2 5 5 2 5 2 2 2 2 2 5 2 4 4 4 4 4 4 5 5 2
+##  [334] 2 4 4 5 5 2 2 4 2 2 5 2 4 2 4 2 4 5 5 2 2 4 2 2 5 5 2 4 4 4 4 5 2 5 4 2 4
+##  [371] 4 5 5 2 2 4 4 4 4 4 5 2 5 2 5 2 2 5 5 5 2 2 2 2 4 4 4 4 2 4 5 5 2 5 4 2 4
+##  [408] 2 1 5 5 2 2 4 4 5 5 5 2 2 2 1 5 5 4 4 1 2 1 5 5 2 2 4 4 4 5 2 2 2 4 4 4 4
+##  [445] 2 5 5 2 5 2 2 2 4 5 5 2 2 2 4 5 5 2 2 2 2 2 1 1 5 5 2 2 4 4 4 4 5 5 2 2 4
+##  [482] 4 1 5 2 2 2 4 4 2 4 5 5 2 2 2 2 4 4 5 5 4 4 4 4 4 4 1 5 5 2 2 4 2 4 1 5 5
+##  [519] 2 2 5 4 4 5 5 5 2 4 4 4 4 4 5 2 2 5 4 4 4 1 1 5 2 2 4 4 4 4 5 2 2 2 4 4 2
+##  [556] 2 5 5 2 2 2 2 4 2 5 5 5 5 2 2 4 1 5 2 2 2 5 2 2 4 2 5 5 2 2 4 2 5 5 2 2 4
+##  [593] 2 2 4 5 2 2 4 2 4 4 1 5 5 2 2 2 4 2 1 5 5 5 2 2 4 2 4 1 5 5 2 2 2 2 4 5 5
+##  [630] 2 2 2 2 4 4 2 5 2 2 2 4 1 1 5 5 5 2 2 2 4 4 4 5 5 5 2 2 5 5 2 2 2 4 2 1 5
+##  [667] 2 5 2 2 2 4 5 2 4 4 4 3 1 4 5 5 2 2 5 2 2 2 2 5 2 5 4 2 4 1 5 2 5 2 2 2 5
+##  [704] 5 2 5 2 2 2 4 3 5 2 2 2 4 4 5 5 2 2 2 4 2 4 2 2 1 5 2 5 2 5 4 2 2 2 5 5 2
+##  [741] 4 4 4 5 5 2 2 2 2 2 4 1 5 5 5 2 5 2 4 1 5 5 2 2 2 4 4 4 5 5 5 2 2 2 4 5 5
+##  [778] 5 5 4 2 2 4 2 5 5 5 2 5 5 2 2 2 2 4 2 4 5 5 2 4 4 1 5 5 2 2 2 5 2 5 5 5 2
+##  [815] 2 2 5 5 5 2 2 2 4 2 4 5 2 2 5 4 2 4 2 4 5 2 2 2 2 2 4 2 4 4 5 1 5 5 5 2 2
+##  [852] 4 4 5 5 2 2 2 2 4 5 5 5 2 2 4 2 4 4 4 5 2 4 2 2 4 1 5 2 2 2 2 2 4 2 2 5 2
+##  [889] 5 2 2 2 4 2 5 2 5 2 2 2 5 2 5 5 5 2 2 5 2 2 2 4 4 5 5 2 2 4 2 2 5 5 5 2 4
+##  [926] 4 4 2 5 2 2 2 2 1 5 5 2 2 4 4 2 4 2 5 2 2 4 4 4 4 5 5 5 2 2 5 2 4 2 4 4 4
+##  [963] 4 4 5 5 2 5 2 4 4 5 5 2 4 5 2 2 2 5 2 4 4 2 2 4 5 5 5 5 2 4 4 2 2 5 5 5 2
+## [1000] 2 2 5 2 2 2 2 2 4 5 5 2 2 2 2 4 5 2 2 2 4 2 4 1 5 5 5 2 2 2 2 2 4 5 5 2 2
+## [1037] 2 2 2 2 2 5 5 2 2 2 1 5 5 2 2 4 2 4 5 5 2 2 2 2 2 4 2 5 5 2 2 2 2 4 2 4 5
+## [1074] 5 5 2 2 2 4 2 2 4 5 5 5 2 4 4 5 2 5 2 2 4 2 2 5 4 2 2 2 4 1 4 5 2 2 2 4 4
+## [1111] 5 5 5 5 4 2 4 4 4 5 5 5 2 4 4 1 5 5 5 5 2 2 4 2 4 2 2 5 2 4 2 4 4 4 5 5 5
+## [1148] 2 2 2 2 2 4 5 5 2 2 2 4 2 4 2 5 5 2 2 2 4 2 4 5 5 2 2 2 2 5 2 2 2 2 5 5 2
+## [1185] 2 2 2 2 5 2 2 1 5 2 5 2 2 2 5 5 5 5 4 1 5 5 5 2 2 2 1 5 5 2 2 2 2 4 2 5 5
+## [1222] 2 2 2 4 4 4 5 2 5 4 2 3 4 2 4 5 2 5 2 4 2 4 5 2 5 4 4 4 4 4 1 5 2 2 2 2 2
+## [1259] 4 4 2 5 2 5 5 2 4 5 5 2 2 4 5 5 2 4 4 5 5 5 2 2 4 4 5 5 2 2 4 4 2 2 5 2 2
+## [1296] 2 4 4 2 2 5 2 2 2 2 2 2 5 5 2 2 2 2 4 4 5 5 5 4 4 4 1 5 5 2 5 2 4 5 2 2 4
+## [1333] 4 1 5 5 2 2 2 2 2 4 5 5 5 5 2 2 4 5 5 2 2 4 2 4 5 5 2 2 2 5 2 4 4 5 5 5 2
+## [1370] 2 4 2 5 5 5 2 5 2 4 5 2 2 2 2 4 4 4 5 5 5 2 2 2 2 4 2 5 2 2 5 5 2 4 5 5 5
+## [1407] 2 2 2 2 2 5 5 2 2 2 4 4 2 4 5 5 2 2 4 2 4 1 5 5 5 5 4 4 2 2 2 4 4 4 4 4 4
+## [1444] 4 4 5 2 5 2 5 4 2 4 5 5 2 2 4 2 5 5 5 2 2 2 5 2 2 2 4 4 1 4 1 2 5 5 2 2 2
+## [1481] 4 3 2 1 5 2 4 4 4 4 4 5 5 2 5 2 4 4 4 4 1 1 2 2 2 4 4 5 5 2 2 2 2 2 4 1 2
+## [1518] 5 5 2 2 2 2 5 2 5 5 2 2 2 4 2 5 5 2 2 4 4 4 5 5 2 2 4 2 4 5 5 2 2 4 4 4 4
+## [1555] 5 5 2 2 2 4 5 5 2 2 5 4 2 4 5 5 2 4 2 2 2 5 2 2 2 4 2 4 4 4 5 5 2 2 2 2 4
+## [1592] 2 5 5 2 2 4 4 1 5 5 5 2 2 4 5 5 2 2 2 2 2 2 2 2 2 2 5 2 1 5 5 5 2 2 5 5 5
+## [1629] 2 2 2 2 5 4 4 4 4 4 4 4 5 5 5 2 2 2 2 2 2 5 2 2 5 4 5 5 5 4 4 4 4 2 2 2 2
+## [1666] 2 4 4 4 4 5 2 2 2 2 2 2 2 4 5 5 5 2 4 2 4 4 4 3 4 4 1 5 5 5 4 4 4 4 5 2 2
+## [1703] 2 2 4 1 5 5 5 5 2 2 2 1 5 5 2 2 2 4 2 2 2 4 5 2 5 2 4 4 1 1 5 5 5 2 2 1 5
+## [1740] 5 5 2 2 4 2 2 4 1 2 5 5 2 2 4 4 4 2 5 5 2 2 2 4 4 5 2 2 2 2 2 2 4 2 5 5 2
+## [1777] 2 2 5 2 2 4 2 2 4 2 4 5 2 2 4 5 4 2 2 5 5 2 2 5 4 4 4 5 5 5 5 2 5 2 4 4 2
+## [1814] 2 4 5 4 5 4 4 4 4 5 5 5 2 4 2 4 2 1 5 2 2 2 4 4 2 5 5 2 2 2 4 5 2 2 2 2 2
+## [1851] 2 1 5 2 5 2 2 4 2 5 5 2 4 2 2 4 4 4 2 1 5 5 5 5 2 2 2 2 5 5 2 2 4 5 2 2 2
+## [1888] 2 4 2 4 2 2 4 5 5 5 2 2 2 5 5 2 2 2 2 4 1 5 5 2 2 4 4 5 5 5 5 5 5 2 4 1 5
+## [1925] 5 5 5 2 4 2 2 4 2 5 5 2 5 5 2 4 4 5 2 5 2 4 4 2 4 5 5 2 2 2 4 4 1 5 5 5 4
+## [1962] 2 4 2 1 5 5 5 2 2 4 2 1 5 2 2 5 5 2 2 4 4 5 2 2 2 2 4 4 5 2 2 2 4 2 5 5 2
+## [1999] 2 2 2 2 5 4 4 5 2 2 2 2 2 2 4 4 5 2 5 2 2 2 4 1 5 2 5 4 2 4 5 5 2 2 4 2 2
+## [2036] 5 5 2 2 2 4 4 2 5 2 2 2 5 2 2 4 2 2 2 5 2 4 5 5 5 2 2 4 4 4 1 1 5 5 2 5 2
+## [2073] 2 2 2 2 4 2 2 2 2 2 2 2 1 5 5 2 2 2 4 2 5 5 5 5 2 2 2 4 4 5 5 5 5 2 1 5 2
+## [2110] 2 2 4 4 4 2 1 5 5 2 2 4 4 2 2 5 5 2 2 4 5 5 2 2 4 5 2 2 2 2 2 2 2 2 4 5 2
+## [2147] 2 2 4 1 5 2 2 2 2 4 4 4 4 5 5 4 4 4 2 4 2 5 5 5 2 2 2 1 5 4 2 2 2 2 4 4 4
+## [2184] 5 5 2 5 2 2 2 2 2 1 5 5 2 2 2 2 2 2 4 5 2 2 2 2 2 2 4 5 5 5 5 2 2 2 2 2 5
+## [2221] 2 2 2 2 4 4 5 5 2 2 4 4 2 4 2 5 5 5 2 2 2 1 1 5 2 2 2 4 4 4 4 4 5 5 5 2 4
+## [2258] 2 2 5 5 2 2 2 2 2 2 5 5 2 4 4 4 4 3 5 5 2 2 2 4 2 2 5 2 2 2 2 2 4 4 2 5 2
+## [2295] 4 2 4 4 4 2 2 5 5 2 2 2 2 2 2 2 2 5 2 2 5 2 2 4 1 5 5 2 2 4 2 4 4 5 2 4 4
+## [2332] 4 5 5 2 2 2 5 4 4 4 5 5 2 2 2 2 4 4 4 5 5 5 2 2 4 2 4 2 5 5 2 2 2 4 5 2 5
+## [2369] 2 2 2 2 4 2 2 4 2 4 4 4 4 4 5 5 5 2 4 4 4 5 5 2 4 4 2 5 5 2 2 2 2 2 4 2 5
+## [2406] 2 5 4 2 2 1 5 5 2 2 2 2 2 2 2 5 2 4 2 4 5 5 2 4 2 4 5 5 2 5 2 2 2 4 4 2 5
+## [2443] 2 5 2 2 2 2 2 5 5 5 4 4 5 5 2 4 2 2 4 2 5 2 2 2 5 2 2 2 2 4 2 5 5 4 2 5 5
+## [2480] 2 2 2 4 1 1 5 2 5 2 4 4 5 5 2 2 5 4 5 5 2 4 4 2 4 4 4 5 5 2 2 2 4 2 2 2 4
+## [2517] 5 5 2 2 4 2 2 5 5 5 2 2 5 4 2 2 2 5 5 2 2 2 2 4 4 1 1 5 5 2 4 4 1 1 5 5 2
+## [2554] 2 2 2 5 2 5 2 2 4 2 2 2 5 2 2 5 2 2 2 2 5 5 2 2 2 2 2 2 4 5 5 5 2 2 2 4 1
+## [2591] 5 5 2 2 2 2 4 5 5 2 5 5 2 2 2 2 5 5 2 2 4 4 2 1 5 2 2 2 4 4 4 2 1 5 5 5 2
+## [2628] 2 1 5 5 5 2 2 2 4 1 4 4 4 4 2 4 2 4 2 4 1 5 2 5 2 2 4 2 1 5 5 2 5 2 2 5 5
+## [2665] 2 2 2 2 4 2 5 5 2 4 2 4 4 4 1 5 2 2 2 2 2 1 4 5 5 2 2 2 2 4 2 1 5 5 2 2 2
+## [2702] 4 4 4 5 5 5 2 2 4 5 2 4 2 2 2 4 4 2 4 4 5 5 5 2 2 4 2 1 1 5 2 5 4 4 4 4 1
+## [2739] 5 5 2 4 4 2 4 5 2 2 2 2 2 2 2 4 2 2 5 5 5 4 2 2 2 2
 ## 
 ## Within cluster sum of squares by cluster:
-## [1]  737.6141 1248.0870 1849.5824 2624.4456  722.9391
+## [1]  737.6141 2624.4456  722.9391 1248.0870 1849.5824
 ##  (between_SS / total_SS =  56.7 %)
 ## 
 ## Available components:
@@ -7118,7 +7209,7 @@ Looks like this time, cluster 1 is all below average and cluster 5 is mostly abo
 ##     Player                 Team Pos  PER   TS. PProd AST. WS.40 BPM
 ## 1 Cam Mack Nebraska Cornhuskers   G 15.9 0.481   382 36.4 0.081 3.9
 ##   advk5.cluster
-## 1             3
+## 1             5
 \end{verbatim}
 
 Cluster 3 on my dataset. So in this season, we can say he's in a big group of players who are all above average on these advanced metrics.
@@ -7135,78 +7226,9 @@ Now who are his Big Ten peers?
 \end{Shaded}
 
 \begin{verbatim}
-##                  Player                     Team Pos  PER   TS. PProd AST.
-## 1       Cassius Winston  Michigan State Spartans   G 22.5 0.567   495 37.2
-## 2           Marcus Carr Minnesota Golden Gophers   G 18.1 0.491   468 37.0
-## 3         Anthony Cowan       Maryland Terrapins   G 21.1 0.551   466 29.2
-## 4        Zavier Simpson      Michigan Wolverines   G 19.7 0.535   436 43.6
-## 5           Ayo Dosunmu Illinois Fighting Illini   G 19.6 0.551   411 21.1
-## 6              Cam Mack     Nebraska Cornhuskers   G 15.9 0.481   382 36.4
-## 7          Joe Wieskamp            Iowa Hawkeyes   G 19.7 0.566   368  9.3
-## 8        Ron Harper Jr.  Rutgers Scarlet Knights   G 20.4 0.541   318  7.6
-## 9        D'Mitrik Trice        Wisconsin Badgers   G 16.2 0.531   312 27.5
-## 10      Haanif Cheatham     Nebraska Cornhuskers   G 15.6 0.551   308  9.1
-## 11         Andres Feliz Illinois Fighting Illini   G 20.1 0.542   306 22.1
-## 12          Pat Spencer    Northwestern Wildcats   G 15.9 0.527   299 28.6
-## 13      Eric Hunter Jr.      Purdue Boilermakers   G 14.0 0.524   297 17.0
-## 14         Myreon Jones Penn State Nittany Lions   G 21.0 0.589   288 20.0
-## 15           Eli Brooks      Michigan Wolverines   G 13.8 0.521   283 11.2
-## 16            Geo Baker  Rutgers Scarlet Knights   G 16.5 0.483   282 23.6
-## 17        Aaron Wiggins       Maryland Terrapins   G 14.5 0.496   282 11.0
-## 18        Aljami Durham         Indiana Hoosiers   G 14.3 0.573   262 18.3
-## 19       Darryl Morsell       Maryland Terrapins   G 13.4 0.518   252 17.0
-## 20       Jahaad Proctor      Purdue Boilermakers   G 15.5 0.506   249 13.9
-## 21        Devonte Green         Indiana Hoosiers   G 16.1 0.507   249 19.6
-## 22            CJ Walker      Ohio State Buckeyes   G 13.9 0.534   247 23.3
-## 23 Duane Washington Jr.      Ohio State Buckeyes   G 16.6 0.544   244 13.4
-## 24          Myles Dread Penn State Nittany Lions   G 13.7 0.498   237 15.6
-## 25           Eric Ayala       Maryland Terrapins   G 10.3 0.470   237 17.8
-## 26             Boo Buie    Northwestern Wildcats   G 12.7 0.475   223 22.8
-## 27          CJ Fredrick            Iowa Hawkeyes   G 17.2 0.649   218 16.9
-## 28     Connor McCaffery            Iowa Hawkeyes   G 12.5 0.491   214 20.5
-## 29          D.J. Carton      Ohio State Buckeyes   G 17.8 0.593   208 27.0
-## 30        Joe Toussaint            Iowa Hawkeyes   G 13.4 0.466   206 26.9
-## 31         Rob Phinisee         Indiana Hoosiers   G 11.5 0.480   175 25.8
-## 32         Jack Hoiberg  Michigan State Spartans   G 25.3 0.509    24 50.7
-## 33           Tommy Luce      Purdue Boilermakers   G 14.0 0.385    12 43.0
-## 34         Tino Malnati    Northwestern Wildcats   G 24.3 0.500     3 40.4
-## 35  Rico Ozuna-Harrison      Michigan Wolverines   G 29.3 1.000     3 44.5
-##    WS.40 BPM advk5.cluster
-## 1  0.203 8.0             3
-## 2  0.146 6.7             3
-## 3  0.204 9.4             3
-## 4  0.157 7.3             3
-## 5  0.161 6.2             3
-## 6  0.081 3.9             3
-## 7  0.149 7.3             3
-## 8  0.186 7.4             3
-## 9  0.133 6.8             3
-## 10 0.091 2.5             3
-## 11 0.185 7.3             3
-## 12 0.076 3.0             3
-## 13 0.120 5.9             3
-## 14 0.183 8.4             3
-## 15 0.107 5.8             3
-## 16 0.139 6.9             3
-## 17 0.123 6.2             3
-## 18 0.122 4.6             3
-## 19 0.115 5.5             3
-## 20 0.139 5.0             3
-## 21 0.114 4.9             3
-## 22 0.142 6.9             3
-## 23 0.151 4.4             3
-## 24 0.129 6.5             3
-## 25 0.089 3.3             3
-## 26 0.039 0.2             3
-## 27 0.133 6.7             3
-## 28 0.109 6.5             3
-## 29 0.152 6.6             3
-## 30 0.071 2.5             3
-## 31 0.080 3.3             3
-## 32 0.268 6.2             3
-## 33 0.102 2.2             3
-## 34 0.161 7.8             3
-## 35 0.307 8.7             3
+##  [1] Player        Team          Pos           PER           TS.          
+##  [6] PProd         AST.          WS.40         BPM           advk5.cluster
+## <0 rows> (or 0-length row.names)
 \end{verbatim}
 
 Sorting on Points Produced, Cam Mack is sixth out of the 35 guards in the Big Ten who land in Cluster 3. Seems advanced metrics take a little bit of the shine off of Cam. But then, so does leaving the program after one suspension-riddled season.
@@ -7312,12 +7334,30 @@ Before you run the following code chunk, though, be aware a few things will take
 \NormalTok{huskers <-}\StringTok{ }\KeywordTok{search_tweets}\NormalTok{(}
   \StringTok{"#huskers"}\NormalTok{, }\DataTypeTok{n =} \DecValTok{8000}\NormalTok{, }\DataTypeTok{include_rts =} \OtherTok{FALSE}
 \NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{verbatim}
+## Warning: Rate limit exceeded - 88
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Rate limit exceeded
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{gbr <-}\StringTok{ }\KeywordTok{search_tweets}\NormalTok{(}
   \StringTok{"#GBR"}\NormalTok{, }\DataTypeTok{n =} \DecValTok{8000}\NormalTok{, }\DataTypeTok{include_rts =} \OtherTok{FALSE}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## Warning: Rate limit exceeded - 88
+
+## Warning: Rate limit exceeded
+\end{verbatim}
 
 \textbf{Important Note}: Depending on when you run the above code chunk, the API will return different data then the data used for the examples later in this chapter. This is due to the query rate cap Twitter places on it's API. Twitter's API caps queries to 18,000 of the most recent tweets during the past couple of days. This cap resets every 15 minutes. The \texttt{rtweet} package does has functionality to pull data once your query limit resets. However, if you're looking to pull tweets for a very popular event (e.g., The Super Bowl), you may want to consider other options to extract this type of data. This is also important to understand because if you are looking to pull tweets for a specific event, you will need to make sure you are pulling this data within a reasonable time during or after the event. If you don't, these rate limits might not allow you access the data you need to do your analysis.
 
@@ -7589,7 +7629,7 @@ One question we might have pertains to the number of tweets that occur during th
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-313-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-314-1.pdf}
 
 There you have it. A trend line plotting tweet volume throughout the course of the event. Do you see any areas where the match might have had a significant number of tweets?
 
@@ -7638,6 +7678,10 @@ Now that we have a tidied textual data set, all we need to do is apply our senti
 ## Joining, by = "word"
 \end{verbatim}
 
+\begin{verbatim}
+## `summarise()` ungrouping output (override with `.groups` argument)
+\end{verbatim}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}
@@ -7659,7 +7703,7 @@ Now that we have a tidied textual data set, all we need to do is apply our senti
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-315-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-316-1.pdf}
 
 When looking at this trend line, you can see that during the volleyball game, tweets using the \#husker and \#gbr hashtags had some wide variation in sentiment. Overall it seems that tweets during the volleyball match were mostly positive, where at times it dipped negative. Why might this be the case? Well, unfortunately, even though this was a big game for Husker volleyball, not many people were tweeting during the match (take a look at the number of tweets chart above). So if there was one word used in a tweet that was ranked as very negative in sentiment, it would have easily drove our average sentiment into the negative region quickly.
 
@@ -7698,9 +7742,9 @@ Now, let's just get a sense of the number of tweets that occurred at certain poi
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-317-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-318-1.pdf}
 
-Looking at this plot, we can see the tweet volume is a lot higher than that of the volleyball match. In fact, it looks like towards the end of the game there was a five minute interval where \textasciitilde{}80 or so tweets occurred. Given the outcome of the game, I assume people were not real happy during this spike in activity. Well we have the tools to answer this question.
+Looking at this plot, we can see the tweet volume is a lot higher than that of the volleyball match. In fact, it looks like towards the end of the game there was a five minute interval where \textasciitilde80 or so tweets occurred. Given the outcome of the game, I assume people were not real happy during this spike in activity. Well we have the tools to answer this question.
 
 As before, let's pull in our sentiment library with the \texttt{get\_sentiments()} function. Then lets tidy up our tweet data using the \texttt{unnest\_tokens()} and \texttt{anti\_join(stop\_words)}. Remember this step just places every word within a tweet on its own row and filters out any words that don't have any real meaning to the calculation of sentiment (i.e., and, the, a, etc.).
 
@@ -7736,6 +7780,10 @@ You can then use the \texttt{ggplot} code to plot sentiment over time, introduce
 ## Joining, by = "word"
 \end{verbatim}
 
+\begin{verbatim}
+## `summarise()` ungrouping output (override with `.groups` argument)
+\end{verbatim}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}
@@ -7757,7 +7805,7 @@ You can then use the \texttt{ggplot} code to plot sentiment over time, introduce
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-319-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-320-1.pdf}
 
 As you can see, it started out pretty positive. Then, it started to go negative throughout the first half. However, there was a bump, which was around the time D-Lineman, Darrion Daniels almost scored a pick six. Around halftime, we can see a little bit of a bump towards positive sentiment. This was probably most likely due to people cheering on the Huskers to come out strong after the half. As the second half progressed, you can see things turned for the worst again, and sentiment became negative up until the end of the game, most likely because people realized they were going to get another L on the schedule. You can relive all this excitement again by catching the game recap \href{https://www.youtube.com/watch?v=m0hKH6Zb0vY\&feature=onebox}{here}.
 
@@ -7840,7 +7888,7 @@ With cowplot, we can use a function called \texttt{plot\_grid} to arrange the ch
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-326-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-327-1.pdf}
 
 We can also stack them on top of each other:
 
@@ -7850,7 +7898,7 @@ We can also stack them on top of each other:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-327-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-328-1.pdf}
 
 To make these publishable, we should add headlines, chatter, decent labels, credit lines, etc. But to do this, we'll have to figure out which labels go on which charts, so we can make it look decent. For example -- both charts don't need x or y labels. If you don't have a title and subtitle on both, the spacing is off, so you need to leave one blank or the other blank. You'll just have to fiddle with it until you get it looking right.
 
@@ -7890,7 +7938,7 @@ Saving a cowplot plot\_grid is the same as anything else we did in the class:
 ## Saving 6.5 x 4.5 in image
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-330-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-331-1.pdf}
 
 \hypertarget{encircling-points-on-a-scatterplot}{%
 \chapter{Encircling points on a scatterplot}\label{encircling-points-on-a-scatterplot}}
@@ -7947,7 +7995,7 @@ We've done this before, but let's make a standard scatterplot of minutes and poi
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-333-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-334-1.pdf}
 
 So we can see right away that there are some dots at the very top that we'd want to highlight. Who are these scoring machines?
 
@@ -7967,7 +8015,7 @@ And like we've done in the past, we can add it to the chart with another geom\_p
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-335-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-336-1.pdf}
 
 And like that, we're on the path to something publishable. We'll need to label those dots with \texttt{ggrepel} and we'll need to drop the default grey and add some headlines and all that. And, for the most part, we've got a solid chart.
 
@@ -7987,7 +8035,7 @@ Let's start with \texttt{s\_shape} 1 and \texttt{expand} 1.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-336-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-337-1.pdf}
 
 Whoa. That's \ldots{} not good.
 
@@ -8002,7 +8050,7 @@ Let's go the opposite direction.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-337-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-338-1.pdf}
 
 Better, but \ldots{} the circle cuts through multiple dots.
 
@@ -8017,7 +8065,7 @@ This takes a little bit of finessing, but a shape of .5 means the line will have
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-338-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-339-1.pdf}
 
 Now let's clean this up and make it presentable. If you look at the top scorers, only two were Wooden Award finalists. So here's what a chart telling that story might look like.
 
@@ -8039,7 +8087,7 @@ Now let's clean this up and make it presentable. If you look at the top scorers,
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-339-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-340-1.pdf}
 
 \hypertarget{a-different-more-local-example}{%
 \section{A different, more local example}\label{a-different-more-local-example}}
@@ -8073,7 +8121,7 @@ And just like above, we can plug in our players geom, our nutop dataframe into a
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-341-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-342-1.pdf}
 
 The dot on the far right? Cam Mack. Oh what could have been.
 
@@ -8148,7 +8196,7 @@ So Baylor was ranked in the 13th, 14th and 15th week, 9th, 7th and 7th, respecti
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-345-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-346-1.pdf}
 
 Well, it's a start. I'm immediately annoyed by the top teams being at the bottom. I learned a neat trick from ggbump that's been in ggplot all along -- \texttt{scale\_y\_reverse()}
 
@@ -8158,7 +8206,7 @@ Well, it's a start. I'm immediately annoyed by the top teams being at the bottom
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-346-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-347-1.pdf}
 
 Better. But, still not great. Let's add a point at each week.
 
@@ -8171,7 +8219,7 @@ Better. But, still not great. Let's add a point at each week.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-347-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-348-1.pdf}
 
 Another step. That makes it more subway map like. But the colors are all wrong. To fix this, we're going to use \texttt{scale\_color\_manual} and we're going to Google the hex codes for each team. The legend will tell you what order your \texttt{scale\_color\_manual} needs to be.
 
@@ -8185,7 +8233,7 @@ Another step. That makes it more subway map like. But the colors are all wrong. 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-348-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-349-1.pdf}
 
 Another step. But the legend is annoying. And trying to find which red is Alabama vs Ohio State is hard. So what if we labeled each dot at the beginning and end? We can do that with some clever usage of geom\_text and a little dplyr filtering inside the data step. We filter out the first and last weeks, then use hjust -- horizontal justification -- to move them left or right.
 
@@ -8201,7 +8249,7 @@ Another step. But the legend is annoying. And trying to find which red is Alabam
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-349-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-350-1.pdf}
 
 Better, but the legend is still there. We can drop it in a theme directive by saying \texttt{legend.position\ =\ "none"}. We'll also throw a theme\_minimal on there to drop the default grey, and we'll add some better labeling.
 
@@ -8223,7 +8271,7 @@ Better, but the legend is still there. We can drop it in a theme directive by sa
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-350-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-351-1.pdf}
 
 Now let's fix our text hierarchy.
 
@@ -8249,7 +8297,7 @@ Now let's fix our text hierarchy.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-351-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-352-1.pdf}
 
 And the last thing: anyone else annoyed at 7.5th place on the left? We can fix that too by specifying the breaks in scale\_y\_reverse. We can do that with the x axis as well, but since we haven't reversed it, we do that in \texttt{scale\_x\_continuous} with the same breaks. Also: forgot my source and credit line.
 
@@ -8282,7 +8330,7 @@ One last thing: Let's change the width of the chart to make Ohio State and Penn 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-352-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-353-1.pdf}
 
 \hypertarget{text-cleaning}{%
 \chapter{Text cleaning}\label{text-cleaning}}
@@ -8919,6 +8967,6 @@ table(simulations)
   Using the Slack app will also mean getting alerted to messages right away. If you are logging in through a web browser, you won't know when I've responded. If we're having a Slack conversation and I see you log in, send me a message, then disappear right away, I know you're using a browser and when that conversation drags because you aren't getting messages, \textbf{I'm going to get frustrated}. You likely aren't the only one asking for help at that moment.
 \end{itemize}
 
-\bibliography{packages.bib}
+  \bibliography{packages.bib}
 
 \end{document}
