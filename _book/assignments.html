@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 37 Assignments | Sports Data Analysis and Visualization</title>
+  <meta name="description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 37 Assignments | Sports Data Analysis and Visualization" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 37 Assignments | Sports Data Analysis and Visualization" />
+  
+  <meta name="twitter:description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
+  
+
+<meta name="author" content="By Matt Waite" />
+
+
+<meta name="date" content="2019-07-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="text-cleaning.html"/>
+<link rel="next" href="appendix.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-160712129-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-160712129-1');
+</script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Sports Data Analysis and Visualization</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Throwing cold water on hot takes</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#requirements-and-conventions"><i class="fa fa-check"></i><b>1.1</b> Requirements and Conventions</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i><b>1.2</b> About this book</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="the-very-basics.html"><a href="the-very-basics.html"><i class="fa fa-check"></i><b>2</b> The very basics</a><ul>
+<li class="chapter" data-level="2.1" data-path="the-very-basics.html"><a href="the-very-basics.html#adding-libraries-part-1"><i class="fa fa-check"></i><b>2.1</b> Adding libraries, part 1</a></li>
+<li class="chapter" data-level="2.2" data-path="the-very-basics.html"><a href="the-very-basics.html#adding-libraries-part-2"><i class="fa fa-check"></i><b>2.2</b> Adding libraries, part 2</a></li>
+<li class="chapter" data-level="2.3" data-path="the-very-basics.html"><a href="the-very-basics.html#notebooks"><i class="fa fa-check"></i><b>2.3</b> Notebooks</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html"><i class="fa fa-check"></i><b>3</b> Data, structures and types</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#rows-and-columns"><i class="fa fa-check"></i><b>3.1</b> Rows and columns</a></li>
+<li class="chapter" data-level="3.2" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#types"><i class="fa fa-check"></i><b>3.2</b> Types</a></li>
+<li class="chapter" data-level="3.3" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#a-simple-way-to-get-data"><i class="fa fa-check"></i><b>3.3</b> A simple way to get data</a></li>
+<li class="chapter" data-level="3.4" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#cleaning-the-data"><i class="fa fa-check"></i><b>3.4</b> Cleaning the data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="aggregates.html"><a href="aggregates.html"><i class="fa fa-check"></i><b>4</b> Aggregates</a><ul>
+<li class="chapter" data-level="4.1" data-path="aggregates.html"><a href="aggregates.html#basic-data-analysis-group-by-and-count"><i class="fa fa-check"></i><b>4.1</b> Basic data analysis: Group By and Count</a></li>
+<li class="chapter" data-level="4.2" data-path="aggregates.html"><a href="aggregates.html#other-aggregates-mean-and-median"><i class="fa fa-check"></i><b>4.2</b> Other aggregates: Mean and median</a></li>
+<li class="chapter" data-level="4.3" data-path="aggregates.html"><a href="aggregates.html#even-more-aggregates"><i class="fa fa-check"></i><b>4.3</b> Even more aggregates</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="mutating-data.html"><a href="mutating-data.html"><i class="fa fa-check"></i><b>5</b> Mutating data</a><ul>
+<li class="chapter" data-level="5.1" data-path="mutating-data.html"><a href="mutating-data.html#a-more-complex-example"><i class="fa fa-check"></i><b>5.1</b> A more complex example</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="filters-and-selections.html"><a href="filters-and-selections.html"><i class="fa fa-check"></i><b>6</b> Filters and selections</a><ul>
+<li class="chapter" data-level="6.1" data-path="filters-and-selections.html"><a href="filters-and-selections.html#selecting-data-to-make-it-easier-to-read"><i class="fa fa-check"></i><b>6.1</b> Selecting data to make it easier to read</a></li>
+<li class="chapter" data-level="6.2" data-path="filters-and-selections.html"><a href="filters-and-selections.html#using-conditional-filters-to-set-limits"><i class="fa fa-check"></i><b>6.2</b> Using conditional filters to set limits</a></li>
+<li class="chapter" data-level="6.3" data-path="filters-and-selections.html"><a href="filters-and-selections.html#top-list"><i class="fa fa-check"></i><b>6.3</b> Top list</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="transforming-data.html"><a href="transforming-data.html"><i class="fa fa-check"></i><b>7</b> Transforming data</a><ul>
+<li class="chapter" data-level="7.1" data-path="transforming-data.html"><a href="transforming-data.html#making-long-data-wide"><i class="fa fa-check"></i><b>7.1</b> Making long data wide</a></li>
+<li class="chapter" data-level="7.2" data-path="transforming-data.html"><a href="transforming-data.html#why-this-matters"><i class="fa fa-check"></i><b>7.2</b> Why this matters</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>8</b> Simulations</a><ul>
+<li class="chapter" data-level="8.1" data-path="simulations.html"><a href="simulations.html#cold-streaks"><i class="fa fa-check"></i><b>8.1</b> Cold streaks</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html"><i class="fa fa-check"></i><b>9</b> Correlations and regression</a><ul>
+<li class="chapter" data-level="9.1" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html#a-more-predictive-example"><i class="fa fa-check"></i><b>9.1</b> A more predictive example</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="multiple-regression.html"><a href="multiple-regression.html"><i class="fa fa-check"></i><b>10</b> Multiple regression</a></li>
+<li class="chapter" data-level="11" data-path="residuals.html"><a href="residuals.html"><i class="fa fa-check"></i><b>11</b> Residuals</a><ul>
+<li class="chapter" data-level="11.1" data-path="residuals.html"><a href="residuals.html#penalties"><i class="fa fa-check"></i><b>11.1</b> Penalties</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z scores</a><ul>
+<li class="chapter" data-level="12.1" data-path="z-scores.html"><a href="z-scores.html#calculating-a-z-score-in-r"><i class="fa fa-check"></i><b>12.1</b> Calculating a Z score in R</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html"><i class="fa fa-check"></i><b>13</b> Intro to ggplot</a><ul>
+<li class="chapter" data-level="13.1" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#the-bar-chart"><i class="fa fa-check"></i><b>13.1</b> The bar chart</a></li>
+<li class="chapter" data-level="13.2" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#scales"><i class="fa fa-check"></i><b>13.2</b> Scales</a></li>
+<li class="chapter" data-level="13.3" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#styling"><i class="fa fa-check"></i><b>13.3</b> Styling</a></li>
+<li class="chapter" data-level="13.4" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#one-last-trick-coord-flip"><i class="fa fa-check"></i><b>13.4</b> One last trick: coord flip</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="stacked-bar-charts.html"><a href="stacked-bar-charts.html"><i class="fa fa-check"></i><b>14</b> Stacked bar charts</a></li>
+<li class="chapter" data-level="15" data-path="waffle-charts.html"><a href="waffle-charts.html"><i class="fa fa-check"></i><b>15</b> Waffle charts</a><ul>
+<li class="chapter" data-level="15.1" data-path="waffle-charts.html"><a href="waffle-charts.html#waffle-irons"><i class="fa fa-check"></i><b>15.1</b> Waffle Irons</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="line-charts.html"><a href="line-charts.html"><i class="fa fa-check"></i><b>16</b> Line charts</a><ul>
+<li class="chapter" data-level="16.1" data-path="line-charts.html"><a href="line-charts.html#this-is-too-simple."><i class="fa fa-check"></i><b>16.1</b> This is too simple.</a></li>
+<li class="chapter" data-level="16.2" data-path="line-charts.html"><a href="line-charts.html#but-what-if-i-wanted-to-add-a-lot-of-lines."><i class="fa fa-check"></i><b>16.2</b> But what if I wanted to add a lot of lines.</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="step-charts.html"><a href="step-charts.html"><i class="fa fa-check"></i><b>17</b> Step charts</a></li>
+<li class="chapter" data-level="18" data-path="ridge-charts.html"><a href="ridge-charts.html"><i class="fa fa-check"></i><b>18</b> Ridge charts</a></li>
+<li class="chapter" data-level="19" data-path="lollipop-charts.html"><a href="lollipop-charts.html"><i class="fa fa-check"></i><b>19</b> Lollipop charts</a></li>
+<li class="chapter" data-level="20" data-path="scatterplots.html"><a href="scatterplots.html"><i class="fa fa-check"></i><b>20</b> Scatterplots</a></li>
+<li class="chapter" data-level="21" data-path="facet-wraps.html"><a href="facet-wraps.html"><i class="fa fa-check"></i><b>21</b> Facet wraps</a><ul>
+<li class="chapter" data-level="21.1" data-path="facet-wraps.html"><a href="facet-wraps.html#facet-grid-vs-facet-wraps"><i class="fa fa-check"></i><b>21.1</b> Facet grid vs facet wraps</a></li>
+<li class="chapter" data-level="21.2" data-path="facet-wraps.html"><a href="facet-wraps.html#other-types"><i class="fa fa-check"></i><b>21.2</b> Other types</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>22</b> Tables</a><ul>
+<li class="chapter" data-level="22.1" data-path="tables.html"><a href="tables.html#exporting-tables"><i class="fa fa-check"></i><b>22.1</b> Exporting tables</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="bubble-charts.html"><a href="bubble-charts.html"><i class="fa fa-check"></i><b>23</b> Bubble charts</a></li>
+<li class="chapter" data-level="24" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html"><i class="fa fa-check"></i><b>24</b> Circular bar plots</a></li>
+<li class="chapter" data-level="25" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html"><i class="fa fa-check"></i><b>25</b> Intro to rvest</a><ul>
+<li class="chapter" data-level="25.1" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html#a-slightly-more-complicated-example"><i class="fa fa-check"></i><b>25.1</b> A slightly more complicated example</a></li>
+<li class="chapter" data-level="25.2" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html#an-even-more-complicated-example"><i class="fa fa-check"></i><b>25.2</b> An even more complicated example</a></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="advanced-rvest.html"><a href="advanced-rvest.html"><i class="fa fa-check"></i><b>26</b> Advanced rvest</a><ul>
+<li class="chapter" data-level="26.1" data-path="advanced-rvest.html"><a href="advanced-rvest.html#one-last-bit"><i class="fa fa-check"></i><b>26.1</b> One last bit</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="annotations.html"><a href="annotations.html"><i class="fa fa-check"></i><b>27</b> Annotations</a></li>
+<li class="chapter" data-level="28" data-path="finishing-touches-part-1.html"><a href="finishing-touches-part-1.html"><i class="fa fa-check"></i><b>28</b> Finishing touches, part 1</a><ul>
+<li class="chapter" data-level="28.1" data-path="finishing-touches-part-1.html"><a href="finishing-touches-part-1.html#graphics-vs-visual-stories"><i class="fa fa-check"></i><b>28.1</b> Graphics vs visual stories</a></li>
+<li class="chapter" data-level="28.2" data-path="finishing-touches-part-1.html"><a href="finishing-touches-part-1.html#getting-ggplot-closer-to-output"><i class="fa fa-check"></i><b>28.2</b> Getting ggplot closer to output</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="finishing-touches-2.html"><a href="finishing-touches-2.html"><i class="fa fa-check"></i><b>29</b> Finishing Touches 2</a></li>
+<li class="chapter" data-level="30" data-path="plotly.html"><a href="plotly.html"><i class="fa fa-check"></i><b>30</b> Plotly</a><ul>
+<li class="chapter" data-level="30.1" data-path="plotly.html"><a href="plotly.html#publishing-using-plotly"><i class="fa fa-check"></i><b>30.1</b> Publishing using Plotly</a></li>
+</ul></li>
+<li class="chapter" data-level="31" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>31</b> Clustering</a><ul>
+<li class="chapter" data-level="31.1" data-path="clustering.html"><a href="clustering.html#advanced-metrics"><i class="fa fa-check"></i><b>31.1</b> Advanced metrics</a></li>
+</ul></li>
+<li class="chapter" data-level="32" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html"><i class="fa fa-check"></i><b>32</b> Rtweet and Text Analysis</a><ul>
+<li class="chapter" data-level="32.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#prerequisites"><i class="fa fa-check"></i><b>32.1</b> Prerequisites</a><ul>
+<li class="chapter" data-level="32.1.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#tools-for-text-analysis"><i class="fa fa-check"></i><b>32.1.1</b> Tools for text analysis</a></li>
+<li class="chapter" data-level="32.1.2" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#working-with-string-data"><i class="fa fa-check"></i><b>32.1.2</b> Working with string data</a></li>
+</ul></li>
+<li class="chapter" data-level="32.2" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#verifying-your-account-to-access-twitter-data"><i class="fa fa-check"></i><b>32.2</b> Verifying your account to access Twitter data</a></li>
+<li class="chapter" data-level="32.3" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#the-data-used-here"><i class="fa fa-check"></i><b>32.3</b> The data used here</a></li>
+<li class="chapter" data-level="32.4" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#data-exploration"><i class="fa fa-check"></i><b>32.4</b> Data Exploration</a></li>
+<li class="chapter" data-level="32.5" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#cleaning-data-for-analysis"><i class="fa fa-check"></i><b>32.5</b> Cleaning data for analysis</a><ul>
+<li class="chapter" data-level="32.5.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#fixing-the-date-and-focusing-only-on-game-tweets"><i class="fa fa-check"></i><b>32.5.1</b> Fixing the date and focusing only on game tweets</a></li>
+</ul></li>
+<li class="chapter" data-level="32.6" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#number-of-tweets-throughout-the-game"><i class="fa fa-check"></i><b>32.6</b> Number of tweets throughout the game</a></li>
+<li class="chapter" data-level="32.7" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#tidying-the-text-data-for-analysis-applying-the-sentiment-scores"><i class="fa fa-check"></i><b>32.7</b> Tidying the text data for analysis, applying the sentiment scores</a><ul>
+<li class="chapter" data-level="32.7.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#example-2---nebraskas-loss-to-purdue-what-were-fans-sentiments-towards-this-loss"><i class="fa fa-check"></i><b>32.7.1</b> Example 2 - Nebraska’s loss to Purdue, what were fan’s sentiments towards this loss?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="33" data-path="arranging-multiple-plots-together.html"><a href="arranging-multiple-plots-together.html"><i class="fa fa-check"></i><b>33</b> Arranging multiple plots together</a></li>
+<li class="chapter" data-level="34" data-path="encircling-points-on-a-scatterplot.html"><a href="encircling-points-on-a-scatterplot.html"><i class="fa fa-check"></i><b>34</b> Encircling points on a scatterplot</a><ul>
+<li class="chapter" data-level="34.1" data-path="encircling-points-on-a-scatterplot.html"><a href="encircling-points-on-a-scatterplot.html#a-different-more-local-example"><i class="fa fa-check"></i><b>34.1</b> A different, more local example</a></li>
+</ul></li>
+<li class="chapter" data-level="35" data-path="bump-charts.html"><a href="bump-charts.html"><i class="fa fa-check"></i><b>35</b> Bump charts</a></li>
+<li class="chapter" data-level="36" data-path="text-cleaning.html"><a href="text-cleaning.html"><i class="fa fa-check"></i><b>36</b> Text cleaning</a><ul>
+<li class="chapter" data-level="36.1" data-path="text-cleaning.html"><a href="text-cleaning.html#stripping-out-text"><i class="fa fa-check"></i><b>36.1</b> Stripping out text</a></li>
+<li class="chapter" data-level="36.2" data-path="text-cleaning.html"><a href="text-cleaning.html#another-example-splitting-columns"><i class="fa fa-check"></i><b>36.2</b> Another example: splitting columns</a></li>
+</ul></li>
+<li class="chapter" data-level="37" data-path="assignments.html"><a href="assignments.html"><i class="fa fa-check"></i><b>37</b> Assignments</a></li>
+<li class="chapter" data-level="38" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>38</b> Appendix</a><ul>
+<li class="chapter" data-level="38.1" data-path="appendix.html"><a href="appendix.html#how-to-get-help-in-this-class"><i class="fa fa-check"></i><b>38.1</b> How to get help in this class</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Sports Data Analysis and Visualization</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="assignments" class="section level1">
+<h1><span class="header-section-number">Chapter 37</span> Assignments</h1>
+<p>This is a collection of assignments I’ve used in my Sports Data Analysis and Visualization course at the University of Nebraska-Lincoln. The overriding philosophy is to have students do lots of small assignments that directly apply what they learned, and often pulling from other assignments. Each small assignment is just a few points each – I make them 5 points each and make the grading a yes/no decision on 5 different questions – so a bad grade on one doesn’t matter. Then, twice during the semester, I have them create blog posts with visualizations on a topic of their choosing. The topic must have a point of view – Nebraska’s woes on third down are why the team is struggling, for example – and must be backed up with data. They have to write a completely documented R Notebook explaining what they did and why; they have to write a publicly facing blog post for a general audience and that post has to have at least three graphs backing up their point; and they have to give a lightning talk (no more than five minutes) in class about what they have found. Those two assignments are typically worth 50 percent of the course grade.</p>
+<p>I think rubrics are crap, but I give students these questions as a guide to what I’m expecting:</p>
+<ol style="list-style-type: decimal">
+<li>Did you read the data into a dataframe?</li>
+<li>Did you use the skill discussed in the chapter correctly?</li>
+<li>Did you answer all the questions posed by the assignment?</li>
+<li>Did you use Markdown comments to explain your steps, what you did and why?</li>
+</ol>
+<p><strong>Chapter 1: Intro</strong></p>
+<ul>
+<li>Install <a href="https://slack.com/get">Slack</a> on your computer and your phone.</li>
+<li>If on a Mac, <a href="http://osxdaily.com/2014/02/12/install-command-line-tools-mac-os-x/">install the Command Line Tools</a>.</li>
+<li>Install <a href="https://rweb.crmda.ku.edu/cran/">R for your computer</a>.</li>
+<li>Install <a href="https://www.rstudio.com/products/rstudio/download/#download">R Studio Desktop for your computer</a> ONLY AFTER YOU HAVE INSTALLED R</li>
+</ul>
+<p><strong>Chapter 2: Basics</strong></p>
+<p>Part 1:</p>
+<p>In the console, type <code>install.packages("swirl")</code></p>
+<p>Then <code>library("swirl")</code></p>
+<p>Then <code>swirl()</code></p>
+<p>Follow instructions on the screen. Each time you are asked if which one you want, you want the first one. The basics, the beginning, the first parts. All the first ones. Then just follow the instructions on the screen.</p>
+<p>Part 2:</p>
+<p>Create an R notebook (which you should have done if you were following along). In it, delete all the generated text from it, so you have a blank document. Then, write a sentence in the document telling me what the last thing you did in Swirl was. Then add a code block (see about inserting code in the chapter) and add two numbers together. Any two numbers. Run that code block. Save the file and submit the .Rmd file created when you save it to Canvas. That’s it. Simple.</p>
+<p><strong>Chapter 3: Data, structures and types</strong></p>
+<p>Using what you learned in the chapter, fetch <a href="http://www.cfbstats.com/2018/leader/827/player/split01/category19/sort01.html">the list of the Big Ten’s leading tacklers</a>. Submit the CSV file to Canvas. In the comments, label each field type. What are they? Dates? Characters? Numeric?</p>
+<p><strong>Chapter 4: Aggregates</strong></p>
+<p>Import <a href="https://unl.box.com/s/a8m91bro10t89watsyo13yjegb1fy009">this dataset of every college basketball game in the 2018-19 season</a>. Using what you learned in the chapter, answer the following questions:</p>
+<ol style="list-style-type: decimal">
+<li>What team shot the most shots?</li>
+<li>What team averaged the most shots?</li>
+<li>What team had the highest median number of shots?</li>
+<li>How much difference is there between the top average shots team and the top median shots team? Why do you think that is?</li>
+</ol>
+<p><strong>Chapter 5: Mutating Data</strong></p>
+<p>Import <a href="https://unl.box.com/s/a8m91bro10t89watsyo13yjegb1fy009">this dataset of every college basketball game in the 2018-19 season</a>. Using what you learned in the chapter, mutate a new variable: differential. Differential is the difference between the team score and the opponent score. A positive number means the team in question won. A negative number means the team in question lost. After creating the differential, average them together and sort them in descending order. Which team had the highest average point differential in college basketball? In other words, which team consistently won by the largest margins?</p>
+<p><strong>Chapter 6: Filters and selections</strong></p>
+<p>Import the data of <a href="https://unl.box.com/s/s1wzw61u9ia50qmirfhuvprgpmmah9rj">every college basketball player’s season stats in 2018-19 season</a>. Using this data, let’s get closer to a real answer to where the cutoff for true shooting season should be from the chapter. First, find the median number of shots attempted in the season, then set the cutoff filter for who had the best true shooting percentage using that number.</p>
+<p><strong>Chapter 7: Transforming data</strong></p>
+<p>Import this dataset of <a href="https://unl.box.com/s/fs3rj0dns1xh2y1dx0c2yc0adh4u3zsy">college football attendance data from 2013-2018</a>. This data is long data – one team, one year, one row. We need it to be wide data. Hint: it’ll be much easier if you select only the columns you need to make it wide instead of using them all. Submit your notebook.</p>
+<p><strong>Chapter 8: Simulations</strong></p>
+<p>On Feb. 6, Nebraska’s basketball team had a nightmare night shooting the ball. They attempted 57 shots … and made only 12. The team shot .429 on the season. Simulate 1000 games of them taking 57 shots using their season long .429 as the probability that they’ll make a shot. How many times do they make just 12?</p>
+<p><strong>Chapter 9: Correlations and regressions</strong></p>
+<p>Do the same thing described in the chapter, but for defense. Report your R-squared number, your p-value, what those mean and from that, how close does it come to predicting the Iowa Nebraska game?</p>
+<p><strong>Chapter 10: Multiple regression</strong></p>
+<p>You have been hired by Fred Hoiberg to build a team. He’s interested in the model started in the chapter, but wants more.</p>
+<p>There are more predictors to be added to our model. You are to find two. Two that contribute to the predictive quality of the model without largely overlapping another predictor.</p>
+<p>In your notebook, report the adjusted r-squared you achieved.</p>
+<p>You are to generate a new set of coefficients, a new formula and a new set of numbers of what a conference champion would expect in terms of differential. I’ve done a lot of work for you. Continue it. Add two more predictors and complete the prediction. And compare that to Nebraska of this season.</p>
+<p>Turn in your notebook with these answers and comments to the code you added, making sure to add WHY you are doing things. Why did you select those two variables.</p>
+<p><strong>Chapter 11: Residuals</strong></p>
+<p>Using the same data from the chapter, model defensive third down percentage and defensive points allowed. Which teams are overperforming that model given the residual analysis?</p>
+<p><strong>Chapter 12: Z scores</strong></p>
+<p>Refine the composite Z Score I started in the chapter. Add two more elements to it. What else do you think is important to the success of a basketball team? I’ve got shooting, rebounds and the opponents shooting. What else would you add?</p>
+<p>In an R Notebook, make your case for the two elements you are adding – what is your logic? Why these two?. Then, follow my steps here until you get to the <code>teamquality</code> dataframe step, where you’ll need to add the fields you are going to add to the composite. Then you’ll need to add your fields to the <code>teamtotals</code> dataframe. Then you’ll need to adjust <code>teamzscore</code>.</p>
+<p>Finally, look at your ranking of Big Ten teams and compare it to mine. Did adding more elements to the composite change anything? Explain the differences in your notebook. Which one do you think is more accurate? I won’t be offended if you say yours, but why do you feel that way?</p>
+<p><strong>Chapter 13: Intro to ggplot</strong></p>
+<p><a href="https://unl.box.com/s/hvxmnxhr41x4ikgt3vk38aczcbrf97pn">Take this same attendance data</a>. I want you to produce a bar chart of the top 10 schools by percent change in attendance between 2018 and 2013. I want you to change the title and the labels and I want you to apply a theme different from the ones I used above. You can find <a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">more themes in the ggplot documentation</a>.</p>
+<p><strong>Chapter 14: Stacked bar charts</strong></p>
+<p>I want you to make this same chart, except I want you to make the weight the percentage of the total number of graduates that gender represents. You’ll be mutating a new field to create that percentage. You’ll then chart it with the fill. The end result should be a stacked bar chart allowing you to compare genders between universities. Answer the following question: Which schools have the largest gender imbalances?</p>
+<p><strong>Chapter 15: Waffle charts</strong></p>
+<p>Compare Nebraska and Michgan’s night on the basketball court using a Waffle chart and another metric than what I’ve done above for the game.</p>
+<p><a href="https://github.com/hrbrmstr/waffle">Here’s the library’s documentation</a>.
+<a href="https://www.sports-reference.com/cbb/boxscores/2019-02-28-19-michigan.html">Here’s the stats from the game</a>.</p>
+<p>Turn in your notebook with your waffle chart. It must contain these two things:</p>
+<ul>
+<li>Your waffle chart</li>
+<li>A written narrative of what it says. What does your waffle chart say about how that game turned out?</li>
+</ul>
+<p><strong>Chapter 16: Line Charts</strong></p>
+<p>Import <a href="https://unl.box.com/s/a8m91bro10t89watsyo13yjegb1fy009">this dataset of every college basketball game in the 2018-19 season</a>.</p>
+<ul>
+<li><p>How does Nebraska’s shooting percentage compare to the Big Ten over the season? Put the Big Ten on the same chart as Nebraska, you’ll need two dataframes, two geoms and with your Big Ten dataframe, you need to use <code>group</code> in the aesthetic.</p></li>
+<li><p>After working on this chart, your boss comes in and says they don’t care about field goal percentage anymore. They just care about three-point shooting because they read on some blog that three-point shooting was all the rage. Change what you need to change to make your line chart now about how the season has gone behind the three-point line. How does Nebraska compare to the rest of the Big Ten?</p></li>
+</ul>
+<p><strong>Chapter 17: Step charts</strong></p>
+<p>Re-make the chart in the chapter, but with rebounding. I want you to visualize the differential between our rebounds and their rebounds, and then plot the step chart showing over the course of the season. Highlight Nebraska. Highlight the top team. Add annotation layers to label both of them.</p>
+<p><strong>Chapter 18: Ridge charts</strong></p>
+<p>You’ve been hired by Fred Hoiberg to tell him how to win the Big Ten. He’s not impressed with that I came up with. So what you need to do is look for a <em>composite</em> measure that produces a meaningful ridgeplot. What that means is you’re going to mutate <code>wintotalgroupinglogs</code> one more time. Is the differential between rebounding meaningful instead of just the total? Or assists? Or something else? Your call. Your goal is to produce a ridgeplot that tells The Mayor he needs to focus on doing X better than the opponent to win a Big Ten title.</p>
+<p><strong>Chapter 19: Lollipop charts</strong></p>
+<p>You’ve been hired by Fred Hoiberg to tell him how to win the Big Ten. He’s not impressed with that I came up with. So what else could you look at with lollipop charts? Your call. Your goal is to produce a lollipop chart that tells The Mayor he needs to focus on the gap between X and Y if he wants to win a Big Ten title.</p>
+<p><strong>Chapter 20: Scatterplot</strong></p>
+<p>Using the data from the walkthrough, model and graph two other elements of Nebraska’s season versus wins. How much does your choices of metrics predict the season? What do the scatterplots of what you chose look like? What do the linear models say (r-squared, p-values)? How predictive are they, i.e. using y=mx+b, how close to Nebraska’s win total do your models get to?</p>
+<p><strong>Chapter 21: Facet Wraps</strong></p>
+<p>Which Big Ten teams were good a shooting three point shots? Which teams weren’t? Using a facet grid, chart each teams three point shooting season against the league average.</p>
+<p><strong>Chapter 22</strong></p>
+<p>Import <a href="https://unl.box.com/s/a8m91bro10t89watsyo13yjegb1fy009">this dataset of every college basketball game in the 2018-19 season</a>.</p>
+<p>Create a dataframe that shows the 10 best or 10 worst at something. Or rank the Big Ten. Your choice. Then use formattable to show in both a table and visually how the best were different from the worst.</p>
+<p>Export it to a PNG using the example above. Then, in Illustrator, add a headline, chatter, source and credit lines. Turn in the PNG file you export from Illustrator.</p>
+<p><strong>New Chapter</strong></p>
+<p>Import <a href="https://unl.box.com/s/a8m91bro10t89watsyo13yjegb1fy009">this dataset of every college basketball game in the 2018-19 season</a>. Create a bubble chart looking at two stats to make your scatterplot and a third making the size of your bubble. Make the color the conference name.</p>
+<p>I want to see your bubble chart, but more importantly, I want you to discuss if what you came up with makes an effective bubble chart. Does it tell a story? Does the size of the bubble enhance understanding? No is an acceptable answer. But explain why it did or didn’t work.</p>
+<p><strong>New Chapter</strong></p>
+<p>Your turn: Let’s evaluate the second part of the quote from the chapter: November basketball tells you where you are.</p>
+<p>We’ve looked at wins. What else could you look at over the course of the season that tells you where you are? Pick a metric. Explain your choice. Make a circular bar chart. Evaluate the result. What does it say?</p>
+<p><strong>Chapter 23: Rvest</strong></p>
+<p>I am a huge Premiere League fan, so I want data on the league. <a href="https://fbref.com/en/comps/9/stats/Premier-League-Stats">For now, I just want teams</a>. Scrape the team data at the top, but before you do, look at the header. Is it one row? Does that make it standard? Nope. So what now?</p>
+<p><strong>Chapter 24: Advanced Rvest</strong></p>
+<p>I don’t usually assign an advanced rvest assignment because I don’t want to turn 30 students loose on some poor provider’s servers.</p>
+<p><strong>Note:</strong> There are no assignments for annotations and finishing touches. In my classes, I have students present two major visual stories where they have to incorporate the elements of those assignments as part of their grade.</p>
+<p><strong>Chapter 30: Plotly</strong></p>
+<p>First, create a simple ggplot like we did above exploring WRAA – <a href="http://m.mlb.com/glossary/advanced-stats/weighted-runs-above-average">weighted runs above average</a> – as your x value and and plate appearances (PA) as your y variable.</p>
+<p>Next, create a plotly visualization using the same two variables. Alter the hover elements to show relevant data. If you leave it the same from the chapter, you lose points.</p>
+<p>Export your plotly visualization to plotly’s website. Include a link of your viz in your notebook. In your notebook, discuss the relative advantages and disadvantages of this interactive plot versus the static plots we’ve been doing.</p>
+<p><strong>Chapter 31: Clustering</strong></p>
+<p>We looked at who Cam Mack’s peers are, but what about the team? Use k-means clustering on a <a href="https://unl.box.com/s/qdqu5rbz7f9jtk04fhuiqrb9p0nx5a0z">dataset of every college basketball team’s season stats</a> and determine who Nebraska’s peers are.</p>
+<p>To complete this assignment, you’ll need to pick the metrics you want to measure teams by. One note – teams haven’t played the same number of games, so it would be wise to either focus on the per game or percentage metrics, either using them or creating them yourself. You’ll then need to scale them. You’ll need to decide the optimal number of clusters (k) and then run them. Combine the data back, determine which cluster Nebraska is in in your clustering and then show Nebraska’s peers.</p>
+<p>In your notebook, write a few sentences and answering this question: Is the peer group Nebraska is in fair?</p>
+<p><strong>Chapter 32: Rtweet</strong></p>
+<p>Using the Rtweet library, gather tweets about the Maryland game Saturday night. WARNING: The API only lets you go back 18000 tweets – we settled on 8000 in the walkthrough. If you wait too long to run the scrape after the game, you won’t get the tweets you need to complete it. If you don’t intend to do the assignment Saturday night, at least scrape the data and save it as a CSV as detailed in the chapter. You can then analyze it any time you want.</p>
+<p>Analyze sentiment and chart it as in the chapter. Compare the Maryland game to the Purdue game. Are they different? Is sentiment better or worse for one or the other? Describe the differences in your notebook.</p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="text-cleaning.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="appendix.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["SportsData.pdf", "SportsData.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

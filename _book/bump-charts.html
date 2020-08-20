@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 35 Bump charts | Sports Data Analysis and Visualization</title>
+  <meta name="description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 35 Bump charts | Sports Data Analysis and Visualization" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 35 Bump charts | Sports Data Analysis and Visualization" />
+  
+  <meta name="twitter:description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
+  
+
+<meta name="author" content="By Matt Waite" />
+
+
+<meta name="date" content="2019-07-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="encircling-points-on-a-scatterplot.html"/>
+<link rel="next" href="text-cleaning.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-160712129-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-160712129-1');
+</script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Sports Data Analysis and Visualization</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Throwing cold water on hot takes</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#requirements-and-conventions"><i class="fa fa-check"></i><b>1.1</b> Requirements and Conventions</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i><b>1.2</b> About this book</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="the-very-basics.html"><a href="the-very-basics.html"><i class="fa fa-check"></i><b>2</b> The very basics</a><ul>
+<li class="chapter" data-level="2.1" data-path="the-very-basics.html"><a href="the-very-basics.html#adding-libraries-part-1"><i class="fa fa-check"></i><b>2.1</b> Adding libraries, part 1</a></li>
+<li class="chapter" data-level="2.2" data-path="the-very-basics.html"><a href="the-very-basics.html#adding-libraries-part-2"><i class="fa fa-check"></i><b>2.2</b> Adding libraries, part 2</a></li>
+<li class="chapter" data-level="2.3" data-path="the-very-basics.html"><a href="the-very-basics.html#notebooks"><i class="fa fa-check"></i><b>2.3</b> Notebooks</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html"><i class="fa fa-check"></i><b>3</b> Data, structures and types</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#rows-and-columns"><i class="fa fa-check"></i><b>3.1</b> Rows and columns</a></li>
+<li class="chapter" data-level="3.2" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#types"><i class="fa fa-check"></i><b>3.2</b> Types</a></li>
+<li class="chapter" data-level="3.3" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#a-simple-way-to-get-data"><i class="fa fa-check"></i><b>3.3</b> A simple way to get data</a></li>
+<li class="chapter" data-level="3.4" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#cleaning-the-data"><i class="fa fa-check"></i><b>3.4</b> Cleaning the data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="aggregates.html"><a href="aggregates.html"><i class="fa fa-check"></i><b>4</b> Aggregates</a><ul>
+<li class="chapter" data-level="4.1" data-path="aggregates.html"><a href="aggregates.html#basic-data-analysis-group-by-and-count"><i class="fa fa-check"></i><b>4.1</b> Basic data analysis: Group By and Count</a></li>
+<li class="chapter" data-level="4.2" data-path="aggregates.html"><a href="aggregates.html#other-aggregates-mean-and-median"><i class="fa fa-check"></i><b>4.2</b> Other aggregates: Mean and median</a></li>
+<li class="chapter" data-level="4.3" data-path="aggregates.html"><a href="aggregates.html#even-more-aggregates"><i class="fa fa-check"></i><b>4.3</b> Even more aggregates</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="mutating-data.html"><a href="mutating-data.html"><i class="fa fa-check"></i><b>5</b> Mutating data</a><ul>
+<li class="chapter" data-level="5.1" data-path="mutating-data.html"><a href="mutating-data.html#a-more-complex-example"><i class="fa fa-check"></i><b>5.1</b> A more complex example</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="filters-and-selections.html"><a href="filters-and-selections.html"><i class="fa fa-check"></i><b>6</b> Filters and selections</a><ul>
+<li class="chapter" data-level="6.1" data-path="filters-and-selections.html"><a href="filters-and-selections.html#selecting-data-to-make-it-easier-to-read"><i class="fa fa-check"></i><b>6.1</b> Selecting data to make it easier to read</a></li>
+<li class="chapter" data-level="6.2" data-path="filters-and-selections.html"><a href="filters-and-selections.html#using-conditional-filters-to-set-limits"><i class="fa fa-check"></i><b>6.2</b> Using conditional filters to set limits</a></li>
+<li class="chapter" data-level="6.3" data-path="filters-and-selections.html"><a href="filters-and-selections.html#top-list"><i class="fa fa-check"></i><b>6.3</b> Top list</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="transforming-data.html"><a href="transforming-data.html"><i class="fa fa-check"></i><b>7</b> Transforming data</a><ul>
+<li class="chapter" data-level="7.1" data-path="transforming-data.html"><a href="transforming-data.html#making-long-data-wide"><i class="fa fa-check"></i><b>7.1</b> Making long data wide</a></li>
+<li class="chapter" data-level="7.2" data-path="transforming-data.html"><a href="transforming-data.html#why-this-matters"><i class="fa fa-check"></i><b>7.2</b> Why this matters</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>8</b> Simulations</a><ul>
+<li class="chapter" data-level="8.1" data-path="simulations.html"><a href="simulations.html#cold-streaks"><i class="fa fa-check"></i><b>8.1</b> Cold streaks</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html"><i class="fa fa-check"></i><b>9</b> Correlations and regression</a><ul>
+<li class="chapter" data-level="9.1" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html#a-more-predictive-example"><i class="fa fa-check"></i><b>9.1</b> A more predictive example</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="multiple-regression.html"><a href="multiple-regression.html"><i class="fa fa-check"></i><b>10</b> Multiple regression</a></li>
+<li class="chapter" data-level="11" data-path="residuals.html"><a href="residuals.html"><i class="fa fa-check"></i><b>11</b> Residuals</a><ul>
+<li class="chapter" data-level="11.1" data-path="residuals.html"><a href="residuals.html#penalties"><i class="fa fa-check"></i><b>11.1</b> Penalties</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z scores</a><ul>
+<li class="chapter" data-level="12.1" data-path="z-scores.html"><a href="z-scores.html#calculating-a-z-score-in-r"><i class="fa fa-check"></i><b>12.1</b> Calculating a Z score in R</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html"><i class="fa fa-check"></i><b>13</b> Intro to ggplot</a><ul>
+<li class="chapter" data-level="13.1" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#the-bar-chart"><i class="fa fa-check"></i><b>13.1</b> The bar chart</a></li>
+<li class="chapter" data-level="13.2" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#scales"><i class="fa fa-check"></i><b>13.2</b> Scales</a></li>
+<li class="chapter" data-level="13.3" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#styling"><i class="fa fa-check"></i><b>13.3</b> Styling</a></li>
+<li class="chapter" data-level="13.4" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#one-last-trick-coord-flip"><i class="fa fa-check"></i><b>13.4</b> One last trick: coord flip</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="stacked-bar-charts.html"><a href="stacked-bar-charts.html"><i class="fa fa-check"></i><b>14</b> Stacked bar charts</a></li>
+<li class="chapter" data-level="15" data-path="waffle-charts.html"><a href="waffle-charts.html"><i class="fa fa-check"></i><b>15</b> Waffle charts</a><ul>
+<li class="chapter" data-level="15.1" data-path="waffle-charts.html"><a href="waffle-charts.html#waffle-irons"><i class="fa fa-check"></i><b>15.1</b> Waffle Irons</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="line-charts.html"><a href="line-charts.html"><i class="fa fa-check"></i><b>16</b> Line charts</a><ul>
+<li class="chapter" data-level="16.1" data-path="line-charts.html"><a href="line-charts.html#this-is-too-simple."><i class="fa fa-check"></i><b>16.1</b> This is too simple.</a></li>
+<li class="chapter" data-level="16.2" data-path="line-charts.html"><a href="line-charts.html#but-what-if-i-wanted-to-add-a-lot-of-lines."><i class="fa fa-check"></i><b>16.2</b> But what if I wanted to add a lot of lines.</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="step-charts.html"><a href="step-charts.html"><i class="fa fa-check"></i><b>17</b> Step charts</a></li>
+<li class="chapter" data-level="18" data-path="ridge-charts.html"><a href="ridge-charts.html"><i class="fa fa-check"></i><b>18</b> Ridge charts</a></li>
+<li class="chapter" data-level="19" data-path="lollipop-charts.html"><a href="lollipop-charts.html"><i class="fa fa-check"></i><b>19</b> Lollipop charts</a></li>
+<li class="chapter" data-level="20" data-path="scatterplots.html"><a href="scatterplots.html"><i class="fa fa-check"></i><b>20</b> Scatterplots</a></li>
+<li class="chapter" data-level="21" data-path="facet-wraps.html"><a href="facet-wraps.html"><i class="fa fa-check"></i><b>21</b> Facet wraps</a><ul>
+<li class="chapter" data-level="21.1" data-path="facet-wraps.html"><a href="facet-wraps.html#facet-grid-vs-facet-wraps"><i class="fa fa-check"></i><b>21.1</b> Facet grid vs facet wraps</a></li>
+<li class="chapter" data-level="21.2" data-path="facet-wraps.html"><a href="facet-wraps.html#other-types"><i class="fa fa-check"></i><b>21.2</b> Other types</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>22</b> Tables</a><ul>
+<li class="chapter" data-level="22.1" data-path="tables.html"><a href="tables.html#exporting-tables"><i class="fa fa-check"></i><b>22.1</b> Exporting tables</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="bubble-charts.html"><a href="bubble-charts.html"><i class="fa fa-check"></i><b>23</b> Bubble charts</a></li>
+<li class="chapter" data-level="24" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html"><i class="fa fa-check"></i><b>24</b> Circular bar plots</a></li>
+<li class="chapter" data-level="25" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html"><i class="fa fa-check"></i><b>25</b> Intro to rvest</a><ul>
+<li class="chapter" data-level="25.1" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html#a-slightly-more-complicated-example"><i class="fa fa-check"></i><b>25.1</b> A slightly more complicated example</a></li>
+<li class="chapter" data-level="25.2" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html#an-even-more-complicated-example"><i class="fa fa-check"></i><b>25.2</b> An even more complicated example</a></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="advanced-rvest.html"><a href="advanced-rvest.html"><i class="fa fa-check"></i><b>26</b> Advanced rvest</a><ul>
+<li class="chapter" data-level="26.1" data-path="advanced-rvest.html"><a href="advanced-rvest.html#one-last-bit"><i class="fa fa-check"></i><b>26.1</b> One last bit</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="annotations.html"><a href="annotations.html"><i class="fa fa-check"></i><b>27</b> Annotations</a></li>
+<li class="chapter" data-level="28" data-path="finishing-touches-part-1.html"><a href="finishing-touches-part-1.html"><i class="fa fa-check"></i><b>28</b> Finishing touches, part 1</a><ul>
+<li class="chapter" data-level="28.1" data-path="finishing-touches-part-1.html"><a href="finishing-touches-part-1.html#graphics-vs-visual-stories"><i class="fa fa-check"></i><b>28.1</b> Graphics vs visual stories</a></li>
+<li class="chapter" data-level="28.2" data-path="finishing-touches-part-1.html"><a href="finishing-touches-part-1.html#getting-ggplot-closer-to-output"><i class="fa fa-check"></i><b>28.2</b> Getting ggplot closer to output</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="finishing-touches-2.html"><a href="finishing-touches-2.html"><i class="fa fa-check"></i><b>29</b> Finishing Touches 2</a></li>
+<li class="chapter" data-level="30" data-path="plotly.html"><a href="plotly.html"><i class="fa fa-check"></i><b>30</b> Plotly</a><ul>
+<li class="chapter" data-level="30.1" data-path="plotly.html"><a href="plotly.html#publishing-using-plotly"><i class="fa fa-check"></i><b>30.1</b> Publishing using Plotly</a></li>
+</ul></li>
+<li class="chapter" data-level="31" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>31</b> Clustering</a><ul>
+<li class="chapter" data-level="31.1" data-path="clustering.html"><a href="clustering.html#advanced-metrics"><i class="fa fa-check"></i><b>31.1</b> Advanced metrics</a></li>
+</ul></li>
+<li class="chapter" data-level="32" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html"><i class="fa fa-check"></i><b>32</b> Rtweet and Text Analysis</a><ul>
+<li class="chapter" data-level="32.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#prerequisites"><i class="fa fa-check"></i><b>32.1</b> Prerequisites</a><ul>
+<li class="chapter" data-level="32.1.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#tools-for-text-analysis"><i class="fa fa-check"></i><b>32.1.1</b> Tools for text analysis</a></li>
+<li class="chapter" data-level="32.1.2" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#working-with-string-data"><i class="fa fa-check"></i><b>32.1.2</b> Working with string data</a></li>
+</ul></li>
+<li class="chapter" data-level="32.2" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#verifying-your-account-to-access-twitter-data"><i class="fa fa-check"></i><b>32.2</b> Verifying your account to access Twitter data</a></li>
+<li class="chapter" data-level="32.3" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#the-data-used-here"><i class="fa fa-check"></i><b>32.3</b> The data used here</a></li>
+<li class="chapter" data-level="32.4" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#data-exploration"><i class="fa fa-check"></i><b>32.4</b> Data Exploration</a></li>
+<li class="chapter" data-level="32.5" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#cleaning-data-for-analysis"><i class="fa fa-check"></i><b>32.5</b> Cleaning data for analysis</a><ul>
+<li class="chapter" data-level="32.5.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#fixing-the-date-and-focusing-only-on-game-tweets"><i class="fa fa-check"></i><b>32.5.1</b> Fixing the date and focusing only on game tweets</a></li>
+</ul></li>
+<li class="chapter" data-level="32.6" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#number-of-tweets-throughout-the-game"><i class="fa fa-check"></i><b>32.6</b> Number of tweets throughout the game</a></li>
+<li class="chapter" data-level="32.7" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#tidying-the-text-data-for-analysis-applying-the-sentiment-scores"><i class="fa fa-check"></i><b>32.7</b> Tidying the text data for analysis, applying the sentiment scores</a><ul>
+<li class="chapter" data-level="32.7.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#example-2---nebraskas-loss-to-purdue-what-were-fans-sentiments-towards-this-loss"><i class="fa fa-check"></i><b>32.7.1</b> Example 2 - Nebraska’s loss to Purdue, what were fan’s sentiments towards this loss?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="33" data-path="arranging-multiple-plots-together.html"><a href="arranging-multiple-plots-together.html"><i class="fa fa-check"></i><b>33</b> Arranging multiple plots together</a></li>
+<li class="chapter" data-level="34" data-path="encircling-points-on-a-scatterplot.html"><a href="encircling-points-on-a-scatterplot.html"><i class="fa fa-check"></i><b>34</b> Encircling points on a scatterplot</a><ul>
+<li class="chapter" data-level="34.1" data-path="encircling-points-on-a-scatterplot.html"><a href="encircling-points-on-a-scatterplot.html#a-different-more-local-example"><i class="fa fa-check"></i><b>34.1</b> A different, more local example</a></li>
+</ul></li>
+<li class="chapter" data-level="35" data-path="bump-charts.html"><a href="bump-charts.html"><i class="fa fa-check"></i><b>35</b> Bump charts</a></li>
+<li class="chapter" data-level="36" data-path="text-cleaning.html"><a href="text-cleaning.html"><i class="fa fa-check"></i><b>36</b> Text cleaning</a><ul>
+<li class="chapter" data-level="36.1" data-path="text-cleaning.html"><a href="text-cleaning.html#stripping-out-text"><i class="fa fa-check"></i><b>36.1</b> Stripping out text</a></li>
+<li class="chapter" data-level="36.2" data-path="text-cleaning.html"><a href="text-cleaning.html#another-example-splitting-columns"><i class="fa fa-check"></i><b>36.2</b> Another example: splitting columns</a></li>
+</ul></li>
+<li class="chapter" data-level="37" data-path="assignments.html"><a href="assignments.html"><i class="fa fa-check"></i><b>37</b> Assignments</a></li>
+<li class="chapter" data-level="38" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>38</b> Appendix</a><ul>
+<li class="chapter" data-level="38.1" data-path="appendix.html"><a href="appendix.html#how-to-get-help-in-this-class"><i class="fa fa-check"></i><b>38.1</b> How to get help in this class</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Sports Data Analysis and Visualization</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="bump-charts" class="section level1">
+<h1><span class="header-section-number">Chapter 35</span> Bump charts</h1>
+<p>Not every library is on CRAN, which if you didn’t know is the place where all the libraries we’ve installed up to this point are coming from. CRAN is a global repository of libraries, but they’re libraries that are ready for a global audience of users, meaning they’ve been tested thoroughly and most of the bugs are out of them.</p>
+<p>Developers are constantly working on new libraries, and some of them are interesting enough to try and stable enough to make a go of it. If you can handle a little uncertainty and understand that what you want to do might not work totally right, you can install those libraries from another code repository, GitHub. GitHub is a massive repository of all kinds of code developers want to share. <a href="https://github.com/mattwaite/sportsdatabook">This book is on GitHub</a>, for instance.</p>
+<p>To install a library from GitHub requires a couple of steps. The first is you need a set of tools to get them, called <code>devtools</code>. So go over to the console and install <code>devtools</code> like this:</p>
+<p><code>install.packages("devtools")</code></p>
+<p>The package we’re going to try is called ggbump and it makes bump charts. Bump charts are like a subway map for rankings that change over time. We’re going to make a bump chart of the college football playoff rankings this last season.</p>
+<p>To get ggbump, run this in the console: <code>devtools::install_github("davidsjoberg/ggbump")</code></p>
+<p>Now we’ll load up our libraries.</p>
+<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb573-1"><a href="bump-charts.html#cb573-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb573-2"><a href="bump-charts.html#cb573-2"></a><span class="kw">library</span>(ggbump)</span></code></pre></div>
+<p><a href="https://unl.box.com/s/18mzeypa3pgg5pw2xxgawfbhyryo3z3a">Here’s the dataset</a> we’ll use, which I scraped out of the college football playoff <a href="https://collegefootballplayoff.com/rankings.aspx">website</a>:</p>
+<div class="sourceCode" id="cb574"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb574-1"><a href="bump-charts.html#cb574-1"></a>rankings &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/cfbranking.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   Rank = col_double(),
+##   Team = col_character(),
+##   Record = col_character(),
+##   Week = col_double(),
+##   ShortTeam = col_character()
+## )</code></pre>
+<p>The point of a bump chart is to show how the ranking of something changed over time – you could do this with the top 25 in football or basketball. I’ve seen it done with European soccer league standings over a season. The requirements are that you have a row of data for a team, in that week, with their rank. So if you have 5 weeks of playoff rankings, like we do, you’re going to have five rows of LSU, and five rows of Ohio State. you can see the basic look of the data by using head()</p>
+<div class="sourceCode" id="cb576"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb576-1"><a href="bump-charts.html#cb576-1"></a><span class="kw">head</span>(rankings)</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 5
+##    Rank Team               Record  Week ShortTeam
+##   &lt;dbl&gt; &lt;chr&gt;              &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;    
+## 1     9 Baylor University  1-Oct     13 Baylor   
+## 2     7 Baylor University  1-Nov     14 Baylor   
+## 3     7 Baylor University  2-Nov     15 Baylor   
+## 4     5 Clemson University Sep-00    10 Clem.    
+## 5     3 Clemson University Oct-00    11 Clem.    
+## 6     3 Clemson University Nov-00    12 Clem.</code></pre>
+<p>So Baylor was ranked in the 13th, 14th and 15th week, 9th, 7th and 7th, respectively. So our data is in the form we need it to be. Now we can make a bump chart. We’ll start simple.</p>
+<div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb578-1"><a href="bump-charts.html#cb578-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_bump</span>(<span class="dt">data=</span>rankings, <span class="kw">aes</span>(<span class="dt">x=</span>Week, <span class="dt">y=</span>Rank, <span class="dt">color=</span>Team))</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-346-1.png" width="672" /></p>
+<p>Well, it’s a start. I’m immediately annoyed by the top teams being at the bottom. I learned a neat trick from ggbump that’s been in ggplot all along – <code>scale_y_reverse()</code></p>
+<div class="sourceCode" id="cb579"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb579-1"><a href="bump-charts.html#cb579-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_bump</span>(<span class="dt">data=</span>rankings, <span class="kw">aes</span>(<span class="dt">x=</span>Week, <span class="dt">y=</span>Rank, <span class="dt">color=</span>Team)) <span class="op">+</span><span class="st"> </span><span class="kw">scale_y_reverse</span>()</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-347-1.png" width="672" /></p>
+<p>Better. But, still not great. Let’s add a point at each week.</p>
+<div class="sourceCode" id="cb580"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb580-1"><a href="bump-charts.html#cb580-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb580-2"><a href="bump-charts.html#cb580-2"></a><span class="st">  </span><span class="kw">geom_bump</span>(<span class="dt">data=</span>rankings, <span class="kw">aes</span>(<span class="dt">x=</span>Week, <span class="dt">y=</span>Rank, <span class="dt">color=</span>Team)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb580-3"><a href="bump-charts.html#cb580-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>rankings, <span class="kw">aes</span>(<span class="dt">x=</span>Week, <span class="dt">y=</span>Rank, <span class="dt">color=</span>Team), <span class="dt">size =</span> <span class="dv">4</span>) <span class="op">+</span></span>
+<span id="cb580-4"><a href="bump-charts.html#cb580-4"></a><span class="st">  </span><span class="kw">scale_y_reverse</span>() </span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-348-1.png" width="672" /></p>
+<p>Another step. That makes it more subway map like. But the colors are all wrong. To fix this, we’re going to use <code>scale_color_manual</code> and we’re going to Google the hex codes for each team. The legend will tell you what order your <code>scale_color_manual</code> needs to be.</p>
+<div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb581-1"><a href="bump-charts.html#cb581-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb581-2"><a href="bump-charts.html#cb581-2"></a><span class="st">  </span><span class="kw">geom_bump</span>(<span class="dt">data=</span>rankings, <span class="kw">aes</span>(<span class="dt">x=</span>Week, <span class="dt">y=</span>Rank, <span class="dt">color=</span>Team)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb581-3"><a href="bump-charts.html#cb581-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>rankings, <span class="kw">aes</span>(<span class="dt">x=</span>Week, <span class="dt">y=</span>Rank, <span class="dt">color=</span>Team), <span class="dt">size =</span> <span class="dv">4</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb581-4"><a href="bump-charts.html#cb581-4"></a><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;#003015&quot;</span>,<span class="st">&quot;#F66733&quot;</span>, <span class="st">&quot;#461D7C&quot;</span>, <span class="st">&quot;#bb0000&quot;</span>, <span class="st">&quot;#041E42&quot;</span>, <span class="st">&quot;#AF002A&quot;</span>,<span class="st">&quot;#0021A5&quot;</span>, <span class="st">&quot;#BA0C2F&quot;</span>, <span class="st">&quot;#7A0019&quot;</span>, <span class="st">&quot;#841617&quot;</span>, <span class="st">&quot;#154733&quot;</span>, <span class="st">&quot;#CC0000&quot;</span>, <span class="st">&quot;#c5050c&quot;</span>)) <span class="op">+</span></span>
+<span id="cb581-5"><a href="bump-charts.html#cb581-5"></a><span class="st">  </span><span class="kw">scale_y_reverse</span>() </span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-349-1.png" width="672" /></p>
+<p>Another step. But the legend is annoying. And trying to find which red is Alabama vs Ohio State is hard. So what if we labeled each dot at the beginning and end? We can do that with some clever usage of geom_text and a little dplyr filtering inside the data step. We filter out the first and last weeks, then use hjust – horizontal justification – to move them left or right.</p>
+<div class="sourceCode" id="cb582"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb582-1"><a href="bump-charts.html#cb582-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb582-2"><a href="bump-charts.html#cb582-2"></a><span class="st">  </span><span class="kw">geom_bump</span>(<span class="dt">data=</span>rankings, <span class="kw">aes</span>(<span class="dt">x=</span>Week, <span class="dt">y=</span>Rank, <span class="dt">color=</span>Team)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb582-3"><a href="bump-charts.html#cb582-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>rankings, <span class="kw">aes</span>(<span class="dt">x=</span>Week, <span class="dt">y=</span>Rank, <span class="dt">color=</span>Team), <span class="dt">size =</span> <span class="dv">4</span>) <span class="op">+</span><span class="st">   </span></span>
+<span id="cb582-4"><a href="bump-charts.html#cb582-4"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">data =</span> rankings <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Week <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(Week)), <span class="kw">aes</span>(<span class="dt">x =</span> Week <span class="op">-</span><span class="st"> </span><span class="fl">.2</span>, <span class="dt">y=</span>Rank, <span class="dt">label =</span> ShortTeam), <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">hjust =</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb582-5"><a href="bump-charts.html#cb582-5"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">data =</span> rankings <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Week <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(Week)), <span class="kw">aes</span>(<span class="dt">x =</span> Week <span class="op">+</span><span class="st"> </span><span class="fl">.2</span>, <span class="dt">y=</span>Rank, <span class="dt">label =</span> ShortTeam), <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">hjust =</span> <span class="dv">0</span>) <span class="op">+</span></span>
+<span id="cb582-6"><a href="bump-charts.html#cb582-6"></a><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;#003015&quot;</span>,<span class="st">&quot;#F66733&quot;</span>, <span class="st">&quot;#461D7C&quot;</span>, <span class="st">&quot;#bb0000&quot;</span>, <span class="st">&quot;#041E42&quot;</span>, <span class="st">&quot;#AF002A&quot;</span>,<span class="st">&quot;#0021A5&quot;</span>, <span class="st">&quot;#BA0C2F&quot;</span>, <span class="st">&quot;#7A0019&quot;</span>, <span class="st">&quot;#841617&quot;</span>, <span class="st">&quot;#154733&quot;</span>, <span class="st">&quot;#CC0000&quot;</span>, <span class="st">&quot;#c5050c&quot;</span>)) <span class="op">+</span></span>
+<span id="cb582-7"><a href="bump-charts.html#cb582-7"></a><span class="st">  </span><span class="kw">scale_y_reverse</span>() </span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-350-1.png" width="672" /></p>
+<p>Better, but the legend is still there. We can drop it in a theme directive by saying <code>legend.position = "none"</code>. We’ll also throw a theme_minimal on there to drop the default grey, and we’ll add some better labeling.</p>
+<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb583-1"><a href="bump-charts.html#cb583-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb583-2"><a href="bump-charts.html#cb583-2"></a><span class="st">  </span><span class="kw">geom_bump</span>(<span class="dt">data=</span>rankings, <span class="kw">aes</span>(<span class="dt">x=</span>Week, <span class="dt">y=</span>Rank, <span class="dt">color=</span>Team)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb583-3"><a href="bump-charts.html#cb583-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>rankings, <span class="kw">aes</span>(<span class="dt">x=</span>Week, <span class="dt">y=</span>Rank, <span class="dt">color=</span>Team), <span class="dt">size =</span> <span class="dv">4</span>) <span class="op">+</span><span class="st">   </span></span>
+<span id="cb583-4"><a href="bump-charts.html#cb583-4"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">data =</span> rankings <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Week <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(Week)), <span class="kw">aes</span>(<span class="dt">x =</span> Week <span class="op">-</span><span class="st"> </span><span class="fl">.2</span>, <span class="dt">y=</span>Rank, <span class="dt">label =</span> ShortTeam), <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">hjust =</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb583-5"><a href="bump-charts.html#cb583-5"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">data =</span> rankings <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Week <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(Week)), <span class="kw">aes</span>(<span class="dt">x =</span> Week <span class="op">+</span><span class="st"> </span><span class="fl">.2</span>, <span class="dt">y=</span>Rank, <span class="dt">label =</span> ShortTeam), <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">hjust =</span> <span class="dv">0</span>) <span class="op">+</span></span>
+<span id="cb583-6"><a href="bump-charts.html#cb583-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;The race to the playoffs&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;LSU and Ohio State were never out of the top two spots. LSU deserved it.&quot;</span>, <span class="dt">y=</span> <span class="st">&quot;Rank&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;Week&quot;</span>) <span class="op">+</span></span>
+<span id="cb583-7"><a href="bump-charts.html#cb583-7"></a><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span></span>
+<span id="cb583-8"><a href="bump-charts.html#cb583-8"></a><span class="st">  </span><span class="kw">theme</span>(</span>
+<span id="cb583-9"><a href="bump-charts.html#cb583-9"></a>    <span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb583-10"><a href="bump-charts.html#cb583-10"></a>    <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>()</span>
+<span id="cb583-11"><a href="bump-charts.html#cb583-11"></a>    ) <span class="op">+</span></span>
+<span id="cb583-12"><a href="bump-charts.html#cb583-12"></a><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;#003015&quot;</span>,<span class="st">&quot;#F66733&quot;</span>, <span class="st">&quot;#461D7C&quot;</span>, <span class="st">&quot;#bb0000&quot;</span>, <span class="st">&quot;#041E42&quot;</span>, <span class="st">&quot;#AF002A&quot;</span>,<span class="st">&quot;#0021A5&quot;</span>, <span class="st">&quot;#BA0C2F&quot;</span>, <span class="st">&quot;#7A0019&quot;</span>, <span class="st">&quot;#841617&quot;</span>, <span class="st">&quot;#154733&quot;</span>, <span class="st">&quot;#CC0000&quot;</span>, <span class="st">&quot;#c5050c&quot;</span>)) <span class="op">+</span></span>
+<span id="cb583-13"><a href="bump-charts.html#cb583-13"></a><span class="st">  </span><span class="kw">scale_y_reverse</span>() </span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-351-1.png" width="672" /></p>
+<p>Now let’s fix our text hierarchy.</p>
+<div class="sourceCode" id="cb584"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb584-1"><a href="bump-charts.html#cb584-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb584-2"><a href="bump-charts.html#cb584-2"></a><span class="st">  </span><span class="kw">geom_bump</span>(<span class="dt">data=</span>rankings, <span class="kw">aes</span>(<span class="dt">x=</span>Week, <span class="dt">y=</span>Rank, <span class="dt">color=</span>Team)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb584-3"><a href="bump-charts.html#cb584-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>rankings, <span class="kw">aes</span>(<span class="dt">x=</span>Week, <span class="dt">y=</span>Rank, <span class="dt">color=</span>Team), <span class="dt">size =</span> <span class="dv">4</span>) <span class="op">+</span><span class="st">   </span></span>
+<span id="cb584-4"><a href="bump-charts.html#cb584-4"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">data =</span> rankings <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Week <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(Week)), <span class="kw">aes</span>(<span class="dt">x =</span> Week <span class="op">-</span><span class="st"> </span><span class="fl">.2</span>, <span class="dt">y=</span>Rank, <span class="dt">label =</span> ShortTeam), <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">hjust =</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb584-5"><a href="bump-charts.html#cb584-5"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">data =</span> rankings <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Week <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(Week)), <span class="kw">aes</span>(<span class="dt">x =</span> Week <span class="op">+</span><span class="st"> </span><span class="fl">.2</span>, <span class="dt">y=</span>Rank, <span class="dt">label =</span> ShortTeam), <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">hjust =</span> <span class="dv">0</span>) <span class="op">+</span></span>
+<span id="cb584-6"><a href="bump-charts.html#cb584-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;The race to the playoffs&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;LSU and Ohio State were never out of the top two spots. LSU deserved it.&quot;</span>, <span class="dt">y=</span> <span class="st">&quot;Rank&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;Week&quot;</span>) <span class="op">+</span></span>
+<span id="cb584-7"><a href="bump-charts.html#cb584-7"></a><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span></span>
+<span id="cb584-8"><a href="bump-charts.html#cb584-8"></a><span class="st">  </span><span class="kw">theme</span>(</span>
+<span id="cb584-9"><a href="bump-charts.html#cb584-9"></a>    <span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb584-10"><a href="bump-charts.html#cb584-10"></a>    <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(),</span>
+<span id="cb584-11"><a href="bump-charts.html#cb584-11"></a>    <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">16</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb584-12"><a href="bump-charts.html#cb584-12"></a>    <span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">8</span>), </span>
+<span id="cb584-13"><a href="bump-charts.html#cb584-13"></a>    <span class="dt">plot.subtitle =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">10</span>), </span>
+<span id="cb584-14"><a href="bump-charts.html#cb584-14"></a>    <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>()</span>
+<span id="cb584-15"><a href="bump-charts.html#cb584-15"></a>    ) <span class="op">+</span></span>
+<span id="cb584-16"><a href="bump-charts.html#cb584-16"></a><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;#003015&quot;</span>,<span class="st">&quot;#F66733&quot;</span>, <span class="st">&quot;#461D7C&quot;</span>, <span class="st">&quot;#bb0000&quot;</span>, <span class="st">&quot;#041E42&quot;</span>, <span class="st">&quot;#AF002A&quot;</span>,<span class="st">&quot;#0021A5&quot;</span>, <span class="st">&quot;#BA0C2F&quot;</span>, <span class="st">&quot;#7A0019&quot;</span>, <span class="st">&quot;#841617&quot;</span>, <span class="st">&quot;#154733&quot;</span>, <span class="st">&quot;#CC0000&quot;</span>, <span class="st">&quot;#c5050c&quot;</span>)) <span class="op">+</span></span>
+<span id="cb584-17"><a href="bump-charts.html#cb584-17"></a><span class="st">  </span><span class="kw">scale_y_reverse</span>() </span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-352-1.png" width="672" /></p>
+<p>And the last thing: anyone else annoyed at 7.5th place on the left? We can fix that too by specifying the breaks in scale_y_reverse. We can do that with the x axis as well, but since we haven’t reversed it, we do that in <code>scale_x_continuous</code> with the same breaks. Also: forgot my source and credit line.</p>
+<p>One last thing: Let’s change the width of the chart to make Ohio State and Penn State fit. We can do that by adding <code>fig.width=X</code> in the <code>{r}</code> setup in your block. So something like this:</p>
+<pre><code>{r fig.width=8}</code></pre>
+<div class="sourceCode" id="cb586"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb586-1"><a href="bump-charts.html#cb586-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb586-2"><a href="bump-charts.html#cb586-2"></a><span class="st">  </span><span class="kw">geom_bump</span>(<span class="dt">data=</span>rankings, <span class="kw">aes</span>(<span class="dt">x=</span>Week, <span class="dt">y=</span>Rank, <span class="dt">color=</span>Team)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb586-3"><a href="bump-charts.html#cb586-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>rankings, <span class="kw">aes</span>(<span class="dt">x=</span>Week, <span class="dt">y=</span>Rank, <span class="dt">color=</span>Team), <span class="dt">size =</span> <span class="dv">4</span>) <span class="op">+</span><span class="st">   </span></span>
+<span id="cb586-4"><a href="bump-charts.html#cb586-4"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">data =</span> rankings <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Week <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(Week)), <span class="kw">aes</span>(<span class="dt">x =</span> Week <span class="op">-</span><span class="st"> </span><span class="fl">.2</span>, <span class="dt">y=</span>Rank, <span class="dt">label =</span> ShortTeam), <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">hjust =</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb586-5"><a href="bump-charts.html#cb586-5"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">data =</span> rankings <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Week <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(Week)), <span class="kw">aes</span>(<span class="dt">x =</span> Week <span class="op">+</span><span class="st"> </span><span class="fl">.2</span>, <span class="dt">y=</span>Rank, <span class="dt">label =</span> ShortTeam), <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">hjust =</span> <span class="dv">0</span>) <span class="op">+</span></span>
+<span id="cb586-6"><a href="bump-charts.html#cb586-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;The race to the playoffs&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;LSU and Ohio State were never out of the top two spots. LSU deserved it.&quot;</span>, <span class="dt">y=</span> <span class="st">&quot;Rank&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;Week&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Source: College Football Playoff Committee | Chart by Matt Waite&quot;</span>) <span class="op">+</span></span>
+<span id="cb586-7"><a href="bump-charts.html#cb586-7"></a><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span></span>
+<span id="cb586-8"><a href="bump-charts.html#cb586-8"></a><span class="st">  </span><span class="kw">theme</span>(</span>
+<span id="cb586-9"><a href="bump-charts.html#cb586-9"></a>    <span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb586-10"><a href="bump-charts.html#cb586-10"></a>    <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(),</span>
+<span id="cb586-11"><a href="bump-charts.html#cb586-11"></a>    <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">16</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb586-12"><a href="bump-charts.html#cb586-12"></a>    <span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">8</span>), </span>
+<span id="cb586-13"><a href="bump-charts.html#cb586-13"></a>    <span class="dt">plot.subtitle =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">10</span>), </span>
+<span id="cb586-14"><a href="bump-charts.html#cb586-14"></a>    <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>()</span>
+<span id="cb586-15"><a href="bump-charts.html#cb586-15"></a>    ) <span class="op">+</span></span>
+<span id="cb586-16"><a href="bump-charts.html#cb586-16"></a><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;#003015&quot;</span>,<span class="st">&quot;#F66733&quot;</span>, <span class="st">&quot;#461D7C&quot;</span>, <span class="st">&quot;#bb0000&quot;</span>, <span class="st">&quot;#041E42&quot;</span>, <span class="st">&quot;#AF002A&quot;</span>,<span class="st">&quot;#0021A5&quot;</span>, <span class="st">&quot;#BA0C2F&quot;</span>, <span class="st">&quot;#7A0019&quot;</span>, <span class="st">&quot;#841617&quot;</span>, <span class="st">&quot;#154733&quot;</span>, <span class="st">&quot;#CC0000&quot;</span>, <span class="st">&quot;#c5050c&quot;</span>)) <span class="op">+</span></span>
+<span id="cb586-17"><a href="bump-charts.html#cb586-17"></a><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">11</span>,<span class="dv">12</span>,<span class="dv">13</span>,<span class="dv">14</span>,<span class="dv">15</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb586-18"><a href="bump-charts.html#cb586-18"></a><span class="st">  </span><span class="kw">scale_y_reverse</span>(<span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">10</span>))</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-353-1.png" width="768" /></p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="encircling-points-on-a-scatterplot.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="text-cleaning.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["SportsData.pdf", "SportsData.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

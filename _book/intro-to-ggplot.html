@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 13 Intro to ggplot | Sports Data Analysis and Visualization</title>
+  <meta name="description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 13 Intro to ggplot | Sports Data Analysis and Visualization" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 13 Intro to ggplot | Sports Data Analysis and Visualization" />
+  
+  <meta name="twitter:description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
+  
+
+<meta name="author" content="By Matt Waite" />
+
+
+<meta name="date" content="2019-07-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="z-scores.html"/>
+<link rel="next" href="stacked-bar-charts.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-160712129-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-160712129-1');
+</script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Sports Data Analysis and Visualization</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Throwing cold water on hot takes</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#requirements-and-conventions"><i class="fa fa-check"></i><b>1.1</b> Requirements and Conventions</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i><b>1.2</b> About this book</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="the-very-basics.html"><a href="the-very-basics.html"><i class="fa fa-check"></i><b>2</b> The very basics</a><ul>
+<li class="chapter" data-level="2.1" data-path="the-very-basics.html"><a href="the-very-basics.html#adding-libraries-part-1"><i class="fa fa-check"></i><b>2.1</b> Adding libraries, part 1</a></li>
+<li class="chapter" data-level="2.2" data-path="the-very-basics.html"><a href="the-very-basics.html#adding-libraries-part-2"><i class="fa fa-check"></i><b>2.2</b> Adding libraries, part 2</a></li>
+<li class="chapter" data-level="2.3" data-path="the-very-basics.html"><a href="the-very-basics.html#notebooks"><i class="fa fa-check"></i><b>2.3</b> Notebooks</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html"><i class="fa fa-check"></i><b>3</b> Data, structures and types</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#rows-and-columns"><i class="fa fa-check"></i><b>3.1</b> Rows and columns</a></li>
+<li class="chapter" data-level="3.2" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#types"><i class="fa fa-check"></i><b>3.2</b> Types</a></li>
+<li class="chapter" data-level="3.3" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#a-simple-way-to-get-data"><i class="fa fa-check"></i><b>3.3</b> A simple way to get data</a></li>
+<li class="chapter" data-level="3.4" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#cleaning-the-data"><i class="fa fa-check"></i><b>3.4</b> Cleaning the data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="aggregates.html"><a href="aggregates.html"><i class="fa fa-check"></i><b>4</b> Aggregates</a><ul>
+<li class="chapter" data-level="4.1" data-path="aggregates.html"><a href="aggregates.html#basic-data-analysis-group-by-and-count"><i class="fa fa-check"></i><b>4.1</b> Basic data analysis: Group By and Count</a></li>
+<li class="chapter" data-level="4.2" data-path="aggregates.html"><a href="aggregates.html#other-aggregates-mean-and-median"><i class="fa fa-check"></i><b>4.2</b> Other aggregates: Mean and median</a></li>
+<li class="chapter" data-level="4.3" data-path="aggregates.html"><a href="aggregates.html#even-more-aggregates"><i class="fa fa-check"></i><b>4.3</b> Even more aggregates</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="mutating-data.html"><a href="mutating-data.html"><i class="fa fa-check"></i><b>5</b> Mutating data</a><ul>
+<li class="chapter" data-level="5.1" data-path="mutating-data.html"><a href="mutating-data.html#a-more-complex-example"><i class="fa fa-check"></i><b>5.1</b> A more complex example</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="filters-and-selections.html"><a href="filters-and-selections.html"><i class="fa fa-check"></i><b>6</b> Filters and selections</a><ul>
+<li class="chapter" data-level="6.1" data-path="filters-and-selections.html"><a href="filters-and-selections.html#selecting-data-to-make-it-easier-to-read"><i class="fa fa-check"></i><b>6.1</b> Selecting data to make it easier to read</a></li>
+<li class="chapter" data-level="6.2" data-path="filters-and-selections.html"><a href="filters-and-selections.html#using-conditional-filters-to-set-limits"><i class="fa fa-check"></i><b>6.2</b> Using conditional filters to set limits</a></li>
+<li class="chapter" data-level="6.3" data-path="filters-and-selections.html"><a href="filters-and-selections.html#top-list"><i class="fa fa-check"></i><b>6.3</b> Top list</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="transforming-data.html"><a href="transforming-data.html"><i class="fa fa-check"></i><b>7</b> Transforming data</a><ul>
+<li class="chapter" data-level="7.1" data-path="transforming-data.html"><a href="transforming-data.html#making-long-data-wide"><i class="fa fa-check"></i><b>7.1</b> Making long data wide</a></li>
+<li class="chapter" data-level="7.2" data-path="transforming-data.html"><a href="transforming-data.html#why-this-matters"><i class="fa fa-check"></i><b>7.2</b> Why this matters</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>8</b> Simulations</a><ul>
+<li class="chapter" data-level="8.1" data-path="simulations.html"><a href="simulations.html#cold-streaks"><i class="fa fa-check"></i><b>8.1</b> Cold streaks</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html"><i class="fa fa-check"></i><b>9</b> Correlations and regression</a><ul>
+<li class="chapter" data-level="9.1" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html#a-more-predictive-example"><i class="fa fa-check"></i><b>9.1</b> A more predictive example</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="multiple-regression.html"><a href="multiple-regression.html"><i class="fa fa-check"></i><b>10</b> Multiple regression</a></li>
+<li class="chapter" data-level="11" data-path="residuals.html"><a href="residuals.html"><i class="fa fa-check"></i><b>11</b> Residuals</a><ul>
+<li class="chapter" data-level="11.1" data-path="residuals.html"><a href="residuals.html#penalties"><i class="fa fa-check"></i><b>11.1</b> Penalties</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z scores</a><ul>
+<li class="chapter" data-level="12.1" data-path="z-scores.html"><a href="z-scores.html#calculating-a-z-score-in-r"><i class="fa fa-check"></i><b>12.1</b> Calculating a Z score in R</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html"><i class="fa fa-check"></i><b>13</b> Intro to ggplot</a><ul>
+<li class="chapter" data-level="13.1" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#the-bar-chart"><i class="fa fa-check"></i><b>13.1</b> The bar chart</a></li>
+<li class="chapter" data-level="13.2" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#scales"><i class="fa fa-check"></i><b>13.2</b> Scales</a></li>
+<li class="chapter" data-level="13.3" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#styling"><i class="fa fa-check"></i><b>13.3</b> Styling</a></li>
+<li class="chapter" data-level="13.4" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#one-last-trick-coord-flip"><i class="fa fa-check"></i><b>13.4</b> One last trick: coord flip</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="stacked-bar-charts.html"><a href="stacked-bar-charts.html"><i class="fa fa-check"></i><b>14</b> Stacked bar charts</a></li>
+<li class="chapter" data-level="15" data-path="waffle-charts.html"><a href="waffle-charts.html"><i class="fa fa-check"></i><b>15</b> Waffle charts</a><ul>
+<li class="chapter" data-level="15.1" data-path="waffle-charts.html"><a href="waffle-charts.html#waffle-irons"><i class="fa fa-check"></i><b>15.1</b> Waffle Irons</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="line-charts.html"><a href="line-charts.html"><i class="fa fa-check"></i><b>16</b> Line charts</a><ul>
+<li class="chapter" data-level="16.1" data-path="line-charts.html"><a href="line-charts.html#this-is-too-simple."><i class="fa fa-check"></i><b>16.1</b> This is too simple.</a></li>
+<li class="chapter" data-level="16.2" data-path="line-charts.html"><a href="line-charts.html#but-what-if-i-wanted-to-add-a-lot-of-lines."><i class="fa fa-check"></i><b>16.2</b> But what if I wanted to add a lot of lines.</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="step-charts.html"><a href="step-charts.html"><i class="fa fa-check"></i><b>17</b> Step charts</a></li>
+<li class="chapter" data-level="18" data-path="ridge-charts.html"><a href="ridge-charts.html"><i class="fa fa-check"></i><b>18</b> Ridge charts</a></li>
+<li class="chapter" data-level="19" data-path="lollipop-charts.html"><a href="lollipop-charts.html"><i class="fa fa-check"></i><b>19</b> Lollipop charts</a></li>
+<li class="chapter" data-level="20" data-path="scatterplots.html"><a href="scatterplots.html"><i class="fa fa-check"></i><b>20</b> Scatterplots</a></li>
+<li class="chapter" data-level="21" data-path="facet-wraps.html"><a href="facet-wraps.html"><i class="fa fa-check"></i><b>21</b> Facet wraps</a><ul>
+<li class="chapter" data-level="21.1" data-path="facet-wraps.html"><a href="facet-wraps.html#facet-grid-vs-facet-wraps"><i class="fa fa-check"></i><b>21.1</b> Facet grid vs facet wraps</a></li>
+<li class="chapter" data-level="21.2" data-path="facet-wraps.html"><a href="facet-wraps.html#other-types"><i class="fa fa-check"></i><b>21.2</b> Other types</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>22</b> Tables</a><ul>
+<li class="chapter" data-level="22.1" data-path="tables.html"><a href="tables.html#exporting-tables"><i class="fa fa-check"></i><b>22.1</b> Exporting tables</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="bubble-charts.html"><a href="bubble-charts.html"><i class="fa fa-check"></i><b>23</b> Bubble charts</a></li>
+<li class="chapter" data-level="24" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html"><i class="fa fa-check"></i><b>24</b> Circular bar plots</a></li>
+<li class="chapter" data-level="25" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html"><i class="fa fa-check"></i><b>25</b> Intro to rvest</a><ul>
+<li class="chapter" data-level="25.1" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html#a-slightly-more-complicated-example"><i class="fa fa-check"></i><b>25.1</b> A slightly more complicated example</a></li>
+<li class="chapter" data-level="25.2" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html#an-even-more-complicated-example"><i class="fa fa-check"></i><b>25.2</b> An even more complicated example</a></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="advanced-rvest.html"><a href="advanced-rvest.html"><i class="fa fa-check"></i><b>26</b> Advanced rvest</a><ul>
+<li class="chapter" data-level="26.1" data-path="advanced-rvest.html"><a href="advanced-rvest.html#one-last-bit"><i class="fa fa-check"></i><b>26.1</b> One last bit</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="annotations.html"><a href="annotations.html"><i class="fa fa-check"></i><b>27</b> Annotations</a></li>
+<li class="chapter" data-level="28" data-path="finishing-touches-part-1.html"><a href="finishing-touches-part-1.html"><i class="fa fa-check"></i><b>28</b> Finishing touches, part 1</a><ul>
+<li class="chapter" data-level="28.1" data-path="finishing-touches-part-1.html"><a href="finishing-touches-part-1.html#graphics-vs-visual-stories"><i class="fa fa-check"></i><b>28.1</b> Graphics vs visual stories</a></li>
+<li class="chapter" data-level="28.2" data-path="finishing-touches-part-1.html"><a href="finishing-touches-part-1.html#getting-ggplot-closer-to-output"><i class="fa fa-check"></i><b>28.2</b> Getting ggplot closer to output</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="finishing-touches-2.html"><a href="finishing-touches-2.html"><i class="fa fa-check"></i><b>29</b> Finishing Touches 2</a></li>
+<li class="chapter" data-level="30" data-path="plotly.html"><a href="plotly.html"><i class="fa fa-check"></i><b>30</b> Plotly</a><ul>
+<li class="chapter" data-level="30.1" data-path="plotly.html"><a href="plotly.html#publishing-using-plotly"><i class="fa fa-check"></i><b>30.1</b> Publishing using Plotly</a></li>
+</ul></li>
+<li class="chapter" data-level="31" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>31</b> Clustering</a><ul>
+<li class="chapter" data-level="31.1" data-path="clustering.html"><a href="clustering.html#advanced-metrics"><i class="fa fa-check"></i><b>31.1</b> Advanced metrics</a></li>
+</ul></li>
+<li class="chapter" data-level="32" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html"><i class="fa fa-check"></i><b>32</b> Rtweet and Text Analysis</a><ul>
+<li class="chapter" data-level="32.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#prerequisites"><i class="fa fa-check"></i><b>32.1</b> Prerequisites</a><ul>
+<li class="chapter" data-level="32.1.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#tools-for-text-analysis"><i class="fa fa-check"></i><b>32.1.1</b> Tools for text analysis</a></li>
+<li class="chapter" data-level="32.1.2" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#working-with-string-data"><i class="fa fa-check"></i><b>32.1.2</b> Working with string data</a></li>
+</ul></li>
+<li class="chapter" data-level="32.2" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#verifying-your-account-to-access-twitter-data"><i class="fa fa-check"></i><b>32.2</b> Verifying your account to access Twitter data</a></li>
+<li class="chapter" data-level="32.3" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#the-data-used-here"><i class="fa fa-check"></i><b>32.3</b> The data used here</a></li>
+<li class="chapter" data-level="32.4" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#data-exploration"><i class="fa fa-check"></i><b>32.4</b> Data Exploration</a></li>
+<li class="chapter" data-level="32.5" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#cleaning-data-for-analysis"><i class="fa fa-check"></i><b>32.5</b> Cleaning data for analysis</a><ul>
+<li class="chapter" data-level="32.5.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#fixing-the-date-and-focusing-only-on-game-tweets"><i class="fa fa-check"></i><b>32.5.1</b> Fixing the date and focusing only on game tweets</a></li>
+</ul></li>
+<li class="chapter" data-level="32.6" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#number-of-tweets-throughout-the-game"><i class="fa fa-check"></i><b>32.6</b> Number of tweets throughout the game</a></li>
+<li class="chapter" data-level="32.7" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#tidying-the-text-data-for-analysis-applying-the-sentiment-scores"><i class="fa fa-check"></i><b>32.7</b> Tidying the text data for analysis, applying the sentiment scores</a><ul>
+<li class="chapter" data-level="32.7.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#example-2---nebraskas-loss-to-purdue-what-were-fans-sentiments-towards-this-loss"><i class="fa fa-check"></i><b>32.7.1</b> Example 2 - Nebraska’s loss to Purdue, what were fan’s sentiments towards this loss?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="33" data-path="arranging-multiple-plots-together.html"><a href="arranging-multiple-plots-together.html"><i class="fa fa-check"></i><b>33</b> Arranging multiple plots together</a></li>
+<li class="chapter" data-level="34" data-path="encircling-points-on-a-scatterplot.html"><a href="encircling-points-on-a-scatterplot.html"><i class="fa fa-check"></i><b>34</b> Encircling points on a scatterplot</a><ul>
+<li class="chapter" data-level="34.1" data-path="encircling-points-on-a-scatterplot.html"><a href="encircling-points-on-a-scatterplot.html#a-different-more-local-example"><i class="fa fa-check"></i><b>34.1</b> A different, more local example</a></li>
+</ul></li>
+<li class="chapter" data-level="35" data-path="bump-charts.html"><a href="bump-charts.html"><i class="fa fa-check"></i><b>35</b> Bump charts</a></li>
+<li class="chapter" data-level="36" data-path="text-cleaning.html"><a href="text-cleaning.html"><i class="fa fa-check"></i><b>36</b> Text cleaning</a><ul>
+<li class="chapter" data-level="36.1" data-path="text-cleaning.html"><a href="text-cleaning.html#stripping-out-text"><i class="fa fa-check"></i><b>36.1</b> Stripping out text</a></li>
+<li class="chapter" data-level="36.2" data-path="text-cleaning.html"><a href="text-cleaning.html#another-example-splitting-columns"><i class="fa fa-check"></i><b>36.2</b> Another example: splitting columns</a></li>
+</ul></li>
+<li class="chapter" data-level="37" data-path="assignments.html"><a href="assignments.html"><i class="fa fa-check"></i><b>37</b> Assignments</a></li>
+<li class="chapter" data-level="38" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>38</b> Appendix</a><ul>
+<li class="chapter" data-level="38.1" data-path="appendix.html"><a href="appendix.html#how-to-get-help-in-this-class"><i class="fa fa-check"></i><b>38.1</b> How to get help in this class</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Sports Data Analysis and Visualization</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="intro-to-ggplot" class="section level1">
+<h1><span class="header-section-number">Chapter 13</span> Intro to ggplot</h1>
+<p>With <code>ggplot2</code>, we dive into the world of programmatic data visualization. The <code>ggplot2</code> library implements something called the grammar of graphics. The main concepts are:</p>
+<ul>
+<li>aesthetics - which in this case means the data which we are going to plot</li>
+<li>geometries - which means the shape the data is going to take</li>
+<li>scales - which means any transformations we might make on the data</li>
+<li>facets - which means how we might graph many elements of the same dataset in the same space</li>
+<li>layers - which means how we might lay multiple geometries over top of each other to reveal new information.</li>
+</ul>
+<p>Hadley Wickam, who is behind all of the libraries we have used in this course to date, wrote about his layered grammar of graphics in <a href="http://byrneslab.net/classes/biol607/readings/wickham_layered-grammar.pdf">this 2009 paper that is worth your time to read</a>.</p>
+<p>Here are some <code>ggplot2</code> resources you’ll want to keep handy:</p>
+<ul>
+<li><a href="http://ggplot2.tidyverse.org/reference/index.html">The ggplot documentation</a>.</li>
+<li><a href="http://www.cookbook-r.com/Graphs/">The ggplot cookbook</a></li>
+</ul>
+<p>Let’s dive in using data we’ve already seen before – football attendance. This workflow will represent a clear picture of what your work in this class will be like for much of the rest of the semester. One way to think of this workflow is that your R Notebook is now your digital sketchbook, where you will try different types of visualizations to find ones that work. Then, you will export your work into a program like Illustrator to finish the work.</p>
+<p>To begin, we’ll import the <code>ggplot2</code> and <code>dplyr</code> libraries. We’ll read in the data, then create a new dataframe that represents <a href="https://unl.box.com/s/etqna5bfvf3b0gsnw0kcjjn1rxx9335s">our attendance data</a>, similar to what we’ve done before.</p>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="intro-to-ggplot.html#cb183-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="intro-to-ggplot.html#cb184-1"></a>attendance &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;data/attendance.csv&#39;</span>)</span></code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   Institution = col_character(),
+##   Conference = col_character(),
+##   `2013` = col_double(),
+##   `2014` = col_double(),
+##   `2015` = col_double(),
+##   `2016` = col_double(),
+##   `2017` = col_double(),
+##   `2018` = col_double()
+## )</code></pre>
+<p>First, let’s get a top 10 list by announced attendance this last season. We’ll use the same tricks we used in the filtering assignment.</p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="intro-to-ggplot.html#cb186-1"></a>attendance <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb186-2"><a href="intro-to-ggplot.html#cb186-2"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(<span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb186-3"><a href="intro-to-ggplot.html#cb186-3"></a><span class="st">  </span><span class="kw">top_n</span>(<span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb186-4"><a href="intro-to-ggplot.html#cb186-4"></a><span class="st">  </span><span class="kw">select</span>(Institution, <span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)</span></code></pre></div>
+<pre><code>## Selecting by 2018</code></pre>
+<pre><code>## # A tibble: 10 x 2
+##    Institution `2018`
+##    &lt;chr&gt;        &lt;dbl&gt;
+##  1 Michigan    775156
+##  2 Penn St.    738396
+##  3 Ohio St.    713630
+##  4 Alabama     710931
+##  5 LSU         705733
+##  6 Texas A&amp;M   698908
+##  7 Tennessee   650887
+##  8 Georgia     649222
+##  9 Nebraska    623240
+## 10 Oklahoma    607146</code></pre>
+<p>That looks good, so let’s save it to a new data frame and use that data frame instead going forward.</p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="intro-to-ggplot.html#cb189-1"></a>top10 &lt;-<span class="st"> </span>attendance <span class="op">%&gt;%</span></span>
+<span id="cb189-2"><a href="intro-to-ggplot.html#cb189-2"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(<span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb189-3"><a href="intro-to-ggplot.html#cb189-3"></a><span class="st">  </span><span class="kw">top_n</span>(<span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb189-4"><a href="intro-to-ggplot.html#cb189-4"></a><span class="st">  </span><span class="kw">select</span>(Institution, <span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)</span></code></pre></div>
+<pre><code>## Selecting by 2018</code></pre>
+<div id="the-bar-chart" class="section level2">
+<h2><span class="header-section-number">13.1</span> The bar chart</h2>
+<p>The easiest thing we can do is create a simple bar chart of our data. <strong>Bar charts show magnitude. They invite you to compare how much more or less one thing is compared to others.</strong></p>
+<p>We could, for instance, create a bar chart of the total attendance. To do that, we simply tell <code>ggplot2</code> what our dataset is, what element of the data we want to make the bar chart out of (which is the aesthetic), and the geometry type (which is the geom). It looks like this:</p>
+<p><code>ggplot(top10, aes(x=Institution)) + geom_bar()</code></p>
+<p>Note: attendance is our data, <code>aes</code> means aesthetics, <code>x=Institution</code> explicitly tells <code>ggplot2</code> that our x value – our horizontal value – is the Institution field from the data, and then we add on the <code>geom_bar()</code> as the geometry. And what do we get when we run that?</p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="intro-to-ggplot.html#cb191-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span>Institution)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>()</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-105-1.png" width="672" /></p>
+<p>We get … weirdness. We expected to see bars of different sizes, but we get all with a count of 1. What gives? Well, this is the default behavior. What we have here is something called a histogram, where <code>ggplot2</code> helpfully counted up the number of times the Institution appears and counted them up. Since we only have one record per Institution, the count is always 1. How do we fix this? By adding <code>weight</code> to our aesthetic.</p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="intro-to-ggplot.html#cb192-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span>Institution, <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb192-2"><a href="intro-to-ggplot.html#cb192-2"></a><span class="st">  </span><span class="kw">geom_bar</span>()</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-106-1.png" width="672" /></p>
+<p>Closer. But … what order is that in? And what happened to our count numbers on the left? Why are they in scientific notation?</p>
+<p>Let’s deal with the ordering first. <code>ggplot2</code>’s default behavior is to sort the data by the x axis variable. So it’s in alphabetical order. To change that, we have to <code>reorder</code> it. With <code>reorder</code>, we first have to tell <code>ggplot</code> what we are reordering, and then we have to tell it HOW we are reordering it. So it’s reorder(FIELD, SORTFIELD).</p>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="intro-to-ggplot.html#cb193-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Institution, <span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>()</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
+<p>Better. We can argue about if the right order is smallest to largest or largest to smallest. But this gets us close. By the way, to sort it largest to smallest, put a negative sign in front of the sort field.</p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="intro-to-ggplot.html#cb194-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Institution, <span class="op">-</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>()</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-108-1.png" width="672" /></p>
+</div>
+<div id="scales" class="section level2">
+<h2><span class="header-section-number">13.2</span> Scales</h2>
+<p>To fix the axis labels, we need try one of the other main elements of the <code>ggplot2</code> library, which is transform a scale. More often that not, that means doing something like putting it on a logarithmic scale or some other kind of transformation. In this case, we’re just changing how it’s represented. The default in <code>ggplot2</code> for large values is to express them as scientific notation. Rarely ever is that useful in our line of work. So we have to transform them into human readable numbers.</p>
+<p>The easiest way to do this is to use a library called <code>scales</code> and it’s already installed.</p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="intro-to-ggplot.html#cb195-1"></a><span class="kw">library</span>(scales)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;scales&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:purrr&#39;:
+## 
+##     discard</code></pre>
+<pre><code>## The following object is masked from &#39;package:readr&#39;:
+## 
+##     col_factor</code></pre>
+<p>To alter the scale, we add a piece to our plot with <code>+</code> and we tell it which scale is getting altered and what kind of data it is. In our case, our Y axis is what is needing to be altered, and it’s continuous data (meaning it can be any number between x and y, vs discrete data which are categorical). So we need to add <code>scale_y_continuous</code> and the information we want to pass it is to alter the labels with a function called <code>comma</code>.</p>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="intro-to-ggplot.html#cb199-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Institution, <span class="op">-</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb199-2"><a href="intro-to-ggplot.html#cb199-2"></a><span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb199-3"><a href="intro-to-ggplot.html#cb199-3"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>comma)</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
+<p>Better.</p>
+</div>
+<div id="styling" class="section level2">
+<h2><span class="header-section-number">13.3</span> Styling</h2>
+<p>We are going to spend a lot more time on styling, but let’s add some simple labels to this with a new bit called <code>labs</code> which is short for labels.</p>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="intro-to-ggplot.html#cb200-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Institution, <span class="op">-</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb200-2"><a href="intro-to-ggplot.html#cb200-2"></a><span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb200-3"><a href="intro-to-ggplot.html#cb200-3"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>comma) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb200-4"><a href="intro-to-ggplot.html#cb200-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Top 10 Football Programs By Attendance&quot;</span>, <span class="dt">x=</span><span class="st">&quot;School&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Attendance&quot;</span>)</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-111-1.png" width="672" /></p>
+<p>The library has lots and lots of ways to alter the styling – we can programmatically control nearly every part of the look and feel of the chart. One simple way is to apply themes in the library already. We do that the same way we’ve done other things – we add them. Here’s the light theme.</p>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="intro-to-ggplot.html#cb201-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Institution, <span class="op">-</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb201-2"><a href="intro-to-ggplot.html#cb201-2"></a><span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb201-3"><a href="intro-to-ggplot.html#cb201-3"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>comma) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb201-4"><a href="intro-to-ggplot.html#cb201-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Top 10 Football Programs By Attendance&quot;</span>, <span class="dt">x=</span><span class="st">&quot;School&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Attendance&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb201-5"><a href="intro-to-ggplot.html#cb201-5"></a><span class="st">  </span><span class="kw">theme_light</span>()</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
+<p>Or the minimal theme:</p>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="intro-to-ggplot.html#cb202-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Institution, <span class="op">-</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb202-2"><a href="intro-to-ggplot.html#cb202-2"></a><span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb202-3"><a href="intro-to-ggplot.html#cb202-3"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>comma) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb202-4"><a href="intro-to-ggplot.html#cb202-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Top 10 Football Programs By Attendance&quot;</span>, <span class="dt">x=</span><span class="st">&quot;School&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Attendance&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb202-5"><a href="intro-to-ggplot.html#cb202-5"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-113-1.png" width="672" /></p>
+<p>Later on, we’ll write our own themes. For now, the built in ones will get us closer to something that looks good.</p>
+</div>
+<div id="one-last-trick-coord-flip" class="section level2">
+<h2><span class="header-section-number">13.4</span> One last trick: coord flip</h2>
+<p>Sometimes, we don’t want vertical bars. Maybe we think this would look better horizontal. How do we do that? By adding <code>coord_flip()</code> to our code. It does what it says – it inverts the coordinates of the figures.</p>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="intro-to-ggplot.html#cb203-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Institution, <span class="op">-</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb203-2"><a href="intro-to-ggplot.html#cb203-2"></a><span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb203-3"><a href="intro-to-ggplot.html#cb203-3"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>comma) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb203-4"><a href="intro-to-ggplot.html#cb203-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Top 10 Football Programs By Attendance&quot;</span>, <span class="dt">x=</span><span class="st">&quot;School&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Attendance&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb203-5"><a href="intro-to-ggplot.html#cb203-5"></a><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb203-6"><a href="intro-to-ggplot.html#cb203-6"></a><span class="st">  </span><span class="kw">coord_flip</span>()</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-114-1.png" width="672" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="z-scores.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="stacked-bar-charts.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["SportsData.pdf", "SportsData.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

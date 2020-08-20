@@ -37,7 +37,7 @@ library(tidyverse)
 
 The first thing we need to do is get some data to work with. We do that by reading it in. In our case, we're going to read data from a csv file -- a comma-separated values file.
 
-The CSV file we're going to read from is a [Basketball Reference](https://www.basketball-reference.com/leagues/NBA_2020_advanced.html) of advanced metrics for NBA players this season. The Sports Reference sites are a godsend of data, a trove of stuff, and we're going to use it a lot in this class.
+The CSV file we're going to read from is a [Basketball Reference](https://www.basketball-reference.com/leagues/NBA_2020_advanced.html) of advanced metrics for NBA players this season. [You can download the CSV here](https://unl.box.com/s/5v1d70ab0xyaajkolynd54a1t4p38b3v). The Sports Reference sites are a godsend of data, a trove of stuff, and we're going to use it a lot in this class.
 
 So step 2, after setting up our libraries, is most often going to be importing data. In order to analyze data, we need data, so it stands to reason that this would be something we'd do very early.
 
