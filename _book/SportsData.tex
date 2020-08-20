@@ -448,7 +448,7 @@ But the tidyverse has a neat little trick. We can load most of the libraries we'
 
 The first thing we need to do is get some data to work with. We do that by reading it in. In our case, we're going to read data from a csv file -- a comma-separated values file.
 
-The CSV file we're going to read from is a \href{https://www.basketball-reference.com/leagues/NBA_2020_advanced.html}{Basketball Reference} of advanced metrics for NBA players this season. The Sports Reference sites are a godsend of data, a trove of stuff, and we're going to use it a lot in this class.
+The CSV file we're going to read from is a \href{https://www.basketball-reference.com/leagues/NBA_2020_advanced.html}{Basketball Reference} of advanced metrics for NBA players this season. \href{https://unl.box.com/s/5v1d70ab0xyaajkolynd54a1t4p38b3v}{You can download the CSV here}. The Sports Reference sites are a godsend of data, a trove of stuff, and we're going to use it a lot in this class.
 
 So step 2, after setting up our libraries, is most often going to be importing data. In order to analyze data, we need data, so it stands to reason that this would be something we'd do very early.
 
@@ -7334,30 +7334,12 @@ Before you run the following code chunk, though, be aware a few things will take
 \NormalTok{huskers <-}\StringTok{ }\KeywordTok{search_tweets}\NormalTok{(}
   \StringTok{"#huskers"}\NormalTok{, }\DataTypeTok{n =} \DecValTok{8000}\NormalTok{, }\DataTypeTok{include_rts =} \OtherTok{FALSE}
 \NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{verbatim}
-## Warning: Rate limit exceeded - 88
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Rate limit exceeded
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{gbr <-}\StringTok{ }\KeywordTok{search_tweets}\NormalTok{(}
   \StringTok{"#GBR"}\NormalTok{, }\DataTypeTok{n =} \DecValTok{8000}\NormalTok{, }\DataTypeTok{include_rts =} \OtherTok{FALSE}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## Warning: Rate limit exceeded - 88
-
-## Warning: Rate limit exceeded
-\end{verbatim}
 
 \textbf{Important Note}: Depending on when you run the above code chunk, the API will return different data then the data used for the examples later in this chapter. This is due to the query rate cap Twitter places on it's API. Twitter's API caps queries to 18,000 of the most recent tweets during the past couple of days. This cap resets every 15 minutes. The \texttt{rtweet} package does has functionality to pull data once your query limit resets. However, if you're looking to pull tweets for a very popular event (e.g., The Super Bowl), you may want to consider other options to extract this type of data. This is also important to understand because if you are looking to pull tweets for a specific event, you will need to make sure you are pulling this data within a reasonable time during or after the event. If you don't, these rate limits might not allow you access the data you need to do your analysis.
 
