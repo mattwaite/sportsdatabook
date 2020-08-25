@@ -313,11 +313,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>You can keep doing that for as many libraries as you need. I’ve seen notebooks with 10 or more library imports.</p>
 <p>But the tidyverse has a neat little trick. We can load most of the libraries we’ll need for the whole semester with one line:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="aggregates.html#cb14-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
-<pre><code>## ── Attaching packages ─────── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ── Attaching packages ────────── tidyverse 1.3.0 ──</code></pre>
 <pre><code>## ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
 ## ✓ tibble  3.0.3     ✓ stringr 1.4.0
 ## ✓ tidyr   1.1.1     ✓ forcats 0.5.0</code></pre>
-<pre><code>## ── Conflicts ────────── tidyverse_conflicts() ──
+<pre><code>## ── Conflicts ───────────── tidyverse_conflicts() ──
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <p><strong>From now on, if that’s not the first line of your notebook, you’re probably doing it wrong.</strong></p>
@@ -442,21 +442,21 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb34-3"><a href="aggregates.html#cb34-3"></a><span class="st">  </span><span class="kw">summarise</span>(</span>
 <span id="cb34-4"><a href="aggregates.html#cb34-4"></a>    <span class="dt">count =</span> <span class="kw">n</span>(),</span>
 <span id="cb34-5"><a href="aggregates.html#cb34-5"></a>    <span class="dt">mean_minutes =</span> <span class="kw">mean</span>(MP),</span>
-<span id="cb34-6"><a href="aggregates.html#cb34-6"></a>    <span class="dt">median_median =</span> <span class="kw">median</span>(MP)</span>
+<span id="cb34-6"><a href="aggregates.html#cb34-6"></a>    <span class="dt">median_minutes =</span> <span class="kw">median</span>(MP)</span>
 <span id="cb34-7"><a href="aggregates.html#cb34-7"></a>  )</span></code></pre></div>
 <pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 9 x 4
-##   Pos   count mean_minutes median_median
-##   &lt;chr&gt; &lt;int&gt;        &lt;dbl&gt;         &lt;dbl&gt;
-## 1 C       111         891.          887 
-## 2 C-PF      2         316.          316.
-## 3 PF      135         790.          567 
-## 4 PF-C      2        1548.         1548.
-## 5 PG      111         944.          850 
-## 6 SF      113         877.          754 
-## 7 SF-PF     4         638.          286.
-## 8 SF-SG     3        1211          1688 
-## 9 SG      170         843.          654.</code></pre>
+##   Pos   count mean_minutes median_minutes
+##   &lt;chr&gt; &lt;int&gt;        &lt;dbl&gt;          &lt;dbl&gt;
+## 1 C       111         891.           887 
+## 2 C-PF      2         316.           316.
+## 3 PF      135         790.           567 
+## 4 PF-C      2        1548.          1548.
+## 5 PG      111         944.           850 
+## 6 SF      113         877.           754 
+## 7 SF-PF     4         638.           286.
+## 8 SF-SG     3        1211           1688 
+## 9 SG      170         843.           654.</code></pre>
 <p>So there’s 651 players in the data. Let’s look at shooting guards. The average shooting guard plays 842 minutes and the median is 653.5 minutes.</p>
 <p>Why?</p>
 <p>Let’s let sort help us.</p>

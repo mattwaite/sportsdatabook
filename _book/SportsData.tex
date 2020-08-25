@@ -656,7 +656,7 @@ Let's look just a the number of minutes each position gets.
 \StringTok{  }\KeywordTok{summarise}\NormalTok{(}
     \DataTypeTok{count =} \KeywordTok{n}\NormalTok{(),}
     \DataTypeTok{mean_minutes =} \KeywordTok{mean}\NormalTok{(MP),}
-    \DataTypeTok{median_median =} \KeywordTok{median}\NormalTok{(MP)}
+    \DataTypeTok{median_minutes =} \KeywordTok{median}\NormalTok{(MP)}
 \NormalTok{  )}
 \end{Highlighting}
 \end{Shaded}
@@ -667,17 +667,17 @@ Let's look just a the number of minutes each position gets.
 
 \begin{verbatim}
 ## # A tibble: 9 x 4
-##   Pos   count mean_minutes median_median
-##   <chr> <int>        <dbl>         <dbl>
-## 1 C       111         891.          887 
-## 2 C-PF      2         316.          316.
-## 3 PF      135         790.          567 
-## 4 PF-C      2        1548.         1548.
-## 5 PG      111         944.          850 
-## 6 SF      113         877.          754 
-## 7 SF-PF     4         638.          286.
-## 8 SF-SG     3        1211          1688 
-## 9 SG      170         843.          654.
+##   Pos   count mean_minutes median_minutes
+##   <chr> <int>        <dbl>          <dbl>
+## 1 C       111         891.           887 
+## 2 C-PF      2         316.           316.
+## 3 PF      135         790.           567 
+## 4 PF-C      2        1548.          1548.
+## 5 PG      111         944.           850 
+## 6 SF      113         877.           754 
+## 7 SF-PF     4         638.           286.
+## 8 SF-SG     3        1211           1688 
+## 9 SG      170         843.           654.
 \end{verbatim}
 
 So there's 651 players in the data. Let's look at shooting guards. The average shooting guard plays 842 minutes and the median is 653.5 minutes.
