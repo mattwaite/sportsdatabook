@@ -136,7 +136,7 @@ nbaplayers %>%
   summarise(
     count = n(),
     mean_minutes = mean(MP),
-    median_median = median(MP)
+    median_minutes = median(MP)
   )
 ```
 So there's 651 players in the data. Let's look at shooting guards. The average shooting guard plays 842 minutes and the median is 653.5 minutes. 
