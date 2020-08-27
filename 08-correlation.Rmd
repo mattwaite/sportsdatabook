@@ -31,7 +31,7 @@ newcorrelations <- correlations %>%
   mutate(differential = OffPoints - DefPoints)
 ```
 
-In R, there is a `cor` function, and it works much the same as `mean` or `median`. So we want to see if `differential` is correlated with `Yards`, which is the yards of penalties a team gets in a game. We do that by referenceing `differential` and `Yards` and specifying we want a `pearson` correlation. The number we get back is the correlation coefficient.
+In R, there is a `cor` function, and it works much the same as `mean` or `median`. So we want to see if `differential` is correlated with `Yards`, which is the yards of penalties a team gets in a game. We do that by referencing `differential` and `Yards` and specifying we want a `pearson` correlation. The number we get back is the correlation coefficient.
 
 ```{r}
 newcorrelations %>% summarise(correlation = cor(differential, Yards, method="pearson"))
