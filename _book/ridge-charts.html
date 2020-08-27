@@ -182,8 +182,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1" data-path="transforming-data.html"><a href="transforming-data.html#making-long-data-wide"><i class="fa fa-check"></i><b>7.1</b> Making long data wide</a></li>
 <li class="chapter" data-level="7.2" data-path="transforming-data.html"><a href="transforming-data.html#why-this-matters"><i class="fa fa-check"></i><b>7.2</b> Why this matters</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>8</b> Simulations</a><ul>
-<li class="chapter" data-level="8.1" data-path="simulations.html"><a href="simulations.html#cold-streaks"><i class="fa fa-check"></i><b>8.1</b> Cold streaks</a></li>
+<li class="chapter" data-level="8" data-path="significance-tests.html"><a href="significance-tests.html"><i class="fa fa-check"></i><b>8</b> Significance tests</a><ul>
+<li class="chapter" data-level="8.1" data-path="significance-tests.html"><a href="significance-tests.html#accepting-the-null-hypothesis"><i class="fa fa-check"></i><b>8.1</b> Accepting the null hypothesis</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html"><i class="fa fa-check"></i><b>9</b> Correlations and regression</a><ul>
 <li class="chapter" data-level="9.1" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html#a-more-predictive-example"><i class="fa fa-check"></i><b>9.1</b> A more predictive example</a></li>
@@ -270,6 +270,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="38" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>38</b> Appendix</a><ul>
 <li class="chapter" data-level="38.1" data-path="appendix.html"><a href="appendix.html#how-to-get-help-in-this-class"><i class="fa fa-check"></i><b>38.1</b> How to get help in this class</a></li>
 </ul></li>
+<li class="chapter" data-level="39" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>39</b> Simulations</a><ul>
+<li class="chapter" data-level="39.1" data-path="simulations.html"><a href="simulations.html#cold-streaks"><i class="fa fa-check"></i><b>39.1</b> Cold streaks</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -295,10 +298,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Ridgeplots are useful for when you want to show how different groupings compare with a large number of datapoints. So let’s look at how we do this, and in the process, we learn about ggplot extensions. The extensions add functionality to ggplot, which doesn’t out of the box have ridgeplots (sometimes called joyplots).</p>
 <p>In the console, run this: <code>install.packages("ggridges")</code></p>
 <p>Now we can add those libraries.</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="ridge-charts.html#cb251-1"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb251-2"><a href="ridge-charts.html#cb251-2"></a><span class="kw">library</span>(ggridges)</span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="ridge-charts.html#cb255-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb255-2"><a href="ridge-charts.html#cb255-2"></a><span class="kw">library</span>(ggridges)</span></code></pre></div>
 <p>So for this, let’s look at every basketball game played since the 2014-15 season. That’s more than 28,000 basketball games. <a href="https://unl.box.com/s/u9407jj007fxtnu1vbkybdawaqg6j3fw">Download that data here</a>.</p>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="ridge-charts.html#cb252-1"></a>logs &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/logs1519.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="ridge-charts.html#cb256-1"></a>logs &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/logs1519.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Warning: Missing column names filled in: &#39;X1&#39; [1]</code></pre>
 <pre><code>## Parsed with column specification:
 ## cols(
@@ -315,59 +318,59 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## See spec(...) for full column specifications.</code></pre>
 <p>So I want to group teams by wins. Wins are the only thing that matter – ask Tim Miles. So our data has a column called W_L that lists if the team won or lost. The problem is it doesn’t just say W or L. If the game went to overtime, it lists that. That complicates counting wins. And, with ridgeplots, I want to be be able to separate EVERY GAME by how many wins the team had over a SEASON. So I’ve got some work to do.</p>
 <p>First, here’s a trick to find a string of text and make that. It’s called <code>grepl</code> and the basic syntax is grepl for this string in this field and then do what I tell you. In this case, we’re going to create a new field called winloss look for W or L (and ignore any OT notation) and give wins a 1 and losses a 0.</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="ridge-charts.html#cb256-1"></a>winlosslogs &lt;-<span class="st"> </span>logs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">winloss =</span> <span class="kw">case_when</span>(</span>
-<span id="cb256-2"><a href="ridge-charts.html#cb256-2"></a>  <span class="kw">grepl</span>(<span class="st">&quot;W&quot;</span>, W_L) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, </span>
-<span id="cb256-3"><a href="ridge-charts.html#cb256-3"></a>  <span class="kw">grepl</span>(<span class="st">&quot;L&quot;</span>, W_L) <span class="op">~</span><span class="st"> </span><span class="dv">0</span>)</span>
-<span id="cb256-4"><a href="ridge-charts.html#cb256-4"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="ridge-charts.html#cb260-1"></a>winlosslogs &lt;-<span class="st"> </span>logs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">winloss =</span> <span class="kw">case_when</span>(</span>
+<span id="cb260-2"><a href="ridge-charts.html#cb260-2"></a>  <span class="kw">grepl</span>(<span class="st">&quot;W&quot;</span>, W_L) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, </span>
+<span id="cb260-3"><a href="ridge-charts.html#cb260-3"></a>  <span class="kw">grepl</span>(<span class="st">&quot;L&quot;</span>, W_L) <span class="op">~</span><span class="st"> </span><span class="dv">0</span>)</span>
+<span id="cb260-4"><a href="ridge-charts.html#cb260-4"></a>)</span></code></pre></div>
 <p>Now I’m going to add up all the winlosses for each team, which should give me the number of wins for each team.</p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="ridge-charts.html#cb257-1"></a>winlosslogs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Team, Conference, season) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">TeamWins =</span> <span class="kw">sum</span>(winloss)) -&gt;<span class="st"> </span>teamseasonwins</span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="ridge-charts.html#cb261-1"></a>winlosslogs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Team, Conference, season) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">TeamWins =</span> <span class="kw">sum</span>(winloss)) -&gt;<span class="st"> </span>teamseasonwins</span></code></pre></div>
 <pre><code>## `summarise()` regrouping output by &#39;Team&#39;, &#39;Conference&#39; (override with `.groups` argument)</code></pre>
 <p>Now that I have season win totals, I can join that data back to my log data so each game has the total number of wins in each season.</p>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="ridge-charts.html#cb259-1"></a>winlosslogs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">left_join</span>(teamseasonwins, <span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;Team&quot;</span>, <span class="st">&quot;Conference&quot;</span>, <span class="st">&quot;season&quot;</span>)) -&gt;<span class="st"> </span>wintotallogs</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="ridge-charts.html#cb263-1"></a>winlosslogs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">left_join</span>(teamseasonwins, <span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;Team&quot;</span>, <span class="st">&quot;Conference&quot;</span>, <span class="st">&quot;season&quot;</span>)) -&gt;<span class="st"> </span>wintotallogs</span></code></pre></div>
 <p>Now I can use that same <code>case_when</code> logic to create some groupings. So I want to group teams together by how many wins they had over the season. For no good reason, I started with more than 25 wins, then did groups of 5 down to 10 wins. If you had fewer than 10 wins, God help your program.</p>
 <p>The way to create a new field based on groupings like that is to use <code>case_when</code>, which says, basically, when This Thing Is True, Do This. So in our case, we’re going to pass a couple of logical statements that when they are both true, our data gets labeled how we want to label it. So we <code>mutate</code> a field called grouping and then use <code>case_when</code>.</p>
-<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="ridge-charts.html#cb260-1"></a>wintotallogs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">grouping =</span> <span class="kw">case_when</span>(</span>
-<span id="cb260-2"><a href="ridge-charts.html#cb260-2"></a>  TeamWins <span class="op">&gt;</span><span class="st"> </span><span class="dv">25</span> <span class="op">~</span><span class="st"> &quot;More than 25 wins&quot;</span>,</span>
-<span id="cb260-3"><a href="ridge-charts.html#cb260-3"></a>  TeamWins <span class="op">&gt;=</span><span class="st"> </span><span class="dv">20</span> <span class="op">&amp;</span><span class="st"> </span>TeamWins <span class="op">&lt;=</span><span class="dv">25</span> <span class="op">~</span><span class="st"> &quot;20-25 wins&quot;</span>,</span>
-<span id="cb260-4"><a href="ridge-charts.html#cb260-4"></a>  TeamWins <span class="op">&gt;=</span><span class="st"> </span><span class="dv">15</span> <span class="op">&amp;</span><span class="st"> </span>TeamWins <span class="op">&lt;=</span><span class="dv">19</span> <span class="op">~</span><span class="st"> &quot;15-19 wins&quot;</span>,</span>
-<span id="cb260-5"><a href="ridge-charts.html#cb260-5"></a>  TeamWins <span class="op">&gt;=</span><span class="st"> </span><span class="dv">10</span> <span class="op">&amp;</span><span class="st"> </span>TeamWins <span class="op">&lt;=</span><span class="dv">14</span> <span class="op">~</span><span class="st"> &quot;10-14 wins&quot;</span>,</span>
-<span id="cb260-6"><a href="ridge-charts.html#cb260-6"></a>  TeamWins <span class="op">&lt;</span><span class="st"> </span><span class="dv">10</span> <span class="op">~</span><span class="st"> &quot;Less than 10 wins&quot;</span>)</span>
-<span id="cb260-7"><a href="ridge-charts.html#cb260-7"></a>) -&gt;<span class="st"> </span>wintotalgroupinglogs</span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="ridge-charts.html#cb264-1"></a>wintotallogs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">grouping =</span> <span class="kw">case_when</span>(</span>
+<span id="cb264-2"><a href="ridge-charts.html#cb264-2"></a>  TeamWins <span class="op">&gt;</span><span class="st"> </span><span class="dv">25</span> <span class="op">~</span><span class="st"> &quot;More than 25 wins&quot;</span>,</span>
+<span id="cb264-3"><a href="ridge-charts.html#cb264-3"></a>  TeamWins <span class="op">&gt;=</span><span class="st"> </span><span class="dv">20</span> <span class="op">&amp;</span><span class="st"> </span>TeamWins <span class="op">&lt;=</span><span class="dv">25</span> <span class="op">~</span><span class="st"> &quot;20-25 wins&quot;</span>,</span>
+<span id="cb264-4"><a href="ridge-charts.html#cb264-4"></a>  TeamWins <span class="op">&gt;=</span><span class="st"> </span><span class="dv">15</span> <span class="op">&amp;</span><span class="st"> </span>TeamWins <span class="op">&lt;=</span><span class="dv">19</span> <span class="op">~</span><span class="st"> &quot;15-19 wins&quot;</span>,</span>
+<span id="cb264-5"><a href="ridge-charts.html#cb264-5"></a>  TeamWins <span class="op">&gt;=</span><span class="st"> </span><span class="dv">10</span> <span class="op">&amp;</span><span class="st"> </span>TeamWins <span class="op">&lt;=</span><span class="dv">14</span> <span class="op">~</span><span class="st"> &quot;10-14 wins&quot;</span>,</span>
+<span id="cb264-6"><a href="ridge-charts.html#cb264-6"></a>  TeamWins <span class="op">&lt;</span><span class="st"> </span><span class="dv">10</span> <span class="op">~</span><span class="st"> &quot;Less than 10 wins&quot;</span>)</span>
+<span id="cb264-7"><a href="ridge-charts.html#cb264-7"></a>) -&gt;<span class="st"> </span>wintotalgroupinglogs</span></code></pre></div>
 <p>So my <code>wintotalgroupinglogs</code> table has each game, with a field that gives the total number of wins each team had that season and labeling each game with one of five groupings. I could use <code>dplyr</code> to do group_by on those five groups and find some things out about them, but ridgeplots do that visually.</p>
 <p>Let’s look at the differences in rebounds by those five groups. Do teams that win more than 25 games rebound better than teams that win fewer games?</p>
 <p>The answer might surprise you.</p>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="ridge-charts.html#cb261-1"></a><span class="kw">ggplot</span>(wintotalgroupinglogs, <span class="kw">aes</span>(<span class="dt">x =</span> TeamTotalRebounds, <span class="dt">y =</span> grouping, <span class="dt">fill =</span> grouping)) <span class="op">+</span></span>
-<span id="cb261-2"><a href="ridge-charts.html#cb261-2"></a><span class="st">  </span><span class="kw">geom_density_ridges</span>() <span class="op">+</span></span>
-<span id="cb261-3"><a href="ridge-charts.html#cb261-3"></a><span class="st">  </span><span class="kw">theme_ridges</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb261-4"><a href="ridge-charts.html#cb261-4"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="ridge-charts.html#cb265-1"></a><span class="kw">ggplot</span>(wintotalgroupinglogs, <span class="kw">aes</span>(<span class="dt">x =</span> TeamTotalRebounds, <span class="dt">y =</span> grouping, <span class="dt">fill =</span> grouping)) <span class="op">+</span></span>
+<span id="cb265-2"><a href="ridge-charts.html#cb265-2"></a><span class="st">  </span><span class="kw">geom_density_ridges</span>() <span class="op">+</span></span>
+<span id="cb265-3"><a href="ridge-charts.html#cb265-3"></a><span class="st">  </span><span class="kw">theme_ridges</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb265-4"><a href="ridge-charts.html#cb265-4"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 <pre><code>## Picking joint bandwidth of 0.88</code></pre>
 <pre><code>## Warning: Removed 2 rows containing non-finite values (stat_density_ridges).</code></pre>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-157-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-159-1.png" width="672" /></p>
 <p>Answer? Not really. Game to game, maybe. Over five seasons? The differences are indistinguishable.</p>
 <p>How about assists?</p>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="ridge-charts.html#cb264-1"></a><span class="kw">ggplot</span>(wintotalgroupinglogs, <span class="kw">aes</span>(<span class="dt">x =</span> TeamAssists, <span class="dt">y =</span> grouping, <span class="dt">fill =</span> grouping)) <span class="op">+</span></span>
-<span id="cb264-2"><a href="ridge-charts.html#cb264-2"></a><span class="st">  </span><span class="kw">geom_density_ridges</span>() <span class="op">+</span></span>
-<span id="cb264-3"><a href="ridge-charts.html#cb264-3"></a><span class="st">  </span><span class="kw">theme_ridges</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb264-4"><a href="ridge-charts.html#cb264-4"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="ridge-charts.html#cb268-1"></a><span class="kw">ggplot</span>(wintotalgroupinglogs, <span class="kw">aes</span>(<span class="dt">x =</span> TeamAssists, <span class="dt">y =</span> grouping, <span class="dt">fill =</span> grouping)) <span class="op">+</span></span>
+<span id="cb268-2"><a href="ridge-charts.html#cb268-2"></a><span class="st">  </span><span class="kw">geom_density_ridges</span>() <span class="op">+</span></span>
+<span id="cb268-3"><a href="ridge-charts.html#cb268-3"></a><span class="st">  </span><span class="kw">theme_ridges</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb268-4"><a href="ridge-charts.html#cb268-4"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 <pre><code>## Picking joint bandwidth of 0.601</code></pre>
 <pre><code>## Warning: Removed 2 rows containing non-finite values (stat_density_ridges).</code></pre>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-158-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-160-1.png" width="672" /></p>
 <p>There’s a little better, especially between top and bottom.</p>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="ridge-charts.html#cb267-1"></a><span class="kw">ggplot</span>(wintotalgroupinglogs, <span class="kw">aes</span>(<span class="dt">x =</span> Team3PPCT, <span class="dt">y =</span> grouping, <span class="dt">fill =</span> grouping)) <span class="op">+</span></span>
-<span id="cb267-2"><a href="ridge-charts.html#cb267-2"></a><span class="st">  </span><span class="kw">geom_density_ridges</span>() <span class="op">+</span></span>
-<span id="cb267-3"><a href="ridge-charts.html#cb267-3"></a><span class="st">  </span><span class="kw">theme_ridges</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb267-4"><a href="ridge-charts.html#cb267-4"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="ridge-charts.html#cb271-1"></a><span class="kw">ggplot</span>(wintotalgroupinglogs, <span class="kw">aes</span>(<span class="dt">x =</span> Team3PPCT, <span class="dt">y =</span> grouping, <span class="dt">fill =</span> grouping)) <span class="op">+</span></span>
+<span id="cb271-2"><a href="ridge-charts.html#cb271-2"></a><span class="st">  </span><span class="kw">geom_density_ridges</span>() <span class="op">+</span></span>
+<span id="cb271-3"><a href="ridge-charts.html#cb271-3"></a><span class="st">  </span><span class="kw">theme_ridges</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb271-4"><a href="ridge-charts.html#cb271-4"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 <pre><code>## Picking joint bandwidth of 0.0156</code></pre>
 <pre><code>## Warning: Removed 2 rows containing non-finite values (stat_density_ridges).</code></pre>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-159-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-161-1.png" width="672" /></p>
 <p>If you’ve been paying attention this semester, you know what’s coming next.</p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="ridge-charts.html#cb270-1"></a><span class="kw">ggplot</span>(wintotalgroupinglogs, <span class="kw">aes</span>(<span class="dt">x =</span> TeamFGPCT, <span class="dt">y =</span> grouping, <span class="dt">fill =</span> grouping)) <span class="op">+</span></span>
-<span id="cb270-2"><a href="ridge-charts.html#cb270-2"></a><span class="st">  </span><span class="kw">geom_density_ridges</span>() <span class="op">+</span></span>
-<span id="cb270-3"><a href="ridge-charts.html#cb270-3"></a><span class="st">  </span><span class="kw">theme_ridges</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb270-4"><a href="ridge-charts.html#cb270-4"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="ridge-charts.html#cb274-1"></a><span class="kw">ggplot</span>(wintotalgroupinglogs, <span class="kw">aes</span>(<span class="dt">x =</span> TeamFGPCT, <span class="dt">y =</span> grouping, <span class="dt">fill =</span> grouping)) <span class="op">+</span></span>
+<span id="cb274-2"><a href="ridge-charts.html#cb274-2"></a><span class="st">  </span><span class="kw">geom_density_ridges</span>() <span class="op">+</span></span>
+<span id="cb274-3"><a href="ridge-charts.html#cb274-3"></a><span class="st">  </span><span class="kw">theme_ridges</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb274-4"><a href="ridge-charts.html#cb274-4"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 <pre><code>## Picking joint bandwidth of 0.0102</code></pre>
 <pre><code>## Warning: Removed 2 rows containing non-finite values (stat_density_ridges).</code></pre>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-160-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-162-1.png" width="672" /></p>
 
 </div>
             </section>

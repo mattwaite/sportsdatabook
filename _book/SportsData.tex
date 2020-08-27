@@ -776,7 +776,7 @@ So first we'll import the tidyverse so we can read in our data and begin to work
 \end{Highlighting}
 \end{Shaded}
 
-Now we'll import a common and \href{https://unl.box.com/s/etqna5bfvf3b0gsnw0kcjjn1rxx9335s}{simple dataset of total attendance} at NCAA football games over the last few seasons.
+Now we'll import a common and \href{https://unl.box.com/s/oajabnn5614s22jstgcd9ojxo2njn6jt}{simple dataset of total attendance} at NCAA football games over the last few seasons.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -906,7 +906,7 @@ There's metric in basketball that's easy to understand -- shooting percentage. I
 
 Basketball nerds, because of these weaknesses, have created a new metric called \href{https://en.wikipedia.org/wiki/True_shooting_percentage}{True Shooting Percentage}. True shooting percentage takes into account all aspects of a players shooting to determine who the real shooters are.
 
-Using \texttt{dplyr} and \texttt{mutate}, we can calculate true shooting percentage. So let's look at a new dataset, one of \href{https://unl.box.com/s/s1wzw61u9ia50qmirfhuvprgpmmah9rj}{every college basketball player's season stats in 2018-19 season}. It's a dataset of 5,386 players, and we've got 59 variables -- one of them is True Shooting Percentage, but we're going to ignore that.
+Using \texttt{dplyr} and \texttt{mutate}, we can calculate true shooting percentage. So let's look at a new dataset, one of \href{https://unl.box.com/s/u99ualyzrrzucunr9edd3m4gvgvorez6}{every college basketball player's season stats in 2018-19 season}. It's a dataset of 5,386 players, and we've got 59 variables -- one of them is True Shooting Percentage, but we're going to ignore that.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -995,7 +995,7 @@ More often than not, we have more data than we want. Sometimes we need to be rid
 
 \textbf{Selecting simply returns only the fields named}. So if you only want to see School and Attendance, you select those fields. When you look at your data again, you'll have two columns. If you try to use one of your columns that you had before you used select, you'll get an error.
 
-Let's work with our \href{https://unl.box.com/s/etqna5bfvf3b0gsnw0kcjjn1rxx9335s}{football attendance} data to show some examples.
+Let's work with our \href{https://unl.box.com/s/oajabnn5614s22jstgcd9ojxo2njn6jt}{football attendance} data to show some examples.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1168,7 +1168,7 @@ If you have truly massive data, Select has tools to help you select fields that 
 \hypertarget{using-conditional-filters-to-set-limits}{%
 \section{Using conditional filters to set limits}\label{using-conditional-filters-to-set-limits}}
 
-Let's return to the blistering season of Drayton Whiteside using our dataset of \href{https://unl.box.com/s/s1wzw61u9ia50qmirfhuvprgpmmah9rj}{every college basketball player's season stats in 2018-19 season}. How can we set limits in something like a question of who had the best season? Let's get our Drayton Whiteside data from the previous chapter back up.
+Let's return to the blistering season of Drayton Whiteside using our dataset of \href{https://unl.box.com/s/u99ualyzrrzucunr9edd3m4gvgvorez6}{every college basketball player's season stats in 2018-19 season}. How can we set limits in something like a question of who had the best season? Let's get our Drayton Whiteside data from the previous chapter back up.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1319,7 +1319,7 @@ You are soon going to discover that long before you can visualize data, \textbf{
 
 But what if your visualization library needs one row for each measure? So state, data type and the data. Nebraska, Population, 1,929,000. That's one row. Then the next row is Nebraska, Average Life Expectancy, 76. That's the next row. That's where recasting your data comes in.
 
-We can use a library called \texttt{tidyr} to \texttt{pivot\_longer} or \texttt{pivot\_wider} the data, depending on what we need. We'll use a \href{https://unl.box.com/s/etqna5bfvf3b0gsnw0kcjjn1rxx9335s}{dataset of college football attendance} to demonstrate. First we need some libraries.
+We can use a library called \texttt{tidyr} to \texttt{pivot\_longer} or \texttt{pivot\_wider} the data, depending on what we need. We'll use a \href{https://unl.box.com/s/oajabnn5614s22jstgcd9ojxo2njn6jt}{dataset of college football attendance} to demonstrate. First we need some libraries.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1503,71 +1503,147 @@ Now that we have long data for just Nebraska, we can chart it.
 
 \includegraphics{SportsData_files/figure-latex/unnamed-chunk-50-1.pdf}
 
-\hypertarget{simulations}{%
-\chapter{Simulations}\label{simulations}}
+\hypertarget{significance-tests}{%
+\chapter{Significance tests}\label{significance-tests}}
 
-Two seasons ago, James Palmer Jr.~shot 139 three point attempts and made 43 of them for a .309 shooting percentage last year. A few weeks into last season, he was 7 for 39 -- a paltry .179. Is something wrong or is this just bad luck?
+Now that we've worked with data a little, it's time to start asking more probing questions of our data. One of the most probing questions we can ask -- one that so few sports journalists ask -- is if the difference between this thing and the normal thing is real.
 
-Luck is something that comes up a lot in sports. Is a team unlucky? Or a player? One way we can get to this, we can get to that is by simulating things based on their typical percentages. Simulations work by choosing random values within a range based on a distribution. The most common distribution is the normal or binomial distribution. The normal distribution is where the most cases appear around the mean, 66 percent of cases are within one standard deviation from the mean, and the further away from the mean you get, the more rare things become.
+We have a perfect natural experiment going on in sports right now to show how significance tests work. The NBA, to salvage a season and get to the playoffs, put their players in a bubble -- more accurately a hotel complex at Disney World in Orlando -- and had them play games without fans.
+
+So are the games different from other regular season games that had fans?
+
+To answer this, we need to understand that a significance test is a way to determine if two numbers are \emph{significantly} different from each other. Generally speaking, we're asking if a subset of data -- a sample -- is different from the total data pool -- the population. Typically, this relies on data being in a normal distribution.
 
 \includegraphics[width=17.64in]{images/simulations2}
+If it is, then we know certain things about it. Like the mean -- the average -- will be a line right at the peak of cases. And that 66 percent of cases will be in that red area -- the first standard deviation.
 
-Let's simulate 39 three point attempts 1000 times with his season long shooting percentage and see if this could just be random chance or something else.
+A significance test will determine if a sample taken from that group is different from the total.
 
-We do this using a base R function called \texttt{rbinom} or binomial distribution. So what that means is there's a normally distrubuted chance that James Palmer Jr.~is going to shoot above and below his career three point shooting percentage. If we randomly assign values in that distribution 1000 times, how many times will it come up 7, like this example?
+Significance testing involves stating a hypothesis. In our case, our hypothesis is that there is a difference between bubble games without people and regular games with people.
+
+In statistics, the \textbf{null hypothesis} is the opposite of your hypothesis. In this case, that there is no difference between fans and no fans.
+
+What we're driving toward is a metric called a p-value, which is the probability that you'd get your sample mean \emph{if the null hypothesis is true.} So in our case, it's the probability we'd see the numbers we get if there was no difference between fans and no fans. If that probability is below .05, then we consider the difference significant and we reject the null hypothesis.
+
+So let's see. \href{https://unl.box.com/s/ifhuz3t0b7rbk0u8hr52b17klvqv8lxo}{Here's a log of every game in this NBA season}. There's a field called COVID, which labels the game as a regular game or a bubble game.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{)}
-
-\NormalTok{simulations <-}\StringTok{ }\KeywordTok{rbinom}\NormalTok{(}\DataTypeTok{n =} \DecValTok{1000}\NormalTok{, }\DataTypeTok{size =} \DecValTok{39}\NormalTok{, }\DataTypeTok{prob =} \FloatTok{.309}\NormalTok{)}
-
-\KeywordTok{table}\NormalTok{(simulations)}
+\NormalTok{logs <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/nbabubble.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## simulations
-##   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22 
-##   1   4   5  12  35  44  76 117 134 135 135  99  71  53  37  21  15   2   3   1
+## Parsed with column specification:
+## cols(
+##   .default = col_double(),
+##   Season = col_character(),
+##   Conference = col_character(),
+##   Team = col_character(),
+##   Date = col_date(format = ""),
+##   HomeAway = col_character(),
+##   Opponent = col_character(),
+##   W_L = col_character(),
+##   COVID = col_character()
+## )
 \end{verbatim}
 
-How do we read this? The first row and the second row form a pair. The top row is the number of shots made. The number immediately under it is the number of simulations where that occurred.
+\begin{verbatim}
+## See spec(...) for full column specifications.
+\end{verbatim}
 
-\includegraphics[width=23.06in]{images/simulations1}
+First, let's just look at scoring. Here's a theory: fans make players nervous. The screaming makes players tense up, and tension makes for bad shooting. An alternative to this: screaming fans make you defend harder. So my hypothesis is that not only is the scoring different, it's lower.
 
-So what we see is given his season long shooting percentage, it's not out of the realm of randomness that with just 39 attempts for Palmer, he's only hit only 7. In 1000 simulations, it comes up 35 times. Is he below where he should be? Yes. Will he likely improve and soon? Unless something is very wrong, yes. And indeed, by the end of the season, he finished with a .313 shooting percentage from 3 point range. So we can say he was just unlucky.
-
-\hypertarget{cold-streaks}{%
-\section{Cold streaks}\label{cold-streaks}}
-
-During the Western Illinois game, the team, shooting .329 on the season from behind the arc, went 0-15 in the second half. How strange is that?
+First things first, let's create a new field, called \texttt{totalpoints} and add the two scores together. We'll need this, so we're going to make this a new dataframe called \texttt{points}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{)}
-
-\NormalTok{simulations <-}\StringTok{ }\KeywordTok{rbinom}\NormalTok{(}\DataTypeTok{n =} \DecValTok{1000}\NormalTok{, }\DataTypeTok{size =} \DecValTok{15}\NormalTok{, }\DataTypeTok{prob =} \FloatTok{.329}\NormalTok{)}
-
-\KeywordTok{hist}\NormalTok{(simulations)}
+\NormalTok{points <-}\StringTok{ }\NormalTok{logs }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{totalpoints =}\NormalTok{ TeamScore }\OperatorTok{+}\StringTok{ }\NormalTok{OpponentScore )}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-54-1.pdf}
+Typically speaking, with significance tests, the process involves creating two different means and then running a bunch of formulas on them. R makes this easy by giving you a \texttt{t.test} function, which does all the work for you. What we have to tell it is what is the value we are testing, over which groups, and from what data. It looks like this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{table}\NormalTok{(simulations)}
+\KeywordTok{t.test}\NormalTok{(totalpoints }\OperatorTok{~}\StringTok{ }\NormalTok{COVID, }\DataTypeTok{data=}\NormalTok{points)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## simulations
-##   0   1   2   3   4   5   6   7   8   9  10  11 
-##   5  16  59 132 200 218 172  92  65  34   4   3
+## 
+## 	Welch Two Sample t-test
+## 
+## data:  totalpoints by COVID
+## t = -5.232, df = 206.88, p-value = 4.099e-07
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -11.64698  -5.27178
+## sample estimates:
+##    mean in group With Fans mean in group Without Fans 
+##                   222.8929                   231.3523
 \end{verbatim}
 
-Short answer: Really weird. If you simulate 15 threes 1000 times, sometimes you'll see them miss all of them, but only a few times -- five times, in this case. Most of the time, the team won't go 0-15 even once. So going ice cold is not totally out of the realm of random chance, but it's highly unlikely.
+Now let's talk about the output. I prefer to read these bottom up. So at the bottom, it says that the mean number of points score in an NBA game With Fans is 222.89. The mean scored in games Without Fans is 231.35. That means teams are scoring almost 8.5 points MORE without fans on average.
+
+But, some games are defenseless track meets, some games are defensive slugfests. We learned that averages can be skewed by extremes. So the next thing we need to look at is the p-value. Remember, this is the probability that we'd get this sample mean -- the without fans mean -- if there was no difference between fans and no fans.
+
+The probability? 4.099 x 10 to the -7 power. Don't remember your scientific notation? That's .00000004099. The decimal, seven zeros and the number.
+
+Remember, if the probability is below .05, then we determine that that this number is statistically significant. We'll talk more about statistical significance soon, but in this case, statistical significance means that our hypothesis is correct: points are different without fans than with.
+
+Well, .000000004099 is less than .05, so we \emph{reject the null hypothesis} and we can confidently say that bubble teams are scoring more than they were when fans packed arenas.
+
+\hypertarget{accepting-the-null-hypothesis}{%
+\section{Accepting the null hypothesis}\label{accepting-the-null-hypothesis}}
+
+So what does it look like when your hypothesis is wrong?
+
+Let's test another thing that may have been impacted by bubble games: home court advantage. If you're the home team, but you're not at home, does it affect you? It has to, right? Your fans aren't there. Home and away are just positions on the scoreboard. It can't matter, can it?
+
+My hypothesis, because we have to test if it's different, is that home court is no longer an advantage, and the home team will score less relative to the away team.
+
+First things first: We need to make a dataframe where Team is the home team. And then we'll create a differential between the home team and away team. If home court is an advantage, the differential should average out to be positive -- the home team scores more than the away team.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{homecourt <-}\StringTok{ }\NormalTok{logs }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(HomeAway) }\OperatorTok{==}\StringTok{ }\OtherTok{TRUE}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{differential =}\NormalTok{ TeamScore }\OperatorTok{-}\StringTok{ }\NormalTok{OpponentScore)}
+\end{Highlighting}
+\end{Shaded}
+
+Now let's test it.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{t.test}\NormalTok{(differential }\OperatorTok{~}\StringTok{ }\NormalTok{COVID, }\DataTypeTok{data=}\NormalTok{homecourt)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 	Welch Two Sample t-test
+## 
+## data:  differential by COVID
+## t = 0.36892, df = 107.84, p-value = 0.7129
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -2.301628  3.354268
+## sample estimates:
+##    mean in group With Fans mean in group Without Fans 
+##                   2.174047                   1.647727
+\end{verbatim}
+
+So again, start at the bottom. With Fans, the home team averages 2.17 more points than the away team. Without fans, they average 1.64 more.
+
+If you are a bad sportswriter or a hack sports talk radio host, you look at this and scream ``the bubble killed home court!''
+
+But two things: first, the home team is STILL scoring more than the away team on the whole.
+
+And two: Look at the p-value. It's .7129. Is that less than .05? No, no it is not. So that means we have to \textbf{accept the null hypothesis} that there is no difference between fans and no fans when it comes to the difference between the home team and the away team's score.
+
+Now, does this mean that the bubble hasn't impacted the magic of home court? Not necessarily. What it's saying is that this metric isn't capable of telling you that.
+
+We're going to be analyzing these bubble games for \emph{years} trying to find the true impact of fans.
 
 \hypertarget{correlations-and-regression}{%
 \chapter{Correlations and regression}\label{correlations-and-regression}}
@@ -1627,7 +1703,7 @@ We're going create a new dataframe called newcorrelations that takes our data th
 \end{Highlighting}
 \end{Shaded}
 
-In R, there is a \texttt{cor} function, and it works much the same as \texttt{mean} or \texttt{median}. So we want to see if \texttt{differential} is correlated with \texttt{Yards}, which is the yards of penalties a team gets in a game. We do that by referenceing \texttt{differential} and \texttt{Yards} and specifying we want a \texttt{pearson} correlation. The number we get back is the correlation coefficient.
+In R, there is a \texttt{cor} function, and it works much the same as \texttt{mean} or \texttt{median}. So we want to see if \texttt{differential} is correlated with \texttt{Yards}, which is the yards of penalties a team gets in a game. We do that by referencing \texttt{differential} and \texttt{Yards} and specifying we want a \texttt{pearson} correlation. The number we get back is the correlation coefficient.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1732,7 +1808,7 @@ There's three things we need here:
 
 You can see the problem in a graph. On the X axis is penalty yards, on the y is aggregate score. If these elements had a strong relationship, we'd see a clear pattern moving from right to left, sloping down. On the left would be the teams with lots of penalty yards and a negative point differential. On right would be teams with low penalty yards and high point differentials. Do you see that below?
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-62-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-64-1.pdf}
 
 \begin{quote}
 \textbf{Your turn}: Try it with the other penalty measures. Total penalties and penalty yards per game. Does anything change? Do either of these meet the .05 threshold for randomness? Are either of these any more predictive?
@@ -2548,7 +2624,7 @@ So looking at this table, what you see here are the teams who scored more than t
 
 But, before we can bestow any validity on it, we need to see if this linear model is appropriate. We've done that some looking at our p-values and R-squared values. But one more check is to look at the residuals themselves. We do that by plotting the residuals with the predictor. We'll get into plotting soon, but for now just seeing it is enough.
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-85-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-87-1.pdf}
 
 The lack of a shape here -- the seemingly random nature -- is a good sign that a linear model works for our data. If there was a pattern, that would indicate something else was going on in our data and we needed a different model.
 
@@ -2558,7 +2634,7 @@ Another way to view your residuals is by connecting the predicted value with the
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-86-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-88-1.pdf}
 
 The blue line here separates underperformers from overperformers.
 
@@ -2649,7 +2725,7 @@ So what we can say about this model is that it's statistically significant but u
 
 So our model says Oklahoma \emph{should} only be scoring 31.3 points per game given how many penalty yards per game, but they're really scoring 48.4. Oy. What happens if we plot those residuals?
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-91-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-93-1.pdf}
 
 Well \ldots{} it actually says that a linear model is appropriate. Which an important lesson -- just because your residual plot says a linear model works here, that doesn't say your linear model is good. There are other measures for that, and you need to use them.
 
@@ -2659,7 +2735,7 @@ Here's the segment plot of residuals -- you'll see some really long lines. That'
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-92-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-94-1.pdf}
 
 \hypertarget{z-scores}{%
 \chapter{Z scores}\label{z-scores}}
@@ -2966,7 +3042,7 @@ Note: attendance is our data, \texttt{aes} means aesthetics, \texttt{x=Instituti
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-105-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-107-1.pdf}
 
 We get \ldots{} weirdness. We expected to see bars of different sizes, but we get all with a count of 1. What gives? Well, this is the default behavior. What we have here is something called a histogram, where \texttt{ggplot2} helpfully counted up the number of times the Institution appears and counted them up. Since we only have one record per Institution, the count is always 1. How do we fix this? By adding \texttt{weight} to our aesthetic.
 
@@ -2977,7 +3053,7 @@ We get \ldots{} weirdness. We expected to see bars of different sizes, but we ge
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-106-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-108-1.pdf}
 
 Closer. But \ldots{} what order is that in? And what happened to our count numbers on the left? Why are they in scientific notation?
 
@@ -2989,7 +3065,7 @@ Let's deal with the ordering first. \texttt{ggplot2}'s default behavior is to so
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-107-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-109-1.pdf}
 
 Better. We can argue about if the right order is smallest to largest or largest to smallest. But this gets us close. By the way, to sort it largest to smallest, put a negative sign in front of the sort field.
 
@@ -2999,7 +3075,7 @@ Better. We can argue about if the right order is smallest to largest or largest 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-108-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-110-1.pdf}
 
 \hypertarget{scales}{%
 \section{Scales}\label{scales}}
@@ -3024,7 +3100,7 @@ To alter the scale, we add a piece to our plot with \texttt{+} and we tell it wh
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-110-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-112-1.pdf}
 
 Better.
 
@@ -3042,7 +3118,7 @@ We are going to spend a lot more time on styling, but let's add some simple labe
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-111-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-113-1.pdf}
 
 The library has lots and lots of ways to alter the styling -- we can programmatically control nearly every part of the look and feel of the chart. One simple way is to apply themes in the library already. We do that the same way we've done other things -- we add them. Here's the light theme.
 
@@ -3056,7 +3132,7 @@ The library has lots and lots of ways to alter the styling -- we can programmati
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-112-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-114-1.pdf}
 
 Or the minimal theme:
 
@@ -3070,7 +3146,7 @@ Or the minimal theme:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-113-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-115-1.pdf}
 
 Later on, we'll write our own themes. For now, the built in ones will get us closer to something that looks good.
 
@@ -3090,7 +3166,7 @@ Sometimes, we don't want vertical bars. Maybe we think this would look better ho
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-114-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-116-1.pdf}
 
 \hypertarget{stacked-bar-charts}{%
 \chapter{Stacked bar charts}\label{stacked-bar-charts}}
@@ -3161,7 +3237,7 @@ Building on what we learned in the last chapter, we know we can turn this into a
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-119-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-121-1.pdf}
 
 What's the problem with this chart?
 
@@ -3207,7 +3283,7 @@ Here it is in a pie chart:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-120-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-122-1.pdf}
 
 You can see, it's pretty white. But \ldots{} what about beyond that? How carefully can you evaluate angles and area?
 
@@ -3252,7 +3328,7 @@ The waffle library can break this down in a way that's easier on the eyes than a
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-123-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-125-1.pdf}
 
 Or, we could make this two teams in the same chart.
 
@@ -3268,7 +3344,7 @@ Or, we could make this two teams in the same chart.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-125-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-127-1.pdf}
 
 \hypertarget{waffle-irons}{%
 \section{Waffle Irons}\label{waffle-irons}}
@@ -3284,7 +3360,7 @@ So what does it look like if we compare the two teams using the two vectors in t
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-126-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-128-1.pdf}
 
 What do you notice about this chart? Notice how the squares aren't the same size? Well, Ohio State outgained Nebraska by a long way. So the squares aren't the same size because the numbers aren't the same. We can fix that by adding an unnamed padding number so the number of shots add up to the same thing. Let's make the total for everyone be 580, Ohio State's total yards of offense. So to do that, we need to add a padding of 349 to Nebraska. REMEMBER: Don't name it or it'll show up in the legend.
 
@@ -3306,7 +3382,7 @@ Now, in our waffle iron, if we don't give that padding a color, we'll get an err
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-128-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-130-1.pdf}
 
 One last thing we can do is change the 1 square = 1 yard bit -- which makes the squares really small in this case -- by dividing our vector. Remember what you learned in Swirl about math on vectors?
 
@@ -3319,7 +3395,7 @@ One last thing we can do is change the 1 square = 1 yard bit -- which makes the 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-129-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-131-1.pdf}
 
 News flash: Ohio State crushed Nebraska.
 
@@ -3389,7 +3465,7 @@ Line charts, unlike bar charts, do have a y-axis. So in our ggplot step, we have
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-133-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-135-1.pdf}
 
 See a problem here? Note the Y axis doesn't start with zero. That makes this look worse than it is (and that February swoon is pretty bad). To make the axis what you want, you can use \texttt{scale\_x\_continuous} or \texttt{scale\_y\_continuous} and pass in a list with the bottom and top value you want. You do that like this:
 
@@ -3399,7 +3475,7 @@ See a problem here? Note the Y axis doesn't start with zero. That makes this loo
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-134-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-136-1.pdf}
 
 Note also that our X axis labels are automated. It knows it's a date and it just labels it by month.
 
@@ -3424,7 +3500,7 @@ First, let's chart Nebraska. Read carefully. First we set the data. Then we set 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-136-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-138-1.pdf}
 
 Now, by using +, we can add Michigan State to it. REMEMBER COPY AND PASTE IS A THING. Nothing changes except what data you are using.
 
@@ -3434,7 +3510,7 @@ Now, by using +, we can add Michigan State to it. REMEMBER COPY AND PASTE IS A T
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-137-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-139-1.pdf}
 
 Let's flatten our lines out by zeroing the Y axis.
 
@@ -3444,7 +3520,7 @@ Let's flatten our lines out by zeroing the Y axis.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-138-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-140-1.pdf}
 
 So visually speaking, the difference between Nebraska and Michigan State's season is that Michigan State stayed mostly on an even keel, and Nebraska went on a two month swoon.
 
@@ -3469,7 +3545,7 @@ I can keep layering on layers all day if I want. And if my dataset has more than
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-140-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-142-1.pdf}
 
 What do we see here? How has Nebraska and Michigan State's season evolved against all the rest of the teams in college basketball?
 
@@ -3491,7 +3567,7 @@ But how does that compare to the average? We can add that pretty easily by creat
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-142-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-144-1.pdf}
 
 \hypertarget{step-charts}{%
 \chapter{Step charts}\label{step-charts}}
@@ -3570,7 +3646,7 @@ The step chart is it's own geom, so we can employ it just like we have the other
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-147-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-149-1.pdf}
 
 Let's try a different element of the aesthetic: color, but this time inside the aesthetic. Last time, we did the color outside. When you put it inside, you pass it a column name and ggplot will color each line based on what thing that is, and it will create a legend that labels each line that thing.
 
@@ -3580,7 +3656,7 @@ Let's try a different element of the aesthetic: color, but this time inside the 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-148-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-150-1.pdf}
 
 From this, we can see two teams in the Big Ten had negative point differentials last season -- Illinois and Rutgers.
 
@@ -3611,7 +3687,7 @@ The second thing I'm going to add is the annotation layer. In this case, I am ad
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-150-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-152-1.pdf}
 
 \hypertarget{ridge-charts}{%
 \chapter{Ridge charts}\label{ridge-charts}}
@@ -3732,7 +3808,7 @@ The answer might surprise you.
 ## Warning: Removed 2 rows containing non-finite values (stat_density_ridges).
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-157-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-159-1.pdf}
 
 Answer? Not really. Game to game, maybe. Over five seasons? The differences are indistinguishable.
 
@@ -3755,7 +3831,7 @@ How about assists?
 ## Warning: Removed 2 rows containing non-finite values (stat_density_ridges).
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-158-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-160-1.pdf}
 
 There's a little better, especially between top and bottom.
 
@@ -3776,7 +3852,7 @@ There's a little better, especially between top and bottom.
 ## Warning: Removed 2 rows containing non-finite values (stat_density_ridges).
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-159-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-161-1.pdf}
 
 If you've been paying attention this semester, you know what's coming next.
 
@@ -3797,7 +3873,7 @@ If you've been paying attention this semester, you know what's coming next.
 ## Warning: Removed 2 rows containing non-finite values (stat_density_ridges).
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-160-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-162-1.pdf}
 
 \hypertarget{lollipop-charts}{%
 \chapter{Lollipop charts}\label{lollipop-charts}}
@@ -3899,7 +3975,7 @@ A lollipop chart is made up of two things -- a line between two points, and two 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-167-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-169-1.pdf}
 
 We can do better by changing the order of the teams by their shooting performance and giving it some theme love.
 
@@ -3923,7 +3999,7 @@ We can do better by changing the order of the teams by their shooting performanc
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-168-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-170-1.pdf}
 
 What if we wanted to order them by wins? Our data has a column called W\_L that lists if the team won or lost. The problem is it doens't just say W or L. If the game went to overtime, it lists that. That complicates counting wins. Here's a trick to find a string of text and make that. It's called \texttt{grepl} and the basic syntax is grepl for this string in this field and then do what I tell you. In this case, we're going to create a new field called winloss look for W or L (and ignore any OT notation) and give wins a 1 and losses a 0.
 
@@ -3964,7 +4040,7 @@ So let's look at turnovers and assists. We'll call it give and take. Does the di
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-172-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-174-1.pdf}
 
 Short answer: Not really. Something you need to get used to in data visualization -- not everything works. Sometimes you find things, sometimes you don't. Don't publish a graphic that doesn't find anything. Let it stay in your notebook as an idea that didn't pan out.
 
@@ -4054,7 +4130,7 @@ Now let's look at the scatterplot. With a scatterplot, we put what predicts the 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-177-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-179-1.pdf}
 
 Let's talk about this. It seems that the data slopes up to the right. That would indicate a positive correlation between shooting percentage and wins. And that makes sense, no? You'd expect teams that shoot the ball well to win. But can we get a better sense of this? Yes, by adding another geom -- \texttt{geom\_smooth}.
 
@@ -4068,7 +4144,7 @@ Let's talk about this. It seems that the data slopes up to the right. That would
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-178-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-180-1.pdf}
 
 But \ldots{} how strong a relationship is this? How much can shooting percentage explain wins? Can we put some numbers to this?
 
@@ -4182,7 +4258,7 @@ The first thing we can do is look at a line chart, like we have done in previous
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-183-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-185-1.pdf}
 
 And, not surprisingly, we get a hairball. We could color certain lines, but that would limit us to focus on one team. What if we did all of them at once? We do that with a \texttt{facet\_wrap}. The only thing we MUST pass into a \texttt{facet\_wrap} is what thing we're going to separate them out by. In this case, we precede that field with a tilde, so in our case we want the Team field. It looks like this:
 
@@ -4192,7 +4268,7 @@ And, not surprisingly, we get a hairball. We could color certain lines, but that
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-184-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-186-1.pdf}
 
 Answer: Not immediately clear, but we can look at this and analyze it. We could add a piece of annotation to help us out.
 
@@ -4215,7 +4291,7 @@ Answer: Not immediately clear, but we can look at this and analyze it. We could 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-186-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-188-1.pdf}
 
 What do you see here? How do teams compare? How do they change over time? I'm not asking you these questions because they're an assignment -- I'm asking because that's exactly what this chart helps answer. Your brain will immediately start making those connections.
 
@@ -4230,7 +4306,7 @@ Facet grids allow us to put teams on the same plane, versus just repeating them.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-187-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-189-1.pdf}
 
 And here they are next to each other:
 
@@ -4240,7 +4316,7 @@ And here they are next to each other:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-188-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-190-1.pdf}
 
 Note: We'd have some work to do with the labeling on this -- we'll get to that -- but you can see where this is valuable comparing a group of things. One warning: Don't go too crazy with this or it loses it's visual power.
 
@@ -4255,7 +4331,7 @@ Line charts aren't the only things we can do. We can do any kind of chart in ggp
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-189-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-191-1.pdf}
 
 \hypertarget{tables}{%
 \chapter{Tables}\label{tables}}
@@ -5138,7 +5214,7 @@ A bubble chart is just a scatterplot with one additional element in the aestheti
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-204-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-206-1.pdf}
 
 As expected, yards per game pretty tightly predicts points per game, but you could have guessed that without a chart. So let's add the size element.
 
@@ -5148,7 +5224,7 @@ As expected, yards per game pretty tightly predicts points per game, but you cou
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-205-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-207-1.pdf}
 
 Eh. What does this chart tell you? Trick question, there's not much new here. The dots are too big. Also, we can't see when they overlap. We can fix that by adding an alpha element outside the aesthetic -- alpha in this case is transparency -- and we can manually change the size of the dots by adding \texttt{scale\_size} and a \texttt{range}.
 
@@ -5158,7 +5234,7 @@ Eh. What does this chart tell you? Trick question, there's not much new here. Th
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-206-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-208-1.pdf}
 
 Before we do any more work, let's return to the earlier question: What story does this tell? Can you discern a story from the bubbles? Are teams with lots of turnovers doing poorly and teams with few turnovers doing well? The problem is, you can't really tell. So this is a dead end for a bubble chart. If you get a big mess, it's a dead giveaway that you probably don't have a bubble chart.
 
@@ -5210,7 +5286,7 @@ Now we can do the bubble chart.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-208-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-210-1.pdf}
 
 Better! Teams are spread out a little more. Bottom right quadrant -- the good defense, good offense quadrant -- have some large dots. The upper left quadrant -- bad defense, bad offense -- have some very small dots, meaning they have a really terrible turnover margin.
 
@@ -5234,7 +5310,7 @@ Now we can add \texttt{color=PositiveNegative} to the aesthetic and our dots wil
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-210-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-212-1.pdf}
 
 Now we're getting somewhere. What's the story that this chart tells? Blue dots -- positive turnover margins -- are all drifting toward that good offense, good defense quadrant. Green dots -- negative turnover margins -- are drifting toward that bad defense, bad offense quadrant.
 
@@ -5255,7 +5331,7 @@ Let's add some annotations. Let's look at the top two turnover margin teams and 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-212-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-214-1.pdf}
 
 No surprise there. What about Nebraska?
 
@@ -5276,7 +5352,7 @@ No surprise there. What about Nebraska?
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-214-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-216-1.pdf}
 
 Sadly, no surprise there either.
 
@@ -5300,7 +5376,7 @@ The last things we need to do? Add some labels, apply our finishing touches.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-215-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-217-1.pdf}
 
 \hypertarget{circular-bar-plots}{%
 \chapter{Circular bar plots}\label{circular-bar-plots}}
@@ -5382,7 +5458,7 @@ Earlier, we did stacked bar charts. We have what we need to do that now.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-220-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-222-1.pdf}
 
 Eeek. This is already looking not great. But to make it a circular bar chart, we add \texttt{coord\_polar()} to our chart.
 
@@ -5392,7 +5468,7 @@ Eeek. This is already looking not great. But to make it a circular bar chart, we
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-221-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-223-1.pdf}
 
 Based on that, the day is probably too thin a slice, and there's way too many conferences in college basketball. Let's group this by months and filter out all but the power five conferences.
 
@@ -5422,7 +5498,7 @@ Now we can use wins to make our circular bar chart of wins by month in the Power
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-224-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-226-1.pdf}
 
 Yikes. That looks a lot like a broken pie chart. So months are too thick of a slice. Let's use weeks in our floor date to see what that gives us.
 
@@ -5442,7 +5518,7 @@ Yikes. That looks a lot like a broken pie chart. So months are too thick of a sl
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-226-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-228-1.pdf}
 
 That looks better. But what does it say? Does November basketball matter? What this is saying is \ldots{} yeah, it kinda does. The reason? Lots of wins get piled up in November and December, during non-conference play. So if you are a team with NCAA tournament dreams, you need to win games in November to make sure your tournament resume is where it needs to be come March. Does an individual win or loss matter? Probably not. But your record in November does.
 
@@ -6094,7 +6170,7 @@ The rest is just adding labels and messing with the theme.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-257-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-259-1.pdf}
 
 \hypertarget{finishing-touches-part-1}{%
 \chapter{Finishing touches, part 1}\label{finishing-touches-part-1}}
@@ -6218,7 +6294,7 @@ We'll start with the basics.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-262-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-264-1.pdf}
 
 Let's take changing things one by one. The first thing we can do is change the figure size. Sometimes you don't want a square. We can use the \texttt{knitr} output settings in our chunk to do this easily in our notebooks.
 
@@ -6229,7 +6305,7 @@ Let's take changing things one by one. The first thing we can do is change the f
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-263-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-265-1.pdf}
 
 Now let's add a fit line.
 
@@ -6244,7 +6320,7 @@ Now let's add a fit line.
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-264-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-266-1.pdf}
 
 And now some labels.
 
@@ -6260,7 +6336,7 @@ And now some labels.
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-265-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-267-1.pdf}
 
 Let's get rid of the default plot look and drop the grey background.
 
@@ -6277,7 +6353,7 @@ Let's get rid of the default plot look and drop the grey background.
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-266-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-268-1.pdf}
 
 Off to a good start, but our text has no real heirarchy. We'd want our headline to stand out more. So let's change that. When it comes to changing text, the place to do that is in the theme element. \href{http://ggplot2.tidyverse.org/reference/theme.html}{There are a lot of ways to modify the theme}. We'll start easy. Let's make the headline bigger and bold.
 
@@ -6297,7 +6373,7 @@ Off to a good start, but our text has no real heirarchy. We'd want our headline 
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-267-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-269-1.pdf}
 
 Now let's fix a few other things -- like the axis labels being too big, the subtitle could be bigger and lets drop some grid lines.
 
@@ -6320,7 +6396,7 @@ Now let's fix a few other things -- like the axis labels being too big, the subt
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-268-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-270-1.pdf}
 
 Missing from this graph is the context that the headline promises. Where is Nebraska? We haven't added it yet. So let's add a point and a label for it.
 
@@ -6345,7 +6421,7 @@ Missing from this graph is the context that the headline promises. Where is Nebr
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-269-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-271-1.pdf}
 
 If we're happy with this output -- if it meets all of our needs for publication -- then we can simply export it as a png file. We do that by adding \texttt{+\ ggsave("plot.png",\ width=5,\ height=2)} to the end of our code. Note the width and the height are from our knitr parameters at the top -- you have to repeat them or the graph will export at the default 7x7.
 
@@ -6392,7 +6468,7 @@ We can add labels and themes, but you have to be careful. The waffle library is 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-272-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-274-1.pdf}
 
 Note: The alignment of text sucks.
 
@@ -6449,7 +6525,7 @@ Here is a full example. I start with my waffle iron code, but note that each waf
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-274-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-276-1.pdf}
 
 If you try to use ggsave on that, you'll only get the last waffle chart. Like I said, irons aren't really anything, so ggplot ignores them. So to do this, we have to use R's pdf capability.
 
@@ -6538,7 +6614,7 @@ Let's look at the relationship between a player's batting average and wRC+ (\hre
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-278-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-280-1.pdf}
 
 You can obviously add more aesthetics to make it look better, but you get the picture. If I'm a fan of sports though, obviously I want to see who the outlier points are or just scroll through and see each player at an individual location. We can always annotate data, but that process can be tedious.
 
@@ -6566,7 +6642,7 @@ Let's start simple with just the minimum needed for a scatterplot. For that, we 
 ##   Read more about this attribute -> https://plot.ly/r/reference/#scatter-mode
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-279-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-281-1.pdf}
 
 We get a chart, but hover over a point. Recognize those players? You can't unless you know each player's specific stats to divine who they are. That isn't very friendly, so let's add a hover element. Then we want to specify what we want our users to see when they hover over a data point, hence hoverinfo = ``text''. The next step will be to define what our text is. How that gets done is a little bit of HTML and a little bit of R. What is in quotes is what the users are going to see directly, what's after the quotes is what data is going to appear. So ``Player:'', Name translates to something like Player: Christian Yelich when the user hovers above Yelich's data point.
 
@@ -6597,7 +6673,7 @@ Then we add the HTML, \texttt{\textless{}br\textgreater{}}, or break. All this m
 ##   Read more about this attribute -> https://plot.ly/r/reference/#scatter-mode
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-280-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-282-1.pdf}
 
 Now we can see each player a little better. If you look at the players on the farthest right, you'll find Mike Trout (shocker), Yordan Alvarez and Christian Yelich.
 
@@ -6633,7 +6709,7 @@ To finish, we're going to fix the layout a bit, very similar to how we've been d
 ##   Read more about this attribute -> https://plot.ly/r/reference/#scatter-mode
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-281-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-283-1.pdf}
 
 \hypertarget{publishing-using-plotly}{%
 \section{Publishing using Plotly}\label{publishing-using-plotly}}
@@ -6804,7 +6880,7 @@ All you need to do in this code is change out the data frame -- \texttt{playerss
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-289-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-291-1.pdf}
 
 The Elbow method -- so named because you're looking for the ``elbow'' where the line flattens out. In this case, it looks like a K of 5 is ideal. So let's try that. We're going to use the kmeans function, saving it to an object called k5. We just need to tell it our dataframe name, how many centers (k) we want, and we'll use a sensible default for how many different configurations to try.
 
@@ -6954,7 +7030,7 @@ So Cam's in cluster 5, which if you look at our clusters, puts him in the cluste
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-294-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-296-1.pdf}
 
 Not bad, not bad. But who are Cam Mack's peers? If we look at the numbers in Group 5, there's 495 of them. So let's limit them to just Big Ten guards. Unfortunately, my scraper didn't quite work and in the place of Conference is the coach's name. So I'm going to have to do this the hard way and make a list of Big Ten teams and filter on that. Then I'll sort by minutes played.
 
@@ -7073,7 +7149,7 @@ Let's find the optimal number of clusters.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-298-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-300-1.pdf}
 
 Looks like 5 again.
 
@@ -7611,7 +7687,7 @@ One question we might have pertains to the number of tweets that occur during th
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-314-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-316-1.pdf}
 
 There you have it. A trend line plotting tweet volume throughout the course of the event. Do you see any areas where the match might have had a significant number of tweets?
 
@@ -7685,7 +7761,7 @@ Now that we have a tidied textual data set, all we need to do is apply our senti
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-316-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-318-1.pdf}
 
 When looking at this trend line, you can see that during the volleyball game, tweets using the \#husker and \#gbr hashtags had some wide variation in sentiment. Overall it seems that tweets during the volleyball match were mostly positive, where at times it dipped negative. Why might this be the case? Well, unfortunately, even though this was a big game for Husker volleyball, not many people were tweeting during the match (take a look at the number of tweets chart above). So if there was one word used in a tweet that was ranked as very negative in sentiment, it would have easily drove our average sentiment into the negative region quickly.
 
@@ -7724,7 +7800,7 @@ Now, let's just get a sense of the number of tweets that occurred at certain poi
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-318-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-320-1.pdf}
 
 Looking at this plot, we can see the tweet volume is a lot higher than that of the volleyball match. In fact, it looks like towards the end of the game there was a five minute interval where \textasciitilde80 or so tweets occurred. Given the outcome of the game, I assume people were not real happy during this spike in activity. Well we have the tools to answer this question.
 
@@ -7787,7 +7863,7 @@ You can then use the \texttt{ggplot} code to plot sentiment over time, introduce
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-320-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-322-1.pdf}
 
 As you can see, it started out pretty positive. Then, it started to go negative throughout the first half. However, there was a bump, which was around the time D-Lineman, Darrion Daniels almost scored a pick six. Around halftime, we can see a little bit of a bump towards positive sentiment. This was probably most likely due to people cheering on the Huskers to come out strong after the half. As the second half progressed, you can see things turned for the worst again, and sentiment became negative up until the end of the game, most likely because people realized they were going to get another L on the schedule. You can relive all this excitement again by catching the game recap \href{https://www.youtube.com/watch?v=m0hKH6Zb0vY\&feature=onebox}{here}.
 
@@ -7870,7 +7946,7 @@ With cowplot, we can use a function called \texttt{plot\_grid} to arrange the ch
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-327-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-329-1.pdf}
 
 We can also stack them on top of each other:
 
@@ -7880,7 +7956,7 @@ We can also stack them on top of each other:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-328-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-330-1.pdf}
 
 To make these publishable, we should add headlines, chatter, decent labels, credit lines, etc. But to do this, we'll have to figure out which labels go on which charts, so we can make it look decent. For example -- both charts don't need x or y labels. If you don't have a title and subtitle on both, the spacing is off, so you need to leave one blank or the other blank. You'll just have to fiddle with it until you get it looking right.
 
@@ -7920,7 +7996,7 @@ Saving a cowplot plot\_grid is the same as anything else we did in the class:
 ## Saving 6.5 x 4.5 in image
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-331-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-333-1.pdf}
 
 \hypertarget{encircling-points-on-a-scatterplot}{%
 \chapter{Encircling points on a scatterplot}\label{encircling-points-on-a-scatterplot}}
@@ -7977,7 +8053,7 @@ We've done this before, but let's make a standard scatterplot of minutes and poi
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-334-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-336-1.pdf}
 
 So we can see right away that there are some dots at the very top that we'd want to highlight. Who are these scoring machines?
 
@@ -7997,7 +8073,7 @@ And like we've done in the past, we can add it to the chart with another geom\_p
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-336-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-338-1.pdf}
 
 And like that, we're on the path to something publishable. We'll need to label those dots with \texttt{ggrepel} and we'll need to drop the default grey and add some headlines and all that. And, for the most part, we've got a solid chart.
 
@@ -8017,7 +8093,7 @@ Let's start with \texttt{s\_shape} 1 and \texttt{expand} 1.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-337-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-339-1.pdf}
 
 Whoa. That's \ldots{} not good.
 
@@ -8032,7 +8108,7 @@ Let's go the opposite direction.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-338-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-340-1.pdf}
 
 Better, but \ldots{} the circle cuts through multiple dots.
 
@@ -8047,7 +8123,7 @@ This takes a little bit of finessing, but a shape of .5 means the line will have
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-339-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-341-1.pdf}
 
 Now let's clean this up and make it presentable. If you look at the top scorers, only two were Wooden Award finalists. So here's what a chart telling that story might look like.
 
@@ -8069,7 +8145,7 @@ Now let's clean this up and make it presentable. If you look at the top scorers,
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-340-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-342-1.pdf}
 
 \hypertarget{a-different-more-local-example}{%
 \section{A different, more local example}\label{a-different-more-local-example}}
@@ -8103,7 +8179,7 @@ And just like above, we can plug in our players geom, our nutop dataframe into a
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-342-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-344-1.pdf}
 
 The dot on the far right? Cam Mack. Oh what could have been.
 
@@ -8178,7 +8254,7 @@ So Baylor was ranked in the 13th, 14th and 15th week, 9th, 7th and 7th, respecti
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-346-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-348-1.pdf}
 
 Well, it's a start. I'm immediately annoyed by the top teams being at the bottom. I learned a neat trick from ggbump that's been in ggplot all along -- \texttt{scale\_y\_reverse()}
 
@@ -8188,7 +8264,7 @@ Well, it's a start. I'm immediately annoyed by the top teams being at the bottom
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-347-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-349-1.pdf}
 
 Better. But, still not great. Let's add a point at each week.
 
@@ -8201,7 +8277,7 @@ Better. But, still not great. Let's add a point at each week.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-348-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-350-1.pdf}
 
 Another step. That makes it more subway map like. But the colors are all wrong. To fix this, we're going to use \texttt{scale\_color\_manual} and we're going to Google the hex codes for each team. The legend will tell you what order your \texttt{scale\_color\_manual} needs to be.
 
@@ -8215,7 +8291,7 @@ Another step. That makes it more subway map like. But the colors are all wrong. 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-349-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-351-1.pdf}
 
 Another step. But the legend is annoying. And trying to find which red is Alabama vs Ohio State is hard. So what if we labeled each dot at the beginning and end? We can do that with some clever usage of geom\_text and a little dplyr filtering inside the data step. We filter out the first and last weeks, then use hjust -- horizontal justification -- to move them left or right.
 
@@ -8231,7 +8307,7 @@ Another step. But the legend is annoying. And trying to find which red is Alabam
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-350-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-352-1.pdf}
 
 Better, but the legend is still there. We can drop it in a theme directive by saying \texttt{legend.position\ =\ "none"}. We'll also throw a theme\_minimal on there to drop the default grey, and we'll add some better labeling.
 
@@ -8253,7 +8329,7 @@ Better, but the legend is still there. We can drop it in a theme directive by sa
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-351-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-353-1.pdf}
 
 Now let's fix our text hierarchy.
 
@@ -8279,7 +8355,7 @@ Now let's fix our text hierarchy.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-352-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-354-1.pdf}
 
 And the last thing: anyone else annoyed at 7.5th place on the left? We can fix that too by specifying the breaks in scale\_y\_reverse. We can do that with the x axis as well, but since we haven't reversed it, we do that in \texttt{scale\_x\_continuous} with the same breaks. Also: forgot my source and credit line.
 
@@ -8312,7 +8388,7 @@ One last thing: Let's change the width of the chart to make Ohio State and Penn 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-353-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-355-1.pdf}
 
 \hypertarget{text-cleaning}{%
 \chapter{Text cleaning}\label{text-cleaning}}
@@ -8948,6 +9024,72 @@ table(simulations)
 \item
   Using the Slack app will also mean getting alerted to messages right away. If you are logging in through a web browser, you won't know when I've responded. If we're having a Slack conversation and I see you log in, send me a message, then disappear right away, I know you're using a browser and when that conversation drags because you aren't getting messages, \textbf{I'm going to get frustrated}. You likely aren't the only one asking for help at that moment.
 \end{itemize}
+
+\hypertarget{simulations}{%
+\chapter{Simulations}\label{simulations}}
+
+Two seasons ago, James Palmer Jr.~shot 139 three point attempts and made 43 of them for a .309 shooting percentage last year. A few weeks into last season, he was 7 for 39 -- a paltry .179. Is something wrong or is this just bad luck?
+
+Luck is something that comes up a lot in sports. Is a team unlucky? Or a player? One way we can get to this, we can get to that is by simulating things based on their typical percentages. Simulations work by choosing random values within a range based on a distribution. The most common distribution is the normal or binomial distribution. The normal distribution is where the most cases appear around the mean, 66 percent of cases are within one standard deviation from the mean, and the further away from the mean you get, the more rare things become.
+
+\includegraphics[width=17.64in]{images/simulations2}
+
+Let's simulate 39 three point attempts 1000 times with his season long shooting percentage and see if this could just be random chance or something else.
+
+We do this using a base R function called \texttt{rbinom} or binomial distribution. So what that means is there's a normally distrubuted chance that James Palmer Jr.~is going to shoot above and below his career three point shooting percentage. If we randomly assign values in that distribution 1000 times, how many times will it come up 7, like this example?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{)}
+
+\NormalTok{simulations <-}\StringTok{ }\KeywordTok{rbinom}\NormalTok{(}\DataTypeTok{n =} \DecValTok{1000}\NormalTok{, }\DataTypeTok{size =} \DecValTok{39}\NormalTok{, }\DataTypeTok{prob =} \FloatTok{.309}\NormalTok{)}
+
+\KeywordTok{table}\NormalTok{(simulations)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## simulations
+##   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22 
+##   1   4   5  12  35  44  76 117 134 135 135  99  71  53  37  21  15   2   3   1
+\end{verbatim}
+
+How do we read this? The first row and the second row form a pair. The top row is the number of shots made. The number immediately under it is the number of simulations where that occurred.
+
+\includegraphics[width=23.06in]{images/simulations1}
+
+So what we see is given his season long shooting percentage, it's not out of the realm of randomness that with just 39 attempts for Palmer, he's only hit only 7. In 1000 simulations, it comes up 35 times. Is he below where he should be? Yes. Will he likely improve and soon? Unless something is very wrong, yes. And indeed, by the end of the season, he finished with a .313 shooting percentage from 3 point range. So we can say he was just unlucky.
+
+\hypertarget{cold-streaks}{%
+\section{Cold streaks}\label{cold-streaks}}
+
+During the Western Illinois game, the team, shooting .329 on the season from behind the arc, went 0-15 in the second half. How strange is that?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{)}
+
+\NormalTok{simulations <-}\StringTok{ }\KeywordTok{rbinom}\NormalTok{(}\DataTypeTok{n =} \DecValTok{1000}\NormalTok{, }\DataTypeTok{size =} \DecValTok{15}\NormalTok{, }\DataTypeTok{prob =} \FloatTok{.329}\NormalTok{)}
+
+\KeywordTok{hist}\NormalTok{(simulations)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-373-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(simulations)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## simulations
+##   0   1   2   3   4   5   6   7   8   9  10  11 
+##   5  16  59 132 200 218 172  92  65  34   4   3
+\end{verbatim}
+
+Short answer: Really weird. If you simulate 15 threes 1000 times, sometimes you'll see them miss all of them, but only a few times -- five times, in this case. Most of the time, the team won't go 0-15 even once. So going ice cold is not totally out of the realm of random chance, but it's highly unlikely.
 
   \bibliography{packages.bib}
 

@@ -182,8 +182,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1" data-path="transforming-data.html"><a href="transforming-data.html#making-long-data-wide"><i class="fa fa-check"></i><b>7.1</b> Making long data wide</a></li>
 <li class="chapter" data-level="7.2" data-path="transforming-data.html"><a href="transforming-data.html#why-this-matters"><i class="fa fa-check"></i><b>7.2</b> Why this matters</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>8</b> Simulations</a><ul>
-<li class="chapter" data-level="8.1" data-path="simulations.html"><a href="simulations.html#cold-streaks"><i class="fa fa-check"></i><b>8.1</b> Cold streaks</a></li>
+<li class="chapter" data-level="8" data-path="significance-tests.html"><a href="significance-tests.html"><i class="fa fa-check"></i><b>8</b> Significance tests</a><ul>
+<li class="chapter" data-level="8.1" data-path="significance-tests.html"><a href="significance-tests.html#accepting-the-null-hypothesis"><i class="fa fa-check"></i><b>8.1</b> Accepting the null hypothesis</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html"><i class="fa fa-check"></i><b>9</b> Correlations and regression</a><ul>
 <li class="chapter" data-level="9.1" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html#a-more-predictive-example"><i class="fa fa-check"></i><b>9.1</b> A more predictive example</a></li>
@@ -270,6 +270,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="38" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>38</b> Appendix</a><ul>
 <li class="chapter" data-level="38.1" data-path="appendix.html"><a href="appendix.html#how-to-get-help-in-this-class"><i class="fa fa-check"></i><b>38.1</b> How to get help in this class</a></li>
 </ul></li>
+<li class="chapter" data-level="39" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>39</b> Simulations</a><ul>
+<li class="chapter" data-level="39.1" data-path="simulations.html"><a href="simulations.html#cold-streaks"><i class="fa fa-check"></i><b>39.1</b> Cold streaks</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -297,7 +300,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Or new minus old divided by old. Your new number minus the old number, the result of which is divided by the old number. To do that in R, we can use <code>dplyr</code> and <code>mutate</code> to calculate new metrics in a new field using existing fields of data.</p>
 <p>So first we’ll import the tidyverse so we can read in our data and begin to work with it.</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="mutating-data.html#cb42-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
-<p>Now we’ll import a common and <a href="https://unl.box.com/s/etqna5bfvf3b0gsnw0kcjjn1rxx9335s">simple dataset of total attendance</a> at NCAA football games over the last few seasons.</p>
+<p>Now we’ll import a common and <a href="https://unl.box.com/s/oajabnn5614s22jstgcd9ojxo2njn6jt">simple dataset of total attendance</a> at NCAA football games over the last few seasons.</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="mutating-data.html#cb43-1"></a>attendance &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;data/attendance.csv&#39;</span>)</span></code></pre></div>
 <pre><code>## Parsed with column specification:
 ## cols(
@@ -379,7 +382,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">5.1</span> A more complex example</h2>
 <p>There’s metric in basketball that’s easy to understand – shooting percentage. It’s the number of shots made divided by the number of shots attempted. Simple, right? Except it’s a little too simple. Because what about three point shooters? They tend to be more vailable because the three point shot is worth more. What about players who get to the line? In shooting percentage, free throws are nowhere to be found.</p>
 <p>Basketball nerds, because of these weaknesses, have created a new metric called <a href="https://en.wikipedia.org/wiki/True_shooting_percentage">True Shooting Percentage</a>. True shooting percentage takes into account all aspects of a players shooting to determine who the real shooters are.</p>
-<p>Using <code>dplyr</code> and <code>mutate</code>, we can calculate true shooting percentage. So let’s look at a new dataset, one of <a href="https://unl.box.com/s/s1wzw61u9ia50qmirfhuvprgpmmah9rj">every college basketball player’s season stats in 2018-19 season</a>. It’s a dataset of 5,386 players, and we’ve got 59 variables – one of them is True Shooting Percentage, but we’re going to ignore that.</p>
+<p>Using <code>dplyr</code> and <code>mutate</code>, we can calculate true shooting percentage. So let’s look at a new dataset, one of <a href="https://unl.box.com/s/u99ualyzrrzucunr9edd3m4gvgvorez6">every college basketball player’s season stats in 2018-19 season</a>. It’s a dataset of 5,386 players, and we’ve got 59 variables – one of them is True Shooting Percentage, but we’re going to ignore that.</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="mutating-data.html#cb53-1"></a>players &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/players19.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Warning: Missing column names filled in: &#39;X1&#39; [1]</code></pre>
 <pre><code>## Parsed with column specification:

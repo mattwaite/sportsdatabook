@@ -182,8 +182,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1" data-path="transforming-data.html"><a href="transforming-data.html#making-long-data-wide"><i class="fa fa-check"></i><b>7.1</b> Making long data wide</a></li>
 <li class="chapter" data-level="7.2" data-path="transforming-data.html"><a href="transforming-data.html#why-this-matters"><i class="fa fa-check"></i><b>7.2</b> Why this matters</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>8</b> Simulations</a><ul>
-<li class="chapter" data-level="8.1" data-path="simulations.html"><a href="simulations.html#cold-streaks"><i class="fa fa-check"></i><b>8.1</b> Cold streaks</a></li>
+<li class="chapter" data-level="8" data-path="significance-tests.html"><a href="significance-tests.html"><i class="fa fa-check"></i><b>8</b> Significance tests</a><ul>
+<li class="chapter" data-level="8.1" data-path="significance-tests.html"><a href="significance-tests.html#accepting-the-null-hypothesis"><i class="fa fa-check"></i><b>8.1</b> Accepting the null hypothesis</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html"><i class="fa fa-check"></i><b>9</b> Correlations and regression</a><ul>
 <li class="chapter" data-level="9.1" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html#a-more-predictive-example"><i class="fa fa-check"></i><b>9.1</b> A more predictive example</a></li>
@@ -270,6 +270,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="38" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>38</b> Appendix</a><ul>
 <li class="chapter" data-level="38.1" data-path="appendix.html"><a href="appendix.html#how-to-get-help-in-this-class"><i class="fa fa-check"></i><b>38.1</b> How to get help in this class</a></li>
 </ul></li>
+<li class="chapter" data-level="39" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>39</b> Simulations</a><ul>
+<li class="chapter" data-level="39.1" data-path="simulations.html"><a href="simulations.html#cold-streaks"><i class="fa fa-check"></i><b>39.1</b> Cold streaks</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -295,7 +298,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>More often than not, we have more data than we want. Sometimes we need to be rid of that data. In <code>dplyr</code>, there’s two ways to go about this: filtering and selecting.</p>
 <p><strong>Filtering creates a subset of the data based on criteria</strong>. All records where the count is greater than 10. All records that match “Nebraska”. Something like that.</p>
 <p><strong>Selecting simply returns only the fields named</strong>. So if you only want to see School and Attendance, you select those fields. When you look at your data again, you’ll have two columns. If you try to use one of your columns that you had before you used select, you’ll get an error.</p>
-<p>Let’s work with our <a href="https://unl.box.com/s/etqna5bfvf3b0gsnw0kcjjn1rxx9335s">football attendance</a> data to show some examples.</p>
+<p>Let’s work with our <a href="https://unl.box.com/s/oajabnn5614s22jstgcd9ojxo2njn6jt">football attendance</a> data to show some examples.</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="filters-and-selections.html#cb59-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="filters-and-selections.html#cb60-1"></a>attendance &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;data/attendance.csv&#39;</span>)</span></code></pre></div>
 <pre><code>## Parsed with column specification:
@@ -397,7 +400,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="using-conditional-filters-to-set-limits" class="section level2">
 <h2><span class="header-section-number">6.2</span> Using conditional filters to set limits</h2>
-<p>Let’s return to the blistering season of Drayton Whiteside using our dataset of <a href="https://unl.box.com/s/s1wzw61u9ia50qmirfhuvprgpmmah9rj">every college basketball player’s season stats in 2018-19 season</a>. How can we set limits in something like a question of who had the best season? Let’s get our Drayton Whiteside data from the previous chapter back up.</p>
+<p>Let’s return to the blistering season of Drayton Whiteside using our dataset of <a href="https://unl.box.com/s/u99ualyzrrzucunr9edd3m4gvgvorez6">every college basketball player’s season stats in 2018-19 season</a>. How can we set limits in something like a question of who had the best season? Let’s get our Drayton Whiteside data from the previous chapter back up.</p>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="filters-and-selections.html#cb73-1"></a>players &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/players19.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Warning: Missing column names filled in: &#39;X1&#39; [1]</code></pre>
 <pre><code>## Parsed with column specification:

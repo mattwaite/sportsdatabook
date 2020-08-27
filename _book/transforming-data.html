@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="filters-and-selections.html"/>
-<link rel="next" href="simulations.html"/>
+<link rel="next" href="significance-tests.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -182,8 +182,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1" data-path="transforming-data.html"><a href="transforming-data.html#making-long-data-wide"><i class="fa fa-check"></i><b>7.1</b> Making long data wide</a></li>
 <li class="chapter" data-level="7.2" data-path="transforming-data.html"><a href="transforming-data.html#why-this-matters"><i class="fa fa-check"></i><b>7.2</b> Why this matters</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>8</b> Simulations</a><ul>
-<li class="chapter" data-level="8.1" data-path="simulations.html"><a href="simulations.html#cold-streaks"><i class="fa fa-check"></i><b>8.1</b> Cold streaks</a></li>
+<li class="chapter" data-level="8" data-path="significance-tests.html"><a href="significance-tests.html"><i class="fa fa-check"></i><b>8</b> Significance tests</a><ul>
+<li class="chapter" data-level="8.1" data-path="significance-tests.html"><a href="significance-tests.html#accepting-the-null-hypothesis"><i class="fa fa-check"></i><b>8.1</b> Accepting the null hypothesis</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html"><i class="fa fa-check"></i><b>9</b> Correlations and regression</a><ul>
 <li class="chapter" data-level="9.1" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html#a-more-predictive-example"><i class="fa fa-check"></i><b>9.1</b> A more predictive example</a></li>
@@ -270,6 +270,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="38" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>38</b> Appendix</a><ul>
 <li class="chapter" data-level="38.1" data-path="appendix.html"><a href="appendix.html#how-to-get-help-in-this-class"><i class="fa fa-check"></i><b>38.1</b> How to get help in this class</a></li>
 </ul></li>
+<li class="chapter" data-level="39" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>39</b> Simulations</a><ul>
+<li class="chapter" data-level="39.1" data-path="simulations.html"><a href="simulations.html#cold-streaks"><i class="fa fa-check"></i><b>39.1</b> Cold streaks</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -295,7 +298,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Sometimes long data needs to be wide, and sometimes wide data needs to be long. I’ll explain.</p>
 <p>You are soon going to discover that long before you can visualize data, <strong>you need to have it in a form that the visualization library can deal with</strong>. One of the ways that isn’t immediately obvious is <strong>how your data is cast</strong>. Most of the data you will encounter will be <strong>wide – each row will represent a single entity with multiple measures for that entity</strong>. So think of states. Your row of your dataset could have the state name, population, average life expectancy and other demographic data.</p>
 <p>But what if your visualization library needs one row for each measure? So state, data type and the data. Nebraska, Population, 1,929,000. That’s one row. Then the next row is Nebraska, Average Life Expectancy, 76. That’s the next row. That’s where recasting your data comes in.</p>
-<p>We can use a library called <code>tidyr</code> to <code>pivot_longer</code> or <code>pivot_wider</code> the data, depending on what we need. We’ll use a <a href="https://unl.box.com/s/etqna5bfvf3b0gsnw0kcjjn1rxx9335s">dataset of college football attendance</a> to demonstrate. First we need some libraries.</p>
+<p>We can use a library called <code>tidyr</code> to <code>pivot_longer</code> or <code>pivot_wider</code> the data, depending on what we need. We’ll use a <a href="https://unl.box.com/s/oajabnn5614s22jstgcd9ojxo2njn6jt">dataset of college football attendance</a> to demonstrate. First we need some libraries.</p>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="transforming-data.html#cb84-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
 <p>Now we’ll load the data.</p>
 <div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="transforming-data.html#cb85-1"></a>attendance &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;data/attendance.csv&#39;</span>)</span></code></pre></div>
@@ -416,7 +419,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="filters-and-selections.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="simulations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="significance-tests.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

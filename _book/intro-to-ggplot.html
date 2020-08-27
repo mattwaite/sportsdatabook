@@ -182,8 +182,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1" data-path="transforming-data.html"><a href="transforming-data.html#making-long-data-wide"><i class="fa fa-check"></i><b>7.1</b> Making long data wide</a></li>
 <li class="chapter" data-level="7.2" data-path="transforming-data.html"><a href="transforming-data.html#why-this-matters"><i class="fa fa-check"></i><b>7.2</b> Why this matters</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>8</b> Simulations</a><ul>
-<li class="chapter" data-level="8.1" data-path="simulations.html"><a href="simulations.html#cold-streaks"><i class="fa fa-check"></i><b>8.1</b> Cold streaks</a></li>
+<li class="chapter" data-level="8" data-path="significance-tests.html"><a href="significance-tests.html"><i class="fa fa-check"></i><b>8</b> Significance tests</a><ul>
+<li class="chapter" data-level="8.1" data-path="significance-tests.html"><a href="significance-tests.html#accepting-the-null-hypothesis"><i class="fa fa-check"></i><b>8.1</b> Accepting the null hypothesis</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html"><i class="fa fa-check"></i><b>9</b> Correlations and regression</a><ul>
 <li class="chapter" data-level="9.1" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html#a-more-predictive-example"><i class="fa fa-check"></i><b>9.1</b> A more predictive example</a></li>
@@ -270,6 +270,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="38" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>38</b> Appendix</a><ul>
 <li class="chapter" data-level="38.1" data-path="appendix.html"><a href="appendix.html#how-to-get-help-in-this-class"><i class="fa fa-check"></i><b>38.1</b> How to get help in this class</a></li>
 </ul></li>
+<li class="chapter" data-level="39" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>39</b> Simulations</a><ul>
+<li class="chapter" data-level="39.1" data-path="simulations.html"><a href="simulations.html#cold-streaks"><i class="fa fa-check"></i><b>39.1</b> Cold streaks</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -308,8 +311,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Let’s dive in using data we’ve already seen before – football attendance. This workflow will represent a clear picture of what your work in this class will be like for much of the rest of the semester. One way to think of this workflow is that your R Notebook is now your digital sketchbook, where you will try different types of visualizations to find ones that work. Then, you will export your work into a program like Illustrator to finish the work.</p>
 <p>To begin, we’ll import the <code>ggplot2</code> and <code>dplyr</code> libraries. We’ll read in the data, then create a new dataframe that represents <a href="https://unl.box.com/s/etqna5bfvf3b0gsnw0kcjjn1rxx9335s">our attendance data</a>, similar to what we’ve done before.</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="intro-to-ggplot.html#cb183-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="intro-to-ggplot.html#cb184-1"></a>attendance &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;data/attendance.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="intro-to-ggplot.html#cb187-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="intro-to-ggplot.html#cb188-1"></a>attendance &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;data/attendance.csv&#39;</span>)</span></code></pre></div>
 <pre><code>## Parsed with column specification:
 ## cols(
 ##   Institution = col_character(),
@@ -322,10 +325,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ##   `2018` = col_double()
 ## )</code></pre>
 <p>First, let’s get a top 10 list by announced attendance this last season. We’ll use the same tricks we used in the filtering assignment.</p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="intro-to-ggplot.html#cb186-1"></a>attendance <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb186-2"><a href="intro-to-ggplot.html#cb186-2"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(<span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb186-3"><a href="intro-to-ggplot.html#cb186-3"></a><span class="st">  </span><span class="kw">top_n</span>(<span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb186-4"><a href="intro-to-ggplot.html#cb186-4"></a><span class="st">  </span><span class="kw">select</span>(Institution, <span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="intro-to-ggplot.html#cb190-1"></a>attendance <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb190-2"><a href="intro-to-ggplot.html#cb190-2"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(<span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb190-3"><a href="intro-to-ggplot.html#cb190-3"></a><span class="st">  </span><span class="kw">top_n</span>(<span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb190-4"><a href="intro-to-ggplot.html#cb190-4"></a><span class="st">  </span><span class="kw">select</span>(Institution, <span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)</span></code></pre></div>
 <pre><code>## Selecting by 2018</code></pre>
 <pre><code>## # A tibble: 10 x 2
 ##    Institution `2018`
@@ -341,10 +344,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ##  9 Nebraska    623240
 ## 10 Oklahoma    607146</code></pre>
 <p>That looks good, so let’s save it to a new data frame and use that data frame instead going forward.</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="intro-to-ggplot.html#cb189-1"></a>top10 &lt;-<span class="st"> </span>attendance <span class="op">%&gt;%</span></span>
-<span id="cb189-2"><a href="intro-to-ggplot.html#cb189-2"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(<span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb189-3"><a href="intro-to-ggplot.html#cb189-3"></a><span class="st">  </span><span class="kw">top_n</span>(<span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb189-4"><a href="intro-to-ggplot.html#cb189-4"></a><span class="st">  </span><span class="kw">select</span>(Institution, <span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="intro-to-ggplot.html#cb193-1"></a>top10 &lt;-<span class="st"> </span>attendance <span class="op">%&gt;%</span></span>
+<span id="cb193-2"><a href="intro-to-ggplot.html#cb193-2"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(<span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb193-3"><a href="intro-to-ggplot.html#cb193-3"></a><span class="st">  </span><span class="kw">top_n</span>(<span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb193-4"><a href="intro-to-ggplot.html#cb193-4"></a><span class="st">  </span><span class="kw">select</span>(Institution, <span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)</span></code></pre></div>
 <pre><code>## Selecting by 2018</code></pre>
 <div id="the-bar-chart" class="section level2">
 <h2><span class="header-section-number">13.1</span> The bar chart</h2>
@@ -352,25 +355,25 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>We could, for instance, create a bar chart of the total attendance. To do that, we simply tell <code>ggplot2</code> what our dataset is, what element of the data we want to make the bar chart out of (which is the aesthetic), and the geometry type (which is the geom). It looks like this:</p>
 <p><code>ggplot(top10, aes(x=Institution)) + geom_bar()</code></p>
 <p>Note: attendance is our data, <code>aes</code> means aesthetics, <code>x=Institution</code> explicitly tells <code>ggplot2</code> that our x value – our horizontal value – is the Institution field from the data, and then we add on the <code>geom_bar()</code> as the geometry. And what do we get when we run that?</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="intro-to-ggplot.html#cb191-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span>Institution)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>()</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-105-1.png" width="672" /></p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="intro-to-ggplot.html#cb195-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span>Institution)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>()</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
 <p>We get … weirdness. We expected to see bars of different sizes, but we get all with a count of 1. What gives? Well, this is the default behavior. What we have here is something called a histogram, where <code>ggplot2</code> helpfully counted up the number of times the Institution appears and counted them up. Since we only have one record per Institution, the count is always 1. How do we fix this? By adding <code>weight</code> to our aesthetic.</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="intro-to-ggplot.html#cb192-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span>Institution, <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb192-2"><a href="intro-to-ggplot.html#cb192-2"></a><span class="st">  </span><span class="kw">geom_bar</span>()</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-106-1.png" width="672" /></p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="intro-to-ggplot.html#cb196-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span>Institution, <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb196-2"><a href="intro-to-ggplot.html#cb196-2"></a><span class="st">  </span><span class="kw">geom_bar</span>()</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-108-1.png" width="672" /></p>
 <p>Closer. But … what order is that in? And what happened to our count numbers on the left? Why are they in scientific notation?</p>
 <p>Let’s deal with the ordering first. <code>ggplot2</code>’s default behavior is to sort the data by the x axis variable. So it’s in alphabetical order. To change that, we have to <code>reorder</code> it. With <code>reorder</code>, we first have to tell <code>ggplot</code> what we are reordering, and then we have to tell it HOW we are reordering it. So it’s reorder(FIELD, SORTFIELD).</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="intro-to-ggplot.html#cb193-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Institution, <span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>()</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="intro-to-ggplot.html#cb197-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Institution, <span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>()</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-109-1.png" width="672" /></p>
 <p>Better. We can argue about if the right order is smallest to largest or largest to smallest. But this gets us close. By the way, to sort it largest to smallest, put a negative sign in front of the sort field.</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="intro-to-ggplot.html#cb194-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Institution, <span class="op">-</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>()</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-108-1.png" width="672" /></p>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="intro-to-ggplot.html#cb198-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Institution, <span class="op">-</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>()</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
 </div>
 <div id="scales" class="section level2">
 <h2><span class="header-section-number">13.2</span> Scales</h2>
 <p>To fix the axis labels, we need try one of the other main elements of the <code>ggplot2</code> library, which is transform a scale. More often that not, that means doing something like putting it on a logarithmic scale or some other kind of transformation. In this case, we’re just changing how it’s represented. The default in <code>ggplot2</code> for large values is to express them as scientific notation. Rarely ever is that useful in our line of work. So we have to transform them into human readable numbers.</p>
 <p>The easiest way to do this is to use a library called <code>scales</code> and it’s already installed.</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="intro-to-ggplot.html#cb195-1"></a><span class="kw">library</span>(scales)</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="intro-to-ggplot.html#cb199-1"></a><span class="kw">library</span>(scales)</span></code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;scales&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:purrr&#39;:
@@ -380,46 +383,46 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ##     col_factor</code></pre>
 <p>To alter the scale, we add a piece to our plot with <code>+</code> and we tell it which scale is getting altered and what kind of data it is. In our case, our Y axis is what is needing to be altered, and it’s continuous data (meaning it can be any number between x and y, vs discrete data which are categorical). So we need to add <code>scale_y_continuous</code> and the information we want to pass it is to alter the labels with a function called <code>comma</code>.</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="intro-to-ggplot.html#cb199-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Institution, <span class="op">-</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb199-2"><a href="intro-to-ggplot.html#cb199-2"></a><span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb199-3"><a href="intro-to-ggplot.html#cb199-3"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>comma)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="intro-to-ggplot.html#cb203-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Institution, <span class="op">-</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb203-2"><a href="intro-to-ggplot.html#cb203-2"></a><span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb203-3"><a href="intro-to-ggplot.html#cb203-3"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>comma)</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
 <p>Better.</p>
 </div>
 <div id="styling" class="section level2">
 <h2><span class="header-section-number">13.3</span> Styling</h2>
 <p>We are going to spend a lot more time on styling, but let’s add some simple labels to this with a new bit called <code>labs</code> which is short for labels.</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="intro-to-ggplot.html#cb200-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Institution, <span class="op">-</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb200-2"><a href="intro-to-ggplot.html#cb200-2"></a><span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb200-3"><a href="intro-to-ggplot.html#cb200-3"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>comma) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb200-4"><a href="intro-to-ggplot.html#cb200-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Top 10 Football Programs By Attendance&quot;</span>, <span class="dt">x=</span><span class="st">&quot;School&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Attendance&quot;</span>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-111-1.png" width="672" /></p>
-<p>The library has lots and lots of ways to alter the styling – we can programmatically control nearly every part of the look and feel of the chart. One simple way is to apply themes in the library already. We do that the same way we’ve done other things – we add them. Here’s the light theme.</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="intro-to-ggplot.html#cb201-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Institution, <span class="op">-</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb201-2"><a href="intro-to-ggplot.html#cb201-2"></a><span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb201-3"><a href="intro-to-ggplot.html#cb201-3"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>comma) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb201-4"><a href="intro-to-ggplot.html#cb201-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Top 10 Football Programs By Attendance&quot;</span>, <span class="dt">x=</span><span class="st">&quot;School&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Attendance&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb201-5"><a href="intro-to-ggplot.html#cb201-5"></a><span class="st">  </span><span class="kw">theme_light</span>()</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
-<p>Or the minimal theme:</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="intro-to-ggplot.html#cb202-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Institution, <span class="op">-</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb202-2"><a href="intro-to-ggplot.html#cb202-2"></a><span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb202-3"><a href="intro-to-ggplot.html#cb202-3"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>comma) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb202-4"><a href="intro-to-ggplot.html#cb202-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Top 10 Football Programs By Attendance&quot;</span>, <span class="dt">x=</span><span class="st">&quot;School&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Attendance&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb202-5"><a href="intro-to-ggplot.html#cb202-5"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="intro-to-ggplot.html#cb204-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Institution, <span class="op">-</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb204-2"><a href="intro-to-ggplot.html#cb204-2"></a><span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb204-3"><a href="intro-to-ggplot.html#cb204-3"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>comma) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb204-4"><a href="intro-to-ggplot.html#cb204-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Top 10 Football Programs By Attendance&quot;</span>, <span class="dt">x=</span><span class="st">&quot;School&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Attendance&quot;</span>)</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-113-1.png" width="672" /></p>
+<p>The library has lots and lots of ways to alter the styling – we can programmatically control nearly every part of the look and feel of the chart. One simple way is to apply themes in the library already. We do that the same way we’ve done other things – we add them. Here’s the light theme.</p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="intro-to-ggplot.html#cb205-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Institution, <span class="op">-</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb205-2"><a href="intro-to-ggplot.html#cb205-2"></a><span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb205-3"><a href="intro-to-ggplot.html#cb205-3"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>comma) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb205-4"><a href="intro-to-ggplot.html#cb205-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Top 10 Football Programs By Attendance&quot;</span>, <span class="dt">x=</span><span class="st">&quot;School&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Attendance&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb205-5"><a href="intro-to-ggplot.html#cb205-5"></a><span class="st">  </span><span class="kw">theme_light</span>()</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-114-1.png" width="672" /></p>
+<p>Or the minimal theme:</p>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="intro-to-ggplot.html#cb206-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Institution, <span class="op">-</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb206-2"><a href="intro-to-ggplot.html#cb206-2"></a><span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb206-3"><a href="intro-to-ggplot.html#cb206-3"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>comma) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb206-4"><a href="intro-to-ggplot.html#cb206-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Top 10 Football Programs By Attendance&quot;</span>, <span class="dt">x=</span><span class="st">&quot;School&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Attendance&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb206-5"><a href="intro-to-ggplot.html#cb206-5"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-115-1.png" width="672" /></p>
 <p>Later on, we’ll write our own themes. For now, the built in ones will get us closer to something that looks good.</p>
 </div>
 <div id="one-last-trick-coord-flip" class="section level2">
 <h2><span class="header-section-number">13.4</span> One last trick: coord flip</h2>
 <p>Sometimes, we don’t want vertical bars. Maybe we think this would look better horizontal. How do we do that? By adding <code>coord_flip()</code> to our code. It does what it says – it inverts the coordinates of the figures.</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="intro-to-ggplot.html#cb203-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Institution, <span class="op">-</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb203-2"><a href="intro-to-ggplot.html#cb203-2"></a><span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb203-3"><a href="intro-to-ggplot.html#cb203-3"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>comma) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb203-4"><a href="intro-to-ggplot.html#cb203-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Top 10 Football Programs By Attendance&quot;</span>, <span class="dt">x=</span><span class="st">&quot;School&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Attendance&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb203-5"><a href="intro-to-ggplot.html#cb203-5"></a><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb203-6"><a href="intro-to-ggplot.html#cb203-6"></a><span class="st">  </span><span class="kw">coord_flip</span>()</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-114-1.png" width="672" /></p>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="intro-to-ggplot.html#cb207-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Institution, <span class="op">-</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb207-2"><a href="intro-to-ggplot.html#cb207-2"></a><span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb207-3"><a href="intro-to-ggplot.html#cb207-3"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>comma) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb207-4"><a href="intro-to-ggplot.html#cb207-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Top 10 Football Programs By Attendance&quot;</span>, <span class="dt">x=</span><span class="st">&quot;School&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Attendance&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb207-5"><a href="intro-to-ggplot.html#cb207-5"></a><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb207-6"><a href="intro-to-ggplot.html#cb207-6"></a><span class="st">  </span><span class="kw">coord_flip</span>()</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-116-1.png" width="672" /></p>
 
 </div>
 </div>

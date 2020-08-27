@@ -182,8 +182,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1" data-path="transforming-data.html"><a href="transforming-data.html#making-long-data-wide"><i class="fa fa-check"></i><b>7.1</b> Making long data wide</a></li>
 <li class="chapter" data-level="7.2" data-path="transforming-data.html"><a href="transforming-data.html#why-this-matters"><i class="fa fa-check"></i><b>7.2</b> Why this matters</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>8</b> Simulations</a><ul>
-<li class="chapter" data-level="8.1" data-path="simulations.html"><a href="simulations.html#cold-streaks"><i class="fa fa-check"></i><b>8.1</b> Cold streaks</a></li>
+<li class="chapter" data-level="8" data-path="significance-tests.html"><a href="significance-tests.html"><i class="fa fa-check"></i><b>8</b> Significance tests</a><ul>
+<li class="chapter" data-level="8.1" data-path="significance-tests.html"><a href="significance-tests.html#accepting-the-null-hypothesis"><i class="fa fa-check"></i><b>8.1</b> Accepting the null hypothesis</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html"><i class="fa fa-check"></i><b>9</b> Correlations and regression</a><ul>
 <li class="chapter" data-level="9.1" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html#a-more-predictive-example"><i class="fa fa-check"></i><b>9.1</b> A more predictive example</a></li>
@@ -270,6 +270,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="38" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>38</b> Appendix</a><ul>
 <li class="chapter" data-level="38.1" data-path="appendix.html"><a href="appendix.html#how-to-get-help-in-this-class"><i class="fa fa-check"></i><b>38.1</b> How to get help in this class</a></li>
 </ul></li>
+<li class="chapter" data-level="39" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>39</b> Simulations</a><ul>
+<li class="chapter" data-level="39.1" data-path="simulations.html"><a href="simulations.html#cold-streaks"><i class="fa fa-check"></i><b>39.1</b> Cold streaks</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -293,30 +296,30 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="finishing-touches-2" class="section level1">
 <h1><span class="header-section-number">Chapter 29</span> Finishing Touches 2</h1>
 <p>Frequently in my classes, students use the waffle charts library quite extensively to make graphics. This is a quick walkthough on how to get a waffle chart into a publication ready state.</p>
-<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="finishing-touches-2.html#cb441-1"></a><span class="kw">library</span>(waffle)</span></code></pre></div>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="finishing-touches-2.html#cb445-1"></a><span class="kw">library</span>(waffle)</span></code></pre></div>
 <p>Let’s look at the offensive numbers from Nebraska v. Wisconsin football game. Nebraska lost 41-24, but Wisconsin gained only 15 yards more than Nebraska did. You can find the <a href="https://www.ncaa.com/game/football/fbs/2018/10/06/nebraska-wisconsin/team-stats">official stats on the NCAA’s website</a>.</p>
 <p>I’m going to make two vectors for each team and record rushing yards and passing yards.</p>
-<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="finishing-touches-2.html#cb442-1"></a>nu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Rushing&quot;</span>=<span class="dv">111</span>, <span class="st">&quot;Passing&quot;</span>=<span class="dv">407</span>, <span class="dv">15</span>)</span>
-<span id="cb442-2"><a href="finishing-touches-2.html#cb442-2"></a>wi &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Rushing&quot;</span>=<span class="dv">370</span>, <span class="st">&quot;Passing&quot;</span>=<span class="dv">163</span>, <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="finishing-touches-2.html#cb446-1"></a>nu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Rushing&quot;</span>=<span class="dv">111</span>, <span class="st">&quot;Passing&quot;</span>=<span class="dv">407</span>, <span class="dv">15</span>)</span>
+<span id="cb446-2"><a href="finishing-touches-2.html#cb446-2"></a>wi &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Rushing&quot;</span>=<span class="dv">370</span>, <span class="st">&quot;Passing&quot;</span>=<span class="dv">163</span>, <span class="dv">0</span>)</span></code></pre></div>
 <p>So what does the breakdown of Nebraska’s night look like? How balanced was the offense?</p>
 <p>The waffle library can break this down in a way that’s easier on the eyes than a pie chart. We call the library, add the data, specify the number of rows, give it a title and an x value label, and to clean up a quirk of the library, we’ve got to specify colors.</p>
 <p><strong>ADDITIONALLY</strong></p>
 <p>We can add labels and themes, but you have to be careful. The waffle library is applying it’s own theme, but if we override something they are using in their theme, some things that are hidden come back and make it worse. So here is an example of how to use ggplot’s <code>labs</code> and the theme to make a fully publication ready graphic.</p>
-<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="finishing-touches-2.html#cb443-1"></a><span class="kw">waffle</span>(nu<span class="op">/</span><span class="dv">10</span>, <span class="dt">rows =</span> <span class="dv">5</span>, <span class="dt">xlab=</span><span class="st">&quot;1 square = 10 yards&quot;</span>, <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Nebraska vs Wisconsin on offense&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;The Huskers couldn&#39;t get much of a running game going.&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Source: NCAA | Graphic by Matt Waite&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb443-2"><a href="finishing-touches-2.html#cb443-2"></a><span class="st">  </span><span class="kw">theme</span>(</span>
-<span id="cb443-3"><a href="finishing-touches-2.html#cb443-3"></a>    <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">16</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb443-4"><a href="finishing-touches-2.html#cb443-4"></a>    <span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>),</span>
-<span id="cb443-5"><a href="finishing-touches-2.html#cb443-5"></a>    <span class="dt">axis.title.y =</span> <span class="kw">element_blank</span>()</span>
-<span id="cb443-6"><a href="finishing-touches-2.html#cb443-6"></a>  )</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-272-1.png" width="672" /></p>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="finishing-touches-2.html#cb447-1"></a><span class="kw">waffle</span>(nu<span class="op">/</span><span class="dv">10</span>, <span class="dt">rows =</span> <span class="dv">5</span>, <span class="dt">xlab=</span><span class="st">&quot;1 square = 10 yards&quot;</span>, <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Nebraska vs Wisconsin on offense&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;The Huskers couldn&#39;t get much of a running game going.&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Source: NCAA | Graphic by Matt Waite&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb447-2"><a href="finishing-touches-2.html#cb447-2"></a><span class="st">  </span><span class="kw">theme</span>(</span>
+<span id="cb447-3"><a href="finishing-touches-2.html#cb447-3"></a>    <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">16</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb447-4"><a href="finishing-touches-2.html#cb447-4"></a>    <span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>),</span>
+<span id="cb447-5"><a href="finishing-touches-2.html#cb447-5"></a>    <span class="dt">axis.title.y =</span> <span class="kw">element_blank</span>()</span>
+<span id="cb447-6"><a href="finishing-touches-2.html#cb447-6"></a>  )</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-274-1.png" width="672" /></p>
 <p>Note: The alignment of text sucks.</p>
 <p>How to fix that? We can use ggsave to a pdf and fix it in Illustrator.</p>
-<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="finishing-touches-2.html#cb444-1"></a><span class="kw">waffle</span>(nu<span class="op">/</span><span class="dv">10</span>, <span class="dt">rows =</span> <span class="dv">5</span>, <span class="dt">xlab=</span><span class="st">&quot;1 square = 10 yards&quot;</span>, <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Nebraska vs Wisconsin on offense&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;The Huskers couldn&#39;t get much of a running game going.&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Source: NCAA | Graphic by Matt Waite&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb444-2"><a href="finishing-touches-2.html#cb444-2"></a><span class="st">  </span><span class="kw">theme</span>(</span>
-<span id="cb444-3"><a href="finishing-touches-2.html#cb444-3"></a>    <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">16</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb444-4"><a href="finishing-touches-2.html#cb444-4"></a>    <span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>),</span>
-<span id="cb444-5"><a href="finishing-touches-2.html#cb444-5"></a>    <span class="dt">axis.title.y =</span> <span class="kw">element_blank</span>()</span>
-<span id="cb444-6"><a href="finishing-touches-2.html#cb444-6"></a>  ) <span class="op">+</span><span class="st"> </span><span class="kw">ggsave</span>(<span class="st">&quot;waffle.pdf&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="finishing-touches-2.html#cb448-1"></a><span class="kw">waffle</span>(nu<span class="op">/</span><span class="dv">10</span>, <span class="dt">rows =</span> <span class="dv">5</span>, <span class="dt">xlab=</span><span class="st">&quot;1 square = 10 yards&quot;</span>, <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Nebraska vs Wisconsin on offense&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;The Huskers couldn&#39;t get much of a running game going.&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Source: NCAA | Graphic by Matt Waite&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb448-2"><a href="finishing-touches-2.html#cb448-2"></a><span class="st">  </span><span class="kw">theme</span>(</span>
+<span id="cb448-3"><a href="finishing-touches-2.html#cb448-3"></a>    <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">16</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb448-4"><a href="finishing-touches-2.html#cb448-4"></a>    <span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>),</span>
+<span id="cb448-5"><a href="finishing-touches-2.html#cb448-5"></a>    <span class="dt">axis.title.y =</span> <span class="kw">element_blank</span>()</span>
+<span id="cb448-6"><a href="finishing-touches-2.html#cb448-6"></a>  ) <span class="op">+</span><span class="st"> </span><span class="kw">ggsave</span>(<span class="st">&quot;waffle.pdf&quot;</span>)</span></code></pre></div>
 <p>But what if we’re using a waffle iron? And what if we want to change the output size? It gets tougher.</p>
 <p>Truth is, I’m not sure what is going on with the sizing. You can try it and you’ll find that the outputs are … unpredictable.</p>
 <p>Things you need to know about waffle irons:</p>
@@ -326,45 +329,45 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>Using ggsave doesn’t work either. So you’ll have to use R’s pdf output.</li>
 </ul>
 <p>Here is a full example. I start with my waffle iron code, but note that each waffle is pretty much a self contained thing. That’s because a waffle iron isn’t really a thing. It’s just a way to group waffles together, so you have to make each waffle individually. My first waffle has the title and subtitle but no x axis labels and the bottom one has not title or subtitle but the axis labels and the caption.</p>
-<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="finishing-touches-2.html#cb445-1"></a><span class="kw">iron</span>(</span>
-<span id="cb445-2"><a href="finishing-touches-2.html#cb445-2"></a> <span class="kw">waffle</span>(</span>
-<span id="cb445-3"><a href="finishing-touches-2.html#cb445-3"></a>   nu<span class="op">/</span><span class="dv">10</span>, </span>
-<span id="cb445-4"><a href="finishing-touches-2.html#cb445-4"></a>   <span class="dt">rows =</span> <span class="dv">2</span>, </span>
-<span id="cb445-5"><a href="finishing-touches-2.html#cb445-5"></a>   <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb445-6"><a href="finishing-touches-2.html#cb445-6"></a><span class="st">   </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Nebraska vs Wisconsin: By the numbers&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;The Huskers couldn&#39;t run, Wisconsin could.&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb445-7"><a href="finishing-touches-2.html#cb445-7"></a><span class="st">   </span><span class="kw">theme</span>(</span>
-<span id="cb445-8"><a href="finishing-touches-2.html#cb445-8"></a>    <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">16</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb445-9"><a href="finishing-touches-2.html#cb445-9"></a>    <span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>),</span>
-<span id="cb445-10"><a href="finishing-touches-2.html#cb445-10"></a>    <span class="dt">axis.title.y =</span> <span class="kw">element_blank</span>()</span>
-<span id="cb445-11"><a href="finishing-touches-2.html#cb445-11"></a>  ),</span>
-<span id="cb445-12"><a href="finishing-touches-2.html#cb445-12"></a> <span class="kw">waffle</span>(</span>
-<span id="cb445-13"><a href="finishing-touches-2.html#cb445-13"></a>   wi<span class="op">/</span><span class="dv">10</span>, </span>
-<span id="cb445-14"><a href="finishing-touches-2.html#cb445-14"></a>   <span class="dt">rows =</span> <span class="dv">2</span>, </span>
-<span id="cb445-15"><a href="finishing-touches-2.html#cb445-15"></a>   <span class="dt">xlab=</span><span class="st">&quot;1 square = 10 yards&quot;</span>, </span>
-<span id="cb445-16"><a href="finishing-touches-2.html#cb445-16"></a>   <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">caption=</span><span class="st">&quot;Source: NCAA | Graphic by Matt Waite&quot;</span>)</span>
-<span id="cb445-17"><a href="finishing-touches-2.html#cb445-17"></a>) </span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-274-1.png" width="672" /></p>
+<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="finishing-touches-2.html#cb449-1"></a><span class="kw">iron</span>(</span>
+<span id="cb449-2"><a href="finishing-touches-2.html#cb449-2"></a> <span class="kw">waffle</span>(</span>
+<span id="cb449-3"><a href="finishing-touches-2.html#cb449-3"></a>   nu<span class="op">/</span><span class="dv">10</span>, </span>
+<span id="cb449-4"><a href="finishing-touches-2.html#cb449-4"></a>   <span class="dt">rows =</span> <span class="dv">2</span>, </span>
+<span id="cb449-5"><a href="finishing-touches-2.html#cb449-5"></a>   <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb449-6"><a href="finishing-touches-2.html#cb449-6"></a><span class="st">   </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Nebraska vs Wisconsin: By the numbers&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;The Huskers couldn&#39;t run, Wisconsin could.&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb449-7"><a href="finishing-touches-2.html#cb449-7"></a><span class="st">   </span><span class="kw">theme</span>(</span>
+<span id="cb449-8"><a href="finishing-touches-2.html#cb449-8"></a>    <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">16</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb449-9"><a href="finishing-touches-2.html#cb449-9"></a>    <span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>),</span>
+<span id="cb449-10"><a href="finishing-touches-2.html#cb449-10"></a>    <span class="dt">axis.title.y =</span> <span class="kw">element_blank</span>()</span>
+<span id="cb449-11"><a href="finishing-touches-2.html#cb449-11"></a>  ),</span>
+<span id="cb449-12"><a href="finishing-touches-2.html#cb449-12"></a> <span class="kw">waffle</span>(</span>
+<span id="cb449-13"><a href="finishing-touches-2.html#cb449-13"></a>   wi<span class="op">/</span><span class="dv">10</span>, </span>
+<span id="cb449-14"><a href="finishing-touches-2.html#cb449-14"></a>   <span class="dt">rows =</span> <span class="dv">2</span>, </span>
+<span id="cb449-15"><a href="finishing-touches-2.html#cb449-15"></a>   <span class="dt">xlab=</span><span class="st">&quot;1 square = 10 yards&quot;</span>, </span>
+<span id="cb449-16"><a href="finishing-touches-2.html#cb449-16"></a>   <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">caption=</span><span class="st">&quot;Source: NCAA | Graphic by Matt Waite&quot;</span>)</span>
+<span id="cb449-17"><a href="finishing-touches-2.html#cb449-17"></a>) </span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-276-1.png" width="672" /></p>
 <p>If you try to use ggsave on that, you’ll only get the last waffle chart. Like I said, irons aren’t really anything, so ggplot ignores them. So to do this, we have to use R’s pdf capability.</p>
 <p>Here’s the same code, but wrapped in the R pdf functions. The first line says we’re going to output this as a pdf with this name. Then my code, then <code>dev.off</code> to tell R that’s what I want as a PDF. Don’t forget that.</p>
-<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="finishing-touches-2.html#cb446-1"></a><span class="kw">pdf</span>(<span class="st">&quot;waffleiron.pdf&quot;</span>)</span>
-<span id="cb446-2"><a href="finishing-touches-2.html#cb446-2"></a><span class="kw">iron</span>(</span>
-<span id="cb446-3"><a href="finishing-touches-2.html#cb446-3"></a> <span class="kw">waffle</span>(</span>
-<span id="cb446-4"><a href="finishing-touches-2.html#cb446-4"></a>   nu<span class="op">/</span><span class="dv">10</span>, </span>
-<span id="cb446-5"><a href="finishing-touches-2.html#cb446-5"></a>   <span class="dt">rows =</span> <span class="dv">2</span>, </span>
-<span id="cb446-6"><a href="finishing-touches-2.html#cb446-6"></a>   <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb446-7"><a href="finishing-touches-2.html#cb446-7"></a><span class="st">   </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Nebraska vs Wisconsin: By the numbers&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;The Huskers couldn&#39;t run, Wisconsin could.&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb446-8"><a href="finishing-touches-2.html#cb446-8"></a><span class="st">   </span><span class="kw">theme</span>(</span>
-<span id="cb446-9"><a href="finishing-touches-2.html#cb446-9"></a>    <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">16</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb446-10"><a href="finishing-touches-2.html#cb446-10"></a>    <span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>),</span>
-<span id="cb446-11"><a href="finishing-touches-2.html#cb446-11"></a>    <span class="dt">axis.title.y =</span> <span class="kw">element_blank</span>()</span>
-<span id="cb446-12"><a href="finishing-touches-2.html#cb446-12"></a>  ),</span>
-<span id="cb446-13"><a href="finishing-touches-2.html#cb446-13"></a> <span class="kw">waffle</span>(</span>
-<span id="cb446-14"><a href="finishing-touches-2.html#cb446-14"></a>   wi<span class="op">/</span><span class="dv">10</span>, </span>
-<span id="cb446-15"><a href="finishing-touches-2.html#cb446-15"></a>   <span class="dt">rows =</span> <span class="dv">2</span>, </span>
-<span id="cb446-16"><a href="finishing-touches-2.html#cb446-16"></a>   <span class="dt">xlab=</span><span class="st">&quot;1 square = 10 yards&quot;</span>, </span>
-<span id="cb446-17"><a href="finishing-touches-2.html#cb446-17"></a>   <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">caption=</span><span class="st">&quot;Source: NCAA | Graphic by Matt Waite&quot;</span>)</span>
-<span id="cb446-18"><a href="finishing-touches-2.html#cb446-18"></a>) </span>
-<span id="cb446-19"><a href="finishing-touches-2.html#cb446-19"></a><span class="kw">dev.off</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="finishing-touches-2.html#cb450-1"></a><span class="kw">pdf</span>(<span class="st">&quot;waffleiron.pdf&quot;</span>)</span>
+<span id="cb450-2"><a href="finishing-touches-2.html#cb450-2"></a><span class="kw">iron</span>(</span>
+<span id="cb450-3"><a href="finishing-touches-2.html#cb450-3"></a> <span class="kw">waffle</span>(</span>
+<span id="cb450-4"><a href="finishing-touches-2.html#cb450-4"></a>   nu<span class="op">/</span><span class="dv">10</span>, </span>
+<span id="cb450-5"><a href="finishing-touches-2.html#cb450-5"></a>   <span class="dt">rows =</span> <span class="dv">2</span>, </span>
+<span id="cb450-6"><a href="finishing-touches-2.html#cb450-6"></a>   <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb450-7"><a href="finishing-touches-2.html#cb450-7"></a><span class="st">   </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Nebraska vs Wisconsin: By the numbers&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;The Huskers couldn&#39;t run, Wisconsin could.&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb450-8"><a href="finishing-touches-2.html#cb450-8"></a><span class="st">   </span><span class="kw">theme</span>(</span>
+<span id="cb450-9"><a href="finishing-touches-2.html#cb450-9"></a>    <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">16</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb450-10"><a href="finishing-touches-2.html#cb450-10"></a>    <span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>),</span>
+<span id="cb450-11"><a href="finishing-touches-2.html#cb450-11"></a>    <span class="dt">axis.title.y =</span> <span class="kw">element_blank</span>()</span>
+<span id="cb450-12"><a href="finishing-touches-2.html#cb450-12"></a>  ),</span>
+<span id="cb450-13"><a href="finishing-touches-2.html#cb450-13"></a> <span class="kw">waffle</span>(</span>
+<span id="cb450-14"><a href="finishing-touches-2.html#cb450-14"></a>   wi<span class="op">/</span><span class="dv">10</span>, </span>
+<span id="cb450-15"><a href="finishing-touches-2.html#cb450-15"></a>   <span class="dt">rows =</span> <span class="dv">2</span>, </span>
+<span id="cb450-16"><a href="finishing-touches-2.html#cb450-16"></a>   <span class="dt">xlab=</span><span class="st">&quot;1 square = 10 yards&quot;</span>, </span>
+<span id="cb450-17"><a href="finishing-touches-2.html#cb450-17"></a>   <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">caption=</span><span class="st">&quot;Source: NCAA | Graphic by Matt Waite&quot;</span>)</span>
+<span id="cb450-18"><a href="finishing-touches-2.html#cb450-18"></a>) </span>
+<span id="cb450-19"><a href="finishing-touches-2.html#cb450-19"></a><span class="kw">dev.off</span>()</span></code></pre></div>
 <p>It probably still needs work in Illustrator, but less than before.</p>
 
 </div>
