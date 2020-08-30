@@ -1,52 +1,62 @@
 # Residuals
 
-When looking at a linear model of your data, there's a measure you need to be aware of called residuals. The residual is the distance between what the model predicted and what the real outcome is. So if your model predicted a team would score 38 points per game given their third down conversion percentage, and they score 45, then your residual is 7. If they had scored 31, then their residual would be -7. 
+When looking at a linear model of your data, there's a measure you need to be aware of called residuals. The residual is the distance between what the model predicted and what the real outcome is. Take our model at the end of the correlation and regression chapter. Our model predicted Nebraska, given a -40 net yardage deficit would lose to Iowa by -3.95 points. They lost by -3. So our residual is -.95. If Iowa fakes that last second field goal and scores a touchdown, our residual would have been -7. 
 
-Residuals can tell you severals things, but most importantly is if a linear model the right model for your data. If the residuals appear to be random, then a linear model is appropriate. If they have a pattern, it means something else is going on in your data and a linear model isn't appropriate. 
+Residuals can tell you several things, but most important is if a linear model the right model for your data. If the residuals appear to be random, then a linear model is appropriate. If they have a pattern, it means something else is going on in your data and a linear model isn't appropriate. 
 
-Residuals can also tell you who is underperforming and overperforming the model. Let's take a look at an example we've used regularly this semester -- third down conversion percentage and penalties. 
+Residuals can also tell you who is underperforming and overperforming the model. And the more robust the model -- the better your r-squared value is -- the more meaningful that label of under or overperforming is. 
 
-Let's first attach libraries and [get some data](https://unl.box.com/s/zlxoptqixkt98gubk3i6316qun99l49r). Note: In the rvest steps, I rename the first column because it's blank on the page and then I merge scoring offense to two different tables -- third downs and penalties. 
+Let's go back to our net yards model.
+
+Let's first attach libraries and [get some data](https://unl.box.com/s/2prgq48ctoxlukn6kmfjw0u1opda5s0m). 
 
 ```{r}
 library(tidyverse)
 ```
 
 ```{r}
-offense <- read_csv("data/correlations.csv")
+logs <- read_csv("data/footballlogs19.csv")
 ```
 
-First, let's build a linear model and save it as a new dataframe called `fit`. 
+First, let's make the columns we'll need.
 
 ```{r}
-fit <- lm(`OffPointsG` ~ `OffConversionPct`, data = offense)
+residualmodel <- logs %>% mutate(differential = TeamScore - OpponentScore, NetYards = OffensiveYards - DefYards)
+```
+
+Now let's create our model.
+
+```{r}
+fit <- lm(differential ~ NetYards, data = residualmodel)
 summary(fit)
 ```
 
-We've seen this output before, but let's review because if you are using scatterplots to make a point, you should do this. First, note the Min and Max residual at the top. A team has underperformed the model by 11.4 points, and a team has overperformed it by 13.5. The median residual, where half are above and half are below, is just slightly under the fit line. Close here is good. 
+We've seen this output before, but let's review because if you are using scatterplots to make a point, you should do this. First, note the Min and Max residual at the top. A team has underperformed the model by 39 points (!), and a team has overperformed it by 39 points (!!). The median residual, where half are above and half are below, is just slightly above the fit line. Close here is good. 
 
-Next: Look at the Adjusted R-squared value. What that says is that 44 percent of a team's scoring output can be predicted by their third down conversion percentage. This is just one year, so that's a little low. If we did this with more years, that would go up. 
+Next: Look at the Adjusted R-squared value. What that says is that 72 percent of a team's scoring output can be predicted by their net yards.  
 
-Last: Look at the p-value. We are looking for a p-value smaller than .05. At .05, we can say that our correlation didn't happen at random. And, in this case, it REALLY didn't happen at random. 
+Last: Look at the p-value. We are looking for a p-value smaller than .05. At .05, we can say that our correlation didn't happen at random. And, in this case, it REALLY didn't happen at random. But if you know a little bit about football, it doesn't surprise you that the more you outgain your opponent, the more you win by. It's an intuitive result.
 
-What we want to do now is look at those residuals. We can add them to our dataframe like this:
-
-```{r}
-offense$predicted <- predict(fit)
-offense$residuals <- residuals(fit)
-```
-
-Now we can sort our data by those residuals. Sorting in descending order gives us the teams that are overperforming the model.
+What we want to do now is look at those residuals. We want to add them to our individual game records. We can do that by creating two new fields -- predicted and residuals -- to our dataframe like this:
 
 ```{r}
-offense %>% arrange(desc(residuals))
+residualmodel$predicted <- predict(fit)
+residualmodel$residuals <- residuals(fit)
 ```
-So looking at this table, what you see here are the teams who scored more than their third down conversion percentage would indicate. Some of those teams were just lucky. Some of those teams were really good at long touchdown plays that didn't need a lot of third downs to get down the field. But these are your overperformers. 
 
-But, before we can bestow any validity on it, we need to see if this linear model is appropriate. We've done that some looking at our p-values and R-squared values. But one more check is to look at the residuals themselves. We do that by plotting the residuals with the predictor. We'll get into plotting soon, but for now just seeing it is enough.
+Now we can sort our data by those residuals. Sorting in descending order gives us the games where teams overperformed the model. To make it easier to read, I'm going to use select to give us just the columns we need to see.
+
+```{r}
+residualmodel %>% arrange(desc(residuals)) %>% select(Team, Opponent, Result, NetYards, residuals)
+```
+So looking at this table, what you see here are the teams who scored more than their net yards would indicate. One of them should jump off the page at you.
+
+Remember Nebraska vs Illinois? We came back to win and everyone was happy and relieved at the same time? We outgained Illinois by **386 yards** in that game and won by 4. Our model predicted Nebraska should have won that game by 36.8 points. Illinois outscored the model by almost as many points as they had. Just goes to show you: you can have all the advantages and you can still screw it up. Just ask Buffalo: They were only outgained by Penn State by 70 yards and still lost by 32. 
+
+But, before we can bestow any validity on this model, we need to see if this linear model is appropriate. We've done that some looking at our p-values and R-squared values. But one more check is to look at the residuals themselves. We do that by plotting the residuals with the predictor. We'll get into plotting soon, but for now just seeing it is enough.
 
 ```{r echo=FALSE}
-ggplot(offense, aes(x=OffConversionPct, y=residuals)) + geom_point()
+ggplot(residualmodel, aes(x=NetYards, y=residuals)) + geom_point()
 ```
 
 The lack of a shape here -- the seemingly random nature -- is a good sign that a linear model works for our data. If there was a pattern, that would indicate something else was going on in our data and we needed a different model.
@@ -54,7 +64,7 @@ The lack of a shape here -- the seemingly random nature -- is a good sign that a
 Another way to view your residuals is by connecting the predicted value with the actual value.
 
 ```{r echo=FALSE}
-ggplot(data=offense, aes(x=OffConversionPct, y=OffPointsG)) + geom_point() + geom_segment(aes(xend = OffConversionPct, yend = predicted)) + geom_smooth(method=lm, se=FALSE)
+ggplot(data=residualmodel, aes(x=NetYards, y=differential)) + geom_point() + geom_segment(aes(xend = NetYards, yend = predicted)) + geom_smooth(method=lm, se=FALSE)
 ```
 
 The blue line here separates underperformers from overperformers.
@@ -64,22 +74,27 @@ The blue line here separates underperformers from overperformers.
 Now let's look at it where it doesn't work: Penalties. 
 
 ```{r}
-penalties <- offense
+penalties <- logs %>% 
+  mutate(
+    differential = TeamScore - OpponentScore, 
+    TotalPenalties = Penalties+DefPenalties,
+    TotalPenaltyYards = PenaltyYds+DefPenaltyYds
+  )
 ```
 
 
 ```{r}
-pfit <- lm(OffPointsG ~ Yards, data = penalties)
+pfit <- lm(differential ~ TotalPenaltyYards, data = penalties)
 summary(pfit)
 ```
 
 So from top to bottom:
 
-* Our min and max go from -16.5 to positive 17.1
-* Our adjusted R-squared is ... .06. Not much at all. 
-* Our p-value is ... .002, which is less than than .05. 
+* Our min and max go from -73 to positive 77
+* Our adjusted R-squared is ... -0.0004139. Not much at all. 
+* Our p-value is ... 0.576, which is more than than .05. 
 
-So what we can say about this model is that it's statistically significant but utterly meaningless. Normally, we'd stop right here -- why bother going forward with a predictive model that isn't predictive? But let's do it anyway. 
+So what we can say about this model is that it's statistically insignificant and utterly meaningless. Normally, we'd stop right here -- why bother going forward with a predictive model that isn't predictive? But let's do it anyway. 
 
 ```{r}
 penalties$predicted <- predict(pfit)
@@ -87,20 +102,20 @@ penalties$residuals <- residuals(pfit)
 ```
 
 ```{r}
-penalties %>% arrange(desc(residuals))
+penalties %>% arrange(desc(residuals)) %>% select(Team, Opponent, Result, TotalPenaltyYards, residuals)
 ```
 
-So our model says Oklahoma *should* only be scoring 31.3 points per game given how many penalty yards per game, but they're really scoring 48.4. Oy. What happens if we plot those residuals? 
+First, note all of the biggest misses here are all blowout games. The worst game of the season last year was, by far, Maryland vs Howard, a 79-0 shellacking that should never have happened. The differential was 79 points. The model missed that differential by ... 76.9 points. In other words, this model is terrible. But let's look at it anyway. 
 
 ```{r echo=FALSE}
-ggplot(penalties, aes(x=Yards, y=residuals)) + geom_point()
+ggplot(penalties, aes(x=TotalPenaltyYards, y=residuals)) + geom_point()
 ```
 
 Well ... it actually says that a linear model is appropriate. Which an important lesson -- just because your residual plot says a linear model works here, that doesn't say your linear model is good. There are other measures for that, and you need to use them. 
 
-Here's the segment plot of residuals -- you'll see some really long lines. That's a bad sign. 
+Here's the segment plot of residuals -- you'll see some really long lines. That's a bad sign. Another bad sign? A flat fit line. It means there's no relationship between these two things. Which we already know.
 
 ```{r echo=FALSE}
-ggplot(data=penalties, aes(x=Yards, y=OffPointsG)) + geom_point() + geom_segment(aes(xend = Yards, yend = predicted)) + geom_smooth(method=lm, se=FALSE)
+ggplot(data=penalties, aes(x=TotalPenaltyYards, y=differential)) + geom_point() + geom_segment(aes(xend = TotalPenaltyYards, yend = predicted)) + geom_smooth(method=lm, se=FALSE)
 ```
 
