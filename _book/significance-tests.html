@@ -338,14 +338,13 @@ If it is, then we know certain things about it. Like the mean – the average �
 ##                   222.8929                   231.3523</code></pre>
 <p>Now let’s talk about the output. I prefer to read these bottom up. So at the bottom, it says that the mean number of points score in an NBA game With Fans is 222.89. The mean scored in games Without Fans is 231.35. That means teams are scoring almost 8.5 points MORE without fans on average.</p>
 <p>But, some games are defenseless track meets, some games are defensive slugfests. We learned that averages can be skewed by extremes. So the next thing we need to look at is the p-value. Remember, this is the probability that we’d get this sample mean – the without fans mean – if there was no difference between fans and no fans.</p>
-<p>The probability? 4.099 x 10 to the -7 power. Don’t remember your scientific notation? That’s .00000004099. The decimal, seven zeros and the number.</p>
-<p>Remember, if the probability is below .05, then we determine that that this number is statistically significant. We’ll talk more about statistical significance soon, but in this case, statistical significance means that our hypothesis is correct: points are different without fans than with.</p>
-<p>Well, .000000004099 is less than .05, so we <em>reject the null hypothesis</em> and we can confidently say that bubble teams are scoring more than they were when fans packed arenas.</p>
+<p>The probability? 4.099e-07 or 4.099 x 10 to the -7 power. Don’t remember your scientific notation? That’s .00000004099. The decimal, seven zeros and the number.</p>
+<p>Remember, if the probability is below .05, then we determine that this number is statistically significant. We’ll talk more about statistical significance soon, but in this case, statistical significance means that our hypothesis is correct: points are different without fans than with. And since our hypothesis is correct, we <em>reject the null hypothesis</em> and we can confidently say that bubble teams are scoring more than they were when fans packed arenas.</p>
 <div id="accepting-the-null-hypothesis" class="section level2">
 <h2><span class="header-section-number">8.1</span> Accepting the null hypothesis</h2>
 <p>So what does it look like when your hypothesis is wrong?</p>
 <p>Let’s test another thing that may have been impacted by bubble games: home court advantage. If you’re the home team, but you’re not at home, does it affect you? It has to, right? Your fans aren’t there. Home and away are just positions on the scoreboard. It can’t matter, can it?</p>
-<p>My hypothesis, because we have to test if it’s different, is that home court is no longer an advantage, and the home team will score less relative to the away team.</p>
+<p>My hypothesis is that home court is no longer an advantage, and the home team will score less relative to the away team.</p>
 <p>First things first: We need to make a dataframe where Team is the home team. And then we’ll create a differential between the home team and away team. If home court is an advantage, the differential should average out to be positive – the home team scores more than the away team.</p>
 <div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="significance-tests.html#cb103-1"></a>homecourt &lt;-<span class="st"> </span>logs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="kw">is.na</span>(HomeAway) <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">differential =</span> TeamScore <span class="op">-</span><span class="st"> </span>OpponentScore)</span></code></pre></div>
 <p>Now let’s test it.</p>
@@ -363,9 +362,9 @@ If it is, then we know certain things about it. Like the mean – the average �
 ##                   2.174047                   1.647727</code></pre>
 <p>So again, start at the bottom. With Fans, the home team averages 2.17 more points than the away team. Without fans, they average 1.64 more.</p>
 <p>If you are a bad sportswriter or a hack sports talk radio host, you look at this and scream “the bubble killed home court!”</p>
-<p>But two things: first, the home team is STILL scoring more than the away team on the whole.</p>
+<p>But two things: first, the home team is STILL, on average, scoring more than the away team on the whole.</p>
 <p>And two: Look at the p-value. It’s .7129. Is that less than .05? No, no it is not. So that means we have to <strong>accept the null hypothesis</strong> that there is no difference between fans and no fans when it comes to the difference between the home team and the away team’s score.</p>
-<p>Now, does this mean that the bubble hasn’t impacted the magic of home court? Not necessarily. What it’s saying is that this metric isn’t capable of telling you that.</p>
+<p>Now, does this mean that the bubble hasn’t impacted the magic of home court? Not necessarily. What it’s saying is that the variance between one and the other is too large to be able to say that they’re different. It could just be random noise that’s causing the difference, and so it’s not real. More to the point, it’s saying that this metric isn’t capable of telling you that there’s no home court in the bubble.</p>
 <p>We’re going to be analyzing these bubble games for <em>years</em> trying to find the true impact of fans.</p>
 
 </div>

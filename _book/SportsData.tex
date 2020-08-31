@@ -1588,11 +1588,9 @@ Now let's talk about the output. I prefer to read these bottom up. So at the bot
 
 But, some games are defenseless track meets, some games are defensive slugfests. We learned that averages can be skewed by extremes. So the next thing we need to look at is the p-value. Remember, this is the probability that we'd get this sample mean -- the without fans mean -- if there was no difference between fans and no fans.
 
-The probability? 4.099 x 10 to the -7 power. Don't remember your scientific notation? That's .00000004099. The decimal, seven zeros and the number.
+The probability? 4.099e-07 or 4.099 x 10 to the -7 power. Don't remember your scientific notation? That's .00000004099. The decimal, seven zeros and the number.
 
-Remember, if the probability is below .05, then we determine that that this number is statistically significant. We'll talk more about statistical significance soon, but in this case, statistical significance means that our hypothesis is correct: points are different without fans than with.
-
-Well, .000000004099 is less than .05, so we \emph{reject the null hypothesis} and we can confidently say that bubble teams are scoring more than they were when fans packed arenas.
+Remember, if the probability is below .05, then we determine that this number is statistically significant. We'll talk more about statistical significance soon, but in this case, statistical significance means that our hypothesis is correct: points are different without fans than with. And since our hypothesis is correct, we \emph{reject the null hypothesis} and we can confidently say that bubble teams are scoring more than they were when fans packed arenas.
 
 \hypertarget{accepting-the-null-hypothesis}{%
 \section{Accepting the null hypothesis}\label{accepting-the-null-hypothesis}}
@@ -1601,7 +1599,7 @@ So what does it look like when your hypothesis is wrong?
 
 Let's test another thing that may have been impacted by bubble games: home court advantage. If you're the home team, but you're not at home, does it affect you? It has to, right? Your fans aren't there. Home and away are just positions on the scoreboard. It can't matter, can it?
 
-My hypothesis, because we have to test if it's different, is that home court is no longer an advantage, and the home team will score less relative to the away team.
+My hypothesis is that home court is no longer an advantage, and the home team will score less relative to the away team.
 
 First things first: We need to make a dataframe where Team is the home team. And then we'll create a differential between the home team and away team. If home court is an advantage, the differential should average out to be positive -- the home team scores more than the away team.
 
@@ -1637,11 +1635,11 @@ So again, start at the bottom. With Fans, the home team averages 2.17 more point
 
 If you are a bad sportswriter or a hack sports talk radio host, you look at this and scream ``the bubble killed home court!''
 
-But two things: first, the home team is STILL scoring more than the away team on the whole.
+But two things: first, the home team is STILL, on average, scoring more than the away team on the whole.
 
 And two: Look at the p-value. It's .7129. Is that less than .05? No, no it is not. So that means we have to \textbf{accept the null hypothesis} that there is no difference between fans and no fans when it comes to the difference between the home team and the away team's score.
 
-Now, does this mean that the bubble hasn't impacted the magic of home court? Not necessarily. What it's saying is that this metric isn't capable of telling you that.
+Now, does this mean that the bubble hasn't impacted the magic of home court? Not necessarily. What it's saying is that the variance between one and the other is too large to be able to say that they're different. It could just be random noise that's causing the difference, and so it's not real. More to the point, it's saying that this metric isn't capable of telling you that there's no home court in the bubble.
 
 We're going to be analyzing these bubble games for \emph{years} trying to find the true impact of fans.
 
@@ -1654,7 +1652,7 @@ Can we put some numbers behind that? Can we prove it or not?
 
 This is what we're going to start to answer. And we'll do it with correlations and regressions.
 
-First, we need libraries and \href{https://unl.box.com/s/zlxoptqixkt98gubk3i6316qun99l49r}{data}.
+First, we need libraries and \href{https://unl.box.com/s/2prgq48ctoxlukn6kmfjw0u1opda5s0m}{data}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1664,26 +1662,28 @@ First, we need libraries and \href{https://unl.box.com/s/zlxoptqixkt98gubk3i6316
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{correlations <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/correlations.csv"}\NormalTok{)}
+\NormalTok{correlations <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/footballlogs19.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## Parsed with column specification:
 ## cols(
-##   Name = col_character(),
-##   OffPoints = col_double(),
-##   OffPointsG = col_double(),
-##   DefPoints = col_double(),
-##   DefPointsG = col_double(),
-##   Pen. = col_double(),
-##   Yards = col_double(),
-##   `Pen./G` = col_double(),
-##   OffConversions = col_double(),
-##   OffConversionPct = col_double(),
-##   DefConversions = col_double(),
-##   DefConversionPct = col_double()
+##   .default = col_double(),
+##   Date = col_date(format = ""),
+##   HomeAway = col_character(),
+##   Opponent = col_character(),
+##   Result = col_character(),
+##   TeamFull = col_character(),
+##   TeamURL = col_character(),
+##   Outcome = col_character(),
+##   Team = col_character(),
+##   Conference = col_character()
 ## )
+\end{verbatim}
+
+\begin{verbatim}
+## See spec(...) for full column specifications.
 \end{verbatim}
 
 To do this, we need all FBS college football teams and their season stats from last year. How much, over the course of a season, does a thing matter? That's the question you're going to answer.
@@ -1699,15 +1699,15 @@ We're going create a new dataframe called newcorrelations that takes our data th
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{newcorrelations <-}\StringTok{ }\NormalTok{correlations }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{differential =}\NormalTok{ OffPoints }\OperatorTok{-}\StringTok{ }\NormalTok{DefPoints)}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{differential =}\NormalTok{ TeamScore }\OperatorTok{-}\StringTok{ }\NormalTok{OpponentScore, }\DataTypeTok{TotalPenalties =}\NormalTok{ Penalties}\OperatorTok{+}\NormalTok{DefPenalties, }\DataTypeTok{TotalPenaltyYards =}\NormalTok{ PenaltyYds}\OperatorTok{+}\NormalTok{DefPenaltyYds)}
 \end{Highlighting}
 \end{Shaded}
 
-In R, there is a \texttt{cor} function, and it works much the same as \texttt{mean} or \texttt{median}. So we want to see if \texttt{differential} is correlated with \texttt{Yards}, which is the yards of penalties a team gets in a game. We do that by referencing \texttt{differential} and \texttt{Yards} and specifying we want a \texttt{pearson} correlation. The number we get back is the correlation coefficient.
+In R, there is a \texttt{cor} function, and it works much the same as \texttt{mean} or \texttt{median}. So we want to see if \texttt{differential} is correlated with \texttt{TotalPenaltyYards}, which is the yards of penalties a team gets in a game. We do that by referencing \texttt{differential} and \texttt{TotalPenaltyYards} and specifying we want a \texttt{pearson} correlation. The number we get back is the correlation coefficient.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{newcorrelations }\OperatorTok{%>%}\StringTok{ }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{correlation =} \KeywordTok{cor}\NormalTok{(differential, Yards, }\DataTypeTok{method=}\StringTok{"pearson"}\NormalTok{))}
+\NormalTok{newcorrelations }\OperatorTok{%>%}\StringTok{ }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{correlation =} \KeywordTok{cor}\NormalTok{(differential, TotalPenaltyYards, }\DataTypeTok{method=}\StringTok{"pearson"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1715,17 +1715,17 @@ In R, there is a \texttt{cor} function, and it works much the same as \texttt{me
 ## # A tibble: 1 x 1
 ##   correlation
 ##         <dbl>
-## 1       0.201
+## 1     -0.0137
 \end{verbatim}
 
-So on a scale of 0 to 1, penalty yards and whether or not the team scores more points than it give up are at .2. You could say they're 20 percent related. Another way to say it? They're 80 percent not related.
+So on a scale of -1 to 1, where 0 means there's no relationship at all and 1 or -1 means a perfect relationship, penalty yards and whether or not the team scores more points than it give up are at -0.014. You could say they're 1.4 percent related toward the negative -- more penalties, the lower your differential. Another way to say it? They're 98.6 percent not related.
 
 What about the number of penalties instead of the yards?
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{newcorrelations }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{correlation =} \KeywordTok{cor}\NormalTok{(differential, }\StringTok{`}\DataTypeTok{Pen.}\StringTok{`}\NormalTok{, }\DataTypeTok{method=}\StringTok{"pearson"}\NormalTok{))}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{correlation =} \KeywordTok{cor}\NormalTok{(differential, TotalPenalties, }\DataTypeTok{method=}\StringTok{"pearson"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1733,41 +1733,24 @@ What about the number of penalties instead of the yards?
 ## # A tibble: 1 x 1
 ##   correlation
 ##         <dbl>
-## 1       0.153
+## 1    -0.00875
 \end{verbatim}
 
-Even less related. What about looking at the average? Penalty yards per game?
+So wait, what does this all mean?
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{newcorrelations }\OperatorTok{%>%}\StringTok{ }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{correlation =} \KeywordTok{cor}\NormalTok{(differential, }\StringTok{`}\DataTypeTok{Pen./G}\StringTok{`}\NormalTok{, }\DataTypeTok{method=}\StringTok{"pearson"}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
+It means that when you look at every game in college football, the number of penalties and penalty yards does have a negative impact on the score difference between your team and the other team. But the relationship between penalties, penalty yards and the difference between scores is barely anything at all. Like 99 percent not related.
 
-\begin{verbatim}
-## # A tibble: 1 x 1
-##   correlation
-##         <dbl>
-## 1     -0.0331
-\end{verbatim}
+Normally, at this point, you'd quit while you were ahead. A correlation coefficient that shows there's no relationship between two things means stop. It's pointless to go on. But let's beat a dead horse a bit for the sake of talk radio callers who want to complain about undisciplined football teams.
 
-Not only is it less related, but the relationship is inverted.
-
-So wait, what does that mean?
-
-It means that the number of penalty yards and penalties is actually positively related to differential. Put another way, teams that have more penalties and penalty yards tend to have better outcomes. The average is barely -- 3 percent -- negatively correlated, meaning that teams with higher averages score fewer points.
-
-What? That makes no sense. How can that be?
-
-Enter regression. Regression is how we try to fit our data into a line that explains the relationship the best. Regressions will help us predict things as well -- if we have a team that has so many penalties, what kind of point differential could we expect, given every FBS team? So regressions are about prediction, correlations are about description. Correlations describe a relationship. Regressions help us predict what that relationship means. Specifically, it tells us how much of the change in a dependent variable can be explained by the independent variable.
+Enter regression. Regression is how we try to fit our data into a line that explains the relationship the best. Regressions will help us predict things as well -- if we have a team that has so many penalties, what kind of point differential could we expect? So regressions are about prediction, correlations are about description. Correlations describe a relationship. Regressions help us predict what that relationship means and what it might look like in the real world. Specifically, it tells us how much of the change in a dependent variable can be explained by the independent variable.
 
 Another thing regressions do is give us some other tools to evaluate if the relationship is real or not.
 
-Here's an example of using linear modeling to look at yards. Think of the \texttt{\textasciitilde{}} character as saying ``is predicted by''. The output looks like a lot, but what we need is a small part of it.
+Here's an example of using linear modeling to look at penalty yards. Think of the \texttt{\textasciitilde{}} character as saying ``is predicted by''. The output looks like a lot, but what we need is a small part of it.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{fit <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(differential }\OperatorTok{~}\StringTok{ }\NormalTok{Yards, }\DataTypeTok{data =}\NormalTok{ newcorrelations)}
+\NormalTok{fit <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(differential }\OperatorTok{~}\StringTok{ }\NormalTok{TotalPenaltyYards, }\DataTypeTok{data =}\NormalTok{ newcorrelations)}
 \KeywordTok{summary}\NormalTok{(fit)}
 \end{Highlighting}
 \end{Shaded}
@@ -1775,22 +1758,22 @@ Here's an example of using linear modeling to look at yards. Think of the \textt
 \begin{verbatim}
 ## 
 ## Call:
-## lm(formula = differential ~ Yards, data = newcorrelations)
+## lm(formula = differential ~ TotalPenaltyYards, data = newcorrelations)
 ## 
 ## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -351.02  -93.49    2.67  107.88  444.42 
+##    Min     1Q Median     3Q    Max 
+## -73.13 -15.16   0.71  15.61  76.86 
 ## 
 ## Coefficients:
-##               Estimate Std. Error t value Pr(>|t|)  
-## (Intercept) -108.73848   59.70868  -1.821   0.0709 .
-## Yards          0.19484    0.08399   2.320   0.0219 *
+##                    Estimate Std. Error t value Pr(>|t|)  
+## (Intercept)        2.785946   1.525993   1.826   0.0681 .
+## TotalPenaltyYards -0.007407   0.013244  -0.559   0.5760  
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 140 on 128 degrees of freedom
-## Multiple R-squared:  0.04035,	Adjusted R-squared:  0.03285 
-## F-statistic: 5.382 on 1 and 128 DF,  p-value: 0.02193
+## Residual standard error: 23.3 on 1660 degrees of freedom
+## Multiple R-squared:  0.0001884,	Adjusted R-squared:  -0.0004139 
+## F-statistic: 0.3128 on 1 and 1660 DF,  p-value: 0.576
 \end{verbatim}
 
 There's three things we need here:
@@ -1799,30 +1782,38 @@ There's three things we need here:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  First we want to look at the p-value. It's at the bottom right corner of the output. In the case of Yards, the p-value is .02193. The threshold we're looking for here is .05. If it's less than .05, then the relationship is considered to be \emph{statistically significant}. Significance here does not mean it's a big deal. It means it's not random. That's it. Just that. Not random. So in our case, the relationship between penalty yards and a team's aggregate point differential are not random. It's a real relationship.
+  First we want to look at the p-value. It's at the bottom right corner of the output. In the case of Total Penalty Yards, the p-value is .576. The threshold we're looking for here is .05. If it's less than .05, then the relationship is considered to be \emph{statistically significant}. Significance here does not mean it's a big deal. It means it's not random. That's it. Just that. Not random. So in our case, the relationship between total penalty yards and a team's aggregate point differential are \textbf{not statistically significant}. The differences in score difference and penalty yards could be completely random. This is another sign we should just stop with this.
 \item
-  Second, we look at the Adjusted R-squared value. It's right above the p-value. Adjusted R-squared is a measure of how much of the difference between teams aggregate point values can be explained by penalty yards. Our correlation coefficient said they're 20 percent related to each other, but penalty yard's ability to explain the difference between teams? About 3.3 percent. That's \ldots{} not much. It's really nothing.
+  Second, we look at the Adjusted R-squared value. It's right above the p-value. Adjusted R-squared is a measure of how much of the difference between teams aggregate point values can be explained by penalty yards. Our correlation coefficient said they're 1.4 percent related to each other, but penalty yard's ability to explain the difference between teams? About .04 percent. That's \ldots{} not much. It's really nothing. Again, we should quit.
 \item
-  The third thing we can look at, and we only bother if the first two are meaningful, is the coefficients. In the middle, you can see the (Intercept) is -108.73848 and the Yards coefficient is .19484. Remember high school algebra? Remember learning the equation of a line? Remember swearing that learning \texttt{y=mx+b} is stupid because you'll never need it again? Surprise. It's useful again. In this case, we could try to predict a team's aggregate score in a season -- will they score more than they give up -- by using \texttt{y=mx+b}. In this case, y is the aggregate score, m is .19484 and b is -108.73848. So we would multiply a teams total penalty yards by .19484 and then subtract 108.73848 from it. The result would tell you what the total aggregate score in the season would be. Chance that your even close with this? About 3 percent.
+  The third thing we can look at, and we only bother if the first two are meaningful, is the coefficients. In the middle, you can see the (Intercept) is 2.79 and the TotalPenaltyYards coefficient is -0.007407. Remember high school algebra? Remember learning the equation of a line? Remember swearing that learning \texttt{y=mx+b} is stupid because you'll never need it again? Surprise. It's useful again. In this case, we could try to predict a team's score differential in a game -- will they score more than they give up -- by using \texttt{y=mx+b}. In this case, y is the aggregate score, m is -0.007407 and b is 2.79. So we would multiply a teams total penalty yards by -0.007407 and then add 2.79 to it. The result would tell you what the total aggregate score in the game would be, according to our model. Chance that your even close with this? About .04 percent. In other words, you've got a 99.96 percent chance of being completely wrong. Did I say we should quit? Yeah.
 \end{enumerate}
 
-You can see the problem in a graph. On the X axis is penalty yards, on the y is aggregate score. If these elements had a strong relationship, we'd see a clear pattern moving from right to left, sloping down. On the left would be the teams with lots of penalty yards and a negative point differential. On right would be teams with low penalty yards and high point differentials. Do you see that below?
+So penalty yards are totally meaningless to the outcome of a game.
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-64-1.pdf}
+You can see the problem in a graph. On the X axis is penalty yards, on the y is aggregate score. If these elements had a strong relationship, we'd see a clear pattern moving from right to left, sloping down. On the left would be the teams with few penalties and a positive point differential. On right would be teams with high penalty yards and negative point differentials. Do you see that below?
 
-\begin{quote}
-\textbf{Your turn}: Try it with the other penalty measures. Total penalties and penalty yards per game. Does anything change? Do either of these meet the .05 threshold for randomness? Are either of these any more predictive?
-\end{quote}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-63-1.pdf}
 
 \hypertarget{a-more-predictive-example}{%
 \section{A more predictive example}\label{a-more-predictive-example}}
 
-So we've firmly established that penalties aren't predictive. But what is? One measure I've found to be highly predictive of a team's success is how well do they do on third down. It's simple really: Succeed on third down, you get to stay on offense. Fail on third down, you are punting (most likely) or settling for a field goal. Either way, you're scoring less than you would by scoring touchdowns. How related are points per game and third down conversion percentage?
+So we've \textbf{firmly} established that penalties aren't predictive. But what is?
+
+So instead of looking at penalty yards, let's make a new metric: Net Yards. Can we predict the score differential by looking at the yards a team gained minus the yards they gave up.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{newcorrelations }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{correlation =} \KeywordTok{cor}\NormalTok{(OffPointsG, OffConversionPct, }\DataTypeTok{method=}\StringTok{"pearson"}\NormalTok{))}
+\NormalTok{regressions <-}\StringTok{ }\NormalTok{newcorrelations }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{NetYards =}\NormalTok{ OffensiveYards }\OperatorTok{-}\StringTok{ }\NormalTok{DefYards)}
+\end{Highlighting}
+\end{Shaded}
+
+First, let's look at the correlation coefficent.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{regressions }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{correlation =} \KeywordTok{cor}\NormalTok{(differential, NetYards, }\DataTypeTok{method=}\StringTok{"pearson"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1830,68 +1821,56 @@ So we've firmly established that penalties aren't predictive. But what is? One m
 ## # A tibble: 1 x 1
 ##   correlation
 ##         <dbl>
-## 1       0.666
+## 1       0.850
 \end{verbatim}
 
-Answer: 67 percent. More than three times more related than penalty yards. But how meaningful is that relationship and how predictive is it?
+Answer: 85 percent. Not a perfect relationship, but very good. But how meaningful is that relationship and how predictive is it?
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{third <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(OffPointsG }\OperatorTok{~}\StringTok{ }\NormalTok{OffConversionPct, }\DataTypeTok{data =}\NormalTok{ newcorrelations)}
-\KeywordTok{summary}\NormalTok{(third)}
+\NormalTok{net <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(differential }\OperatorTok{~}\StringTok{ }\NormalTok{NetYards, }\DataTypeTok{data =}\NormalTok{ regressions)}
+\KeywordTok{summary}\NormalTok{(net)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## 
 ## Call:
-## lm(formula = OffPointsG ~ OffConversionPct, data = newcorrelations)
+## lm(formula = differential ~ NetYards, data = regressions)
 ## 
 ## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -11.3861  -3.5411  -0.5885   2.9011  13.5188 
+##     Min      1Q  Median      3Q     Max 
+## -39.981  -8.566   0.171   8.832  39.361 
 ## 
 ## Coefficients:
-##                  Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)      -4.74024    3.41041   -1.39    0.167    
-## OffConversionPct  0.85625    0.08479   10.10   <2e-16 ***
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 0.309946   0.302520   1.025    0.306    
+## NetYards    0.106536   0.001623  65.644   <2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 5.111 on 128 degrees of freedom
-## Multiple R-squared:  0.4434,	Adjusted R-squared:  0.4391 
-## F-statistic:   102 on 1 and 128 DF,  p-value: < 2.2e-16
+## Residual standard error: 12.29 on 1660 degrees of freedom
+## Multiple R-squared:  0.7219,	Adjusted R-squared:  0.7217 
+## F-statistic:  4309 on 1 and 1660 DF,  p-value: < 2.2e-16
 \end{verbatim}
 
 First we check p-value. See that e-16? That means scientific notation. That means our number is 2.2 times 10 to the -16 power. So -.000000000000000022. That's sixteen zeros between the decimal and 22. Is that less than .05? Uh, yeah. So this is really, really, really not random. But anyone who has watched a game of football knows this is true. It makes intuitive sense.
 
-Second, Adjusted R-squared: .4391. So we can predict 44 percent of the difference in the total offensive points per game a team scores by simply looking at their third down conversion percentage.
+Second, Adjusted R-squared: 0.7217. So we can predict a whopping 72 percent of the difference in the score differential by simply looking at the net yards the team has.
 
-Third, the coefficients: In this case, our \texttt{y=mx+b} formula looks like \texttt{y\ =\ .85625x-4.74024}. So if we were applying this, let's look at Nebraska's 31-28 loss to Iowa on Black Friday in 2018. Nebraska was 6-15 on third down in that game, or 40 percent (Iowa was 7 of 13 or 54 percent). Given those numbers, our formula predicts Nebraska should have scored how many points?
+Third, the coefficients: In this case, our \texttt{y=mx+b} formula looks like \texttt{y\ =\ .106536x\ +\ .309946}. So if we were applying this, let's look at Nebraska's 27-24 loss to Iowa in 2019. Nebraska's net yards that game? -40.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{(}\FloatTok{0.85625} \OperatorTok{*}\StringTok{ }\DecValTok{40}\NormalTok{) }\OperatorTok{-}\StringTok{ }\FloatTok{4.74024} 
+\NormalTok{(.}\DecValTok{106536}\OperatorTok{*-}\DecValTok{40}\NormalTok{)}\OperatorTok{+}\NormalTok{.}\DecValTok{309946} 
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 29.50976
+## [1] -3.951494
 \end{verbatim}
 
-That's really close to the 28 they did score. And Iowa?
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{(}\FloatTok{0.85625} \OperatorTok{*}\StringTok{ }\DecValTok{54}\NormalTok{) }\OperatorTok{-}\StringTok{ }\FloatTok{4.74024} 
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 41.49726
-\end{verbatim}
-
-By our model, Iowa should have scored 10 more points than they did. But they didn't. Why, besides Iowa is terrible and deserves punishment from the football gods for being Iowa? Remember our model can only explain 44 percent of the points. There's more to football than one metric.
+So by our model, Nebraska should have lost by 3.95 points. That's really close to the 3 point groin kick of a loss that happened.
 
 \hypertarget{multiple-regression}{%
 \chapter{Multiple regression}\label{multiple-regression}}
@@ -2510,13 +2489,15 @@ By this model, it predicted we would outscore our opponent by .07 points over th
 \hypertarget{residuals}{%
 \chapter{Residuals}\label{residuals}}
 
-When looking at a linear model of your data, there's a measure you need to be aware of called residuals. The residual is the distance between what the model predicted and what the real outcome is. So if your model predicted a team would score 38 points per game given their third down conversion percentage, and they score 45, then your residual is 7. If they had scored 31, then their residual would be -7.
+When looking at a linear model of your data, there's a measure you need to be aware of called residuals. The residual is the distance between what the model predicted and what the real outcome is. Take our model at the end of the correlation and regression chapter. Our model predicted Nebraska, given a -40 net yardage deficit would lose to Iowa by -3.95 points. They lost by -3. So our residual is -.95. If Iowa fakes that last second field goal and scores a touchdown, our residual would have been -7.
 
-Residuals can tell you severals things, but most importantly is if a linear model the right model for your data. If the residuals appear to be random, then a linear model is appropriate. If they have a pattern, it means something else is going on in your data and a linear model isn't appropriate.
+Residuals can tell you several things, but most important is if a linear model the right model for your data. If the residuals appear to be random, then a linear model is appropriate. If they have a pattern, it means something else is going on in your data and a linear model isn't appropriate.
 
-Residuals can also tell you who is underperforming and overperforming the model. Let's take a look at an example we've used regularly this semester -- third down conversion percentage and penalties.
+Residuals can also tell you who is underperforming and overperforming the model. And the more robust the model -- the better your r-squared value is -- the more meaningful that label of under or overperforming is.
 
-Let's first attach libraries and \href{https://unl.box.com/s/zlxoptqixkt98gubk3i6316qun99l49r}{get some data}. Note: In the rvest steps, I rename the first column because it's blank on the page and then I merge scoring offense to two different tables -- third downs and penalties.
+Let's go back to our net yards model.
+
+Let's first attach libraries and \href{https://unl.box.com/s/2prgq48ctoxlukn6kmfjw0u1opda5s0m}{get some data}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2526,33 +2507,43 @@ Let's first attach libraries and \href{https://unl.box.com/s/zlxoptqixkt98gubk3i
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{offense <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/correlations.csv"}\NormalTok{)}
+\NormalTok{logs <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/footballlogs19.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## Parsed with column specification:
 ## cols(
-##   Name = col_character(),
-##   OffPoints = col_double(),
-##   OffPointsG = col_double(),
-##   DefPoints = col_double(),
-##   DefPointsG = col_double(),
-##   Pen. = col_double(),
-##   Yards = col_double(),
-##   `Pen./G` = col_double(),
-##   OffConversions = col_double(),
-##   OffConversionPct = col_double(),
-##   DefConversions = col_double(),
-##   DefConversionPct = col_double()
+##   .default = col_double(),
+##   Date = col_date(format = ""),
+##   HomeAway = col_character(),
+##   Opponent = col_character(),
+##   Result = col_character(),
+##   TeamFull = col_character(),
+##   TeamURL = col_character(),
+##   Outcome = col_character(),
+##   Team = col_character(),
+##   Conference = col_character()
 ## )
 \end{verbatim}
 
-First, let's build a linear model and save it as a new dataframe called \texttt{fit}.
+\begin{verbatim}
+## See spec(...) for full column specifications.
+\end{verbatim}
+
+First, let's make the columns we'll need.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{fit <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\StringTok{`}\DataTypeTok{OffPointsG}\StringTok{`} \OperatorTok{~}\StringTok{ `}\DataTypeTok{OffConversionPct}\StringTok{`}\NormalTok{, }\DataTypeTok{data =}\NormalTok{ offense)}
+\NormalTok{residualmodel <-}\StringTok{ }\NormalTok{logs }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{differential =}\NormalTok{ TeamScore }\OperatorTok{-}\StringTok{ }\NormalTok{OpponentScore, }\DataTypeTok{NetYards =}\NormalTok{ OffensiveYards }\OperatorTok{-}\StringTok{ }\NormalTok{DefYards)}
+\end{Highlighting}
+\end{Shaded}
+
+Now let's create our model.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(differential }\OperatorTok{~}\StringTok{ }\NormalTok{NetYards, }\DataTypeTok{data =}\NormalTok{ residualmodel)}
 \KeywordTok{summary}\NormalTok{(fit)}
 \end{Highlighting}
 \end{Shaded}
@@ -2560,69 +2551,69 @@ First, let's build a linear model and save it as a new dataframe called \texttt{
 \begin{verbatim}
 ## 
 ## Call:
-## lm(formula = OffPointsG ~ OffConversionPct, data = offense)
+## lm(formula = differential ~ NetYards, data = residualmodel)
 ## 
 ## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -11.3861  -3.5411  -0.5885   2.9011  13.5188 
+##     Min      1Q  Median      3Q     Max 
+## -39.981  -8.566   0.171   8.832  39.361 
 ## 
 ## Coefficients:
-##                  Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)      -4.74024    3.41041   -1.39    0.167    
-## OffConversionPct  0.85625    0.08479   10.10   <2e-16 ***
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 0.309946   0.302520   1.025    0.306    
+## NetYards    0.106536   0.001623  65.644   <2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 5.111 on 128 degrees of freedom
-## Multiple R-squared:  0.4434,	Adjusted R-squared:  0.4391 
-## F-statistic:   102 on 1 and 128 DF,  p-value: < 2.2e-16
+## Residual standard error: 12.29 on 1660 degrees of freedom
+## Multiple R-squared:  0.7219,	Adjusted R-squared:  0.7217 
+## F-statistic:  4309 on 1 and 1660 DF,  p-value: < 2.2e-16
 \end{verbatim}
 
-We've seen this output before, but let's review because if you are using scatterplots to make a point, you should do this. First, note the Min and Max residual at the top. A team has underperformed the model by 11.4 points, and a team has overperformed it by 13.5. The median residual, where half are above and half are below, is just slightly under the fit line. Close here is good.
+We've seen this output before, but let's review because if you are using scatterplots to make a point, you should do this. First, note the Min and Max residual at the top. A team has underperformed the model by 39 points (!), and a team has overperformed it by 39 points (!!). The median residual, where half are above and half are below, is just slightly above the fit line. Close here is good.
 
-Next: Look at the Adjusted R-squared value. What that says is that 44 percent of a team's scoring output can be predicted by their third down conversion percentage. This is just one year, so that's a little low. If we did this with more years, that would go up.
+Next: Look at the Adjusted R-squared value. What that says is that 72 percent of a team's scoring output can be predicted by their net yards.
 
-Last: Look at the p-value. We are looking for a p-value smaller than .05. At .05, we can say that our correlation didn't happen at random. And, in this case, it REALLY didn't happen at random.
+Last: Look at the p-value. We are looking for a p-value smaller than .05. At .05, we can say that our correlation didn't happen at random. And, in this case, it REALLY didn't happen at random. But if you know a little bit about football, it doesn't surprise you that the more you outgain your opponent, the more you win by. It's an intuitive result.
 
-What we want to do now is look at those residuals. We can add them to our dataframe like this:
+What we want to do now is look at those residuals. We want to add them to our individual game records. We can do that by creating two new fields -- predicted and residuals -- to our dataframe like this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{offense}\OperatorTok{$}\NormalTok{predicted <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(fit)}
-\NormalTok{offense}\OperatorTok{$}\NormalTok{residuals <-}\StringTok{ }\KeywordTok{residuals}\NormalTok{(fit)}
+\NormalTok{residualmodel}\OperatorTok{$}\NormalTok{predicted <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(fit)}
+\NormalTok{residualmodel}\OperatorTok{$}\NormalTok{residuals <-}\StringTok{ }\KeywordTok{residuals}\NormalTok{(fit)}
 \end{Highlighting}
 \end{Shaded}
 
-Now we can sort our data by those residuals. Sorting in descending order gives us the teams that are overperforming the model.
+Now we can sort our data by those residuals. Sorting in descending order gives us the games where teams overperformed the model. To make it easier to read, I'm going to use select to give us just the columns we need to see.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{offense }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(residuals))}
+\NormalTok{residualmodel }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(residuals)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(Team, Opponent, Result, NetYards, residuals)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 130 x 14
-##    Name  OffPoints OffPointsG DefPoints DefPointsG  Pen. Yards `Pen./G`
-##    <chr>     <dbl>      <dbl>     <dbl>      <dbl> <dbl> <dbl>    <dbl>
-##  1 Tole~       525       40.4       397       30.5    99   931      7.6
-##  2 Utah~       618       47.5       289       22.2   101   916      7.8
-##  3 Syra~       523       40.2       351       27      94   768      7.2
-##  4 Okla~       677       48.4       466       33.3    86   855      6.1
-##  5 Clem~       664       44.3       197       13.1    73   674      4.9
-##  6 Hous~       571       43.9       483       37.2    87   683      6.7
-##  7 Miss~       407       33.9       434       36.2    88   802      7.3
-##  8 Neva~       404       31.1       350       26.9    77   738      5.9
-##  9 Bost~       384       32         308       25.7    75   590      6.3
-## 10 West~       483       40.3       326       27.2    85   800      7.1
-## # ... with 120 more rows, and 6 more variables: OffConversions <dbl>,
-## #   OffConversionPct <dbl>, DefConversions <dbl>, DefConversionPct <dbl>,
-## #   predicted <dbl>, residuals <dbl>
+## # A tibble: 1,662 x 5
+##    Team          Opponent             Result    NetYards residuals
+##    <chr>         <chr>                <chr>        <dbl>     <dbl>
+##  1 Penn State    Buffalo              W (45-13)      -72      39.4
+##  2 Illinois      Nebraska             L (38-42)     -386      36.8
+##  3 Virginia Tech Miami (FL)           W (42-35)     -226      30.8
+##  4 Tennessee     Chattanooga          W (45-0)       133      30.5
+##  5 Baylor        Kansas               W (61-6)       227      30.5
+##  6 Syracuse      Duke                 W (49-6)       116      30.3
+##  7 Houston       North Texas          W (46-25)      -86      29.9
+##  8 South Florida South Carolina State W (55-16)       83      29.8
+##  9 Troy          Texas State          W (63-27)       55      29.8
+## 10 Miami (FL)    Louisville           W (52-27)      -47      29.7
+## # ... with 1,652 more rows
 \end{verbatim}
 
-So looking at this table, what you see here are the teams who scored more than their third down conversion percentage would indicate. Some of those teams were just lucky. Some of those teams were really good at long touchdown plays that didn't need a lot of third downs to get down the field. But these are your overperformers.
+So looking at this table, what you see here are the teams who scored more than their net yards would indicate. One of them should jump off the page at you.
 
-But, before we can bestow any validity on it, we need to see if this linear model is appropriate. We've done that some looking at our p-values and R-squared values. But one more check is to look at the residuals themselves. We do that by plotting the residuals with the predictor. We'll get into plotting soon, but for now just seeing it is enough.
+Remember Nebraska vs Illinois? We came back to win and everyone was happy and relieved at the same time? We outgained Illinois by \textbf{386 yards} in that game and won by 4. Our model predicted Nebraska should have won that game by 36.8 points. Illinois outscored the model by almost as many points as they had. Just goes to show you: you can have all the advantages and you can still screw it up. Just ask Buffalo: They were only outgained by Penn State by 70 yards and still lost by 32.
+
+But, before we can bestow any validity on this model, we need to see if this linear model is appropriate. We've done that some looking at our p-values and R-squared values. But one more check is to look at the residuals themselves. We do that by plotting the residuals with the predictor. We'll get into plotting soon, but for now just seeing it is enough.
 
 \includegraphics{SportsData_files/figure-latex/unnamed-chunk-87-1.pdf}
 
@@ -2645,13 +2636,18 @@ Now let's look at it where it doesn't work: Penalties.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{penalties <-}\StringTok{ }\NormalTok{offense}
+\NormalTok{penalties <-}\StringTok{ }\NormalTok{logs }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}
+    \DataTypeTok{differential =}\NormalTok{ TeamScore }\OperatorTok{-}\StringTok{ }\NormalTok{OpponentScore, }
+    \DataTypeTok{TotalPenalties =}\NormalTok{ Penalties}\OperatorTok{+}\NormalTok{DefPenalties,}
+    \DataTypeTok{TotalPenaltyYards =}\NormalTok{ PenaltyYds}\OperatorTok{+}\NormalTok{DefPenaltyYds}
+\NormalTok{  )}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pfit <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(OffPointsG }\OperatorTok{~}\StringTok{ }\NormalTok{Yards, }\DataTypeTok{data =}\NormalTok{ penalties)}
+\NormalTok{pfit <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(differential }\OperatorTok{~}\StringTok{ }\NormalTok{TotalPenaltyYards, }\DataTypeTok{data =}\NormalTok{ penalties)}
 \KeywordTok{summary}\NormalTok{(pfit)}
 \end{Highlighting}
 \end{Shaded}
@@ -2659,22 +2655,22 @@ Now let's look at it where it doesn't work: Penalties.
 \begin{verbatim}
 ## 
 ## Call:
-## lm(formula = OffPointsG ~ Yards, data = penalties)
+## lm(formula = differential ~ TotalPenaltyYards, data = penalties)
 ## 
 ## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -16.5381  -4.5779  -0.5204   4.2418  17.0543 
+##    Min     1Q Median     3Q    Max 
+## -73.13 -15.16   0.71  15.61  76.86 
 ## 
 ## Coefficients:
-##              Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) 20.897213   2.819227   7.412 1.49e-11 ***
-## Yards        0.012220   0.003966   3.082  0.00252 ** 
+##                    Estimate Std. Error t value Pr(>|t|)  
+## (Intercept)        2.785946   1.525993   1.826   0.0681 .
+## TotalPenaltyYards -0.007407   0.013244  -0.559   0.5760  
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 6.61 on 128 degrees of freedom
-## Multiple R-squared:  0.06907,	Adjusted R-squared:  0.06179 
-## F-statistic: 9.496 on 1 and 128 DF,  p-value: 0.002521
+## Residual standard error: 23.3 on 1660 degrees of freedom
+## Multiple R-squared:  0.0001884,	Adjusted R-squared:  -0.0004139 
+## F-statistic: 0.3128 on 1 and 1660 DF,  p-value: 0.576
 \end{verbatim}
 
 So from top to bottom:
@@ -2682,14 +2678,14 @@ So from top to bottom:
 \begin{itemize}
 \tightlist
 \item
-  Our min and max go from -16.5 to positive 17.1
+  Our min and max go from -73 to positive 77
 \item
-  Our adjusted R-squared is \ldots{} .06. Not much at all.
+  Our adjusted R-squared is \ldots{} -0.0004139. Not much at all.
 \item
-  Our p-value is \ldots{} .002, which is less than than .05.
+  Our p-value is \ldots{} 0.576, which is more than than .05.
 \end{itemize}
 
-So what we can say about this model is that it's statistically significant but utterly meaningless. Normally, we'd stop right here -- why bother going forward with a predictive model that isn't predictive? But let's do it anyway.
+So what we can say about this model is that it's statistically insignificant and utterly meaningless. Normally, we'd stop right here -- why bother going forward with a predictive model that isn't predictive? But let's do it anyway.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2700,36 +2696,34 @@ So what we can say about this model is that it's statistically significant but u
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{penalties }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(residuals))}
+\NormalTok{penalties }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(residuals)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(Team, Opponent, Result, TotalPenaltyYards, residuals)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 130 x 14
-##    Name  OffPoints OffPointsG DefPoints DefPointsG  Pen. Yards `Pen./G`
-##    <chr>     <dbl>      <dbl>     <dbl>      <dbl> <dbl> <dbl>    <dbl>
-##  1 Okla~       677       48.4       466       33.3    86   855      6.1
-##  2 Utah~       618       47.5       289       22.2   101   916      7.8
-##  3 Clem~       664       44.3       197       13.1    73   674      4.9
-##  4 Alab~       684       45.6       271       18.1    87   796      5.8
-##  5 Hous~       571       43.9       483       37.2    87   683      6.7
-##  6 UCF         562       43.2       295       22.7    97   848      7.5
-##  7 Memp~       601       42.9       447       31.9   101   833      7.2
-##  8 Ohio        521       40.1       320       24.6    64   652      4.9
-##  9 Syra~       523       40.2       351       27      94   768      7.2
-## 10 West~       483       40.3       326       27.2    85   800      7.1
-## # ... with 120 more rows, and 6 more variables: OffConversions <dbl>,
-## #   OffConversionPct <dbl>, DefConversions <dbl>, DefConversionPct <dbl>,
-## #   predicted <dbl>, residuals <dbl>
+## # A tibble: 1,662 x 5
+##    Team           Opponent            Result    TotalPenaltyYards residuals
+##    <chr>          <chr>               <chr>                 <dbl>     <dbl>
+##  1 Maryland       Howard              W (79-0)                 87      76.9
+##  2 Penn State     Idaho               W (79-7)                 97      69.9
+##  3 Ohio State     Miami (OH)          W (76-5)                102      69.0
+##  4 Oregon         Nevada              W (77-6)                 88      68.9
+##  5 Louisiana      Texas Southern      W (77-6)                 55      68.6
+##  6 Miami (FL)     Bethune-Cookman     W (63-0)                110      61.0
+##  7 Alabama        Western Carolina    W (66-3)                 81      60.8
+##  8 UCF            Florida A&M         W (62-0)                171      60.5
+##  9 South Carolina Charleston Southern W (72-10)                49      59.6
+## 10 Wisconsin      Central Michigan    W (61-0)                 49      58.6
+## # ... with 1,652 more rows
 \end{verbatim}
 
-So our model says Oklahoma \emph{should} only be scoring 31.3 points per game given how many penalty yards per game, but they're really scoring 48.4. Oy. What happens if we plot those residuals?
+First, note all of the biggest misses here are all blowout games. The worst game of the season last year was, by far, Maryland vs Howard, a 79-0 shellacking that should never have happened. The differential was 79 points. The model missed that differential by \ldots{} 76.9 points. In other words, this model is terrible. But let's look at it anyway.
 
 \includegraphics{SportsData_files/figure-latex/unnamed-chunk-93-1.pdf}
 
 Well \ldots{} it actually says that a linear model is appropriate. Which an important lesson -- just because your residual plot says a linear model works here, that doesn't say your linear model is good. There are other measures for that, and you need to use them.
 
-Here's the segment plot of residuals -- you'll see some really long lines. That's a bad sign.
+Here's the segment plot of residuals -- you'll see some really long lines. That's a bad sign. Another bad sign? A flat fit line. It means there's no relationship between these two things. Which we already know.
 
 \begin{verbatim}
 ## `geom_smooth()` using formula 'y ~ x'
