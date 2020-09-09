@@ -1,12 +1,16 @@
-# Z scores
+# Z-scores
 
-Z scores are a handy way to standardize scores so you can compare things across groupings. In our case, we may want to compare teams by year, or era. We can use z scores to answer questions like who was the greatest X of all time, because a Z score can put them in context to their era. 
+Z-scores are a handy way to standardize numbers so you can compare things across groupings or time. In this class, we may want to compare teams by year, or era. We can use z-scores to answer questions like who was the greatest X of all time, because a z-score can put them in context to their era. 
 
-We can also use z scores to ask how much better is team A from team B. 
+A z-score is a measure of how a particular stat is from the mean. It's measured in standard deviations from that mean. A standard deviation is a measure of how much variation -- how spread out -- numbers are in a data set. What it means here, with regards to z-scores, is that zero is perfectly average. If it's 1, it's one standard deviation above the mean, and 34 percent of all cases are between 0 and 1. 
 
-So let's use Nebraska basketball, which if you haven't been reading lately is at a bit of a crossroads. 
+```{r, echo=FALSE}
+knitr::include_graphics(rep("images/simulations2.png"))
+```
 
-A Z score is a measure of how far a number is from the population mean of that number. An easier way to say that -- how different is my grade from the average grade in the class. The formula for calculating a Z score is `(MyScore - AverageScore)/Standard Deviation of Scores`. The standard deviation is a number calculated to show the amount of variation in a set of data. In a normal distribution, 68 percent of all scores will be within 1 standard deviation, 95 percent will be within 2 and 99 within 3. 
+If you think of the normal distribution, it means that 84.3 percent of all case are below that 1. If it were -1, it would mean the number is one standard deviation below the mean, and 84.3 percent of cases would be above that -1. So if you have numbers with z-scores of 3 or even 4, that means that number is waaaaaay above the mean.  
+
+So let's use last year's Nebraska basketball team, which if haven't been paying attention to current events, was not good at basketball. 
 
 ## Calculating a Z score in R
 
@@ -14,13 +18,13 @@ A Z score is a measure of how far a number is from the population mean of that n
 library(tidyverse)
 ```
 
-Let's look at the current state of Nebraska basketball using the [same logs data we've been using, but for this season so far](https://unl.box.com/s/wnlh0u9low1yh56enion8zjmu8r7dc8p). 
+Let's look at the current state of Nebraska basketball using the [same logs data we've been using for the 2019-2020 season](https://unl.box.com/s/yc01x7ae7r2jtuixo4j3s3s0ed7o5f8g). 
 
 ```{r}
 gamelogs <- read_csv("data/logs20.csv")
 ```
 
-The first thing we need to do is select some fields we think represent team quality:
+The first thing we need to do is select some fields we think represent team quality and a few things to help us keep things straight. So I'm going to pick shooting percentage, rebounding and the opponent version of the same two: 
 
 ```{r}
 teamquality <- gamelogs %>% 
@@ -37,12 +41,12 @@ teamtotals <- teamquality %>%
     ReboundAvg = mean(TeamTotalRebounds), 
     OppFGAvg = mean(OpponentFGPCT),
     OffRebAvg = mean(OpponentTotalRebounds)
-    )
+    ) 
 ```
 
-To calculate a Z score in R, the easiest way is to use the scale function in base R. To use it, you use `scale(FieldName, center=TRUE, scale=TRUE)`. The center and scale indicate if you want to subtract from the mean and if you want to divide by the standard deviation, respectively. We do.
+To calculate a z-score in R, the easiest way is to use the `scale` function in base R. To use it, you use `scale(FieldName, center=TRUE, scale=TRUE)`. The center and scale indicate if you want to subtract from the mean and if you want to divide by the standard deviation, respectively. We do.
 
-When we have multiple Z Scores, it's pretty standard practice to add them together into a composite score. That's what we're doing at the end here with `TotalZscore`. Note: We have to invert OppZscore and OppRebZScore by multiplying it by a negative 1 because the lower someone's opponent number is, the better. 
+When we have multiple z-scores, it's pretty standard practice to add them together into a composite score. That's what we're doing at the end here with `TotalZscore`. Note: We have to invert OppZscore and OppRebZScore by multiplying it by a negative 1 because the lower someone's opponent number is, the better. 
 
 ```{r}
 teamzscore <- teamtotals %>% 
@@ -69,7 +73,7 @@ So who are the best teams in the country?
 teamzscore %>% arrange(desc(TotalZscore))
 ```
 
-Don't sleep on the Anteaters come tournament time!
+Don't sleep on the Anteaters! Would have been a tough out at the tournament that never happened.
 
 But closer to home, how is Nebraska doing.
 
