@@ -304,14 +304,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>facets - which means how we might graph many elements of the same dataset in the same space</li>
 <li>layers - which means how we might lay multiple geometries over top of each other to reveal new information.</li>
 </ul>
-<p>Hadley Wickam, who is behind all of the libraries we have used in this course to date, wrote about his layered grammar of graphics in <a href="http://byrneslab.net/classes/biol607/readings/wickham_layered-grammar.pdf">this 2009 paper that is worth your time to read</a>.</p>
+<p>Hadley Wickham, who is behind all of the libraries we have used in this course to date, wrote about his layered grammar of graphics in <a href="http://byrneslab.net/classes/biol607/readings/wickham_layered-grammar.pdf">this 2009 paper that is worth your time to read</a>.</p>
 <p>Here are some <code>ggplot2</code> resources you’ll want to keep handy:</p>
 <ul>
 <li><a href="http://ggplot2.tidyverse.org/reference/index.html">The ggplot documentation</a>.</li>
 <li><a href="http://www.cookbook-r.com/Graphs/">The ggplot cookbook</a></li>
 </ul>
-<p>Let’s dive in using data we’ve already seen before – football attendance. This workflow will represent a clear picture of what your work in this class will be like for much of the rest of the semester. One way to think of this workflow is that your R Notebook is now your digital sketchbook, where you will try different types of visualizations to find ones that work. Then, you will export your work into a program like Illustrator to finish the work.</p>
-<p>To begin, we’ll import the <code>ggplot2</code> and <code>dplyr</code> libraries. We’ll read in the data, then create a new dataframe that represents <a href="https://unl.box.com/s/etqna5bfvf3b0gsnw0kcjjn1rxx9335s">our attendance data</a>, similar to what we’ve done before.</p>
+<p>Let’s dive in using data we’ve already seen before – football attendance. This workflow will represent a clear picture of what your work in this class will be like for much of the rest of the semester. One way to think of this workflow is that your R Notebook is now your digital sketchbook, where you will try different types of visualizations to find ones that work. Then, you will either write the code that adds necessary and required parts to finish it, or you’ll export your work into a program like Illustrator to finish the work.</p>
+<p>To begin, we’ll import libraries as we have all along. We’ll read in the data, then create a new dataframe that represents <a href="https://unl.box.com/s/oajabnn5614s22jstgcd9ojxo2njn6jt">our attendance data</a>, similar to what we’ve done before.</p>
 <div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="intro-to-ggplot.html#cb187-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
 <div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="intro-to-ggplot.html#cb188-1"></a>attendance &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;data/attendance.csv&#39;</span>)</span></code></pre></div>
 <pre><code>## Parsed with column specification:
@@ -325,7 +325,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ##   `2017` = col_double(),
 ##   `2018` = col_double()
 ## )</code></pre>
-<p>First, let’s get a top 10 list by announced attendance this last season. We’ll use the same tricks we used in the filtering assignment.</p>
+<p>First, let’s get a top 10 list by announced attendance in the most recent season we have data. We’ll use the same tricks we used in the filtering assignment.</p>
 <div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="intro-to-ggplot.html#cb190-1"></a>attendance <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb190-2"><a href="intro-to-ggplot.html#cb190-2"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(<span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb190-3"><a href="intro-to-ggplot.html#cb190-3"></a><span class="st">  </span><span class="kw">top_n</span>(<span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
@@ -396,21 +396,31 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="intro-to-ggplot.html#cb204-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Institution, <span class="op">-</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb204-2"><a href="intro-to-ggplot.html#cb204-2"></a><span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb204-3"><a href="intro-to-ggplot.html#cb204-3"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>comma) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb204-4"><a href="intro-to-ggplot.html#cb204-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Top 10 Football Programs By Attendance&quot;</span>, <span class="dt">x=</span><span class="st">&quot;School&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Attendance&quot;</span>)</span></code></pre></div>
+<span id="cb204-4"><a href="intro-to-ggplot.html#cb204-4"></a><span class="st">  </span><span class="kw">labs</span>(</span>
+<span id="cb204-5"><a href="intro-to-ggplot.html#cb204-5"></a>    <span class="dt">title=</span><span class="st">&quot;Top 10 Football Programs By Attendance&quot;</span>, </span>
+<span id="cb204-6"><a href="intro-to-ggplot.html#cb204-6"></a>    <span class="dt">x=</span><span class="st">&quot;School&quot;</span>, </span>
+<span id="cb204-7"><a href="intro-to-ggplot.html#cb204-7"></a>    <span class="dt">y=</span><span class="st">&quot;Attendance&quot;</span></span>
+<span id="cb204-8"><a href="intro-to-ggplot.html#cb204-8"></a>)</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-114-1.png" width="672" /></p>
 <p>The library has lots and lots of ways to alter the styling – we can programmatically control nearly every part of the look and feel of the chart. One simple way is to apply themes in the library already. We do that the same way we’ve done other things – we add them. Here’s the light theme.</p>
 <div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="intro-to-ggplot.html#cb205-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Institution, <span class="op">-</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb205-2"><a href="intro-to-ggplot.html#cb205-2"></a><span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb205-3"><a href="intro-to-ggplot.html#cb205-3"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>comma) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb205-4"><a href="intro-to-ggplot.html#cb205-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Top 10 Football Programs By Attendance&quot;</span>, <span class="dt">x=</span><span class="st">&quot;School&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Attendance&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb205-5"><a href="intro-to-ggplot.html#cb205-5"></a><span class="st">  </span><span class="kw">theme_light</span>()</span></code></pre></div>
+<span id="cb205-4"><a href="intro-to-ggplot.html#cb205-4"></a><span class="st">  </span><span class="kw">labs</span>(</span>
+<span id="cb205-5"><a href="intro-to-ggplot.html#cb205-5"></a>    <span class="dt">title=</span><span class="st">&quot;Top 10 Football Programs By Attendance&quot;</span>, </span>
+<span id="cb205-6"><a href="intro-to-ggplot.html#cb205-6"></a>    <span class="dt">x=</span><span class="st">&quot;School&quot;</span>, </span>
+<span id="cb205-7"><a href="intro-to-ggplot.html#cb205-7"></a>    <span class="dt">y=</span><span class="st">&quot;Attendance&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb205-8"><a href="intro-to-ggplot.html#cb205-8"></a><span class="st">  </span><span class="kw">theme_light</span>()</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-115-1.png" width="672" /></p>
 <p>Or the minimal theme:</p>
 <div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="intro-to-ggplot.html#cb206-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Institution, <span class="op">-</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb206-2"><a href="intro-to-ggplot.html#cb206-2"></a><span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb206-3"><a href="intro-to-ggplot.html#cb206-3"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>comma) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb206-4"><a href="intro-to-ggplot.html#cb206-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Top 10 Football Programs By Attendance&quot;</span>, <span class="dt">x=</span><span class="st">&quot;School&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Attendance&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb206-5"><a href="intro-to-ggplot.html#cb206-5"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<span id="cb206-4"><a href="intro-to-ggplot.html#cb206-4"></a><span class="st">  </span><span class="kw">labs</span>(</span>
+<span id="cb206-5"><a href="intro-to-ggplot.html#cb206-5"></a>    <span class="dt">title=</span><span class="st">&quot;Top 10 Football Programs By Attendance&quot;</span>, </span>
+<span id="cb206-6"><a href="intro-to-ggplot.html#cb206-6"></a>    <span class="dt">x=</span><span class="st">&quot;School&quot;</span>, </span>
+<span id="cb206-7"><a href="intro-to-ggplot.html#cb206-7"></a>    <span class="dt">y=</span><span class="st">&quot;Attendance&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb206-8"><a href="intro-to-ggplot.html#cb206-8"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-116-1.png" width="672" /></p>
 <p>Later on, we’ll write our own themes. For now, the built in ones will get us closer to something that looks good.</p>
 </div>
@@ -420,9 +430,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="intro-to-ggplot.html#cb207-1"></a><span class="kw">ggplot</span>(top10, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Institution, <span class="op">-</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="dt">weight=</span><span class="st">`</span><span class="dt">2018</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb207-2"><a href="intro-to-ggplot.html#cb207-2"></a><span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb207-3"><a href="intro-to-ggplot.html#cb207-3"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>comma) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb207-4"><a href="intro-to-ggplot.html#cb207-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Top 10 Football Programs By Attendance&quot;</span>, <span class="dt">x=</span><span class="st">&quot;School&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Attendance&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb207-5"><a href="intro-to-ggplot.html#cb207-5"></a><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb207-6"><a href="intro-to-ggplot.html#cb207-6"></a><span class="st">  </span><span class="kw">coord_flip</span>()</span></code></pre></div>
+<span id="cb207-4"><a href="intro-to-ggplot.html#cb207-4"></a><span class="st">  </span><span class="kw">labs</span>(</span>
+<span id="cb207-5"><a href="intro-to-ggplot.html#cb207-5"></a>    <span class="dt">title=</span><span class="st">&quot;Top 10 Football Programs By Attendance&quot;</span>, </span>
+<span id="cb207-6"><a href="intro-to-ggplot.html#cb207-6"></a>    <span class="dt">x=</span><span class="st">&quot;School&quot;</span>, </span>
+<span id="cb207-7"><a href="intro-to-ggplot.html#cb207-7"></a>    <span class="dt">y=</span><span class="st">&quot;Attendance&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb207-8"><a href="intro-to-ggplot.html#cb207-8"></a><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb207-9"><a href="intro-to-ggplot.html#cb207-9"></a><span class="st">  </span><span class="kw">coord_flip</span>()</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-117-1.png" width="672" /></p>
 
 </div>

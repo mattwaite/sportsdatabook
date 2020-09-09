@@ -2944,7 +2944,7 @@ With \texttt{ggplot2}, we dive into the world of programmatic data visualization
   layers - which means how we might lay multiple geometries over top of each other to reveal new information.
 \end{itemize}
 
-Hadley Wickam, who is behind all of the libraries we have used in this course to date, wrote about his layered grammar of graphics in \href{http://byrneslab.net/classes/biol607/readings/wickham_layered-grammar.pdf}{this 2009 paper that is worth your time to read}.
+Hadley Wickham, who is behind all of the libraries we have used in this course to date, wrote about his layered grammar of graphics in \href{http://byrneslab.net/classes/biol607/readings/wickham_layered-grammar.pdf}{this 2009 paper that is worth your time to read}.
 
 Here are some \texttt{ggplot2} resources you'll want to keep handy:
 
@@ -2956,9 +2956,9 @@ Here are some \texttt{ggplot2} resources you'll want to keep handy:
   \href{http://www.cookbook-r.com/Graphs/}{The ggplot cookbook}
 \end{itemize}
 
-Let's dive in using data we've already seen before -- football attendance. This workflow will represent a clear picture of what your work in this class will be like for much of the rest of the semester. One way to think of this workflow is that your R Notebook is now your digital sketchbook, where you will try different types of visualizations to find ones that work. Then, you will export your work into a program like Illustrator to finish the work.
+Let's dive in using data we've already seen before -- football attendance. This workflow will represent a clear picture of what your work in this class will be like for much of the rest of the semester. One way to think of this workflow is that your R Notebook is now your digital sketchbook, where you will try different types of visualizations to find ones that work. Then, you will either write the code that adds necessary and required parts to finish it, or you'll export your work into a program like Illustrator to finish the work.
 
-To begin, we'll import the \texttt{ggplot2} and \texttt{dplyr} libraries. We'll read in the data, then create a new dataframe that represents \href{https://unl.box.com/s/etqna5bfvf3b0gsnw0kcjjn1rxx9335s}{our attendance data}, similar to what we've done before.
+To begin, we'll import libraries as we have all along. We'll read in the data, then create a new dataframe that represents \href{https://unl.box.com/s/oajabnn5614s22jstgcd9ojxo2njn6jt}{our attendance data}, similar to what we've done before.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2986,7 +2986,7 @@ To begin, we'll import the \texttt{ggplot2} and \texttt{dplyr} libraries. We'll 
 ## )
 \end{verbatim}
 
-First, let's get a top 10 list by announced attendance this last season. We'll use the same tricks we used in the filtering assignment.
+First, let's get a top 10 list by announced attendance in the most recent season we have data. We'll use the same tricks we used in the filtering assignment.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3121,7 +3121,11 @@ We are going to spend a lot more time on styling, but let's add some simple labe
 \KeywordTok{ggplot}\NormalTok{(top10, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\KeywordTok{reorder}\NormalTok{(Institution, }\OperatorTok{-}\StringTok{`}\DataTypeTok{2018}\StringTok{`}\NormalTok{), }\DataTypeTok{weight=}\StringTok{`}\DataTypeTok{2018}\StringTok{`}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{geom_bar}\NormalTok{() }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{labels=}\NormalTok{comma) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title=}\StringTok{"Top 10 Football Programs By Attendance"}\NormalTok{, }\DataTypeTok{x=}\StringTok{"School"}\NormalTok{, }\DataTypeTok{y=}\StringTok{"Attendance"}\NormalTok{)}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}
+    \DataTypeTok{title=}\StringTok{"Top 10 Football Programs By Attendance"}\NormalTok{, }
+    \DataTypeTok{x=}\StringTok{"School"}\NormalTok{, }
+    \DataTypeTok{y=}\StringTok{"Attendance"}
+\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3134,7 +3138,10 @@ The library has lots and lots of ways to alter the styling -- we can programmati
 \KeywordTok{ggplot}\NormalTok{(top10, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\KeywordTok{reorder}\NormalTok{(Institution, }\OperatorTok{-}\StringTok{`}\DataTypeTok{2018}\StringTok{`}\NormalTok{), }\DataTypeTok{weight=}\StringTok{`}\DataTypeTok{2018}\StringTok{`}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{geom_bar}\NormalTok{() }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{labels=}\NormalTok{comma) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title=}\StringTok{"Top 10 Football Programs By Attendance"}\NormalTok{, }\DataTypeTok{x=}\StringTok{"School"}\NormalTok{, }\DataTypeTok{y=}\StringTok{"Attendance"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}
+    \DataTypeTok{title=}\StringTok{"Top 10 Football Programs By Attendance"}\NormalTok{, }
+    \DataTypeTok{x=}\StringTok{"School"}\NormalTok{, }
+    \DataTypeTok{y=}\StringTok{"Attendance"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{theme_light}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -3148,7 +3155,10 @@ Or the minimal theme:
 \KeywordTok{ggplot}\NormalTok{(top10, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\KeywordTok{reorder}\NormalTok{(Institution, }\OperatorTok{-}\StringTok{`}\DataTypeTok{2018}\StringTok{`}\NormalTok{), }\DataTypeTok{weight=}\StringTok{`}\DataTypeTok{2018}\StringTok{`}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{geom_bar}\NormalTok{() }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{labels=}\NormalTok{comma) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title=}\StringTok{"Top 10 Football Programs By Attendance"}\NormalTok{, }\DataTypeTok{x=}\StringTok{"School"}\NormalTok{, }\DataTypeTok{y=}\StringTok{"Attendance"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}
+    \DataTypeTok{title=}\StringTok{"Top 10 Football Programs By Attendance"}\NormalTok{, }
+    \DataTypeTok{x=}\StringTok{"School"}\NormalTok{, }
+    \DataTypeTok{y=}\StringTok{"Attendance"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{theme_minimal}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -3167,7 +3177,10 @@ Sometimes, we don't want vertical bars. Maybe we think this would look better ho
 \KeywordTok{ggplot}\NormalTok{(top10, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\KeywordTok{reorder}\NormalTok{(Institution, }\OperatorTok{-}\StringTok{`}\DataTypeTok{2018}\StringTok{`}\NormalTok{), }\DataTypeTok{weight=}\StringTok{`}\DataTypeTok{2018}\StringTok{`}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{geom_bar}\NormalTok{() }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{labels=}\NormalTok{comma) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title=}\StringTok{"Top 10 Football Programs By Attendance"}\NormalTok{, }\DataTypeTok{x=}\StringTok{"School"}\NormalTok{, }\DataTypeTok{y=}\StringTok{"Attendance"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}
+    \DataTypeTok{title=}\StringTok{"Top 10 Football Programs By Attendance"}\NormalTok{, }
+    \DataTypeTok{x=}\StringTok{"School"}\NormalTok{, }
+    \DataTypeTok{y=}\StringTok{"Attendance"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{coord_flip}\NormalTok{()}
 \end{Highlighting}
