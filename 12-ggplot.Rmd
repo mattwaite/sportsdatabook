@@ -8,16 +8,16 @@ With `ggplot2`, we dive into the world of programmatic data visualization. The `
 * facets - which means how we might graph many elements of the same dataset in the same space
 * layers - which means how we might lay multiple geometries over top of each other to reveal new information.
 
-Hadley Wickam, who is behind all of the libraries we have used in this course to date, wrote about his layered grammar of graphics in [this 2009 paper that is worth your time to read](http://byrneslab.net/classes/biol607/readings/wickham_layered-grammar.pdf). 
+Hadley Wickham, who is behind all of the libraries we have used in this course to date, wrote about his layered grammar of graphics in [this 2009 paper that is worth your time to read](http://byrneslab.net/classes/biol607/readings/wickham_layered-grammar.pdf). 
 
 Here are some `ggplot2` resources you'll want to keep handy: 
 
 * [The ggplot documentation](http://ggplot2.tidyverse.org/reference/index.html).
 * [The ggplot cookbook](http://www.cookbook-r.com/Graphs/)
 
-Let's dive in using data we've already seen before -- football attendance. This workflow will represent a clear picture of what your work in this class will be like for much of the rest of the semester. One way to think of this workflow is that your R Notebook is now your digital sketchbook, where you will try different types of visualizations to find ones that work. Then, you will export your work into a program like Illustrator to finish the work. 
+Let's dive in using data we've already seen before -- football attendance. This workflow will represent a clear picture of what your work in this class will be like for much of the rest of the semester. One way to think of this workflow is that your R Notebook is now your digital sketchbook, where you will try different types of visualizations to find ones that work. Then, you will either write the code that adds necessary and required parts to finish it, or you'll export your work into a program like Illustrator to finish the work. 
 
-To begin, we'll import the `ggplot2` and `dplyr` libraries. We'll read in the data, then create a new dataframe that represents [our attendance data](https://unl.box.com/s/etqna5bfvf3b0gsnw0kcjjn1rxx9335s), similar to what we've done before. 
+To begin, we'll import libraries as we have all along. We'll read in the data, then create a new dataframe that represents [our attendance data](https://unl.box.com/s/oajabnn5614s22jstgcd9ojxo2njn6jt), similar to what we've done before. 
 
 ```{r}
 library(tidyverse)
@@ -27,7 +27,7 @@ library(tidyverse)
 attendance <- read_csv('data/attendance.csv')
 ```
 
-First, let's get a top 10 list by announced attendance this last season. We'll use the same tricks we used in the filtering assignment. 
+First, let's get a top 10 list by announced attendance in the most recent season we have data. We'll use the same tricks we used in the filtering assignment. 
 
 ```{r}
 attendance %>% 
@@ -108,7 +108,11 @@ We are going to spend a lot more time on styling, but let's add some simple labe
 ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + 
   geom_bar() + 
   scale_y_continuous(labels=comma) + 
-  labs(title="Top 10 Football Programs By Attendance", x="School", y="Attendance")
+  labs(
+    title="Top 10 Football Programs By Attendance", 
+    x="School", 
+    y="Attendance"
+)
 ```
 
 The library has lots and lots of ways to alter the styling -- we can programmatically control nearly every part of the look and feel of the chart. One simple way is to apply themes in the library already. We do that the same way we've done other things -- we add them. Here's the light theme. 
@@ -117,7 +121,10 @@ The library has lots and lots of ways to alter the styling -- we can programmati
 ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + 
   geom_bar() + 
   scale_y_continuous(labels=comma) + 
-  labs(title="Top 10 Football Programs By Attendance", x="School", y="Attendance") + 
+  labs(
+    title="Top 10 Football Programs By Attendance", 
+    x="School", 
+    y="Attendance") + 
   theme_light()
 ```
 
@@ -127,7 +134,10 @@ Or the minimal theme:
 ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + 
   geom_bar() + 
   scale_y_continuous(labels=comma) + 
-  labs(title="Top 10 Football Programs By Attendance", x="School", y="Attendance") + 
+  labs(
+    title="Top 10 Football Programs By Attendance", 
+    x="School", 
+    y="Attendance") + 
   theme_minimal()
 ```
 
@@ -141,7 +151,10 @@ Sometimes, we don't want vertical bars. Maybe we think this would look better ho
 ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + 
   geom_bar() + 
   scale_y_continuous(labels=comma) + 
-  labs(title="Top 10 Football Programs By Attendance", x="School", y="Attendance") + 
+  labs(
+    title="Top 10 Football Programs By Attendance", 
+    x="School", 
+    y="Attendance") + 
   theme_minimal() + 
   coord_flip()
 ```
