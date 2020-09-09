@@ -84,3 +84,14 @@ teamzscore %>%
 ```
 
 So, as we can see, with our composite Z Score, Nebraska is ... not good. Not good at all. 
+
+## Writing about z-scores
+
+The great thing about z-scores is that they make it very easy for you, the sports analyst, to create your own measures of who is better than who. The downside: Only a small handful of sports fans know what the hell a z-score is. 
+
+As such, you should try as hard as you can to avoid writing about them. 
+
+If the word z-score appears in your story or in a chart, you need to explain what it is. "The ranking uses a statistical measure of the distance from the mean called a z-score" is a good way to go about it. You don't need a full stats textbook definition, just a quick explanation. And keep it simple. 
+
+**Never use z-score in a headline.** Write around it. Away from it. Z-score in a headline is attention repellent. You won't get anyone to look at it. So "Tottenham tops in z-score" bad, "Tottenham tops in the Premiere League" good.
+
