@@ -192,8 +192,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11" data-path="residuals.html"><a href="residuals.html"><i class="fa fa-check"></i><b>11</b> Residuals</a><ul>
 <li class="chapter" data-level="11.1" data-path="residuals.html"><a href="residuals.html#penalties"><i class="fa fa-check"></i><b>11.1</b> Penalties</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z scores</a><ul>
+<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z-scores</a><ul>
 <li class="chapter" data-level="12.1" data-path="z-scores.html"><a href="z-scores.html#calculating-a-z-score-in-r"><i class="fa fa-check"></i><b>12.1</b> Calculating a Z score in R</a></li>
+<li class="chapter" data-level="12.2" data-path="z-scores.html"><a href="z-scores.html#writing-about-z-scores"><i class="fa fa-check"></i><b>12.2</b> Writing about z-scores</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html"><i class="fa fa-check"></i><b>13</b> Intro to ggplot</a><ul>
 <li class="chapter" data-level="13.1" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#the-bar-chart"><i class="fa fa-check"></i><b>13.1</b> The bar chart</a></li>
@@ -562,7 +563,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb524-12"><a href="rtweet-and-text-analysis.html#cb524-12"></a>       <span class="dt">x =</span> <span class="st">&quot;Central Standard Time (CST)&quot;</span>) <span class="op">+</span></span>
 <span id="cb524-13"><a href="rtweet-and-text-analysis.html#cb524-13"></a><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span></span>
 <span id="cb524-14"><a href="rtweet-and-text-analysis.html#cb524-14"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title.x =</span> <span class="kw">element_blank</span>())</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-316-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-317-1.png" width="672" /></p>
 <p>There you have it. A trend line plotting tweet volume throughout the course of the event. Do you see any areas where the match might have had a significant number of tweets?</p>
 </div>
 <div id="tidying-the-text-data-for-analysis-applying-the-sentiment-scores" class="section level2">
@@ -603,7 +604,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb530-14"><a href="rtweet-and-text-analysis.html#cb530-14"></a>    <span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>),</span>
 <span id="cb530-15"><a href="rtweet-and-text-analysis.html#cb530-15"></a>    <span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">7</span>)</span>
 <span id="cb530-16"><a href="rtweet-and-text-analysis.html#cb530-16"></a>        )</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-318-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-319-1.png" width="672" /></p>
 <p>When looking at this trend line, you can see that during the volleyball game, tweets using the #husker and #gbr hashtags had some wide variation in sentiment. Overall it seems that tweets during the volleyball match were mostly positive, where at times it dipped negative. Why might this be the case? Well, unfortunately, even though this was a big game for Husker volleyball, not many people were tweeting during the match (take a look at the number of tweets chart above). So if there was one word used in a tweet that was ranked as very negative in sentiment, it would have easily drove our average sentiment into the negative region quickly.</p>
 <p>Also, we need to consider that this match took place after the Huskers loss to Purdue, which we will examine in the next example. This is important to know because people during the volleyball match may have also been tweeting about how poorly the football game went earlier in the day. Thus, low tweet volume mixed with the potential for tweets referencing something other than the match at hand may have had some influence on the sentiment scores.</p>
 <p>There’s also one last thing to keep in mind when you draw conclusions from this type of text data. Language is complex–it can have multiple meanings, which is highly influenced by context. Take for example the word ‘destroy’, like its use in the following statement: “This team is going to destroy the defense today.” Although we clearly can see this is a positive statement, when a computer applies sentiment scores, the context of the statement is stripped away, and destroy will be scored as negative sentiment. In short, computers are not smart enough to include context when they calculate sentiment, yet. So, keep this limitation in mind when you draw conclusions from your sentiment analyses using text data.</p>
@@ -625,7 +626,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb532-6"><a href="rtweet-and-text-analysis.html#cb532-6"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> football_time, <span class="kw">aes</span>(<span class="dt">x =</span> created_at, <span class="dt">y =</span> n)) <span class="op">+</span></span>
 <span id="cb532-7"><a href="rtweet-and-text-analysis.html#cb532-7"></a><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span></span>
 <span id="cb532-8"><a href="rtweet-and-text-analysis.html#cb532-8"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Number of Tweets&quot;</span>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-320-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-321-1.png" width="672" /></p>
 <p>Looking at this plot, we can see the tweet volume is a lot higher than that of the volleyball match. In fact, it looks like towards the end of the game there was a five minute interval where ~80 or so tweets occurred. Given the outcome of the game, I assume people were not real happy during this spike in activity. Well we have the tools to answer this question.</p>
 <p>As before, let’s pull in our sentiment library with the <code>get_sentiments()</code> function. Then lets tidy up our tweet data using the <code>unnest_tokens()</code> and <code>anti_join(stop_words)</code>. Remember this step just places every word within a tweet on its own row and filters out any words that don’t have any real meaning to the calculation of sentiment (i.e., and, the, a, etc.).</p>
 <div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb533-1"><a href="rtweet-and-text-analysis.html#cb533-1"></a>afinn &lt;-<span class="st"> </span><span class="kw">get_sentiments</span>(<span class="st">&quot;afinn&quot;</span>)</span>
@@ -659,7 +660,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb538-14"><a href="rtweet-and-text-analysis.html#cb538-14"></a>    <span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>),</span>
 <span id="cb538-15"><a href="rtweet-and-text-analysis.html#cb538-15"></a>    <span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">7</span>)</span>
 <span id="cb538-16"><a href="rtweet-and-text-analysis.html#cb538-16"></a>  )</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-322-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-323-1.png" width="672" /></p>
 <p>As you can see, it started out pretty positive. Then, it started to go negative throughout the first half. However, there was a bump, which was around the time D-Lineman, Darrion Daniels almost scored a pick six. Around halftime, we can see a little bit of a bump towards positive sentiment. This was probably most likely due to people cheering on the Huskers to come out strong after the half. As the second half progressed, you can see things turned for the worst again, and sentiment became negative up until the end of the game, most likely because people realized they were going to get another L on the schedule. You can relive all this excitement again by catching the game recap <a href="https://www.youtube.com/watch?v=m0hKH6Zb0vY&amp;feature=onebox">here</a>.</p>
 
 </div>

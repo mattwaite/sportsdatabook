@@ -192,8 +192,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11" data-path="residuals.html"><a href="residuals.html"><i class="fa fa-check"></i><b>11</b> Residuals</a><ul>
 <li class="chapter" data-level="11.1" data-path="residuals.html"><a href="residuals.html#penalties"><i class="fa fa-check"></i><b>11.1</b> Penalties</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z scores</a><ul>
+<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z-scores</a><ul>
 <li class="chapter" data-level="12.1" data-path="z-scores.html"><a href="z-scores.html#calculating-a-z-score-in-r"><i class="fa fa-check"></i><b>12.1</b> Calculating a Z score in R</a></li>
+<li class="chapter" data-level="12.2" data-path="z-scores.html"><a href="z-scores.html#writing-about-z-scores"><i class="fa fa-check"></i><b>12.2</b> Writing about z-scores</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html"><i class="fa fa-check"></i><b>13</b> Intro to ggplot</a><ul>
 <li class="chapter" data-level="13.1" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#the-bar-chart"><i class="fa fa-check"></i><b>13.1</b> The bar chart</a></li>
@@ -312,7 +313,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb215-12"><a href="waffle-charts.html#cb215-12"></a><span class="kw">filter</span>(total <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="waffle-charts.html#cb217-1"></a><span class="kw">ggplot</span>(jdf, <span class="kw">aes</span>(<span class="dt">x=</span><span class="st">&quot;&quot;</span>, <span class="dt">y=</span>total, <span class="dt">fill=</span>Race)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">width =</span> <span class="dv">1</span>, <span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">coord_polar</span>(<span class="st">&quot;y&quot;</span>, <span class="dt">start=</span><span class="dv">0</span>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-122-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-123-1.png" width="672" /></p>
 <p>You can see, it’s pretty white. But … what about beyond that? How carefully can you evaluate angles and area?</p>
 <p>Not well.</p>
 <p>So let’s introduce a better way: The Waffle Chart. Some call it a square pie chart. I personally hate that. Waffles it is.</p>
@@ -329,11 +330,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>So what does the breakdown of the night look like?</p>
 <p>The waffle library can break this down in a way that’s easier on the eyes than a pie chart. We call the library, add the data, specify the number of rows, give it a title and an x value label, and to clean up a quirk of the library, we’ve got to specify colors.</p>
 <div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="waffle-charts.html#cb220-1"></a><span class="kw">waffle</span>(nu, <span class="dt">rows =</span> <span class="dv">10</span>, <span class="dt">title=</span><span class="st">&quot;Nebraska&#39;s offense&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;1 square = 1 yard&quot;</span>, <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>))</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-125-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-126-1.png" width="672" /></p>
 <p>Or, we could make this two teams in the same chart.</p>
 <div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="waffle-charts.html#cb221-1"></a>passing &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Nebraska&quot;</span>=<span class="dv">47</span>, <span class="st">&quot;Ohio State&quot;</span>=<span class="dv">212</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="waffle-charts.html#cb222-1"></a><span class="kw">waffle</span>(passing, <span class="dt">rows =</span> <span class="dv">10</span>, <span class="dt">title=</span><span class="st">&quot;Nebraska vs Ohio State: passing&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;1 square = 1 yard&quot;</span>, <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-127-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-128-1.png" width="672" /></p>
 <div id="waffle-irons" class="section level2">
 <h2><span class="header-section-number">15.1</span> Waffle Irons</h2>
 <p>So what does it look like if we compare the two teams using the two vectors in the same chart? To do that – and I am not making this up – you have to create a waffle iron. Get it? Waffle charts? Iron?</p>
@@ -341,7 +342,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb223-2"><a href="waffle-charts.html#cb223-2"></a> <span class="kw">waffle</span>(nu, <span class="dt">rows =</span> <span class="dv">10</span>, <span class="dt">title=</span><span class="st">&quot;Nebraska&#39;s offense&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;1 square = 1 yard&quot;</span>, <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>)),</span>
 <span id="cb223-3"><a href="waffle-charts.html#cb223-3"></a> <span class="kw">waffle</span>(oh, <span class="dt">rows =</span> <span class="dv">10</span>, <span class="dt">title=</span><span class="st">&quot;Ohio State&#39;s offense&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;1 square = 1 yard&quot;</span>, <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>))</span>
 <span id="cb223-4"><a href="waffle-charts.html#cb223-4"></a>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-128-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-129-1.png" width="672" /></p>
 <p>What do you notice about this chart? Notice how the squares aren’t the same size? Well, Ohio State outgained Nebraska by a long way. So the squares aren’t the same size because the numbers aren’t the same. We can fix that by adding an unnamed padding number so the number of shots add up to the same thing. Let’s make the total for everyone be 580, Ohio State’s total yards of offense. So to do that, we need to add a padding of 349 to Nebraska. REMEMBER: Don’t name it or it’ll show up in the legend.</p>
 <div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="waffle-charts.html#cb224-1"></a>nu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Rushing&quot;</span>=<span class="dv">184</span>, <span class="st">&quot;Passing&quot;</span>=<span class="dv">47</span>, <span class="dv">349</span>)</span>
 <span id="cb224-2"><a href="waffle-charts.html#cb224-2"></a>oh &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Rushing&quot;</span>=<span class="dv">368</span>, <span class="st">&quot;Passing&quot;</span>=<span class="dv">212</span>, <span class="dv">0</span>)</span></code></pre></div>
@@ -350,13 +351,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb225-2"><a href="waffle-charts.html#cb225-2"></a> <span class="kw">waffle</span>(nu, <span class="dt">rows =</span> <span class="dv">10</span>, <span class="dt">title=</span><span class="st">&quot;Nebraska&#39;s offense&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;1 square = 1 yard&quot;</span>, <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>)),</span>
 <span id="cb225-3"><a href="waffle-charts.html#cb225-3"></a> <span class="kw">waffle</span>(oh, <span class="dt">rows =</span> <span class="dv">10</span>, <span class="dt">title=</span><span class="st">&quot;Ohio State&#39;s offense&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;1 square = 1 yard&quot;</span>, <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>))</span>
 <span id="cb225-4"><a href="waffle-charts.html#cb225-4"></a>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-130-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
 <p>One last thing we can do is change the 1 square = 1 yard bit – which makes the squares really small in this case – by dividing our vector. Remember what you learned in Swirl about math on vectors?</p>
 <div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="waffle-charts.html#cb226-1"></a><span class="kw">iron</span>(</span>
 <span id="cb226-2"><a href="waffle-charts.html#cb226-2"></a> <span class="kw">waffle</span>(nu<span class="op">/</span><span class="dv">2</span>, <span class="dt">rows =</span> <span class="dv">10</span>, <span class="dt">title=</span><span class="st">&quot;Nebraska&#39;s offense&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;1 square = 2 yards&quot;</span>, <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>)),</span>
 <span id="cb226-3"><a href="waffle-charts.html#cb226-3"></a> <span class="kw">waffle</span>(oh<span class="op">/</span><span class="dv">2</span>, <span class="dt">rows =</span> <span class="dv">10</span>, <span class="dt">title=</span><span class="st">&quot;Ohio State&#39;s offense&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;1 square = 2 yards&quot;</span>, <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>))</span>
 <span id="cb226-4"><a href="waffle-charts.html#cb226-4"></a>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-132-1.png" width="672" /></p>
 <p>News flash: Ohio State crushed Nebraska.</p>
 
 </div>

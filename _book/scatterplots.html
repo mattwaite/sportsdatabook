@@ -192,8 +192,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11" data-path="residuals.html"><a href="residuals.html"><i class="fa fa-check"></i><b>11</b> Residuals</a><ul>
 <li class="chapter" data-level="11.1" data-path="residuals.html"><a href="residuals.html#penalties"><i class="fa fa-check"></i><b>11.1</b> Penalties</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z scores</a><ul>
+<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z-scores</a><ul>
 <li class="chapter" data-level="12.1" data-path="z-scores.html"><a href="z-scores.html#calculating-a-z-score-in-r"><i class="fa fa-check"></i><b>12.1</b> Calculating a Z score in R</a></li>
+<li class="chapter" data-level="12.2" data-path="z-scores.html"><a href="z-scores.html#writing-about-z-scores"><i class="fa fa-check"></i><b>12.2</b> Writing about z-scores</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html"><i class="fa fa-check"></i><b>13</b> Intro to ggplot</a><ul>
 <li class="chapter" data-level="13.1" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#the-bar-chart"><i class="fa fa-check"></i><b>13.1</b> The bar chart</a></li>
@@ -333,11 +334,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <p>Now let’s look at the scatterplot. With a scatterplot, we put what predicts the thing on the X axis, and the thing being predicted on the Y axis. In this case, X is our shooting percentage, y is our wins.</p>
 <div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="scatterplots.html#cb303-1"></a><span class="kw">ggplot</span>(fgmodel, <span class="kw">aes</span>(<span class="dt">x=</span>fgpct, <span class="dt">y=</span>wins)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-179-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-180-1.png" width="672" /></p>
 <p>Let’s talk about this. It seems that the data slopes up to the right. That would indicate a positive correlation between shooting percentage and wins. And that makes sense, no? You’d expect teams that shoot the ball well to win. But can we get a better sense of this? Yes, by adding another geom – <code>geom_smooth</code>.</p>
 <div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="scatterplots.html#cb304-1"></a><span class="kw">ggplot</span>(fgmodel, <span class="kw">aes</span>(<span class="dt">x=</span>fgpct, <span class="dt">y=</span>wins)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm, <span class="dt">se=</span><span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-180-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-181-1.png" width="672" /></p>
 <p>But … how strong a relationship is this? How much can shooting percentage explain wins? Can we put some numbers to this?</p>
 <p>Of course we can. We can apply a linear model to this – remember Chapter 9? We’re going to create an object called fit, and then we’re going to put into that object a linear model – <code>lm</code> – and the way to read this is “wins are predicted by field goal percentage”. Then we just want the summary of that model.</p>
 <div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="scatterplots.html#cb306-1"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(wins <span class="op">~</span><span class="st"> </span>fgpct, <span class="dt">data =</span> fgmodel)</span>

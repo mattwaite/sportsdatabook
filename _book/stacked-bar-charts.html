@@ -192,8 +192,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11" data-path="residuals.html"><a href="residuals.html"><i class="fa fa-check"></i><b>11</b> Residuals</a><ul>
 <li class="chapter" data-level="11.1" data-path="residuals.html"><a href="residuals.html#penalties"><i class="fa fa-check"></i><b>11.1</b> Penalties</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z scores</a><ul>
+<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z-scores</a><ul>
 <li class="chapter" data-level="12.1" data-path="z-scores.html"><a href="z-scores.html#calculating-a-z-score-in-r"><i class="fa fa-check"></i><b>12.1</b> Calculating a Z score in R</a></li>
+<li class="chapter" data-level="12.2" data-path="z-scores.html"><a href="z-scores.html#writing-about-z-scores"><i class="fa fa-check"></i><b>12.2</b> Writing about z-scores</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html"><i class="fa fa-check"></i><b>13</b> Intro to ggplot</a><ul>
 <li class="chapter" data-level="13.1" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#the-bar-chart"><i class="fa fa-check"></i><b>13.1</b> The bar chart</a></li>
@@ -324,7 +325,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 6 Indiana Universi… Big Ten Confere…          2009 Women              2959  5626</code></pre>
 <p>Building on what we learned in the last chapter, we know we can turn this into a bar chart with an x value, a weight and a geom_bar. What’re going to add is a <code>fill</code>. The <code>fill</code> will stack bars on each other based on which element it is. In this case, we can fill the bar by Gender, which means it will stack the number of male graduates on top of the number of female graduates and we can see how they compare.</p>
 <div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="stacked-bar-charts.html#cb214-1"></a><span class="kw">ggplot</span>(BIG09, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(<span class="st">`</span><span class="dt">Institution name</span><span class="st">`</span>, <span class="op">-</span>Total), <span class="dt">weight=</span><span class="st">`</span><span class="dt">Number of completers</span><span class="st">`</span>, <span class="dt">fill=</span>Gender)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-121-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-122-1.png" width="672" /></p>
 <p>What’s the problem with this chart?</p>
 <p>Let me ask a different question – which schools have larger differences in male and female graduation rates? Can you compare Illnois to Northwestern? Not really. We’ve charted the total numbers. We need the percentage of the whole.</p>
 <blockquote>

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 12 Z scores | Sports Data Analysis and Visualization</title>
+  <title>Chapter 12 Z-scores | Sports Data Analysis and Visualization</title>
   <meta name="description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 12 Z scores | Sports Data Analysis and Visualization" />
+  <meta property="og:title" content="Chapter 12 Z-scores | Sports Data Analysis and Visualization" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 12 Z scores | Sports Data Analysis and Visualization" />
+  <meta name="twitter:title" content="Chapter 12 Z-scores | Sports Data Analysis and Visualization" />
   
   <meta name="twitter:description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
   
@@ -192,8 +192,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11" data-path="residuals.html"><a href="residuals.html"><i class="fa fa-check"></i><b>11</b> Residuals</a><ul>
 <li class="chapter" data-level="11.1" data-path="residuals.html"><a href="residuals.html#penalties"><i class="fa fa-check"></i><b>11.1</b> Penalties</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z scores</a><ul>
+<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z-scores</a><ul>
 <li class="chapter" data-level="12.1" data-path="z-scores.html"><a href="z-scores.html#calculating-a-z-score-in-r"><i class="fa fa-check"></i><b>12.1</b> Calculating a Z score in R</a></li>
+<li class="chapter" data-level="12.2" data-path="z-scores.html"><a href="z-scores.html#writing-about-z-scores"><i class="fa fa-check"></i><b>12.2</b> Writing about z-scores</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html"><i class="fa fa-check"></i><b>13</b> Intro to ggplot</a><ul>
 <li class="chapter" data-level="13.1" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#the-bar-chart"><i class="fa fa-check"></i><b>13.1</b> The bar chart</a></li>
@@ -294,15 +295,16 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="z-scores" class="section level1">
-<h1><span class="header-section-number">Chapter 12</span> Z scores</h1>
-<p>Z scores are a handy way to standardize scores so you can compare things across groupings. In our case, we may want to compare teams by year, or era. We can use z scores to answer questions like who was the greatest X of all time, because a Z score can put them in context to their era.</p>
-<p>We can also use z scores to ask how much better is team A from team B.</p>
-<p>So let’s use Nebraska basketball, which if you haven’t been reading lately is at a bit of a crossroads.</p>
-<p>A Z score is a measure of how far a number is from the population mean of that number. An easier way to say that – how different is my grade from the average grade in the class. The formula for calculating a Z score is <code>(MyScore - AverageScore)/Standard Deviation of Scores</code>. The standard deviation is a number calculated to show the amount of variation in a set of data. In a normal distribution, 68 percent of all scores will be within 1 standard deviation, 95 percent will be within 2 and 99 within 3.</p>
+<h1><span class="header-section-number">Chapter 12</span> Z-scores</h1>
+<p>Z-scores are a handy way to standardize numbers so you can compare things across groupings or time. In this class, we may want to compare teams by year, or era. We can use z-scores to answer questions like who was the greatest X of all time, because a z-score can put them in context to their era.</p>
+<p>A z-score is a measure of how a particular stat is from the mean. It’s measured in standard deviations from that mean. A standard deviation is a measure of how much variation – how spread out – numbers are in a data set. What it means here, with regards to z-scores, is that zero is perfectly average. If it’s 1, it’s one standard deviation above the mean, and 34 percent of all cases are between 0 and 1.</p>
+<p><img src="images/simulations2.png" width="635" /></p>
+<p>If you think of the normal distribution, it means that 84.3 percent of all case are below that 1. If it were -1, it would mean the number is one standard deviation below the mean, and 84.3 percent of cases would be above that -1. So if you have numbers with z-scores of 3 or even 4, that means that number is waaaaaay above the mean.</p>
+<p>So let’s use last year’s Nebraska basketball team, which if haven’t been paying attention to current events, was not good at basketball.</p>
 <div id="calculating-a-z-score-in-r" class="section level2">
 <h2><span class="header-section-number">12.1</span> Calculating a Z score in R</h2>
 <div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="z-scores.html#cb173-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
-<p>Let’s look at the current state of Nebraska basketball using the <a href="https://unl.box.com/s/wnlh0u9low1yh56enion8zjmu8r7dc8p">same logs data we’ve been using, but for this season so far</a>.</p>
+<p>Let’s look at the current state of Nebraska basketball using the <a href="https://unl.box.com/s/yc01x7ae7r2jtuixo4j3s3s0ed7o5f8g">same logs data we’ve been using for the 2019-2020 season</a>.</p>
 <div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="z-scores.html#cb174-1"></a>gamelogs &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/logs20.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Parsed with column specification:
 ## cols(
@@ -317,7 +319,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ##   season = col_character()
 ## )</code></pre>
 <pre><code>## See spec(...) for full column specifications.</code></pre>
-<p>The first thing we need to do is select some fields we think represent team quality:</p>
+<p>The first thing we need to do is select some fields we think represent team quality and a few things to help us keep things straight. So I’m going to pick shooting percentage, rebounding and the opponent version of the same two:</p>
 <div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="z-scores.html#cb177-1"></a>teamquality &lt;-<span class="st"> </span>gamelogs <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb177-2"><a href="z-scores.html#cb177-2"></a><span class="st">  </span><span class="kw">select</span>(Conference, Team, TeamFGPCT, TeamTotalRebounds, OpponentFGPCT, OpponentTotalRebounds)</span></code></pre></div>
 <p>And since we have individual game data, we need to collapse this into one record for each team. We do that with … group by.</p>
@@ -328,10 +330,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb178-5"><a href="z-scores.html#cb178-5"></a>    <span class="dt">ReboundAvg =</span> <span class="kw">mean</span>(TeamTotalRebounds), </span>
 <span id="cb178-6"><a href="z-scores.html#cb178-6"></a>    <span class="dt">OppFGAvg =</span> <span class="kw">mean</span>(OpponentFGPCT),</span>
 <span id="cb178-7"><a href="z-scores.html#cb178-7"></a>    <span class="dt">OffRebAvg =</span> <span class="kw">mean</span>(OpponentTotalRebounds)</span>
-<span id="cb178-8"><a href="z-scores.html#cb178-8"></a>    )</span></code></pre></div>
+<span id="cb178-8"><a href="z-scores.html#cb178-8"></a>    ) </span></code></pre></div>
 <pre><code>## `summarise()` regrouping output by &#39;Conference&#39; (override with `.groups` argument)</code></pre>
-<p>To calculate a Z score in R, the easiest way is to use the scale function in base R. To use it, you use <code>scale(FieldName, center=TRUE, scale=TRUE)</code>. The center and scale indicate if you want to subtract from the mean and if you want to divide by the standard deviation, respectively. We do.</p>
-<p>When we have multiple Z Scores, it’s pretty standard practice to add them together into a composite score. That’s what we’re doing at the end here with <code>TotalZscore</code>. Note: We have to invert OppZscore and OppRebZScore by multiplying it by a negative 1 because the lower someone’s opponent number is, the better.</p>
+<p>To calculate a z-score in R, the easiest way is to use the <code>scale</code> function in base R. To use it, you use <code>scale(FieldName, center=TRUE, scale=TRUE)</code>. The center and scale indicate if you want to subtract from the mean and if you want to divide by the standard deviation, respectively. We do.</p>
+<p>When we have multiple z-scores, it’s pretty standard practice to add them together into a composite score. That’s what we’re doing at the end here with <code>TotalZscore</code>. Note: We have to invert OppZscore and OppRebZScore by multiplying it by a negative 1 because the lower someone’s opponent number is, the better.</p>
 <div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="z-scores.html#cb180-1"></a>teamzscore &lt;-<span class="st"> </span>teamtotals <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb180-2"><a href="z-scores.html#cb180-2"></a><span class="st">  </span><span class="kw">mutate</span>(</span>
 <span id="cb180-3"><a href="z-scores.html#cb180-3"></a>    <span class="dt">FGzscore =</span> <span class="kw">as.numeric</span>(<span class="kw">scale</span>(FGAvg, <span class="dt">center =</span> <span class="ot">TRUE</span>, <span class="dt">scale =</span> <span class="ot">TRUE</span>)),</span>
@@ -373,7 +375,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 10 ACC        Loui… 0.457       36.6    0.392      29.8    1.11     1.37  
 ## # … with 343 more rows, and 3 more variables: OppZscore &lt;dbl&gt;,
 ## #   OppRebZScore &lt;dbl&gt;, TotalZscore &lt;dbl&gt;</code></pre>
-<p>Don’t sleep on the Anteaters come tournament time!</p>
+<p>Don’t sleep on the Anteaters! Would have been a tough out at the tournament that never happened.</p>
 <p>But closer to home, how is Nebraska doing.</p>
 <div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="z-scores.html#cb185-1"></a>teamzscore <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb185-2"><a href="z-scores.html#cb185-2"></a><span class="st">  </span><span class="kw">filter</span>(Conference <span class="op">==</span><span class="st"> &quot;Big Ten&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
@@ -399,6 +401,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## # … with 3 more variables: OppZscore &lt;dbl&gt;, OppRebZScore &lt;dbl&gt;,
 ## #   TotalZscore &lt;dbl&gt;</code></pre>
 <p>So, as we can see, with our composite Z Score, Nebraska is … not good. Not good at all.</p>
+</div>
+<div id="writing-about-z-scores" class="section level2">
+<h2><span class="header-section-number">12.2</span> Writing about z-scores</h2>
+<p>The great thing about z-scores is that they make it very easy for you, the sports analyst, to create your own measures of who is better than who. The downside: Only a small handful of sports fans know what the hell a z-score is.</p>
+<p>As such, you should try as hard as you can to avoid writing about them.</p>
+<p>If the word z-score appears in your story or in a chart, you need to explain what it is. “The ranking uses a statistical measure of the distance from the mean called a z-score” is a good way to go about it. You don’t need a full stats textbook definition, just a quick explanation. And keep it simple.</p>
+<p><strong>Never use z-score in a headline.</strong> Write around it. Away from it. Z-score in a headline is attention repellent. You won’t get anyone to look at it. So “Tottenham tops in z-score” bad, “Tottenham tops in the Premiere League” good.</p>
 
 </div>
 </div>

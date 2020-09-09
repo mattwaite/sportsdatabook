@@ -192,8 +192,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11" data-path="residuals.html"><a href="residuals.html"><i class="fa fa-check"></i><b>11</b> Residuals</a><ul>
 <li class="chapter" data-level="11.1" data-path="residuals.html"><a href="residuals.html#penalties"><i class="fa fa-check"></i><b>11.1</b> Penalties</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z scores</a><ul>
+<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z-scores</a><ul>
 <li class="chapter" data-level="12.1" data-path="z-scores.html"><a href="z-scores.html#calculating-a-z-score-in-r"><i class="fa fa-check"></i><b>12.1</b> Calculating a Z score in R</a></li>
+<li class="chapter" data-level="12.2" data-path="z-scores.html"><a href="z-scores.html#writing-about-z-scores"><i class="fa fa-check"></i><b>12.2</b> Writing about z-scores</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html"><i class="fa fa-check"></i><b>13</b> Intro to ggplot</a><ul>
 <li class="chapter" data-level="13.1" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#the-bar-chart"><i class="fa fa-check"></i><b>13.1</b> The bar chart</a></li>
@@ -361,7 +362,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb484-2"><a href="clustering.html#cb484-2"></a>       <span class="dt">type=</span><span class="st">&quot;b&quot;</span>, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">frame =</span> <span class="ot">FALSE</span>, </span>
 <span id="cb484-3"><a href="clustering.html#cb484-3"></a>       <span class="dt">xlab=</span><span class="st">&quot;Number of clusters K&quot;</span>,</span>
 <span id="cb484-4"><a href="clustering.html#cb484-4"></a>       <span class="dt">ylab=</span><span class="st">&quot;Total within-clusters sum of squares&quot;</span>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-291-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-292-1.png" width="672" /></p>
 <p>The Elbow method – so named because you’re looking for the “elbow” where the line flattens out. In this case, it looks like a K of 5 is ideal. So let’s try that. We’re going to use the kmeans function, saving it to an object called k5. We just need to tell it our dataframe name, how many centers (k) we want, and we’ll use a sensible default for how many different configurations to try.</p>
 <div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="clustering.html#cb485-1"></a>k5 &lt;-<span class="st"> </span><span class="kw">kmeans</span>(playersscaled, <span class="dt">centers =</span> <span class="dv">5</span>, <span class="dt">nstart =</span> <span class="dv">25</span>)</span></code></pre></div>
 <p>Let’s look at what we get.</p>
@@ -472,7 +473,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="clustering.html#cb491-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb491-2"><a href="clustering.html#cb491-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>playercluster, <span class="kw">aes</span>(<span class="dt">x=</span>MP, <span class="dt">y=</span>AST, <span class="dt">color=</span>k5.cluster)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb491-3"><a href="clustering.html#cb491-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>cm, <span class="kw">aes</span>(<span class="dt">x=</span>MP, <span class="dt">y=</span>AST), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-296-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-297-1.png" width="672" /></p>
 <p>Not bad, not bad. But who are Cam Mack’s peers? If we look at the numbers in Group 5, there’s 495 of them. So let’s limit them to just Big Ten guards. Unfortunately, my scraper didn’t quite work and in the place of Conference is the coach’s name. So I’m going to have to do this the hard way and make a list of Big Ten teams and filter on that. Then I’ll sort by minutes played.</p>
 <div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="clustering.html#cb492-1"></a>big10 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Nebraska Cornhuskers&quot;</span>, <span class="st">&quot;Iowa Hawkeyes&quot;</span>, <span class="st">&quot;Minnesota Golden Gophers&quot;</span>, <span class="st">&quot;Illinois Fighting Illini&quot;</span>, <span class="st">&quot;Northwestern Wildcats&quot;</span>, <span class="st">&quot;Wisconsin Badgers&quot;</span>, <span class="st">&quot;Indiana Hoosiers&quot;</span>, <span class="st">&quot;Purdue Boilermakers&quot;</span>, <span class="st">&quot;Ohio State Buckeyes&quot;</span>, <span class="st">&quot;Michigan Wolverines&quot;</span>, <span class="st">&quot;Michigan State Spartans&quot;</span>, <span class="st">&quot;Penn State Nittany Lions&quot;</span>, <span class="st">&quot;Rutgers Scarlet Knights&quot;</span>, <span class="st">&quot;Maryland Terrapins&quot;</span>)</span>
 <span id="cb492-2"><a href="clustering.html#cb492-2"></a></span>
@@ -560,7 +561,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb496-13"><a href="clustering.html#cb496-13"></a>       <span class="dt">type=</span><span class="st">&quot;b&quot;</span>, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">frame =</span> <span class="ot">FALSE</span>, </span>
 <span id="cb496-14"><a href="clustering.html#cb496-14"></a>       <span class="dt">xlab=</span><span class="st">&quot;Number of clusters K&quot;</span>,</span>
 <span id="cb496-15"><a href="clustering.html#cb496-15"></a>       <span class="dt">ylab=</span><span class="st">&quot;Total within-clusters sum of squares&quot;</span>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-300-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-301-1.png" width="672" /></p>
 <p>Looks like 5 again.</p>
 <div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="clustering.html#cb497-1"></a>advk5 &lt;-<span class="st"> </span><span class="kw">kmeans</span>(playersadvscaled, <span class="dt">centers =</span> <span class="dv">5</span>, <span class="dt">nstart =</span> <span class="dv">25</span>)</span></code></pre></div>
 <p>What do we have here?</p>

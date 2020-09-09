@@ -192,8 +192,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11" data-path="residuals.html"><a href="residuals.html"><i class="fa fa-check"></i><b>11</b> Residuals</a><ul>
 <li class="chapter" data-level="11.1" data-path="residuals.html"><a href="residuals.html#penalties"><i class="fa fa-check"></i><b>11.1</b> Penalties</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z scores</a><ul>
+<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z-scores</a><ul>
 <li class="chapter" data-level="12.1" data-path="z-scores.html"><a href="z-scores.html#calculating-a-z-score-in-r"><i class="fa fa-check"></i><b>12.1</b> Calculating a Z score in R</a></li>
+<li class="chapter" data-level="12.2" data-path="z-scores.html"><a href="z-scores.html#writing-about-z-scores"><i class="fa fa-check"></i><b>12.2</b> Writing about z-scores</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html"><i class="fa fa-check"></i><b>13</b> Intro to ggplot</a><ul>
 <li class="chapter" data-level="13.1" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#the-bar-chart"><i class="fa fa-check"></i><b>13.1</b> The bar chart</a></li>
@@ -311,7 +312,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb447-4"><a href="finishing-touches-2.html#cb447-4"></a>    <span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>),</span>
 <span id="cb447-5"><a href="finishing-touches-2.html#cb447-5"></a>    <span class="dt">axis.title.y =</span> <span class="kw">element_blank</span>()</span>
 <span id="cb447-6"><a href="finishing-touches-2.html#cb447-6"></a>  )</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-274-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-275-1.png" width="672" /></p>
 <p>Note: The alignment of text sucks.</p>
 <p>How to fix that? We can use ggsave to a pdf and fix it in Illustrator.</p>
 <div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="finishing-touches-2.html#cb448-1"></a><span class="kw">waffle</span>(nu<span class="op">/</span><span class="dv">10</span>, <span class="dt">rows =</span> <span class="dv">5</span>, <span class="dt">xlab=</span><span class="st">&quot;1 square = 10 yards&quot;</span>, <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Nebraska vs Wisconsin on offense&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;The Huskers couldn&#39;t get much of a running game going.&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Source: NCAA | Graphic by Matt Waite&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
@@ -346,7 +347,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb449-15"><a href="finishing-touches-2.html#cb449-15"></a>   <span class="dt">xlab=</span><span class="st">&quot;1 square = 10 yards&quot;</span>, </span>
 <span id="cb449-16"><a href="finishing-touches-2.html#cb449-16"></a>   <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">caption=</span><span class="st">&quot;Source: NCAA | Graphic by Matt Waite&quot;</span>)</span>
 <span id="cb449-17"><a href="finishing-touches-2.html#cb449-17"></a>) </span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-276-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-277-1.png" width="672" /></p>
 <p>If you try to use ggsave on that, you’ll only get the last waffle chart. Like I said, irons aren’t really anything, so ggplot ignores them. So to do this, we have to use R’s pdf capability.</p>
 <p>Here’s the same code, but wrapped in the R pdf functions. The first line says we’re going to output this as a pdf with this name. Then my code, then <code>dev.off</code> to tell R that’s what I want as a PDF. Don’t forget that.</p>
 <div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="finishing-touches-2.html#cb450-1"></a><span class="kw">pdf</span>(<span class="st">&quot;waffleiron.pdf&quot;</span>)</span>

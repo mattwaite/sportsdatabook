@@ -192,8 +192,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11" data-path="residuals.html"><a href="residuals.html"><i class="fa fa-check"></i><b>11</b> Residuals</a><ul>
 <li class="chapter" data-level="11.1" data-path="residuals.html"><a href="residuals.html#penalties"><i class="fa fa-check"></i><b>11.1</b> Penalties</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z scores</a><ul>
+<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z-scores</a><ul>
 <li class="chapter" data-level="12.1" data-path="z-scores.html"><a href="z-scores.html#calculating-a-z-score-in-r"><i class="fa fa-check"></i><b>12.1</b> Calculating a Z score in R</a></li>
+<li class="chapter" data-level="12.2" data-path="z-scores.html"><a href="z-scores.html#writing-about-z-scores"><i class="fa fa-check"></i><b>12.2</b> Writing about z-scores</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html"><i class="fa fa-check"></i><b>13</b> Intro to ggplot</a><ul>
 <li class="chapter" data-level="13.1" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#the-bar-chart"><i class="fa fa-check"></i><b>13.1</b> The bar chart</a></li>
@@ -326,13 +327,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## See spec(...) for full column specifications.</code></pre>
 <p>We’ve done this before, but let’s make a standard scatterplot of minutes and points.</p>
 <div class="sourceCode" id="cb564"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb564-1"><a href="encircling-points-on-a-scatterplot.html#cb564-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">data=</span>players, <span class="kw">aes</span>(<span class="dt">x=</span>MP, <span class="dt">y=</span>PTS))</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-336-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-337-1.png" width="672" /></p>
 <p>So we can see right away that there are some dots at the very top that we’d want to highlight. Who are these scoring machines?</p>
 <p>Like we have done in the past, let’s make a dataframe of top scorers. We’ll set the cutoff at 650 points in a season.</p>
 <div class="sourceCode" id="cb565"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb565-1"><a href="encircling-points-on-a-scatterplot.html#cb565-1"></a>topscorers &lt;-<span class="st"> </span>players <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(PTS <span class="op">&gt;</span><span class="st"> </span><span class="dv">650</span>)</span></code></pre></div>
 <p>And like we’ve done in the past, we can add it to the chart with another geom_point. We’ll make all the players grey, we’ll make all the top scorers black.</p>
 <div class="sourceCode" id="cb566"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb566-1"><a href="encircling-points-on-a-scatterplot.html#cb566-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">data=</span>players, <span class="kw">aes</span>(<span class="dt">x=</span>MP, <span class="dt">y=</span>PTS), <span class="dt">color=</span><span class="st">&quot;grey&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">data=</span>topscorers, <span class="kw">aes</span>(<span class="dt">x=</span>MP, <span class="dt">y=</span>PTS), <span class="dt">color=</span><span class="st">&quot;black&quot;</span>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-338-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-339-1.png" width="672" /></p>
 <p>And like that, we’re on the path to something publishable. We’ll need to label those dots with <code>ggrepel</code> and we’ll need to drop the default grey and add some headlines and all that. And, for the most part, we’ve got a solid chart.</p>
 <p>But what if we could really draw the eye to those players. Let’s draw a circle around them.
 In <code>ggalt</code>, there is a new geom called <code>geom_encircle</code>, which … does what you think it does. It encircles all the dots in a dataset.</p>
@@ -342,21 +343,21 @@ In <code>ggalt</code>, there is a new geom called <code>geom_encircle</code>, wh
 <span id="cb567-2"><a href="encircling-points-on-a-scatterplot.html#cb567-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>players, <span class="kw">aes</span>(<span class="dt">x=</span>MP, <span class="dt">y=</span>PTS), <span class="dt">color=</span><span class="st">&quot;grey&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb567-3"><a href="encircling-points-on-a-scatterplot.html#cb567-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>topscorers, <span class="kw">aes</span>(<span class="dt">x=</span>MP, <span class="dt">y=</span>PTS), <span class="dt">color=</span><span class="st">&quot;black&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb567-4"><a href="encircling-points-on-a-scatterplot.html#cb567-4"></a><span class="st">  </span><span class="kw">geom_encircle</span>(<span class="dt">data=</span>topscorers, <span class="kw">aes</span>(<span class="dt">x=</span>MP, <span class="dt">y=</span>PTS), <span class="dt">s_shape=</span><span class="dv">1</span>, <span class="dt">expand=</span><span class="dv">1</span>, <span class="dt">colour=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-339-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-340-1.png" width="672" /></p>
 <p>Whoa. That’s … not good.</p>
 <p>Let’s go the opposite direction.</p>
 <div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb568-1"><a href="encircling-points-on-a-scatterplot.html#cb568-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb568-2"><a href="encircling-points-on-a-scatterplot.html#cb568-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>players, <span class="kw">aes</span>(<span class="dt">x=</span>MP, <span class="dt">y=</span>PTS), <span class="dt">color=</span><span class="st">&quot;grey&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb568-3"><a href="encircling-points-on-a-scatterplot.html#cb568-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>topscorers, <span class="kw">aes</span>(<span class="dt">x=</span>MP, <span class="dt">y=</span>PTS), <span class="dt">color=</span><span class="st">&quot;black&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb568-4"><a href="encircling-points-on-a-scatterplot.html#cb568-4"></a><span class="st">  </span><span class="kw">geom_encircle</span>(<span class="dt">data=</span>topscorers, <span class="kw">aes</span>(<span class="dt">x=</span>MP, <span class="dt">y=</span>PTS), <span class="dt">s_shape=</span><span class="dv">0</span>, <span class="dt">expand=</span><span class="dv">0</span>, <span class="dt">colour=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-340-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-341-1.png" width="672" /></p>
 <p>Better, but … the circle cuts through multiple dots.</p>
 <p>This takes a little bit of finessing, but a shape of .5 means the line will have some bend to it – it’ll look more like someone circled it with a pen. Then, the expand is better if you use hundredths instead of tenths. So .01 instead of .1. Here’s mine after fiddling with it for a bit.</p>
 <div class="sourceCode" id="cb569"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb569-1"><a href="encircling-points-on-a-scatterplot.html#cb569-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb569-2"><a href="encircling-points-on-a-scatterplot.html#cb569-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>players, <span class="kw">aes</span>(<span class="dt">x=</span>MP, <span class="dt">y=</span>PTS), <span class="dt">color=</span><span class="st">&quot;grey&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb569-3"><a href="encircling-points-on-a-scatterplot.html#cb569-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>topscorers, <span class="kw">aes</span>(<span class="dt">x=</span>MP, <span class="dt">y=</span>PTS), <span class="dt">color=</span><span class="st">&quot;black&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb569-4"><a href="encircling-points-on-a-scatterplot.html#cb569-4"></a><span class="st">  </span><span class="kw">geom_encircle</span>(<span class="dt">data=</span>topscorers, <span class="kw">aes</span>(<span class="dt">x=</span>MP, <span class="dt">y=</span>PTS), <span class="dt">s_shape=</span>.<span class="dv">5</span>, <span class="dt">expand=</span>.<span class="dv">03</span>, <span class="dt">colour=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-341-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-342-1.png" width="672" /></p>
 <p>Now let’s clean this up and make it presentable. If you look at the top scorers, only two were Wooden Award finalists. So here’s what a chart telling that story might look like.</p>
 <div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb570-1"><a href="encircling-points-on-a-scatterplot.html#cb570-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb570-2"><a href="encircling-points-on-a-scatterplot.html#cb570-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>players, <span class="kw">aes</span>(<span class="dt">x=</span>MP, <span class="dt">y=</span>PTS), <span class="dt">color=</span><span class="st">&quot;grey&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
@@ -371,7 +372,7 @@ In <code>ggalt</code>, there is a new geom called <code>geom_encircle</code>, wh
 <span id="cb570-11"><a href="encircling-points-on-a-scatterplot.html#cb570-11"></a>    <span class="dt">plot.subtitle =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">10</span>), </span>
 <span id="cb570-12"><a href="encircling-points-on-a-scatterplot.html#cb570-12"></a>    <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>()</span>
 <span id="cb570-13"><a href="encircling-points-on-a-scatterplot.html#cb570-13"></a>    )</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-342-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-343-1.png" width="672" /></p>
 <div id="a-different-more-local-example" class="section level2">
 <h2><span class="header-section-number">34.1</span> A different, more local example</h2>
 <p>You can use circling outside of the top of something. It’s a bit obvious that the previous dots were top scorers. What about when they aren’t at the top?</p>
@@ -389,7 +390,7 @@ In <code>ggalt</code>, there is a new geom called <code>geom_encircle</code>, wh
 <span id="cb572-8"><a href="encircling-points-on-a-scatterplot.html#cb572-8"></a>    <span class="dt">plot.subtitle =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">10</span>), </span>
 <span id="cb572-9"><a href="encircling-points-on-a-scatterplot.html#cb572-9"></a>    <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>()</span>
 <span id="cb572-10"><a href="encircling-points-on-a-scatterplot.html#cb572-10"></a>    )</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-344-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-345-1.png" width="672" /></p>
 <p>The dot on the far right? Cam Mack. Oh what could have been.</p>
 
 </div>

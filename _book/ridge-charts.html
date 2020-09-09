@@ -192,8 +192,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11" data-path="residuals.html"><a href="residuals.html"><i class="fa fa-check"></i><b>11</b> Residuals</a><ul>
 <li class="chapter" data-level="11.1" data-path="residuals.html"><a href="residuals.html#penalties"><i class="fa fa-check"></i><b>11.1</b> Penalties</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z scores</a><ul>
+<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z-scores</a><ul>
 <li class="chapter" data-level="12.1" data-path="z-scores.html"><a href="z-scores.html#calculating-a-z-score-in-r"><i class="fa fa-check"></i><b>12.1</b> Calculating a Z score in R</a></li>
+<li class="chapter" data-level="12.2" data-path="z-scores.html"><a href="z-scores.html#writing-about-z-scores"><i class="fa fa-check"></i><b>12.2</b> Writing about z-scores</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html"><i class="fa fa-check"></i><b>13</b> Intro to ggplot</a><ul>
 <li class="chapter" data-level="13.1" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#the-bar-chart"><i class="fa fa-check"></i><b>13.1</b> The bar chart</a></li>
@@ -345,7 +346,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb265-4"><a href="ridge-charts.html#cb265-4"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 <pre><code>## Picking joint bandwidth of 0.88</code></pre>
 <pre><code>## Warning: Removed 2 rows containing non-finite values (stat_density_ridges).</code></pre>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-159-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-160-1.png" width="672" /></p>
 <p>Answer? Not really. Game to game, maybe. Over five seasons? The differences are indistinguishable.</p>
 <p>How about assists?</p>
 <div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="ridge-charts.html#cb268-1"></a><span class="kw">ggplot</span>(wintotalgroupinglogs, <span class="kw">aes</span>(<span class="dt">x =</span> TeamAssists, <span class="dt">y =</span> grouping, <span class="dt">fill =</span> grouping)) <span class="op">+</span></span>
@@ -354,7 +355,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb268-4"><a href="ridge-charts.html#cb268-4"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 <pre><code>## Picking joint bandwidth of 0.601</code></pre>
 <pre><code>## Warning: Removed 2 rows containing non-finite values (stat_density_ridges).</code></pre>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-160-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-161-1.png" width="672" /></p>
 <p>There’s a little better, especially between top and bottom.</p>
 <div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="ridge-charts.html#cb271-1"></a><span class="kw">ggplot</span>(wintotalgroupinglogs, <span class="kw">aes</span>(<span class="dt">x =</span> Team3PPCT, <span class="dt">y =</span> grouping, <span class="dt">fill =</span> grouping)) <span class="op">+</span></span>
 <span id="cb271-2"><a href="ridge-charts.html#cb271-2"></a><span class="st">  </span><span class="kw">geom_density_ridges</span>() <span class="op">+</span></span>
@@ -362,7 +363,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb271-4"><a href="ridge-charts.html#cb271-4"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 <pre><code>## Picking joint bandwidth of 0.0156</code></pre>
 <pre><code>## Warning: Removed 2 rows containing non-finite values (stat_density_ridges).</code></pre>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-161-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-162-1.png" width="672" /></p>
 <p>If you’ve been paying attention this semester, you know what’s coming next.</p>
 <div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="ridge-charts.html#cb274-1"></a><span class="kw">ggplot</span>(wintotalgroupinglogs, <span class="kw">aes</span>(<span class="dt">x =</span> TeamFGPCT, <span class="dt">y =</span> grouping, <span class="dt">fill =</span> grouping)) <span class="op">+</span></span>
 <span id="cb274-2"><a href="ridge-charts.html#cb274-2"></a><span class="st">  </span><span class="kw">geom_density_ridges</span>() <span class="op">+</span></span>
@@ -370,7 +371,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb274-4"><a href="ridge-charts.html#cb274-4"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 <pre><code>## Picking joint bandwidth of 0.0102</code></pre>
 <pre><code>## Warning: Removed 2 rows containing non-finite values (stat_density_ridges).</code></pre>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-162-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-163-1.png" width="672" /></p>
 
 </div>
             </section>

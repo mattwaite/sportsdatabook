@@ -192,8 +192,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11" data-path="residuals.html"><a href="residuals.html"><i class="fa fa-check"></i><b>11</b> Residuals</a><ul>
 <li class="chapter" data-level="11.1" data-path="residuals.html"><a href="residuals.html#penalties"><i class="fa fa-check"></i><b>11.1</b> Penalties</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z scores</a><ul>
+<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z-scores</a><ul>
 <li class="chapter" data-level="12.1" data-path="z-scores.html"><a href="z-scores.html#calculating-a-z-score-in-r"><i class="fa fa-check"></i><b>12.1</b> Calculating a Z score in R</a></li>
+<li class="chapter" data-level="12.2" data-path="z-scores.html"><a href="z-scores.html#writing-about-z-scores"><i class="fa fa-check"></i><b>12.2</b> Writing about z-scores</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html"><i class="fa fa-check"></i><b>13</b> Intro to ggplot</a><ul>
 <li class="chapter" data-level="13.1" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#the-bar-chart"><i class="fa fa-check"></i><b>13.1</b> The bar chart</a></li>
@@ -326,10 +327,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="step-charts.html#cb250-1"></a>bigdiff &lt;-<span class="st"> </span>difflogs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Conference <span class="op">==</span><span class="st"> &quot;Big Ten&quot;</span>)</span></code></pre></div>
 <p>The step chart is it’s own geom, so we can employ it just like we have the others. It works almost exactly the same as a line chart, but it uses the cumulative sum instead of a regular value and, as the name implies, creates a step like shape to the line instead of a curve.</p>
 <div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="step-charts.html#cb251-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_step</span>(<span class="dt">data=</span>bigdiff, <span class="kw">aes</span>(<span class="dt">x=</span>Date, <span class="dt">y=</span>CumDiff, <span class="dt">group=</span>Team))</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-149-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-150-1.png" width="672" /></p>
 <p>Let’s try a different element of the aesthetic: color, but this time inside the aesthetic. Last time, we did the color outside. When you put it inside, you pass it a column name and ggplot will color each line based on what thing that is, and it will create a legend that labels each line that thing.</p>
 <div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="step-charts.html#cb252-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_step</span>(<span class="dt">data=</span>bigdiff, <span class="kw">aes</span>(<span class="dt">x=</span>Date, <span class="dt">y=</span>CumDiff, <span class="dt">group=</span>Team, <span class="dt">color=</span>Team))</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-150-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-151-1.png" width="672" /></p>
 <p>From this, we can see two teams in the Big Ten had negative point differentials last season – Illinois and Rutgers.</p>
 <p>Let’s look at those top teams plus Nebraska.</p>
 <div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="step-charts.html#cb253-1"></a>nu &lt;-<span class="st"> </span>bigdiff <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Team <span class="op">==</span><span class="st"> &quot;Nebraska Cornhuskers&quot;</span>)</span>
@@ -345,7 +346,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb254-6"><a href="step-charts.html#cb254-6"></a><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x=</span>(<span class="kw">as.Date</span>(<span class="st">&quot;2018-12-10&quot;</span>)), <span class="dt">y=</span><span class="dv">220</span>, <span class="dt">label=</span><span class="st">&quot;Nebraska&quot;</span>) <span class="op">+</span></span>
 <span id="cb254-7"><a href="step-charts.html#cb254-7"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Date&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Cumulative Point Differential&quot;</span>, <span class="dt">title=</span><span class="st">&quot;Nebraska was among the league&#39;s most dominant&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;Before the misseason skid, Nebraska was at the top of the Big Ten in point differential&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Source: Sports-Reference.com | By Matt Waite&quot;</span>) <span class="op">+</span></span>
 <span id="cb254-8"><a href="step-charts.html#cb254-8"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-152-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-153-1.png" width="672" /></p>
 
 </div>
             </section>
