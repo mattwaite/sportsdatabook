@@ -298,39 +298,97 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 14</span> Stacked bar charts</h1>
 <p>One of the elements of data visualization excellence is <strong>inviting comparison</strong>. Often that comes in showing <strong>what proportion a thing is in relation to the whole thing</strong>. With bar charts, we’re showing magnitude of the whole thing. If we have information about the parts of the whole, <strong>we can stack them on top of each other to compare them, showing both the whole and the components</strong>. And it’s a simple change to what we’ve already done.</p>
 <div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="stacked-bar-charts.html#cb208-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
-<p>We’re going to use a dataset of graduation rates by gender by school in the NCAA. <a href="https://unl.box.com/s/3nw1eokvs9zfdjyzvjaj3xdq01rm8sym">You can get it here</a>.</p>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="stacked-bar-charts.html#cb209-1"></a>grads &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;data/grads.csv&#39;</span>)</span></code></pre></div>
+<p>We’re going to use a dataset of college football games last season. <a href="https://unl.box.com/s/2prgq48ctoxlukn6kmfjw0u1opda5s0m">You can get it here</a>.</p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="stacked-bar-charts.html#cb209-1"></a>football &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/footballlogs19.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Parsed with column specification:
 ## cols(
-##   `Institution name` = col_character(),
-##   `Primary Conference in Actual Year` = col_character(),
-##   `Cohort year` = col_double(),
-##   Gender = col_character(),
-##   `Number of completers` = col_double(),
-##   Total = col_double()
+##   .default = col_double(),
+##   Date = col_date(format = &quot;&quot;),
+##   HomeAway = col_character(),
+##   Opponent = col_character(),
+##   Result = col_character(),
+##   TeamFull = col_character(),
+##   TeamURL = col_character(),
+##   Outcome = col_character(),
+##   Team = col_character(),
+##   Conference = col_character()
 ## )</code></pre>
-<p>What we have here is the name of the school, the conference, the cohort of when they started school, the gender, the number of that gender that graduated and the total number of graduates in that cohort.</p>
-<p>Let’s pretend for a moment we’re looking at the graduation rates of men and women in the Big 10 Conference and we want to chart that. First, let’s work on our data. We need to filter the “Big Ten Conference” school, and we want the latest year, which is 2009. So we’ll create a dataframe called <code>BIG09</code> and populate it.</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="stacked-bar-charts.html#cb211-1"></a>BIG09 &lt;-<span class="st"> </span>grads <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="st">`</span><span class="dt">Primary Conference in Actual Year</span><span class="st">`</span><span class="op">==</span><span class="st">&quot;Big Ten Conference&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="st">`</span><span class="dt">Cohort year</span><span class="st">`</span> <span class="op">==</span><span class="st"> </span><span class="dv">2009</span>)</span></code></pre></div>
-<p>Reminder: <code>head()</code> will give you a quick look at what your data looks like, but <strong>it will only show you the first six rows</strong>.</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="stacked-bar-charts.html#cb212-1"></a><span class="kw">head</span>(BIG09)</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 6
-##   `Institution nam… `Primary Confer… `Cohort year` Gender `Number of comp… Total
-##   &lt;chr&gt;             &lt;chr&gt;                    &lt;dbl&gt; &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt;
-## 1 University of Il… Big Ten Confere…          2009 Men                2973  5940
-## 2 University of Il… Big Ten Confere…          2009 Women              2967  5940
-## 3 Northwestern Uni… Big Ten Confere…          2009 Men                 963  1974
-## 4 Northwestern Uni… Big Ten Confere…          2009 Women              1011  1974
-## 5 Indiana Universi… Big Ten Confere…          2009 Men                2667  5626
-## 6 Indiana Universi… Big Ten Confere…          2009 Women              2959  5626</code></pre>
-<p>Building on what we learned in the last chapter, we know we can turn this into a bar chart with an x value, a weight and a geom_bar. What’re going to add is a <code>fill</code>. The <code>fill</code> will stack bars on each other based on which element it is. In this case, we can fill the bar by Gender, which means it will stack the number of male graduates on top of the number of female graduates and we can see how they compare.</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="stacked-bar-charts.html#cb214-1"></a><span class="kw">ggplot</span>(BIG09, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(<span class="st">`</span><span class="dt">Institution name</span><span class="st">`</span>, <span class="op">-</span>Total), <span class="dt">weight=</span><span class="st">`</span><span class="dt">Number of completers</span><span class="st">`</span>, <span class="dt">fill=</span>Gender)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-122-1.png" width="672" /></p>
+<pre><code>## See spec(...) for full column specifications.</code></pre>
+<p>What we have here is every game in college football last season. The question we want to answer is this: Who had the most prolific offenses in the Big Ten last season? And how did they get there?</p>
+<p>So to make this chart, we have to just add one thing to a bar chart like we did in the previous chapter. However, it’s not that simple.</p>
+<p>We have game data, and we need season data. To get that, we need to do some group by and sum work. And since we’re only interested in the Big Ten, we have some filtering to do too. For this, we’re going to measure offensive production by rushing yards and passing yards. So if we have all the games a team played, and the rushing and passing yards for each of those games, what we need to do to get the season totals is just add them up.</p>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="stacked-bar-charts.html#cb212-1"></a>football <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb212-2"><a href="stacked-bar-charts.html#cb212-2"></a><span class="st">  </span><span class="kw">group_by</span>(Conference, Team) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb212-3"><a href="stacked-bar-charts.html#cb212-3"></a><span class="st">  </span><span class="kw">summarise</span>(</span>
+<span id="cb212-4"><a href="stacked-bar-charts.html#cb212-4"></a>    <span class="dt">SeasonRushingYards =</span> <span class="kw">sum</span>(RushingYds),</span>
+<span id="cb212-5"><a href="stacked-bar-charts.html#cb212-5"></a>    <span class="dt">SeasonPassingYards =</span> <span class="kw">sum</span>(PassingYds),</span>
+<span id="cb212-6"><a href="stacked-bar-charts.html#cb212-6"></a>  ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Conference <span class="op">==</span><span class="st"> &quot;Big Ten Conference&quot;</span>)</span></code></pre></div>
+<pre><code>## `summarise()` regrouping output by &#39;Conference&#39; (override with `.groups` argument)</code></pre>
+<pre><code>## # A tibble: 14 x 4
+## # Groups:   Conference [1]
+##    Conference         Team           SeasonRushingYards SeasonPassingYards
+##    &lt;chr&gt;              &lt;chr&gt;                       &lt;dbl&gt;              &lt;dbl&gt;
+##  1 Big Ten Conference Illinois                     1877               2409
+##  2 Big Ten Conference Indiana                      1700               3931
+##  3 Big Ten Conference Iowa                         1789               2976
+##  4 Big Ten Conference Maryland                     2033               2088
+##  5 Big Ten Conference Michigan                     1966               3261
+##  6 Big Ten Conference Michigan State               1666               3182
+##  7 Big Ten Conference Minnesota                    2323               3293
+##  8 Big Ten Conference Nebraska                     2454               2551
+##  9 Big Ten Conference Northwestern                 2162               1404
+## 10 Big Ten Conference Ohio State                   3742               3684
+## 11 Big Ten Conference Penn State                   2496               2877
+## 12 Big Ten Conference Purdue                       1002               3719
+## 13 Big Ten Conference Rutgers                      1612               1672
+## 14 Big Ten Conference Wisconsin                    3272               2802</code></pre>
+<p>By looking at this, we can see we got what we needed. We have 14 teams and numbers that look like season totals for yards. Save that to a new dataframe.</p>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="stacked-bar-charts.html#cb215-1"></a>football <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb215-2"><a href="stacked-bar-charts.html#cb215-2"></a><span class="st">  </span><span class="kw">group_by</span>(Conference, Team) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb215-3"><a href="stacked-bar-charts.html#cb215-3"></a><span class="st">  </span><span class="kw">summarise</span>(</span>
+<span id="cb215-4"><a href="stacked-bar-charts.html#cb215-4"></a>    <span class="dt">SeasonRushingYards =</span> <span class="kw">sum</span>(RushingYds),</span>
+<span id="cb215-5"><a href="stacked-bar-charts.html#cb215-5"></a>    <span class="dt">SeasonPassingYards =</span> <span class="kw">sum</span>(PassingYds),</span>
+<span id="cb215-6"><a href="stacked-bar-charts.html#cb215-6"></a>  ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Conference <span class="op">==</span><span class="st"> &quot;Big Ten Conference&quot;</span>) -&gt;<span class="st"> </span>yards</span></code></pre></div>
+<pre><code>## `summarise()` regrouping output by &#39;Conference&#39; (override with `.groups` argument)</code></pre>
+<p>Now, the problem we have is that ggplot wants long data and this data is wide. So we need to use <code>tidyr</code> to make it long, just like we did in the transforming data chapter.</p>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="stacked-bar-charts.html#cb217-1"></a>yards <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb217-2"><a href="stacked-bar-charts.html#cb217-2"></a><span class="st">  </span><span class="kw">pivot_longer</span>(</span>
+<span id="cb217-3"><a href="stacked-bar-charts.html#cb217-3"></a>    <span class="dt">cols=</span><span class="kw">starts_with</span>(<span class="st">&quot;Season&quot;</span>), </span>
+<span id="cb217-4"><a href="stacked-bar-charts.html#cb217-4"></a>    <span class="dt">names_to=</span><span class="st">&quot;Type&quot;</span>, </span>
+<span id="cb217-5"><a href="stacked-bar-charts.html#cb217-5"></a>    <span class="dt">values_to=</span><span class="st">&quot;Yards&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 28 x 4
+## # Groups:   Conference [1]
+##    Conference         Team     Type               Yards
+##    &lt;chr&gt;              &lt;chr&gt;    &lt;chr&gt;              &lt;dbl&gt;
+##  1 Big Ten Conference Illinois SeasonRushingYards  1877
+##  2 Big Ten Conference Illinois SeasonPassingYards  2409
+##  3 Big Ten Conference Indiana  SeasonRushingYards  1700
+##  4 Big Ten Conference Indiana  SeasonPassingYards  3931
+##  5 Big Ten Conference Iowa     SeasonRushingYards  1789
+##  6 Big Ten Conference Iowa     SeasonPassingYards  2976
+##  7 Big Ten Conference Maryland SeasonRushingYards  2033
+##  8 Big Ten Conference Maryland SeasonPassingYards  2088
+##  9 Big Ten Conference Michigan SeasonRushingYards  1966
+## 10 Big Ten Conference Michigan SeasonPassingYards  3261
+## # … with 18 more rows</code></pre>
+<p>What you can see now is that we have two rows for each team: One for rushing yards, one for passing yards. This is what ggplot needs. Save it to a new dataframe.</p>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="stacked-bar-charts.html#cb219-1"></a>yards <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb219-2"><a href="stacked-bar-charts.html#cb219-2"></a><span class="st">  </span><span class="kw">pivot_longer</span>(</span>
+<span id="cb219-3"><a href="stacked-bar-charts.html#cb219-3"></a>    <span class="dt">cols=</span><span class="kw">starts_with</span>(<span class="st">&quot;Season&quot;</span>), </span>
+<span id="cb219-4"><a href="stacked-bar-charts.html#cb219-4"></a>    <span class="dt">names_to=</span><span class="st">&quot;Type&quot;</span>, </span>
+<span id="cb219-5"><a href="stacked-bar-charts.html#cb219-5"></a>    <span class="dt">values_to=</span><span class="st">&quot;Yards&quot;</span>) -&gt;<span class="st"> </span>yardswide</span></code></pre></div>
+<p>Building on what we learned in the last chapter, we know we can turn this into a bar chart with an x value, a weight and a geom_bar. What we are going to add is a <code>fill</code>. The <code>fill</code> will stack bars on each other based on which element it is. In this case, we can fill the bar by Type, which means it will stack the number of rushing yards on top of passing yards and we can see how they compare.</p>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="stacked-bar-charts.html#cb220-1"></a><span class="kw">ggplot</span>(yardswide, <span class="kw">aes</span>(<span class="dt">x=</span>Team, <span class="dt">weight=</span>Yards, <span class="dt">fill=</span>Type)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb220-2"><a href="stacked-bar-charts.html#cb220-2"></a><span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb220-3"><a href="stacked-bar-charts.html#cb220-3"></a><span class="st">  </span><span class="kw">coord_flip</span>()</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-124-1.png" width="672" /></p>
 <p>What’s the problem with this chart?</p>
-<p>Let me ask a different question – which schools have larger differences in male and female graduation rates? Can you compare Illnois to Northwestern? Not really. We’ve charted the total numbers. We need the percentage of the whole.</p>
-<blockquote>
-<p><strong>YOUR TURN</strong>: Using what you know – hint: mutate – how could you chart this using percents of the whole instead of counts?</p>
-</blockquote>
+<p>There’s a couple of things, one of which we’ll deal with now: The ordering is alphabetical (from the bottom up). So let’s <code>reorder</code> the teams by Yards.</p>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="stacked-bar-charts.html#cb221-1"></a><span class="kw">ggplot</span>(yardswide, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Team, Yards), <span class="dt">weight=</span>Yards, <span class="dt">fill=</span>Type)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb221-2"><a href="stacked-bar-charts.html#cb221-2"></a><span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb221-3"><a href="stacked-bar-charts.html#cb221-3"></a><span class="st">  </span><span class="kw">coord_flip</span>()</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-125-1.png" width="672" /></p>
+<p>And just like that, Ohio State comes out on top, with Wisconsin second and … Indiana? … third. Huh.</p>
 
 </div>
             </section>

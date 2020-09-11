@@ -19,7 +19,7 @@ We have game data, and we need season data. To get that, we need to do some grou
 ```{r}
 football %>% 
   group_by(Conference, Team) %>% 
-  summarize(
+  summarise(
     SeasonRushingYards = sum(RushingYds),
     SeasonPassingYards = sum(PassingYds),
   ) %>% filter(Conference == "Big Ten Conference")
@@ -30,7 +30,7 @@ By looking at this, we can see we got what we needed. We have 14 teams and numbe
 ```{r}
 football %>% 
   group_by(Conference, Team) %>% 
-  summarize(
+  summarise(
     SeasonRushingYards = sum(RushingYds),
     SeasonPassingYards = sum(PassingYds),
   ) %>% filter(Conference == "Big Ten Conference") -> yards
