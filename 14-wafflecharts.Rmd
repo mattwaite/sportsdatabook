@@ -30,9 +30,10 @@ Not well.
 So let's introduce a better way: The Waffle Chart. Some call it a square pie chart. I personally hate that. Waffles it is. 
 
 **A waffle chart is designed to show you parts of the whole -- proportionality**. How many yards on offense come from rushing or passing. How many singles, doubles, triples and home runs make up a teams hits. How many shots a basketball team takes are two pointers versus three pointers. 
+
 First, install the library in the console. We want a newer version of the `waffle` library than is in CRAN -- where you normally get libraries from -- so copy and paste this into your console: 
 
-`install.packages("waffle", repos = "https://cinc.rud.is")`
+`install.packages("waffle")`
 
 Now load it: 
 
@@ -151,7 +152,15 @@ News flash: Ohio State crushed Nebraska.
 
 ## Waffles two ways: Part 2
 
-At first, this might seem harder than doing it the way we just walked through, but the benefits will come later when it's far, far easier to style this chart, where the previous charts are harder.
+For this part, we want a newer version of the `waffle` library than is in CRAN -- where you normally get libraries from. 
+
+**WARNING: This didn't work in a variety of environments, so it may not work on yours.**
+
+Copy and paste this into your console: 
+
+`install.packages("waffle", repos = "https://cinc.rud.is")`
+
+At first, this way might seem harder than doing it the way we just walked through, but the benefits will come later when it's far, far easier to style this chart, where the previous charts are harder.
 
 We have the log of every game in college football -- [you can get it here](https://unl.box.com/s/2prgq48ctoxlukn6kmfjw0u1opda5s0m) -- and we can find this game with some simple filtering. 
 
