@@ -12,7 +12,7 @@ Let's start getting all that we need. We can use the tidyverse shortcut.
 library(tidyverse)
 ```
 
-Now we'll [import the data you need](https://unl.box.com/s/a8m91bro10t89watsyo13yjegb1fy009). Mine looks like this: 
+Now we'll [import the data you need](https://unl.box.com/s/fozp95j76gbc08qqoe01ozcxzsz801ns). Mine looks like this: 
 
 ```{r}
 logs <- read_csv("data/logs19.csv")
