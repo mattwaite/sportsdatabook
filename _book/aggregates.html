@@ -213,7 +213,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="17" data-path="step-charts.html"><a href="step-charts.html"><i class="fa fa-check"></i><b>17</b> Step charts</a></li>
 <li class="chapter" data-level="18" data-path="ridge-charts.html"><a href="ridge-charts.html"><i class="fa fa-check"></i><b>18</b> Ridge charts</a></li>
-<li class="chapter" data-level="19" data-path="lollipop-charts.html"><a href="lollipop-charts.html"><i class="fa fa-check"></i><b>19</b> Lollipop charts</a></li>
+<li class="chapter" data-level="19" data-path="dumbbell-and-lollipop-charts.html"><a href="dumbbell-and-lollipop-charts.html"><i class="fa fa-check"></i><b>19</b> Dumbbell and lollipop charts</a><ul>
+<li class="chapter" data-level="19.1" data-path="dumbbell-and-lollipop-charts.html"><a href="dumbbell-and-lollipop-charts.html#dumbbell-plots"><i class="fa fa-check"></i><b>19.1</b> Dumbbell plots</a></li>
+<li class="chapter" data-level="19.2" data-path="dumbbell-and-lollipop-charts.html"><a href="dumbbell-and-lollipop-charts.html#lollipop-charts"><i class="fa fa-check"></i><b>19.2</b> Lollipop charts</a></li>
+</ul></li>
 <li class="chapter" data-level="20" data-path="scatterplots.html"><a href="scatterplots.html"><i class="fa fa-check"></i><b>20</b> Scatterplots</a></li>
 <li class="chapter" data-level="21" data-path="facet-wraps.html"><a href="facet-wraps.html"><i class="fa fa-check"></i><b>21</b> Facet wraps</a><ul>
 <li class="chapter" data-level="21.1" data-path="facet-wraps.html"><a href="facet-wraps.html#facet-grid-vs-facet-wraps"><i class="fa fa-check"></i><b>21.1</b> Facet grid vs facet wraps</a></li>
@@ -318,11 +321,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>You can keep doing that for as many libraries as you need. I’ve seen notebooks with 10 or more library imports.</p>
 <p>But the tidyverse has a neat little trick. We can load most of the libraries we’ll need for the whole semester with one line:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="aggregates.html#cb14-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
-<pre><code>## ── Attaching packages ───── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ── Attaching packages ──────── tidyverse 1.3.0 ──</code></pre>
 <pre><code>## ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
 ## ✓ tibble  3.0.3     ✓ stringr 1.4.0
 ## ✓ tidyr   1.1.1     ✓ forcats 0.5.0</code></pre>
-<pre><code>## ── Conflicts ──────── tidyverse_conflicts() ──
+<pre><code>## ── Conflicts ─────────── tidyverse_conflicts() ──
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <p><strong>From now on, if that’s not the first line of your notebook, you’re probably doing it wrong.</strong></p>
