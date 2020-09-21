@@ -1,106 +1,137 @@
-# Lollipop charts
+# Dumbbell and lollipop charts
 
-Second to my love of waffle charts because I'm always hungry, lollipop charts are an excellently named way of showing the difference between two things on a number line -- a start and a finish, for instance. Or the difference between two related things. Say, turnovers and assists. They aren't a geom, specifically, but you can assemble them out of points and segments, which are geoms. 
+Second to my love of waffle charts because I'm always hungry, dumbbell charts are an excellently named way of **showing the difference between two things on a number line** -- a start and a finish, for instance. Or the difference between two related things. Say, turnovers and assists. 
+
+Lollipop charts -- another excellent name -- are a variation on bar charts. They do a good job of showing magnitude and difference between things. 
+
+To use both of them, you need to add a new library: 
+
+`install.packages("ggalt")`
+
+Let's give it a whirl.
 
 ```{r}
 library(tidyverse)
+library(ggalt)
 ```
 
+## Dumbbell plots
+
+For this, let's use [last season's college football data](https://unl.box.com/s/2prgq48ctoxlukn6kmfjw0u1opda5s0m).
+
 ```{r}
-logs <- read_csv("data/logs19.csv")
+logs <- read_csv("data/footballlogs19.csv")
 ```
 
-For the first example, let's look at the difference between a team's shooting performance and the conference's shooting performance as a whole. To get this, we're going to add up all the shots made by the conference, all the attempts taken by the conference, and then mutate a percentage based on that. 
+For the first example, let's look at the difference between a team's giveaways -- turnovers lost -- versus takeaways, turnovers gained. To get this, we're going to add up all offensive turnovers and defensive turnovers for a team in a season and take a look at where they come out. To make this readable, I'm going to focus on the Big Ten.
 
 ```{r}
-conferenceshooting <- logs %>%
-  group_by(Conference) %>% 
-  summarise(totalshots = sum(TeamFG), totalattempts = sum(TeamFGA)) %>%
-  mutate(conferenceshootingpct = totalshots/totalattempts)
-```
-
-Now I'm going to do the same with teams. 
-
-```{r}
-teamshooting <- logs %>%
+turnovers <- logs %>%
   group_by(Team, Conference) %>% 
-  summarise(totalshots = sum(TeamFG), totalattempts = sum(TeamFGA)) %>%
-  mutate(teamshootingpct = totalshots/totalattempts)
+  summarise(
+    Giveaways = sum(TotalTurnovers), 
+    Takeaways = sum(DefTotalTurnovers)) %>%
+  filter(Conference == "Big Ten Conference")
 ```
 
-The last thing I need to do is join them together. So each team will have the conference shooting percentage as well as their own. 
+Now, the way that the `geom_dumbbell` works is pretty simple when viewed through what we've done before. There's just some tweaks. 
+
+First: We start with the y axis. The reason is we want our dumbbells going left and right, so the label is going to be on the y axis. 
+
+Second: Our x is actually two things: x and xend. What you put in there will decide where on the line the dot appears.
 
 ```{r}
-shooting <- teamshooting %>% left_join(conferenceshooting, by="Conference")
-```
-
-I have every team in college basketball, but that's insane. 
-
-```{r}
-big10 <- shooting %>% filter(Conference == "Big Ten")
-```
-
-So this takes a little doing, but the logic is pretty clear in the end. 
-
-A lollipop chart is made up of two things -- a line between two points, and two points. So we need a geom_segment and two geom_points. And because they get layered starting at the bottom, our segment is first. A geom segment is made up of two things -- an x and a y value, and an x and y end. In this case, our x and xend are the same -- the Team -- and our y and yend are our two stats. For our points, both x values are the Team and the y is the different stats. What that does is put each point on the same line. 
-
-```{r}
-ggplot(big10) +
-  geom_segment(aes(x=Team, xend=Team, y=teamshootingpct, yend=conferenceshootingpct), color="grey") + 
-  geom_point(aes(x=Team, y=teamshootingpct), color="red") + 
-  geom_point(aes(x=Team, y=conferenceshootingpct), color="blue") +
-  coord_flip()
-```
-
-We can do better by changing the order of the teams by their shooting performance and giving it some theme love. 
-
-```{r}
-ggplot(big10) +
-  geom_segment(aes(x=reorder(Team, teamshootingpct), xend=Team, y=teamshootingpct, yend=conferenceshootingpct), color="grey") + 
-  geom_point(aes(x=reorder(Team, teamshootingpct), y=teamshootingpct), color="red") + 
-  geom_point(aes(x=reorder(Team, teamshootingpct), y=conferenceshootingpct), color="blue") +
-  coord_flip() +
-   labs(x="", y="Shooting percentage vs league average", title="Except Purdue, shooting predicted Big Ten success", subtitle="The Boilermakers were average shooters, went deep in the NCAA tournament", caption="Source: sports-reference.com | By Matt Waite") +
-  theme_minimal() + 
-  theme(
-    plot.title = element_text(size = 16, face = "bold", hjust = 1),
-    plot.subtitle = element_text(hjust = 1.3),
-    axis.title = element_text(size = 10),
-    axis.title.y = element_blank(),
-    axis.text = element_text(size = 7),
-    axis.ticks = element_blank()
+ggplot() + 
+  geom_dumbbell(
+    data=turnovers, 
+    aes(y=Team, x=Takeaways, xend=Giveaways)
   )
 ```
+Well, that's a chart alright, but what dot is the giveaways and what are the takeaways? To fix this, we'll add colors.
 
-What if we wanted to order them by wins? Our data has a column called W_L that lists if the team won or lost. The problem is it doens't just say W or L. If the game went to overtime, it lists that. That complicates counting wins. Here's a trick to find a string of text and make that. It's called `grepl` and the basic syntax is grepl for this string in this field and then do what I tell you. In this case, we're going to create a new field called winloss look for W or L (and ignore any OT notation) and give wins a 1 and losses a 0.
-
-
-```{r}
-winlosslogs <- logs %>% mutate(winloss = case_when(
-  grepl("W", W_L) ~ 1, 
-  grepl("L", W_L) ~ 0)
-)
-```
-
-So let's look at turnovers and assists. We'll call it give and take. Does the difference between those two things indicate something when we sort them by wins?
+So our choice of colors here is important. We want giveaways to be seen as bad and takeaways to be seen as good. So lets try red for giveaways and green for takeaways. To make this work, we'll need to do three things: first, use the English spelling of color, so `colour`. The, uh, `colour` is the bar between the dots, the `x_colour` is the color of the x value dot and the `xend_colour` is the color of the xend dot. So in our setup, takeaways are x, they're good, so they're green. 
 
 ```{r}
-giveandtake <- winlosslogs %>% group_by(Conference, Team) %>% summarise(turnovers = sum(TeamTurnovers), assists = sum(TeamAssists), wins=sum(winloss)) 
+ggplot() + 
+  geom_dumbbell(
+    data=turnovers, 
+    aes(y=Team, x=Takeaways, xend=Giveaways),
+    colour = "grey",
+    colour_x = "green",
+    colour_xend = "red")
+```
+Better. Let's make two more tweaks. First, let's make the whole thing bigger with a `size` element. And let's add `theme_minimal` to clean out some cruft. 
+
+```{r}
+ggplot() + 
+  geom_dumbbell(
+    data=turnovers, 
+    aes(y=Team, x=Takeaways, xend=Giveaways),
+    size = 1,
+    color = "grey",
+    colour_x = "green",
+    colour_xend = "red") + 
+  theme_minimal()
+```
+And now we have a chart that tells a story -- got green on the right? That's good. A long distance between green and red? Better. But what if we sort it by good turnovers? 
+
+```{r}
+ggplot() + 
+  geom_dumbbell(
+    data=turnovers, 
+    aes(y=reorder(Team, Takeaways), x=Takeaways, xend=Giveaways),
+    size = 1,
+    color = "grey",
+    colour_x = "green",
+    colour_xend = "red") + 
+  theme_minimal()
+```
+Believe it or not, Illinois had the most takeaways in the Big Ten last season. Don't sleep on the Fighting Lovie Smiths.
+
+## Lollipop charts
+
+Sticking with takeaways, lollipops are similar to bar charts in that they show magnitude. And like dumbbells, they are similar in that we start with a y -- the traditional lollipop chart is on its side -- and we only need one x. The only additional thing we need to add is that we need to tell it that it is a horizontal chart.
+
+```{r}
+ggplot() + 
+  geom_lollipop(
+    data=turnovers, 
+    aes(y=Team, x=Takeaways), 
+    horizontal = TRUE
+    )
+```
+We can do better than this with a simple theme_minimal and some better labels. 
+
+```{r}
+ggplot() + 
+  geom_lollipop(
+    data=turnovers, 
+    aes(y=reorder(Team, Takeaways), x=Takeaways), 
+    horizontal = TRUE
+    ) + theme_minimal() + 
+  labs(title = "Nebraska's defense wasn't as bad as you think", y="Team")
+```
+How about some layering? 
+
+```{r}
+nu <- turnovers %>% filter(Team == "Nebraska")
 ```
 
 ```{r}
-big10gt <- giveandtake %>% filter(Conference == "Big Ten")
+ggplot() + 
+  geom_lollipop(
+    data=turnovers, 
+    aes(y=reorder(Team, Takeaways), x=Takeaways), 
+    horizontal = TRUE
+    ) + 
+  geom_lollipop(
+    data=nu,
+    aes(y=Team, x=Takeaways),
+    horizontal = TRUE,
+    color = "red"
+  ) + 
+  theme_minimal() + 
+  labs(title = "Nebraska's defense wasn't as bad as you think", y="Team")
 ```
 
-```{r}
-ggplot(big10gt) +
-  geom_segment(aes(x=reorder(Team, wins), xend=Team, y=turnovers, yend=assists), color="grey") + 
-  geom_point(aes(x=reorder(Team, wins), y=turnovers), color="red") + 
-  geom_point(aes(x=reorder(Team, wins), y=assists), color="blue") +
-  coord_flip()
-```
-
-Short answer: Not really. Something you need to get used to in data visualization -- not everything works. Sometimes you find things, sometimes you don't. Don't publish a graphic that doesn't find anything. Let it stay in your notebook as an idea that didn't pan out.
-
-
-
+The headline says it all. Nebraska's defense was middle of the league in takeaways. 
