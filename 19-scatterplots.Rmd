@@ -1,80 +1,99 @@
 # Scatterplots
 
-In several chapters of this book, we've been fixated on the Nebraska basketball team's shooting percentage, which took a nose dive during the season and ultimately doomed Tim Miles job. The question is ... does it matter?
+On the Monday, Sept. 21, 2020 edition of the Pick Six Podcast, Omaha World Herald reporter Sam McKewon talked a little about the Nebraska mens basketball team. Specifically the conversation was about a new roster release, and how the second year of Fred Hoiberg ball was going to look very different, starting with the heights of the players. After a near complete roster turnover, the players on the team now were nearly all taller than 6'4", and one of the shorter ones is penciled in as the starting point guard.
 
-This is what we're going to start to answer today. And we'll do it with scatterplots and correlations.
+Why is that important? One reason, McKewon posited, is that teams made a lot of three point shots on Nebraska. In fact, Nebraska finished dead last in the conference in three points shots made against them. McKewon chalked this up to bad perimeter defense, and that Nebraska needed to improve it. Being taller -- or more specifically having the longer arms that go with being taller -- will help with that, McKewon said. 
 
-First, we need libraries and [data](https://unl.box.com/s/a8m91bro10t89watsyo13yjegb1fy009).
+Better perimeter defense, better team.
+
+The question before you is this: is that true? Does keeping a lid on your opponent's ability to score three pointers mean more wins?
+
+This is what we're going to start to answer today. And we'll do it with scatterplots and regressions. Scatterplots are very good at showing **relationships between two numbers**. 
+
+First, we need libraries and [data](https://unl.box.com/s/yc01x7ae7r2jtuixo4j3s3s0ed7o5f8g).
 
 ```{r}
 library(tidyverse)
 ```
 
 ```{r}
-logs <- read_csv("data/logs19.csv")
+logs <- read_csv("data/logs20.csv")
 ```
 
-To do this, we need all teams and their season stats. How much, over the course of a season, does a thing matter? That's the question you're going to answer. 
+To do this, we need all teams and their season stats. How much, team to team, does a thing matter? That's the question you're going to answer. 
 
-In our case, we want to know how much does shooting percentage influence wins? How much difference can we explain in wins with shooting percentage? We're going to total up the number of wins each team has and their season shooting percentage in one swoop.
+In our case, we want to know how much do three point shots made influence wins? How much difference can we explain in wins by knowing how many threes the other team made against you? We're going to total up the number of threes each team allowed and their season wins in one swoop.
 
-Let's borrow from our ridgecharts work to get the correct wins and losses totals for each team. 
+To do this, we need to use conditional logic -- `case_when` in this case -- to determine if the team won or lost the game. In this case, we'll create a new column called `winloss`. Case when statements can be read like this: When This is True, Do This. This bit of code -- which you can use in a lot of contexts in this class -- uses the `grepl` function to look for the letter W in the W_L column and, if it finds it, makes winloss 1. If it finds an L, it makes it 0. Sum your winloss column and you have your season win total. The reason we have to use `grepl` to find W or L is because Sports Reference will record overtime wins differently than regular wins. Same with losses. 
 
 ```{r}
-winlosslogs <- logs %>% mutate(winloss = case_when(
-  grepl("W", W_L) ~ 1, 
-  grepl("L", W_L) ~ 0)
+winlosslogs <- logs %>% 
+  mutate(
+    winloss = case_when(
+      grepl("W", W_L) ~ 1, 
+      grepl("L", W_L) ~ 0)
 )
 ```
 
-Now we can get a dataframe together that gives us the total wins for each team, and the total shots taken and made, which let's us calculate a season shooting percentage. 
+Now we can get a dataframe together that gives us the total wins for each team, and the total three point shots made. We'll call that new dataframe `threedef`.
 
 ```{r}
-winlosslogs %>% 
-  group_by(Team) %>%
-  summarise(
-    wins = sum(winloss),
-    totalFGAttempts = sum(TeamFGA),
-    totalFG = sum(TeamFG)
-  ) %>%
-  mutate(fgpct = totalFG/totalFGAttempts) -> fgmodel
+threedef <- winlosslogs %>% 
+  group_by(Team) %>% 
+  summarize(
+    Wins = sum(winloss), 
+    TotalOpp3P = sum(Opponent3P)
+    )
 ```
 
-Now let's look at the scatterplot. With a scatterplot, we put what predicts the thing on the X axis, and the thing being predicted on the Y axis. In this case, X is our shooting percentage, y is our wins.
+Now let's look at the scatterplot. With a scatterplot, we put what predicts the thing on the X axis, and the thing being predicted on the Y axis. In this case, X is our three pointers given up, y is our wins.
 
 ```{r}
-ggplot(fgmodel, aes(x=fgpct, y=wins)) + geom_point()
+ggplot() + geom_point(data=threedef, aes(x=TotalOpp3P, y=Wins))
 ```
 
-Let's talk about this. It seems that the data slopes up to the right. That would indicate a positive correlation between shooting percentage and wins. And that makes sense, no? You'd expect teams that shoot the ball well to win. But can we get a better sense of this? Yes, by adding another geom -- `geom_smooth`.
+Let's talk about this. This seems kind of random, but clustered around the middle and maybe sloping down to the right. That would mean the more threes you give up, the less you win. And that makes intuitive sense. But can we get a better sense of this? Yes, by adding another geom -- `geom_smooth`. It's identical to our `geom_point`, but we add a method to the end, which in this case we're using the linear method or `lm`.
 
 ```{r}
-ggplot(fgmodel, aes(x=fgpct, y=wins)) + geom_point() + geom_smooth(method=lm, se=TRUE)
+ggplot() + 
+  geom_point(data=threedef, aes(x=TotalOpp3P, y=Wins)) +
+  geom_smooth(data=threedef, aes(x=TotalOpp3P, y=Wins), method="lm")
 ```
 
-But ... how strong a relationship is this? How much can shooting percentage explain wins? Can we put some numbers to this?
+So it does slope down to the right like we expect, but this still doesn't look good to me. It's very spread out. Which is a clue that you should be asking a question here: how strong of a relationship is this? How much can threes given up explain wins? Can we put some numbers to this?
 
-Of course we can. We can apply a linear model to this -- remember Chapter 9? We're going to create an object called fit, and then we're going to put into that object a linear model -- `lm` -- and the way to read this is "wins are predicted by field goal percentage". Then we just want the summary of that model.
+Of course we can. We can apply a linear model to this -- remember Chapter 9? We're going to create an object called fit, and then we're going to put into that object a linear model -- `lm` -- and the way to read this is "wins are predicted by opponent threes". Then we just want the summary of that model.
 
 ```{r}
-fit <- lm(wins ~ fgpct, data = fgmodel)
+fit <- lm(Wins ~ TotalOpp3P, data = threedef)
 summary(fit)
 ```
 
 Remember from Chapter 9: There's just a few things you really need.
 
-The first thing: R-squared. In this case, the Adjusted R-squared value is .3462, which we can interpret as shooting percentage predicts about 35 percent of the variance in wins. Which sounds not great, but in social science, that's huge. That's great. A psychology major would murder for that R-squared.
+The first thing: R-squared. In this case, the Adjusted R-squared value is 0.06526, which we can interpret as shooting percentage predicts about 6.5 percent of the variance in wins. Which sounds not great.
 
-Second: The P-value. We want anything less than .05. If it's above .05, the change between them is not statistically significant -- it's probably explained by random chance. In our case, we have 2.2e-16, which is to say 2.2 with 16 zeros in front of it, or .000000000000000022. Is that less than .05? Yes. Yes it is. So this is not random. Again, we would expect this, so it's a good logic test.
+Second: The P-value. We want anything less than .05. If it's above .05, the change between them is not statistically significant -- it's probably explained by random chance. In our case, we have 6.869e-07, which is to say 6.869 with 7 zeros in front of it, or .00000006869. Is that less than .05? Yes. Yes it is. So this is not random. Again, we would expect this, so it's a good logic test.
 
-Third: The coefficient. In this case, the coefficient for fgpct is 149.416. Since I didn't convert percentages to decimals, what this says is that for every percentage point improvement in shooting percentage, we can expect the team to win 1.49 more games plus or minus some error. 
+Third: The coefficient. In this case, the coefficient for TeamOpp3P is -0.041390. What this model predicts, given that and the intercept of 25.619712, is this: Every team starts with about 26 wins. For every 100 three pointers the other team makes, you lose 4.139 games off that total. So if you give up 100 threes in a season, you'll be a 20 win team. Give up 200, you're a 17 win team, and so on. How am I doing that? Remember your algebra and y = mx + b. In this case, y is the wins, m is the coefficient, x is the number of threes given up and b is the intercept. 
 
-And we can use this to predict a team's wins: remember your algebra and y = mx + b. In this case, y is the wins, m is the coefficient, x is the shooting percentage and b is the intercept. 
+Let's use Nebraska as an example. They had 276 threes scored on them in the last season. 
 
-So can plug these together: Expected wins = 149.416 * shooting percentage - 49.217
+y = -0.041390 * 276 + 25.619712 or 14.19 wins. 
 
-Let's use Nebraska as an example. They shot about .43 on the season (.4294421 to be exact). 
+How many wins did Nebraska have? 7. 
 
-y = 149.416 * .4294421 - 49.217 or 14.95 wins. How many wins did Nebraska have? 19. 
+What does that mean? It means that as disappointing a season as it was, Nebraska UNDERPERFORMED according to this model. But our R-squared is only 6.5 percent. Put another way: 93.5 percent of the difference in wins between teams is predicted by something else.
 
-What does that mean? It means that as disappointing a season as it was, Nebraska actually OVERPERFORMED it's season shooting percentage. They shouldn't have won as many games as they did, according to our model. 
+Where is Nebraska on the plot? We know we can use layering for that. 
+
+```{r}
+nu <- threedef %>% filter(Team == "Nebraska Cornhuskers")
+```
+
+```{r}
+ggplot() + 
+  geom_point(data=threedef, aes(x=TotalOpp3P, y=Wins)) +
+  geom_smooth(data=threedef, aes(x=TotalOpp3P, y=Wins), method="lm") +
+  geom_point(data=nu, aes(x=TotalOpp3P, y=Wins), color="red")
+```
