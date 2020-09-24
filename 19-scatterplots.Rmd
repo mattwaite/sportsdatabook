@@ -40,7 +40,7 @@ Now we can get a dataframe together that gives us the total wins for each team, 
 ```{r}
 threedef <- winlosslogs %>% 
   group_by(Team) %>% 
-  summarize(
+  summarise(
     Wins = sum(winloss), 
     TotalOpp3P = sum(Opponent3P)
     )
