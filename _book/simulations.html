@@ -305,11 +305,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="images/simulations2.png" width="635" /></p>
 <p>Let’s simulate 39 three point attempts 1000 times with his season long shooting percentage and see if this could just be random chance or something else.</p>
 <p>We do this using a base R function called <code>rbinom</code> or binomial distribution. So what that means is there’s a normally distrubuted chance that James Palmer Jr. is going to shoot above and below his career three point shooting percentage. If we randomly assign values in that distribution 1000 times, how many times will it come up 7, like this example?</p>
-<div class="sourceCode" id="cb638"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb638-1"><a href="simulations.html#cb638-1"></a><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb638-2"><a href="simulations.html#cb638-2"></a></span>
-<span id="cb638-3"><a href="simulations.html#cb638-3"></a>simulations &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">1000</span>, <span class="dt">size =</span> <span class="dv">39</span>, <span class="dt">prob =</span> <span class="fl">.309</span>)</span>
-<span id="cb638-4"><a href="simulations.html#cb638-4"></a></span>
-<span id="cb638-5"><a href="simulations.html#cb638-5"></a><span class="kw">table</span>(simulations)</span></code></pre></div>
+<div class="sourceCode" id="cb637"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb637-1"><a href="simulations.html#cb637-1"></a><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb637-2"><a href="simulations.html#cb637-2"></a></span>
+<span id="cb637-3"><a href="simulations.html#cb637-3"></a>simulations &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">1000</span>, <span class="dt">size =</span> <span class="dv">39</span>, <span class="dt">prob =</span> <span class="fl">.309</span>)</span>
+<span id="cb637-4"><a href="simulations.html#cb637-4"></a></span>
+<span id="cb637-5"><a href="simulations.html#cb637-5"></a><span class="kw">table</span>(simulations)</span></code></pre></div>
 <pre><code>## simulations
 ##   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22 
 ##   1   4   5  12  35  44  76 117 134 135 135  99  71  53  37  21  15   2   3   1</code></pre>
@@ -319,13 +319,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="cold-streaks" class="section level2">
 <h2><span class="header-section-number">39.1</span> Cold streaks</h2>
 <p>During the Western Illinois game, the team, shooting .329 on the season from behind the arc, went 0-15 in the second half. How strange is that?</p>
-<div class="sourceCode" id="cb640"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb640-1"><a href="simulations.html#cb640-1"></a><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb640-2"><a href="simulations.html#cb640-2"></a></span>
-<span id="cb640-3"><a href="simulations.html#cb640-3"></a>simulations &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">1000</span>, <span class="dt">size =</span> <span class="dv">15</span>, <span class="dt">prob =</span> <span class="fl">.329</span>)</span>
-<span id="cb640-4"><a href="simulations.html#cb640-4"></a></span>
-<span id="cb640-5"><a href="simulations.html#cb640-5"></a><span class="kw">hist</span>(simulations)</span></code></pre></div>
+<div class="sourceCode" id="cb639"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb639-1"><a href="simulations.html#cb639-1"></a><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb639-2"><a href="simulations.html#cb639-2"></a></span>
+<span id="cb639-3"><a href="simulations.html#cb639-3"></a>simulations &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">1000</span>, <span class="dt">size =</span> <span class="dv">15</span>, <span class="dt">prob =</span> <span class="fl">.329</span>)</span>
+<span id="cb639-4"><a href="simulations.html#cb639-4"></a></span>
+<span id="cb639-5"><a href="simulations.html#cb639-5"></a><span class="kw">hist</span>(simulations)</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-386-1.png" width="672" /></p>
-<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb641-1"><a href="simulations.html#cb641-1"></a><span class="kw">table</span>(simulations)</span></code></pre></div>
+<div class="sourceCode" id="cb640"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb640-1"><a href="simulations.html#cb640-1"></a><span class="kw">table</span>(simulations)</span></code></pre></div>
 <pre><code>## simulations
 ##   0   1   2   3   4   5   6   7   8   9  10  11 
 ##   5  16  59 132 200 218 172  92  65  34   4   3</code></pre>
