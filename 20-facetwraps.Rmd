@@ -10,10 +10,10 @@ As always, we start with libraries.
 library(tidyverse)
 ```
 
-Now data.
+[Now data](https://unl.box.com/s/yc01x7ae7r2jtuixo4j3s3s0ed7o5f8g).
 
 ```{r}
-logs <- read_csv("data/logs19.csv")
+logs <- read_csv("data/logs20.csv")
 ```
 
 Let's narrow our pile and look just at the Big Ten.
@@ -25,13 +25,18 @@ big10 <- logs %>% filter(Conference == "Big Ten")
 The first thing we can do is look at a line chart, like we have done in previous chapters. 
 
 ```{r}
-ggplot() + geom_line(data=big10, aes(x=Date, y=TeamFGPCT, group=Team)) + scale_y_continuous(limits = c(0, .7))
+ggplot() + 
+  geom_line(data=big10, aes(x=Date, y=TeamFGPCT, group=Team)) + 
+  scale_y_continuous(limits = c(0, .7))
 ```
 
 And, not surprisingly, we get a hairball. We could color certain lines, but that would limit us to focus on one team. What if we did all of them at once? We do that with a `facet_wrap`. The only thing we MUST pass into a `facet_wrap` is what thing we're going to separate them out by. In this case, we precede that field with a tilde, so in our case we want the Team field. It looks like this: 
 
 ```{r}
-ggplot() + geom_line(data=big10, aes(x=Date, y=TeamFGPCT, group=Team)) + scale_y_continuous(limits = c(0, .7)) + facet_wrap(~Team)
+ggplot() + 
+  geom_line(data=big10, aes(x=Date, y=TeamFGPCT, group=Team)) + 
+  scale_y_continuous(limits = c(0, .7)) + 
+  facet_wrap(~Team)
 ```
 
 Answer: Not immediately clear, but we can look at this and analyze it. We could add a piece of annotation to help us out. 
@@ -41,7 +46,11 @@ big10 %>% summarise(mean(TeamFGPCT))
 ```
 
 ```{r}
-ggplot() + geom_hline(yintercept=.4447, color="blue") + geom_line(data=big10, aes(x=Date, y=TeamFGPCT, group=Team)) + scale_y_continuous(limits = c(0, .7)) + facet_wrap(~Team)
+ggplot() + 
+  geom_hline(yintercept=.4361078, color="blue") + 
+  geom_line(data=big10, aes(x=Date, y=TeamFGPCT, group=Team)) + 
+  scale_y_continuous(limits = c(0, .7)) + 
+  facet_wrap(~Team)
 ```
 
 What do you see here? How do teams compare? How do they change over time? I'm not asking you these questions because they're an assignment -- I'm asking because that's exactly what this chart helps answer. Your brain will immediately start making those connections. 
@@ -51,13 +60,21 @@ What do you see here? How do teams compare? How do they change over time? I'm no
 Facet grids allow us to put teams on the same plane, versus just repeating them. And we can specify that plane as vertical or horizontal. For example, here's our chart from above, but using facet_grid to stack them.
 
 ```{r fig.height=20, fig.width=5}
-ggplot() + geom_hline(yintercept=.4447, color="blue") + geom_line(data=big10, aes(x=Date, y=TeamFGPCT, group=Team)) + scale_y_continuous(limits = c(0, .7)) + facet_grid(Team ~ .)
+ggplot() + 
+  geom_hline(yintercept=.4361078, color="blue") + 
+  geom_line(data=big10, aes(x=Date, y=TeamFGPCT, group=Team)) + 
+  scale_y_continuous(limits = c(0, .7)) + 
+  facet_grid(Team ~ .)
 ```
 
 And here they are next to each other:
 
 ```{r}
-ggplot() + geom_hline(yintercept=.4447, color="blue") + geom_line(data=big10, aes(x=Date, y=TeamFGPCT, group=Team)) + scale_y_continuous(limits = c(0, .7)) + facet_grid(. ~ Team)
+ggplot() + 
+  geom_hline(yintercept=.4361078, color="blue") + 
+  geom_line(data=big10, aes(x=Date, y=TeamFGPCT, group=Team)) + 
+  scale_y_continuous(limits = c(0, .7)) + 
+  facet_grid(. ~ Team)
 ```
 
 Note: We'd have some work to do with the labeling on this -- we'll get to that -- but you can see where this is valuable comparing a group of things. One warning: Don't go too crazy with this or it loses it's visual power.
@@ -67,5 +84,9 @@ Note: We'd have some work to do with the labeling on this -- we'll get to that -
 Line charts aren't the only things we can do. We can do any kind of chart in ggplot. Staying with shooting, where are team's winning and losing performances coming from when we talk about team shooting and opponent shooting? 
 
 ```{r}
-ggplot() + geom_point(data=big10, aes(x=TeamFGPCT, y=OpponentFGPCT, color=W_L)) + scale_y_continuous(limits = c(0, .7)) + scale_x_continuous(limits = c(0, .7)) + facet_wrap(~Team)
+ggplot() + 
+  geom_point(data=big10, aes(x=TeamFGPCT, y=OpponentFGPCT, color=W_L)) +
+  scale_y_continuous(limits = c(0, .7)) + 
+  scale_x_continuous(limits = c(0, .7)) + 
+  facet_wrap(~Team)
 ```
