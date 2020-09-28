@@ -5527,219 +5527,245 @@ And since then, people have wanted bubble charts. And we're back to the original
 
 First, I'm going to show you an example of them not working to illustrate the point.
 
-I'm going to load up my libraries: tidyverse per usual, rvest to get some data (we'll discuss rvest in greater detail in an upcoming chapter) and ggrepel because I end up using it every time I do a scatterplot.
+I'm going to load up my libraries.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(tidyverse)}
-\KeywordTok{library}\NormalTok{(rvest)}
-\KeywordTok{library}\NormalTok{(ggrepel)}
 \end{Highlighting}
 \end{Shaded}
 
-So for this example, I want to look at Nebraska's offense in the 2019 season. It \ldots{} hasn't gone well. And typical of Nebraska teams for the last decade, they're turning the ball over a lot. So given the number of turnovers, how does Nebraska compare to other teams in the FBS?
+So for this example, I want to look at where Big Ten teams compare to the rest of college football last season. Is the Big Ten's reputation for tough games and defenses earned? Can we see patterns in good team vs bad teams?
 
-I'm going to create a scatterplot yards per game on the X axis and points per game on the Y. They're pretty highly correlated with each other. And then I'm going to make the dot the size of the turnovers -- the bubble in my bubble charts.
+I'm going to create a scatterplot with offensive yards per play on the X axis and defensive yards per play on the y axis. We can then divide the grid into four quadrants. Teams with high yards per offensive play and low defensive yards per play are teams with good offenses and good defenses. The opposite means bad defense, bad offense. Then, to drive the point home, I'm going to make the dot the size of the total wins on the season -- the bubble in my bubble charts.
 
-Using Rvest, I'm going to grab total offense rankings, scoring offense rankings and turnover rankings and then merge them together with just the fields I need. This will all get explained more thoroughly coming up, but that's what this block of code does. When it's done, I'll have a dataframe called \texttt{offense} which I'll use to build my bubble chart.
+\href{https://unl.box.com/s/2prgq48ctoxlukn6kmfjw0u1opda5s0m}{We'll use last season's college football games}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{yardsurl <-}\StringTok{ "http://cfbstats.com/2019/leader/national/team/offense/split01/category10/sort01.html"}
-
-\NormalTok{yards19 <-}\StringTok{ }\NormalTok{yardsurl }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{read_html}\NormalTok{() }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{html_nodes}\NormalTok{(}\DataTypeTok{xpath =} \StringTok{'//*[@id="content"]/div[2]/table'}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{html_table}\NormalTok{()}
-
-\NormalTok{yards19 <-}\StringTok{ }\NormalTok{yards19[[}\DecValTok{1}\NormalTok{]] }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(Name, }\StringTok{`}\DataTypeTok{Yards/G}\StringTok{`}\NormalTok{)}
-
-\NormalTok{pointsurl <-}\StringTok{ "http://cfbstats.com/2019/leader/national/team/offense/split01/category09/sort01.html"}
-
-\NormalTok{points19 <-}\StringTok{ }\NormalTok{pointsurl }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{read_html}\NormalTok{() }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{html_nodes}\NormalTok{(}\DataTypeTok{xpath =} \StringTok{'//*[@id="content"]/div[2]/table'}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{html_table}\NormalTok{()}
-
-\NormalTok{points19 <-}\StringTok{ }\NormalTok{points19[[}\DecValTok{1}\NormalTok{]] }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(Name, }\StringTok{`}\DataTypeTok{Points/G}\StringTok{`}\NormalTok{)}
-
-\NormalTok{turnoversurl <-}\StringTok{ "http://cfbstats.com/2019/leader/national/team/offense/split01/category12/sort01.html"}
-
-\NormalTok{turnovers19 <-}\StringTok{ }\NormalTok{turnoversurl }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{read_html}\NormalTok{() }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{html_nodes}\NormalTok{(}\DataTypeTok{xpath =} \StringTok{'//*[@id="content"]/div[2]/table'}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{html_table}\NormalTok{()}
-
-\NormalTok{turnovers19 <-}\StringTok{ }\NormalTok{turnovers19[[}\DecValTok{1}\NormalTok{]] }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(Name, }\StringTok{`}\DataTypeTok{Total Lost}\StringTok{`}\NormalTok{)}
-
-
-\NormalTok{offense <-}\StringTok{ }\NormalTok{yards19 }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{left_join}\NormalTok{(points19, }\DataTypeTok{by=}\KeywordTok{c}\NormalTok{(}\StringTok{"Name"}\NormalTok{)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{left_join}\NormalTok{(turnovers19, }\DataTypeTok{by=}\KeywordTok{c}\NormalTok{(}\StringTok{"Name"}\NormalTok{))}
+\NormalTok{logs <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/footballlogs19.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   .default = col_double(),
+##   Date = col_date(format = ""),
+##   HomeAway = col_character(),
+##   Opponent = col_character(),
+##   Result = col_character(),
+##   TeamFull = col_character(),
+##   TeamURL = col_character(),
+##   Outcome = col_character(),
+##   Team = col_character(),
+##   Conference = col_character()
+## )
+\end{verbatim}
+
+\begin{verbatim}
+## See spec(...) for full column specifications.
+\end{verbatim}
+
+To do this, I've got some work to do. First, I need to mutate the outcomes of the games into 1s and 0s so I can add up the wins. We've done this before, so this won't be new to you, just adjusted slightly from basketball data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{winlosslogs <-}\StringTok{ }\NormalTok{logs }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}
+    \DataTypeTok{wins =} \KeywordTok{case_when}\NormalTok{(}
+      \KeywordTok{grepl}\NormalTok{(}\StringTok{"W"}\NormalTok{, Outcome) }\OperatorTok{~}\StringTok{ }\DecValTok{1}\NormalTok{, }
+      \KeywordTok{grepl}\NormalTok{(}\StringTok{"L"}\NormalTok{, Outcome) }\OperatorTok{~}\StringTok{ }\DecValTok{0}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Now I have some more work to do. My football logs data has the yards per play of each game, and I could average those together and get something very close to what I'm going to do, but averaging each games yards per play is not the same thing as calculating it, so we're going to calculate it.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{winlosslogs }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(Team, Conference) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}
+    \DataTypeTok{TotalPlays =} \KeywordTok{sum}\NormalTok{(OffensivePlays), }
+    \DataTypeTok{TotalYards =} \KeywordTok{sum}\NormalTok{(OffensiveYards), }
+    \DataTypeTok{DefensivePlays =} \KeywordTok{sum}\NormalTok{(DefPlays), }
+    \DataTypeTok{DefensiveYards =} \KeywordTok{sum}\NormalTok{(DefYards), }
+    \DataTypeTok{TotalWins =} \KeywordTok{sum}\NormalTok{(wins)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}
+    \DataTypeTok{OffensiveYPP =}\NormalTok{ TotalYards}\OperatorTok{/}\NormalTok{TotalPlays, }
+    \DataTypeTok{DefensiveYPP =}\NormalTok{ DefensiveYards}\OperatorTok{/}\NormalTok{DefensivePlays) ->}\StringTok{ }\NormalTok{ypp}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` regrouping output by 'Team' (override with `.groups` argument)
+\end{verbatim}
 
 A bubble chart is just a scatterplot with one additional element in the aesthetic -- a size. Here's the scatterplot version.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{offense, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\StringTok{`}\DataTypeTok{Yards/G}\StringTok{`}\NormalTok{, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{Points/G}\StringTok{`}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-219-1.pdf}
-
-As expected, yards per game pretty tightly predicts points per game, but you could have guessed that without a chart. So let's add the size element.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{offense, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\StringTok{`}\DataTypeTok{Yards/G}\StringTok{`}\NormalTok{, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{Points/G}\StringTok{`}\NormalTok{, }\DataTypeTok{size=}\StringTok{`}\DataTypeTok{Total Lost}\StringTok{`}\NormalTok{)) }
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-220-1.pdf}
-
-Eh. What does this chart tell you? Trick question, there's not much new here. The dots are too big. Also, we can't see when they overlap. We can fix that by adding an alpha element outside the aesthetic -- alpha in this case is transparency -- and we can manually change the size of the dots by adding \texttt{scale\_size} and a \texttt{range}.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{offense, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\StringTok{`}\DataTypeTok{Yards/G}\StringTok{`}\NormalTok{, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{Points/G}\StringTok{`}\NormalTok{, }\DataTypeTok{size=}\StringTok{`}\DataTypeTok{Total Lost}\StringTok{`}\NormalTok{), }\DataTypeTok{alpha=}\NormalTok{.}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_size}\NormalTok{(}\DataTypeTok{range =} \KeywordTok{c}\NormalTok{(.}\DecValTok{1}\NormalTok{, }\DecValTok{15}\NormalTok{), }\DataTypeTok{name=}\StringTok{"Turnovers"}\NormalTok{)}
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{ypp, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{OffensiveYPP, }\DataTypeTok{y=}\NormalTok{DefensiveYPP))}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{SportsData_files/figure-latex/unnamed-chunk-221-1.pdf}
 
-Before we do any more work, let's return to the earlier question: What story does this tell? Can you discern a story from the bubbles? Are teams with lots of turnovers doing poorly and teams with few turnovers doing well? The problem is, you can't really tell. So this is a dead end for a bubble chart. If you get a big mess, it's a dead giveaway that you probably don't have a bubble chart.
+Looks kind of random, eh? In this case, that's not that bad because we're not claiming a relationship. We're saying the location on the chart has meaning. So, do teams on the bottom right -- good offense, good defense -- win more games?
 
-So let's look at something else. Let's look at something that isn't directly correlated -- we'll look at offensive points per game vs defensive points per game.
-
-I'm going to edit the same rvest code to grab those points per game stats and merge it all together. When it's done, I'll have a dataframe called \texttt{football} and we can look at where good teams fall on the chart with turnover margin as a scaled dot.
+Let's add the size element.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ourl <-}\StringTok{ "http://cfbstats.com/2019/leader/national/team/offense/split01/category09/sort01.html"}
-
-\NormalTok{o19 <-}\StringTok{ }\NormalTok{ourl }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{read_html}\NormalTok{() }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{html_nodes}\NormalTok{(}\DataTypeTok{xpath =} \StringTok{'//*[@id="content"]/div[2]/table'}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{html_table}\NormalTok{()}
-
-\NormalTok{o19 <-}\StringTok{ }\NormalTok{o19[[}\DecValTok{1}\NormalTok{]] }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(Name, }\StringTok{`}\DataTypeTok{Points/G}\StringTok{`}\NormalTok{)}
-
-\NormalTok{durl <-}\StringTok{ "http://cfbstats.com/2019/leader/national/team/defense/split01/category09/sort01.html"}
-
-\NormalTok{d19 <-}\StringTok{ }\NormalTok{durl }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{read_html}\NormalTok{() }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{html_nodes}\NormalTok{(}\DataTypeTok{xpath =} \StringTok{'//*[@id="content"]/div[2]/table'}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{html_table}\NormalTok{()}
-
-\NormalTok{d19 <-}\StringTok{ }\NormalTok{d19[[}\DecValTok{1}\NormalTok{]] }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(Name, }\StringTok{`}\DataTypeTok{Points/G}\StringTok{`}\NormalTok{)}
-
-\NormalTok{turnoversurl <-}\StringTok{ "http://cfbstats.com/2019/leader/national/team/offense/split01/category12/sort01.html"}
-
-\NormalTok{turnovers19 <-}\StringTok{ }\NormalTok{turnoversurl }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{read_html}\NormalTok{() }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{html_nodes}\NormalTok{(}\DataTypeTok{xpath =} \StringTok{'//*[@id="content"]/div[2]/table'}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{html_table}\NormalTok{()}
-
-\NormalTok{turnovers19 <-}\StringTok{ }\NormalTok{turnovers19[[}\DecValTok{1}\NormalTok{]] }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(Name, Margin)}
-
-\NormalTok{football <-}\StringTok{ }\NormalTok{o19 }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{left_join}\NormalTok{(d19, }\DataTypeTok{by=}\KeywordTok{c}\NormalTok{(}\StringTok{"Name"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{left_join}\NormalTok{(turnovers19, }\DataTypeTok{by=}\KeywordTok{c}\NormalTok{(}\StringTok{"Name"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{rename}\NormalTok{(}\StringTok{`}\DataTypeTok{Offensive Points Per Game}\StringTok{`}\NormalTok{ =}\StringTok{ `}\DataTypeTok{Points/G.x}\StringTok{`}\NormalTok{, }\StringTok{`}\DataTypeTok{Defensive Points Per Game}\StringTok{`}\NormalTok{=}\StringTok{`}\DataTypeTok{Points/G.y}\StringTok{`}\NormalTok{)}
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}
+    \DataTypeTok{data=}\NormalTok{ypp, }
+    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{OffensiveYPP, }\DataTypeTok{y=}\NormalTok{DefensiveYPP, }\DataTypeTok{size=}\NormalTok{TotalWins)}
+\NormalTok{    )}
 \end{Highlighting}
 \end{Shaded}
 
-Now we can do the bubble chart.
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-222-1.pdf}
+
+What does this chart tell you? We can see a general pattern that there are more big dots on the bottom right than the upper left. But we can make this more readable by adding an alpha element outside the aesthetic -- alpha in this case is transparency -- and we can manually change the size of the dots by adding \texttt{scale\_size} and a \texttt{range}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{football, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\StringTok{`}\DataTypeTok{Offensive Points Per Game}\StringTok{`}\NormalTok{, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{Defensive Points Per Game}\StringTok{`}\NormalTok{, }\DataTypeTok{size=}\NormalTok{Margin), }\DataTypeTok{alpha=}\NormalTok{.}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_size}\NormalTok{(}\DataTypeTok{range =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{6}\NormalTok{), }\DataTypeTok{name=}\StringTok{"Turnovers"}\NormalTok{)}
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}
+    \DataTypeTok{data=}\NormalTok{ypp, }
+    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{OffensiveYPP, }\DataTypeTok{y=}\NormalTok{DefensiveYPP, }\DataTypeTok{size=}\NormalTok{TotalWins),}
+    \DataTypeTok{alpha =} \FloatTok{.3}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{scale_size}\NormalTok{(}\DataTypeTok{range =} \KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{8}\NormalTok{), }\DataTypeTok{name=}\StringTok{"Wins"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{SportsData_files/figure-latex/unnamed-chunk-223-1.pdf}
 
-Better! Teams are spread out a little more. Bottom right quadrant -- the good defense, good offense quadrant -- have some large dots. The upper left quadrant -- bad defense, bad offense -- have some very small dots, meaning they have a really terrible turnover margin.
-
-But what would make this chart better -- and what you saw in the Rosling video -- is color. What if we colored the dots by if they were above or below zero? Meaning, do they have a positive or negative turnover margin? We can do that with a quick mutate and a case\_when statement.
+And by now, you now know to add in the Big Ten as a layer, I would hope.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{football <-}\StringTok{ }\NormalTok{football }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{PositiveNegative =} \KeywordTok{case_when}\NormalTok{(}
-\NormalTok{  Margin }\OperatorTok{>}\StringTok{ }\DecValTok{0} \OperatorTok{~}\StringTok{ "Positive"}\NormalTok{,}
-\NormalTok{  Margin }\OperatorTok{<}\StringTok{ }\DecValTok{0} \OperatorTok{~}\StringTok{ "Negative"}\NormalTok{,}
-\NormalTok{  Margin }\OperatorTok{==}\StringTok{ }\DecValTok{0} \OperatorTok{~}\StringTok{ "Even"}
-\NormalTok{))}
+\NormalTok{bigten <-}\StringTok{ }\NormalTok{ypp }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Conference }\OperatorTok{==}\StringTok{ "Big Ten Conference"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-Now we can add \texttt{color=PositiveNegative} to the aesthetic and our dots will be colored by if they are positive, negative or zero.
-
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{football, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\StringTok{`}\DataTypeTok{Offensive Points Per Game}\StringTok{`}\NormalTok{, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{Defensive Points Per Game}\StringTok{`}\NormalTok{, }\DataTypeTok{size=}\NormalTok{Margin, }\DataTypeTok{color=}\NormalTok{PositiveNegative), }\DataTypeTok{alpha=}\NormalTok{.}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_size}\NormalTok{(}\DataTypeTok{range =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{6}\NormalTok{), }\DataTypeTok{name=}\StringTok{"Turnovers"}\NormalTok{)}
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}
+    \DataTypeTok{data=}\NormalTok{ypp, }
+    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{OffensiveYPP, }\DataTypeTok{y=}\NormalTok{DefensiveYPP, }\DataTypeTok{size=}\NormalTok{TotalWins), }
+    \DataTypeTok{color=}\StringTok{"grey"}\NormalTok{, }
+    \DataTypeTok{alpha=}\NormalTok{.}\DecValTok{5}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}
+    \DataTypeTok{data=}\NormalTok{bigten, }
+    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{OffensiveYPP, }\DataTypeTok{y=}\NormalTok{DefensiveYPP, }\DataTypeTok{size=}\NormalTok{TotalWins), }
+    \DataTypeTok{color=}\StringTok{"red"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{SportsData_files/figure-latex/unnamed-chunk-225-1.pdf}
 
-Now we're getting somewhere. What's the story that this chart tells? Blue dots -- positive turnover margins -- are all drifting toward that good offense, good defense quadrant. Green dots -- negative turnover margins -- are drifting toward that bad defense, bad offense quadrant.
-
-Let's add some annotations. Let's look at the top two turnover margin teams and where they come out.
+Let's add some things to this chart to help us out. First, let's add lines that show us the average of all teams for those two metrics. So first, we need to calculate those. Because I have grouped data, it's going to require me to ungroup it so I can get just the total average of those two numbers.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{topteams <-}\StringTok{ }\NormalTok{football }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Name }\OperatorTok{==}\StringTok{ "LSU"} \OperatorTok{|}\StringTok{ }\NormalTok{Name }\OperatorTok{==}\StringTok{ "Alabama"}\NormalTok{)}
+\NormalTok{ypp }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}
+    \DataTypeTok{offense =} \KeywordTok{mean}\NormalTok{(OffensiveYPP), }
+    \DataTypeTok{defense =} \KeywordTok{mean}\NormalTok{(DefensiveYPP)}
+\NormalTok{    )}
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+## # A tibble: 1 x 2
+##   offense defense
+##     <dbl>   <dbl>
+## 1    5.82    5.67
+\end{verbatim}
+
+Now we can use those averages to add two more geoms -- geom\_vline and geom\_hline, for vertical lines and horizontal lines.
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{football, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\StringTok{`}\DataTypeTok{Offensive Points Per Game}\StringTok{`}\NormalTok{, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{Defensive Points Per Game}\StringTok{`}\NormalTok{, }\DataTypeTok{size=}\NormalTok{Margin, }\DataTypeTok{color=}\NormalTok{PositiveNegative), }\DataTypeTok{alpha=}\NormalTok{.}\DecValTok{2}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_text_repel}\NormalTok{(}\DataTypeTok{data=}\NormalTok{topteams, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\StringTok{`}\DataTypeTok{Offensive Points Per Game}\StringTok{`}\NormalTok{, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{Defensive Points Per Game}\StringTok{`}\NormalTok{, }\DataTypeTok{label=}\NormalTok{Name)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{scale_size}\NormalTok{(}\DataTypeTok{range =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{6}\NormalTok{), }\DataTypeTok{name=}\StringTok{"Turnovers"}\NormalTok{)}
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}
+    \DataTypeTok{data=}\NormalTok{ypp, }
+    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{OffensiveYPP, }\DataTypeTok{y=}\NormalTok{DefensiveYPP, }\DataTypeTok{size=}\NormalTok{TotalWins), }
+    \DataTypeTok{color=}\StringTok{"grey"}\NormalTok{, }
+    \DataTypeTok{alpha=}\NormalTok{.}\DecValTok{5}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}
+    \DataTypeTok{data=}\NormalTok{bigten, }
+    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{OffensiveYPP, }\DataTypeTok{y=}\NormalTok{DefensiveYPP, }\DataTypeTok{size=}\NormalTok{TotalWins), }
+    \DataTypeTok{color=}\StringTok{"red"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_vline}\NormalTok{(}\DataTypeTok{xintercept =} \FloatTok{5.820543}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_hline}\NormalTok{(}\DataTypeTok{yintercept =} \FloatTok{5.673263}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{SportsData_files/figure-latex/unnamed-chunk-227-1.pdf}
 
-No surprise there. What about Nebraska?
+Now, let's add another new geom for us, using a new library called \texttt{ggrepel}, which will help us label the dots without overwriting other labels. So we'll have to install that in the console:
+
+`install.packages(``ggrepel'')
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{nu <-}\StringTok{ }\NormalTok{football }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Name}\OperatorTok{==}\StringTok{"Nebraska"}\NormalTok{)}
+\KeywordTok{library}\NormalTok{(ggrepel)}
 \end{Highlighting}
 \end{Shaded}
 
+And with that, we can add labels to the dots. The \texttt{geom\_text\_repel} is pretty much the exact same thing as your Big Ten geom point, but instead of a size, you include a label.
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{football, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\StringTok{`}\DataTypeTok{Offensive Points Per Game}\StringTok{`}\NormalTok{, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{Defensive Points Per Game}\StringTok{`}\NormalTok{, }\DataTypeTok{size=}\NormalTok{Margin, }\DataTypeTok{color=}\NormalTok{PositiveNegative), }\DataTypeTok{alpha=}\NormalTok{.}\DecValTok{2}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_text_repel}\NormalTok{(}\DataTypeTok{data=}\NormalTok{topteams, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\StringTok{`}\DataTypeTok{Offensive Points Per Game}\StringTok{`}\NormalTok{, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{Defensive Points Per Game}\StringTok{`}\NormalTok{, }\DataTypeTok{label=}\NormalTok{Name)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{nu, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\StringTok{`}\DataTypeTok{Offensive Points Per Game}\StringTok{`}\NormalTok{, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{Defensive Points Per Game}\StringTok{`}\NormalTok{, }\DataTypeTok{size=}\NormalTok{Margin), }\DataTypeTok{alpha=}\NormalTok{.}\DecValTok{2}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_text_repel}\NormalTok{(}\DataTypeTok{data=}\NormalTok{nu, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\StringTok{`}\DataTypeTok{Offensive Points Per Game}\StringTok{`}\NormalTok{, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{Defensive Points Per Game}\StringTok{`}\NormalTok{, }\DataTypeTok{label=}\NormalTok{Name)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{scale_size}\NormalTok{(}\DataTypeTok{range =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{6}\NormalTok{), }\DataTypeTok{name=}\StringTok{"Turnovers"}\NormalTok{)}
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}
+    \DataTypeTok{data=}\NormalTok{ypp, }
+    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{OffensiveYPP, }\DataTypeTok{y=}\NormalTok{DefensiveYPP, }\DataTypeTok{size=}\NormalTok{TotalWins), }
+    \DataTypeTok{color=}\StringTok{"grey"}\NormalTok{, }
+    \DataTypeTok{alpha=}\NormalTok{.}\DecValTok{5}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}
+    \DataTypeTok{data=}\NormalTok{bigten, }
+    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{OffensiveYPP, }\DataTypeTok{y=}\NormalTok{DefensiveYPP, }\DataTypeTok{size=}\NormalTok{TotalWins), }
+    \DataTypeTok{color=}\StringTok{"red"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_vline}\NormalTok{(}\DataTypeTok{xintercept =} \FloatTok{5.820543}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_hline}\NormalTok{(}\DataTypeTok{yintercept =} \FloatTok{5.673263}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_text_repel}\NormalTok{(}
+    \DataTypeTok{data=}\NormalTok{bigten, }
+    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{OffensiveYPP, }\DataTypeTok{y=}\NormalTok{DefensiveYPP, }\DataTypeTok{label=}\NormalTok{Team)}
+\NormalTok{  )}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{SportsData_files/figure-latex/unnamed-chunk-229-1.pdf}
+Well, what do you know about that? Nebraska was \ldots{} really average last season.
 
-Sadly, no surprise there either.
-
-The last things we need to do? Add some labels, apply our finishing touches.
+All that's left is some labels and some finishing touches.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{football, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\StringTok{`}\DataTypeTok{Offensive Points Per Game}\StringTok{`}\NormalTok{, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{Defensive Points Per Game}\StringTok{`}\NormalTok{, }\DataTypeTok{size=}\NormalTok{Margin, }\DataTypeTok{color=}\NormalTok{PositiveNegative), }\DataTypeTok{alpha=}\NormalTok{.}\DecValTok{2}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_text_repel}\NormalTok{(}\DataTypeTok{data=}\NormalTok{topteams, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\StringTok{`}\DataTypeTok{Offensive Points Per Game}\StringTok{`}\NormalTok{, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{Defensive Points Per Game}\StringTok{`}\NormalTok{, }\DataTypeTok{label=}\NormalTok{Name)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data=}\NormalTok{nu, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\StringTok{`}\DataTypeTok{Offensive Points Per Game}\StringTok{`}\NormalTok{, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{Defensive Points Per Game}\StringTok{`}\NormalTok{, }\DataTypeTok{size=}\NormalTok{Margin), }\DataTypeTok{alpha=}\NormalTok{.}\DecValTok{2}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_text_repel}\NormalTok{(}\DataTypeTok{data=}\NormalTok{nu, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\StringTok{`}\DataTypeTok{Offensive Points Per Game}\StringTok{`}\NormalTok{, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{Defensive Points Per Game}\StringTok{`}\NormalTok{, }\DataTypeTok{label=}\NormalTok{Name)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{scale_size}\NormalTok{(}\DataTypeTok{range =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{6}\NormalTok{), }\DataTypeTok{name=}\StringTok{"Turnovers"}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title=}\StringTok{"Same song, different year"}\NormalTok{, }\DataTypeTok{subtitle=}\StringTok{"The Husker's turnover margin is zero, putting them miles from the top."}\NormalTok{, }\DataTypeTok{caption=}\StringTok{"Source: NCAA | By Matt Waite"}\NormalTok{)  }\OperatorTok{+}\StringTok{ }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}
+    \DataTypeTok{data=}\NormalTok{ypp, }
+    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{OffensiveYPP, }\DataTypeTok{y=}\NormalTok{DefensiveYPP, }\DataTypeTok{size=}\NormalTok{TotalWins), }
+    \DataTypeTok{color=}\StringTok{"grey"}\NormalTok{, }
+    \DataTypeTok{alpha=}\NormalTok{.}\DecValTok{5}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}
+    \DataTypeTok{data=}\NormalTok{bigten, }
+    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{OffensiveYPP, }\DataTypeTok{y=}\NormalTok{DefensiveYPP, }\DataTypeTok{size=}\NormalTok{TotalWins), }
+    \DataTypeTok{color=}\StringTok{"red"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_vline}\NormalTok{(}\DataTypeTok{xintercept =} \FloatTok{5.820543}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_hline}\NormalTok{(}\DataTypeTok{yintercept =} \FloatTok{5.673263}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_text_repel}\NormalTok{(}
+    \DataTypeTok{data=}\NormalTok{bigten, }
+    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{OffensiveYPP, }\DataTypeTok{y=}\NormalTok{DefensiveYPP, }\DataTypeTok{label=}\NormalTok{Team)}
+\NormalTok{  ) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title=}\StringTok{"Nebraska: Average at football"}\NormalTok{, }\DataTypeTok{subtitle=}\StringTok{"The Husker's were dead in the middle, neither good nor bad at anything."}\NormalTok{, }\DataTypeTok{caption=}\StringTok{"Source: NCAA | By Matt Waite"}\NormalTok{)  }\OperatorTok{+}\StringTok{ }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{theme}\NormalTok{(}
     \DataTypeTok{plot.title =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{16}\NormalTok{, }\DataTypeTok{face =} \StringTok{"bold"}\NormalTok{),}
     \DataTypeTok{axis.title =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{8}\NormalTok{), }
