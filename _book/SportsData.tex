@@ -4740,7 +4740,7 @@ install.packages("webshot")
 webshot::install_phantomjs()
 \end{verbatim}
 
-So what does all of these libraries do? Let's gather a few and \href{https://unl.box.com/s/g3eeuogx8bog72ig28enuakhpdlbn394}{get some data}.
+So what does all of these libraries do? Let's gather a few and \href{https://unl.box.com/s/th02njntiobd2azw7zhebgf9yb1o7x8i}{get some data} of every game in the last 5 years.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4751,534 +4751,663 @@ So what does all of these libraries do? Let's gather a few and \href{https://unl
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{offense <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/offensechange.csv"}\NormalTok{)}
+\NormalTok{logs <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/logs1520.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## Parsed with column specification:
 ## cols(
-##   Year = col_double(),
-##   Name = col_character(),
-##   G = col_double(),
-##   `Rush Yards` = col_double(),
-##   `Pass Yards` = col_double(),
-##   Plays = col_double(),
-##   `Total Yards` = col_double(),
-##   `Yards/Play` = col_double(),
-##   `Yards/G` = col_double()
+##   .default = col_double(),
+##   Date = col_date(format = ""),
+##   HomeAway = col_character(),
+##   Opponent = col_character(),
+##   W_L = col_character(),
+##   Blank = col_logical(),
+##   Team = col_character(),
+##   Conference = col_character(),
+##   season = col_character()
 ## )
 \end{verbatim}
 
-Let's ask this question: Which college football team saw the greatest improvement in yards per game last regular season? The simplest way to calculate that is by percent change.
+\begin{verbatim}
+## See spec(...) for full column specifications.
+\end{verbatim}
+
+Let's ask this question: Which college football team saw the greatest increase in three point attempts last season as a percentage of shots? The simplest way to calculate that is by percent change.
+
+We've got a little work to do, putting together ideas we've used before. What we need to end up with is some data that looks like this:
+
+\texttt{Team\ \textbar{}\ 2018-2019\ season\ threes\ \textbar{}\ 2019-2020\ season\ threes\ \textbar{}\ pct\ change}
+
+To get that, we'll need to do some filtering to get the right seasons, some grouping and summarizing to get the right number, some pivoting to get it organized correctly so we can mutate the percent change.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{changeTotalOffense <-}\StringTok{ }\NormalTok{offense }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(Name, Year, }\StringTok{`}\DataTypeTok{Yards/G}\StringTok{`}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# picking what we need.}
-\StringTok{  }\KeywordTok{pivot_wider}\NormalTok{(}\DataTypeTok{names_from =}\NormalTok{ Year, }\DataTypeTok{values_from =} \StringTok{`}\DataTypeTok{Yards/G}\StringTok{`}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# making it wide }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Change=}\NormalTok{(}\StringTok{`}\DataTypeTok{2019}\StringTok{`}\OperatorTok{-}\StringTok{`}\DataTypeTok{2018}\StringTok{`}\NormalTok{)}\OperatorTok{/}\StringTok{`}\DataTypeTok{2018}\StringTok{`}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# so we can calculate percent change}
-\StringTok{  }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(Change)) }\OperatorTok{%>%}\StringTok{  }
+\NormalTok{threechange <-}\StringTok{ }\NormalTok{logs }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(season }\OperatorTok{==}\StringTok{ "2018-2019"} \OperatorTok{|}\StringTok{ }\NormalTok{season }\OperatorTok{==}\StringTok{ "2019-2020"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(Team, Conference, season) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{Total3PA =} \KeywordTok{sum}\NormalTok{(Team3PA)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{pivot_wider}\NormalTok{(}\DataTypeTok{names_from=}\NormalTok{season, }\DataTypeTok{values_from =}\NormalTok{ Total3PA) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{PercentChange =}\NormalTok{ (}\StringTok{`}\DataTypeTok{2019-2020}\StringTok{`}\OperatorTok{-}\StringTok{`}\DataTypeTok{2018-2019}\StringTok{`}\NormalTok{)}\OperatorTok{/}\StringTok{`}\DataTypeTok{2018-2019}\StringTok{`}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(PercentChange)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{() }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{top_n}\NormalTok{(}\DecValTok{10}\NormalTok{) }\CommentTok{# just want a top 10 list}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Selecting by Change
+## `summarise()` regrouping output by 'Team', 'Conference' (override with `.groups` argument)
+\end{verbatim}
+
+\begin{verbatim}
+## Selecting by PercentChange
 \end{verbatim}
 
 We've output tables to the screen a thousand times in this class with \texttt{head}, but kable makes them look decent with very little code.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{changeTotalOffense }\OperatorTok{%>%}\StringTok{ }\KeywordTok{kable}\NormalTok{()}
+\NormalTok{threechange }\OperatorTok{%>%}\StringTok{ }\KeywordTok{kable}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-Name
+Team
 
-2019
+Conference
 
-2018
+2018-2019
 
-Change
+2019-2020
 
-Central Michigan
+PercentChange
 
-433.6
+Mississippi Valley State Delta Devils
 
-254.7
+SWAC
 
-0.7023950
+554
 
-LSU
+837
 
-564.1
+0.5108303
 
-402.1
+Valparaiso Crusaders
 
-0.4028849
+MVC
 
-UTSA
+585
 
-344.9
+843
 
-247.1
+0.4410256
 
-0.3957912
+Ball State Cardinals
 
-San Jose State
+MAC
 
-427.4
+621
 
-323.7
+842
 
-0.3203584
+0.3558776
 
-Navy
+San Jose State Spartans
 
-455.8
+MWC
 
-349.3
+641
 
-0.3048955
+861
 
-Louisville
+0.3432137
 
-447.3
+Alabama Crimson Tide
 
-352.6
+SEC
 
-0.2685763
+718
 
-SMU
+957
 
-489.8
+0.3328691
 
-387.2
+Minnesota Golden Gophers
 
-0.2649793
+Big Ten
 
-BYU
+603
 
-443.8
+762
 
-364.9
+0.2636816
 
-0.2162236
+Georgia Southern Eagles
 
-New Mexico
+Sun Belt
 
-400.3
+631
 
-330.0
+792
 
-0.2130303
+0.2551506
 
-Charlotte
+Tennessee Tech Golden Eagles
 
-411.8
+OVC
 
-343.1
+620
 
-0.2002332
+776
 
-So there you have it. Central Michigan improved the most (but look at who came in second!). Kable has a mountain of customization options. The good news is that it works in a very familiar pattern. We'll start with default styling.
+0.2516129
+
+San Francisco Dons
+
+WCC
+
+728
+
+899
+
+0.2348901
+
+McNeese State Cowboys
+
+Southland
+
+547
+
+675
+
+0.2340037
+
+So there you have it. Mississippi Valley State changed their team so much they took 51 percent more threes last season from the season before. Where did Nebraska come out? Isn't Fred Ball supposed to be a lot of threes? We ranked 111th in college basketball in terms of change from the season before. Believe it or not, Nebraska took four fewer threes last season under Fred Ball than the last season of Tim Miles.
+
+Kable has a mountain of customization options. The good news is that it works in a very familiar pattern. We'll start with default styling.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{changeTotalOffense }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{threechange }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{kable}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{kable_styling}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-Name
+Team
 
-2019
+Conference
 
-2018
+2018-2019
 
-Change
+2019-2020
 
-Central Michigan
+PercentChange
 
-433.6
+Mississippi Valley State Delta Devils
 
-254.7
+SWAC
 
-0.7023950
+554
 
-LSU
+837
 
-564.1
+0.5108303
 
-402.1
+Valparaiso Crusaders
 
-0.4028849
+MVC
 
-UTSA
+585
 
-344.9
+843
 
-247.1
+0.4410256
 
-0.3957912
+Ball State Cardinals
 
-San Jose State
+MAC
 
-427.4
+621
 
-323.7
+842
 
-0.3203584
+0.3558776
 
-Navy
+San Jose State Spartans
 
-455.8
+MWC
 
-349.3
+641
 
-0.3048955
+861
 
-Louisville
+0.3432137
 
-447.3
+Alabama Crimson Tide
 
-352.6
+SEC
 
-0.2685763
+718
 
-SMU
+957
 
-489.8
+0.3328691
 
-387.2
+Minnesota Golden Gophers
 
-0.2649793
+Big Ten
 
-BYU
+603
 
-443.8
+762
 
-364.9
+0.2636816
 
-0.2162236
+Georgia Southern Eagles
 
-New Mexico
+Sun Belt
 
-400.3
+631
 
-330.0
+792
 
-0.2130303
+0.2551506
 
-Charlotte
+Tennessee Tech Golden Eagles
 
-411.8
+OVC
 
-343.1
+620
 
-0.2002332
+776
+
+0.2516129
+
+San Francisco Dons
+
+WCC
+
+728
+
+899
+
+0.2348901
+
+McNeese State Cowboys
+
+Southland
+
+547
+
+675
+
+0.2340037
 
 Let's do more than the defaults, which you can see are pretty decent. Let's stripe every other row with a little bit of grey, and let's smush the width of the rows.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{changeTotalOffense }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{threechange }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{kable}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{kable_styling}\NormalTok{(}\DataTypeTok{bootstrap_options =} \KeywordTok{c}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }\StringTok{"condensed"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
-Name
+Team
 
-2019
+Conference
 
-2018
+2018-2019
 
-Change
+2019-2020
 
-Central Michigan
+PercentChange
 
-433.6
+Mississippi Valley State Delta Devils
 
-254.7
+SWAC
 
-0.7023950
+554
 
-LSU
+837
 
-564.1
+0.5108303
 
-402.1
+Valparaiso Crusaders
 
-0.4028849
+MVC
 
-UTSA
+585
 
-344.9
+843
 
-247.1
+0.4410256
 
-0.3957912
+Ball State Cardinals
 
-San Jose State
+MAC
 
-427.4
+621
 
-323.7
+842
 
-0.3203584
+0.3558776
 
-Navy
+San Jose State Spartans
 
-455.8
+MWC
 
-349.3
+641
 
-0.3048955
+861
 
-Louisville
+0.3432137
 
-447.3
+Alabama Crimson Tide
 
-352.6
+SEC
 
-0.2685763
+718
 
-SMU
+957
 
-489.8
+0.3328691
 
-387.2
+Minnesota Golden Gophers
 
-0.2649793
+Big Ten
 
-BYU
+603
 
-443.8
+762
 
-364.9
+0.2636816
 
-0.2162236
+Georgia Southern Eagles
 
-New Mexico
+Sun Belt
 
-400.3
+631
 
-330.0
+792
 
-0.2130303
+0.2551506
 
-Charlotte
+Tennessee Tech Golden Eagles
 
-411.8
+OVC
 
-343.1
+620
 
-0.2002332
+776
 
-Throughout the semester, we've been using color and other signals to highlight things. Let's pretend we're doing a project on LSU. We can use row\_spec to highlight things.
+0.2516129
 
-What row\_spec is doing here is we're specifying which row -- 2 -- and making all the text on that row bold. We're making the color of the text white, because we're going to set the background to a color -- in this case, the hex color for LSU purple.
+San Francisco Dons
+
+WCC
+
+728
+
+899
+
+0.2348901
+
+McNeese State Cowboys
+
+Southland
+
+547
+
+675
+
+0.2340037
+
+Throughout the semester, we've been using color and other signals to highlight things. Let's pretend we're doing a project on Minnesota. We can use row\_spec to highlight things.
+
+What row\_spec is doing here is we're specifying which row -- 6 -- and making all the text on that row bold. We're making the color of the text white, because we're going to set the background to a color -- in this case, the hex color for Minnesota gold.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{changeTotalOffense }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{threechange }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{kable}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{kable_styling}\NormalTok{(}\DataTypeTok{bootstrap_options =} \KeywordTok{c}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }\StringTok{"condensed"}\NormalTok{)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{row_spec}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DataTypeTok{bold =}\NormalTok{ T, }\DataTypeTok{color =} \StringTok{"white"}\NormalTok{, }\DataTypeTok{background =} \StringTok{"#461D7C"}\NormalTok{)}
+\StringTok{  }\KeywordTok{row_spec}\NormalTok{(}\DecValTok{6}\NormalTok{, }\DataTypeTok{bold =}\NormalTok{ T, }\DataTypeTok{color =} \StringTok{"white"}\NormalTok{, }\DataTypeTok{background =} \StringTok{"#FBB93C"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-Name
+Team
 
-2019
+Conference
 
-2018
+2018-2019
 
-Change
+2019-2020
 
-Central Michigan
+PercentChange
 
-433.6
+Mississippi Valley State Delta Devils
 
-254.7
+SWAC
 
-0.7023950
+554
 
-LSU
+837
 
-564.1
+0.5108303
 
-402.1
+Valparaiso Crusaders
 
-0.4028849
+MVC
 
-UTSA
+585
 
-344.9
+843
 
-247.1
+0.4410256
 
-0.3957912
+Ball State Cardinals
 
-San Jose State
+MAC
 
-427.4
+621
 
-323.7
+842
 
-0.3203584
+0.3558776
 
-Navy
+San Jose State Spartans
 
-455.8
+MWC
 
-349.3
+641
 
-0.3048955
+861
 
-Louisville
+0.3432137
 
-447.3
+Alabama Crimson Tide
 
-352.6
+SEC
 
-0.2685763
+718
 
-SMU
+957
 
-489.8
+0.3328691
 
-387.2
+Minnesota Golden Gophers
 
-0.2649793
+Big Ten
 
-BYU
+603
 
-443.8
+762
 
-364.9
+0.2636816
 
-0.2162236
+Georgia Southern Eagles
 
-New Mexico
+Sun Belt
 
-400.3
+631
 
-330.0
+792
 
-0.2130303
+0.2551506
 
-Charlotte
+Tennessee Tech Golden Eagles
 
-411.8
+OVC
 
-343.1
+620
 
-0.2002332
+776
+
+0.2516129
+
+San Francisco Dons
+
+WCC
+
+728
+
+899
+
+0.2348901
+
+McNeese State Cowboys
+
+Southland
+
+547
+
+675
+
+0.2340037
 
 There's also something called column\_spec where we can change the styling on individual columns. What if we wanted to make all the team names bold?
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{changeTotalOffense }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{threechange }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{kable}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{kable_styling}\NormalTok{(}\DataTypeTok{bootstrap_options =} \KeywordTok{c}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }\StringTok{"condensed"}\NormalTok{)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{row_spec}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DataTypeTok{bold =}\NormalTok{ T, }\DataTypeTok{color =} \StringTok{"white"}\NormalTok{, }\DataTypeTok{background =} \StringTok{"#461D7C"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{row_spec}\NormalTok{(}\DecValTok{6}\NormalTok{, }\DataTypeTok{bold =}\NormalTok{ T, }\DataTypeTok{color =} \StringTok{"white"}\NormalTok{, }\DataTypeTok{background =} \StringTok{"#FBB93C"}\NormalTok{) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{column_spec}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{bold=}\NormalTok{T)}
 \end{Highlighting}
 \end{Shaded}
 
-Name
+Team
 
-2019
+Conference
 
-2018
+2018-2019
 
-Change
+2019-2020
 
-Central Michigan
+PercentChange
 
-433.6
+Mississippi Valley State Delta Devils
 
-254.7
+SWAC
 
-0.7023950
+554
 
-LSU
+837
 
-564.1
+0.5108303
 
-402.1
+Valparaiso Crusaders
 
-0.4028849
+MVC
 
-UTSA
+585
 
-344.9
+843
 
-247.1
+0.4410256
 
-0.3957912
+Ball State Cardinals
 
-San Jose State
+MAC
 
-427.4
+621
 
-323.7
+842
 
-0.3203584
+0.3558776
 
-Navy
+San Jose State Spartans
 
-455.8
+MWC
 
-349.3
+641
 
-0.3048955
+861
 
-Louisville
+0.3432137
 
-447.3
+Alabama Crimson Tide
 
-352.6
+SEC
 
-0.2685763
+718
 
-SMU
+957
 
-489.8
+0.3328691
 
-387.2
+Minnesota Golden Gophers
 
-0.2649793
+Big Ten
 
-BYU
+603
 
-443.8
+762
 
-364.9
+0.2636816
 
-0.2162236
+Georgia Southern Eagles
 
-New Mexico
+Sun Belt
 
-400.3
+631
 
-330.0
+792
 
-0.2130303
+0.2551506
 
-Charlotte
+Tennessee Tech Golden Eagles
 
-411.8
+OVC
 
-343.1
+620
 
-0.2002332
+776
+
+0.2516129
+
+San Francisco Dons
+
+WCC
+
+728
+
+899
+
+0.2348901
+
+McNeese State Cowboys
+
+Southland
+
+547
+
+675
+
+0.2340037
 
 Honestly, this is really good right here. You'd see this published \ldots{} except for one thing: the percentages.
 
@@ -5296,214 +5425,302 @@ Then, we're going to use mutate here to use formattables \texttt{percent()} func
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{changeTotalOffense }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Change =} \KeywordTok{percent}\NormalTok{(Change)) }\OperatorTok{%>%}
+\NormalTok{threechange }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Change =} \KeywordTok{percent}\NormalTok{(PercentChange)) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{kable}\NormalTok{(}\DataTypeTok{escape=}\NormalTok{F) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{kable_styling}\NormalTok{(}\DataTypeTok{bootstrap_options =} \KeywordTok{c}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }\StringTok{"condensed"}\NormalTok{)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{row_spec}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DataTypeTok{bold =}\NormalTok{ T, }\DataTypeTok{color =} \StringTok{"white"}\NormalTok{, }\DataTypeTok{background =} \StringTok{"#461D7C"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{row_spec}\NormalTok{(}\DecValTok{6}\NormalTok{, }\DataTypeTok{bold =}\NormalTok{ T, }\DataTypeTok{color =} \StringTok{"white"}\NormalTok{, }\DataTypeTok{background =} \StringTok{"#FBB93C"}\NormalTok{) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{column_spec}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{bold=}\NormalTok{T)}
 \end{Highlighting}
 \end{Shaded}
 
-Name
+Team
 
-2019
+Conference
 
-2018
+2018-2019
+
+2019-2020
+
+PercentChange
 
 Change
 
-Central Michigan
+Mississippi Valley State Delta Devils
 
-433.6
+SWAC
 
-254.7
+554
 
-70.24\%
+837
 
-LSU
+0.5108303
 
-564.1
+51.08\%
 
-402.1
+Valparaiso Crusaders
 
-40.29\%
+MVC
 
-UTSA
+585
 
-344.9
+843
 
-247.1
+0.4410256
 
-39.58\%
+44.10\%
 
-San Jose State
+Ball State Cardinals
 
-427.4
+MAC
 
-323.7
+621
 
-32.04\%
+842
 
-Navy
+0.3558776
 
-455.8
+35.59\%
 
-349.3
+San Jose State Spartans
 
-30.49\%
+MWC
 
-Louisville
+641
 
-447.3
+861
 
-352.6
+0.3432137
 
-26.86\%
+34.32\%
 
-SMU
+Alabama Crimson Tide
 
-489.8
+SEC
 
-387.2
+718
 
-26.50\%
+957
 
-BYU
+0.3328691
 
-443.8
+33.29\%
 
-364.9
+Minnesota Golden Gophers
 
-21.62\%
+Big Ten
 
-New Mexico
+603
 
-400.3
+762
 
-330.0
+0.2636816
 
-21.30\%
+26.37\%
 
-Charlotte
+Georgia Southern Eagles
 
-411.8
+Sun Belt
 
-343.1
+631
 
-20.02\%
+792
+
+0.2551506
+
+25.52\%
+
+Tennessee Tech Golden Eagles
+
+OVC
+
+620
+
+776
+
+0.2516129
+
+25.16\%
+
+San Francisco Dons
+
+WCC
+
+728
+
+899
+
+0.2348901
+
+23.49\%
+
+McNeese State Cowboys
+
+Southland
+
+547
+
+675
+
+0.2340037
+
+23.40\%
 
 Another way to highlight things: color ramps. We can change the color of the box covering the percentage using another mutate like this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{changeTotalOffense }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Change =} \KeywordTok{percent}\NormalTok{(Change)) }\OperatorTok{%>%}
+\NormalTok{threechange }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Change =} \KeywordTok{percent}\NormalTok{(PercentChange)) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Change =} \KeywordTok{cell_spec}\NormalTok{(}
 \NormalTok{    Change, }\DataTypeTok{color =} \StringTok{"white"}\NormalTok{, }\DataTypeTok{bold =}\NormalTok{ T,}
     \DataTypeTok{background =} \KeywordTok{spec_color}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{, }\DataTypeTok{end =} \FloatTok{0.75}\NormalTok{, }\DataTypeTok{option =} \StringTok{"B"}\NormalTok{, }\DataTypeTok{direction =} \DecValTok{-1}\NormalTok{)}
 \NormalTok{  )) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{kable}\NormalTok{(}\DataTypeTok{escape=}\NormalTok{F) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{kable_styling}\NormalTok{(}\DataTypeTok{bootstrap_options =} \KeywordTok{c}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }\StringTok{"condensed"}\NormalTok{)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{row_spec}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DataTypeTok{bold =}\NormalTok{ T, }\DataTypeTok{color =} \StringTok{"white"}\NormalTok{, }\DataTypeTok{background =} \StringTok{"#461D7C"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{row_spec}\NormalTok{(}\DecValTok{6}\NormalTok{, }\DataTypeTok{bold =}\NormalTok{ T, }\DataTypeTok{color =} \StringTok{"white"}\NormalTok{, }\DataTypeTok{background =} \StringTok{"#FBB93C"}\NormalTok{) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{column_spec}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{bold=}\NormalTok{T)}
 \end{Highlighting}
 \end{Shaded}
 
-Name
+Team
 
-2019
+Conference
 
-2018
+2018-2019
+
+2019-2020
+
+PercentChange
 
 Change
 
-Central Michigan
+Mississippi Valley State Delta Devils
 
-433.6
+SWAC
 
-254.7
+554
 
-{70.24\%}
+837
 
-LSU
+0.5108303
 
-564.1
+{51.08\%}
 
-402.1
+Valparaiso Crusaders
 
-{40.29\%}
+MVC
 
-UTSA
+585
 
-344.9
+843
 
-247.1
+0.4410256
 
-{39.58\%}
+{44.10\%}
 
-San Jose State
+Ball State Cardinals
 
-427.4
+MAC
 
-323.7
+621
 
-{32.04\%}
+842
 
-Navy
+0.3558776
 
-455.8
+{35.59\%}
 
-349.3
+San Jose State Spartans
 
-{30.49\%}
+MWC
 
-Louisville
+641
 
-447.3
+861
 
-352.6
+0.3432137
 
-{26.86\%}
+{34.32\%}
 
-SMU
+Alabama Crimson Tide
 
-489.8
+SEC
 
-387.2
+718
 
-{26.50\%}
+957
 
-BYU
+0.3328691
 
-443.8
+{33.29\%}
 
-364.9
+Minnesota Golden Gophers
 
-{21.62\%}
+Big Ten
 
-New Mexico
+603
 
-400.3
+762
 
-330.0
+0.2636816
 
-{21.30\%}
+{26.37\%}
 
-Charlotte
+Georgia Southern Eagles
 
-411.8
+Sun Belt
 
-343.1
+631
 
-{20.02\%}
+792
+
+0.2551506
+
+{25.52\%}
+
+Tennessee Tech Golden Eagles
+
+OVC
+
+620
+
+776
+
+0.2516129
+
+{25.16\%}
+
+San Francisco Dons
+
+WCC
+
+728
+
+899
+
+0.2348901
+
+{23.49\%}
+
+McNeese State Cowboys
+
+Southland
+
+547
+
+675
+
+0.2340037
+
+{23.40\%}
 
 If this is intersting to you, \href{https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html\#overview}{there's more you can do}.
 
 \hypertarget{exporting-tables}{%
 \section{Exporting tables}\label{exporting-tables}}
 
-One of the major shortcomings with \texttt{formattable} is a very limited ability to export tables. Fortunately, \texttt{kable} appears to have solved that problem.
+One of the major shortcomings with \texttt{formattable} is a very limited ability to export tables. Fortunately, \texttt{kable} appears to have somewhat solved that problem.
 
 But, for this to be a finished product, we need to add a headline, credit line and source line.
 
@@ -5515,17 +5732,17 @@ To export it, we merely add a save\_kable to the end and give it a file path.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{changeTotalOffense }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Change =} \KeywordTok{percent}\NormalTok{(Change)) }\OperatorTok{%>%}
+\NormalTok{threechange }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Change =} \KeywordTok{percent}\NormalTok{(PercentChange)) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Change =} \KeywordTok{cell_spec}\NormalTok{(}
 \NormalTok{    Change, }\DataTypeTok{color =} \StringTok{"white"}\NormalTok{, }\DataTypeTok{bold =}\NormalTok{ T,}
     \DataTypeTok{background =} \KeywordTok{spec_color}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{, }\DataTypeTok{end =} \FloatTok{0.75}\NormalTok{, }\DataTypeTok{option =} \StringTok{"B"}\NormalTok{, }\DataTypeTok{direction =} \DecValTok{-1}\NormalTok{)}
 \NormalTok{  )) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{kable}\NormalTok{(}\DataTypeTok{escape=}\NormalTok{F) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{kable_styling}\NormalTok{(}\DataTypeTok{bootstrap_options =} \KeywordTok{c}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }\StringTok{"condensed"}\NormalTok{)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{row_spec}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DataTypeTok{bold =}\NormalTok{ T, }\DataTypeTok{color =} \StringTok{"white"}\NormalTok{, }\DataTypeTok{background =} \StringTok{"#461D7C"}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{column_spec}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{bold=}\NormalTok{T) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{save_kable}\NormalTok{(}\StringTok{"lsu.pdf"}\NormalTok{)}
+\StringTok{  }\KeywordTok{row_spec}\NormalTok{(}\DecValTok{6}\NormalTok{, }\DataTypeTok{bold =}\NormalTok{ T, }\DataTypeTok{color =} \StringTok{"white"}\NormalTok{, }\DataTypeTok{background =} \StringTok{"#FBB93C"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{column_spec}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{bold=}\NormalTok{T)}
+  \KeywordTok{save_kable}\NormalTok{(}\StringTok{"minnesota.pdf"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
