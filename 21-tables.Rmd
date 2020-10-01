@@ -14,67 +14,77 @@ install.packages("webshot")
 webshot::install_phantomjs()
 ```
 
-So what does all of these libraries do? Let's gather a few and [get some data](https://unl.box.com/s/g3eeuogx8bog72ig28enuakhpdlbn394). 
+So what does all of these libraries do? Let's gather a few and [get some data](https://unl.box.com/s/th02njntiobd2azw7zhebgf9yb1o7x8i) of every game in the last 5 years. 
 
 ```{r}
 library(tidyverse)
 library(kableExtra)
 ```
 
-
 ```{r}
-offense <- read_csv("data/offensechange.csv")
+logs <- read_csv("data/logs1520.csv")
 ```
 
-Let's ask this question: Which college football team saw the greatest improvement in yards per game last regular season? The simplest way to calculate that is by percent change. 
+Let's ask this question: Which college football team saw the greatest increase in three point attempts last season as a percentage of shots? The simplest way to calculate that is by percent change. 
+
+We've got a little work to do, putting together ideas we've used before. What we need to end up with is some data that looks like this:
+
+`Team | 2018-2019 season threes | 2019-2020 season threes | pct change`
+
+To get that, we'll need to do some filtering to get the right seasons, some grouping and summarizing to get the right number, some pivoting to get it organized correctly so we can mutate the percent change. 
 
 ```{r}
-changeTotalOffense <- offense %>%
-  select(Name, Year, `Yards/G`) %>% # picking what we need.
-  pivot_wider(names_from = Year, values_from = `Yards/G`) %>% # making it wide 
-  mutate(Change=(`2019`-`2018`)/`2018`) %>% # so we can calculate percent change
-  arrange(desc(Change)) %>%  
+threechange <- logs %>%
+  filter(season == "2018-2019" | season == "2019-2020") %>%
+  group_by(Team, Conference, season) %>%
+  summarize(Total3PA = sum(Team3PA)) %>%
+  pivot_wider(names_from=season, values_from = Total3PA) %>%
+  mutate(PercentChange = (`2019-2020`-`2018-2019`)/`2018-2019`) %>%
+  arrange(desc(PercentChange)) %>% 
+  ungroup() %>%
   top_n(10) # just want a top 10 list
 ```
 We've output tables to the screen a thousand times in this class with `head`, but kable makes them look decent with very little code. 
 
 ```{r}
-changeTotalOffense %>% kable()
+threechange %>% kable()
 ```
 
-So there you have it. Central Michigan improved the most (but look at who came in second!). Kable has a mountain of customization options. The good news is that it works in a very familiar pattern. We'll start with default styling.
+So there you have it. Mississippi Valley State changed their team so much they took 51 percent more threes last season from the season before. Where did Nebraska come out? Isn't Fred Ball supposed to be a lot of threes? We ranked 111th in college basketball in terms of change from the season before. Believe it or not, Nebraska took four fewer threes last season under Fred Ball than the last season of Tim Miles.  
+
+Kable has a mountain of customization options. The good news is that it works in a very familiar pattern. We'll start with default styling.
 
 ```{r}
-changeTotalOffense %>% 
+threechange %>% 
   kable() %>% 
   kable_styling()
 ```
 Let's do more than the defaults, which you can see are pretty decent. Let's stripe every other row with a little bit of grey, and let's smush the width of the rows.
 
 ```{r}
-changeTotalOffense %>% 
+threechange %>% 
   kable() %>% 
   kable_styling(bootstrap_options = c("striped", "condensed"))
 ```
 
-Throughout the semester, we've been using color and other signals to highlight things. Let's pretend we're doing a project on LSU. We can use row_spec to highlight things.
+Throughout the semester, we've been using color and other signals to highlight things. Let's pretend we're doing a project on Minnesota. We can use row_spec to highlight things.
 
-What row_spec is doing here is we're specifying which row -- 2 -- and making all the text on that row bold. We're making the color of the text white, because we're going to set the background to a color -- in this case, the hex color for LSU purple.
+What row_spec is doing here is we're specifying which row -- 6 -- and making all the text on that row bold. We're making the color of the text white, because we're going to set the background to a color -- in this case, the hex color for Minnesota gold.
 
 ```{r}
-changeTotalOffense %>% 
+threechange %>% 
   kable() %>% 
   kable_styling(bootstrap_options = c("striped", "condensed")) %>%
-  row_spec(2, bold = T, color = "white", background = "#461D7C")
+  row_spec(6, bold = T, color = "white", background = "#FBB93C")
 ```
 
 There's also something called column_spec where we can change the styling on individual columns. What if we wanted to make all the team names bold?
 
 ```{r}
-changeTotalOffense %>% 
+threechange %>% 
   kable() %>% 
   kable_styling(bootstrap_options = c("striped", "condensed")) %>%
-  row_spec(2, bold = T, color = "white", background = "#461D7C") %>%
+  row_spec(6, bold = T, color = "white", background = "#FBB93C") %>%
   column_spec(1, bold=T)
 ```
 
@@ -91,26 +101,26 @@ library(formattable)
 Then, we're going to use mutate here to use formattables `percent()` function to fix Change. Because it uses some HTML wizardry under the hood, we have to set kable to not `escape` the HTML.
 
 ```{r}
-changeTotalOffense %>% 
-  mutate(Change = percent(Change)) %>%
+threechange %>%
+  mutate(Change = percent(PercentChange)) %>%
   kable(escape=F) %>% 
   kable_styling(bootstrap_options = c("striped", "condensed")) %>%
-  row_spec(2, bold = T, color = "white", background = "#461D7C") %>%
+  row_spec(6, bold = T, color = "white", background = "#FBB93C") %>%
   column_spec(1, bold=T)
 ```
 
 Another way to highlight things: color ramps. We can change the color of the box covering the percentage using another mutate like this:
 
 ```{r}
-changeTotalOffense %>% 
-  mutate(Change = percent(Change)) %>%
+threechange %>% 
+  mutate(Change = percent(PercentChange)) %>%
   mutate(Change = cell_spec(
     Change, color = "white", bold = T,
     background = spec_color(1:10, end = 0.75, option = "B", direction = -1)
   )) %>%
   kable(escape=F) %>% 
   kable_styling(bootstrap_options = c("striped", "condensed")) %>%
-  row_spec(2, bold = T, color = "white", background = "#461D7C") %>%
+  row_spec(6, bold = T, color = "white", background = "#FBB93C") %>%
   column_spec(1, bold=T)
 ```
 
@@ -118,7 +128,7 @@ If this is intersting to you, [there's more you can do](https://cran.r-project.o
 
 ## Exporting tables
 
-One of the major shortcomings with `formattable` is a very limited ability to export tables. Fortunately, `kable` appears to have solved that problem.
+One of the major shortcomings with `formattable` is a very limited ability to export tables. Fortunately, `kable` appears to have somewhat solved that problem.
 
 But, for this to be a finished product, we need to add a headline, credit line and source line. 
 
@@ -129,17 +139,17 @@ The other good news bad news: `kable` isn't going to export this as an actual ve
 To export it, we merely add a save_kable to the end and give it a file path.
 
 ```{r eval=FALSE}
-changeTotalOffense %>% 
-  mutate(Change = percent(Change)) %>%
+threechange %>% 
+  mutate(Change = percent(PercentChange)) %>%
   mutate(Change = cell_spec(
     Change, color = "white", bold = T,
     background = spec_color(1:10, end = 0.75, option = "B", direction = -1)
   )) %>%
   kable(escape=F) %>% 
   kable_styling(bootstrap_options = c("striped", "condensed")) %>%
-  row_spec(2, bold = T, color = "white", background = "#461D7C") %>%
-  column_spec(1, bold=T) %>%
-  save_kable("lsu.pdf")
+  row_spec(6, bold = T, color = "white", background = "#FBB93C") %>%
+  column_spec(1, bold=T)
+  save_kable("minnesota.pdf")
 ```
 To fix this, we need to pull it into Illustrator. In there, we're going to expand the artboard, add a headline and chatter, then add source and credit lines at the bottom, and finish with touching up the artboards.
 
