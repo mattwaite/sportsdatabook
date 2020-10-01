@@ -37,7 +37,7 @@ To get that, we'll need to do some filtering to get the right seasons, some grou
 threechange <- logs %>%
   filter(season == "2018-2019" | season == "2019-2020") %>%
   group_by(Team, Conference, season) %>%
-  summarize(Total3PA = sum(Team3PA)) %>%
+  summarise(Total3PA = sum(Team3PA)) %>%
   pivot_wider(names_from=season, values_from = Total3PA) %>%
   mutate(PercentChange = (`2019-2020`-`2018-2019`)/`2018-2019`) %>%
   arrange(desc(PercentChange)) %>% 
