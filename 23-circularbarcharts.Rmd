@@ -21,6 +21,8 @@ Let's import [every basketball game from this year](https://unl.box.com/s/wnlh0u
 logs <- read_csv("data/logs20.csv")
 ```
 
+## Does November basketball matter?
+
 So let's test the notion of November Basketball Doesn't Matter. What matters in basketball? Let's start simple: Wins.
 
 Sports Reference's win columns are weird, so we need to scan through them and find W and L and we'll give them numbers using `case_when`. I'm also going to filter out tournament basketball.
@@ -79,3 +81,61 @@ ggplot() + geom_bar(data=wins, aes(x=week, weight=wins, fill=Conference)) + them
 ```
 
 That looks better. But what does it say? Does November basketball matter? What this is saying is ... yeah, it kinda does. The reason? Lots of wins get piled up in November and December, during non-conference play. So if you are a team with NCAA tournament dreams, you need to win games in November to make sure your tournament resume is where it needs to be come March. Does an individual win or loss matter? Probably not. But your record in November does.
+
+## Does it show you where you are?
+
+So here is the problem we have:
+
+1. We have data for every game. In the past, we were able to calculate the team wins and losses because the way the data records them is the Team is the main team, and they win or lose. The Opponent is recorded, but the Opponent has the mirror image of this game as well, where they are the Team. So essentially every game is in here twice -- one for each team that plays in the game. 
+2. We need to attach the Opponent's winning percentage to each game so we can decide if it's a quality win for Team.
+3. The Team name is not an exact copy of the Team name. So we can't join them using it.
+
+So what we have to do is invert the process that we've done before. We need to group by the Opponent -- because the names will be consistent then -- and we need to invert the wins and losses. A win in the W_L column is a win for the Team. That means each loss in the W_L column is a WIN for the Opponent. 
+
+Once we invert, the data looks very similar to what we've done before. One other thing: I noticed there's some tournament games in here, so the filter at the end strips them out. 
+
+```{r}
+oppwinlosslogs <- logs %>% mutate(winloss = case_when(
+  grepl("W", W_L) ~ 0, 
+  grepl("L", W_L) ~ 1)
+) %>% filter(Date < "2020-03-19")
+```
+
+So now we have a dataframe called oppwinlosslogs that has an inverted winloss column. So now we can group by the Opponent and sum the wins and it will tell us how many games the Opponent won. We can also count the wins and get a winning percentage.
+
+```{r}
+oppwinlosslogs %>% group_by(Opponent) %>% summarize(games=n(), wins=sum(winloss)) %>% mutate(winpct = wins/games) -> opprecord
+```
+
+Now we have a dataframe of 659 opponent winning records. Wait, what? There's 353 teams in major college basketball, so why 659? If you look through it, there's a bunch of teams playing lower level teams. Given that they are lower level, they're likely cannon fodder and will lose the game, and we're going to filter them out in a minute. 
+
+Now we can join the opponent winning percentage to our winlosslogs data so we can answer our question about quality wins.
+
+```{r}
+winlosslogs <- logs %>% mutate(winloss = case_when(
+  grepl("W", W_L) ~ 1, 
+  grepl("L", W_L) ~ 0)
+) %>% filter(Date < "2020-03-19")
+```
+
+```{r}
+winlosslogs %>% left_join(opprecord, by=("Opponent")) -> winswithopppct
+```
+
+Now that we have a table called winswithopppct, we can filter out teams non power 5 teams and teams that won less than 60 percent of their games and run the same calculations in the book. 
+
+```{r}
+p5 <- c("SEC", "Big Ten", "Pac-12", "Big 12", "ACC")
+```
+
+```{r}
+winswithopppct %>% filter(winpct > .6) %>% mutate(week = floor_date(Date, unit="weeks")) %>% group_by(week, Conference) %>% summarize(wins=sum(winloss)) %>% filter(Conference %in% p5) -> qualitywins
+```
+
+Now with our dataframe called qualitywins, we can chart it again.
+
+```{r}
+ggplot() + geom_bar(data=qualitywins, aes(x=week, weight=wins, fill=Conference)) + theme_minimal() + coord_polar()
+```
+
+Look at this chart and compare it to the first one.

@@ -148,7 +148,7 @@ threechange %>%
   kable(escape=F) %>% 
   kable_styling(bootstrap_options = c("striped", "condensed")) %>%
   row_spec(6, bold = T, color = "white", background = "#FBB93C") %>%
-  column_spec(1, bold=T)
+  column_spec(1, bold=T) %>%
   save_kable("minnesota.pdf")
 ```
 To fix this, we need to pull it into Illustrator. In there, we're going to expand the artboard, add a headline and chatter, then add source and credit lines at the bottom, and finish with touching up the artboards.
