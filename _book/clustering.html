@@ -52,6 +52,7 @@
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
@@ -238,11 +239,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="26.1" data-path="advanced-rvest.html"><a href="advanced-rvest.html#one-last-bit"><i class="fa fa-check"></i><b>26.1</b> One last bit</a></li>
 </ul></li>
 <li class="chapter" data-level="27" data-path="annotations.html"><a href="annotations.html"><i class="fa fa-check"></i><b>27</b> Annotations</a></li>
-<li class="chapter" data-level="28" data-path="finishing-touches-part-1.html"><a href="finishing-touches-part-1.html"><i class="fa fa-check"></i><b>28</b> Finishing touches, part 1</a><ul>
-<li class="chapter" data-level="28.1" data-path="finishing-touches-part-1.html"><a href="finishing-touches-part-1.html#graphics-vs-visual-stories"><i class="fa fa-check"></i><b>28.1</b> Graphics vs visual stories</a></li>
-<li class="chapter" data-level="28.2" data-path="finishing-touches-part-1.html"><a href="finishing-touches-part-1.html#getting-ggplot-closer-to-output"><i class="fa fa-check"></i><b>28.2</b> Getting ggplot closer to output</a></li>
+<li class="chapter" data-level="28" data-path="finishing-touches.html"><a href="finishing-touches.html"><i class="fa fa-check"></i><b>28</b> Finishing touches</a><ul>
+<li class="chapter" data-level="28.1" data-path="finishing-touches.html"><a href="finishing-touches.html#graphics-vs-visual-stories"><i class="fa fa-check"></i><b>28.1</b> Graphics vs visual stories</a></li>
+<li class="chapter" data-level="28.2" data-path="finishing-touches.html"><a href="finishing-touches.html#getting-ggplot-closer-to-output"><i class="fa fa-check"></i><b>28.2</b> Getting ggplot closer to output</a></li>
+<li class="chapter" data-level="28.3" data-path="finishing-touches.html"><a href="finishing-touches.html#waffle-charts-require-special-attention"><i class="fa fa-check"></i><b>28.3</b> Waffle charts require special attention</a></li>
 </ul></li>
-<li class="chapter" data-level="29" data-path="finishing-touches-2.html"><a href="finishing-touches-2.html"><i class="fa fa-check"></i><b>29</b> Finishing Touches 2</a></li>
+<li class="chapter" data-level="29" data-path="headlines.html"><a href="headlines.html"><i class="fa fa-check"></i><b>29</b> Headlines</a></li>
 <li class="chapter" data-level="30" data-path="plotly.html"><a href="plotly.html"><i class="fa fa-check"></i><b>30</b> Plotly</a><ul>
 <li class="chapter" data-level="30.1" data-path="plotly.html"><a href="plotly.html#publishing-using-plotly"><i class="fa fa-check"></i><b>30.1</b> Publishing using Plotly</a></li>
 </ul></li>
@@ -310,12 +312,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>For this exercise, I want to look at Cam Mack, Nebraska’s point guard and probably the most interesting player on Fred Hoiberg’s first team. This is Mack’s first year in major college basketball – he played a year at a community college – so we don’t have much to go on. But with a season in the books, who does Cam Mack compare to?</p>
 <p>To answer this, we’ll use k-means clustering.</p>
 <p>First thing we do is load some libraries and set a seed, so if we run this repeatedly, our random numbers are generated from the same base. If you don’t have the cluster library, just add it on the console with <code>install.packages("cluster")</code></p>
-<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="clustering.html#cb508-1"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb508-2"><a href="clustering.html#cb508-2"></a><span class="kw">library</span>(cluster)</span>
-<span id="cb508-3"><a href="clustering.html#cb508-3"></a></span>
-<span id="cb508-4"><a href="clustering.html#cb508-4"></a><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb524"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb524-1"><a href="clustering.html#cb524-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb524-2"><a href="clustering.html#cb524-2"></a><span class="kw">library</span>(cluster)</span>
+<span id="cb524-3"><a href="clustering.html#cb524-3"></a></span>
+<span id="cb524-4"><a href="clustering.html#cb524-4"></a><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span></code></pre></div>
 <p>I’ve gone and scraped <a href="https://unl.box.com/s/0g56ve61y6hakyxzr1u4t534721bqvg8">stats for every player in this current season</a> so let’s load that up.</p>
-<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="clustering.html#cb509-1"></a>players &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/players20.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb525-1"><a href="clustering.html#cb525-1"></a>players &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/players20.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Parsed with column specification:
 ## cols(
 ##   .default = col_double(),
@@ -331,27 +333,27 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## See spec(...) for full column specifications.</code></pre>
 <p>To cluster this data properly, we have some work to do.</p>
 <p>First, it won’t do to have players who haven’t played, so we can use filter to find anyone with greater than 0 minutes played. Next, Cam Mack is a guard, so let’s just look at guards. Third, we want to limit the data to things that make sense to look at for Cam Mack – things like shooting, three point shooting, assists, turnovers and points.</p>
-<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb512-1"><a href="clustering.html#cb512-1"></a>playersselected &lt;-<span class="st"> </span>players <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb512-2"><a href="clustering.html#cb512-2"></a><span class="st">  </span><span class="kw">filter</span>(MP<span class="op">&gt;</span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Pos <span class="op">==</span><span class="st"> &quot;G&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb512-3"><a href="clustering.html#cb512-3"></a><span class="st">  </span><span class="kw">select</span>(Player, Team, Pos, MP, <span class="st">`</span><span class="dt">FG%</span><span class="st">`</span>, <span class="st">`</span><span class="dt">3P%</span><span class="st">`</span>, AST, TOV, PTS) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb512-4"><a href="clustering.html#cb512-4"></a><span class="st">  </span><span class="kw">na.omit</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb528-1"><a href="clustering.html#cb528-1"></a>playersselected &lt;-<span class="st"> </span>players <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb528-2"><a href="clustering.html#cb528-2"></a><span class="st">  </span><span class="kw">filter</span>(MP<span class="op">&gt;</span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Pos <span class="op">==</span><span class="st"> &quot;G&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb528-3"><a href="clustering.html#cb528-3"></a><span class="st">  </span><span class="kw">select</span>(Player, Team, Pos, MP, <span class="st">`</span><span class="dt">FG%</span><span class="st">`</span>, <span class="st">`</span><span class="dt">3P%</span><span class="st">`</span>, AST, TOV, PTS) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb528-4"><a href="clustering.html#cb528-4"></a><span class="st">  </span><span class="kw">na.omit</span>() </span></code></pre></div>
 <p>Now, k-means clustering doesn’t work as well with data that can be on different scales. So comparing a percentage to a count metric – shooting percentage to points – would create chaos because shooting percentages are a fraction of 1 and points, depending on when they are in the season, could be quite large. So we have to scale each metric – put them on a similar basis using the distance from the max value as our guide. Also, k-means clustering won’t work with text data, so we need to create a dataframe that’s just the numbers, but scaled. We can do that with another select, and using mutate_all with the scale function. The <code>na.omit()</code> means get rid of any blanks, because they too will cause errors.</p>
-<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb513-1"><a href="clustering.html#cb513-1"></a>playersscaled &lt;-<span class="st"> </span>playersselected <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb513-2"><a href="clustering.html#cb513-2"></a><span class="st">  </span><span class="kw">select</span>(MP, <span class="st">`</span><span class="dt">FG%</span><span class="st">`</span>, <span class="st">`</span><span class="dt">3P%</span><span class="st">`</span>, AST, TOV, PTS) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb513-3"><a href="clustering.html#cb513-3"></a><span class="st">  </span><span class="kw">mutate_all</span>(scale) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb513-4"><a href="clustering.html#cb513-4"></a><span class="st">  </span><span class="kw">na.omit</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="clustering.html#cb529-1"></a>playersscaled &lt;-<span class="st"> </span>playersselected <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb529-2"><a href="clustering.html#cb529-2"></a><span class="st">  </span><span class="kw">select</span>(MP, <span class="st">`</span><span class="dt">FG%</span><span class="st">`</span>, <span class="st">`</span><span class="dt">3P%</span><span class="st">`</span>, AST, TOV, PTS) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb529-3"><a href="clustering.html#cb529-3"></a><span class="st">  </span><span class="kw">mutate_all</span>(scale) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb529-4"><a href="clustering.html#cb529-4"></a><span class="st">  </span><span class="kw">na.omit</span>()</span></code></pre></div>
 <p>With k-means clustering, we decide how many clusters we want. Most often, researchers will try a handful of different cluster numbers and see what works. But there are methods for finding the optimal number. One method is called the Elbow method. One implementation of this, <a href="https://uc-r.github.io/kmeans_clustering">borrowed from the University of Cincinnati’s Business Analytics program</a>, does this quite nicely with a graph that will help you decide for yourself.</p>
 <p>All you need to do in this code is change out the data frame – <code>playersscaled</code> in this case – and run it.</p>
-<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb514-1"><a href="clustering.html#cb514-1"></a><span class="co"># function to compute total within-cluster sum of square </span></span>
-<span id="cb514-2"><a href="clustering.html#cb514-2"></a>wss &lt;-<span class="st"> </span><span class="cf">function</span>(k) {</span>
-<span id="cb514-3"><a href="clustering.html#cb514-3"></a>  <span class="kw">kmeans</span>(playersscaled, k, <span class="dt">nstart =</span> <span class="dv">10</span> )<span class="op">$</span>tot.withinss</span>
-<span id="cb514-4"><a href="clustering.html#cb514-4"></a>}</span>
-<span id="cb514-5"><a href="clustering.html#cb514-5"></a></span>
-<span id="cb514-6"><a href="clustering.html#cb514-6"></a><span class="co"># Compute and plot wss for k = 1 to k = 15</span></span>
-<span id="cb514-7"><a href="clustering.html#cb514-7"></a>k.values &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">15</span></span>
-<span id="cb514-8"><a href="clustering.html#cb514-8"></a></span>
-<span id="cb514-9"><a href="clustering.html#cb514-9"></a><span class="co"># extract wss for 2-15 clusters</span></span>
-<span id="cb514-10"><a href="clustering.html#cb514-10"></a>wss_values &lt;-<span class="st"> </span><span class="kw">map_dbl</span>(k.values, wss)</span></code></pre></div>
+<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb530-1"><a href="clustering.html#cb530-1"></a><span class="co"># function to compute total within-cluster sum of square </span></span>
+<span id="cb530-2"><a href="clustering.html#cb530-2"></a>wss &lt;-<span class="st"> </span><span class="cf">function</span>(k) {</span>
+<span id="cb530-3"><a href="clustering.html#cb530-3"></a>  <span class="kw">kmeans</span>(playersscaled, k, <span class="dt">nstart =</span> <span class="dv">10</span> )<span class="op">$</span>tot.withinss</span>
+<span id="cb530-4"><a href="clustering.html#cb530-4"></a>}</span>
+<span id="cb530-5"><a href="clustering.html#cb530-5"></a></span>
+<span id="cb530-6"><a href="clustering.html#cb530-6"></a><span class="co"># Compute and plot wss for k = 1 to k = 15</span></span>
+<span id="cb530-7"><a href="clustering.html#cb530-7"></a>k.values &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">15</span></span>
+<span id="cb530-8"><a href="clustering.html#cb530-8"></a></span>
+<span id="cb530-9"><a href="clustering.html#cb530-9"></a><span class="co"># extract wss for 2-15 clusters</span></span>
+<span id="cb530-10"><a href="clustering.html#cb530-10"></a>wss_values &lt;-<span class="st"> </span><span class="kw">map_dbl</span>(k.values, wss)</span></code></pre></div>
 <pre><code>## Warning: did not converge in 10 iterations
 
 ## Warning: did not converge in 10 iterations
@@ -365,15 +367,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## Warning: did not converge in 10 iterations
 
 ## Warning: did not converge in 10 iterations</code></pre>
-<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb516-1"><a href="clustering.html#cb516-1"></a><span class="kw">plot</span>(k.values, wss_values,</span>
-<span id="cb516-2"><a href="clustering.html#cb516-2"></a>       <span class="dt">type=</span><span class="st">&quot;b&quot;</span>, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">frame =</span> <span class="ot">FALSE</span>, </span>
-<span id="cb516-3"><a href="clustering.html#cb516-3"></a>       <span class="dt">xlab=</span><span class="st">&quot;Number of clusters K&quot;</span>,</span>
-<span id="cb516-4"><a href="clustering.html#cb516-4"></a>       <span class="dt">ylab=</span><span class="st">&quot;Total within-clusters sum of squares&quot;</span>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-311-1.png" width="672" /></p>
+<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb532-1"><a href="clustering.html#cb532-1"></a><span class="kw">plot</span>(k.values, wss_values,</span>
+<span id="cb532-2"><a href="clustering.html#cb532-2"></a>       <span class="dt">type=</span><span class="st">&quot;b&quot;</span>, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">frame =</span> <span class="ot">FALSE</span>, </span>
+<span id="cb532-3"><a href="clustering.html#cb532-3"></a>       <span class="dt">xlab=</span><span class="st">&quot;Number of clusters K&quot;</span>,</span>
+<span id="cb532-4"><a href="clustering.html#cb532-4"></a>       <span class="dt">ylab=</span><span class="st">&quot;Total within-clusters sum of squares&quot;</span>)</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-318-1.png" width="672" /></p>
 <p>The Elbow method – so named because you’re looking for the “elbow” where the line flattens out. In this case, it looks like a K of 5 is ideal. So let’s try that. We’re going to use the kmeans function, saving it to an object called k5. We just need to tell it our dataframe name, how many centers (k) we want, and we’ll use a sensible default for how many different configurations to try.</p>
-<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="clustering.html#cb517-1"></a>k5 &lt;-<span class="st"> </span><span class="kw">kmeans</span>(playersscaled, <span class="dt">centers =</span> <span class="dv">5</span>, <span class="dt">nstart =</span> <span class="dv">25</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb533-1"><a href="clustering.html#cb533-1"></a>k5 &lt;-<span class="st"> </span><span class="kw">kmeans</span>(playersscaled, <span class="dt">centers =</span> <span class="dv">5</span>, <span class="dt">nstart =</span> <span class="dv">25</span>)</span></code></pre></div>
 <p>Let’s look at what we get.</p>
-<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb518-1"><a href="clustering.html#cb518-1"></a>k5</span></code></pre></div>
+<div class="sourceCode" id="cb534"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb534-1"><a href="clustering.html#cb534-1"></a>k5</span></code></pre></div>
 <pre><code>## K-means clustering with 5 clusters of sizes 242, 58, 495, 989, 863
 ## 
 ## Cluster means:
@@ -468,23 +470,23 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## [6] &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;</code></pre>
 <p>Interpreting this output, the very first thing you need to know is that <strong>the cluster numbers are meaningless</strong>. They aren’t ranks. They aren’t anything. After you have taken that on board, look at the cluster sizes at the top. Clusters 1 and 2 are pretty large compared to others. That’s notable. Then we can look at the cluster means. For reference, 0 is going to be average. So group 1 is below average on minutes played. Group 2 is slightly above, group 5 is well above.</p>
 <p>So which group is Cam Mack in? Well, first we have to put our data back together again. In K5, there is a list of cluster assignments in the same order we put them in, but recall we have no names. So we need to re-combine them with our original data. We can do that with the following:</p>
-<div class="sourceCode" id="cb520"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb520-1"><a href="clustering.html#cb520-1"></a>playercluster &lt;-<span class="st"> </span><span class="kw">data.frame</span>(playersselected, k5<span class="op">$</span>cluster) </span></code></pre></div>
+<div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb536-1"><a href="clustering.html#cb536-1"></a>playercluster &lt;-<span class="st"> </span><span class="kw">data.frame</span>(playersselected, k5<span class="op">$</span>cluster) </span></code></pre></div>
 <p>Now we have a dataframe called playercluster that has our player names and what cluster they are in. The fastest way to find Cam Mack is to double click on the playercluster table in the environment and use the search in the top right of the table. Because this is based on some random selections of points to start the groupings, these may change from person to person, but Mack is in Group 1 in my data.</p>
 <p>We now have a dataset and can plot it like anything else. Let’s get Cam Mack and then plot him against the rest of college basketball on assists versus minutes played.</p>
-<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb521-1"><a href="clustering.html#cb521-1"></a>cm &lt;-<span class="st"> </span>playercluster <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Player <span class="op">==</span><span class="st"> &quot;Cam Mack&quot;</span>)</span>
-<span id="cb521-2"><a href="clustering.html#cb521-2"></a></span>
-<span id="cb521-3"><a href="clustering.html#cb521-3"></a>cm</span></code></pre></div>
+<div class="sourceCode" id="cb537"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb537-1"><a href="clustering.html#cb537-1"></a>cm &lt;-<span class="st"> </span>playercluster <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Player <span class="op">==</span><span class="st"> &quot;Cam Mack&quot;</span>)</span>
+<span id="cb537-2"><a href="clustering.html#cb537-2"></a></span>
+<span id="cb537-3"><a href="clustering.html#cb537-3"></a>cm</span></code></pre></div>
 <pre><code>##     Player                 Team Pos  MP  FG.  X3P. AST TOV PTS k5.cluster
 ## 1 Cam Mack Nebraska Cornhuskers   G 931 0.39 0.339 172  71 324          3</code></pre>
 <p>So Cam’s in cluster 5, which if you look at our clusters, puts him in the cluster with all above average metrics. What does that look like? We know Cam was an assist machine, so where do group 5 people grade out on assists?</p>
-<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb523-1"><a href="clustering.html#cb523-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb523-2"><a href="clustering.html#cb523-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>playercluster, <span class="kw">aes</span>(<span class="dt">x=</span>MP, <span class="dt">y=</span>AST, <span class="dt">color=</span>k5.cluster)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb523-3"><a href="clustering.html#cb523-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>cm, <span class="kw">aes</span>(<span class="dt">x=</span>MP, <span class="dt">y=</span>AST), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-316-1.png" width="672" /></p>
+<div class="sourceCode" id="cb539"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb539-1"><a href="clustering.html#cb539-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb539-2"><a href="clustering.html#cb539-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>playercluster, <span class="kw">aes</span>(<span class="dt">x=</span>MP, <span class="dt">y=</span>AST, <span class="dt">color=</span>k5.cluster)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb539-3"><a href="clustering.html#cb539-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>cm, <span class="kw">aes</span>(<span class="dt">x=</span>MP, <span class="dt">y=</span>AST), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-323-1.png" width="672" /></p>
 <p>Not bad, not bad. But who are Cam Mack’s peers? If we look at the numbers in Group 5, there’s 495 of them. So let’s limit them to just Big Ten guards. Unfortunately, my scraper didn’t quite work and in the place of Conference is the coach’s name. So I’m going to have to do this the hard way and make a list of Big Ten teams and filter on that. Then I’ll sort by minutes played.</p>
-<div class="sourceCode" id="cb524"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb524-1"><a href="clustering.html#cb524-1"></a>big10 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Nebraska Cornhuskers&quot;</span>, <span class="st">&quot;Iowa Hawkeyes&quot;</span>, <span class="st">&quot;Minnesota Golden Gophers&quot;</span>, <span class="st">&quot;Illinois Fighting Illini&quot;</span>, <span class="st">&quot;Northwestern Wildcats&quot;</span>, <span class="st">&quot;Wisconsin Badgers&quot;</span>, <span class="st">&quot;Indiana Hoosiers&quot;</span>, <span class="st">&quot;Purdue Boilermakers&quot;</span>, <span class="st">&quot;Ohio State Buckeyes&quot;</span>, <span class="st">&quot;Michigan Wolverines&quot;</span>, <span class="st">&quot;Michigan State Spartans&quot;</span>, <span class="st">&quot;Penn State Nittany Lions&quot;</span>, <span class="st">&quot;Rutgers Scarlet Knights&quot;</span>, <span class="st">&quot;Maryland Terrapins&quot;</span>)</span>
-<span id="cb524-2"><a href="clustering.html#cb524-2"></a></span>
-<span id="cb524-3"><a href="clustering.html#cb524-3"></a>playercluster <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(k5.cluster <span class="op">==</span><span class="st"> </span><span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Team <span class="op">%in%</span><span class="st"> </span>big10) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="kw">desc</span>(MP))</span></code></pre></div>
+<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb540-1"><a href="clustering.html#cb540-1"></a>big10 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Nebraska Cornhuskers&quot;</span>, <span class="st">&quot;Iowa Hawkeyes&quot;</span>, <span class="st">&quot;Minnesota Golden Gophers&quot;</span>, <span class="st">&quot;Illinois Fighting Illini&quot;</span>, <span class="st">&quot;Northwestern Wildcats&quot;</span>, <span class="st">&quot;Wisconsin Badgers&quot;</span>, <span class="st">&quot;Indiana Hoosiers&quot;</span>, <span class="st">&quot;Purdue Boilermakers&quot;</span>, <span class="st">&quot;Ohio State Buckeyes&quot;</span>, <span class="st">&quot;Michigan Wolverines&quot;</span>, <span class="st">&quot;Michigan State Spartans&quot;</span>, <span class="st">&quot;Penn State Nittany Lions&quot;</span>, <span class="st">&quot;Rutgers Scarlet Knights&quot;</span>, <span class="st">&quot;Maryland Terrapins&quot;</span>)</span>
+<span id="cb540-2"><a href="clustering.html#cb540-2"></a></span>
+<span id="cb540-3"><a href="clustering.html#cb540-3"></a>playercluster <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(k5.cluster <span class="op">==</span><span class="st"> </span><span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Team <span class="op">%in%</span><span class="st"> </span>big10) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="kw">desc</span>(MP))</span></code></pre></div>
 <pre><code>##               Player                     Team Pos  MP   FG.  X3P. AST TOV PTS
 ## 1  Da&#39;Monte Williams Illinois Fighting Illini   G 592 0.302 0.211  37  20  64
 ## 2      Tre&#39; Williams Minnesota Golden Gophers   G 445 0.286 0.263  23  24  84
@@ -542,37 +544,37 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">31.1</span> Advanced metrics</h2>
 <p>How much does this change if we change the metrics? I used pretty standard box score metrics above. What if we did it using Player Efficiency Rating, True Shooting Percentage, Point Production, Assist Percentage, Win Shares Per 40 Minutes and Box Plus Minus (you can get definitions of all of them by <a href="https://www.sports-reference.com/cbb/schools/nebraska/2020.html">hovering over the stats on Nebraksa’s stats page</a>).</p>
 <p>We’ll repeat the process. Filter out players who don’t play, players with stats missing, and just focus on those stats listed above.</p>
-<div class="sourceCode" id="cb526"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb526-1"><a href="clustering.html#cb526-1"></a>playersadvanced &lt;-<span class="st"> </span>players <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb526-2"><a href="clustering.html#cb526-2"></a><span class="st">  </span><span class="kw">filter</span>(MP<span class="op">&gt;</span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb526-3"><a href="clustering.html#cb526-3"></a><span class="st">  </span><span class="kw">filter</span>(Pos <span class="op">==</span><span class="st"> &quot;G&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb526-4"><a href="clustering.html#cb526-4"></a><span class="st">  </span><span class="kw">select</span>(Player, Team, Pos, PER, <span class="st">`</span><span class="dt">TS%</span><span class="st">`</span>, PProd, <span class="st">`</span><span class="dt">AST%</span><span class="st">`</span>, <span class="st">`</span><span class="dt">WS/40</span><span class="st">`</span>, BPM) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb526-5"><a href="clustering.html#cb526-5"></a><span class="st">  </span><span class="kw">na.omit</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb542-1"><a href="clustering.html#cb542-1"></a>playersadvanced &lt;-<span class="st"> </span>players <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb542-2"><a href="clustering.html#cb542-2"></a><span class="st">  </span><span class="kw">filter</span>(MP<span class="op">&gt;</span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb542-3"><a href="clustering.html#cb542-3"></a><span class="st">  </span><span class="kw">filter</span>(Pos <span class="op">==</span><span class="st"> &quot;G&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb542-4"><a href="clustering.html#cb542-4"></a><span class="st">  </span><span class="kw">select</span>(Player, Team, Pos, PER, <span class="st">`</span><span class="dt">TS%</span><span class="st">`</span>, PProd, <span class="st">`</span><span class="dt">AST%</span><span class="st">`</span>, <span class="st">`</span><span class="dt">WS/40</span><span class="st">`</span>, BPM) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb542-5"><a href="clustering.html#cb542-5"></a><span class="st">  </span><span class="kw">na.omit</span>() </span></code></pre></div>
 <p>Now to scale them.</p>
-<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="clustering.html#cb527-1"></a>playersadvscaled &lt;-<span class="st"> </span>playersadvanced <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb527-2"><a href="clustering.html#cb527-2"></a><span class="st">  </span><span class="kw">select</span>(PER, <span class="st">`</span><span class="dt">TS%</span><span class="st">`</span>, PProd, <span class="st">`</span><span class="dt">AST%</span><span class="st">`</span>, <span class="st">`</span><span class="dt">WS/40</span><span class="st">`</span>, BPM) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb527-3"><a href="clustering.html#cb527-3"></a><span class="st">  </span><span class="kw">mutate_all</span>(scale) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb527-4"><a href="clustering.html#cb527-4"></a><span class="st">  </span><span class="kw">na.omit</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb543"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb543-1"><a href="clustering.html#cb543-1"></a>playersadvscaled &lt;-<span class="st"> </span>playersadvanced <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb543-2"><a href="clustering.html#cb543-2"></a><span class="st">  </span><span class="kw">select</span>(PER, <span class="st">`</span><span class="dt">TS%</span><span class="st">`</span>, PProd, <span class="st">`</span><span class="dt">AST%</span><span class="st">`</span>, <span class="st">`</span><span class="dt">WS/40</span><span class="st">`</span>, BPM) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb543-3"><a href="clustering.html#cb543-3"></a><span class="st">  </span><span class="kw">mutate_all</span>(scale) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb543-4"><a href="clustering.html#cb543-4"></a><span class="st">  </span><span class="kw">na.omit</span>()</span></code></pre></div>
 <p>Let’s find the optimal number of clusters.</p>
-<div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb528-1"><a href="clustering.html#cb528-1"></a><span class="co"># function to compute total within-cluster sum of square </span></span>
-<span id="cb528-2"><a href="clustering.html#cb528-2"></a>wss &lt;-<span class="st"> </span><span class="cf">function</span>(k) {</span>
-<span id="cb528-3"><a href="clustering.html#cb528-3"></a>  <span class="kw">kmeans</span>(playersadvscaled, k, <span class="dt">nstart =</span> <span class="dv">10</span> )<span class="op">$</span>tot.withinss</span>
-<span id="cb528-4"><a href="clustering.html#cb528-4"></a>}</span>
-<span id="cb528-5"><a href="clustering.html#cb528-5"></a></span>
-<span id="cb528-6"><a href="clustering.html#cb528-6"></a><span class="co"># Compute and plot wss for k = 1 to k = 15</span></span>
-<span id="cb528-7"><a href="clustering.html#cb528-7"></a>k.values &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">15</span></span>
-<span id="cb528-8"><a href="clustering.html#cb528-8"></a></span>
-<span id="cb528-9"><a href="clustering.html#cb528-9"></a><span class="co"># extract wss for 2-15 clusters</span></span>
-<span id="cb528-10"><a href="clustering.html#cb528-10"></a>wss_values &lt;-<span class="st"> </span><span class="kw">map_dbl</span>(k.values, wss)</span>
-<span id="cb528-11"><a href="clustering.html#cb528-11"></a></span>
-<span id="cb528-12"><a href="clustering.html#cb528-12"></a><span class="kw">plot</span>(k.values, wss_values,</span>
-<span id="cb528-13"><a href="clustering.html#cb528-13"></a>       <span class="dt">type=</span><span class="st">&quot;b&quot;</span>, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">frame =</span> <span class="ot">FALSE</span>, </span>
-<span id="cb528-14"><a href="clustering.html#cb528-14"></a>       <span class="dt">xlab=</span><span class="st">&quot;Number of clusters K&quot;</span>,</span>
-<span id="cb528-15"><a href="clustering.html#cb528-15"></a>       <span class="dt">ylab=</span><span class="st">&quot;Total within-clusters sum of squares&quot;</span>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-320-1.png" width="672" /></p>
+<div class="sourceCode" id="cb544"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb544-1"><a href="clustering.html#cb544-1"></a><span class="co"># function to compute total within-cluster sum of square </span></span>
+<span id="cb544-2"><a href="clustering.html#cb544-2"></a>wss &lt;-<span class="st"> </span><span class="cf">function</span>(k) {</span>
+<span id="cb544-3"><a href="clustering.html#cb544-3"></a>  <span class="kw">kmeans</span>(playersadvscaled, k, <span class="dt">nstart =</span> <span class="dv">10</span> )<span class="op">$</span>tot.withinss</span>
+<span id="cb544-4"><a href="clustering.html#cb544-4"></a>}</span>
+<span id="cb544-5"><a href="clustering.html#cb544-5"></a></span>
+<span id="cb544-6"><a href="clustering.html#cb544-6"></a><span class="co"># Compute and plot wss for k = 1 to k = 15</span></span>
+<span id="cb544-7"><a href="clustering.html#cb544-7"></a>k.values &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">15</span></span>
+<span id="cb544-8"><a href="clustering.html#cb544-8"></a></span>
+<span id="cb544-9"><a href="clustering.html#cb544-9"></a><span class="co"># extract wss for 2-15 clusters</span></span>
+<span id="cb544-10"><a href="clustering.html#cb544-10"></a>wss_values &lt;-<span class="st"> </span><span class="kw">map_dbl</span>(k.values, wss)</span>
+<span id="cb544-11"><a href="clustering.html#cb544-11"></a></span>
+<span id="cb544-12"><a href="clustering.html#cb544-12"></a><span class="kw">plot</span>(k.values, wss_values,</span>
+<span id="cb544-13"><a href="clustering.html#cb544-13"></a>       <span class="dt">type=</span><span class="st">&quot;b&quot;</span>, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">frame =</span> <span class="ot">FALSE</span>, </span>
+<span id="cb544-14"><a href="clustering.html#cb544-14"></a>       <span class="dt">xlab=</span><span class="st">&quot;Number of clusters K&quot;</span>,</span>
+<span id="cb544-15"><a href="clustering.html#cb544-15"></a>       <span class="dt">ylab=</span><span class="st">&quot;Total within-clusters sum of squares&quot;</span>)</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-327-1.png" width="672" /></p>
 <p>Looks like 5 again.</p>
-<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="clustering.html#cb529-1"></a>advk5 &lt;-<span class="st"> </span><span class="kw">kmeans</span>(playersadvscaled, <span class="dt">centers =</span> <span class="dv">5</span>, <span class="dt">nstart =</span> <span class="dv">25</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb545-1"><a href="clustering.html#cb545-1"></a>advk5 &lt;-<span class="st"> </span><span class="kw">kmeans</span>(playersadvscaled, <span class="dt">centers =</span> <span class="dv">5</span>, <span class="dt">nstart =</span> <span class="dv">25</span>)</span></code></pre></div>
 <p>What do we have here?</p>
-<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb530-1"><a href="clustering.html#cb530-1"></a>advk5</span></code></pre></div>
+<div class="sourceCode" id="cb546"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb546-1"><a href="clustering.html#cb546-1"></a>advk5</span></code></pre></div>
 <pre><code>## K-means clustering with 5 clusters of sizes 104, 1253, 9, 632, 766
 ## 
 ## Cluster means:
@@ -669,20 +671,20 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot;
 ## [6] &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;</code></pre>
 <p>Looks like this time, cluster 1 is all below average and cluster 5 is mostly above. Which cluster is Cam Mack in?</p>
-<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb532-1"><a href="clustering.html#cb532-1"></a>playeradvcluster &lt;-<span class="st"> </span><span class="kw">data.frame</span>(playersadvanced, advk5<span class="op">$</span>cluster) </span></code></pre></div>
-<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb533-1"><a href="clustering.html#cb533-1"></a>cmadv &lt;-<span class="st"> </span>playeradvcluster <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Player <span class="op">==</span><span class="st"> &quot;Cam Mack&quot;</span>)</span>
-<span id="cb533-2"><a href="clustering.html#cb533-2"></a></span>
-<span id="cb533-3"><a href="clustering.html#cb533-3"></a>cmadv</span></code></pre></div>
+<div class="sourceCode" id="cb548"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb548-1"><a href="clustering.html#cb548-1"></a>playeradvcluster &lt;-<span class="st"> </span><span class="kw">data.frame</span>(playersadvanced, advk5<span class="op">$</span>cluster) </span></code></pre></div>
+<div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb549-1"><a href="clustering.html#cb549-1"></a>cmadv &lt;-<span class="st"> </span>playeradvcluster <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Player <span class="op">==</span><span class="st"> &quot;Cam Mack&quot;</span>)</span>
+<span id="cb549-2"><a href="clustering.html#cb549-2"></a></span>
+<span id="cb549-3"><a href="clustering.html#cb549-3"></a>cmadv</span></code></pre></div>
 <pre><code>##     Player                 Team Pos  PER   TS. PProd AST. WS.40 BPM
 ## 1 Cam Mack Nebraska Cornhuskers   G 15.9 0.481   382 36.4 0.081 3.9
 ##   advk5.cluster
 ## 1             5</code></pre>
 <p>Cluster 3 on my dataset. So in this season, we can say he’s in a big group of players who are all above average on these advanced metrics.</p>
 <p>Now who are his Big Ten peers?</p>
-<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb535-1"><a href="clustering.html#cb535-1"></a>playeradvcluster <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb535-2"><a href="clustering.html#cb535-2"></a><span class="st">  </span><span class="kw">filter</span>(advk5.cluster <span class="op">==</span><span class="st"> </span><span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb535-3"><a href="clustering.html#cb535-3"></a><span class="st">  </span><span class="kw">filter</span>(Team <span class="op">%in%</span><span class="st"> </span>big10) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb535-4"><a href="clustering.html#cb535-4"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(PProd))</span></code></pre></div>
+<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="clustering.html#cb551-1"></a>playeradvcluster <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb551-2"><a href="clustering.html#cb551-2"></a><span class="st">  </span><span class="kw">filter</span>(advk5.cluster <span class="op">==</span><span class="st"> </span><span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb551-3"><a href="clustering.html#cb551-3"></a><span class="st">  </span><span class="kw">filter</span>(Team <span class="op">%in%</span><span class="st"> </span>big10) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb551-4"><a href="clustering.html#cb551-4"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(PProd))</span></code></pre></div>
 <pre><code>##  [1] Player        Team          Pos           PER           TS.          
 ##  [6] PProd         AST.          WS.40         BPM           advk5.cluster
 ## &lt;0 rows&gt; (or 0-length row.names)</code></pre>
