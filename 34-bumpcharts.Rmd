@@ -19,7 +19,7 @@ library(tidyverse)
 library(ggbump)
 ```
 
-[Here's the dataset](https://unl.box.com/s/18mzeypa3pgg5pw2xxgawfbhyryo3z3a) we'll use, which I scraped out of the college football playoff [website](https://collegefootballplayoff.com/rankings.aspx): 
+[Here's the dataset](https://unl.box.com/s/zgb8hv2fdzz36lcs5bcje59ri84dqjai) we'll use, which I scraped out of the college football playoff [website](https://collegefootballplayoff.com/rankings.aspx): 
 
 ```{r}
 rankings <- read_csv("data/cfbranking.csv")
