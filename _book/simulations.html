@@ -226,7 +226,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="22.1" data-path="tables.html"><a href="tables.html#exporting-tables"><i class="fa fa-check"></i><b>22.1</b> Exporting tables</a></li>
 </ul></li>
 <li class="chapter" data-level="23" data-path="bubble-charts.html"><a href="bubble-charts.html"><i class="fa fa-check"></i><b>23</b> Bubble charts</a></li>
-<li class="chapter" data-level="24" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html"><i class="fa fa-check"></i><b>24</b> Circular bar plots</a></li>
+<li class="chapter" data-level="24" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html"><i class="fa fa-check"></i><b>24</b> Circular bar plots</a><ul>
+<li class="chapter" data-level="24.1" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html#does-november-basketball-matter"><i class="fa fa-check"></i><b>24.1</b> Does November basketball matter?</a></li>
+<li class="chapter" data-level="24.2" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html#does-it-show-you-where-you-are"><i class="fa fa-check"></i><b>24.2</b> Does it show you where you are?</a></li>
+</ul></li>
 <li class="chapter" data-level="25" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html"><i class="fa fa-check"></i><b>25</b> Intro to rvest</a><ul>
 <li class="chapter" data-level="25.1" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html#a-slightly-more-complicated-example"><i class="fa fa-check"></i><b>25.1</b> A slightly more complicated example</a></li>
 <li class="chapter" data-level="25.2" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html#an-even-more-complicated-example"><i class="fa fa-check"></i><b>25.2</b> An even more complicated example</a></li>
@@ -305,11 +308,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="images/simulations2.png" width="635" /></p>
 <p>Let’s simulate 39 three point attempts 1000 times with his season long shooting percentage and see if this could just be random chance or something else.</p>
 <p>We do this using a base R function called <code>rbinom</code> or binomial distribution. So what that means is there’s a normally distrubuted chance that James Palmer Jr. is going to shoot above and below his career three point shooting percentage. If we randomly assign values in that distribution 1000 times, how many times will it come up 7, like this example?</p>
-<div class="sourceCode" id="cb639"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb639-1"><a href="simulations.html#cb639-1"></a><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb639-2"><a href="simulations.html#cb639-2"></a></span>
-<span id="cb639-3"><a href="simulations.html#cb639-3"></a>simulations &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">1000</span>, <span class="dt">size =</span> <span class="dv">39</span>, <span class="dt">prob =</span> <span class="fl">.309</span>)</span>
-<span id="cb639-4"><a href="simulations.html#cb639-4"></a></span>
-<span id="cb639-5"><a href="simulations.html#cb639-5"></a><span class="kw">table</span>(simulations)</span></code></pre></div>
+<div class="sourceCode" id="cb648"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb648-1"><a href="simulations.html#cb648-1"></a><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb648-2"><a href="simulations.html#cb648-2"></a></span>
+<span id="cb648-3"><a href="simulations.html#cb648-3"></a>simulations &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">1000</span>, <span class="dt">size =</span> <span class="dv">39</span>, <span class="dt">prob =</span> <span class="fl">.309</span>)</span>
+<span id="cb648-4"><a href="simulations.html#cb648-4"></a></span>
+<span id="cb648-5"><a href="simulations.html#cb648-5"></a><span class="kw">table</span>(simulations)</span></code></pre></div>
 <pre><code>## simulations
 ##   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22 
 ##   1   4   5  12  35  44  76 117 134 135 135  99  71  53  37  21  15   2   3   1</code></pre>
@@ -319,13 +322,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="cold-streaks" class="section level2">
 <h2><span class="header-section-number">39.1</span> Cold streaks</h2>
 <p>During the Western Illinois game, the team, shooting .329 on the season from behind the arc, went 0-15 in the second half. How strange is that?</p>
-<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb641-1"><a href="simulations.html#cb641-1"></a><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb641-2"><a href="simulations.html#cb641-2"></a></span>
-<span id="cb641-3"><a href="simulations.html#cb641-3"></a>simulations &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">1000</span>, <span class="dt">size =</span> <span class="dv">15</span>, <span class="dt">prob =</span> <span class="fl">.329</span>)</span>
-<span id="cb641-4"><a href="simulations.html#cb641-4"></a></span>
-<span id="cb641-5"><a href="simulations.html#cb641-5"></a><span class="kw">hist</span>(simulations)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-386-1.png" width="672" /></p>
-<div class="sourceCode" id="cb642"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb642-1"><a href="simulations.html#cb642-1"></a><span class="kw">table</span>(simulations)</span></code></pre></div>
+<div class="sourceCode" id="cb650"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb650-1"><a href="simulations.html#cb650-1"></a><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb650-2"><a href="simulations.html#cb650-2"></a></span>
+<span id="cb650-3"><a href="simulations.html#cb650-3"></a>simulations &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">1000</span>, <span class="dt">size =</span> <span class="dv">15</span>, <span class="dt">prob =</span> <span class="fl">.329</span>)</span>
+<span id="cb650-4"><a href="simulations.html#cb650-4"></a></span>
+<span id="cb650-5"><a href="simulations.html#cb650-5"></a><span class="kw">hist</span>(simulations)</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-393-1.png" width="672" /></p>
+<div class="sourceCode" id="cb651"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb651-1"><a href="simulations.html#cb651-1"></a><span class="kw">table</span>(simulations)</span></code></pre></div>
 <pre><code>## simulations
 ##   0   1   2   3   4   5   6   7   8   9  10  11 
 ##   5  16  59 132 200 218 172  92  65  34   4   3</code></pre>

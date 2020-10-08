@@ -226,7 +226,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="22.1" data-path="tables.html"><a href="tables.html#exporting-tables"><i class="fa fa-check"></i><b>22.1</b> Exporting tables</a></li>
 </ul></li>
 <li class="chapter" data-level="23" data-path="bubble-charts.html"><a href="bubble-charts.html"><i class="fa fa-check"></i><b>23</b> Bubble charts</a></li>
-<li class="chapter" data-level="24" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html"><i class="fa fa-check"></i><b>24</b> Circular bar plots</a></li>
+<li class="chapter" data-level="24" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html"><i class="fa fa-check"></i><b>24</b> Circular bar plots</a><ul>
+<li class="chapter" data-level="24.1" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html#does-november-basketball-matter"><i class="fa fa-check"></i><b>24.1</b> Does November basketball matter?</a></li>
+<li class="chapter" data-level="24.2" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html#does-it-show-you-where-you-are"><i class="fa fa-check"></i><b>24.2</b> Does it show you where you are?</a></li>
+</ul></li>
 <li class="chapter" data-level="25" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html"><i class="fa fa-check"></i><b>25</b> Intro to rvest</a><ul>
 <li class="chapter" data-level="25.1" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html#a-slightly-more-complicated-example"><i class="fa fa-check"></i><b>25.1</b> A slightly more complicated example</a></li>
 <li class="chapter" data-level="25.2" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html#an-even-more-complicated-example"><i class="fa fa-check"></i><b>25.2</b> An even more complicated example</a></li>
@@ -1829,8 +1832,8 @@ Southland
 <span id="cb359-7"><a href="tables.html#cb359-7"></a><span class="st">  </span><span class="kw">kable</span>(<span class="dt">escape=</span>F) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb359-8"><a href="tables.html#cb359-8"></a><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">bootstrap_options =</span> <span class="kw">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>)) <span class="op">%&gt;%</span></span>
 <span id="cb359-9"><a href="tables.html#cb359-9"></a><span class="st">  </span><span class="kw">row_spec</span>(<span class="dv">6</span>, <span class="dt">bold =</span> T, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">background =</span> <span class="st">&quot;#FBB93C&quot;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb359-10"><a href="tables.html#cb359-10"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dv">1</span>, <span class="dt">bold=</span>T)</span>
-<span id="cb359-11"><a href="tables.html#cb359-11"></a>  <span class="kw">save_kable</span>(<span class="st">&quot;minnesota.pdf&quot;</span>)</span></code></pre></div>
+<span id="cb359-10"><a href="tables.html#cb359-10"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dv">1</span>, <span class="dt">bold=</span>T) <span class="op">%&gt;%</span></span>
+<span id="cb359-11"><a href="tables.html#cb359-11"></a><span class="st">  </span><span class="kw">save_kable</span>(<span class="st">&quot;minnesota.pdf&quot;</span>)</span></code></pre></div>
 <p>To fix this, we need to pull it into Illustrator. In there, we’re going to expand the artboard, add a headline and chatter, then add source and credit lines at the bottom, and finish with touching up the artboards.</p>
 <p>Here’s a video walkthrough:</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/AeZ5uiCpJro" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>

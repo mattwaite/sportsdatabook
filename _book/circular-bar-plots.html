@@ -226,7 +226,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="22.1" data-path="tables.html"><a href="tables.html#exporting-tables"><i class="fa fa-check"></i><b>22.1</b> Exporting tables</a></li>
 </ul></li>
 <li class="chapter" data-level="23" data-path="bubble-charts.html"><a href="bubble-charts.html"><i class="fa fa-check"></i><b>23</b> Bubble charts</a></li>
-<li class="chapter" data-level="24" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html"><i class="fa fa-check"></i><b>24</b> Circular bar plots</a></li>
+<li class="chapter" data-level="24" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html"><i class="fa fa-check"></i><b>24</b> Circular bar plots</a><ul>
+<li class="chapter" data-level="24.1" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html#does-november-basketball-matter"><i class="fa fa-check"></i><b>24.1</b> Does November basketball matter?</a></li>
+<li class="chapter" data-level="24.2" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html#does-it-show-you-where-you-are"><i class="fa fa-check"></i><b>24.2</b> Does it show you where you are?</a></li>
+</ul></li>
 <li class="chapter" data-level="25" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html"><i class="fa fa-check"></i><b>25</b> Intro to rvest</a><ul>
 <li class="chapter" data-level="25.1" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html#a-slightly-more-complicated-example"><i class="fa fa-check"></i><b>25.1</b> A slightly more complicated example</a></li>
 <li class="chapter" data-level="25.2" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html#an-even-more-complicated-example"><i class="fa fa-check"></i><b>25.2</b> An even more complicated example</a></li>
@@ -327,6 +330,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ##   season = col_character()
 ## )</code></pre>
 <pre><code>## See spec(...) for full column specifications.</code></pre>
+<div id="does-november-basketball-matter" class="section level2">
+<h2><span class="header-section-number">24.1</span> Does November basketball matter?</h2>
 <p>So let’s test the notion of November Basketball Doesn’t Matter. What matters in basketball? Let’s start simple: Wins.</p>
 <p>Sports Reference’s win columns are weird, so we need to scan through them and find W and L and we’ll give them numbers using <code>case_when</code>. I’m also going to filter out tournament basketball.</p>
 <div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="circular-bar-plots.html#cb384-1"></a>winlosslogs &lt;-<span class="st"> </span>logs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">winloss =</span> <span class="kw">case_when</span>(</span>
@@ -356,7 +361,41 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="circular-bar-plots.html#cb395-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">data=</span>wins, <span class="kw">aes</span>(<span class="dt">x=</span>week, <span class="dt">weight=</span>wins, <span class="dt">fill=</span>Conference)) <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span><span class="kw">coord_polar</span>()</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-241-1.png" width="672" /></p>
 <p>That looks better. But what does it say? Does November basketball matter? What this is saying is … yeah, it kinda does. The reason? Lots of wins get piled up in November and December, during non-conference play. So if you are a team with NCAA tournament dreams, you need to win games in November to make sure your tournament resume is where it needs to be come March. Does an individual win or loss matter? Probably not. But your record in November does.</p>
+</div>
+<div id="does-it-show-you-where-you-are" class="section level2">
+<h2><span class="header-section-number">24.2</span> Does it show you where you are?</h2>
+<p>So here is the problem we have:</p>
+<ol style="list-style-type: decimal">
+<li>We have data for every game. In the past, we were able to calculate the team wins and losses because the way the data records them is the Team is the main team, and they win or lose. The Opponent is recorded, but the Opponent has the mirror image of this game as well, where they are the Team. So essentially every game is in here twice – one for each team that plays in the game.</li>
+<li>We need to attach the Opponent’s winning percentage to each game so we can decide if it’s a quality win for Team.</li>
+<li>The Team name is not an exact copy of the Team name. So we can’t join them using it.</li>
+</ol>
+<p>So what we have to do is invert the process that we’ve done before. We need to group by the Opponent – because the names will be consistent then – and we need to invert the wins and losses. A win in the W_L column is a win for the Team. That means each loss in the W_L column is a WIN for the Opponent.</p>
+<p>Once we invert, the data looks very similar to what we’ve done before. One other thing: I noticed there’s some tournament games in here, so the filter at the end strips them out.</p>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="circular-bar-plots.html#cb396-1"></a>oppwinlosslogs &lt;-<span class="st"> </span>logs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">winloss =</span> <span class="kw">case_when</span>(</span>
+<span id="cb396-2"><a href="circular-bar-plots.html#cb396-2"></a>  <span class="kw">grepl</span>(<span class="st">&quot;W&quot;</span>, W_L) <span class="op">~</span><span class="st"> </span><span class="dv">0</span>, </span>
+<span id="cb396-3"><a href="circular-bar-plots.html#cb396-3"></a>  <span class="kw">grepl</span>(<span class="st">&quot;L&quot;</span>, W_L) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb396-4"><a href="circular-bar-plots.html#cb396-4"></a>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Date <span class="op">&lt;</span><span class="st"> &quot;2020-03-19&quot;</span>)</span></code></pre></div>
+<p>So now we have a dataframe called oppwinlosslogs that has an inverted winloss column. So now we can group by the Opponent and sum the wins and it will tell us how many games the Opponent won. We can also count the wins and get a winning percentage.</p>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="circular-bar-plots.html#cb397-1"></a>oppwinlosslogs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Opponent) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">games=</span><span class="kw">n</span>(), <span class="dt">wins=</span><span class="kw">sum</span>(winloss)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">winpct =</span> wins<span class="op">/</span>games) -&gt;<span class="st"> </span>opprecord</span></code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<p>Now we have a dataframe of 659 opponent winning records. Wait, what? There’s 353 teams in major college basketball, so why 659? If you look through it, there’s a bunch of teams playing lower level teams. Given that they are lower level, they’re likely cannon fodder and will lose the game, and we’re going to filter them out in a minute.</p>
+<p>Now we can join the opponent winning percentage to our winlosslogs data so we can answer our question about quality wins.</p>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="circular-bar-plots.html#cb399-1"></a>winlosslogs &lt;-<span class="st"> </span>logs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">winloss =</span> <span class="kw">case_when</span>(</span>
+<span id="cb399-2"><a href="circular-bar-plots.html#cb399-2"></a>  <span class="kw">grepl</span>(<span class="st">&quot;W&quot;</span>, W_L) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, </span>
+<span id="cb399-3"><a href="circular-bar-plots.html#cb399-3"></a>  <span class="kw">grepl</span>(<span class="st">&quot;L&quot;</span>, W_L) <span class="op">~</span><span class="st"> </span><span class="dv">0</span>)</span>
+<span id="cb399-4"><a href="circular-bar-plots.html#cb399-4"></a>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Date <span class="op">&lt;</span><span class="st"> &quot;2020-03-19&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="circular-bar-plots.html#cb400-1"></a>winlosslogs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">left_join</span>(opprecord, <span class="dt">by=</span>(<span class="st">&quot;Opponent&quot;</span>)) -&gt;<span class="st"> </span>winswithopppct</span></code></pre></div>
+<p>Now that we have a table called winswithopppct, we can filter out teams non power 5 teams and teams that won less than 60 percent of their games and run the same calculations in the book.</p>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="circular-bar-plots.html#cb401-1"></a>p5 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;SEC&quot;</span>, <span class="st">&quot;Big Ten&quot;</span>, <span class="st">&quot;Pac-12&quot;</span>, <span class="st">&quot;Big 12&quot;</span>, <span class="st">&quot;ACC&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="circular-bar-plots.html#cb402-1"></a>winswithopppct <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(winpct <span class="op">&gt;</span><span class="st"> </span><span class="fl">.6</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">week =</span> <span class="kw">floor_date</span>(Date, <span class="dt">unit=</span><span class="st">&quot;weeks&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(week, Conference) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">wins=</span><span class="kw">sum</span>(winloss)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Conference <span class="op">%in%</span><span class="st"> </span>p5) -&gt;<span class="st"> </span>qualitywins</span></code></pre></div>
+<pre><code>## `summarise()` regrouping output by &#39;week&#39; (override with `.groups` argument)</code></pre>
+<p>Now with our dataframe called qualitywins, we can chart it again.</p>
+<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="circular-bar-plots.html#cb404-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">data=</span>qualitywins, <span class="kw">aes</span>(<span class="dt">x=</span>week, <span class="dt">weight=</span>wins, <span class="dt">fill=</span>Conference)) <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span><span class="kw">coord_polar</span>()</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-248-1.png" width="672" /></p>
+<p>Look at this chart and compare it to the first one.</p>
 
+</div>
 </div>
             </section>
 
