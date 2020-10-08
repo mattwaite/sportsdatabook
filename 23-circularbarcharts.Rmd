@@ -104,7 +104,7 @@ oppwinlosslogs <- logs %>% mutate(winloss = case_when(
 So now we have a dataframe called oppwinlosslogs that has an inverted winloss column. So now we can group by the Opponent and sum the wins and it will tell us how many games the Opponent won. We can also count the wins and get a winning percentage.
 
 ```{r}
-oppwinlosslogs %>% group_by(Opponent) %>% summarize(games=n(), wins=sum(winloss)) %>% mutate(winpct = wins/games) -> opprecord
+oppwinlosslogs %>% group_by(Opponent) %>% summarise(games=n(), wins=sum(winloss)) %>% mutate(winpct = wins/games) -> opprecord
 ```
 
 Now we have a dataframe of 659 opponent winning records. Wait, what? There's 353 teams in major college basketball, so why 659? If you look through it, there's a bunch of teams playing lower level teams. Given that they are lower level, they're likely cannon fodder and will lose the game, and we're going to filter them out in a minute. 
@@ -129,7 +129,7 @@ p5 <- c("SEC", "Big Ten", "Pac-12", "Big 12", "ACC")
 ```
 
 ```{r}
-winswithopppct %>% filter(winpct > .6) %>% mutate(week = floor_date(Date, unit="weeks")) %>% group_by(week, Conference) %>% summarize(wins=sum(winloss)) %>% filter(Conference %in% p5) -> qualitywins
+winswithopppct %>% filter(winpct > .6) %>% mutate(week = floor_date(Date, unit="weeks")) %>% group_by(week, Conference) %>% summarise(wins=sum(winloss)) %>% filter(Conference %in% p5) -> qualitywins
 ```
 
 Now with our dataframe called qualitywins, we can chart it again.

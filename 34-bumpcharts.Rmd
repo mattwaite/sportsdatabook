@@ -1,18 +1,10 @@
 # Bump charts
 
-Not every library is on CRAN, which if you didn't know is the place where all the libraries we've installed up to this point are coming from. CRAN is a global repository of libraries, but they're libraries that are ready for a global audience of users, meaning they've been tested thoroughly and most of the bugs are out of them. 
+The point of a bump chart is to show how the ranking of something changed over time -- you could do this with the top 25 in football or basketball. I've seen it done with European soccer league standings over a season. 
 
-Developers are constantly working on new libraries, and some of them are interesting enough to try and stable enough to make a go of it. If you can handle a little uncertainty and understand that what you want to do might not work totally right, you can install those libraries from another code repository, GitHub. GitHub is a massive repository of all kinds of code developers want to share. [This book is on GitHub](https://github.com/mattwaite/sportsdatabook), for instance.
+The requirements are that you have a row of data for a team, in that week, with their rank.
 
-To install a library from GitHub requires a couple of steps. The first is you need a set of tools to get them, called `devtools`. So go over to the console and install `devtools` like this: 
-
-`install.packages("devtools")`
-
-The package we're going to try is called ggbump and it makes bump charts. Bump charts are like a subway map for rankings that change over time. We're going to make a bump chart of the college football playoff rankings this last season.
-
-To get ggbump, run this in the console: `devtools::install_github("davidsjoberg/ggbump")`
-
-Now we'll load up our libraries.
+This is another extension to ggplot, and you'll install it the usual way: `install.packages("ggbump")`
 
 ```{r}
 library(tidyverse)
@@ -25,7 +17,7 @@ library(ggbump)
 rankings <- read_csv("data/cfbranking.csv")
 ```
 
-The point of a bump chart is to show how the ranking of something changed over time -- you could do this with the top 25 in football or basketball. I've seen it done with European soccer league standings over a season. The requirements are that you have a row of data for a team, in that week, with their rank. So if you have 5 weeks of playoff rankings, like we do, you're going to have five rows of LSU, and five rows of Ohio State. you can see the basic look of the data by using head()
+Given our requirements of a row of data for a team, in that week, with their rank, take a look at the data provided. We have 5 weeks of playoff rankings, so we should have five rows of LSU, and five rows of Ohio State. You can see the basic look of the data by using head()
 
 ```{r}
 head(rankings)
