@@ -78,6 +78,6 @@ bar2 <- ggplot() + geom_bar(data=bottom10, aes(x=reorder(Institution, change), w
 
 Saving a cowplot plot_grid is the same as anything else we did in the class:
 
-```{r}
+```{r eval=FALSE}
 plot_grid(bar1, bar2) + ggsave("test.png")
 ```
