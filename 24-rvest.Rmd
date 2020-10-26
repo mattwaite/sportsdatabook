@@ -68,10 +68,10 @@ scoringoffense18 <- scoringoffense18[[1]]
 First, how are we going to know, in the data, which year our data is from? We can use mutate.
 
 ```{r error=TRUE}
-scoringoffense19 <- scoringoffense %>% mutate(YEAR = 2019)
+scoringoffense18 <- scoringoffense %>% mutate(YEAR = 2019)
 ```
 
-Uh oh. Error. What does it say? Column 1 must be named. If you look at our data in the environment tab in the upper right corner, you'll see that indeed, the first column has no name. It's the FBS rank of each team. So we can fix that and mutate in the same step. We'll do that using `rename` and since the field doesn't have a name to rename it, we'll use a position argument. We'll say rename column 1 as Rank. 
+Uh oh. Error. What does it say? It's ... not clear, but a hint is that our first column doesn't have a name. Each column must be named. If you look at our data in the environment tab in the upper right corner, you'll see that indeed, the first column has no name. It's the FBS rank of each team. So we can fix that and mutate in the same step. We'll do that using `rename` and since the field doesn't have a name to rename it, we'll use a position argument. We'll say rename column 1 as Rank. 
 
 ```{r}
 scoringoffense19 <- scoringoffense %>% rename(Rank = 1) %>% mutate(YEAR = 2019)
@@ -126,10 +126,10 @@ And we'll take a look at what we have.
 head(stats)
 ```
 
-So, that's not ideal. We have headers and data mixed together, and our columns are named X1 to X34. Also note: They're all character fields. Because the headers are interspersed with data, it all gets called character data. So we've got to first rename each field. 
+So, that's not ideal. We have headers and data mixed together, and our columns are named X1 to X38. Also note: They're all character fields. Because the headers are interspersed with data, it all gets called character data. So we've got to first rename each field. 
 
 ```{r}
-stats <- stats %>% rename(Rank=X1, School=X2, Games=X3, OverallWins=X4, OverallLosses=X5, WinPct=X6, OverallSRS=X7, OverallSOS=X8, ConferenceWins=X9, ConferenceLosses=X10, HomeWins=X11, HomeLosses=X12, AwayWins=X13, AwayLosses=X14, ForPoints=X15, OppPoints=X16, Blank=X17, Minutes=X18, FieldGoalsMade=X19, FieldGoalsAttempted=X20, FieldGoalPCT=X21, ThreePointMade=X22, ThreePointAttempts=X23, ThreePointPct=X24, FreeThrowsMade=X25, FreeThrowsAttempted=X26, FreeThrowPCT=X27, OffensiveRebounds=X28, TotalRebounds=X29, Assists=X30, Steals=X31, Blocks=X32, Turnovers=X33, PersonalFouls=X34)
+stats <- stats %>% rename(Rank=X1, School=X2, Games=X3, OverallWins=X4, OverallLosses=X5, WinPct=X6, OverallSRS=X7, OverallSOS=X8, Blank1=X9, ConferenceWins=X10, ConferenceLosses=X11, Blank2=X12, HomeWins=X13, HomeLosses=X14, Blank3=X15, AwayWins=X16, AwayLosses=X17, Blank4=X18, ForPoints=X19, OppPoints=X20, Blank5=X21, Minutes=X22, FieldGoalsMade=X23, FieldGoalsAttempted=X24, FieldGoalPCT=X25, ThreePointMade=X26, ThreePointAttempts=X27, ThreePointPct=X28, FreeThrowsMade=X29, FreeThrowsAttempted=X30, FreeThrowPCT=X31, OffensiveRebounds=X32, TotalRebounds=X33, Assists=X34, Steals=X35, Blocks=X36, Turnovers=X37, PersonalFouls=X38)
 ```
 
 Now we have to get rid of those headers interspersed in the data. We can do that with filter that say keep all the stuff that isn't this.
@@ -138,10 +138,16 @@ Now we have to get rid of those headers interspersed in the data. We can do that
 stats <- stats %>% filter(Rank != "Rk" & Games != "Overall") 
 ```
 
-And finally, we need to change the file type of all the fields that need it. We're going to use a clever little trick, which goes like this: We're going to use `mutate_at`, which means mutate these fields. The pattern for `mutate_at` is `mutate_at` these variables and do this thing to them. But instead of specifying which of 33 variables we're going to mutate, we're going to specify the one we don't want to change, which is the name of the school. And we just want to convert them to numeric. Here's what it looks like:
+And finally, we need to change the file type of all the fields that need it. We're going to use a clever little trick, which goes like this: We're going to use `mutate_at`, which means mutate these fields. The pattern for `mutate_at` is `mutate_at` these variables and do this thing to them. But instead of specifying which of 38 variables we're going to mutate, we're going to specify the one we don't want to change, which is the name of the school. And we just want to convert them to numeric, which is simple. Here's what it looks like:
 
 ```{r}
 stats <- stats %>% mutate_at(vars(-School), as.numeric)
+```
+
+One last thing: Who needs columns called Blank1, Blank2, Blank3, etc? 
+
+```{r}
+stats <- stats %>% select(-starts_with("Blank"))
 ```
 
 And just like that, we have a method for getting up to the minute season stats for every team in Division I. 
