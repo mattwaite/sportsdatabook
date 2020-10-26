@@ -6341,7 +6341,7 @@ First, how are we going to know, in the data, which year our data is from? We ca
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{scoringoffense19 <-}\StringTok{ }\NormalTok{scoringoffense }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{YEAR =} \DecValTok{2019}\NormalTok{)}
+\NormalTok{scoringoffense18 <-}\StringTok{ }\NormalTok{scoringoffense }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{YEAR =} \DecValTok{2019}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6349,7 +6349,7 @@ First, how are we going to know, in the data, which year our data is from? We ca
 ## Error in env_bind_lazy(private$bindings, !!!set_names(promises, names_bindings)): attempt to use zero-length variable name
 \end{verbatim}
 
-Uh oh. Error. What does it say? Column 1 must be named. If you look at our data in the environment tab in the upper right corner, you'll see that indeed, the first column has no name. It's the FBS rank of each team. So we can fix that and mutate in the same step. We'll do that using \texttt{rename} and since the field doesn't have a name to rename it, we'll use a position argument. We'll say rename column 1 as Rank.
+Uh oh. Error. What does it say? It's \ldots{} not clear, but a hint is that our first column doesn't have a name. Each column must be named. If you look at our data in the environment tab in the upper right corner, you'll see that indeed, the first column has no name. It's the FBS rank of each team. So we can fix that and mutate in the same step. We'll do that using \texttt{rename} and since the field doesn't have a name to rename it, we'll use a position argument. We'll say rename column 1 as Rank.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6461,11 +6461,11 @@ And we'll take a look at what we have.
 ## 6    234     50    487    587
 \end{verbatim}
 
-So, that's not ideal. We have headers and data mixed together, and our columns are named X1 to X34. Also note: They're all character fields. Because the headers are interspersed with data, it all gets called character data. So we've got to first rename each field.
+So, that's not ideal. We have headers and data mixed together, and our columns are named X1 to X38. Also note: They're all character fields. Because the headers are interspersed with data, it all gets called character data. So we've got to first rename each field.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{stats <-}\StringTok{ }\NormalTok{stats }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{Rank=}\NormalTok{X1, }\DataTypeTok{School=}\NormalTok{X2, }\DataTypeTok{Games=}\NormalTok{X3, }\DataTypeTok{OverallWins=}\NormalTok{X4, }\DataTypeTok{OverallLosses=}\NormalTok{X5, }\DataTypeTok{WinPct=}\NormalTok{X6, }\DataTypeTok{OverallSRS=}\NormalTok{X7, }\DataTypeTok{OverallSOS=}\NormalTok{X8, }\DataTypeTok{ConferenceWins=}\NormalTok{X9, }\DataTypeTok{ConferenceLosses=}\NormalTok{X10, }\DataTypeTok{HomeWins=}\NormalTok{X11, }\DataTypeTok{HomeLosses=}\NormalTok{X12, }\DataTypeTok{AwayWins=}\NormalTok{X13, }\DataTypeTok{AwayLosses=}\NormalTok{X14, }\DataTypeTok{ForPoints=}\NormalTok{X15, }\DataTypeTok{OppPoints=}\NormalTok{X16, }\DataTypeTok{Blank=}\NormalTok{X17, }\DataTypeTok{Minutes=}\NormalTok{X18, }\DataTypeTok{FieldGoalsMade=}\NormalTok{X19, }\DataTypeTok{FieldGoalsAttempted=}\NormalTok{X20, }\DataTypeTok{FieldGoalPCT=}\NormalTok{X21, }\DataTypeTok{ThreePointMade=}\NormalTok{X22, }\DataTypeTok{ThreePointAttempts=}\NormalTok{X23, }\DataTypeTok{ThreePointPct=}\NormalTok{X24, }\DataTypeTok{FreeThrowsMade=}\NormalTok{X25, }\DataTypeTok{FreeThrowsAttempted=}\NormalTok{X26, }\DataTypeTok{FreeThrowPCT=}\NormalTok{X27, }\DataTypeTok{OffensiveRebounds=}\NormalTok{X28, }\DataTypeTok{TotalRebounds=}\NormalTok{X29, }\DataTypeTok{Assists=}\NormalTok{X30, }\DataTypeTok{Steals=}\NormalTok{X31, }\DataTypeTok{Blocks=}\NormalTok{X32, }\DataTypeTok{Turnovers=}\NormalTok{X33, }\DataTypeTok{PersonalFouls=}\NormalTok{X34)}
+\NormalTok{stats <-}\StringTok{ }\NormalTok{stats }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{Rank=}\NormalTok{X1, }\DataTypeTok{School=}\NormalTok{X2, }\DataTypeTok{Games=}\NormalTok{X3, }\DataTypeTok{OverallWins=}\NormalTok{X4, }\DataTypeTok{OverallLosses=}\NormalTok{X5, }\DataTypeTok{WinPct=}\NormalTok{X6, }\DataTypeTok{OverallSRS=}\NormalTok{X7, }\DataTypeTok{OverallSOS=}\NormalTok{X8, }\DataTypeTok{Blank1=}\NormalTok{X9, }\DataTypeTok{ConferenceWins=}\NormalTok{X10, }\DataTypeTok{ConferenceLosses=}\NormalTok{X11, }\DataTypeTok{Blank2=}\NormalTok{X12, }\DataTypeTok{HomeWins=}\NormalTok{X13, }\DataTypeTok{HomeLosses=}\NormalTok{X14, }\DataTypeTok{Blank3=}\NormalTok{X15, }\DataTypeTok{AwayWins=}\NormalTok{X16, }\DataTypeTok{AwayLosses=}\NormalTok{X17, }\DataTypeTok{Blank4=}\NormalTok{X18, }\DataTypeTok{ForPoints=}\NormalTok{X19, }\DataTypeTok{OppPoints=}\NormalTok{X20, }\DataTypeTok{Blank5=}\NormalTok{X21, }\DataTypeTok{Minutes=}\NormalTok{X22, }\DataTypeTok{FieldGoalsMade=}\NormalTok{X23, }\DataTypeTok{FieldGoalsAttempted=}\NormalTok{X24, }\DataTypeTok{FieldGoalPCT=}\NormalTok{X25, }\DataTypeTok{ThreePointMade=}\NormalTok{X26, }\DataTypeTok{ThreePointAttempts=}\NormalTok{X27, }\DataTypeTok{ThreePointPct=}\NormalTok{X28, }\DataTypeTok{FreeThrowsMade=}\NormalTok{X29, }\DataTypeTok{FreeThrowsAttempted=}\NormalTok{X30, }\DataTypeTok{FreeThrowPCT=}\NormalTok{X31, }\DataTypeTok{OffensiveRebounds=}\NormalTok{X32, }\DataTypeTok{TotalRebounds=}\NormalTok{X33, }\DataTypeTok{Assists=}\NormalTok{X34, }\DataTypeTok{Steals=}\NormalTok{X35, }\DataTypeTok{Blocks=}\NormalTok{X36, }\DataTypeTok{Turnovers=}\NormalTok{X37, }\DataTypeTok{PersonalFouls=}\NormalTok{X38)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6477,11 +6477,19 @@ Now we have to get rid of those headers interspersed in the data. We can do that
 \end{Highlighting}
 \end{Shaded}
 
-And finally, we need to change the file type of all the fields that need it. We're going to use a clever little trick, which goes like this: We're going to use \texttt{mutate\_at}, which means mutate these fields. The pattern for \texttt{mutate\_at} is \texttt{mutate\_at} these variables and do this thing to them. But instead of specifying which of 33 variables we're going to mutate, we're going to specify the one we don't want to change, which is the name of the school. And we just want to convert them to numeric. Here's what it looks like:
+And finally, we need to change the file type of all the fields that need it. We're going to use a clever little trick, which goes like this: We're going to use \texttt{mutate\_at}, which means mutate these fields. The pattern for \texttt{mutate\_at} is \texttt{mutate\_at} these variables and do this thing to them. But instead of specifying which of 38 variables we're going to mutate, we're going to specify the one we don't want to change, which is the name of the school. And we just want to convert them to numeric, which is simple. Here's what it looks like:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{stats <-}\StringTok{ }\NormalTok{stats }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate_at}\NormalTok{(}\KeywordTok{vars}\NormalTok{(}\OperatorTok{-}\NormalTok{School), as.numeric)}
+\end{Highlighting}
+\end{Shaded}
+
+One last thing: Who needs columns called Blank1, Blank2, Blank3, etc?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{stats <-}\StringTok{ }\NormalTok{stats }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\KeywordTok{starts_with}\NormalTok{(}\StringTok{"Blank"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6502,47 +6510,40 @@ And just like that, we have a method for getting up to the minute season stats f
 ## 5    5     Alabama-Birmingham    35          20            15  0.571       0.36
 ## 6    6          Alabama State    31          12            19  0.387     -15.60
 ##   OverallSOS ConferenceWins ConferenceLosses HomeWins HomeLosses AwayWins
-## 1      -7.34             NA               14        4         NA       13
-## 2       0.24             NA                8       10         NA        9
-## 3       1.09             NA                8       10         NA       14
-## 4      -8.38             NA                4       14         NA        4
-## 5      -1.52             NA               10        8         NA       11
-## 6      -7.84             NA                9        9         NA        8
-##   AwayLosses ForPoints OppPoints Blank Minutes FieldGoalsMade
-## 1          2        NA        10     4      NA           2502
-## 2          6        NA         3     9      NA           2179
-## 3          3        NA         1    10      NA           2271
-## 4          7        NA         0    18      NA           1938
-## 5          5        NA         6     6      NA           2470
-## 6          3        NA         3    13      NA           2086
-##   FieldGoalsAttempted FieldGoalPCT ThreePointMade ThreePointAttempts
-## 1                2161           NA           1370                897
-## 2                2294           NA           1300                802
-## 3                2107           NA           1325                797
-## 4                2285           NA           1295                736
-## 5                2370           NA           1410                906
-## 6                2235           NA           1250                712
-##   ThreePointPct FreeThrowsMade FreeThrowsAttempted FreeThrowPCT
-## 1          1911          0.469                 251          660
-## 2          1776          0.452                 234          711
-## 3          1948          0.409                 297          929
-## 4          1809          0.407                 182          578
-## 5          2003          0.452                 234          694
-## 6          1764          0.404                 216          673
-##   OffensiveRebounds TotalRebounds Assists Steals Blocks Turnovers PersonalFouls
-## 1             0.380           457     642  0.712    325      1110           525
-## 2             0.329           341     503  0.678    253      1077           434
-## 3             0.320           380     539  0.705    312      1204           399
-## 4             0.315           284     453  0.627    314      1032           385
-## 5             0.337           424     630  0.673    367      1279           401
-## 6             0.321           446     684  0.652    365      1094           313
-##   X35 X36 X37 X38
-## 1 297  93 407 635
-## 2 154  57 423 543
-## 3 185 106 388 569
-## 4 234  50 487 587
-## 5 218  82 399 578
-## 6 203 102 451 565
+## 1      -7.34             14                4       13          2       10
+## 2       0.24              8               10        9          6        3
+## 3       1.09              8               10       14          3        1
+## 4      -8.38              4               14        4          7        0
+## 5      -1.52             10                8       11          5        6
+## 6      -7.84              9                9        8          3        3
+##   AwayLosses ForPoints OppPoints Minutes FieldGoalsMade FieldGoalsAttempted
+## 1          4      2502      2161    1370            897                1911
+## 2          9      2179      2294    1300            802                1776
+## 3         10      2271      2107    1325            797                1948
+## 4         18      1938      2285    1295            736                1809
+## 5          6      2470      2370    1410            906                2003
+## 6         13      2086      2235    1250            712                1764
+##   FieldGoalPCT ThreePointMade ThreePointAttempts ThreePointPct FreeThrowsMade
+## 1        0.469            251                660         0.380            457
+## 2        0.452            234                711         0.329            341
+## 3        0.409            297                929         0.320            380
+## 4        0.407            182                578         0.315            284
+## 5        0.452            234                694         0.337            424
+## 6        0.404            216                673         0.321            446
+##   FreeThrowsAttempted FreeThrowPCT OffensiveRebounds TotalRebounds Assists
+## 1                 642        0.712               325          1110     525
+## 2                 503        0.678               253          1077     434
+## 3                 539        0.705               312          1204     399
+## 4                 453        0.627               314          1032     385
+## 5                 630        0.673               367          1279     401
+## 6                 684        0.652               365          1094     313
+##   Steals Blocks Turnovers PersonalFouls
+## 1    297     93       407           635
+## 2    154     57       423           543
+## 3    185    106       388           569
+## 4    234     50       487           587
+## 5    218     82       399           578
+## 6    203    102       451           565
 \end{verbatim}
 
 \hypertarget{advanced-rvest}{%
@@ -6868,7 +6869,7 @@ The rest is just adding labels and messing with the theme.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-280-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-281-1.pdf}
 
 \hypertarget{finishing-touches}{%
 \chapter{Finishing touches}\label{finishing-touches}}
@@ -6992,7 +6993,7 @@ We'll start with the basics.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-285-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-286-1.pdf}
 
 Let's take changing things one by one. The first thing we can do is change the figure size. Sometimes you don't want a square. We can use the \texttt{knitr} output settings in our chunk to do this easily in our notebooks.
 
@@ -7003,7 +7004,7 @@ Let's take changing things one by one. The first thing we can do is change the f
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-286-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-287-1.pdf}
 
 Now let's add a fit line.
 
@@ -7018,7 +7019,7 @@ Now let's add a fit line.
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-287-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-288-1.pdf}
 
 And now some labels.
 
@@ -7034,7 +7035,7 @@ And now some labels.
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-288-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-289-1.pdf}
 
 Let's get rid of the default plot look and drop the grey background.
 
@@ -7051,7 +7052,7 @@ Let's get rid of the default plot look and drop the grey background.
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-289-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-290-1.pdf}
 
 Off to a good start, but our text has no real heirarchy. We'd want our headline to stand out more. So let's change that. When it comes to changing text, the place to do that is in the theme element. \href{http://ggplot2.tidyverse.org/reference/theme.html}{There are a lot of ways to modify the theme}. We'll start easy. Let's make the headline bigger and bold.
 
@@ -7071,7 +7072,7 @@ Off to a good start, but our text has no real heirarchy. We'd want our headline 
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-290-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-291-1.pdf}
 
 Now let's fix a few other things -- like the axis labels being too big, the subtitle could be bigger and lets drop some grid lines.
 
@@ -7094,7 +7095,7 @@ Now let's fix a few other things -- like the axis labels being too big, the subt
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-291-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-292-1.pdf}
 
 Missing from this graph is the context that the headline promises. Where is Nebraska? We haven't added it yet. So let's add a point and a label for it.
 
@@ -7119,7 +7120,7 @@ Missing from this graph is the context that the headline promises. Where is Nebr
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-292-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-293-1.pdf}
 
 If we're happy with this output -- if it meets all of our needs for publication -- then we can simply export it as a png file. We do that by adding \texttt{+\ ggsave("plot.png",\ width=5,\ height=2)} to the end of our code. Note the width and the height are from our knitr parameters at the top -- you have to repeat them or the graph will export at the default 7x7.
 
@@ -7166,7 +7167,7 @@ We can add labels and themes, but you have to be careful. The waffle library is 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-295-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-296-1.pdf}
 
 Note: The alignment of text sucks.
 
@@ -7223,7 +7224,7 @@ Here is a full example. I start with my waffle iron code, but note that each waf
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-297-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-298-1.pdf}
 
 If you try to use ggsave on that, you'll only get the last waffle chart. Like I said, irons aren't really anything, so ggplot ignores them. So to do this, we have to use R's pdf capability.
 
@@ -7363,7 +7364,7 @@ The two bits of text are extremely important. Let's set up a chart and talk abou
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-301-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-302-1.pdf}
 
 First, let's start with some headline basics:
 
@@ -7404,7 +7405,7 @@ Given our graph, here's a few that don't work.
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-302-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-303-1.pdf}
 The problems here:
 
 \begin{itemize}
@@ -7442,7 +7443,7 @@ Another example:
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-303-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-304-1.pdf}
 What's wrong here?
 
 \begin{itemize}
@@ -7482,7 +7483,7 @@ Let's try to do this better.
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-304-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-305-1.pdf}
 
 What works here:
 
@@ -7519,7 +7520,7 @@ One more, same chart.
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-305-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-306-1.pdf}
 
 What works here:
 
@@ -7592,7 +7593,7 @@ Let's look at the relationship between a player's batting average and wRC+ (\hre
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-308-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-309-1.pdf}
 
 You can obviously add more aesthetics to make it look better, but you get the picture. If I'm a fan of sports though, obviously I want to see who the outlier points are or just scroll through and see each player at an individual location. We can always annotate data, but that process can be tedious.
 
@@ -7620,7 +7621,7 @@ Let's start simple with just the minimum needed for a scatterplot. For that, we 
 ##   Read more about this attribute -> https://plot.ly/r/reference/#scatter-mode
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-309-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-310-1.pdf}
 
 We get a chart, but hover over a point. Recognize those players? You can't unless you know each player's specific stats to divine who they are. That isn't very friendly, so let's add a hover element. Then we want to specify what we want our users to see when they hover over a data point, hence hoverinfo = ``text''. The next step will be to define what our text is. How that gets done is a little bit of HTML and a little bit of R. What is in quotes is what the users are going to see directly, what's after the quotes is what data is going to appear. So ``Player:'', Name translates to something like Player: Christian Yelich when the user hovers above Yelich's data point.
 
@@ -7651,7 +7652,7 @@ Then we add the HTML, \texttt{\textless{}br\textgreater{}}, or break. All this m
 ##   Read more about this attribute -> https://plot.ly/r/reference/#scatter-mode
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-310-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-311-1.pdf}
 
 Now we can see each player a little better. If you look at the players on the farthest right, you'll find Mike Trout (shocker), Yordan Alvarez and Christian Yelich.
 
@@ -7687,7 +7688,7 @@ To finish, we're going to fix the layout a bit, very similar to how we've been d
 ##   Read more about this attribute -> https://plot.ly/r/reference/#scatter-mode
 \end{verbatim}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-311-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-312-1.pdf}
 
 \hypertarget{publishing-using-plotly}{%
 \section{Publishing using Plotly}\label{publishing-using-plotly}}
@@ -7858,7 +7859,7 @@ All you need to do in this code is change out the data frame -- \texttt{playerss
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-319-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-320-1.pdf}
 
 The Elbow method -- so named because you're looking for the ``elbow'' where the line flattens out. In this case, it looks like a K of 5 is ideal. So let's try that. We're going to use the kmeans function, saving it to an object called k5. We just need to tell it our dataframe name, how many centers (k) we want, and we'll use a sensible default for how many different configurations to try.
 
@@ -8008,7 +8009,7 @@ So Cam's in cluster 5, which if you look at our clusters, puts him in the cluste
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-324-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-325-1.pdf}
 
 Not bad, not bad. But who are Cam Mack's peers? If we look at the numbers in Group 5, there's 495 of them. So let's limit them to just Big Ten guards. Unfortunately, my scraper didn't quite work and in the place of Conference is the coach's name. So I'm going to have to do this the hard way and make a list of Big Ten teams and filter on that. Then I'll sort by minutes played.
 
@@ -8127,7 +8128,7 @@ Let's find the optimal number of clusters.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-328-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-329-1.pdf}
 
 Looks like 5 again.
 
@@ -8394,6 +8395,14 @@ Before you run the following code chunk, though, be aware a few things will take
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## Warning: Rate limit exceeded - 88
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Rate limit exceeded
+\end{verbatim}
 
 \textbf{Important Note}: Depending on when you run the above code chunk, the API will return different data then the data used for the examples later in this chapter. This is due to the query rate cap Twitter places on it's API. Twitter's API caps queries to 18,000 of the most recent tweets during the past couple of days. This cap resets every 15 minutes. The \texttt{rtweet} package does has functionality to pull data once your query limit resets. However, if you're looking to pull tweets for a very popular event (e.g., The Super Bowl), you may want to consider other options to extract this type of data. This is also important to understand because if you are looking to pull tweets for a specific event, you will need to make sure you are pulling this data within a reasonable time during or after the event. If you don't, these rate limits might not allow you access the data you need to do your analysis.
 
@@ -8665,7 +8674,7 @@ One question we might have pertains to the number of tweets that occur during th
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-344-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-345-1.pdf}
 
 There you have it. A trend line plotting tweet volume throughout the course of the event. Do you see any areas where the match might have had a significant number of tweets?
 
@@ -8739,7 +8748,7 @@ Now that we have a tidied textual data set, all we need to do is apply our senti
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-346-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-347-1.pdf}
 
 When looking at this trend line, you can see that during the volleyball game, tweets using the \#husker and \#gbr hashtags had some wide variation in sentiment. Overall it seems that tweets during the volleyball match were mostly positive, where at times it dipped negative. Why might this be the case? Well, unfortunately, even though this was a big game for Husker volleyball, not many people were tweeting during the match (take a look at the number of tweets chart above). So if there was one word used in a tweet that was ranked as very negative in sentiment, it would have easily drove our average sentiment into the negative region quickly.
 
@@ -8778,7 +8787,7 @@ Now, let's just get a sense of the number of tweets that occurred at certain poi
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-348-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-349-1.pdf}
 
 Looking at this plot, we can see the tweet volume is a lot higher than that of the volleyball match. In fact, it looks like towards the end of the game there was a five minute interval where \textasciitilde80 or so tweets occurred. Given the outcome of the game, I assume people were not real happy during this spike in activity. Well we have the tools to answer this question.
 
@@ -8841,7 +8850,7 @@ You can then use the \texttt{ggplot} code to plot sentiment over time, introduce
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-350-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-351-1.pdf}
 
 As you can see, it started out pretty positive. Then, it started to go negative throughout the first half. However, there was a bump, which was around the time D-Lineman, Darrion Daniels almost scored a pick six. Around halftime, we can see a little bit of a bump towards positive sentiment. This was probably most likely due to people cheering on the Huskers to come out strong after the half. As the second half progressed, you can see things turned for the worst again, and sentiment became negative up until the end of the game, most likely because people realized they were going to get another L on the schedule. You can relive all this excitement again by catching the game recap \href{https://www.youtube.com/watch?v=m0hKH6Zb0vY\&feature=onebox}{here}.
 
@@ -8924,7 +8933,7 @@ With cowplot, we can use a function called \texttt{plot\_grid} to arrange the ch
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-357-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-358-1.pdf}
 
 We can also stack them on top of each other:
 
@@ -8934,7 +8943,7 @@ We can also stack them on top of each other:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-358-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-359-1.pdf}
 
 To make these publishable, we should add headlines, chatter, decent labels, credit lines, etc. But to do this, we'll have to figure out which labels go on which charts, so we can make it look decent. For example -- both charts don't need x or y labels. If you don't have a title and subtitle on both, the spacing is off, so you need to leave one blank or the other blank. You'll just have to fiddle with it until you get it looking right.
 
@@ -9025,7 +9034,7 @@ We've done this before, but let's make a standard scatterplot of minutes and poi
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-364-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-365-1.pdf}
 
 So we can see right away that there are some dots at the very top that we'd want to highlight. Who are these scoring machines?
 
@@ -9045,7 +9054,7 @@ And like we've done in the past, we can add it to the chart with another geom\_p
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-366-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-367-1.pdf}
 
 And like that, we're on the path to something publishable. We'll need to label those dots with \texttt{ggrepel} and we'll need to drop the default grey and add some headlines and all that. And, for the most part, we've got a solid chart.
 
@@ -9065,7 +9074,7 @@ Let's start with \texttt{s\_shape} 1 and \texttt{expand} 1.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-367-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-368-1.pdf}
 
 Whoa. That's \ldots{} not good.
 
@@ -9080,7 +9089,7 @@ Let's go the opposite direction.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-368-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-369-1.pdf}
 
 Better, but \ldots{} the circle cuts through multiple dots.
 
@@ -9095,7 +9104,7 @@ This takes a little bit of finessing, but a shape of .5 means the line will have
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-369-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-370-1.pdf}
 
 Now let's clean this up and make it presentable. If you look at the top scorers, only two were Wooden Award finalists. So here's what a chart telling that story might look like.
 
@@ -9117,7 +9126,7 @@ Now let's clean this up and make it presentable. If you look at the top scorers,
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-370-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-371-1.pdf}
 
 \hypertarget{a-different-more-local-example}{%
 \section{A different, more local example}\label{a-different-more-local-example}}
@@ -9151,7 +9160,7 @@ And just like above, we can plug in our players geom, our nutop dataframe into a
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-372-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-373-1.pdf}
 
 The dot on the far right? Cam Mack. Oh what could have been.
 
@@ -9218,7 +9227,7 @@ So Baylor was ranked in the 13th, 14th and 15th week, 9th, 7th and 7th, respecti
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-376-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-377-1.pdf}
 
 Well, it's a start. I'm immediately annoyed by the top teams being at the bottom. I learned a neat trick from ggbump that's been in ggplot all along -- \texttt{scale\_y\_reverse()}
 
@@ -9228,7 +9237,7 @@ Well, it's a start. I'm immediately annoyed by the top teams being at the bottom
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-377-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-378-1.pdf}
 
 Better. But, still not great. Let's add a point at each week.
 
@@ -9241,7 +9250,7 @@ Better. But, still not great. Let's add a point at each week.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-378-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-379-1.pdf}
 
 Another step. That makes it more subway map like. But the colors are all wrong. To fix this, we're going to use \texttt{scale\_color\_manual} and we're going to Google the hex codes for each team. The legend will tell you what order your \texttt{scale\_color\_manual} needs to be.
 
@@ -9255,7 +9264,7 @@ Another step. That makes it more subway map like. But the colors are all wrong. 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-379-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-380-1.pdf}
 
 Another step. But the legend is annoying. And trying to find which red is Alabama vs Ohio State is hard. So what if we labeled each dot at the beginning and end? We can do that with some clever usage of geom\_text and a little dplyr filtering inside the data step. We filter out the first and last weeks, then use hjust -- horizontal justification -- to move them left or right.
 
@@ -9271,7 +9280,7 @@ Another step. But the legend is annoying. And trying to find which red is Alabam
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-380-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-381-1.pdf}
 
 Better, but the legend is still there. We can drop it in a theme directive by saying \texttt{legend.position\ =\ "none"}. We'll also throw a theme\_minimal on there to drop the default grey, and we'll add some better labeling.
 
@@ -9293,7 +9302,7 @@ Better, but the legend is still there. We can drop it in a theme directive by sa
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-381-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-382-1.pdf}
 
 Now let's fix our text hierarchy.
 
@@ -9319,7 +9328,7 @@ Now let's fix our text hierarchy.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-382-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-383-1.pdf}
 
 And the last thing: anyone else annoyed at 7.5th place on the left? We can fix that too by specifying the breaks in scale\_y\_reverse. We can do that with the x axis as well, but since we haven't reversed it, we do that in \texttt{scale\_x\_continuous} with the same breaks. Also: forgot my source and credit line.
 
@@ -9352,7 +9361,7 @@ One last thing: Let's change the width of the chart to make Ohio State and Penn 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-383-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-384-1.pdf}
 
 \hypertarget{text-cleaning}{%
 \chapter{Text cleaning}\label{text-cleaning}}
@@ -10039,7 +10048,7 @@ During the Western Illinois game, the team, shooting .329 on the season from beh
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SportsData_files/figure-latex/unnamed-chunk-401-1.pdf}
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-402-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]

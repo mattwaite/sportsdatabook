@@ -359,9 +359,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb417-7"><a href="intro-to-rvest.html#cb417-7"></a></span>
 <span id="cb417-8"><a href="intro-to-rvest.html#cb417-8"></a>scoringoffense18 &lt;-<span class="st"> </span>scoringoffense18[[<span class="dv">1</span>]]</span></code></pre></div>
 <p>First, how are we going to know, in the data, which year our data is from? We can use mutate.</p>
-<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="intro-to-rvest.html#cb418-1"></a>scoringoffense19 &lt;-<span class="st"> </span>scoringoffense <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">YEAR =</span> <span class="dv">2019</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="intro-to-rvest.html#cb418-1"></a>scoringoffense18 &lt;-<span class="st"> </span>scoringoffense <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">YEAR =</span> <span class="dv">2019</span>)</span></code></pre></div>
 <pre><code>## Error in env_bind_lazy(private$bindings, !!!set_names(promises, names_bindings)): attempt to use zero-length variable name</code></pre>
-<p>Uh oh. Error. What does it say? Column 1 must be named. If you look at our data in the environment tab in the upper right corner, you’ll see that indeed, the first column has no name. It’s the FBS rank of each team. So we can fix that and mutate in the same step. We’ll do that using <code>rename</code> and since the field doesn’t have a name to rename it, we’ll use a position argument. We’ll say rename column 1 as Rank.</p>
+<p>Uh oh. Error. What does it say? It’s … not clear, but a hint is that our first column doesn’t have a name. Each column must be named. If you look at our data in the environment tab in the upper right corner, you’ll see that indeed, the first column has no name. It’s the FBS rank of each team. So we can fix that and mutate in the same step. We’ll do that using <code>rename</code> and since the field doesn’t have a name to rename it, we’ll use a position argument. We’ll say rename column 1 as Rank.</p>
 <div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="intro-to-rvest.html#cb420-1"></a>scoringoffense19 &lt;-<span class="st"> </span>scoringoffense <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename</span>(<span class="dt">Rank =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">YEAR =</span> <span class="dv">2019</span>)</span>
 <span id="cb420-2"><a href="intro-to-rvest.html#cb420-2"></a>scoringoffense18 &lt;-<span class="st"> </span>scoringoffense18 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename</span>(<span class="dt">Rank =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">YEAR =</span> <span class="dv">2018</span>)</span></code></pre></div>
 <p>And now, to combine the two tables together length-wise – we need to make long data – we’ll use a base R function called <code>rbind</code>. The good thing is rbind is simple. The bad part is it can only do two tables at a time, so if you have more than that, you’ll need to do it in steps.</p>
@@ -421,14 +421,16 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 4    154     57    423    543
 ## 5    185    106    388    569
 ## 6    234     50    487    587</code></pre>
-<p>So, that’s not ideal. We have headers and data mixed together, and our columns are named X1 to X34. Also note: They’re all character fields. Because the headers are interspersed with data, it all gets called character data. So we’ve got to first rename each field.</p>
-<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="intro-to-rvest.html#cb429-1"></a>stats &lt;-<span class="st"> </span>stats <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename</span>(<span class="dt">Rank=</span>X1, <span class="dt">School=</span>X2, <span class="dt">Games=</span>X3, <span class="dt">OverallWins=</span>X4, <span class="dt">OverallLosses=</span>X5, <span class="dt">WinPct=</span>X6, <span class="dt">OverallSRS=</span>X7, <span class="dt">OverallSOS=</span>X8, <span class="dt">ConferenceWins=</span>X9, <span class="dt">ConferenceLosses=</span>X10, <span class="dt">HomeWins=</span>X11, <span class="dt">HomeLosses=</span>X12, <span class="dt">AwayWins=</span>X13, <span class="dt">AwayLosses=</span>X14, <span class="dt">ForPoints=</span>X15, <span class="dt">OppPoints=</span>X16, <span class="dt">Blank=</span>X17, <span class="dt">Minutes=</span>X18, <span class="dt">FieldGoalsMade=</span>X19, <span class="dt">FieldGoalsAttempted=</span>X20, <span class="dt">FieldGoalPCT=</span>X21, <span class="dt">ThreePointMade=</span>X22, <span class="dt">ThreePointAttempts=</span>X23, <span class="dt">ThreePointPct=</span>X24, <span class="dt">FreeThrowsMade=</span>X25, <span class="dt">FreeThrowsAttempted=</span>X26, <span class="dt">FreeThrowPCT=</span>X27, <span class="dt">OffensiveRebounds=</span>X28, <span class="dt">TotalRebounds=</span>X29, <span class="dt">Assists=</span>X30, <span class="dt">Steals=</span>X31, <span class="dt">Blocks=</span>X32, <span class="dt">Turnovers=</span>X33, <span class="dt">PersonalFouls=</span>X34)</span></code></pre></div>
+<p>So, that’s not ideal. We have headers and data mixed together, and our columns are named X1 to X38. Also note: They’re all character fields. Because the headers are interspersed with data, it all gets called character data. So we’ve got to first rename each field.</p>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="intro-to-rvest.html#cb429-1"></a>stats &lt;-<span class="st"> </span>stats <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename</span>(<span class="dt">Rank=</span>X1, <span class="dt">School=</span>X2, <span class="dt">Games=</span>X3, <span class="dt">OverallWins=</span>X4, <span class="dt">OverallLosses=</span>X5, <span class="dt">WinPct=</span>X6, <span class="dt">OverallSRS=</span>X7, <span class="dt">OverallSOS=</span>X8, <span class="dt">Blank1=</span>X9, <span class="dt">ConferenceWins=</span>X10, <span class="dt">ConferenceLosses=</span>X11, <span class="dt">Blank2=</span>X12, <span class="dt">HomeWins=</span>X13, <span class="dt">HomeLosses=</span>X14, <span class="dt">Blank3=</span>X15, <span class="dt">AwayWins=</span>X16, <span class="dt">AwayLosses=</span>X17, <span class="dt">Blank4=</span>X18, <span class="dt">ForPoints=</span>X19, <span class="dt">OppPoints=</span>X20, <span class="dt">Blank5=</span>X21, <span class="dt">Minutes=</span>X22, <span class="dt">FieldGoalsMade=</span>X23, <span class="dt">FieldGoalsAttempted=</span>X24, <span class="dt">FieldGoalPCT=</span>X25, <span class="dt">ThreePointMade=</span>X26, <span class="dt">ThreePointAttempts=</span>X27, <span class="dt">ThreePointPct=</span>X28, <span class="dt">FreeThrowsMade=</span>X29, <span class="dt">FreeThrowsAttempted=</span>X30, <span class="dt">FreeThrowPCT=</span>X31, <span class="dt">OffensiveRebounds=</span>X32, <span class="dt">TotalRebounds=</span>X33, <span class="dt">Assists=</span>X34, <span class="dt">Steals=</span>X35, <span class="dt">Blocks=</span>X36, <span class="dt">Turnovers=</span>X37, <span class="dt">PersonalFouls=</span>X38)</span></code></pre></div>
 <p>Now we have to get rid of those headers interspersed in the data. We can do that with filter that say keep all the stuff that isn’t this.</p>
 <div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="intro-to-rvest.html#cb430-1"></a>stats &lt;-<span class="st"> </span>stats <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Rank <span class="op">!=</span><span class="st"> &quot;Rk&quot;</span> <span class="op">&amp;</span><span class="st"> </span>Games <span class="op">!=</span><span class="st"> &quot;Overall&quot;</span>) </span></code></pre></div>
-<p>And finally, we need to change the file type of all the fields that need it. We’re going to use a clever little trick, which goes like this: We’re going to use <code>mutate_at</code>, which means mutate these fields. The pattern for <code>mutate_at</code> is <code>mutate_at</code> these variables and do this thing to them. But instead of specifying which of 33 variables we’re going to mutate, we’re going to specify the one we don’t want to change, which is the name of the school. And we just want to convert them to numeric. Here’s what it looks like:</p>
+<p>And finally, we need to change the file type of all the fields that need it. We’re going to use a clever little trick, which goes like this: We’re going to use <code>mutate_at</code>, which means mutate these fields. The pattern for <code>mutate_at</code> is <code>mutate_at</code> these variables and do this thing to them. But instead of specifying which of 38 variables we’re going to mutate, we’re going to specify the one we don’t want to change, which is the name of the school. And we just want to convert them to numeric, which is simple. Here’s what it looks like:</p>
 <div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="intro-to-rvest.html#cb431-1"></a>stats &lt;-<span class="st"> </span>stats <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(<span class="op">-</span>School), as.numeric)</span></code></pre></div>
+<p>One last thing: Who needs columns called Blank1, Blank2, Blank3, etc?</p>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="intro-to-rvest.html#cb432-1"></a>stats &lt;-<span class="st"> </span>stats <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">starts_with</span>(<span class="st">&quot;Blank&quot;</span>))</span></code></pre></div>
 <p>And just like that, we have a method for getting up to the minute season stats for every team in Division I.</p>
-<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="intro-to-rvest.html#cb432-1"></a><span class="kw">head</span>(stats)</span></code></pre></div>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="intro-to-rvest.html#cb433-1"></a><span class="kw">head</span>(stats)</span></code></pre></div>
 <pre><code>##   Rank                 School Games OverallWins OverallLosses WinPct OverallSRS
 ## 1    1 Abilene Christian NCAA    34          27             7  0.794      -1.91
 ## 2    2              Air Force    32          14            18  0.438      -4.28
@@ -437,47 +439,40 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 5    5     Alabama-Birmingham    35          20            15  0.571       0.36
 ## 6    6          Alabama State    31          12            19  0.387     -15.60
 ##   OverallSOS ConferenceWins ConferenceLosses HomeWins HomeLosses AwayWins
-## 1      -7.34             NA               14        4         NA       13
-## 2       0.24             NA                8       10         NA        9
-## 3       1.09             NA                8       10         NA       14
-## 4      -8.38             NA                4       14         NA        4
-## 5      -1.52             NA               10        8         NA       11
-## 6      -7.84             NA                9        9         NA        8
-##   AwayLosses ForPoints OppPoints Blank Minutes FieldGoalsMade
-## 1          2        NA        10     4      NA           2502
-## 2          6        NA         3     9      NA           2179
-## 3          3        NA         1    10      NA           2271
-## 4          7        NA         0    18      NA           1938
-## 5          5        NA         6     6      NA           2470
-## 6          3        NA         3    13      NA           2086
-##   FieldGoalsAttempted FieldGoalPCT ThreePointMade ThreePointAttempts
-## 1                2161           NA           1370                897
-## 2                2294           NA           1300                802
-## 3                2107           NA           1325                797
-## 4                2285           NA           1295                736
-## 5                2370           NA           1410                906
-## 6                2235           NA           1250                712
-##   ThreePointPct FreeThrowsMade FreeThrowsAttempted FreeThrowPCT
-## 1          1911          0.469                 251          660
-## 2          1776          0.452                 234          711
-## 3          1948          0.409                 297          929
-## 4          1809          0.407                 182          578
-## 5          2003          0.452                 234          694
-## 6          1764          0.404                 216          673
-##   OffensiveRebounds TotalRebounds Assists Steals Blocks Turnovers PersonalFouls
-## 1             0.380           457     642  0.712    325      1110           525
-## 2             0.329           341     503  0.678    253      1077           434
-## 3             0.320           380     539  0.705    312      1204           399
-## 4             0.315           284     453  0.627    314      1032           385
-## 5             0.337           424     630  0.673    367      1279           401
-## 6             0.321           446     684  0.652    365      1094           313
-##   X35 X36 X37 X38
-## 1 297  93 407 635
-## 2 154  57 423 543
-## 3 185 106 388 569
-## 4 234  50 487 587
-## 5 218  82 399 578
-## 6 203 102 451 565</code></pre>
+## 1      -7.34             14                4       13          2       10
+## 2       0.24              8               10        9          6        3
+## 3       1.09              8               10       14          3        1
+## 4      -8.38              4               14        4          7        0
+## 5      -1.52             10                8       11          5        6
+## 6      -7.84              9                9        8          3        3
+##   AwayLosses ForPoints OppPoints Minutes FieldGoalsMade FieldGoalsAttempted
+## 1          4      2502      2161    1370            897                1911
+## 2          9      2179      2294    1300            802                1776
+## 3         10      2271      2107    1325            797                1948
+## 4         18      1938      2285    1295            736                1809
+## 5          6      2470      2370    1410            906                2003
+## 6         13      2086      2235    1250            712                1764
+##   FieldGoalPCT ThreePointMade ThreePointAttempts ThreePointPct FreeThrowsMade
+## 1        0.469            251                660         0.380            457
+## 2        0.452            234                711         0.329            341
+## 3        0.409            297                929         0.320            380
+## 4        0.407            182                578         0.315            284
+## 5        0.452            234                694         0.337            424
+## 6        0.404            216                673         0.321            446
+##   FreeThrowsAttempted FreeThrowPCT OffensiveRebounds TotalRebounds Assists
+## 1                 642        0.712               325          1110     525
+## 2                 503        0.678               253          1077     434
+## 3                 539        0.705               312          1204     399
+## 4                 453        0.627               314          1032     385
+## 5                 630        0.673               367          1279     401
+## 6                 684        0.652               365          1094     313
+##   Steals Blocks Turnovers PersonalFouls
+## 1    297     93       407           635
+## 2    154     57       423           543
+## 3    185    106       388           569
+## 4    234     50       487           587
+## 5    218     82       399           578
+## 6    203    102       451           565</code></pre>
 
 </div>
 </div>
