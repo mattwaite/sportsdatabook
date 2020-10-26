@@ -305,93 +305,72 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="annotations" class="section level1">
 <h1><span class="header-section-number">Chapter 27</span> Annotations</h1>
-<p>Some of the best sports data visualizations start with a provocative question. At a college just under three hours from Kansas City, my classes are lousy with Chiefs fans. So the first day of classes in the spring of 2019, I asked them: Are the Chief’s Screwed in the Playoffs? The answer ultimately was yes, and how I was able to make that argument before a playoff game had even been played is a good example of how labeling and annotations can make a chart much better.</p>
-<p>Going to add a new library to the mix called <code>ggrepel</code>. You’ll need to install it in the console with <code>install.packages("ggrepel")</code>.</p>
+<p>Some of the best sports data visualizations start with a provocative question. How about this one: Why does Oklahoma always blow it in the college football playoffs?</p>
+<p>For this, we’re going to go back to some code we started in Bubble Charts and we’re going to add some annotations to it. Annotations help us draw attention to things, or help the reader understand what they’re looking at. They’re labels on things, be that the teams we want to highlight or regions of the chart or lines or all of those things.</p>
+<p>For this, we’ll need to add a new library to the mix called <code>ggrepel</code>. You’ll need to install it in the console with <code>install.packages("ggrepel")</code>.</p>
 <div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="annotations.html#cb444-1"></a><span class="kw">library</span>(tidyverse)</span>
 <span id="cb444-2"><a href="annotations.html#cb444-2"></a><span class="kw">library</span>(ggrepel)</span></code></pre></div>
-<p>Now we’ll grab the data and join that data together using the Team name as the common element.</p>
-<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="annotations.html#cb445-1"></a>offense &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/nfloffense.csv&quot;</span>)</span></code></pre></div>
+<p>Now we’ll grab the data.</p>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="annotations.html#cb445-1"></a>logs &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/footballlogs19.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Parsed with column specification:
 ## cols(
 ##   .default = col_double(),
-##   Team = col_character()
+##   Date = col_date(format = &quot;&quot;),
+##   HomeAway = col_character(),
+##   Opponent = col_character(),
+##   Result = col_character(),
+##   TeamFull = col_character(),
+##   TeamURL = col_character(),
+##   Outcome = col_character(),
+##   Team = col_character(),
+##   Conference = col_character()
 ## )</code></pre>
 <pre><code>## See spec(...) for full column specifications.</code></pre>
-<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="annotations.html#cb448-1"></a>defense &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/nfldefense.csv&quot;</span>)</span></code></pre></div>
-<pre><code>## Parsed with column specification:
-## cols(
-##   .default = col_double(),
-##   Team = col_character()
-## )
-## See spec(...) for full column specifications.</code></pre>
-<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="annotations.html#cb450-1"></a>total &lt;-<span class="st"> </span>offense <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">left_join</span>(defense, <span class="dt">by=</span><span class="st">&quot;Team&quot;</span>)</span>
+<p>I’m going to set up a point chart that places teams on two-axes – yards per play on offense on the x axis, and yards per play on defense. We did this in the bubble charts example.</p>
+<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="annotations.html#cb448-1"></a>logs <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb448-2"><a href="annotations.html#cb448-2"></a><span class="st">  </span><span class="kw">group_by</span>(Team, Conference) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb448-3"><a href="annotations.html#cb448-3"></a><span class="st">  </span><span class="kw">summarise</span>(</span>
+<span id="cb448-4"><a href="annotations.html#cb448-4"></a>    <span class="dt">TotalPlays =</span> <span class="kw">sum</span>(OffensivePlays), </span>
+<span id="cb448-5"><a href="annotations.html#cb448-5"></a>    <span class="dt">TotalYards =</span> <span class="kw">sum</span>(OffensiveYards), </span>
+<span id="cb448-6"><a href="annotations.html#cb448-6"></a>    <span class="dt">DefensivePlays =</span> <span class="kw">sum</span>(DefPlays), </span>
+<span id="cb448-7"><a href="annotations.html#cb448-7"></a>    <span class="dt">DefensiveYards =</span> <span class="kw">sum</span>(DefYards)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb448-8"><a href="annotations.html#cb448-8"></a><span class="st">  </span><span class="kw">mutate</span>(</span>
+<span id="cb448-9"><a href="annotations.html#cb448-9"></a>    <span class="dt">OffensiveYPP =</span> TotalYards<span class="op">/</span>TotalPlays, </span>
+<span id="cb448-10"><a href="annotations.html#cb448-10"></a>    <span class="dt">DefensiveYPP =</span> DefensiveYards<span class="op">/</span>DefensivePlays) -&gt;<span class="st"> </span>ypp</span></code></pre></div>
+<pre><code>## `summarise()` regrouping output by &#39;Team&#39; (override with `.groups` argument)</code></pre>
+<p>To build the annotations, I want the average for offensive yards per play and defensive yards per play. We’re going to use those as a proxy for quality. If your team averages more yards per play on offense, that’s good. If they average fewer yards per play on defense, that too is good. So that sets up a situation where we have four corners, anchored by good at both and bad at both. The averages will create lines to divide those four corners up.</p>
+<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="annotations.html#cb450-1"></a>averages &lt;-<span class="st"> </span>ypp <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">AvgOffYardsPer =</span> <span class="kw">mean</span>(OffensiveYPP), <span class="dt">AvgDefYardsPer =</span> <span class="kw">mean</span>(DefensiveYPP))</span>
 <span id="cb450-2"><a href="annotations.html#cb450-2"></a></span>
-<span id="cb450-3"><a href="annotations.html#cb450-3"></a><span class="kw">head</span>(total)</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 52
-##   Team      G PointsFor OffYards OffPlays OffYardsPerPlay OffensiveTurnov…
-##   &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;           &lt;dbl&gt;            &lt;dbl&gt;
-## 1 Kans…    16       565     6810      996             6.8               18
-## 2 Los …    16       527     6738     1060             6.4               19
-## 3 New …    16       504     6067     1010             6                 16
-## 4 New …    16       436     6295     1073             5.9               18
-## 5 Indi…    16       433     6179     1070             5.8               24
-## 6 Pitt…    16       428     6453     1058             6.1               26
-## # … with 45 more variables: FumblesLost &lt;dbl&gt;, OffFirstDowns &lt;dbl&gt;,
-## #   OffPassingComp &lt;dbl&gt;, OffPassingAtt &lt;dbl&gt;, OffPassingYards &lt;dbl&gt;,
-## #   OffensivePassingTD &lt;dbl&gt;, OffPassingINT &lt;dbl&gt;,
-## #   OffensivePassingYardsPerAtt &lt;dbl&gt;, OffensivePassingFirstDowns &lt;dbl&gt;,
-## #   OffRushingAtt &lt;dbl&gt;, OffRushingYards &lt;dbl&gt;, OffRushingTD &lt;dbl&gt;,
-## #   RushingYardsPerAtt &lt;dbl&gt;, RushingFirstDowns &lt;dbl&gt;,
-## #   OffensivePenalties &lt;dbl&gt;, OffPenaltyYards &lt;dbl&gt;,
-## #   OffFirstFromPenalties &lt;dbl&gt;, OffScoringPct &lt;dbl&gt;,
-## #   OffensiveTurnoverPct &lt;dbl&gt;, OffensiveExpectedPoints &lt;dbl&gt;,
-## #   PointsAllowed &lt;dbl&gt;, YdsAllowed &lt;dbl&gt;, PlaysFaced &lt;dbl&gt;,
-## #   DefYardPerPlay &lt;dbl&gt;, Takeaways &lt;dbl&gt;, DefFumblesLost &lt;dbl&gt;,
-## #   FirstDownsAllowed &lt;dbl&gt;, PassingCompsAllowed &lt;dbl&gt;, PassingAttFaced &lt;dbl&gt;,
-## #   PassingYdsAllowed &lt;dbl&gt;, PassingTDAllowed &lt;dbl&gt;, DefPassingINT &lt;dbl&gt;,
-## #   PassingYardsPerPlayAllowed &lt;dbl&gt;, PassingFirstDownsAllowed &lt;dbl&gt;,
-## #   RushingAttFaced &lt;dbl&gt;, RushingYdsAllowed &lt;dbl&gt;, RushingTDAllowed &lt;dbl&gt;,
-## #   RushingYardsPerAttAllowed &lt;dbl&gt;, RushingFirstDownsAllowed &lt;dbl&gt;,
-## #   DefPenalties &lt;dbl&gt;, DefPenaltyYards &lt;dbl&gt;, DefFirstDownByPenalties &lt;dbl&gt;,
-## #   OffensiveScoringPctAllowed &lt;dbl&gt;, DefTurnoverPercentage &lt;dbl&gt;,
-## #   DefExpectedPoints &lt;dbl&gt;</code></pre>
-<p>I’m going to set up a point chart that places team on two-axes – yards per play on offense on the x axis, and yards per play on defense.</p>
-<p>To build the annotations, I want the league average for offensive yards per play and defensive yards per play. We’re going to use those as a proxy for quality. If your team averages more yards per play on offense, that’s good. If they average fewer yards per play on defense, that too is good. So that sets up a situation where we have four corners, anchored by good at both and bad at both. The averages will create lines to divide those four corners up.</p>
-<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="annotations.html#cb452-1"></a>league_averages &lt;-<span class="st"> </span>total <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">AvgOffYardsPer =</span> <span class="kw">mean</span>(OffYardsPerPlay), <span class="dt">AvgDefYardsPer =</span> <span class="kw">mean</span>(DefYardPerPlay))</span>
-<span id="cb452-2"><a href="annotations.html#cb452-2"></a></span>
-<span id="cb452-3"><a href="annotations.html#cb452-3"></a>league_averages</span></code></pre></div>
+<span id="cb450-3"><a href="annotations.html#cb450-3"></a>averages</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 2
 ##   AvgOffYardsPer AvgDefYardsPer
 ##            &lt;dbl&gt;          &lt;dbl&gt;
-## 1           5.59           5.59</code></pre>
-<p>I also want to highlight playoff teams and, of course, the Chiefs, since that was my question. Are they screwed. First, we filter them from our total list.</p>
-<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="annotations.html#cb454-1"></a>playoff_teams &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Kansas City Chiefs&quot;</span>, <span class="st">&quot;New England Patriots&quot;</span>, <span class="st">&quot;Los Angeles Chargers&quot;</span>, <span class="st">&quot;Indianapolis Colts&quot;</span>, <span class="st">&quot;New Orleans Saints&quot;</span>, <span class="st">&quot;Los Angeles Rams&quot;</span>, <span class="st">&quot;Chicago Bears&quot;</span>, <span class="st">&quot;Dallas Cowboys&quot;</span>, <span class="st">&quot;Philadelphia Eagles&quot;</span>)</span>
-<span id="cb454-2"><a href="annotations.html#cb454-2"></a></span>
-<span id="cb454-3"><a href="annotations.html#cb454-3"></a>playoffs &lt;-<span class="st"> </span>total <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Team <span class="op">%in%</span><span class="st"> </span>playoff_teams)</span>
-<span id="cb454-4"><a href="annotations.html#cb454-4"></a></span>
-<span id="cb454-5"><a href="annotations.html#cb454-5"></a>chiefs &lt;-<span class="st"> </span>total <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Team <span class="op">==</span><span class="st"> &quot;Kansas City Chiefs&quot;</span>)</span></code></pre></div>
-<p>Now we create the plot. We have three geom_points, starting with everyone, then playoff teams, then the Chiefs. I alter the colors on each to separate them. Next, I add a geom_hline to add the horizontal line of my defensive average and a geom_vline for my offensive average. Next, I want to add some text annotations, labeling two corners of my chart (the other two, in my opinion, become obvious). Then, I want to label all the playoff teams. I use <code>geom_text_repel</code> to do that – it’s using the ggrepel library to push the text away from the dots, respective of other labels and other dots. It means you don’t have to move them around so you can read them, or so they don’t cover up the dots.</p>
+## 1           5.82           5.67</code></pre>
+<p>I also want to highlight playoff teams.</p>
+<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="annotations.html#cb452-1"></a>playoff_teams &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Oklahoma&quot;</span>, <span class="st">&quot;LSU&quot;</span>, <span class="st">&quot;Clemson&quot;</span>, <span class="st">&quot;Ohio State&quot;</span>)</span>
+<span id="cb452-2"><a href="annotations.html#cb452-2"></a></span>
+<span id="cb452-3"><a href="annotations.html#cb452-3"></a>playoffs &lt;-<span class="st"> </span>ypp <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Team <span class="op">%in%</span><span class="st"> </span>playoff_teams)</span></code></pre></div>
+<p>Now we create the plot. We have two geom_points, starting with everyone, then playoff teams. I alter the colors on each to separate them. Next, I add a geom_hline to add the horizontal line of my defensive average and a geom_vline for my offensive average. Next, I want to add some text annotations, labeling two corners of my chart (the other two, in my opinion, become obvious). Then, I want to label all the playoff teams. I use <code>geom_text_repel</code> to do that – it’s using the ggrepel library to push the text away from the dots, respective of other labels and other dots. It means you don’t have to move them around so you can read them, or so they don’t cover up the dots.</p>
 <p>The rest is just adding labels and messing with the theme.</p>
-<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="annotations.html#cb455-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb455-2"><a href="annotations.html#cb455-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>total, <span class="kw">aes</span>(<span class="dt">x=</span>OffYardsPerPlay, <span class="dt">y=</span>DefYardPerPlay), <span class="dt">color=</span><span class="st">&quot;light grey&quot;</span>) <span class="op">+</span></span>
-<span id="cb455-3"><a href="annotations.html#cb455-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>playoffs, <span class="kw">aes</span>(<span class="dt">x=</span>OffYardsPerPlay, <span class="dt">y=</span>DefYardPerPlay)) <span class="op">+</span></span>
-<span id="cb455-4"><a href="annotations.html#cb455-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>chiefs, <span class="kw">aes</span>(<span class="dt">x=</span>OffYardsPerPlay, <span class="dt">y=</span>DefYardPerPlay), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span></span>
-<span id="cb455-5"><a href="annotations.html#cb455-5"></a><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span><span class="fl">5.59375</span>, <span class="dt">color=</span><span class="st">&quot;dark grey&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb455-6"><a href="annotations.html#cb455-6"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="fl">5.590625</span>, <span class="dt">color=</span><span class="st">&quot;dark grey&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb455-7"><a href="annotations.html#cb455-7"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">x=</span><span class="fl">6.2</span>, <span class="dt">y=</span><span class="dv">5</span>, <span class="dt">label=</span><span class="st">&quot;Good Offense, Good Defense&quot;</span>), <span class="dt">color=</span><span class="st">&quot;light blue&quot;</span>) <span class="op">+</span></span>
-<span id="cb455-8"><a href="annotations.html#cb455-8"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">x=</span><span class="dv">5</span>, <span class="dt">y=</span><span class="dv">6</span>, <span class="dt">label=</span><span class="st">&quot;Bad Defense, Bad Offense&quot;</span>), <span class="dt">color=</span><span class="st">&quot;light blue&quot;</span>) <span class="op">+</span></span>
-<span id="cb455-9"><a href="annotations.html#cb455-9"></a><span class="st">  </span><span class="kw">geom_text_repel</span>(<span class="dt">data=</span>playoffs, <span class="kw">aes</span>(<span class="dt">x=</span>OffYardsPerPlay, <span class="dt">y=</span>DefYardPerPlay, <span class="dt">label=</span>Team)) <span class="op">+</span></span>
-<span id="cb455-10"><a href="annotations.html#cb455-10"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Offensive Yards Per Play&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Defensive Points Per Play&quot;</span>, <span class="dt">title=</span><span class="st">&quot;Are the Chiefs screwed in the playoffs?&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;Their offense is great. Their defense? Not so much&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Source: Sports-Reference.com | By Matt Waite&quot;</span>) <span class="op">+</span></span>
-<span id="cb455-11"><a href="annotations.html#cb455-11"></a><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb455-12"><a href="annotations.html#cb455-12"></a><span class="st">  </span><span class="kw">theme</span>(</span>
-<span id="cb455-13"><a href="annotations.html#cb455-13"></a>    <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">16</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb455-14"><a href="annotations.html#cb455-14"></a>    <span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>),</span>
-<span id="cb455-15"><a href="annotations.html#cb455-15"></a>    <span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">7</span>),</span>
-<span id="cb455-16"><a href="annotations.html#cb455-16"></a>    <span class="dt">axis.ticks =</span> <span class="kw">element_blank</span>(),</span>
-<span id="cb455-17"><a href="annotations.html#cb455-17"></a>    <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),</span>
-<span id="cb455-18"><a href="annotations.html#cb455-18"></a>    <span class="dt">panel.grid.major.x =</span> <span class="kw">element_blank</span>()</span>
-<span id="cb455-19"><a href="annotations.html#cb455-19"></a>  )</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-279-1.png" width="672" /></p>
+<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="annotations.html#cb453-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb453-2"><a href="annotations.html#cb453-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>ypp, <span class="kw">aes</span>(<span class="dt">x=</span>OffensiveYPP, <span class="dt">y=</span>DefensiveYPP), <span class="dt">color=</span><span class="st">&quot;light grey&quot;</span>) <span class="op">+</span></span>
+<span id="cb453-3"><a href="annotations.html#cb453-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>playoffs, <span class="kw">aes</span>(<span class="dt">x=</span>OffensiveYPP, <span class="dt">y=</span>DefensiveYPP)) <span class="op">+</span></span>
+<span id="cb453-4"><a href="annotations.html#cb453-4"></a><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span><span class="fl">5.673263</span>, <span class="dt">color=</span><span class="st">&quot;dark grey&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb453-5"><a href="annotations.html#cb453-5"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="fl">5.820543</span>, <span class="dt">color=</span><span class="st">&quot;dark grey&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb453-6"><a href="annotations.html#cb453-6"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">x=</span><span class="fl">6.8</span>, <span class="dt">y=</span><span class="dv">5</span>, <span class="dt">label=</span><span class="st">&quot;Good Offense, Good Defense&quot;</span>), <span class="dt">color=</span><span class="st">&quot;blue&quot;</span>) <span class="op">+</span></span>
+<span id="cb453-7"><a href="annotations.html#cb453-7"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">x=</span><span class="dv">5</span>, <span class="dt">y=</span><span class="dv">6</span>, <span class="dt">label=</span><span class="st">&quot;Bad Defense, Bad Offense&quot;</span>), <span class="dt">color=</span><span class="st">&quot;blue&quot;</span>) <span class="op">+</span></span>
+<span id="cb453-8"><a href="annotations.html#cb453-8"></a><span class="st">  </span><span class="kw">geom_text_repel</span>(<span class="dt">data=</span>playoffs, <span class="kw">aes</span>(<span class="dt">x=</span>OffensiveYPP, <span class="dt">y=</span>DefensiveYPP, <span class="dt">label=</span>Team)) <span class="op">+</span></span>
+<span id="cb453-9"><a href="annotations.html#cb453-9"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Offensive Yards Per Play&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Defensive Points Per Play&quot;</span>, <span class="dt">title=</span><span class="st">&quot;Why does Oklahoma suck so much?&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;Their offense is great. Their defense? Average at best. Worst in the playoffs.&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Source: Sports-Reference.com | By Matt Waite&quot;</span>) <span class="op">+</span></span>
+<span id="cb453-10"><a href="annotations.html#cb453-10"></a><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb453-11"><a href="annotations.html#cb453-11"></a><span class="st">  </span><span class="kw">theme</span>(</span>
+<span id="cb453-12"><a href="annotations.html#cb453-12"></a>    <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">16</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb453-13"><a href="annotations.html#cb453-13"></a>    <span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>),</span>
+<span id="cb453-14"><a href="annotations.html#cb453-14"></a>    <span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">7</span>),</span>
+<span id="cb453-15"><a href="annotations.html#cb453-15"></a>    <span class="dt">axis.ticks =</span> <span class="kw">element_blank</span>(),</span>
+<span id="cb453-16"><a href="annotations.html#cb453-16"></a>    <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),</span>
+<span id="cb453-17"><a href="annotations.html#cb453-17"></a>    <span class="dt">panel.grid.major.x =</span> <span class="kw">element_blank</span>()</span>
+<span id="cb453-18"><a href="annotations.html#cb453-18"></a>  )</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-280-1.png" width="672" /></p>
 
 </div>
             </section>
