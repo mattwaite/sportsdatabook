@@ -61,7 +61,7 @@ Third: The conference.
 
 Fourth is the table itself, noting to ignore the headers. The last bit fixes the headers, removes the garbage header data from the table, converts the data to numbers, fixes the date and mutates a team and conference value. It looks like a lot, and it took a bit of twiddling to get it done, but it's no different from what you did for your last homework. 
 
-```{r eval = FALSE}
+```{r eval=FALSE}
 page <- read_html("https://www.sports-reference.com/cbb/schools/abilene-christian/2019-gamelogs.html")
   
 team <- page %>%
@@ -76,7 +76,7 @@ table <- page %>%
   html_nodes(xpath = '//*[@id="sgl-basic"]') %>%
   html_table(header=FALSE)
 
-table <- table[[1]] %>% rename(Game=X1, Date=X2, HomeAway=X3, Opponent=X4, W_L=X5, TeamScore=X6, OpponentScore=X7, TeamFG=X8, TeamFGA=X9, TeamFGPCT=X10, Team3P=X11, Team3PA=X12, Team3PPCT=X13, TeamFT=X14, TeamFTA=X15, TeamFTPCT=X16, TeamOffRebounds=X17, TeamTotalRebounds=X18, TeamAssists=X19, TeamSteals=X20, TeamBlocks=X21, TeamTurnovers=X22, TeamPersonalFouls=X23, Blank=X24, OpponentFG=X25, OpponentFGA=X26, OpponentFGPCT=X27, Opponent3P=X28, Opponent3PA=X29, Opponent3PPCT=X30, OpponentFT=X31, OpponentFTA=X32, OpponentFTPCT=X33, OpponentOffRebounds=X34, OpponentTotalRebounds=X35, OpponentAssists=X36, OpponentSteals=X37, OpponentBlocks=X38, OpponentTurnovers=X39, OpponentPersonalFouls=X40) %>% filter(Game != "") %>% filter(Game != "G") %>% mutate(Team=team) %>% mutate_at(vars(-Team, -Date, -Opponent, -HomeAway, -W_L), as.numeric) %>% mutate(Date = ymd(Date)) %>% mutate(Team=team, Conference=conference)
+table <- table[[1]] %>% rename(Game=X1, Date=X2, HomeAway=X3, Opponent=X4, W_L=X5, TeamScore=X6, OpponentScore=X7, TeamFG=X8, TeamFGA=X9, TeamFGPCT=X10, Team3P=X11, Team3PA=X12, Team3PPCT=X13, TeamFT=X14, TeamFTA=X15, TeamFTPCT=X16, TeamOffRebounds=X17, TeamTotalRebounds=X18, TeamAssists=X19, TeamSteals=X20, TeamBlocks=X21, TeamTurnovers=X22, TeamPersonalFouls=X23, Blank=X24, OpponentFG=X25, OpponentFGA=X26, OpponentFGPCT=X27, Opponent3P=X28, Opponent3PA=X29, Opponent3PPCT=X30, OpponentFT=X31, OpponentFTA=X32, OpponentFTPCT=X33, OpponentOffRebounds=X34, OpponentTotalRebounds=X35, OpponentAssists=X36, OpponentSteals=X37, OpponentBlocks=X38, OpponentTurnovers=X39, OpponentPersonalFouls=X40) %>% filter(Game != "") %>% filter(Game != "G") %>% mutate(Team=team, Conference=conference) %>% mutate_at(vars(-Team, -Conference, -Date, -Opponent, -HomeAway, -W_L), as.numeric) %>% mutate(Date = ymd(Date)) 
 ```
 
 Now what we're left with is how do we do this for ALL the teams. We need to send 353 requests to their servers to get each page. And each url is not the one we have -- we need to alter it. 
@@ -89,7 +89,7 @@ Think of it like a program that will go though a list of your classmates and ask
 
 Except we want to take a url, add something to it, alter it, then request it and grab a bunch of data from it. Once we're done doing all that, we'll take all that info and cram it into a bigger dataset and then move on to the next one. Here's what that looks like:
 
-```{r eval = FALSE}
+```{r eval=FALSE}
 uri <- "https://www.sports-reference.com"
 
 logs <- tibble()
@@ -112,10 +112,10 @@ for (i in schools){
     html_nodes(xpath = '//*[@id="sgl-basic"]') %>%
     html_table(header=FALSE)
 
-table <- table[[1]] %>% rename(Game=X1, Date=X2, HomeAway=X3, Opponent=X4, W_L=X5, TeamScore=X6, OpponentScore=X7, TeamFG=X8, TeamFGA=X9, TeamFGPCT=X10, Team3P=X11, Team3PA=X12, Team3PPCT=X13, TeamFT=X14, TeamFTA=X15, TeamFTPCT=X16, TeamOffRebounds=X17, TeamTotalRebounds=X18, TeamAssists=X19, TeamSteals=X20, TeamBlocks=X21, TeamTurnovers=X22, TeamPersonalFouls=X23, Blank=X24, OpponentFG=X25, OpponentFGA=X26, OpponentFGPCT=X27, Opponent3P=X28, Opponent3PA=X29, Opponent3PPCT=X30, OpponentFT=X31, OpponentFTA=X32, OpponentFTPCT=X33, OpponentOffRebounds=X34, OpponentTotalRebounds=X35, OpponentAssists=X36, OpponentSteals=X37, OpponentBlocks=X38, OpponentTurnovers=X39, OpponentPersonalFouls=X40) %>% filter(Game != "") %>% filter(Game != "G") %>% mutate(Team=team) %>% mutate_at(vars(-Team, -Date, -Opponent, -HomeAway, -W_L), as.numeric) %>% mutate(Date = ymd(Date)) %>% mutate(Team=team, Conference=conference)
+table <- table[[1]] %>% rename(Game=X1, Date=X2, HomeAway=X3, Opponent=X4, W_L=X5, TeamScore=X6, OpponentScore=X7, TeamFG=X8, TeamFGA=X9, TeamFGPCT=X10, Team3P=X11, Team3PA=X12, Team3PPCT=X13, TeamFT=X14, TeamFTA=X15, TeamFTPCT=X16, TeamOffRebounds=X17, TeamTotalRebounds=X18, TeamAssists=X19, TeamSteals=X20, TeamBlocks=X21, TeamTurnovers=X22, TeamPersonalFouls=X23, Blank=X24, OpponentFG=X25, OpponentFGA=X26, OpponentFGPCT=X27, Opponent3P=X28, Opponent3PA=X29, Opponent3PPCT=X30, OpponentFT=X31, OpponentFTA=X32, OpponentFTPCT=X33, OpponentOffRebounds=X34, OpponentTotalRebounds=X35, OpponentAssists=X36, OpponentSteals=X37, OpponentBlocks=X38, OpponentTurnovers=X39, OpponentPersonalFouls=X40) %>% filter(Game != "") %>% filter(Game != "G") %>% mutate(Team=team, Conference=conference) %>% mutate_at(vars(-Team, -Conference, -Date, -Opponent, -HomeAway, -W_L), as.numeric) %>% mutate(Date = ymd(Date))
 
   logs <- rbind(logs, table)  # binding them all together
-  Sys.sleep(5)  # Sys.sleep(3) pauses the loop for 3s so as not to overwhelm website's server
+  Sys.sleep(3)  # Sys.sleep(3) pauses the loop for 3s so as not to overwhelm website's server
 }
 ```
 
@@ -139,7 +139,7 @@ The last bits are using rbind to take our data and mash it into a bigger table, 
 Lastly, we write it out to a csv file. 
 
 ```{r eval = FALSE}
-write.csv(logs, "logs.csv")
+write_csv(logs, "logs.csv")
 ```
 
 So with a little programming knowhow, a little bit of problem solving and the stubbornness not to quit on it, you can get a whole lot of data scattered all over the place with not a lot of code. 

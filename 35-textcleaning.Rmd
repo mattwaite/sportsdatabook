@@ -40,7 +40,7 @@ head(nbaplayers)
 
 You can see that every players name is their name, then two backslashes, then some version of their name that must have meaning to Sports Reference, but not to us. So we need to get rid of that. 
 
-To do this, we're going to use a little regular expression magic. REgular expressions are a programmatic way to find any pattern in text. What we're looking for is that `\\` business. But, that presents a problem, because the `\` is a special character. It's called an escape character. That escape character means what comes next is potentially special. For instance, if you see `\n`, that's a newline character. So normally, if you see that, it would add a return. 
+To do this, we're going to use a little regular expression magic. Regular expressions are a programmatic way to find any pattern in text. What we're looking for is that `\\` business. But, that presents a problem, because the `\` is a special character. It's called an escape character. That escape character means what comes next is potentially special. For instance, if you see `\n`, that's a newline character. So normally, if you see that, it would add a return. 
 
 So for us to get rid of the `\` we're going to have to escape the escape character with an escape character. And we have two of them. So we have to do it twice. 
 
@@ -97,7 +97,7 @@ kills %>%
   head()
 ```
 
-Uh oh. Says we have problems in rows 15, 42 and 83. What are they? The NCAA has decided to put (FL), (NY) and (PA) into three teams to tell you they're in Florida, New York and Pennslyvania respectively. Well, we can fix that with some gsub and we'll use a switch called `fixed`, which when set to TRUE it means this literal string, no special characters.
+Uh oh. Says we have problems in rows 15, 42 and 83. What are they? The NCAA has decided to put (FL), (NY) and (PA) into three teams to tell you they're in Florida, New York and Pennsylvania respectively. Well, we can fix that with some gsub and we'll use a switch called `fixed`, which when set to TRUE it means this literal string, no special characters.
 
 ```{r}
 kills %>% 

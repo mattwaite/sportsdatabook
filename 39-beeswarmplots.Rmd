@@ -1,0 +1,149 @@
+# Beeswarm plots
+
+A beeswarm plot is sometimes called a column scatterplot. It's an effective way to show how individual things -- teams, players, etc. -- are distributed along a numberline. The column is a grouping -- say positions in basketball -- and the dots are players, and the dots cluster where the numbers are more common. So think of it like a histogram mixed with a scatterplot crossed with a bar chart. 
+
+An example will help.
+
+First things first: Install ggbeeswarm with `install.packages("ggbeeswarm")`
+
+Like ggalt and ggrepel, ggbeeswarm adds a couple new geoms to ggplot. We'll need to load it, the tidyverse and, for later, ggrepel.
+
+```{r}
+library(tidyverse)
+library(ggbeeswarm)
+library(ggrepel)
+```
+
+Another bit of setup: we need to set the seed for the random number generator. The library "jitters" the dots in the beeswarm randomly. If we don't set the seed, we'll get different results each time. Setting the seed means we get the same look. 
+
+```{r}
+set.seed(1234)
+```
+
+So let's look at last year's basketball team as a group of shooters. The team was disappointing -- we know that -- but what kind of a problem is it going to be that we're returning basically noone from it? 
+
+First we'll load our player data.
+
+```{r}
+players <- read_csv("data/players20.csv")
+```
+
+We know this data has a lot of players who didn't play, so let's get rid of them.
+
+```{r}
+activeplayers <- players %>% filter(MP>0) 
+```
+
+Now let's ask what makes a good shooter? The best measure, in my book, is True Shooting Percentage. It's a combination of weighted field goal shooting -- to account for three pointers -- and free throws. Our data has `TS%`, but if we include *all* players, we'll have too many dots. So let's narrow it down. A decent tool for cutoffs? Field goal attempts. Let's get a quick look at them. 
+
+```{r}
+summary(activeplayers$FGA)
+```
+
+The median number of shots is 96, but we only really care about good ones. So let's use 197 attempts as our cutoff. 
+
+```{r}
+shooters <- activeplayers %>% filter(FGA > 197)
+```
+
+Now we've got enough for a beeswarm plot. It works very much like you would expect -- the group value is the x, the number is the y. We're going to beeswarm by position, and the dots will be true shooting percentage.
+
+```{r}
+ggplot() + geom_beeswarm(data=shooters, aes(x=Pos, y=`TS%`), color="grey")
+```
+
+You can see that there's a lot fewer centers who have attempted more than 197 shots than guards, but then there's a lot more guards in college basketball than anything else. In the guards column, note that fat width of the swarm is between .5 and .55. So that means most guards who shoot more than 197 shots end up in that area. They're the average shooter at that level. You can see, some are better, some are worse. 
+
+So where are the Nebraska players in that mix? 
+
+We'll filter players on Nebraska who meet our criteria. 
+
+```{r}
+nu <- players %>% 
+  filter(Team == "Nebraska Cornhuskers") %>% 
+  filter(FGA>197) %>% 
+  arrange(desc(`TS%`))
+```
+
+Four Cornhuskers took more than 197 shots. Number returning this season? Zero.
+
+That's ... not a good start. Nothing coming back. But how good are they as true shooters?  
+
+When you add another beeswarm, we need to pass another element in -- we need to tell it if we're grouping on the x value. Not sure why, but you'll get a warning if you don't. 
+
+```{r}
+ggplot() + 
+  geom_beeswarm(
+    data=shooters, 
+    groupOnX=TRUE, 
+    aes(x=Pos, y=`TS%`), color="grey") + 
+  geom_beeswarm(
+    data=nu, 
+    groupOnX=TRUE, 
+    aes(x=Pos, y=`TS%`), color="red")
+```
+Ooof. Best we can muster is middle of the fat part. Who is that? 
+
+This is where we can use ggrepel. Let's add a text layer and label the dots. 
+
+```{r}
+ggplot() + 
+  geom_beeswarm(
+    data=shooters, 
+    groupOnX=TRUE, 
+    aes(x=Pos, y=`TS%`), color="grey") + 
+  geom_beeswarm(
+    data=nu, 
+    groupOnX=TRUE, 
+    aes(x=Pos, y=`TS%`), color="red") + 
+  geom_text_repel(
+    data=nu, 
+    aes(x=Pos, y=`TS%`, label=Player))
+```
+
+So Haanif Cheatham was our best shooter by true shooting percentage. The rest were below average shooters for that volume of shooting. 
+
+## A few other options
+
+The ggbeeswarm library has a couple of variations on the geom_beeswarm that may work better for your application. They are `geom_quasirandom` and `geom_jitter`. 
+
+There's not a lot to change from our example to see what they do. 
+
+```{r}
+ggplot() + 
+  geom_quasirandom(
+    data=shooters, 
+    groupOnX=TRUE, 
+    aes(x=Pos, y=`TS%`), color="grey") + 
+  geom_quasirandom(
+    data=nu, 
+    groupOnX=TRUE, 
+    aes(x=Pos, y=`TS%`), color="red") + 
+  geom_text_repel(
+    data=nu, 
+    aes(x=Pos, y=`TS%`, label=Player))
+```
+
+Quasirandom spreads out the dots you see in beeswarm using -- you guessed it -- quasirandom spacing. 
+
+For `geom_jitter`, we need to remove the groupOnX value. Why? No clue. 
+
+```{r}
+ggplot() + 
+  geom_jitter(
+    data=shooters, 
+    aes(x=Pos, y=`TS%`), color="grey") + 
+  geom_jitter(
+    data=nu, 
+    aes(x=Pos, y=`TS%`), color="red") + 
+  geom_text_repel(
+    data=nu, 
+    aes(x=Pos, y=`TS%`, label=Player))
+```
+
+`geom_jitter` spreads out the dots evenly across the width of the column, randomly deciding where in the line of the true shooting percentage they appear. 
+
+Which one is right for you? You're going to have to experiment and decide. This is the art in the art and a science. 
+
+
+
