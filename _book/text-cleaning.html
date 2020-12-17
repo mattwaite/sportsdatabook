@@ -283,6 +283,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="39" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>39</b> Simulations</a><ul>
 <li class="chapter" data-level="39.1" data-path="simulations.html"><a href="simulations.html#cold-streaks"><i class="fa fa-check"></i><b>39.1</b> Cold streaks</a></li>
 </ul></li>
+<li class="chapter" data-level="40" data-path="beeswarm-plots.html"><a href="beeswarm-plots.html"><i class="fa fa-check"></i><b>40</b> Beeswarm plots</a><ul>
+<li class="chapter" data-level="40.1" data-path="beeswarm-plots.html"><a href="beeswarm-plots.html#a-few-other-options"><i class="fa fa-check"></i><b>40.1</b> A few other options</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -358,7 +361,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## #   DWS &lt;dbl&gt;, WS &lt;dbl&gt;, `WS/48` &lt;dbl&gt;, OBPM &lt;dbl&gt;, DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;,
 ## #   VORP &lt;dbl&gt;</code></pre>
 <p>You can see that every players name is their name, then two backslashes, then some version of their name that must have meaning to Sports Reference, but not to us. So we need to get rid of that.</p>
-<p>To do this, we’re going to use a little regular expression magic. REgular expressions are a programmatic way to find any pattern in text. What we’re looking for is that <code>\\</code> business. But, that presents a problem, because the <code>\</code> is a special character. It’s called an escape character. That escape character means what comes next is potentially special. For instance, if you see <code>\n</code>, that’s a newline character. So normally, if you see that, it would add a return.</p>
+<p>To do this, we’re going to use a little regular expression magic. Regular expressions are a programmatic way to find any pattern in text. What we’re looking for is that <code>\\</code> business. But, that presents a problem, because the <code>\</code> is a special character. It’s called an escape character. That escape character means what comes next is potentially special. For instance, if you see <code>\n</code>, that’s a newline character. So normally, if you see that, it would add a return.</p>
 <p>So for us to get rid of the <code>\</code> we’re going to have to escape the escape character with an escape character. And we have two of them. So we have to do it twice.</p>
 <p>Yes. Really.</p>
 <p>So if we wanted to find two backslashes, we need <code>\\\\</code>. Then, using regular expressions, we can say “and then everything else after this” with this: .*</p>
@@ -438,7 +441,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 4     4 Carlyl… &quot; Lip… ASUN)      Jr.   5-10  OH      100   522      5.22 2017-…
 ## 5     5 Veroni… &quot; BYU… WCC)       Jr.   6-0   OH      118   569      4.82 2017-…
 ## 6     6 Torrey… &quot; Cal… Big West)  So.   6-3   OH      101   477      4.72 2017-…</code></pre>
-<p>Uh oh. Says we have problems in rows 15, 42 and 83. What are they? The NCAA has decided to put (FL), (NY) and (PA) into three teams to tell you they’re in Florida, New York and Pennslyvania respectively. Well, we can fix that with some gsub and we’ll use a switch called <code>fixed</code>, which when set to TRUE it means this literal string, no special characters.</p>
+<p>Uh oh. Says we have problems in rows 15, 42 and 83. What are they? The NCAA has decided to put (FL), (NY) and (PA) into three teams to tell you they’re in Florida, New York and Pennsylvania respectively. Well, we can fix that with some gsub and we’ll use a switch called <code>fixed</code>, which when set to TRUE it means this literal string, no special characters.</p>
 <div class="sourceCode" id="cb653"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb653-1"><a href="text-cleaning.html#cb653-1"></a>kills <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb653-2"><a href="text-cleaning.html#cb653-2"></a><span class="st">  </span><span class="kw">separate</span>(Player, <span class="dt">into=</span><span class="kw">c</span>(<span class="st">&quot;Player&quot;</span>, <span class="st">&quot;School&quot;</span>), <span class="dt">sep=</span><span class="st">&quot;,&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb653-3"><a href="text-cleaning.html#cb653-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">School =</span> <span class="kw">gsub</span>(<span class="st">&quot;(FL)&quot;</span>, <span class="st">&quot;FL&quot;</span>, School, <span class="dt">fixed=</span><span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>

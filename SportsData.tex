@@ -6646,7 +6646,7 @@ Fourth is the table itself, noting to ignore the headers. The last bit fixes the
 \StringTok{  }\KeywordTok{html_nodes}\NormalTok{(}\DataTypeTok{xpath =} \StringTok{'//*[@id="sgl-basic"]'}\NormalTok{) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{html_table}\NormalTok{(}\DataTypeTok{header=}\OtherTok{FALSE}\NormalTok{)}
 
-\NormalTok{table <-}\StringTok{ }\NormalTok{table[[}\DecValTok{1}\NormalTok{]] }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{Game=}\NormalTok{X1, }\DataTypeTok{Date=}\NormalTok{X2, }\DataTypeTok{HomeAway=}\NormalTok{X3, }\DataTypeTok{Opponent=}\NormalTok{X4, }\DataTypeTok{W_L=}\NormalTok{X5, }\DataTypeTok{TeamScore=}\NormalTok{X6, }\DataTypeTok{OpponentScore=}\NormalTok{X7, }\DataTypeTok{TeamFG=}\NormalTok{X8, }\DataTypeTok{TeamFGA=}\NormalTok{X9, }\DataTypeTok{TeamFGPCT=}\NormalTok{X10, }\DataTypeTok{Team3P=}\NormalTok{X11, }\DataTypeTok{Team3PA=}\NormalTok{X12, }\DataTypeTok{Team3PPCT=}\NormalTok{X13, }\DataTypeTok{TeamFT=}\NormalTok{X14, }\DataTypeTok{TeamFTA=}\NormalTok{X15, }\DataTypeTok{TeamFTPCT=}\NormalTok{X16, }\DataTypeTok{TeamOffRebounds=}\NormalTok{X17, }\DataTypeTok{TeamTotalRebounds=}\NormalTok{X18, }\DataTypeTok{TeamAssists=}\NormalTok{X19, }\DataTypeTok{TeamSteals=}\NormalTok{X20, }\DataTypeTok{TeamBlocks=}\NormalTok{X21, }\DataTypeTok{TeamTurnovers=}\NormalTok{X22, }\DataTypeTok{TeamPersonalFouls=}\NormalTok{X23, }\DataTypeTok{Blank=}\NormalTok{X24, }\DataTypeTok{OpponentFG=}\NormalTok{X25, }\DataTypeTok{OpponentFGA=}\NormalTok{X26, }\DataTypeTok{OpponentFGPCT=}\NormalTok{X27, }\DataTypeTok{Opponent3P=}\NormalTok{X28, }\DataTypeTok{Opponent3PA=}\NormalTok{X29, }\DataTypeTok{Opponent3PPCT=}\NormalTok{X30, }\DataTypeTok{OpponentFT=}\NormalTok{X31, }\DataTypeTok{OpponentFTA=}\NormalTok{X32, }\DataTypeTok{OpponentFTPCT=}\NormalTok{X33, }\DataTypeTok{OpponentOffRebounds=}\NormalTok{X34, }\DataTypeTok{OpponentTotalRebounds=}\NormalTok{X35, }\DataTypeTok{OpponentAssists=}\NormalTok{X36, }\DataTypeTok{OpponentSteals=}\NormalTok{X37, }\DataTypeTok{OpponentBlocks=}\NormalTok{X38, }\DataTypeTok{OpponentTurnovers=}\NormalTok{X39, }\DataTypeTok{OpponentPersonalFouls=}\NormalTok{X40) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Game }\OperatorTok{!=}\StringTok{ ""}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Game }\OperatorTok{!=}\StringTok{ "G"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Team=}\NormalTok{team) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate_at}\NormalTok{(}\KeywordTok{vars}\NormalTok{(}\OperatorTok{-}\NormalTok{Team, }\OperatorTok{-}\NormalTok{Date, }\OperatorTok{-}\NormalTok{Opponent, }\OperatorTok{-}\NormalTok{HomeAway, }\OperatorTok{-}\NormalTok{W_L), as.numeric) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Date =} \KeywordTok{ymd}\NormalTok{(Date)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Team=}\NormalTok{team, }\DataTypeTok{Conference=}\NormalTok{conference)}
+\NormalTok{table <-}\StringTok{ }\NormalTok{table[[}\DecValTok{1}\NormalTok{]] }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{Game=}\NormalTok{X1, }\DataTypeTok{Date=}\NormalTok{X2, }\DataTypeTok{HomeAway=}\NormalTok{X3, }\DataTypeTok{Opponent=}\NormalTok{X4, }\DataTypeTok{W_L=}\NormalTok{X5, }\DataTypeTok{TeamScore=}\NormalTok{X6, }\DataTypeTok{OpponentScore=}\NormalTok{X7, }\DataTypeTok{TeamFG=}\NormalTok{X8, }\DataTypeTok{TeamFGA=}\NormalTok{X9, }\DataTypeTok{TeamFGPCT=}\NormalTok{X10, }\DataTypeTok{Team3P=}\NormalTok{X11, }\DataTypeTok{Team3PA=}\NormalTok{X12, }\DataTypeTok{Team3PPCT=}\NormalTok{X13, }\DataTypeTok{TeamFT=}\NormalTok{X14, }\DataTypeTok{TeamFTA=}\NormalTok{X15, }\DataTypeTok{TeamFTPCT=}\NormalTok{X16, }\DataTypeTok{TeamOffRebounds=}\NormalTok{X17, }\DataTypeTok{TeamTotalRebounds=}\NormalTok{X18, }\DataTypeTok{TeamAssists=}\NormalTok{X19, }\DataTypeTok{TeamSteals=}\NormalTok{X20, }\DataTypeTok{TeamBlocks=}\NormalTok{X21, }\DataTypeTok{TeamTurnovers=}\NormalTok{X22, }\DataTypeTok{TeamPersonalFouls=}\NormalTok{X23, }\DataTypeTok{Blank=}\NormalTok{X24, }\DataTypeTok{OpponentFG=}\NormalTok{X25, }\DataTypeTok{OpponentFGA=}\NormalTok{X26, }\DataTypeTok{OpponentFGPCT=}\NormalTok{X27, }\DataTypeTok{Opponent3P=}\NormalTok{X28, }\DataTypeTok{Opponent3PA=}\NormalTok{X29, }\DataTypeTok{Opponent3PPCT=}\NormalTok{X30, }\DataTypeTok{OpponentFT=}\NormalTok{X31, }\DataTypeTok{OpponentFTA=}\NormalTok{X32, }\DataTypeTok{OpponentFTPCT=}\NormalTok{X33, }\DataTypeTok{OpponentOffRebounds=}\NormalTok{X34, }\DataTypeTok{OpponentTotalRebounds=}\NormalTok{X35, }\DataTypeTok{OpponentAssists=}\NormalTok{X36, }\DataTypeTok{OpponentSteals=}\NormalTok{X37, }\DataTypeTok{OpponentBlocks=}\NormalTok{X38, }\DataTypeTok{OpponentTurnovers=}\NormalTok{X39, }\DataTypeTok{OpponentPersonalFouls=}\NormalTok{X40) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Game }\OperatorTok{!=}\StringTok{ ""}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Game }\OperatorTok{!=}\StringTok{ "G"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Team=}\NormalTok{team, }\DataTypeTok{Conference=}\NormalTok{conference) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate_at}\NormalTok{(}\KeywordTok{vars}\NormalTok{(}\OperatorTok{-}\NormalTok{Team, }\OperatorTok{-}\NormalTok{Conference, }\OperatorTok{-}\NormalTok{Date, }\OperatorTok{-}\NormalTok{Opponent, }\OperatorTok{-}\NormalTok{HomeAway, }\OperatorTok{-}\NormalTok{W_L), as.numeric) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Date =} \KeywordTok{ymd}\NormalTok{(Date)) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -6684,10 +6684,10 @@ Except we want to take a url, add something to it, alter it, then request it and
 \StringTok{    }\KeywordTok{html_nodes}\NormalTok{(}\DataTypeTok{xpath =} \StringTok{'//*[@id="sgl-basic"]'}\NormalTok{) }\OperatorTok{%>%}
 \StringTok{    }\KeywordTok{html_table}\NormalTok{(}\DataTypeTok{header=}\OtherTok{FALSE}\NormalTok{)}
 
-\NormalTok{table <-}\StringTok{ }\NormalTok{table[[}\DecValTok{1}\NormalTok{]] }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{Game=}\NormalTok{X1, }\DataTypeTok{Date=}\NormalTok{X2, }\DataTypeTok{HomeAway=}\NormalTok{X3, }\DataTypeTok{Opponent=}\NormalTok{X4, }\DataTypeTok{W_L=}\NormalTok{X5, }\DataTypeTok{TeamScore=}\NormalTok{X6, }\DataTypeTok{OpponentScore=}\NormalTok{X7, }\DataTypeTok{TeamFG=}\NormalTok{X8, }\DataTypeTok{TeamFGA=}\NormalTok{X9, }\DataTypeTok{TeamFGPCT=}\NormalTok{X10, }\DataTypeTok{Team3P=}\NormalTok{X11, }\DataTypeTok{Team3PA=}\NormalTok{X12, }\DataTypeTok{Team3PPCT=}\NormalTok{X13, }\DataTypeTok{TeamFT=}\NormalTok{X14, }\DataTypeTok{TeamFTA=}\NormalTok{X15, }\DataTypeTok{TeamFTPCT=}\NormalTok{X16, }\DataTypeTok{TeamOffRebounds=}\NormalTok{X17, }\DataTypeTok{TeamTotalRebounds=}\NormalTok{X18, }\DataTypeTok{TeamAssists=}\NormalTok{X19, }\DataTypeTok{TeamSteals=}\NormalTok{X20, }\DataTypeTok{TeamBlocks=}\NormalTok{X21, }\DataTypeTok{TeamTurnovers=}\NormalTok{X22, }\DataTypeTok{TeamPersonalFouls=}\NormalTok{X23, }\DataTypeTok{Blank=}\NormalTok{X24, }\DataTypeTok{OpponentFG=}\NormalTok{X25, }\DataTypeTok{OpponentFGA=}\NormalTok{X26, }\DataTypeTok{OpponentFGPCT=}\NormalTok{X27, }\DataTypeTok{Opponent3P=}\NormalTok{X28, }\DataTypeTok{Opponent3PA=}\NormalTok{X29, }\DataTypeTok{Opponent3PPCT=}\NormalTok{X30, }\DataTypeTok{OpponentFT=}\NormalTok{X31, }\DataTypeTok{OpponentFTA=}\NormalTok{X32, }\DataTypeTok{OpponentFTPCT=}\NormalTok{X33, }\DataTypeTok{OpponentOffRebounds=}\NormalTok{X34, }\DataTypeTok{OpponentTotalRebounds=}\NormalTok{X35, }\DataTypeTok{OpponentAssists=}\NormalTok{X36, }\DataTypeTok{OpponentSteals=}\NormalTok{X37, }\DataTypeTok{OpponentBlocks=}\NormalTok{X38, }\DataTypeTok{OpponentTurnovers=}\NormalTok{X39, }\DataTypeTok{OpponentPersonalFouls=}\NormalTok{X40) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Game }\OperatorTok{!=}\StringTok{ ""}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Game }\OperatorTok{!=}\StringTok{ "G"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Team=}\NormalTok{team) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate_at}\NormalTok{(}\KeywordTok{vars}\NormalTok{(}\OperatorTok{-}\NormalTok{Team, }\OperatorTok{-}\NormalTok{Date, }\OperatorTok{-}\NormalTok{Opponent, }\OperatorTok{-}\NormalTok{HomeAway, }\OperatorTok{-}\NormalTok{W_L), as.numeric) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Date =} \KeywordTok{ymd}\NormalTok{(Date)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Team=}\NormalTok{team, }\DataTypeTok{Conference=}\NormalTok{conference)}
+\NormalTok{table <-}\StringTok{ }\NormalTok{table[[}\DecValTok{1}\NormalTok{]] }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{Game=}\NormalTok{X1, }\DataTypeTok{Date=}\NormalTok{X2, }\DataTypeTok{HomeAway=}\NormalTok{X3, }\DataTypeTok{Opponent=}\NormalTok{X4, }\DataTypeTok{W_L=}\NormalTok{X5, }\DataTypeTok{TeamScore=}\NormalTok{X6, }\DataTypeTok{OpponentScore=}\NormalTok{X7, }\DataTypeTok{TeamFG=}\NormalTok{X8, }\DataTypeTok{TeamFGA=}\NormalTok{X9, }\DataTypeTok{TeamFGPCT=}\NormalTok{X10, }\DataTypeTok{Team3P=}\NormalTok{X11, }\DataTypeTok{Team3PA=}\NormalTok{X12, }\DataTypeTok{Team3PPCT=}\NormalTok{X13, }\DataTypeTok{TeamFT=}\NormalTok{X14, }\DataTypeTok{TeamFTA=}\NormalTok{X15, }\DataTypeTok{TeamFTPCT=}\NormalTok{X16, }\DataTypeTok{TeamOffRebounds=}\NormalTok{X17, }\DataTypeTok{TeamTotalRebounds=}\NormalTok{X18, }\DataTypeTok{TeamAssists=}\NormalTok{X19, }\DataTypeTok{TeamSteals=}\NormalTok{X20, }\DataTypeTok{TeamBlocks=}\NormalTok{X21, }\DataTypeTok{TeamTurnovers=}\NormalTok{X22, }\DataTypeTok{TeamPersonalFouls=}\NormalTok{X23, }\DataTypeTok{Blank=}\NormalTok{X24, }\DataTypeTok{OpponentFG=}\NormalTok{X25, }\DataTypeTok{OpponentFGA=}\NormalTok{X26, }\DataTypeTok{OpponentFGPCT=}\NormalTok{X27, }\DataTypeTok{Opponent3P=}\NormalTok{X28, }\DataTypeTok{Opponent3PA=}\NormalTok{X29, }\DataTypeTok{Opponent3PPCT=}\NormalTok{X30, }\DataTypeTok{OpponentFT=}\NormalTok{X31, }\DataTypeTok{OpponentFTA=}\NormalTok{X32, }\DataTypeTok{OpponentFTPCT=}\NormalTok{X33, }\DataTypeTok{OpponentOffRebounds=}\NormalTok{X34, }\DataTypeTok{OpponentTotalRebounds=}\NormalTok{X35, }\DataTypeTok{OpponentAssists=}\NormalTok{X36, }\DataTypeTok{OpponentSteals=}\NormalTok{X37, }\DataTypeTok{OpponentBlocks=}\NormalTok{X38, }\DataTypeTok{OpponentTurnovers=}\NormalTok{X39, }\DataTypeTok{OpponentPersonalFouls=}\NormalTok{X40) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Game }\OperatorTok{!=}\StringTok{ ""}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Game }\OperatorTok{!=}\StringTok{ "G"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Team=}\NormalTok{team, }\DataTypeTok{Conference=}\NormalTok{conference) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate_at}\NormalTok{(}\KeywordTok{vars}\NormalTok{(}\OperatorTok{-}\NormalTok{Team, }\OperatorTok{-}\NormalTok{Conference, }\OperatorTok{-}\NormalTok{Date, }\OperatorTok{-}\NormalTok{Opponent, }\OperatorTok{-}\NormalTok{HomeAway, }\OperatorTok{-}\NormalTok{W_L), as.numeric) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Date =} \KeywordTok{ymd}\NormalTok{(Date))}
 
 \NormalTok{  logs <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(logs, table)  }\CommentTok{# binding them all together}
-  \KeywordTok{Sys.sleep}\NormalTok{(}\DecValTok{5}\NormalTok{)  }\CommentTok{# Sys.sleep(3) pauses the loop for 3s so as not to overwhelm website's server}
+  \KeywordTok{Sys.sleep}\NormalTok{(}\DecValTok{3}\NormalTok{)  }\CommentTok{# Sys.sleep(3) pauses the loop for 3s so as not to overwhelm website's server}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
@@ -6713,7 +6713,7 @@ Lastly, we write it out to a csv file.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{write.csv}\NormalTok{(logs, }\StringTok{"logs.csv"}\NormalTok{)}
+\KeywordTok{write_csv}\NormalTok{(logs, }\StringTok{"logs.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -8396,14 +8396,6 @@ Before you run the following code chunk, though, be aware a few things will take
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## Warning: Rate limit exceeded - 88
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Rate limit exceeded
-\end{verbatim}
-
 \textbf{Important Note}: Depending on when you run the above code chunk, the API will return different data then the data used for the examples later in this chapter. This is due to the query rate cap Twitter places on it's API. Twitter's API caps queries to 18,000 of the most recent tweets during the past couple of days. This cap resets every 15 minutes. The \texttt{rtweet} package does has functionality to pull data once your query limit resets. However, if you're looking to pull tweets for a very popular event (e.g., The Super Bowl), you may want to consider other options to extract this type of data. This is also important to understand because if you are looking to pull tweets for a specific event, you will need to make sure you are pulling this data within a reasonable time during or after the event. If you don't, these rate limits might not allow you access the data you need to do your analysis.
 
 The data we will use later for the examples in the chapter can be found \href{https://unl.box.com/s/x4jjifc394gxfvsvbwb3csez2ne4l4rb}{here} and \href{https://unl.box.com/s/s4ej8khwi9ah9qvqpi2jviqomfocie3n}{here}. The first data set are tweets that use the \#huskers hashtag. The second has data of tweets that use the \#gbr hashtag. You will need to download both data sets, put them in the right directory, and import both for the below examples to work correctly. The code to import this data will look something like this:
@@ -9469,7 +9461,7 @@ Now let's look at those names:
 
 You can see that every players name is their name, then two backslashes, then some version of their name that must have meaning to Sports Reference, but not to us. So we need to get rid of that.
 
-To do this, we're going to use a little regular expression magic. REgular expressions are a programmatic way to find any pattern in text. What we're looking for is that \texttt{\textbackslash{}\textbackslash{}} business. But, that presents a problem, because the \texttt{\textbackslash{}} is a special character. It's called an escape character. That escape character means what comes next is potentially special. For instance, if you see \texttt{\textbackslash{}n}, that's a newline character. So normally, if you see that, it would add a return.
+To do this, we're going to use a little regular expression magic. Regular expressions are a programmatic way to find any pattern in text. What we're looking for is that \texttt{\textbackslash{}\textbackslash{}} business. But, that presents a problem, because the \texttt{\textbackslash{}} is a special character. It's called an escape character. That escape character means what comes next is potentially special. For instance, if you see \texttt{\textbackslash{}n}, that's a newline character. So normally, if you see that, it would add a return.
 
 So for us to get rid of the \texttt{\textbackslash{}} we're going to have to escape the escape character with an escape character. And we have two of them. So we have to do it twice.
 
@@ -9608,7 +9600,7 @@ Now, let's get the conference separated. A problem is going to crop up here -- t
 ## 6     6 Torrey~ " Cal~ Big West)  So.   6-3   OH      101   477      4.72 2017-~
 \end{verbatim}
 
-Uh oh. Says we have problems in rows 15, 42 and 83. What are they? The NCAA has decided to put (FL), (NY) and (PA) into three teams to tell you they're in Florida, New York and Pennslyvania respectively. Well, we can fix that with some gsub and we'll use a switch called \texttt{fixed}, which when set to TRUE it means this literal string, no special characters.
+Uh oh. Says we have problems in rows 15, 42 and 83. What are they? The NCAA has decided to put (FL), (NY) and (PA) into three teams to tell you they're in Florida, New York and Pennsylvania respectively. Well, we can fix that with some gsub and we'll use a switch called \texttt{fixed}, which when set to TRUE it means this literal string, no special characters.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -10063,6 +10055,213 @@ During the Western Illinois game, the team, shooting .329 on the season from beh
 \end{verbatim}
 
 Short answer: Really weird. If you simulate 15 threes 1000 times, sometimes you'll see them miss all of them, but only a few times -- five times, in this case. Most of the time, the team won't go 0-15 even once. So going ice cold is not totally out of the realm of random chance, but it's highly unlikely.
+
+\hypertarget{beeswarm-plots}{%
+\chapter{Beeswarm plots}\label{beeswarm-plots}}
+
+A beeswarm plot is sometimes called a column scatterplot. It's an effective way to show how individual things -- teams, players, etc. -- are distributed along a numberline. The column is a grouping -- say positions in basketball -- and the dots are players, and the dots cluster where the numbers are more common. So think of it like a histogram mixed with a scatterplot crossed with a bar chart.
+
+An example will help.
+
+First things first: Install ggbeeswarm with \texttt{install.packages("ggbeeswarm")}
+
+Like ggalt and ggrepel, ggbeeswarm adds a couple new geoms to ggplot. We'll need to load it, the tidyverse and, for later, ggrepel.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{library}\NormalTok{(ggbeeswarm)}
+\KeywordTok{library}\NormalTok{(ggrepel)}
+\end{Highlighting}
+\end{Shaded}
+
+Another bit of setup: we need to set the seed for the random number generator. The library ``jitters'' the dots in the beeswarm randomly. If we don't set the seed, we'll get different results each time. Setting the seed means we get the same look.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+So let's look at last year's basketball team as a group of shooters. The team was disappointing -- we know that -- but what kind of a problem is it going to be that we're returning basically noone from it?
+
+First we'll load our player data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{players <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/players20.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   .default = col_double(),
+##   Team = col_character(),
+##   Player = col_character(),
+##   Class = col_character(),
+##   Pos = col_character(),
+##   Height = col_character(),
+##   Hometown = col_character(),
+##   `High School` = col_character(),
+##   Summary = col_character()
+## )
+\end{verbatim}
+
+\begin{verbatim}
+## See spec(...) for full column specifications.
+\end{verbatim}
+
+We know this data has a lot of players who didn't play, so let's get rid of them.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{activeplayers <-}\StringTok{ }\NormalTok{players }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(MP}\OperatorTok{>}\DecValTok{0}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+Now let's ask what makes a good shooter? The best measure, in my book, is True Shooting Percentage. It's a combination of weighted field goal shooting -- to account for three pointers -- and free throws. Our data has \texttt{TS\%}, but if we include \emph{all} players, we'll have too many dots. So let's narrow it down. A decent tool for cutoffs? Field goal attempts. Let's get a quick look at them.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(activeplayers}\OperatorTok{$}\NormalTok{FGA)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    0.00   23.25   96.00  121.90  197.00  611.00
+\end{verbatim}
+
+The median number of shots is 96, but we only really care about good ones. So let's use 197 attempts as our cutoff.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{shooters <-}\StringTok{ }\NormalTok{activeplayers }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(FGA }\OperatorTok{>}\StringTok{ }\DecValTok{197}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Now we've got enough for a beeswarm plot. It works very much like you would expect -- the group value is the x, the number is the y. We're going to beeswarm by position, and the dots will be true shooting percentage.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_beeswarm}\NormalTok{(}\DataTypeTok{data=}\NormalTok{shooters, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Pos, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{TS%}\StringTok{`}\NormalTok{), }\DataTypeTok{color=}\StringTok{"grey"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-409-1.pdf}
+
+You can see that there's a lot fewer centers who have attempted more than 197 shots than guards, but then there's a lot more guards in college basketball than anything else. In the guards column, note that fat width of the swarm is between .5 and .55. So that means most guards who shoot more than 197 shots end up in that area. They're the average shooter at that level. You can see, some are better, some are worse.
+
+So where are the Nebraska players in that mix?
+
+We'll filter players on Nebraska who meet our criteria.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nu <-}\StringTok{ }\NormalTok{players }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(Team }\OperatorTok{==}\StringTok{ "Nebraska Cornhuskers"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(FGA}\OperatorTok{>}\DecValTok{197}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(}\StringTok{`}\DataTypeTok{TS%}\StringTok{`}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Four Cornhuskers took more than 197 shots. Number returning this season? Zero.
+
+That's \ldots{} not a good start. Nothing coming back. But how good are they as true shooters?
+
+When you add another beeswarm, we need to pass another element in -- we need to tell it if we're grouping on the x value. Not sure why, but you'll get a warning if you don't.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_beeswarm}\NormalTok{(}
+    \DataTypeTok{data=}\NormalTok{shooters, }
+    \DataTypeTok{groupOnX=}\OtherTok{TRUE}\NormalTok{, }
+    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Pos, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{TS%}\StringTok{`}\NormalTok{), }\DataTypeTok{color=}\StringTok{"grey"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_beeswarm}\NormalTok{(}
+    \DataTypeTok{data=}\NormalTok{nu, }
+    \DataTypeTok{groupOnX=}\OtherTok{TRUE}\NormalTok{, }
+    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Pos, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{TS%}\StringTok{`}\NormalTok{), }\DataTypeTok{color=}\StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-411-1.pdf}
+Ooof. Best we can muster is middle of the fat part. Who is that?
+
+This is where we can use ggrepel. Let's add a text layer and label the dots.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_beeswarm}\NormalTok{(}
+    \DataTypeTok{data=}\NormalTok{shooters, }
+    \DataTypeTok{groupOnX=}\OtherTok{TRUE}\NormalTok{, }
+    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Pos, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{TS%}\StringTok{`}\NormalTok{), }\DataTypeTok{color=}\StringTok{"grey"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_beeswarm}\NormalTok{(}
+    \DataTypeTok{data=}\NormalTok{nu, }
+    \DataTypeTok{groupOnX=}\OtherTok{TRUE}\NormalTok{, }
+    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Pos, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{TS%}\StringTok{`}\NormalTok{), }\DataTypeTok{color=}\StringTok{"red"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_text_repel}\NormalTok{(}
+    \DataTypeTok{data=}\NormalTok{nu, }
+    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Pos, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{TS%}\StringTok{`}\NormalTok{, }\DataTypeTok{label=}\NormalTok{Player))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-412-1.pdf}
+
+So Haanif Cheatham was our best shooter by true shooting percentage. The rest were below average shooters for that volume of shooting.
+
+\hypertarget{a-few-other-options}{%
+\section{A few other options}\label{a-few-other-options}}
+
+The ggbeeswarm library has a couple of variations on the geom\_beeswarm that may work better for your application. They are \texttt{geom\_quasirandom} and \texttt{geom\_jitter}.
+
+There's not a lot to change from our example to see what they do.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_quasirandom}\NormalTok{(}
+    \DataTypeTok{data=}\NormalTok{shooters, }
+    \DataTypeTok{groupOnX=}\OtherTok{TRUE}\NormalTok{, }
+    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Pos, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{TS%}\StringTok{`}\NormalTok{), }\DataTypeTok{color=}\StringTok{"grey"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_quasirandom}\NormalTok{(}
+    \DataTypeTok{data=}\NormalTok{nu, }
+    \DataTypeTok{groupOnX=}\OtherTok{TRUE}\NormalTok{, }
+    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Pos, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{TS%}\StringTok{`}\NormalTok{), }\DataTypeTok{color=}\StringTok{"red"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_text_repel}\NormalTok{(}
+    \DataTypeTok{data=}\NormalTok{nu, }
+    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Pos, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{TS%}\StringTok{`}\NormalTok{, }\DataTypeTok{label=}\NormalTok{Player))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-413-1.pdf}
+
+Quasirandom spreads out the dots you see in beeswarm using -- you guessed it -- quasirandom spacing.
+
+For \texttt{geom\_jitter}, we need to remove the groupOnX value. Why? No clue.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_jitter}\NormalTok{(}
+    \DataTypeTok{data=}\NormalTok{shooters, }
+    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Pos, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{TS%}\StringTok{`}\NormalTok{), }\DataTypeTok{color=}\StringTok{"grey"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_jitter}\NormalTok{(}
+    \DataTypeTok{data=}\NormalTok{nu, }
+    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Pos, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{TS%}\StringTok{`}\NormalTok{), }\DataTypeTok{color=}\StringTok{"red"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_text_repel}\NormalTok{(}
+    \DataTypeTok{data=}\NormalTok{nu, }
+    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Pos, }\DataTypeTok{y=}\StringTok{`}\DataTypeTok{TS%}\StringTok{`}\NormalTok{, }\DataTypeTok{label=}\NormalTok{Player))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SportsData_files/figure-latex/unnamed-chunk-414-1.pdf}
+
+\texttt{geom\_jitter} spreads out the dots evenly across the width of the column, randomly deciding where in the line of the true shooting percentage they appear.
+
+Which one is right for you? You're going to have to experiment and decide. This is the art in the art and a science.
 
   \bibliography{packages.bib}
 
