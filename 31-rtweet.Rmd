@@ -82,7 +82,7 @@ Before you can access Twitter data, you will need to verify your account. The `r
 
 Before you run the following code chunk, though, be aware a few things will take place. First, a browser window will open up asking you to verify that `rtweet` is allowed to access Twitter data via the API on behalf of your account. Accept this request and enter your credentials if you are asked to. Once you do this, you should get a message in your browser stating you have successfully authenticated the `rtweet` package. The data will then begin to download. The amount of time needed to import this data will depend on how many tweets the hashtag(s) are associated with. More tweets generally means longer import times. 
 
-```{r}
+```{r eval=FALSE}
 
 huskers <- search_tweets(
   "#huskers", n = 8000, include_rts = FALSE
