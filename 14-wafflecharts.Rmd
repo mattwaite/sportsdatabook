@@ -1,31 +1,6 @@
 # Waffle charts
 
-Pie charts are the devil. They should be an instant F in any data visualization class. I'll give you an example of why.
-
-What's the racial breakdown of journalism majors at UNL?
-
-Here it is in a pie chart:
-
-```{r}
-library(tidyverse)
-
-enrollment <- read.csv("~/Box/Courses/JOUR407-Data-Visualization/Data/collegeenrollment.csv")
-
-jour <- filter(enrollment, MajorName == "Journalism")
-
-jdf <- jour %>% 
-group_by(Race) %>%
-summarise(
-       total=sum(Count)) %>%
-select(Race, total) %>% 
-filter(total != 0)
-
-ggplot(jdf, aes(x="", y=total, fill=Race)) + geom_bar(width = 1, stat = "identity") + coord_polar("y", start=0)
-```
-
-You can see, it's pretty white. But ... what about beyond that? How carefully can you evaluate angles and area?
-
-Not well.
+Pie charts are the devil. They should be an instant F in any data visualization class. The problem? How carefully can you evaluate angles and area? Unless they are blindingly obvious and only a few categories, not well. If you've got 25 categories, how can you tell the difference between 7 and 9 percent? You can't.
 
 So let's introduce a better way: The Waffle Chart. Some call it a square pie chart. I personally hate that. Waffles it is. 
 
