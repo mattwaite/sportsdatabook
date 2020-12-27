@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019) (preloaded format=xelatex 2019.5.8)  2 NOV 2020 20:36
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019) (preloaded format=xelatex 2019.5.8)  18 DEC 2020 12:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -56,16 +56,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/amssymb.sty
-Package: amssymb 2013/01/14 v3.01 AMS font symbols
-(/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/amsfonts.sty
-Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
-\@emptytoks=\toks14
-\symAMSa=\mathgroup4
-\symAMSb=\mathgroup5
-LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
-(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-)) (/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsmath.sty
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2018/12/01 v2.17b AMS math features
 \@mathmargin=\skip43
 For additional information on amsmath, use the `?' option.
@@ -73,7 +64,7 @@ For additional information on amsmath, use the `?' option.
 Package: amstext 2000/06/29 v2.01 AMS text
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks15
+\@emptytoks=\toks14
 \ex@=\dimen103
 )) (/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
@@ -101,21 +92,21 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 730.
 \dotsspace@=\muskip10
 \c@parentequation=\count96
 \dspbrk@lvl=\count97
-\tag@help=\toks16
+\tag@help=\toks15
 \row@=\count98
 \column@=\count99
 \maxfields@=\count100
-\andhelp@=\toks17
+\andhelp@=\toks16
 \eqnshift@=\dimen106
 \alignsep@=\dimen107
 \tagshift@=\dimen108
 \tagwidth@=\dimen109
 \totwidth@=\dimen110
 \lineht@=\dimen111
-\@envbody=\toks18
+\@envbody=\toks17
 \multlinegap=\skip44
 \multlinetaggap=\skip45
-\mathdisplay@stack=\toks19
+\mathdisplay@stack=\toks18
 LaTeX Info: Redefining \[ on input line 2844.
 LaTeX Info: Redefining \] on input line 2845.
 ) (/usr/local/texlive/2019/texmf-dist/tex/generic/ifxetex/ifxetex.sty
@@ -435,9 +426,9 @@ Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 409.
 Package: microtype 2019/02/28 v2.7b Micro-typographical refinements (RS)
 (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks20
+\KV@toks@=\toks19
 )
-\MT@toks=\toks21
+\MT@toks=\toks20
 \MT@count=\count271
 LaTeX Info: Redefining \textls on input line 790.
 \MT@outer@kern=\dimen147
@@ -633,7 +624,7 @@ Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)+ FMi change
 \LT@rows=\count292
 \c@LT@tables=\count293
 \c@LT@chunks=\count294
-\LT@p@ftn=\toks22
+\LT@p@ftn=\toks21
 ) (/usr/local/texlive/2019/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2016/04/27 v1.618033 publication quality tables
 \heavyrulewidth=\dimen157
@@ -653,10 +644,22 @@ Package: booktabs 2016/04/27 v1.618033 publication quality tables
 \@thisruleclass=\count297
 \@lastruleclass=\count298
 \@thisrulewidth=\dimen169
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count299
+\calc@Bcount=\count300
+\calc@Adimen=\dimen170
+\calc@Bdimen=\dimen171
+\calc@Askip=\skip58
+\calc@Bskip=\skip59
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count301
+\calc@Cskip=\skip60
 ) (/usr/local/texlive/2019/texmf-dist/tex/latex/footnotehyper/footnotehyper.sty
 Package: footnotehyper 2018/01/23 v1.1 hyperref aware footnote.sty (JFB)
 \FNH@notes=\box54
-\FNH@width=\dimen170
+\FNH@width=\dimen172
 ) (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
 (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/graphics.sty
@@ -668,58 +671,153 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: xetex.def on input line 99.
 )
-\Gin@req@height=\dimen171
-\Gin@req@width=\dimen172
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/grffile.sty
-Package: grffile 2017/06/30 v1.18 Extended file name support for graphics (HO)
-Package grffile Info: Option `multidot' is set to `true'.
-Package grffile Info: Option `extendedchars' is set to `false'.
-Package grffile Info: Option `space' is set to `true'.
-Package grffile Info: \Gin@ii of package `graphicx' fixed on input line 494.
+\Gin@req@height=\dimen173
+\Gin@req@width=\dimen174
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/tools/array.sty
+Package: array 2018/12/30 v2.4k Tabular extension package (FMi)
+\col@sep=\dimen175
+\ar@mcellbox=\box55
+\extrarowheight=\dimen176
+\NC@list=\toks22
+\extratabsurround=\skip61
+\backup@length=\skip62
+\ar@cellbox=\box56
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2019/01/01 v2.4 Span multiple rows of a table
+\multirow@colwidth=\skip63
+\multirow@cntb=\count302
+\multirow@dima=\skip64
+\bigstrutjot=\dimen177
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/wrapfig/wrapfig.sty
+\wrapoverhang=\dimen178
+\WF@size=\dimen179
+\c@WF@wrappedlines=\count303
+\WF@box=\box57
+\WF@everypar=\toks23
+Package: wrapfig 2003/01/31  v 3.6
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count304
+\float@exts=\toks24
+\float@box=\box58
+\@float@everytoks=\toks25
+\@floatcapt=\box59
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2018/12/12 v1.0d Color table columns (DPC)
+\everycr=\toks26
+\minrowclearance=\skip65
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/pdflscape.sty
+Package: pdflscape 2016/05/14 v0.11 Display of landscape pages in PDF (HO)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: dvipdfm (xetex) on input line 99.
+
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/tabu/tabu.sty
+Package: tabu 2019/01/11 v2.9 - flexible LaTeX tabulars (FC+tabu-fixed)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/varwidth/varwidth.sty
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box60
+\sift@deathcycles=\count305
+\@vwid@loff=\dimen180
+\@vwid@roff=\dimen181
+)
+\c@taburow=\count306
+\tabu@nbcols=\count307
+\tabu@cnt=\count308
+\tabu@Xcol=\count309
+\tabu@alloc=\count310
+\tabu@nested=\count311
+\tabu@target=\dimen182
+\tabu@spreadtarget=\dimen183
+\tabu@naturalX=\dimen184
+\tabucolX=\dimen185
+\tabu@Xsum=\dimen186
+\extrarowdepth=\dimen187
+\abovetabulinesep=\dimen188
+\belowtabulinesep=\dimen189
+\tabustrutrule=\dimen190
+\tabu@thebody=\toks27
+\tabu@footnotes=\toks28
+\tabu@box=\box61
+\tabu@arstrutbox=\box62
+\tabu@hleads=\box63
+\tabu@vleads=\box64
+\tabu@cellskip=\skip66
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/threeparttable/threeparttable.sty
+Package: threeparttable 2003/06/13  v 3.0
+\@tempboxb=\box65
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/threeparttablex/threeparttablex.s
+ty
+Package: threeparttablex 2013/07/23 v0.3 by daleif
+(/usr/local/texlive/2019/texmf-dist/tex/latex/environ/environ.sty
+Package: environ 2014/05/04 v0.3 A new way to define environments
+(/usr/local/texlive/2019/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
+))
+\TPTL@width=\skip67
+) (/usr/local/texlive/2019/texmf-dist/tex/generic/ulem/ulem.sty
+\UL@box=\box66
+\UL@hyphenbox=\box67
+\UL@skip=\skip68
+\UL@hook=\toks29
+\UL@height=\dimen191
+\UL@pe=\count312
+\UL@pixel=\dimen192
+\ULC@box=\box68
+Package: ulem 2012/05/18
+\ULdepth=\dimen193
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/makecell/makecell.sty
+Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
+\rotheadsize=\dimen194
+\c@nlinenum=\count313
+\TeXr@lab=\toks30
 ) (/usr/local/texlive/2019/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
-\bibhang=\skip58
-\bibsep=\skip59
+\bibhang=\skip69
+\bibsep=\skip70
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count299
+\c@NAT@ctr=\count314
 )
 No file SportsData.aux.
 \openout1 = `SportsData.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 144.
+LaTeX Font Info:    ... okay on input line 144.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 144.
+LaTeX Font Info:    ... okay on input line 144.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 144.
+LaTeX Font Info:    ... okay on input line 144.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 144.
+LaTeX Font Info:    ... okay on input line 144.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 144.
+LaTeX Font Info:    ... okay on input line 144.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 144.
+LaTeX Font Info:    ... okay on input line 144.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 144.
+LaTeX Font Info:    ... okay on input line 144.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 144.
+LaTeX Font Info:    ... okay on input line 144.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 144.
+LaTeX Font Info:    ... okay on input line 144.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 144.
+LaTeX Font Info:    ... okay on input line 144.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/lmr/m/n --> TU/lmr/m/n on input line 125.
+(Font)                  OT1/lmr/m/n --> TU/lmr/m/n on input line 144.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/lmr/m/it --> TU/lmr/m/it on input line 125.
+(Font)                  OT1/lmr/m/it --> TU/lmr/m/it on input line 144.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/lmr/bx/n --> TU/lmr/bx/n on input line 125.
+(Font)                  OT1/lmr/bx/n --> TU/lmr/bx/n on input line 144.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 125.
+(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 144.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/lmss/bx/n --> TU/lmss/bx/n on input line 125.
+(Font)                  OT1/lmss/bx/n --> TU/lmss/bx/n on input line 144.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 125.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 144.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/bx/n on input line 125.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/bx/n on input line 144.
 
 Package fontspec Info: latinmodern-math scale = 1.
 
@@ -748,7 +846,7 @@ DFLT;"
 (fontspec)             - 'bold small caps'  (bx/sc) with NFSS spec.: 
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(0)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 125.
+(Font)              scaled to size 10.0pt on input line 144.
 
 Package fontspec Info: latinmodern-math scale = 1.
 
@@ -786,18 +884,18 @@ DFLT;"
 (fontspec)             - 'bold small caps'  (bx/sc) with NFSS spec.: 
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 125.
+(Font)              scaled to size 10.0pt on input line 144.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 125.
+(Font)              `operators' in the math version `normal' on input line 144.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/lmr/m/n --> TU/latinmodern-math.otf(1)/m/n on input
- line 125.
+ line 144.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 125.
+(Font)              `operators' in the math version `bold' on input line 144.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  OT1/lmr/bx/n --> TU/latinmodern-math.otf(1)/bx/n on inp
-ut line 125.
+ut line 144.
 
 Package fontspec Info: latinmodern-math scale = 1.
 
@@ -884,15 +982,15 @@ uage=DFLT;"
 (fontspec)             \fontdimen 21\font =0pt\relax 
 
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `normal' on input line 125.
+(Font)              `symbols' in the math version `normal' on input line 144.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
 (Font)                  OMS/lmsy/m/n --> TU/latinmodern-math.otf(2)/m/n on inpu
-t line 125.
+t line 144.
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `bold' on input line 125.
+(Font)              `symbols' in the math version `bold' on input line 144.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
 (Font)                  OMS/lmsy/b/n --> TU/latinmodern-math.otf(2)/bx/n on inp
-ut line 125.
+ut line 144.
 
 Package fontspec Info: latinmodern-math scale = 1.
 
@@ -962,17 +1060,17 @@ uage=DFLT;"
 
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
 (Font)              `largesymbols' in the math version `normal' on input line 1
-25.
+44.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
 (Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/m/n on inpu
-t line 125.
+t line 144.
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
-(Font)              `largesymbols' in the math version `bold' on input line 125
+(Font)              `largesymbols' in the math version `bold' on input line 144
 .
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
 (Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/bx/n on inp
-ut line 125.
-LaTeX Info: Redefining \microtypecontext on input line 125.
+ut line 144.
+LaTeX Info: Redefining \microtypecontext on input line 144.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: No adjustment of tracking.
@@ -983,56 +1081,45 @@ Package microtype Info: No adjustment of kerning.
 File: mt-LatinModernRoman.cfg 2013/03/13 v1.0 microtype config. file: Latin Mod
 ern Roman (RS)
 )
-\AtBeginShipoutBox=\box55
-Package hyperref Info: Link coloring OFF on input line 125.
+\AtBeginShipoutBox=\box69
+Package hyperref Info: Link coloring OFF on input line 144.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count300
+\c@section@level=\count315
 )
-LaTeX Info: Redefining \ref on input line 125.
-LaTeX Info: Redefining \pageref on input line 125.
-LaTeX Info: Redefining \nameref on input line 125.
+LaTeX Info: Redefining \ref on input line 144.
+LaTeX Info: Redefining \pageref on input line 144.
+LaTeX Info: Redefining \nameref on input line 144.
 
 Package hyperref Warning: Rerun to get /PageLabels entry.
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 12.0pt on input line 127.
+(Font)              scaled to size 12.0pt on input line 146.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 127.
+(Font)              scaled to size 8.0pt on input line 146.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 127.
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 127.
+(Font)              scaled to size 6.0pt on input line 146.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 146.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 12.00128pt on input line 127.
+(Font)              scaled to size 12.00128pt on input line 146.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 8.00085pt on input line 127.
+(Font)              scaled to size 8.00085pt on input line 146.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.00064pt on input line 127.
+(Font)              scaled to size 6.00064pt on input line 146.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 11.99872pt on input line 127.
+(Font)              scaled to size 11.99872pt on input line 146.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 7.99915pt on input line 127.
+(Font)              scaled to size 7.99915pt on input line 146.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 5.99936pt on input line 127.
-LaTeX Font Info:    Try loading font information for U+msa on input line 127.
-(/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/microtype/mt-msa.cfg
-File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
-)
-LaTeX Font Info:    Try loading font information for U+msb on input line 127.
-(/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/microtype/mt-msb.cfg
-File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
-) [1
+(Font)              scaled to size 5.99936pt on input line 146.
+[1
 
 
 ] [2
@@ -1045,17 +1132,14 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 
 ]
 Chapter 1.
-[5]
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 185.
-[6]
-Underfull \hbox (badness 1082) in paragraph at lines 205--207
+[5] [6]
+Underfull \hbox (badness 1082) in paragraph at lines 224--226
 []\TU/lmr/m/n/10 The text is []Attribution-NonCommercial-ShareAlike 4.0 Interna
 tional[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 205--207
+Underfull \hbox (badness 10000) in paragraph at lines 224--226
 
  []
 
@@ -1066,7 +1150,7 @@ Chapter 2.
 File: images/verybasics1.png Graphic file (type bmp)
 <images/verybasics1.png>
 
-Overfull \hbox (633.25305pt too wide) in paragraph at lines 215--216
+Overfull \hbox (633.25305pt too wide) in paragraph at lines 234--235
 [][] 
  []
 
@@ -1076,14 +1160,17 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [9]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[10] [11]
-Underfull \hbox (badness 1033) in paragraph at lines 278--279
+[10]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 248.
+[11]
+Underfull \hbox (badness 1033) in paragraph at lines 297--298
 \TU/lmr/m/n/10 We’ll mostly use two libraries for analysis – \TU/lmtt/m/n/10 dp
 lyr \TU/lmr/m/n/10 and \TU/lmtt/m/n/10 ggplot2\TU/lmr/m/n/10 . To
  []
 
 
-Underfull \hbox (badness 1558) in paragraph at lines 278--279
+Underfull \hbox (badness 1558) in paragraph at lines 297--298
 \TU/lmr/m/n/10 lection of libraries called the tidyverse. Type this into your c
 onsole:
  []
@@ -1091,7 +1178,7 @@ onsole:
 File: images/verybasics2.png Graphic file (type bmp)
 <images/verybasics2.png>
 
-Overfull \hbox (455.75601pt too wide) in paragraph at lines 291--292
+Overfull \hbox (455.75601pt too wide) in paragraph at lines 310--311
 [][] 
  []
 
@@ -1106,7 +1193,7 @@ Chapter 3.
 File: images/data1.png Graphic file (type bmp)
 <images/data1.png>
 
-Overfull \hbox (450.03319pt too wide) in paragraph at lines 335--336
+Overfull \hbox (450.03319pt too wide) in paragraph at lines 354--355
 [][] 
  []
 
@@ -1116,7 +1203,7 @@ Overfull \hbox (450.03319pt too wide) in paragraph at lines 335--336
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [16]
-Overfull \hbox (174.75pt too wide) in paragraph at lines 371--371
+Overfull \hbox (174.75pt too wide) in paragraph at lines 390--390
 []\TU/lmtt/m/n/10 =IMPORTHTML("https://www.sports-reference.com/cbb/schools/neb
 raska/2019-gamelogs.html", "table", 1)[] 
  []
@@ -1125,7 +1212,7 @@ raska/2019-gamelogs.html", "table", 1)[]
 File: images/clean1.png Graphic file (type bmp)
 <images/clean1.png>
 
-Overfull \hbox (568.93245pt too wide) in paragraph at lines 380--381
+Overfull \hbox (568.93245pt too wide) in paragraph at lines 399--400
 [][] 
  []
 
@@ -1136,7 +1223,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 File: images/clean2.png Graphic file (type bmp)
 <images/clean2.png>
 
-Overfull \hbox (675.68164pt too wide) in paragraph at lines 390--391
+Overfull \hbox (675.68164pt too wide) in paragraph at lines 409--410
 [][] 
  []
 
@@ -1147,7 +1234,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 File: images/clean3.png Graphic file (type bmp)
 <images/clean3.png>
 
-Overfull \hbox (436.0153pt too wide) in paragraph at lines 400--401
+Overfull \hbox (436.0153pt too wide) in paragraph at lines 419--420
 [][] 
  []
 
@@ -1162,467 +1249,500 @@ Chapter 4.
 [25
 
 ]
-Overfull \hbox (17.25pt too wide) in paragraph at lines 457--458
+Overfull \hbox (90.75pt too wide) in paragraph at lines 482--482
+[]\TU/lmtt/m/n/10 ## -- Attaching packages ------------------------------------
+--- tidyverse 1.3.0 --[] 
+ []
+
+
+Overfull \hbox (90.75pt too wide) in paragraph at lines 494--494
+[]\TU/lmtt/m/n/10 ## -- Conflicts ------------------------------------------ ti
+dyverse_conflicts() --[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 509--510
 []\TU/lmtt/m/n/10 nbaplayers <- read_csv("~/Box/SportsData/nbaadvancedplayers19
 20.csv") 
  []
 
 [26]
-Overfull \hbox (69.75pt too wide) in paragraph at lines 513--513
+Overfull \hbox (90.75pt too wide) in paragraph at lines 537--537
+[]\TU/lmtt/m/n/10 ## -- Column specification ----------------------------------
+----------------------[] 
+ []
+
+
+Overfull \hbox (69.75pt too wide) in paragraph at lines 563--563
 []\TU/lmtt/m/n/10 ##      Rk Player Pos     Age Tm        G    MP   PER []TS%[]
  []3PAr[]   FTr []ORB%[][] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 513--513
+Overfull \hbox (69.75pt too wide) in paragraph at lines 563--563
 []\TU/lmtt/m/n/10 ##   <dbl> <chr>  <chr> <dbl> <chr> <dbl> <dbl> <dbl> <dbl>  
 <dbl> <dbl>  <dbl>[] 
  []
 
-
-Overfull \hbox (59.25pt too wide) in paragraph at lines 513--513
+[27]
+Overfull \hbox (59.25pt too wide) in paragraph at lines 563--563
 []\TU/lmtt/m/n/10 ## 1     1 Steve~ C        26 OKC      63  1680  20.5 0.604  
 0.006 0.421   14[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 513--513
+Overfull \hbox (69.75pt too wide) in paragraph at lines 563--563
 []\TU/lmtt/m/n/10 ## 2     2 Bam A~ PF       22 MIA      72  2417  20.3 0.598  
 0.018 0.484    8.5[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 513--513
+Overfull \hbox (69.75pt too wide) in paragraph at lines 563--563
 []\TU/lmtt/m/n/10 ## 3     3 LaMar~ C        34 SAS      53  1754  19.7 0.571  
 0.198 0.241    6.3[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 513--513
+Overfull \hbox (69.75pt too wide) in paragraph at lines 563--563
 []\TU/lmtt/m/n/10 ## 4     4 Kyle ~ PF       23 MIA       2    13   4.7 0.5    
 0     0       17.9[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 513--513
+Overfull \hbox (69.75pt too wide) in paragraph at lines 563--563
 []\TU/lmtt/m/n/10 ## 5     5 Nicke~ SG       21 NOP      47   591   8.9 0.473  
 0.5   0.139    1.6[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 513--513
+Overfull \hbox (69.75pt too wide) in paragraph at lines 563--563
 []\TU/lmtt/m/n/10 ## 6     6 Grays~ SG       24 MEM      38   718  12   0.609  
 0.562 0.179    1.2[] 
  []
 
 
-Overfull \hbox (43.5pt too wide) in paragraph at lines 513--513
+Overfull \hbox (43.5pt too wide) in paragraph at lines 563--563
 []\TU/lmtt/m/n/10 ## # ... with 15 more variables: []DRB%[] <dbl>, []TRB%[] <db
 l>, []AST%[] <dbl>,[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 513--513
+Overfull \hbox (38.25pt too wide) in paragraph at lines 563--563
 []\TU/lmtt/m/n/10 ## #   []STL%[] <dbl>, []BLK%[] <dbl>, []TOV%[] <dbl>, []USG%
 [] <dbl>, OWS <dbl>,[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 513--513
+Overfull \hbox (59.25pt too wide) in paragraph at lines 563--563
 []\TU/lmtt/m/n/10 ## #   DWS <dbl>, WS <dbl>, []WS/48[] <dbl>, OBPM <dbl>, DBPM
  <dbl>, BPM <dbl>,[] 
  []
 
-[27]
-Overfull \hbox (17.25pt too wide) in paragraph at lines 549--549
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 599--599
 []\TU/lmtt/m/n/10 ## []summarise()[] ungrouping output (override with [].groups
 [] argument)[] 
  []
 
 [28]
-Overfull \hbox (17.25pt too wide) in paragraph at lines 584--584
+Overfull \hbox (17.25pt too wide) in paragraph at lines 634--634
 []\TU/lmtt/m/n/10 ## []summarise()[] ungrouping output (override with [].groups
 [] argument)[] 
  []
 
-
-Overfull \hbox (59.25pt too wide) in paragraph at lines 617--617
+[29]
+Overfull \hbox (59.25pt too wide) in paragraph at lines 667--667
 []\TU/lmtt/m/n/10 ## []summarise()[] regrouping output by []Tm[] (override with
  [].groups[] argument)[] 
  []
 
-[29]
-Overfull \hbox (17.25pt too wide) in paragraph at lines 666--666
+
+Underfull \vbox (badness 3260) has occurred while \output is active []
+
+[30]
+Overfull \hbox (17.25pt too wide) in paragraph at lines 716--716
 []\TU/lmtt/m/n/10 ## []summarise()[] ungrouping output (override with [].groups
 [] argument)[] 
  []
 
-[30]
-Overfull \hbox (75.0pt too wide) in paragraph at lines 713--713
+
+Overfull \hbox (75.0pt too wide) in paragraph at lines 763--763
 []\TU/lmtt/m/n/10 ##       Rk Player Pos     Age Tm        G    MP   PER []TS%[
 ] []3PAr[]   FTr []ORB%[][] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 713--713
+Overfull \hbox (75.0pt too wide) in paragraph at lines 763--763
 []\TU/lmtt/m/n/10 ##    <dbl> <chr>  <chr> <dbl> <chr> <dbl> <dbl> <dbl> <dbl> 
  <dbl> <dbl>  <dbl>[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 713--713
+Overfull \hbox (75.0pt too wide) in paragraph at lines 763--763
 []\TU/lmtt/m/n/10 ##  1   323 CJ Mc~ SG       28 POR      70  2556  17   0.541 
  0.378 0.136    1.9[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 713--713
+Overfull \hbox (75.0pt too wide) in paragraph at lines 763--763
 []\TU/lmtt/m/n/10 ##  2    55 Devin~ SG       23 PHO      70  2512  20.6 0.618 
  0.31  0.397    1.3[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 713--713
+Overfull \hbox (75.0pt too wide) in paragraph at lines 763--763
 []\TU/lmtt/m/n/10 ##  3   198 James~ SG       30 HOU      68  2483  29.1 0.626 
  0.557 0.528    2.9[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 713--713
+Overfull \hbox (75.0pt too wide) in paragraph at lines 763--763
 []\TU/lmtt/m/n/10 ##  4    27 Harri~ PF       27 SAC      72  2482  13.3 0.574 
  0.338 0.337    3.4[] 
  []
 
-
-Overfull \hbox (75.0pt too wide) in paragraph at lines 713--713
+[31]
+Overfull \hbox (75.0pt too wide) in paragraph at lines 763--763
 []\TU/lmtt/m/n/10 ##  5   297 Damia~ PG       29 POR      66  2474  26.9 0.627 
  0.5   0.384    1.4[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 713--713
+Overfull \hbox (75.0pt too wide) in paragraph at lines 763--763
 []\TU/lmtt/m/n/10 ##  6   204 Tobia~ PF       27 PHI      72  2469  17.2 0.556 
  0.304 0.184    3.1[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 713--713
+Overfull \hbox (75.0pt too wide) in paragraph at lines 763--763
 []\TU/lmtt/m/n/10 ##  7   479 P.J. ~ PF       34 HOU      72  2467   8.3 0.559 
  0.702 0.113    4.7[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 713--713
+Overfull \hbox (75.0pt too wide) in paragraph at lines 763--763
 []\TU/lmtt/m/n/10 ##  8   175 Shai ~ SG       21 OKC      70  2428  17.7 0.568 
  0.247 0.352    2.2[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 713--713
+Overfull \hbox (75.0pt too wide) in paragraph at lines 763--763
 []\TU/lmtt/m/n/10 ##  9     2 Bam A~ PF       22 MIA      72  2417  20.3 0.598 
  0.018 0.484    8.5[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 713--713
+Overfull \hbox (75.0pt too wide) in paragraph at lines 763--763
 []\TU/lmtt/m/n/10 ## 10   343 Donov~ SG       23 UTA      69  2364  18.8 0.558 
  0.352 0.24     2.6[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 713--713
+Overfull \hbox (69.75pt too wide) in paragraph at lines 763--763
 []\TU/lmtt/m/n/10 ## # ... with 641 more rows, and 15 more variables: []DRB%[] 
 <dbl>, []TRB%[] <dbl>,[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 713--713
+Overfull \hbox (54.0pt too wide) in paragraph at lines 763--763
 []\TU/lmtt/m/n/10 ## #   []AST%[] <dbl>, []STL%[] <dbl>, []BLK%[] <dbl>, []TOV%
 [] <dbl>, []USG%[] <dbl>,[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 713--713
+Overfull \hbox (59.25pt too wide) in paragraph at lines 763--763
 []\TU/lmtt/m/n/10 ## #   OWS <dbl>, DWS <dbl>, WS <dbl>, []WS/48[] <dbl>, OBPM 
 <dbl>, DBPM <dbl>,[] 
  []
 
-[31]
-Overfull \hbox (17.25pt too wide) in paragraph at lines 743--743
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 793--793
 []\TU/lmtt/m/n/10 ## []summarise()[] ungrouping output (override with [].groups
 [] argument)[] 
  []
 
-[32]
-Chapter 5.
-[33
+[32] [33] [34
 
 ]
-Overfull \hbox (64.5pt too wide) in paragraph at lines 817--817
+Chapter 5.
+
+Overfull \hbox (90.75pt too wide) in paragraph at lines 850--850
+[]\TU/lmtt/m/n/10 ## -- Column specification ----------------------------------
+----------------------[] 
+ []
+
+[35]
+Overfull \hbox (64.5pt too wide) in paragraph at lines 868--868
 []\TU/lmtt/m/n/10 ##   Institution     Conference      []2013[] []2014[] []2015
 [] []2016[] []2017[] []2018[][] 
  []
 
 
-Overfull \hbox (64.5pt too wide) in paragraph at lines 817--817
+Overfull \hbox (64.5pt too wide) in paragraph at lines 868--868
 []\TU/lmtt/m/n/10 ##   <chr>           <chr>            <dbl>  <dbl>  <dbl>  <d
 bl>  <dbl>  <dbl>[] 
  []
 
 
-Overfull \hbox (64.5pt too wide) in paragraph at lines 817--817
+Overfull \hbox (64.5pt too wide) in paragraph at lines 868--868
 []\TU/lmtt/m/n/10 ## 1 Air Force       MWC             228562 168967 156158 177
 519 174924 166205[] 
  []
 
 
-Overfull \hbox (64.5pt too wide) in paragraph at lines 817--817
+Overfull \hbox (64.5pt too wide) in paragraph at lines 868--868
 []\TU/lmtt/m/n/10 ## 2 Akron           MAC             107101  55019 108588  62
 021 117416  92575[] 
  []
 
 
-Overfull \hbox (64.5pt too wide) in paragraph at lines 817--817
+Overfull \hbox (64.5pt too wide) in paragraph at lines 868--868
 []\TU/lmtt/m/n/10 ## 3 Alabama         SEC             710538 710736 707786 712
 747 712053 710931[] 
  []
 
 
-Overfull \hbox (64.5pt too wide) in paragraph at lines 817--817
+Overfull \hbox (64.5pt too wide) in paragraph at lines 868--868
 []\TU/lmtt/m/n/10 ## 4 Appalachian St. FBS Independent 149366     NA     NA    
  NA     NA     NA[] 
  []
 
 
-Overfull \hbox (64.5pt too wide) in paragraph at lines 817--817
+Overfull \hbox (64.5pt too wide) in paragraph at lines 868--868
 []\TU/lmtt/m/n/10 ## 5 Appalachian St. Sun Belt            NA 138995 128755 156
 916 154722 131716[] 
  []
 
 
-Overfull \hbox (64.5pt too wide) in paragraph at lines 817--817
+Overfull \hbox (64.5pt too wide) in paragraph at lines 868--868
 []\TU/lmtt/m/n/10 ## 6 Arizona         Pac-12          285713 354973 308355 338
 017 255791 318051[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 844--844
+Overfull \hbox (90.75pt too wide) in paragraph at lines 895--895
 []\TU/lmtt/m/n/10 ##    Institution   Conference   []2013[] []2014[] []2015[] [
 ]2016[] []2017[] []2018[]   change[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 844--844
+Overfull \hbox (90.75pt too wide) in paragraph at lines 895--895
 []\TU/lmtt/m/n/10 ##    <chr>         <chr>         <dbl>  <dbl>  <dbl>  <dbl> 
  <dbl>  <dbl>    <dbl>[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 844--844
+Overfull \hbox (85.5pt too wide) in paragraph at lines 895--895
 []\TU/lmtt/m/n/10 ##  1 Air Force     MWC          228562 168967 156158 177519 
 174924 166205 -0.0498[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 844--844
+Overfull \hbox (80.25pt too wide) in paragraph at lines 895--895
 []\TU/lmtt/m/n/10 ##  2 Akron         MAC          107101  55019 108588  62021 
 117416  92575 -0.212[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 844--844
+Overfull \hbox (90.75pt too wide) in paragraph at lines 895--895
 []\TU/lmtt/m/n/10 ##  3 Alabama       SEC          710538 710736 707786 712747 
 712053 710931 -0.00158[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 844--844
+Overfull \hbox (59.25pt too wide) in paragraph at lines 895--895
 []\TU/lmtt/m/n/10 ##  4 Appalachian ~ FBS Indepen~ 149366     NA     NA     NA 
     NA     NA NA[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 844--844
+Overfull \hbox (80.25pt too wide) in paragraph at lines 895--895
 []\TU/lmtt/m/n/10 ##  5 Appalachian ~ Sun Belt         NA 138995 128755 156916 
 154722 131716 -0.149[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 844--844
+Overfull \hbox (80.25pt too wide) in paragraph at lines 895--895
 []\TU/lmtt/m/n/10 ##  6 Arizona       Pac-12       285713 354973 308355 338017 
 255791 318051  0.243[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 844--844
+Overfull \hbox (80.25pt too wide) in paragraph at lines 895--895
 []\TU/lmtt/m/n/10 ##  7 Arizona St.   Pac-12       501509 343073 368985 286417 
 359660 291091 -0.191[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 844--844
+Overfull \hbox (80.25pt too wide) in paragraph at lines 895--895
 []\TU/lmtt/m/n/10 ##  8 Arkansas      SEC          431174 399124 471279 487067 
 442569 367748 -0.169[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 844--844
+Overfull \hbox (90.75pt too wide) in paragraph at lines 895--895
 []\TU/lmtt/m/n/10 ##  9 Arkansas St.  Sun Belt     149477 149163 138043 136200 
 119538 119001 -0.00449[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 844--844
+Overfull \hbox (85.5pt too wide) in paragraph at lines 895--895
 []\TU/lmtt/m/n/10 ## 10 Army West Po~ FBS Indepen~ 169781 171310 185946 163267 
 185543 190156  0.0249[] 
  []
 
-[34]
-Overfull \hbox (90.75pt too wide) in paragraph at lines 871--871
+[36]
+Overfull \hbox (90.75pt too wide) in paragraph at lines 922--922
 []\TU/lmtt/m/n/10 ##    Institution    Conference   []2013[] []2014[] []2015[] 
 []2016[] []2017[] []2018[]  change[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 871--871
+Overfull \hbox (90.75pt too wide) in paragraph at lines 922--922
 []\TU/lmtt/m/n/10 ##    <chr>          <chr>         <dbl>  <dbl>  <dbl>  <dbl>
   <dbl>  <dbl>   <dbl>[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 871--871
+Overfull \hbox (85.5pt too wide) in paragraph at lines 922--922
 []\TU/lmtt/m/n/10 ##  1 Air Force      MWC          228562 168967 156158 177519
  174924 166205  -4.98[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 871--871
+Overfull \hbox (80.25pt too wide) in paragraph at lines 922--922
 []\TU/lmtt/m/n/10 ##  2 Akron          MAC          107101  55019 108588  62021
  117416  92575 -21.2[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 871--871
+Overfull \hbox (90.75pt too wide) in paragraph at lines 922--922
 []\TU/lmtt/m/n/10 ##  3 Alabama        SEC          710538 710736 707786 712747
  712053 710931  -0.158[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 871--871
+Overfull \hbox (69.75pt too wide) in paragraph at lines 922--922
 []\TU/lmtt/m/n/10 ##  4 Appalachian S~ FBS Indepen~ 149366     NA     NA     NA
      NA     NA  NA[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 871--871
+Overfull \hbox (80.25pt too wide) in paragraph at lines 922--922
 []\TU/lmtt/m/n/10 ##  5 Appalachian S~ Sun Belt         NA 138995 128755 156916
  154722 131716 -14.9[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 871--871
+Overfull \hbox (80.25pt too wide) in paragraph at lines 922--922
 []\TU/lmtt/m/n/10 ##  6 Arizona        Pac-12       285713 354973 308355 338017
  255791 318051  24.3[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 871--871
+Overfull \hbox (80.25pt too wide) in paragraph at lines 922--922
 []\TU/lmtt/m/n/10 ##  7 Arizona St.    Pac-12       501509 343073 368985 286417
  359660 291091 -19.1[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 871--871
+Overfull \hbox (80.25pt too wide) in paragraph at lines 922--922
 []\TU/lmtt/m/n/10 ##  8 Arkansas       SEC          431174 399124 471279 487067
  442569 367748 -16.9[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 871--871
+Overfull \hbox (90.75pt too wide) in paragraph at lines 922--922
 []\TU/lmtt/m/n/10 ##  9 Arkansas St.   Sun Belt     149477 149163 138043 136200
  119538 119001  -0.449[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 871--871
+Overfull \hbox (85.5pt too wide) in paragraph at lines 922--922
 []\TU/lmtt/m/n/10 ## 10 Army West Poi~ FBS Indepen~ 169781 171310 185946 163267
  185543 190156   2.49[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 898--898
+Overfull \hbox (69.75pt too wide) in paragraph at lines 949--949
 []\TU/lmtt/m/n/10 ##    Institution   Conference []2013[] []2014[] []2015[] []2
 016[] []2017[] []2018[] change[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 898--898
+Overfull \hbox (69.75pt too wide) in paragraph at lines 949--949
 []\TU/lmtt/m/n/10 ##    <chr>         <chr>       <dbl>  <dbl>  <dbl>  <dbl>  <
 dbl>  <dbl>  <dbl>[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 898--898
+Overfull \hbox (69.75pt too wide) in paragraph at lines 949--949
 []\TU/lmtt/m/n/10 ##  1 Ga. Southern  Sun Belt       NA 105510 124681 104095  6
 1031 100814   65.2[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 898--898
+Overfull \hbox (69.75pt too wide) in paragraph at lines 949--949
 []\TU/lmtt/m/n/10 ##  2 La.-Monroe    Sun Belt    85177  90540  58659  67057  4
 9640  71048   43.1[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 898--898
+Overfull \hbox (69.75pt too wide) in paragraph at lines 949--949
 []\TU/lmtt/m/n/10 ##  3 Louisiana     Sun Belt   129878 154652 129577 121346  7
 8754 111303   41.3[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 898--898
+Overfull \hbox (69.75pt too wide) in paragraph at lines 949--949
 []\TU/lmtt/m/n/10 ##  4 Hawaii        MWC        185931 192159 164031 170299 14
 5463 205455   41.2[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 898--898
+Overfull \hbox (69.75pt too wide) in paragraph at lines 949--949
 []\TU/lmtt/m/n/10 ##  5 Buffalo       MAC        136418 122418 110743 104957  8
 0102 110280   37.7[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 898--898
+Overfull \hbox (69.75pt too wide) in paragraph at lines 949--949
 []\TU/lmtt/m/n/10 ##  6 California    Pac-12     345303 286051 292797 279769 21
 9290 300061   36.8[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 898--898
+Overfull \hbox (69.75pt too wide) in paragraph at lines 949--949
 []\TU/lmtt/m/n/10 ##  7 UCF           AAC        252505 226869 180388 214814 25
 7924 352148   36.5[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 898--898
+Overfull \hbox (69.75pt too wide) in paragraph at lines 949--949
 []\TU/lmtt/m/n/10 ##  8 UTSA          C-USA      175282 165458 138048 138226 11
 4104 148257   29.9[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 898--898
+Overfull \hbox (69.75pt too wide) in paragraph at lines 949--949
 []\TU/lmtt/m/n/10 ##  9 Eastern Mich. MAC         20255  75127  29381 106064  7
 3649  95632   29.8[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 898--898
+Overfull \hbox (69.75pt too wide) in paragraph at lines 949--949
 []\TU/lmtt/m/n/10 ## 10 Louisville    ACC            NA 317829 294413 324391 27
 6957 351755   27.0[] 
  []
 
-[35]
-Overfull \hbox (13.47pt too wide) in paragraph at lines 941--942
+[37]
+Overfull \hbox (90.75pt too wide) in paragraph at lines 988--988
+[]\TU/lmtt/m/n/10 ## -- Column specification ----------------------------------
+----------------------[] 
+ []
+
+
+Overfull \hbox (13.47pt too wide) in paragraph at lines 990--991
 []\TU/lmr/m/n/10 The basic true shooting percentage formula is \TU/lmtt/m/n/10 
 (Points / (2*(FieldGoalAttempts
  []
@@ -1630,818 +1750,836 @@ Overfull \hbox (13.47pt too wide) in paragraph at lines 941--942
 File: images/environment.png Graphic file (type bmp)
 <images/environment.png>
 
-Overfull \hbox (310.48082pt too wide) in paragraph at lines 945--946
+Overfull \hbox (310.48082pt too wide) in paragraph at lines 994--995
 [][] 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[36]
+[38]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[37]
-Overfull \hbox (54.0pt too wide) in paragraph at lines 983--983
+[39]
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1032--1032
 []\TU/lmtt/m/n/10 ##       X1 Team  Conference Player   []#[] Class Pos   Heigh
 t Weight Hometown[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 983--983
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1032--1032
 []\TU/lmtt/m/n/10 ##    <dbl> <chr> <chr>      <chr>  <dbl> <chr> <chr> <chr>  
  <dbl> <chr>[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 983--983
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1032--1032
 []\TU/lmtt/m/n/10 ##  1   579 Texa~ Big 12     Drayt~     4 JR    G     6-0    
    156 Austin,~[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 983--983
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1032--1032
 []\TU/lmtt/m/n/10 ##  2   843 Ston~ AEC        Nick ~    42 FR    F     6-7    
    240 Port Je~[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 983--983
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1032--1032
 []\TU/lmtt/m/n/10 ##  3  1059 Sout~ Southland  Patri~    22 SO    F     6-3    
    210 Folsom,~[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 983--983
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1032--1032
 []\TU/lmtt/m/n/10 ##  4  4269 Dayt~ A-10       Camro~    52 SO    G     5-7    
    160 Country~[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 983--983
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1032--1032
 []\TU/lmtt/m/n/10 ##  5  4681 Cali~ Pac-12     David~    21 JR    G     6-4    
    185 Newbury~[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 983--983
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1032--1032
 []\TU/lmtt/m/n/10 ##  6   326 Virg~ ACC        Grant~     1 FR    G     <NA>   
     NA Charlot~[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 983--983
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1032--1032
 []\TU/lmtt/m/n/10 ##  7   410 Vand~ SEC        Mac H~    42 FR    G     6-6    
    182 Chattan~[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 983--983
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1032--1032
 []\TU/lmtt/m/n/10 ##  8  1390 Sain~ A-10       Jack ~    31 JR    G     6-6    
    205 Mattoon~[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 983--983
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1032--1032
 []\TU/lmtt/m/n/10 ##  9  2230 NJIT~ A-Sun      Patri~     3 SO    G     5-9    
    160 West Or~[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 983--983
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1032--1032
 []\TU/lmtt/m/n/10 ## 10   266 Wash~ Pac-12     Reaga~    34 FR    F     6-6    
    225 Santa A~[] 
  []
 
 
-Overfull \hbox (43.5pt too wide) in paragraph at lines 983--983
+Overfull \hbox (43.5pt too wide) in paragraph at lines 1032--1032
 []\TU/lmtt/m/n/10 ## # ... with 5,376 more rows, and 50 more variables: []High 
 School[] <chr>,[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 983--983
+Overfull \hbox (33.0pt too wide) in paragraph at lines 1032--1032
 []\TU/lmtt/m/n/10 ## #   Summary <chr>, Rk.x <dbl>, G <dbl>, GS <dbl>, MP <dbl>
 , FG <dbl>,[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 983--983
+Overfull \hbox (75.0pt too wide) in paragraph at lines 1032--1032
 []\TU/lmtt/m/n/10 ## #   FGA <dbl>, []FG%[] <dbl>, []2P[] <dbl>, []2PA[] <dbl>,
  []2P%[] <dbl>, []3P[] <dbl>,[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 983--983
+Overfull \hbox (59.25pt too wide) in paragraph at lines 1032--1032
 []\TU/lmtt/m/n/10 ## #   []3PA[] <dbl>, []3P%[] <dbl>, FT <dbl>, FTA <dbl>, []F
 T%[] <dbl>, ORB <dbl>,[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 983--983
+Overfull \hbox (85.5pt too wide) in paragraph at lines 1032--1032
 []\TU/lmtt/m/n/10 ## #   DRB <dbl>, TRB <dbl>, AST <dbl>, STL <dbl>, BLK <dbl>,
  TOV <dbl>, PF <dbl>,[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 983--983
+Overfull \hbox (80.25pt too wide) in paragraph at lines 1032--1032
 []\TU/lmtt/m/n/10 ## #   PTS <dbl>, Rk.y <dbl>, PER <dbl>, []TS%[] <dbl>, []eFG
 %[] <dbl>, []3PAr[] <dbl>,[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 983--983
+Overfull \hbox (33.0pt too wide) in paragraph at lines 1032--1032
 []\TU/lmtt/m/n/10 ## #   FTr <dbl>, PProd <dbl>, []ORB%[] <dbl>, []DRB%[] <dbl>
 , []TRB%[] <dbl>,[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 983--983
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1032--1032
 []\TU/lmtt/m/n/10 ## #   []AST%[] <dbl>, []STL%[] <dbl>, []BLK%[] <dbl>, []TOV%
 [] <dbl>, []USG%[] <dbl>,[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 983--983
+Overfull \hbox (59.25pt too wide) in paragraph at lines 1032--1032
 []\TU/lmtt/m/n/10 ## #   OWS <dbl>, DWS <dbl>, WS <dbl>, []WS/40[] <dbl>, OBPM 
 <dbl>, DBPM <dbl>,[] 
  []
 
-[38]
+[40]
 Chapter 6.
-[39
+
+Overfull \hbox (90.75pt too wide) in paragraph at lines 1074--1074
+[]\TU/lmtt/m/n/10 ## -- Column specification ----------------------------------
+----------------------[] 
+ []
+
+[41
 
 ]
-Overfull \hbox (17.25pt too wide) in paragraph at lines 1043--1043
+Overfull \hbox (17.25pt too wide) in paragraph at lines 1093--1093
 []\TU/lmtt/m/n/10 ##   Institution Conference []2013[] []2014[] []2015[] []2016
 [] []2017[] []2018[][] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 1043--1043
+Overfull \hbox (17.25pt too wide) in paragraph at lines 1093--1093
 []\TU/lmtt/m/n/10 ##   <chr>       <chr>       <dbl>  <dbl>  <dbl>  <dbl>  <dbl
 >  <dbl>[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 1043--1043
+Overfull \hbox (17.25pt too wide) in paragraph at lines 1093--1093
 []\TU/lmtt/m/n/10 ## 1 Nebraska    Big Ten    727466 638744 629983 631402 62858
 3 623240[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1074--1074
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1124--1124
 []\TU/lmtt/m/n/10 ##    Institution    Conference []2013[] []2014[] []2015[] []
 2016[] []2017[] []2018[][] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1074--1074
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1124--1124
 []\TU/lmtt/m/n/10 ##    <chr>          <chr>       <dbl>  <dbl>  <dbl>  <dbl>  
 <dbl>  <dbl>[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1074--1074
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1124--1124
 []\TU/lmtt/m/n/10 ##  1 Alabama        SEC        710538 710736 707786 712747 7
 12053 710931[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1074--1074
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1124--1124
 []\TU/lmtt/m/n/10 ##  2 Auburn         SEC        685252 612157 612157 695498 6
 05120 591236[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1074--1074
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1124--1124
 []\TU/lmtt/m/n/10 ##  3 Clemson        ACC        574333 572262 588266 566787 5
 65412 562799[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1074--1074
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1124--1124
 []\TU/lmtt/m/n/10 ##  4 Florida        SEC        524638 515001 630457 439229 5
 20290 576299[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1074--1074
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1124--1124
 []\TU/lmtt/m/n/10 ##  5 Georgia        SEC        556476 649222 649222 556476 5
 56476 649222[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1074--1074
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1124--1124
 []\TU/lmtt/m/n/10 ##  6 LSU            SEC        639927 712063 654084 708618 5
 91034 705733[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1074--1074
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1124--1124
 []\TU/lmtt/m/n/10 ##  7 Michigan       Big Ten    781144 734364 771174 883741 6
 69534 775156[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1074--1074
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1124--1124
 []\TU/lmtt/m/n/10 ##  8 Michigan St.   Big Ten    506294 522765 522628 522666 5
 07398 508088[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1074--1074
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1124--1124
 []\TU/lmtt/m/n/10 ##  9 Nebraska       Big Ten    727466 638744 629983 631402 6
 28583 623240[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1074--1074
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1124--1124
 []\TU/lmtt/m/n/10 ## 10 Ohio St.       Big Ten    734528 744075 750705 750944 7
 52464 713630[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1074--1074
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1124--1124
 []\TU/lmtt/m/n/10 ## 11 Oklahoma       Big 12     508334 510972 512139 521142 5
 19119 607146[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1074--1074
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1124--1124
 []\TU/lmtt/m/n/10 ## 12 Penn St.       Big Ten    676112 711358 698590 701800 7
 46946 738396[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1074--1074
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1124--1124
 []\TU/lmtt/m/n/10 ## 13 South Carolina SEC        576805 569664 472934 538441 5
 50099 515396[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1074--1074
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1124--1124
 []\TU/lmtt/m/n/10 ## 14 Tennessee      SEC        669087 698276 704088 706776 6
 70454 650887[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1074--1074
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1124--1124
 []\TU/lmtt/m/n/10 ## 15 Texas          Big 12     593857 564618 540210 587283 5
 56667 586277[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1074--1074
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1124--1124
 []\TU/lmtt/m/n/10 ## 16 Texas A&M      SEC        697003 630735 725354 713418 6
 91612 698908[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1074--1074
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1124--1124
 []\TU/lmtt/m/n/10 ## 17 Wisconsin      Big Ten    552378 556642 546099 476144 5
 51766 540072[] 
  []
 
-[40]
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1099--1099
+[42]
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1149--1149
 []\TU/lmtt/m/n/10 ##    Institution    Conference []2013[] []2014[] []2015[] []
 2016[] []2017[] []2018[][] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1099--1099
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1149--1149
 []\TU/lmtt/m/n/10 ##    <chr>          <chr>       <dbl>  <dbl>  <dbl>  <dbl>  
 <dbl>  <dbl>[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1099--1099
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1149--1149
 []\TU/lmtt/m/n/10 ##  1 Alabama        SEC        710538 710736 707786 712747 7
 12053 710931[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1099--1099
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1149--1149
 []\TU/lmtt/m/n/10 ##  2 Arizona        Pac-12     285713 354973 308355 338017 2
 55791 318051[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1099--1099
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1149--1149
 []\TU/lmtt/m/n/10 ##  3 Arizona St.    Pac-12     501509 343073 368985 286417 3
 59660 291091[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1099--1099
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1149--1149
 []\TU/lmtt/m/n/10 ##  4 Arkansas       SEC        431174 399124 471279 487067 4
 42569 367748[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1099--1099
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1149--1149
 []\TU/lmtt/m/n/10 ##  5 Auburn         SEC        685252 612157 612157 695498 6
 05120 591236[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1099--1099
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1149--1149
 []\TU/lmtt/m/n/10 ##  6 Baylor         Big 12     321639 280257 276960 275029 2
 62978 248017[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1099--1099
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1149--1149
 []\TU/lmtt/m/n/10 ##  7 Boston College ACC        198035 239893 211433 192942 2
 15546 263363[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1099--1099
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1149--1149
 []\TU/lmtt/m/n/10 ##  8 California     Pac-12     345303 286051 292797 279769 2
 19290 300061[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1099--1099
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1149--1149
 []\TU/lmtt/m/n/10 ##  9 Clemson        ACC        574333 572262 588266 566787 5
 65412 562799[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1099--1099
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1149--1149
 []\TU/lmtt/m/n/10 ## 10 Colorado       Pac-12     230778 226670 236331 279652 2
 82335 274852[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1136--1136
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1186--1186
 []\TU/lmtt/m/n/10 ##    Institution    Conference []2013[] []2014[] []2015[] []
 2016[] []2017[] []2018[][] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1136--1136
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1186--1186
 []\TU/lmtt/m/n/10 ##    <chr>          <chr>       <dbl>  <dbl>  <dbl>  <dbl>  
 <dbl>  <dbl>[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1136--1136
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1186--1186
 []\TU/lmtt/m/n/10 ##  1 Alabama        SEC        710538 710736 707786 712747 7
 12053 710931[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1136--1136
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1186--1186
 []\TU/lmtt/m/n/10 ##  2 Arizona        Pac-12     285713 354973 308355 338017 2
 55791 318051[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1136--1136
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1186--1186
 []\TU/lmtt/m/n/10 ##  3 Arizona St.    Pac-12     501509 343073 368985 286417 3
 59660 291091[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1136--1136
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1186--1186
 []\TU/lmtt/m/n/10 ##  4 Arkansas       SEC        431174 399124 471279 487067 4
 42569 367748[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1136--1136
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1186--1186
 []\TU/lmtt/m/n/10 ##  5 Auburn         SEC        685252 612157 612157 695498 6
 05120 591236[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1136--1136
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1186--1186
 []\TU/lmtt/m/n/10 ##  6 Baylor         Big 12     321639 280257 276960 275029 2
 62978 248017[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1136--1136
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1186--1186
 []\TU/lmtt/m/n/10 ##  7 Boston College ACC        198035 239893 211433 192942 2
 15546 263363[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1136--1136
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1186--1186
 []\TU/lmtt/m/n/10 ##  8 California     Pac-12     345303 286051 292797 279769 2
 19290 300061[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1136--1136
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1186--1186
 []\TU/lmtt/m/n/10 ##  9 Clemson        ACC        574333 572262 588266 566787 5
 65412 562799[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1136--1136
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1186--1186
 []\TU/lmtt/m/n/10 ## 10 Colorado       Pac-12     230778 226670 236331 279652 2
 82335 274852[] 
  []
 
-[41] [42]
-Overfull \hbox (54.0pt too wide) in paragraph at lines 1235--1235
+[43]
+Overfull \hbox (90.75pt too wide) in paragraph at lines 1249--1249
+[]\TU/lmtt/m/n/10 ## -- Column specification ----------------------------------
+----------------------[] 
+ []
+
+[44]
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1283--1283
 []\TU/lmtt/m/n/10 ##       X1 Team  Conference Player   []#[] Class Pos   Heigh
 t Weight Hometown[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1235--1235
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1283--1283
 []\TU/lmtt/m/n/10 ##    <dbl> <chr> <chr>      <chr>  <dbl> <chr> <chr> <chr>  
  <dbl> <chr>[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 1235--1235
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1283--1283
 []\TU/lmtt/m/n/10 ##  1   579 Texa~ Big 12     Drayt~     4 JR    G     6-0    
    156 Austin,~[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 1235--1235
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1283--1283
 []\TU/lmtt/m/n/10 ##  2   843 Ston~ AEC        Nick ~    42 FR    F     6-7    
    240 Port Je~[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 1235--1235
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1283--1283
 []\TU/lmtt/m/n/10 ##  3  1059 Sout~ Southland  Patri~    22 SO    F     6-3    
    210 Folsom,~[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 1235--1235
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1283--1283
 []\TU/lmtt/m/n/10 ##  4  4269 Dayt~ A-10       Camro~    52 SO    G     5-7    
    160 Country~[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 1235--1235
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1283--1283
 []\TU/lmtt/m/n/10 ##  5  4681 Cali~ Pac-12     David~    21 JR    G     6-4    
    185 Newbury~[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 1235--1235
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1283--1283
 []\TU/lmtt/m/n/10 ##  6   326 Virg~ ACC        Grant~     1 FR    G     <NA>   
     NA Charlot~[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 1235--1235
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1283--1283
 []\TU/lmtt/m/n/10 ##  7   410 Vand~ SEC        Mac H~    42 FR    G     6-6    
    182 Chattan~[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 1235--1235
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1283--1283
 []\TU/lmtt/m/n/10 ##  8  1390 Sain~ A-10       Jack ~    31 JR    G     6-6    
    205 Mattoon~[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 1235--1235
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1283--1283
 []\TU/lmtt/m/n/10 ##  9  2230 NJIT~ A-Sun      Patri~     3 SO    G     5-9    
    160 West Or~[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 1235--1235
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1283--1283
 []\TU/lmtt/m/n/10 ## 10   266 Wash~ Pac-12     Reaga~    34 FR    F     6-6    
    225 Santa A~[] 
  []
 
 
-Overfull \hbox (43.5pt too wide) in paragraph at lines 1235--1235
+Overfull \hbox (43.5pt too wide) in paragraph at lines 1283--1283
 []\TU/lmtt/m/n/10 ## # ... with 5,376 more rows, and 50 more variables: []High 
 School[] <chr>,[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 1235--1235
+Overfull \hbox (33.0pt too wide) in paragraph at lines 1283--1283
 []\TU/lmtt/m/n/10 ## #   Summary <chr>, Rk.x <dbl>, G <dbl>, GS <dbl>, MP <dbl>
 , FG <dbl>,[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 1235--1235
+Overfull \hbox (75.0pt too wide) in paragraph at lines 1283--1283
 []\TU/lmtt/m/n/10 ## #   FGA <dbl>, []FG%[] <dbl>, []2P[] <dbl>, []2PA[] <dbl>,
  []2P%[] <dbl>, []3P[] <dbl>,[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 1235--1235
+Overfull \hbox (59.25pt too wide) in paragraph at lines 1283--1283
 []\TU/lmtt/m/n/10 ## #   []3PA[] <dbl>, []3P%[] <dbl>, FT <dbl>, FTA <dbl>, []F
 T%[] <dbl>, ORB <dbl>,[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 1235--1235
+Overfull \hbox (85.5pt too wide) in paragraph at lines 1283--1283
 []\TU/lmtt/m/n/10 ## #   DRB <dbl>, TRB <dbl>, AST <dbl>, STL <dbl>, BLK <dbl>,
  TOV <dbl>, PF <dbl>,[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 1235--1235
+Overfull \hbox (80.25pt too wide) in paragraph at lines 1283--1283
 []\TU/lmtt/m/n/10 ## #   PTS <dbl>, Rk.y <dbl>, PER <dbl>, []TS%[] <dbl>, []eFG
 %[] <dbl>, []3PAr[] <dbl>,[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 1235--1235
+Overfull \hbox (33.0pt too wide) in paragraph at lines 1283--1283
 []\TU/lmtt/m/n/10 ## #   FTr <dbl>, PProd <dbl>, []ORB%[] <dbl>, []DRB%[] <dbl>
 , []TRB%[] <dbl>,[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 1235--1235
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1283--1283
 []\TU/lmtt/m/n/10 ## #   []AST%[] <dbl>, []STL%[] <dbl>, []BLK%[] <dbl>, []TOV%
 [] <dbl>, []USG%[] <dbl>,[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 1235--1235
+Overfull \hbox (59.25pt too wide) in paragraph at lines 1283--1283
 []\TU/lmtt/m/n/10 ## #   OWS <dbl>, DWS <dbl>, WS <dbl>, []WS/40[] <dbl>, OBPM 
 <dbl>, DBPM <dbl>,[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 1272--1272
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1320--1320
 []\TU/lmtt/m/n/10 ##       X1 Team  Conference Player   []#[] Class Pos   Heigh
 t Weight Hometown[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1272--1272
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1320--1320
 []\TU/lmtt/m/n/10 ##    <dbl> <chr> <chr>      <chr>  <dbl> <chr> <chr> <chr>  
  <dbl> <chr>[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 1272--1272
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1320--1320
 []\TU/lmtt/m/n/10 ##  1  4634 Cent~ Southland  Jorda~    33 JR    G     6-1    
    185 Harriso~[] 
  []
 
-[43]
-Overfull \hbox (48.75pt too wide) in paragraph at lines 1272--1272
+[45]
+Overfull \hbox (48.75pt too wide) in paragraph at lines 1320--1320
 []\TU/lmtt/m/n/10 ##  2  3623 Hart~ AEC        Max T~    20 SR    G     6-5    
    200 Rye, NY[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 1272--1272
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1320--1320
 []\TU/lmtt/m/n/10 ##  3  2675 Mich~ Big Ten    Thoma~    15 FR    F     6-8    
    225 Clarkst~[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 1272--1272
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1320--1320
 []\TU/lmtt/m/n/10 ##  4  5175 Litt~ Sun Belt   Kris ~    32 SO    F     6-8    
    194 Dewitt,~[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 1272--1272
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1320--1320
 []\TU/lmtt/m/n/10 ##  5  5205 Ariz~ Pac-12     De[]Qu~    32 SR    F     6-10  
     225 St. Tho~[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 1272--1272
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1320--1320
 []\TU/lmtt/m/n/10 ##  6  4099 ETSU~ Southern   Lucas~    25 JR    C     7-0    
    220 De Lier~[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 1272--1272
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1320--1320
 []\TU/lmtt/m/n/10 ##  7  3006 Loui~ Sun Belt   Brand~     0 SR    G     6-4    
    180 Hawthor~[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 1272--1272
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1320--1320
 []\TU/lmtt/m/n/10 ##  8   570 Texa~ Big 12     Jaxso~    10 FR    F     6-11   
    220 Lovelan~[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 1272--1272
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1320--1320
 []\TU/lmtt/m/n/10 ##  9  1704 Pepp~ WCC        Victo~    34 FR    C     6-9    
    200 Owerri,~[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 1272--1272
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1320--1320
 []\TU/lmtt/m/n/10 ## 10  4056 East~ MAC        Jalen~    30 SO    F     6-9    
    215 Pasco, ~[] 
  []
 
 
-Overfull \hbox (43.5pt too wide) in paragraph at lines 1272--1272
+Overfull \hbox (43.5pt too wide) in paragraph at lines 1320--1320
 []\TU/lmtt/m/n/10 ## # ... with 3,649 more rows, and 50 more variables: []High 
 School[] <chr>,[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 1272--1272
+Overfull \hbox (33.0pt too wide) in paragraph at lines 1320--1320
 []\TU/lmtt/m/n/10 ## #   Summary <chr>, Rk.x <dbl>, G <dbl>, GS <dbl>, MP <dbl>
 , FG <dbl>,[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 1272--1272
+Overfull \hbox (75.0pt too wide) in paragraph at lines 1320--1320
 []\TU/lmtt/m/n/10 ## #   FGA <dbl>, []FG%[] <dbl>, []2P[] <dbl>, []2PA[] <dbl>,
  []2P%[] <dbl>, []3P[] <dbl>,[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 1272--1272
+Overfull \hbox (59.25pt too wide) in paragraph at lines 1320--1320
 []\TU/lmtt/m/n/10 ## #   []3PA[] <dbl>, []3P%[] <dbl>, FT <dbl>, FTA <dbl>, []F
 T%[] <dbl>, ORB <dbl>,[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 1272--1272
+Overfull \hbox (85.5pt too wide) in paragraph at lines 1320--1320
 []\TU/lmtt/m/n/10 ## #   DRB <dbl>, TRB <dbl>, AST <dbl>, STL <dbl>, BLK <dbl>,
  TOV <dbl>, PF <dbl>,[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 1272--1272
+Overfull \hbox (80.25pt too wide) in paragraph at lines 1320--1320
 []\TU/lmtt/m/n/10 ## #   PTS <dbl>, Rk.y <dbl>, PER <dbl>, []TS%[] <dbl>, []eFG
 %[] <dbl>, []3PAr[] <dbl>,[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 1272--1272
+Overfull \hbox (33.0pt too wide) in paragraph at lines 1320--1320
 []\TU/lmtt/m/n/10 ## #   FTr <dbl>, PProd <dbl>, []ORB%[] <dbl>, []DRB%[] <dbl>
 , []TRB%[] <dbl>,[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 1272--1272
+Overfull \hbox (54.0pt too wide) in paragraph at lines 1320--1320
 []\TU/lmtt/m/n/10 ## #   []AST%[] <dbl>, []STL%[] <dbl>, []BLK%[] <dbl>, []TOV%
 [] <dbl>, []USG%[] <dbl>,[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 1272--1272
+Overfull \hbox (59.25pt too wide) in paragraph at lines 1320--1320
 []\TU/lmtt/m/n/10 ## #   OWS <dbl>, DWS <dbl>, WS <dbl>, []WS/40[] <dbl>, OBPM 
 <dbl>, DBPM <dbl>,[] 
  []
 
-[44] [45] [46
+[46] [47] [48
 
 ]
 Chapter 7.
-[47]
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1373--1373
+
+Overfull \hbox (90.75pt too wide) in paragraph at lines 1399--1399
+[]\TU/lmtt/m/n/10 ## -- Column specification ----------------------------------
+----------------------[] 
+ []
+
+[49]
+Overfull \hbox (69.75pt too wide) in paragraph at lines 1422--1422
 []\TU/lmtt/m/n/10 ##    Institution     Conference      []2013[] []2014[] []201
 5[] []2016[] []2017[] []2018[][] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1373--1373
+Overfull \hbox (69.75pt too wide) in paragraph at lines 1422--1422
 []\TU/lmtt/m/n/10 ##    <chr>           <chr>            <dbl>  <dbl>  <dbl>  <
 dbl>  <dbl>  <dbl>[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1373--1373
+Overfull \hbox (69.75pt too wide) in paragraph at lines 1422--1422
 []\TU/lmtt/m/n/10 ##  1 Air Force       MWC             228562 168967 156158 17
 7519 174924 166205[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1373--1373
+Overfull \hbox (69.75pt too wide) in paragraph at lines 1422--1422
 []\TU/lmtt/m/n/10 ##  2 Akron           MAC             107101  55019 108588  6
 2021 117416  92575[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1373--1373
+Overfull \hbox (69.75pt too wide) in paragraph at lines 1422--1422
 []\TU/lmtt/m/n/10 ##  3 Alabama         SEC             710538 710736 707786 71
 2747 712053 710931[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1373--1373
+Overfull \hbox (69.75pt too wide) in paragraph at lines 1422--1422
 []\TU/lmtt/m/n/10 ##  4 Appalachian St. FBS Independent 149366     NA     NA   
   NA     NA     NA[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1373--1373
+Overfull \hbox (69.75pt too wide) in paragraph at lines 1422--1422
 []\TU/lmtt/m/n/10 ##  5 Appalachian St. Sun Belt            NA 138995 128755 15
 6916 154722 131716[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1373--1373
+Overfull \hbox (69.75pt too wide) in paragraph at lines 1422--1422
 []\TU/lmtt/m/n/10 ##  6 Arizona         Pac-12          285713 354973 308355 33
 8017 255791 318051[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1373--1373
+Overfull \hbox (69.75pt too wide) in paragraph at lines 1422--1422
 []\TU/lmtt/m/n/10 ##  7 Arizona St.     Pac-12          501509 343073 368985 28
 6417 359660 291091[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1373--1373
+Overfull \hbox (69.75pt too wide) in paragraph at lines 1422--1422
 []\TU/lmtt/m/n/10 ##  8 Arkansas        SEC             431174 399124 471279 48
 7067 442569 367748[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1373--1373
+Overfull \hbox (69.75pt too wide) in paragraph at lines 1422--1422
 []\TU/lmtt/m/n/10 ##  9 Arkansas St.    Sun Belt        149477 149163 138043 13
 6200 119538 119001[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1373--1373
+Overfull \hbox (69.75pt too wide) in paragraph at lines 1422--1422
 []\TU/lmtt/m/n/10 ## 10 Army West Point FBS Independent 169781 171310 185946 16
 3267 185543 190156[] 
  []
 
-[48]
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1463--1463
+[50]
+Overfull \hbox (69.75pt too wide) in paragraph at lines 1512--1512
 []\TU/lmtt/m/n/10 ##    Institution     Conference      []2013[] []2014[] []201
 5[] []2016[] []2017[] []2018[][] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1463--1463
+Overfull \hbox (69.75pt too wide) in paragraph at lines 1512--1512
 []\TU/lmtt/m/n/10 ##    <chr>           <chr>            <dbl>  <dbl>  <dbl>  <
 dbl>  <dbl>  <dbl>[] 
  []
 
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1463--1463
+[51]
+Overfull \hbox (69.75pt too wide) in paragraph at lines 1512--1512
 []\TU/lmtt/m/n/10 ##  1 Air Force       MWC             228562 168967 156158 17
 7519 174924 166205[] 
  []
 
-[49]
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1463--1463
+
+Overfull \hbox (69.75pt too wide) in paragraph at lines 1512--1512
 []\TU/lmtt/m/n/10 ##  2 Akron           MAC             107101  55019 108588  6
 2021 117416  92575[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1463--1463
+Overfull \hbox (69.75pt too wide) in paragraph at lines 1512--1512
 []\TU/lmtt/m/n/10 ##  3 Alabama         SEC             710538 710736 707786 71
 2747 712053 710931[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1463--1463
+Overfull \hbox (69.75pt too wide) in paragraph at lines 1512--1512
 []\TU/lmtt/m/n/10 ##  4 Appalachian St. FBS Independent 149366     NA     NA   
   NA     NA     NA[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1463--1463
+Overfull \hbox (69.75pt too wide) in paragraph at lines 1512--1512
 []\TU/lmtt/m/n/10 ##  5 Appalachian St. Sun Belt            NA 138995 128755 15
 6916 154722 131716[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1463--1463
+Overfull \hbox (69.75pt too wide) in paragraph at lines 1512--1512
 []\TU/lmtt/m/n/10 ##  6 Arizona         Pac-12          285713 354973 308355 33
 8017 255791 318051[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1463--1463
+Overfull \hbox (69.75pt too wide) in paragraph at lines 1512--1512
 []\TU/lmtt/m/n/10 ##  7 Arizona St.     Pac-12          501509 343073 368985 28
 6417 359660 291091[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1463--1463
+Overfull \hbox (69.75pt too wide) in paragraph at lines 1512--1512
 []\TU/lmtt/m/n/10 ##  8 Arkansas        SEC             431174 399124 471279 48
 7067 442569 367748[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1463--1463
+Overfull \hbox (69.75pt too wide) in paragraph at lines 1512--1512
 []\TU/lmtt/m/n/10 ##  9 Arkansas St.    Sun Belt        149477 149163 138043 13
 6200 119538 119001[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1463--1463
+Overfull \hbox (69.75pt too wide) in paragraph at lines 1512--1512
 []\TU/lmtt/m/n/10 ## 10 Army West Point FBS Independent 169781 171310 185946 16
 3267 185543 190156[] 
  []
@@ -2449,1812 +2587,1836 @@ Overfull \hbox (69.75pt too wide) in paragraph at lines 1463--1463
 File: SportsData_files/figure-latex/unnamed-chunk-50-1.pdf Graphic file (type p
 df)
 <use SportsData_files/figure-latex/unnamed-chunk-50-1.pdf>
-
-Underfull \vbox (badness 2035) has occurred while \output is active []
-
-[50] [51] [52
+[52] [53] [54
 
 ]
 Chapter 8.
 File: images/simulations2.png Graphic file (type bmp)
 <images/simulations2.png>
 
-Overfull \hbox (292.43188pt too wide) in paragraph at lines 1517--1519
+Overfull \hbox (292.43188pt too wide) in paragraph at lines 1566--1568
 [][]
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[53]
+[55]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[54] [55]
-Overfull \hbox (17.25pt too wide) in paragraph at lines 1585--1585
-[]\TU/lmtt/m/n/10 ## alternative hypothesis: true difference in means is not eq
-ual to 0[] 
+[56]
+Overfull \hbox (90.75pt too wide) in paragraph at lines 1600--1600
+[]\TU/lmtt/m/n/10 ## -- Column specification ----------------------------------
+----------------------[] 
  []
 
-[56]
+[57]
 Overfull \hbox (17.25pt too wide) in paragraph at lines 1632--1632
 []\TU/lmtt/m/n/10 ## alternative hypothesis: true difference in means is not eq
 ual to 0[] 
  []
 
-[57] [58
+[58]
+Overfull \hbox (17.25pt too wide) in paragraph at lines 1679--1679
+[]\TU/lmtt/m/n/10 ## alternative hypothesis: true difference in means is not eq
+ual to 0[] 
+ []
+
+[59] [60
 
 ]
 Chapter 9.
-[59] [60]
-Overfull \hbox (38.25pt too wide) in paragraph at lines 1777--1777
+
+Overfull \hbox (90.75pt too wide) in paragraph at lines 1732--1732
+[]\TU/lmtt/m/n/10 ## -- Column specification ----------------------------------
+----------------------[] 
+ []
+
+[61] [62]
+Overfull \hbox (38.25pt too wide) in paragraph at lines 1822--1822
 []\TU/lmtt/m/n/10 ## lm(formula = differential ~ TotalPenaltyYards, data = newc
 orrelations)[] 
  []
 
-[61] [62]
+[63]
+Overfull \hbox (6.75pt too wide) in paragraph at lines 1822--1822
+[]\TU/lmtt/m/n/10 ## Multiple R-squared:  0.0001884,  Adjusted R-squared:  -0.0
+004139[] 
+ []
+
+[64]
 File: SportsData_files/figure-latex/unnamed-chunk-63-1.pdf Graphic file (type p
 df)
 <use SportsData_files/figure-latex/unnamed-chunk-63-1.pdf>
-[63] [64]
+[65] [66]
 Chapter 10.
-[65
+
+Overfull \hbox (90.75pt too wide) in paragraph at lines 1958--1958
+[]\TU/lmtt/m/n/10 ## -- Column specification ----------------------------------
+----------------------[] 
+ []
+
+[67
 
 ]
-Overfull \hbox (22.5pt too wide) in paragraph at lines 1988--1988
+Overfull \hbox (22.5pt too wide) in paragraph at lines 2031--2031
 []\TU/lmtt/m/n/10 ## lm(formula = Differential ~ TeamFGPCT + OpponentFGPCT, dat
 a = logs)[] 
  []
 
-[66] [67]
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+[68] [69]
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ##                       Differential       TeamFG      TeamF
 GA    TeamFGPCT[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Differential           1.000000000  0.584766682  0.1073892
 35  0.606178206[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFG                 0.584766682  1.000000000  0.5632209
 74  0.751715176[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFGA                0.107389235  0.563220974  1.0000000
 00 -0.109620267[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFGPCT              0.606178206  0.751715176 -0.1096202
 67  1.000000000[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Team3P                 0.318300418  0.408787900  0.2133522
 19  0.322872202[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Team3PA                0.056680627  0.179527313  0.4260119
 24 -0.119421368[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Team3PPCT              0.367934059  0.380235821 -0.1014638
 21  0.545986963[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFT                 0.238182740 -0.022308582 -0.1378538
 24  0.084649669[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFTA                0.206075949 -0.027927391 -0.1298513
 46  0.070632302[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFTPCT              0.138833800  0.016247282 -0.0443944
 72  0.056887587[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamOffRebounds        0.136095147  0.161626257  0.5452316
 83 -0.234244567[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamTotalRebounds      0.470722398  0.328460524  0.4707190
 37  0.018581908[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamAssists            0.540398009  0.664057724  0.2846591
 04  0.566152928[] 
  []
 
-
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+[70]
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamSteals             0.277670288  0.210221346  0.2087431
 24  0.080191710[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamBlocks             0.257608076  0.140856644  0.0745552
 86  0.107327505[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamTurnovers         -0.180578328 -0.143210529 -0.2239712
 65  0.001901048[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamPersonalFouls     -0.194427271 -0.014722266  0.1073255
 60 -0.094653222[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFG            -0.538515115  0.144061400  0.2567372
 62 -0.020183466[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFGA            0.001768386  0.302143806  0.3015935
 28  0.126415534[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFGPCT         -0.614427717 -0.058571888  0.0680347
 75 -0.114791403[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Opponent3P            -0.283754971  0.131517138  0.1352900
 90  0.053105214[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Opponent3PA            0.013910296  0.191131927  0.1384457
 85  0.118723805[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Opponent3PPCT         -0.382427841  0.008026622  0.0572617
 56 -0.031370545[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFT            -0.269300868  0.019511923  0.1570259
 30 -0.091558712[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFTA           -0.226064714  0.012937366  0.1595296
 46 -0.101685664[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFTPCT         -0.175223632  0.007923359  0.0237322
 17 -0.006190565[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentOffRebounds   -0.089347536 -0.036316958  0.0028480
 58 -0.042399744[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentTotalRebounds -0.420010794 -0.225202127  0.3161395
 28 -0.512983306[] 
  []
 
-[68]
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentAssists       -0.491676030  0.004558539  0.1493200
 67 -0.106252682[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentSteals        -0.187754380 -0.102436608 -0.1317349
 64 -0.021724636[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentBlocks        -0.262252627 -0.160469663  0.2184838
 65 -0.356255034[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentTurnovers      0.274326954  0.155293275  0.1981279
 70  0.024254833[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentPersonalFouls  0.169025733 -0.023116620 -0.1071893
 01  0.060150658[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ##                             Team3P     Team3PA     Team3PP
 CT       TeamFT[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Differential           0.318300418  0.05668063  0.36793405
 89  0.238182740[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFG                 0.408787900  0.17952731  0.38023582
 07 -0.022308582[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFGA                0.213352219  0.42601192 -0.10146382
 12 -0.137853824[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFGPCT              0.322872202 -0.11942137  0.54598696
 34  0.084649669[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Team3P                 1.000000000  0.70114773  0.70736634
 04 -0.106344056[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Team3PA                0.701147726  1.00000000  0.04076457
 51 -0.160515313[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Team3PPCT              0.707366340  0.04076458  1.00000000
 00  0.005129556[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFT                -0.106344056 -0.16051531  0.00512955
 61  1.000000000[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFTA               -0.137499074 -0.18150913 -0.01806962
 09  0.927525817[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFTPCT              0.048777304  0.01119250  0.05536843
 15  0.387017653[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamOffRebounds       -0.062026229  0.12484929 -0.19685683
 61  0.087168289[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamTotalRebounds      0.038344971  0.12095682 -0.06289700
 09  0.190691619[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamAssists            0.519530086  0.28786139  0.43269509
 43 -0.016343370[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamSteals             0.016545254  0.04598400 -0.02466572
 89  0.088535320[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamBlocks             0.004747719 -0.02895321  0.02942773
 89  0.092392379[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamTurnovers         -0.088374940 -0.10883919 -0.02094338
 27  0.051609207[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamPersonalFouls     -0.024028303  0.02499520 -0.04981658
 52  0.217846416[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFG             0.123800594  0.15638030  0.02969134
 06  0.057853338[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFGA            0.148931744  0.13062824  0.08122379
 01  0.193116094[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFGPCT          0.029908235  0.08057726 -0.02648437
 59 -0.075399282[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Opponent3P             0.079455775  0.07482590  0.04020124
 13  0.024228311[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Opponent3PA            0.085704376  0.05927299  0.06011501
 76  0.079894905[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Opponent3PPCT          0.029666235  0.04634676  0.00050760
 38 -0.035478488[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFT             0.009796521  0.06316300 -0.03908736
 39  0.161311559[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFTA           -0.002503282  0.05474884 -0.04807327
 23  0.183801456[] 
  []
 
-
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+[71]
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFTPCT          0.022780414  0.02587876  0.00865128
 59 -0.015688533[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentOffRebounds   -0.007870292 -0.01895081  0.00867768
 21  0.064938518[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentTotalRebounds -0.062384273  0.20289676 -0.26388454
 14 -0.064969878[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentAssists        0.029413582  0.08254506 -0.03202894
 94 -0.057730062[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentSteals        -0.053878305 -0.05298037 -0.02513167
 16 -0.001883349[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentBlocks        -0.111782062 -0.05804217 -0.09656079
 77 -0.065055523[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentTurnovers      0.009284106  0.06383515 -0.04884497
 48  0.136922084[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentPersonalFouls -0.127197007 -0.15536393 -0.02688768
 81  0.793539202[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ##                            TeamFTA    TeamFTPCT TeamOffReb
 ounds[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Differential           0.206075949  0.138833800    0.13609
 51470[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFG                -0.027927391  0.016247282    0.16162
 62575[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFGA               -0.129851346 -0.044394472    0.54523
 16831[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFGPCT              0.070632302  0.056887587   -0.23424
 45674[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Team3P                -0.137499074  0.048777304   -0.06202
 62290[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Team3PA               -0.181509133  0.011192503    0.12484
 92948[] 
  []
 
-[69]
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Team3PPCT             -0.018069621  0.055368431   -0.19685
 68361[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFT                 0.927525817  0.387017653    0.08716
 82888[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFTA                1.000000000  0.053233778    0.14159
 33172[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFTPCT              0.053233778  1.000000000   -0.09480
 40467[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamOffRebounds        0.141593317 -0.094804047    1.00000
 00000[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamTotalRebounds      0.231278690 -0.037356471    0.63730
 27887[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamAssists           -0.028289202  0.025948025    0.05092
 77222[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamSteals             0.111199125 -0.025969502    0.11955
 81042[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamBlocks             0.104112579 -0.001425412    0.10601
 63877[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamTurnovers          0.072070652 -0.034614485    0.03717
 28710[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamPersonalFouls      0.250787085 -0.025827923    0.05423
 37992[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFG             0.043602296  0.036986356   -0.04646
 94335[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFGA            0.193466766  0.040334507    0.02423
 53640[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFGPCT         -0.091897172  0.012864509   -0.06888
 33747[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Opponent3P             0.009600704  0.031763685   -0.00637
 10321[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Opponent3PA            0.071193179  0.032554796    0.00037
 53868[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Opponent3PPCT         -0.047136861  0.013996880   -0.00565
 78317[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFT             0.180010001 -0.009352580    0.04343
 99899[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFTA            0.213209437 -0.025707797    0.05846
 69041[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFTPCT         -0.032862991  0.028078614   -0.03190
 32781[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentOffRebounds    0.077003661 -0.016936223   -0.01433
 25753[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentTotalRebounds  0.004736343 -0.177541483   -0.06038
 91339[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentAssists       -0.063875391 -0.007401206   -0.03865
 21955[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentSteals         0.006758108 -0.022033431    0.03269
 77763[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentBlocks        -0.053973588 -0.041175463    0.15718
 12909[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentTurnovers      0.169704736 -0.035463921    0.11547
 17115[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (1.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentPersonalFouls  0.866395092  0.018757079    0.12406
 31120[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ##                       TeamTotalRebounds   TeamAssists   Te
 amSteals   TeamBlocks[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Differential                0.470722398  0.5403980088  0.2
 77670288  0.257608076[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFG                      0.328460524  0.6640577242  0.2
 10221346  0.140856644[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFGA                     0.470719037  0.2846591045  0.2
 08743124  0.074555286[] 
  []
 
-
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+[72]
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFGPCT                   0.018581908  0.5661529279  0.0
 80191710  0.107327505[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Team3P                      0.038344971  0.5195300862  0.0
 16545254  0.004747719[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Team3PA                     0.120956819  0.2878613903  0.0
 45984003 -0.028953212[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Team3PPCT                  -0.062897001  0.4326950943 -0.0
 24665729  0.029427739[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFT                      0.190691619 -0.0163433697  0.0
 88535320  0.092392379[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFTA                     0.231278690 -0.0282892019  0.1
 11199125  0.104112579[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFTPCT                  -0.037356471  0.0259480253 -0.0
 25969502 -0.001425412[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamOffRebounds             0.637302789  0.0509277222  0.1
 19558104  0.106016388[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamTotalRebounds           1.000000000  0.2321524530  0.0
 27446991  0.265518873[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamAssists                 0.232152453  1.0000000000  0.1
 64837110  0.144764562[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamSteals                  0.027446991  0.1648371104  1.0
 00000000  0.065539758[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamBlocks                  0.265518873  0.1447645615  0.0
 65539758  1.000000000[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamTurnovers               0.109155292 -0.0789200586  0.0
 78278779  0.032775757[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamPersonalFouls          -0.007423332 -0.1050900267  0.0
 05151965 -0.054105029[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFG                 -0.229331788 -0.0022308763 -0.1
 38728115 -0.143969401[] 
  []
 
-[70]
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFGA                 0.360268614  0.1863368268 -0.1
 20696505  0.257245080[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFGPCT              -0.530432484 -0.1397140493 -0.0
 68951590 -0.353110391[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Opponent3P                 -0.053371243  0.0354785684 -0.0
 62074442 -0.103465578[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Opponent3PA                 0.232049186  0.1116023406 -0.0
 39184667 -0.042234814[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Opponent3PPCT              -0.273572339 -0.0502063543 -0.0
 47114732 -0.099440199[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFT                 -0.095266106 -0.0835716395 -0.0
 34152581 -0.070920662[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFTA                -0.022971823 -0.0841605708 -0.0
 22178476 -0.056095076[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFTPCT              -0.194279344 -0.0278263543 -0.0
 41125993 -0.052504157[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentOffRebounds        -0.052416263 -0.0333847454  0.0
 16707012  0.178200671[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentTotalRebounds      -0.059965631 -0.2225952122  0.0
 35155522  0.037788375[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentAssists            -0.218597433  0.0006884142 -0.0
 53327136 -0.151146052[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentSteals              0.066119486 -0.0288668673  0.0
 55697260  0.028453380[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentBlocks              0.013924890 -0.1657235463 -0.0
 02230784 -0.038978593[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentTurnovers          -0.034355689  0.1314533533  0.7
 30885169  0.031375703[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentPersonalFouls       0.189144014 -0.0267820830  0.0
 71442012  0.080582762[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ##                       TeamTurnovers TeamPersonalFouls   Op
 ponentFG  OpponentFGA[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Differential           -0.180578328      -0.194427271 -0.5
 38515115  0.001768386[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFG                 -0.143210529      -0.014722266  0.1
 44061400  0.302143806[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFGA                -0.223971265       0.107325560  0.2
 56737262  0.301593528[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFGPCT               0.001901048      -0.094653222 -0.0
 20183466  0.126415534[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Team3P                 -0.088374940      -0.024028303  0.1
 23800594  0.148931744[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Team3PA                -0.108839191       0.024995197  0.1
 56380301  0.130628244[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Team3PPCT              -0.020943383      -0.049816585  0.0
 29691341  0.081223790[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFT                  0.051609207       0.217846416  0.0
 57853338  0.193116094[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFTA                 0.072070652       0.250787085  0.0
 43602296  0.193466766[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFTPCT              -0.034614485      -0.025827923  0.0
 36986356  0.040334507[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamOffRebounds         0.037172871       0.054233799 -0.0
 46469434  0.024235364[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamTotalRebounds       0.109155292      -0.007423332 -0.2
 29331788  0.360268614[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamAssists            -0.078920059      -0.105090027 -0.0
 02230876  0.186336827[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamSteals              0.078278779       0.005151965 -0.1
 38728115 -0.120696505[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamBlocks              0.032775757      -0.054105029 -0.1
 43969401  0.257245080[] 
  []
 
-
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+[73]
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamTurnovers           1.000000000       0.220285924  0.0
 81879049  0.155947902[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamPersonalFouls       0.220285924       1.000000000 -0.0
 15422966 -0.122639976[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFG              0.081879049      -0.015422966  1.0
 00000000  0.515517123[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFGA             0.155947902      -0.122639976  0.5
 15517123  1.000000000[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFGPCT          -0.023017156       0.078411084  0.7
 54791141 -0.161220379[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Opponent3P             -0.018088322      -0.126817358  0.3
 99027442  0.193563166[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Opponent3PA             0.041669476      -0.167647391  0.1
 44074778  0.418730422[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Opponent3PPCT          -0.063187150      -0.015909552  0.3
 95540055 -0.118020866[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFT              0.123594852       0.793147614 -0.0
 13421944 -0.156152803[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFTA             0.154110278       0.865844664 -0.0
 27151720 -0.151706668[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFTPCT          -0.034267574       0.026877590  0.0
 37049836 -0.043324702[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentOffRebounds     0.074131214       0.122282037  0.1
 20715447  0.519792207[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentTotalRebounds  -0.106168146       0.195017438  0.2
 75438081  0.424276325[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentAssists         0.072644677      -0.022619097  0.6
 38304131  0.231851475[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentSteals          0.709987911       0.064446997  0.1
 40823916  0.165329579[] 
  []
 
-[71]
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentBlocks          0.006463872       0.087211248  0.1
 29076992  0.045565883[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentTurnovers       0.188537020       0.101693555 -0.1
 83558009 -0.215633733[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentPersonalFouls   0.131539040       0.322258517  0.0
 15334210  0.136789046[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ##                       OpponentFGPCT   Opponent3P   Opponen
 t3PA Opponent3PPCT[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Differential           -0.614427717 -0.283754971  0.013910
 2958 -0.3824278411[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFG                 -0.058571888  0.131517138  0.191131
 9274  0.0080266219[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFGA                 0.068034775  0.135290090  0.138445
 7845  0.0572617563[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFGPCT              -0.114791403  0.053105214  0.118723
 8045 -0.0313705446[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Team3P                  0.029908235  0.079455775  0.085704
 3764  0.0296662353[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Team3PA                 0.080577258  0.074825900  0.059272
 9911  0.0463467602[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Team3PPCT              -0.026484376  0.040201241  0.060115
 0176  0.0005076038[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFT                 -0.075399282  0.024228311  0.079894
 9051 -0.0354784876[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFTA                -0.091897172  0.009600704  0.071193
 1792 -0.0471368607[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFTPCT               0.012864509  0.031763685  0.032554
 7961  0.0139968801[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamOffRebounds        -0.068883375 -0.006371032  0.000375
 3868 -0.0056578317[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamTotalRebounds      -0.530432484 -0.053371243  0.232049
 1861 -0.2735723395[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamAssists            -0.139714049  0.035478568  0.111602
 3406 -0.0502063543[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamSteals             -0.068951590 -0.062074442 -0.039184
 6669 -0.0471147320[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamBlocks             -0.353110391 -0.103465578 -0.042234
 8142 -0.0994401990[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamTurnovers          -0.023017156 -0.018088322  0.041669
 4763 -0.0631871498[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamPersonalFouls       0.078411084 -0.126817358 -0.167647
 3908 -0.0159095518[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFG              0.754791141  0.399027442  0.144074
 7785  0.3955400546[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFGA            -0.161220379  0.193563166  0.418730
 4220 -0.1180208656[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFGPCT           1.000000000  0.312295571 -0.149367
 4362  0.5522792378[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Opponent3P              0.312295571  1.000000000  0.691451
 8201  0.7094041257[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Opponent3PA            -0.149367436  0.691451820  1.000000
 0000  0.0303822862[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Opponent3PPCT           0.552279238  0.709404126  0.030382
 2862  1.0000000000[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFT              0.106226566 -0.106344743 -0.174340
 0433  0.0169282910[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFTA             0.086625216 -0.140194309 -0.197287
 2368 -0.0080249496[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFTPCT           0.076650746  0.053774302  0.010188
 6734  0.0623587723[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentOffRebounds    -0.251623986 -0.085432899  0.097838
 9488 -0.2013096986[] 
  []
 
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+[74]
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentTotalRebounds  -0.005789348  0.005903551  0.081057
 6009 -0.0680836101[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentAssists         0.553535793  0.513869716  0.264172
 8450  0.4428640799[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentSteals          0.036468797 -0.011661373  0.021448
 1397 -0.0383569868[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentBlocks          0.111935521 -0.004746412 -0.049542
 6307  0.0354134646[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentTurnovers      -0.048082678 -0.095218199 -0.094442
 8800 -0.0421344973[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (69.75pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentPersonalFouls  -0.081776664 -0.011247805  0.039647
 5169 -0.0466461289[] 
  []
 
-[72]
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ##                       OpponentOffRebounds OpponentTotalReb
 ounds OpponentAssists[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Differential                 -0.089347536          -0.4200
 10794   -0.4916760300[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFG                       -0.036316958          -0.2252
 02127    0.0045585394[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFGA                       0.002848058           0.3161
 39528    0.1493200670[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFGPCT                    -0.042399744          -0.5129
 83306   -0.1062526818[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Team3P                       -0.007870292          -0.0623
 84273    0.0294135821[] 
  []
 
-
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+[75]
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Team3PA                      -0.018950808           0.2028
 96760    0.0825450568[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Team3PPCT                     0.008677682          -0.2638
 84541   -0.0320289494[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFT                        0.064938518          -0.0649
 69878   -0.0577300621[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFTA                       0.077003661           0.0047
 36343   -0.0638753907[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFTPCT                    -0.016936223          -0.1775
 41483   -0.0074012062[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamOffRebounds              -0.014332575          -0.0603
 89134   -0.0386521955[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamTotalRebounds            -0.052416263          -0.0599
 65631   -0.2185974327[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamAssists                  -0.033384745          -0.2225
 95212    0.0006884142[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamSteals                    0.016707012           0.0351
 55522   -0.0533271359[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamBlocks                    0.178200671           0.0377
 88375   -0.1511460518[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamTurnovers                 0.074131214          -0.1061
 68146    0.0726446766[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamPersonalFouls             0.122282037           0.1950
 17438   -0.0226190966[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFG                    0.120715447           0.2754
 38081    0.6383041307[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFGA                   0.519792207           0.4242
 76325    0.2318514751[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFGPCT                -0.251623986          -0.0057
 89348    0.5535357935[] 
  []
 
-[73]
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Opponent3P                   -0.085432899           0.0059
 03551    0.5138697156[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Opponent3PA                   0.097838949           0.0810
 57601    0.2641728450[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Opponent3PPCT                -0.201309699          -0.0680
 83610    0.4428640799[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFT                    0.086671729           0.1975
 91588   -0.0123780062[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFTA                   0.136423744           0.2324
 47345   -0.0312058003[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFTPCT                -0.082982260          -0.0212
 81750    0.0417935976[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentOffRebounds           1.000000000           0.6221
 15242    0.0095497736[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentTotalRebounds         0.622115242           1.0000
 00000    0.1792668711[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentAssists               0.009549774           0.1792
 66871    1.0000000000[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentSteals                0.081573888          -0.0386
 73692    0.1068223463[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentBlocks                0.096186044           0.2585
 97044    0.1337215898[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentTurnovers             0.017562976           0.0739
 36193   -0.1060361856[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (85.5pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentPersonalFouls         0.071468553           0.0205
 00608   -0.0849725350[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ##                       OpponentSteals OpponentBlocks Oppone
 ntTurnovers[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Differential            -0.187754380  -0.2622526274      0
 .2743269542[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFG                  -0.102436608  -0.1604696630      0
 .1552932747[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFGA                 -0.131734964   0.2184838647      0
 .1981279705[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFGPCT               -0.021724636  -0.3562550337      0
 .0242548332[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Team3P                  -0.053878305  -0.1117820624      0
 .0092841059[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Team3PA                 -0.052980367  -0.0580421730      0
 .0638351465[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Team3PPCT               -0.025131672  -0.0965607977     -0
 .0488449748[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFT                  -0.001883349  -0.0650555225      0
 .1369220844[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFTA                  0.006758108  -0.0539735876      0
 .1697047361[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamFTPCT               -0.022033431  -0.0411754626     -0
 .0354639208[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamOffRebounds          0.032697776   0.1571812909      0
 .1154717115[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamTotalRebounds        0.066119486   0.0139248895     -0
 .0343556886[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamAssists             -0.028866867  -0.1657235463      0
 .1314533533[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamSteals               0.055697260  -0.0022307839      0
 .7308851693[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamBlocks               0.028453380  -0.0389785933      0
 .0313757033[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamTurnovers            0.709987911   0.0064638717      0
 .1885370196[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## TeamPersonalFouls        0.064446997   0.0872112484      0
 .1016935547[] 
  []
 
-
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+[76]
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFG               0.140823916   0.1290769921     -0
 .1835580089[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFGA              0.165329579   0.0455658832     -0
 .2156337333[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFGPCT            0.036468797   0.1119355214     -0
 .0480826780[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Opponent3P              -0.011661373  -0.0047464115     -0
 .0952181989[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Opponent3PA              0.021448140  -0.0495426307     -0
 .0944428800[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## Opponent3PPCT           -0.038356987   0.0354134646     -0
 .0421344973[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFT               0.077614062   0.1014221807      0
 .0157785673[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFTA              0.097206119   0.1100637520      0
 .0386793945[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentFTPCT           -0.022196700   0.0089467648     -0
 .0520407316[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentOffRebounds      0.081573888   0.0961860439      0
 .0175629757[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentTotalRebounds   -0.038673692   0.2585970440      0
 .0739361927[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentAssists          0.106822346   0.1337215898     -0
 .1060361856[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentSteals           1.000000000   0.0443672204      0
 .0740678539[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentBlocks           0.044367220   1.0000000000      0
 .0001223389[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentTurnovers        0.074067854   0.0001223389      1
 .0000000000[] 
  []
 
-[74]
-Overfull \hbox (33.0pt too wide) in paragraph at lines 2367--2367
+
+Overfull \hbox (33.0pt too wide) in paragraph at lines 2439--2439
 []\TU/lmtt/m/n/10 ## OpponentPersonalFouls    0.030766974  -0.0514541037      0
 .2252310703[] 
  []
 
-
-Underfull \vbox (badness 2698) has occurred while \output is active []
-
-[75]
-Overfull \hbox (64.5pt too wide) in paragraph at lines 2408--2408
+[77]
+Overfull \hbox (64.5pt too wide) in paragraph at lines 2480--2480
 []\TU/lmtt/m/n/10 ## lm(formula = Differential ~ TeamFGPCT + OpponentFGPCT + Te
 amTotalRebounds +[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 2408--2408
+Overfull \hbox (12.0pt too wide) in paragraph at lines 2480--2480
 []\TU/lmtt/m/n/10 ## (Intercept)            -3.655461   0.606119   -6.031 1.64e
 -09 ***[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 2408--2408
+Overfull \hbox (12.0pt too wide) in paragraph at lines 2480--2480
 []\TU/lmtt/m/n/10 ## TeamFGPCT             100.880013   0.560363  180.026  < 2e
 -16 ***[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 2408--2408
+Overfull \hbox (12.0pt too wide) in paragraph at lines 2480--2480
 []\TU/lmtt/m/n/10 ## OpponentFGPCT         -97.563291   0.565004 -172.677  < 2e
 -16 ***[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 2408--2408
+Overfull \hbox (12.0pt too wide) in paragraph at lines 2480--2480
 []\TU/lmtt/m/n/10 ## TeamTotalRebounds       0.516176   0.006239   82.729  < 2e
 -16 ***[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 2408--2408
+Overfull \hbox (12.0pt too wide) in paragraph at lines 2480--2480
 []\TU/lmtt/m/n/10 ## OpponentTotalRebounds  -0.436402   0.006448  -67.679  < 2e
 -16 ***[] 
  []
 
-
-Overfull \hbox (411.0pt too wide) in paragraph at lines 2420--2420
+[78]
+Overfull \hbox (411.0pt too wide) in paragraph at lines 2492--2492
 []\TU/lmtt/m/n/10 Differential = (TeamFGPCT*100.880013) + (OpponentFGPCT*-97.56
 3291) + (TeamTotalRebounds*0.516176) + (OpponentTotalRebounds*-0.436402) - 3.65
 5461[] 
  []
 
-[76] [77] [78
-
-]
-Chapter 11.
 [79] [80]
-Overfull \hbox (17.25pt too wide) in paragraph at lines 2610--2610
+Chapter 11.
+
+Overfull \hbox (90.75pt too wide) in paragraph at lines 2602--2602
+[]\TU/lmtt/m/n/10 ## -- Column specification ----------------------------------
+----------------------[] 
+ []
+
+[81
+
+] [82]
+Overfull \hbox (17.25pt too wide) in paragraph at lines 2680--2680
 []\TU/lmtt/m/n/10 ##    Team          Opponent             Result    NetYards r
 esiduals[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 2610--2610
+Overfull \hbox (17.25pt too wide) in paragraph at lines 2680--2680
 []\TU/lmtt/m/n/10 ##    <chr>         <chr>                <chr>        <dbl>  
    <dbl>[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 2610--2610
+Overfull \hbox (17.25pt too wide) in paragraph at lines 2680--2680
 []\TU/lmtt/m/n/10 ##  1 Penn State    Buffalo              W (45-13)      -72  
     39.4[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 2610--2610
+Overfull \hbox (17.25pt too wide) in paragraph at lines 2680--2680
 []\TU/lmtt/m/n/10 ##  2 Illinois      Nebraska             L (38-42)     -386  
     36.8[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 2610--2610
+Overfull \hbox (17.25pt too wide) in paragraph at lines 2680--2680
 []\TU/lmtt/m/n/10 ##  3 Virginia Tech Miami (FL)           W (42-35)     -226  
     30.8[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 2610--2610
+Overfull \hbox (17.25pt too wide) in paragraph at lines 2680--2680
 []\TU/lmtt/m/n/10 ##  4 Tennessee     Chattanooga          W (45-0)       133  
     30.5[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 2610--2610
+Overfull \hbox (17.25pt too wide) in paragraph at lines 2680--2680
 []\TU/lmtt/m/n/10 ##  5 Baylor        Kansas               W (61-6)       227  
     30.5[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 2610--2610
+Overfull \hbox (17.25pt too wide) in paragraph at lines 2680--2680
 []\TU/lmtt/m/n/10 ##  6 Syracuse      Duke                 W (49-6)       116  
     30.3[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 2610--2610
+Overfull \hbox (17.25pt too wide) in paragraph at lines 2680--2680
 []\TU/lmtt/m/n/10 ##  7 Houston       North Texas          W (46-25)      -86  
     29.9[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 2610--2610
+Overfull \hbox (17.25pt too wide) in paragraph at lines 2680--2680
 []\TU/lmtt/m/n/10 ##  8 South Florida South Carolina State W (55-16)       83  
     29.8[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 2610--2610
+Overfull \hbox (17.25pt too wide) in paragraph at lines 2680--2680
 []\TU/lmtt/m/n/10 ##  9 Troy          Texas State          W (63-27)       55  
     29.8[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 2610--2610
+Overfull \hbox (17.25pt too wide) in paragraph at lines 2680--2680
 []\TU/lmtt/m/n/10 ## 10 Miami (FL)    Louisville           W (52-27)      -47  
     29.7[] 
  []
@@ -4263,89 +4425,95 @@ File: SportsData_files/figure-latex/unnamed-chunk-87-1.pdf Graphic file (type p
 df)
 <use SportsData_files/figure-latex/unnamed-chunk-87-1.pdf>
 
-Underfull \vbox (badness 1728) has occurred while \output is active []
+Underfull \vbox (badness 1721) has occurred while \output is active []
 
-[81]
+[83]
 File: SportsData_files/figure-latex/unnamed-chunk-88-1.pdf Graphic file (type p
 df)
 <use SportsData_files/figure-latex/unnamed-chunk-88-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[82]
-Overfull \hbox (6.75pt too wide) in paragraph at lines 2674--2674
+[84]
+Overfull \hbox (6.75pt too wide) in paragraph at lines 2744--2744
 []\TU/lmtt/m/n/10 ## lm(formula = differential ~ TotalPenaltyYards, data = pena
 lties)[] 
  []
 
-[83]
-Overfull \hbox (64.5pt too wide) in paragraph at lines 2718--2718
+[85]
+Overfull \hbox (6.75pt too wide) in paragraph at lines 2744--2744
+[]\TU/lmtt/m/n/10 ## Multiple R-squared:  0.0001884,  Adjusted R-squared:  -0.0
+004139[] 
+ []
+
+
+Overfull \hbox (64.5pt too wide) in paragraph at lines 2788--2788
 []\TU/lmtt/m/n/10 ##    Team           Opponent            Result    TotalPenal
 tyYards residuals[] 
  []
 
 
-Overfull \hbox (64.5pt too wide) in paragraph at lines 2718--2718
+Overfull \hbox (64.5pt too wide) in paragraph at lines 2788--2788
 []\TU/lmtt/m/n/10 ##    <chr>          <chr>               <chr>               
   <dbl>     <dbl>[] 
  []
 
 
-Overfull \hbox (64.5pt too wide) in paragraph at lines 2718--2718
+Overfull \hbox (64.5pt too wide) in paragraph at lines 2788--2788
 []\TU/lmtt/m/n/10 ##  1 Maryland       Howard              W (79-0)            
      87      76.9[] 
  []
 
 
-Overfull \hbox (64.5pt too wide) in paragraph at lines 2718--2718
+Overfull \hbox (64.5pt too wide) in paragraph at lines 2788--2788
 []\TU/lmtt/m/n/10 ##  2 Penn State     Idaho               W (79-7)            
      97      69.9[] 
  []
 
 
-Overfull \hbox (64.5pt too wide) in paragraph at lines 2718--2718
+Overfull \hbox (64.5pt too wide) in paragraph at lines 2788--2788
 []\TU/lmtt/m/n/10 ##  3 Ohio State     Miami (OH)          W (76-5)            
     102      69.0[] 
  []
 
 
-Overfull \hbox (64.5pt too wide) in paragraph at lines 2718--2718
+Overfull \hbox (64.5pt too wide) in paragraph at lines 2788--2788
 []\TU/lmtt/m/n/10 ##  4 Oregon         Nevada              W (77-6)            
      88      68.9[] 
  []
 
 
-Overfull \hbox (64.5pt too wide) in paragraph at lines 2718--2718
+Overfull \hbox (64.5pt too wide) in paragraph at lines 2788--2788
 []\TU/lmtt/m/n/10 ##  5 Louisiana      Texas Southern      W (77-6)            
      55      68.6[] 
  []
 
 
-Overfull \hbox (64.5pt too wide) in paragraph at lines 2718--2718
+Overfull \hbox (64.5pt too wide) in paragraph at lines 2788--2788
 []\TU/lmtt/m/n/10 ##  6 Miami (FL)     Bethune-Cookman     W (63-0)            
     110      61.0[] 
  []
 
 
-Overfull \hbox (64.5pt too wide) in paragraph at lines 2718--2718
+Overfull \hbox (64.5pt too wide) in paragraph at lines 2788--2788
 []\TU/lmtt/m/n/10 ##  7 Alabama        Western Carolina    W (66-3)            
      81      60.8[] 
  []
 
 
-Overfull \hbox (64.5pt too wide) in paragraph at lines 2718--2718
+Overfull \hbox (64.5pt too wide) in paragraph at lines 2788--2788
 []\TU/lmtt/m/n/10 ##  8 UCF            Florida A&M         W (62-0)            
     171      60.5[] 
  []
 
 
-Overfull \hbox (64.5pt too wide) in paragraph at lines 2718--2718
+Overfull \hbox (64.5pt too wide) in paragraph at lines 2788--2788
 []\TU/lmtt/m/n/10 ##  9 South Carolina Charleston Southern W (72-10)           
      49      59.6[] 
  []
 
 
-Overfull \hbox (64.5pt too wide) in paragraph at lines 2718--2718
+Overfull \hbox (64.5pt too wide) in paragraph at lines 2788--2788
 []\TU/lmtt/m/n/10 ## 10 Wisconsin      Central Michigan    W (61-0)            
      49      58.6[] 
  []
@@ -4356,285 +4524,294 @@ df)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[84]
+[86]
 File: SportsData_files/figure-latex/unnamed-chunk-94-1.pdf Graphic file (type p
 df)
 <use SportsData_files/figure-latex/unnamed-chunk-94-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[85] [86]
+[87] [88]
 Chapter 12.
 File: images/simulations2.png Graphic file (type bmp)
 <images/simulations2.png>
 
-Overfull \hbox (292.43188pt too wide) in paragraph at lines 2741--2742
+Overfull \hbox (292.43188pt too wide) in paragraph at lines 2811--2812
 [][] 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[87
+[89
 
 ]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[88]
-Overfull \hbox (101.25pt too wide) in paragraph at lines 2809--2809
+[90]
+Overfull \hbox (90.75pt too wide) in paragraph at lines 2849--2849
+[]\TU/lmtt/m/n/10 ## -- Column specification ----------------------------------
+----------------------[] 
+ []
+
+
+Overfull \hbox (101.25pt too wide) in paragraph at lines 2877--2877
 []\TU/lmtt/m/n/10 ## []summarise()[] regrouping output by []Conference[] (overr
 ide with [].groups[] argument)[] 
  []
 
-[89]
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2849--2849
+[91]
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2917--2917
 []\TU/lmtt/m/n/10 ##   Conference Team  FGAvg ReboundAvg OppFGAvg OffRebAvg FGz
 score RebZscore[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2849--2849
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2917--2917
 []\TU/lmtt/m/n/10 ##   <chr>      <chr> <dbl>      <dbl>    <dbl>     <dbl>    
 <dbl>     <dbl>[] 
  []
 
 
-Overfull \hbox (48.75pt too wide) in paragraph at lines 2849--2849
+Overfull \hbox (48.75pt too wide) in paragraph at lines 2917--2917
 []\TU/lmtt/m/n/10 ## 1 A-10       Davi~ 0.454       31.1    0.437      30.4    
 0.505   -0.619[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2849--2849
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2917--2917
 []\TU/lmtt/m/n/10 ## 2 A-10       Dayt~ 0.525       32.5    0.413      29.0    
 2.59     0.0352[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2849--2849
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2917--2917
 []\TU/lmtt/m/n/10 ## 3 A-10       Duqu~ 0.444       32.4    0.427      32.4    
 0.216   -0.0168[] 
  []
 
 
-Overfull \hbox (43.5pt too wide) in paragraph at lines 2849--2849
+Overfull \hbox (43.5pt too wide) in paragraph at lines 2917--2917
 []\TU/lmtt/m/n/10 ## 4 A-10       Ford~ 0.384       30.0    0.402      33.9   -
 1.53    -1.13[] 
  []
 
 
-Overfull \hbox (48.75pt too wide) in paragraph at lines 2849--2849
+Overfull \hbox (48.75pt too wide) in paragraph at lines 2917--2917
 []\TU/lmtt/m/n/10 ## 5 A-10       Geor~ 0.424       33.8    0.440      30.5   -
 0.358    0.620[] 
  []
 
 
-Overfull \hbox (48.75pt too wide) in paragraph at lines 2849--2849
+Overfull \hbox (48.75pt too wide) in paragraph at lines 2917--2917
 []\TU/lmtt/m/n/10 ## 6 A-10       Geor~ 0.422       30.5    0.452      32.7   -
 0.410   -0.904[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 2849--2849
+Overfull \hbox (12.0pt too wide) in paragraph at lines 2917--2917
 []\TU/lmtt/m/n/10 ## # ... with 3 more variables: OppZscore <dbl>, OppRebZScore
  <dbl>,[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 2878--2878
+Overfull \hbox (59.25pt too wide) in paragraph at lines 2946--2946
 []\TU/lmtt/m/n/10 ##    Conference Team  FGAvg ReboundAvg OppFGAvg OffRebAvg FG
 zscore RebZscore[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 2878--2878
+Overfull \hbox (59.25pt too wide) in paragraph at lines 2946--2946
 []\TU/lmtt/m/n/10 ##    <chr>      <chr> <dbl>      <dbl>    <dbl>     <dbl>   
  <dbl>     <dbl>[] 
  []
 
-[90]
-Overfull \hbox (48.75pt too wide) in paragraph at lines 2878--2878
+[92]
+Overfull \hbox (48.75pt too wide) in paragraph at lines 2946--2946
 []\TU/lmtt/m/n/10 ##  1 Big West   UC-I~ 0.473       36.6    0.390      27.1   
  1.60     2.23[] 
  []
 
 
-Overfull \hbox (48.75pt too wide) in paragraph at lines 2878--2878
+Overfull \hbox (48.75pt too wide) in paragraph at lines 2946--2946
 []\TU/lmtt/m/n/10 ##  2 Big 12     Kans~ 0.482       35.9    0.378      29.0   
  2.36     1.13[] 
  []
 
 
-Overfull \hbox (48.75pt too wide) in paragraph at lines 2878--2878
+Overfull \hbox (48.75pt too wide) in paragraph at lines 2946--2946
 []\TU/lmtt/m/n/10 ##  3 WCC        Gonz~ 0.517       37.4    0.424      28.2   
  1.73     1.90[] 
  []
 
 
-Overfull \hbox (48.75pt too wide) in paragraph at lines 2878--2878
+Overfull \hbox (48.75pt too wide) in paragraph at lines 2946--2946
 []\TU/lmtt/m/n/10 ##  4 Southland  Step~ 0.490       34.2    0.427      26.6   
  1.76     1.05[] 
  []
 
 
-Overfull \hbox (48.75pt too wide) in paragraph at lines 2878--2878
+Overfull \hbox (48.75pt too wide) in paragraph at lines 2946--2946
 []\TU/lmtt/m/n/10 ##  5 Big Ten    Mich~ 0.460       37.7    0.382      29.6   
  1.38     1.55[] 
  []
 
 
-Overfull \hbox (48.75pt too wide) in paragraph at lines 2878--2878
+Overfull \hbox (48.75pt too wide) in paragraph at lines 2946--2946
 []\TU/lmtt/m/n/10 ##  6 OVC        Murr~ 0.477       35.3    0.401      29.2   
  1.31     1.36[] 
  []
 
 
-Overfull \hbox (48.75pt too wide) in paragraph at lines 2878--2878
+Overfull \hbox (48.75pt too wide) in paragraph at lines 2946--2946
 []\TU/lmtt/m/n/10 ##  7 Summit     Sout~ 0.492       35.5    0.423      31.3   
  1.58     1.52[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 2878--2878
+Overfull \hbox (59.25pt too wide) in paragraph at lines 2946--2946
 []\TU/lmtt/m/n/10 ##  8 A-10       Dayt~ 0.525       32.5    0.413      29.0   
  2.59     0.0352[] 
  []
 
 
-Overfull \hbox (48.75pt too wide) in paragraph at lines 2878--2878
+Overfull \hbox (48.75pt too wide) in paragraph at lines 2946--2946
 []\TU/lmtt/m/n/10 ##  9 A-10       Sain~ 0.457       37.4    0.403      30.5   
  0.598    2.21[] 
  []
 
 
-Overfull \hbox (48.75pt too wide) in paragraph at lines 2878--2878
+Overfull \hbox (48.75pt too wide) in paragraph at lines 2946--2946
 []\TU/lmtt/m/n/10 ## 10 ACC        Loui~ 0.457       36.6    0.392      29.8   
  1.11     1.37[] 
  []
 
 
-Overfull \hbox (6.75pt too wide) in paragraph at lines 2878--2878
+Overfull \hbox (6.75pt too wide) in paragraph at lines 2946--2946
 []\TU/lmtt/m/n/10 ## # ... with 343 more rows, and 3 more variables: OppZscore 
 <dbl>,[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 2913--2913
+Overfull \hbox (59.25pt too wide) in paragraph at lines 2981--2981
 []\TU/lmtt/m/n/10 ##    Conference Team  FGAvg ReboundAvg OppFGAvg OffRebAvg FG
 zscore RebZscore[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 2913--2913
+Overfull \hbox (59.25pt too wide) in paragraph at lines 2981--2981
 []\TU/lmtt/m/n/10 ##    <chr>      <chr> <dbl>      <dbl>    <dbl>     <dbl>   
  <dbl>     <dbl>[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2913--2913
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2981--2981
 []\TU/lmtt/m/n/10 ##  1 Big Ten    Mich~ 0.460       37.7    0.382      29.6   
  1.38      1.55[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2913--2913
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2981--2981
 []\TU/lmtt/m/n/10 ##  2 Big Ten    Rutg~ 0.449       37      0.385      31.1   
  0.727     1.22[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 2913--2913
+Overfull \hbox (59.25pt too wide) in paragraph at lines 2981--2981
 []\TU/lmtt/m/n/10 ##  3 Big Ten    Ohio~ 0.447       33.6    0.400      28.4   
  0.592    -0.393[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 2913--2913
+Overfull \hbox (59.25pt too wide) in paragraph at lines 2981--2981
 []\TU/lmtt/m/n/10 ##  4 Big Ten    Illi~ 0.444       36.1    0.418      29.1   
  0.439     0.779[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 2913--2913
+Overfull \hbox (59.25pt too wide) in paragraph at lines 2981--2981
 []\TU/lmtt/m/n/10 ##  5 Big Ten    Indi~ 0.445       35.1    0.419      29.4   
  0.480     0.306[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 2913--2913
+Overfull \hbox (59.25pt too wide) in paragraph at lines 2981--2981
 []\TU/lmtt/m/n/10 ##  6 Big Ten    Mary~ 0.419       36.1    0.401      31.9   
 -0.952     0.794[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 2913--2913
+Overfull \hbox (59.25pt too wide) in paragraph at lines 2981--2981
 []\TU/lmtt/m/n/10 ##  7 Big Ten    Mich~ 0.463       33.0    0.428      31.9   
  1.56     -0.682[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 2913--2913
+Overfull \hbox (59.25pt too wide) in paragraph at lines 2981--2981
 []\TU/lmtt/m/n/10 ##  8 Big Ten    Penn~ 0.432       35.6    0.411      34.2   
 -0.237     0.550[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 2913--2913
+Overfull \hbox (59.25pt too wide) in paragraph at lines 2981--2981
 []\TU/lmtt/m/n/10 ##  9 Big Ten    Minn~ 0.426       35.5    0.411      33     
 -0.560     0.520[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 2913--2913
+Overfull \hbox (59.25pt too wide) in paragraph at lines 2981--2981
 []\TU/lmtt/m/n/10 ## 10 Big Ten    Iowa~ 0.452       34.2    0.430      32.4   
  0.918    -0.104[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 2913--2913
+Overfull \hbox (59.25pt too wide) in paragraph at lines 2981--2981
 []\TU/lmtt/m/n/10 ## 11 Big Ten    Purd~ 0.418       33.8    0.410      29.3   
 -1.02     -0.271[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2913--2913
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2981--2981
 []\TU/lmtt/m/n/10 ## 12 Big Ten    Wisc~ 0.426       31.3    0.410      32.0   
 -0.587    -1.49[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 2913--2913
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2981--2981
 []\TU/lmtt/m/n/10 ## 13 Big Ten    Nort~ 0.417       30.5    0.422      34.8   
 -1.12     -1.84[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 2913--2913
+Overfull \hbox (59.25pt too wide) in paragraph at lines 2981--2981
 []\TU/lmtt/m/n/10 ## 14 Big Ten    Nebr~ 0.408       32.4    0.453      42.2   
 -1.62     -0.947[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 2913--2913
+Overfull \hbox (12.0pt too wide) in paragraph at lines 2981--2981
 []\TU/lmtt/m/n/10 ## # ... with 3 more variables: OppZscore <dbl>, OppRebZScore
  <dbl>,[] 
  []
 
 
-Underfull \vbox (badness 3769) has occurred while \output is active []
+Underfull \vbox (badness 3735) has occurred while \output is active []
 
-[91] [92]
+[93] [94]
 Chapter 13.
-[93
+[95
 
-] [94]
+]
+Overfull \hbox (90.75pt too wide) in paragraph at lines 3056--3056
+[]\TU/lmtt/m/n/10 ## -- Column specification ----------------------------------
+----------------------[] 
+ []
+
+[96]
 File: SportsData_files/figure-latex/unnamed-chunk-108-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-108-1.pdf>
-
-Underfull \vbox (badness 1515) has occurred while \output is active []
-
-[95]
+[97]
 File: SportsData_files/figure-latex/unnamed-chunk-109-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-109-1.pdf>
@@ -4644,424 +4821,461 @@ pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[96]
+[98]
 File: SportsData_files/figure-latex/unnamed-chunk-111-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-111-1.pdf>
-[97]
+[99]
 File: SportsData_files/figure-latex/unnamed-chunk-113-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-113-1.pdf>
-[98]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[100]
 File: SportsData_files/figure-latex/unnamed-chunk-114-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-114-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[101]
 File: SportsData_files/figure-latex/unnamed-chunk-115-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-115-1.pdf>
-[99]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[102]
 File: SportsData_files/figure-latex/unnamed-chunk-116-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-116-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[100]
+[103]
 File: SportsData_files/figure-latex/unnamed-chunk-117-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-117-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[101] [102]
-Chapter 14.
-[103
+[104] [105] [106
 
 ]
-Overfull \hbox (101.25pt too wide) in paragraph at lines 3249--3249
+Chapter 14.
+
+Overfull \hbox (90.75pt too wide) in paragraph at lines 3312--3312
+[]\TU/lmtt/m/n/10 ## -- Column specification ----------------------------------
+----------------------[] 
+ []
+
+[107]
+Overfull \hbox (101.25pt too wide) in paragraph at lines 3333--3333
 []\TU/lmtt/m/n/10 ## []summarise()[] regrouping output by []Conference[] (overr
 ide with [].groups[] argument)[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 3270--3270
+Overfull \hbox (59.25pt too wide) in paragraph at lines 3354--3354
 []\TU/lmtt/m/n/10 ##    Conference         Team           SeasonRushingYards Se
 asonPassingYards[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 3270--3270
+Overfull \hbox (59.25pt too wide) in paragraph at lines 3354--3354
 []\TU/lmtt/m/n/10 ##    <chr>              <chr>                       <dbl>   
            <dbl>[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 3270--3270
+Overfull \hbox (59.25pt too wide) in paragraph at lines 3354--3354
 []\TU/lmtt/m/n/10 ##  1 Big Ten Conference Illinois                     1877   
             2409[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 3270--3270
+Overfull \hbox (59.25pt too wide) in paragraph at lines 3354--3354
 []\TU/lmtt/m/n/10 ##  2 Big Ten Conference Indiana                      1700   
             3931[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 3270--3270
+Overfull \hbox (59.25pt too wide) in paragraph at lines 3354--3354
 []\TU/lmtt/m/n/10 ##  3 Big Ten Conference Iowa                         1789   
             2976[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 3270--3270
+Overfull \hbox (59.25pt too wide) in paragraph at lines 3354--3354
 []\TU/lmtt/m/n/10 ##  4 Big Ten Conference Maryland                     2033   
             2088[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 3270--3270
+Overfull \hbox (59.25pt too wide) in paragraph at lines 3354--3354
 []\TU/lmtt/m/n/10 ##  5 Big Ten Conference Michigan                     1966   
             3261[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 3270--3270
+Overfull \hbox (59.25pt too wide) in paragraph at lines 3354--3354
 []\TU/lmtt/m/n/10 ##  6 Big Ten Conference Michigan State               1666   
             3182[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 3270--3270
+Overfull \hbox (59.25pt too wide) in paragraph at lines 3354--3354
 []\TU/lmtt/m/n/10 ##  7 Big Ten Conference Minnesota                    2323   
             3293[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 3270--3270
+Overfull \hbox (59.25pt too wide) in paragraph at lines 3354--3354
 []\TU/lmtt/m/n/10 ##  8 Big Ten Conference Nebraska                     2454   
             2551[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 3270--3270
+Overfull \hbox (59.25pt too wide) in paragraph at lines 3354--3354
 []\TU/lmtt/m/n/10 ##  9 Big Ten Conference Northwestern                 2162   
             1404[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 3270--3270
+Overfull \hbox (59.25pt too wide) in paragraph at lines 3354--3354
 []\TU/lmtt/m/n/10 ## 10 Big Ten Conference Ohio State                   3742   
             3684[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 3270--3270
+Overfull \hbox (59.25pt too wide) in paragraph at lines 3354--3354
 []\TU/lmtt/m/n/10 ## 11 Big Ten Conference Penn State                   2496   
             2877[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 3270--3270
+Overfull \hbox (59.25pt too wide) in paragraph at lines 3354--3354
 []\TU/lmtt/m/n/10 ## 12 Big Ten Conference Purdue                       1002   
             3719[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 3270--3270
+Overfull \hbox (59.25pt too wide) in paragraph at lines 3354--3354
 []\TU/lmtt/m/n/10 ## 13 Big Ten Conference Rutgers                      1612   
             1672[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 3270--3270
+Overfull \hbox (59.25pt too wide) in paragraph at lines 3354--3354
 []\TU/lmtt/m/n/10 ## 14 Big Ten Conference Wisconsin                    3272   
             2802[] 
  []
 
 
-Overfull \vbox (0.41995pt too high) detected at line 3283
+Overfull \vbox (0.45996pt too high) detected at line 3367
  []
 
-[104]
-Overfull \hbox (101.25pt too wide) in paragraph at lines 3287--3287
+[108]
+Overfull \hbox (101.25pt too wide) in paragraph at lines 3371--3371
 []\TU/lmtt/m/n/10 ## []summarise()[] regrouping output by []Conference[] (overr
 ide with [].groups[] argument)[] 
  []
 
+[109]
 File: SportsData_files/figure-latex/unnamed-chunk-124-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-124-1.pdf>
-[105]
 File: SportsData_files/figure-latex/unnamed-chunk-125-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-125-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[106] [107] [108
+[110] [111] [112
 
 ]
 Chapter 15.
-
-Overfull \hbox (17.25pt too wide) in paragraph at lines 3387--3387
-[]\TU/lmtt/m/n/10 ## []summarise()[] ungrouping output (override with [].groups
-[] argument)[] 
- []
-
-File: SportsData_files/figure-latex/unnamed-chunk-126-1.pdf Graphic file (type 
+[113]
+File: SportsData_files/figure-latex/unnamed-chunk-128-1.pdf Graphic file (type 
 pdf)
-<use SportsData_files/figure-latex/unnamed-chunk-126-1.pdf>
+<use SportsData_files/figure-latex/unnamed-chunk-128-1.pdf>
+File: SportsData_files/figure-latex/unnamed-chunk-130-1.pdf Graphic file (type 
+pdf)
+<use SportsData_files/figure-latex/unnamed-chunk-130-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[109]
-Underfull \vbox (badness 5970) has occurred while \output is active []
-
-[110]
-File: SportsData_files/figure-latex/unnamed-chunk-129-1.pdf Graphic file (type 
-pdf)
-<use SportsData_files/figure-latex/unnamed-chunk-129-1.pdf>
-[111]
+[114]
 File: SportsData_files/figure-latex/unnamed-chunk-131-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-131-1.pdf>
-File: SportsData_files/figure-latex/unnamed-chunk-132-1.pdf Graphic file (type 
-pdf)
-<use SportsData_files/figure-latex/unnamed-chunk-132-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[112]
-Overfull \vbox (0.35774pt too high) detected at line 3524
+[115]
+Overfull \vbox (0.35774pt too high) detected at line 3571
  []
 
-[113]
+[116]
+File: SportsData_files/figure-latex/unnamed-chunk-133-1.pdf Graphic file (type 
+pdf)
+<use SportsData_files/figure-latex/unnamed-chunk-133-1.pdf>
 File: SportsData_files/figure-latex/unnamed-chunk-134-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-134-1.pdf>
-File: SportsData_files/figure-latex/unnamed-chunk-135-1.pdf Graphic file (type 
-pdf)
-<use SportsData_files/figure-latex/unnamed-chunk-135-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[114] [115]
-Overfull \hbox (69.75pt too wide) in paragraph at lines 3619--3619
+[117]
+Overfull \hbox (90.75pt too wide) in paragraph at lines 3637--3637
+[]\TU/lmtt/m/n/10 ## -- Column specification ----------------------------------
+----------------------[] 
+ []
+
+[118]
+Overfull \hbox (69.75pt too wide) in paragraph at lines 3664--3664
 []\TU/lmtt/m/n/10 ##    Game Date       HomeAway Opponent Result PassingCmp Pas
 singAtt PassingPct[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 3619--3619
+Overfull \hbox (69.75pt too wide) in paragraph at lines 3664--3664
 []\TU/lmtt/m/n/10 ##   <dbl> <date>     <chr>    <chr>    <chr>       <dbl>    
   <dbl>      <dbl>[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 3619--3619
+Overfull \hbox (69.75pt too wide) in paragraph at lines 3664--3664
 []\TU/lmtt/m/n/10 ## 1     5 2019-09-28 <NA>     Ohio St~ L (7-~          8    
      17       47.1[] 
  []
 
 
-Overfull \hbox (6.75pt too wide) in paragraph at lines 3619--3619
+Overfull \hbox (6.75pt too wide) in paragraph at lines 3664--3664
 []\TU/lmtt/m/n/10 ## # ... with 46 more variables: PassingYds <dbl>, PassingTD 
 <dbl>,[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 3619--3619
+Overfull \hbox (59.25pt too wide) in paragraph at lines 3664--3664
 []\TU/lmtt/m/n/10 ## #   RushingAtt <dbl>, RushingYds <dbl>, RushingAvg <dbl>, 
 RushingTD <dbl>,[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 3619--3619
+Overfull \hbox (12.0pt too wide) in paragraph at lines 3664--3664
 []\TU/lmtt/m/n/10 ## #   OffensivePlays <dbl>, OffensiveYards <dbl>, OffenseAvg
  <dbl>,[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 3619--3619
+Overfull \hbox (12.0pt too wide) in paragraph at lines 3664--3664
 []\TU/lmtt/m/n/10 ## #   FirstDownPass <dbl>, FirstDownRush <dbl>, FirstDownPen
  <dbl>,[] 
  []
 
 
-Overfull \hbox (64.5pt too wide) in paragraph at lines 3619--3619
+Overfull \hbox (64.5pt too wide) in paragraph at lines 3664--3664
 []\TU/lmtt/m/n/10 ## #   FirstDownTotal <dbl>, Penalties <dbl>, PenaltyYds <dbl
 >, Fumbles <dbl>,[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 3619--3619
+Overfull \hbox (75.0pt too wide) in paragraph at lines 3664--3664
 []\TU/lmtt/m/n/10 ## #   Interceptions <dbl>, TotalTurnovers <dbl>, TeamFull <c
 hr>, TeamURL <chr>,[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 3619--3619
+Overfull \hbox (75.0pt too wide) in paragraph at lines 3664--3664
 []\TU/lmtt/m/n/10 ## #   Outcome <chr>, TeamScore <dbl>, OpponentScore <dbl>, D
 efPassingCmp <dbl>,[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 3619--3619
+Overfull \hbox (17.25pt too wide) in paragraph at lines 3664--3664
 []\TU/lmtt/m/n/10 ## #   DefPassingAtt <dbl>, DefPassingPct <dbl>, DefPassingYd
 s <dbl>,[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 3619--3619
+Overfull \hbox (12.0pt too wide) in paragraph at lines 3664--3664
 []\TU/lmtt/m/n/10 ## #   DefPassingTD <dbl>, DefRushingAtt <dbl>, DefRushingYds
  <dbl>,[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 3619--3619
+Overfull \hbox (69.75pt too wide) in paragraph at lines 3664--3664
 []\TU/lmtt/m/n/10 ## #   DefRushingAvg <dbl>, DefRushingTD <dbl>, DefPlays <dbl
 >, DefYards <dbl>,[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 3619--3619
+Overfull \hbox (12.0pt too wide) in paragraph at lines 3664--3664
 []\TU/lmtt/m/n/10 ## #   DefAvg <dbl>, DefFirstDownPass <dbl>, DefFirstDownRush
  <dbl>,[] 
  []
 
 
-Overfull \hbox (43.5pt too wide) in paragraph at lines 3619--3619
+Overfull \hbox (43.5pt too wide) in paragraph at lines 3664--3664
 []\TU/lmtt/m/n/10 ## #   DefFirstDownPen <dbl>, DefFirstDownTotal <dbl>, DefPen
 alties <dbl>,[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 3619--3619
+Overfull \hbox (17.25pt too wide) in paragraph at lines 3664--3664
 []\TU/lmtt/m/n/10 ## #   DefPenaltyYds <dbl>, DefFumbles <dbl>, DefInterception
 s <dbl>,[] 
  []
 
-[116]
+[119]
+File: SportsData_files/figure-latex/unnamed-chunk-139-1.pdf Graphic file (type 
+pdf)
+<use SportsData_files/figure-latex/unnamed-chunk-139-1.pdf>
+
+Underfull \hbox (badness 10000) in paragraph at lines 3714--3716
+[][]
+ []
+
+[120]
 File: SportsData_files/figure-latex/unnamed-chunk-140-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-140-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 3669--3671
+Underfull \hbox (badness 10000) in paragraph at lines 3728--3730
 [][]
  []
 
-[117]
 File: SportsData_files/figure-latex/unnamed-chunk-141-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-141-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 3683--3685
+Underfull \hbox (badness 10000) in paragraph at lines 3740--3742
 [][]
  []
 
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[121]
 File: SportsData_files/figure-latex/unnamed-chunk-142-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-142-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 3695--3697
-[][]
- []
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[118]
-File: SportsData_files/figure-latex/unnamed-chunk-143-1.pdf Graphic file (type 
-pdf)
-<use SportsData_files/figure-latex/unnamed-chunk-143-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[119] [120]
-Chapter 16.
-[121
+[122] [123] [124
 
 ]
+Chapter 16.
+
+Overfull \hbox (90.75pt too wide) in paragraph at lines 3801--3801
+[]\TU/lmtt/m/n/10 ## -- Column specification ----------------------------------
+----------------------[] 
+ []
+
+[125]
+File: SportsData_files/figure-latex/unnamed-chunk-146-1.pdf Graphic file (type 
+pdf)
+<use SportsData_files/figure-latex/unnamed-chunk-146-1.pdf>
 File: SportsData_files/figure-latex/unnamed-chunk-147-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-147-1.pdf>
-File: SportsData_files/figure-latex/unnamed-chunk-148-1.pdf Graphic file (type 
-pdf)
-<use SportsData_files/figure-latex/unnamed-chunk-148-1.pdf>
 
 Underfull \vbox (badness 4673) has occurred while \output is active []
 
-[122]
+[126]
+File: SportsData_files/figure-latex/unnamed-chunk-149-1.pdf Graphic file (type 
+pdf)
+<use SportsData_files/figure-latex/unnamed-chunk-149-1.pdf>
+
+Underfull \vbox (badness 3068) has occurred while \output is active []
+
+[127]
 File: SportsData_files/figure-latex/unnamed-chunk-150-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-150-1.pdf>
-
-Underfull \vbox (badness 3078) has occurred while \output is active []
-
-[123]
+[128]
 File: SportsData_files/figure-latex/unnamed-chunk-151-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-151-1.pdf>
-[124]
-File: SportsData_files/figure-latex/unnamed-chunk-152-1.pdf Graphic file (type 
+File: SportsData_files/figure-latex/unnamed-chunk-153-1.pdf Graphic file (type 
 pdf)
-<use SportsData_files/figure-latex/unnamed-chunk-152-1.pdf>
-File: SportsData_files/figure-latex/unnamed-chunk-154-1.pdf Graphic file (type 
-pdf)
-<use SportsData_files/figure-latex/unnamed-chunk-154-1.pdf>
+<use SportsData_files/figure-latex/unnamed-chunk-153-1.pdf>
 
 Underfull \vbox (badness 3138) has occurred while \output is active []
 
-[125]
-Overfull \hbox (17.25pt too wide) in paragraph at lines 3872--3872
+[129]
+Overfull \hbox (17.25pt too wide) in paragraph at lines 3915--3915
 []\TU/lmtt/m/n/10 ## []summarise()[] ungrouping output (override with [].groups
 [] argument)[] 
  []
 
-File: SportsData_files/figure-latex/unnamed-chunk-156-1.pdf Graphic file (type 
+File: SportsData_files/figure-latex/unnamed-chunk-155-1.pdf Graphic file (type 
 pdf)
-<use SportsData_files/figure-latex/unnamed-chunk-156-1.pdf>
+<use SportsData_files/figure-latex/unnamed-chunk-155-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[126] [127] [128
+[130] [131] [132
 
 ]
 Chapter 17.
-[129]
+
+Overfull \hbox (90.75pt too wide) in paragraph at lines 3969--3969
+[]\TU/lmtt/m/n/10 ## -- Column specification ----------------------------------
+----------------------[] 
+ []
+
+[133]
+File: SportsData_files/figure-latex/unnamed-chunk-160-1.pdf Graphic file (type 
+pdf)
+<use SportsData_files/figure-latex/unnamed-chunk-160-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[134]
 File: SportsData_files/figure-latex/unnamed-chunk-161-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-161-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[130]
-File: SportsData_files/figure-latex/unnamed-chunk-162-1.pdf Graphic file (type 
+[135]
+File: SportsData_files/figure-latex/unnamed-chunk-163-1.pdf Graphic file (type 
 pdf)
-<use SportsData_files/figure-latex/unnamed-chunk-162-1.pdf>
+<use SportsData_files/figure-latex/unnamed-chunk-163-1.pdf>
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 5274) has occurred while \output is active []
 
-[131]
-File: SportsData_files/figure-latex/unnamed-chunk-164-1.pdf Graphic file (type 
-pdf)
-<use SportsData_files/figure-latex/unnamed-chunk-164-1.pdf>
-
-Underfull \vbox (badness 5316) has occurred while \output is active []
-
-[132] [133] [134
+[136] [137] [138
 
 ]
 Chapter 18.
-[135]
-Overfull \hbox (143.25pt too wide) in paragraph at lines 4072--4072
+
+Overfull \hbox (90.75pt too wide) in paragraph at lines 4086--4086
+[]\TU/lmtt/m/n/10 ## -- Column specification ----------------------------------
+----------------------[] 
+ []
+
+[139]
+Overfull \hbox (143.25pt too wide) in paragraph at lines 4111--4111
 []\TU/lmtt/m/n/10 ## []summarise()[] regrouping output by []Team[], []Conferenc
 e[] (override with [].groups[] argument)[] 
  []
 
-[136]
-Overfull \hbox (64.5pt too wide) in paragraph at lines 4119--4119
+[140]
+Overfull \hbox (64.5pt too wide) in paragraph at lines 4158--4158
+[]\TU/lmtt/m/n/10 ## Warning: Removed 2 rows containing non-finite values (stat
+_density_ridges).[] 
+ []
+
+File: SportsData_files/figure-latex/unnamed-chunk-170-1.pdf Graphic file (type 
+pdf)
+<use SportsData_files/figure-latex/unnamed-chunk-170-1.pdf>
+[141]
+Overfull \hbox (64.5pt too wide) in paragraph at lines 4181--4181
 []\TU/lmtt/m/n/10 ## Warning: Removed 2 rows containing non-finite values (stat
 _density_ridges).[] 
  []
@@ -5070,17 +5284,19 @@ File: SportsData_files/figure-latex/unnamed-chunk-171-1.pdf Graphic file (type
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-171-1.pdf>
 
-Overfull \hbox (64.5pt too wide) in paragraph at lines 4142--4142
+Overfull \hbox (64.5pt too wide) in paragraph at lines 4202--4202
 []\TU/lmtt/m/n/10 ## Warning: Removed 2 rows containing non-finite values (stat
 _density_ridges).[] 
  []
 
-[137]
 File: SportsData_files/figure-latex/unnamed-chunk-172-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-172-1.pdf>
 
-Overfull \hbox (64.5pt too wide) in paragraph at lines 4163--4163
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[142]
+Overfull \hbox (64.5pt too wide) in paragraph at lines 4223--4223
 []\TU/lmtt/m/n/10 ## Warning: Removed 2 rows containing non-finite values (stat
 _density_ridges).[] 
  []
@@ -5091,175 +5307,229 @@ pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[138]
-Overfull \hbox (64.5pt too wide) in paragraph at lines 4184--4184
-[]\TU/lmtt/m/n/10 ## Warning: Removed 2 rows containing non-finite values (stat
-_density_ridges).[] 
- []
-
-File: SportsData_files/figure-latex/unnamed-chunk-174-1.pdf Graphic file (type 
-pdf)
-<use SportsData_files/figure-latex/unnamed-chunk-174-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[139] [140]
+[143] [144]
 Chapter 19.
-[141
+[145
 
 ]
-Overfull \hbox (69.75pt too wide) in paragraph at lines 4254--4254
+Overfull \hbox (90.75pt too wide) in paragraph at lines 4284--4284
+[]\TU/lmtt/m/n/10 ## -- Column specification ----------------------------------
+----------------------[] 
+ []
+
+
+Overfull \hbox (69.75pt too wide) in paragraph at lines 4301--4301
 []\TU/lmtt/m/n/10 ## []summarise()[] regrouping output by []Team[] (override wi
 th [].groups[] argument)[] 
  []
 
+File: SportsData_files/figure-latex/unnamed-chunk-177-1.pdf Graphic file (type 
+pdf)
+<use SportsData_files/figure-latex/unnamed-chunk-177-1.pdf>
+[146]
 File: SportsData_files/figure-latex/unnamed-chunk-178-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-178-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[142]
+[147]
 File: SportsData_files/figure-latex/unnamed-chunk-179-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-179-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[143]
+[148]
 File: SportsData_files/figure-latex/unnamed-chunk-180-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-180-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[144]
+[149]
 File: SportsData_files/figure-latex/unnamed-chunk-181-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-181-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[145]
+[150]
 File: SportsData_files/figure-latex/unnamed-chunk-182-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-182-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[146]
-File: SportsData_files/figure-latex/unnamed-chunk-183-1.pdf Graphic file (type 
+[151]
+File: SportsData_files/figure-latex/unnamed-chunk-184-1.pdf Graphic file (type 
 pdf)
-<use SportsData_files/figure-latex/unnamed-chunk-183-1.pdf>
+<use SportsData_files/figure-latex/unnamed-chunk-184-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[147]
-File: SportsData_files/figure-latex/unnamed-chunk-185-1.pdf Graphic file (type 
-pdf)
-<use SportsData_files/figure-latex/unnamed-chunk-185-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[148] [149] [150
+[152] [153] [154
 
 ]
 Chapter 20.
-[151]
-Overfull \hbox (17.25pt too wide) in paragraph at lines 4473--4473
+
+Overfull \hbox (90.75pt too wide) in paragraph at lines 4484--4484
+[]\TU/lmtt/m/n/10 ## -- Column specification ----------------------------------
+----------------------[] 
+ []
+
+[155]
+Overfull \hbox (17.25pt too wide) in paragraph at lines 4518--4518
 []\TU/lmtt/m/n/10 ## []summarise()[] ungrouping output (override with [].groups
 [] argument)[] 
  []
 
-[152]
+[156]
+File: SportsData_files/figure-latex/unnamed-chunk-189-1.pdf Graphic file (type 
+pdf)
+<use SportsData_files/figure-latex/unnamed-chunk-189-1.pdf>
 File: SportsData_files/figure-latex/unnamed-chunk-190-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-190-1.pdf>
-File: SportsData_files/figure-latex/unnamed-chunk-191-1.pdf Graphic file (type 
-pdf)
-<use SportsData_files/figure-latex/unnamed-chunk-191-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[153] [154]
-File: SportsData_files/figure-latex/unnamed-chunk-194-1.pdf Graphic file (type 
+[157] [158]
+File: SportsData_files/figure-latex/unnamed-chunk-193-1.pdf Graphic file (type 
 pdf)
-<use SportsData_files/figure-latex/unnamed-chunk-194-1.pdf>
-[155] [156]
+<use SportsData_files/figure-latex/unnamed-chunk-193-1.pdf>
+[159] [160]
 Chapter 21.
-[157
+
+Overfull \hbox (90.75pt too wide) in paragraph at lines 4655--4655
+[]\TU/lmtt/m/n/10 ## -- Column specification ----------------------------------
+----------------------[] 
+ []
+
+[161
 
 ]
+File: SportsData_files/figure-latex/unnamed-chunk-197-1.pdf Graphic file (type 
+pdf)
+<use SportsData_files/figure-latex/unnamed-chunk-197-1.pdf>
 File: SportsData_files/figure-latex/unnamed-chunk-198-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-198-1.pdf>
-File: SportsData_files/figure-latex/unnamed-chunk-199-1.pdf Graphic file (type 
-pdf)
-<use SportsData_files/figure-latex/unnamed-chunk-199-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[158]
+[162]
+File: SportsData_files/figure-latex/unnamed-chunk-200-1.pdf Graphic file (type 
+pdf)
+<use SportsData_files/figure-latex/unnamed-chunk-200-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[163]
 File: SportsData_files/figure-latex/unnamed-chunk-201-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-201-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[159]
+[164]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[165]
 File: SportsData_files/figure-latex/unnamed-chunk-202-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-202-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[160]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[161]
 File: SportsData_files/figure-latex/unnamed-chunk-203-1.pdf Graphic file (type 
 pdf)
 <use SportsData_files/figure-latex/unnamed-chunk-203-1.pdf>
-File: SportsData_files/figure-latex/unnamed-chunk-204-1.pdf Graphic file (type 
-pdf)
-<use SportsData_files/figure-latex/unnamed-chunk-204-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[162] [163] [164
+[166] [167] [168
 
 ]
 Chapter 22.
-[165]
-Underfull \hbox (badness 10000) in paragraph at lines 4781--4782
+
+Overfull \hbox (90.75pt too wide) in paragraph at lines 4827--4827
+[]\TU/lmtt/m/n/10 ## -- Column specification ----------------------------------
+----------------------[] 
+ []
+
+[169]
+Underfull \hbox (badness 10000) in paragraph at lines 4833--4834
 []\TU/lmtt/m/n/10 Team | 2018-2019 season threes | 2019-2020 season threes | pc
 t
  []
 
 
-Overfull \hbox (143.25pt too wide) in paragraph at lines 4801--4801
+Overfull \hbox (143.25pt too wide) in paragraph at lines 4853--4853
 []\TU/lmtt/m/n/10 ## []summarise()[] regrouping output by []Team[], []Conferenc
 e[] (override with [].groups[] argument)[] 
  []
 
-[166] [167] [168] [169] [170] [171] [172] [173] [174] [175]
-Overfull \hbox (23.18001pt too wide) in paragraph at lines 5416--5417
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 7.0pt on input line 4867.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 5.0pt on input line 4867.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 10.00107pt on input line 4867.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 7.00075pt on input line 4867.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 5.00053pt on input line 4867.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 9.99893pt on input line 4867.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 6.99925pt on input line 4867.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 4.99947pt on input line 4867.
+
+Overfull \hbox (77.88998pt too wide) in paragraph at lines 4867--4892
+[][] 
+ []
+
+
+Underfull \vbox (badness 4981) has occurred while \output is active []
+
+[170]
+Overfull \hbox (77.88998pt too wide) in paragraph at lines 4907--4932
+ [][] 
+ []
+
+[171]
+Overfull \hbox (77.88998pt too wide) in paragraph at lines 4946--4971
+ [][] 
+ []
+
+
+Overfull \hbox (77.88998pt too wide) in paragraph at lines 4988--5013
+ [][] 
+ []
+
+[172]
+Overfull \hbox (102.65pt too wide) in paragraph at lines 5029--5054
+ [][] 
+ []
+
+
+Overfull \hbox (23.18001pt too wide) in paragraph at lines 5060--5061
 []\TU/lmr/m/n/10 Go to the console and install \TU/lmtt/m/n/10 formattable \TU/
 lmr/m/n/10 with \TU/lmtt/m/n/10 install.packages("formattable")\TU/lmr/m/n/10 .
  
  []
 
-[176] [177] [178]
-! Undefined control sequence.
-l.5608 \cellcolor
-                 [HTML]{F98C0A}{\textcolor{white}{\textbf{51.08\%}}} 
+! Misplaced \noalign.
+\hline ->\noalign 
+                  {\ifnum 0=`}\fi \let \hskip \vskip \let \vrule \hrule \let...
+l.5099 \hline
+              
 Here is how much of TeX's memory you used:
- 28130 strings out of 492916
- 518506 string characters out of 6133346
- 744617 words of memory out of 5000000
- 31868 multiletter control sequences out of 15000+600000
- 535903 words of font info for 61 fonts, out of 8000000 for 9000
+ 29371 strings out of 492916
+ 535875 string characters out of 6133346
+ 766906 words of memory out of 5000000
+ 33065 multiletter control sequences out of 15000+600000
+ 536366 words of font info for 67 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 58i,6n,115p,1385b,455s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 58i,9n,115p,1363b,455s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on SportsData.pdf (178 pages).
+Output written on SportsData.pdf (172 pages).

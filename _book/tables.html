@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 22 Tables | Sports Data Analysis and Visualization</title>
   <meta name="description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 22 Tables | Sports Data Analysis and Visualization" />
   <meta property="og:type" content="book" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="facet-wraps.html"/>
 <link rel="next" href="bubble-charts.html"/>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,10 +51,11 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
 <script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
@@ -72,18 +74,17 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -103,7 +104,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {  background-color: #f8f8f8; }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -151,140 +152,179 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Sports Data Analysis and Visualization</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Throwing cold water on hot takes</a><ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Throwing cold water on hot takes</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#requirements-and-conventions"><i class="fa fa-check"></i><b>1.1</b> Requirements and Conventions</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i><b>1.2</b> About this book</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="the-very-basics.html"><a href="the-very-basics.html"><i class="fa fa-check"></i><b>2</b> The very basics</a><ul>
+<li class="chapter" data-level="2" data-path="the-very-basics.html"><a href="the-very-basics.html"><i class="fa fa-check"></i><b>2</b> The very basics</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="the-very-basics.html"><a href="the-very-basics.html#adding-libraries-part-1"><i class="fa fa-check"></i><b>2.1</b> Adding libraries, part 1</a></li>
 <li class="chapter" data-level="2.2" data-path="the-very-basics.html"><a href="the-very-basics.html#adding-libraries-part-2"><i class="fa fa-check"></i><b>2.2</b> Adding libraries, part 2</a></li>
 <li class="chapter" data-level="2.3" data-path="the-very-basics.html"><a href="the-very-basics.html#notebooks"><i class="fa fa-check"></i><b>2.3</b> Notebooks</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html"><i class="fa fa-check"></i><b>3</b> Data, structures and types</a><ul>
+<li class="chapter" data-level="3" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html"><i class="fa fa-check"></i><b>3</b> Data, structures and types</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#rows-and-columns"><i class="fa fa-check"></i><b>3.1</b> Rows and columns</a></li>
 <li class="chapter" data-level="3.2" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#types"><i class="fa fa-check"></i><b>3.2</b> Types</a></li>
 <li class="chapter" data-level="3.3" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#a-simple-way-to-get-data"><i class="fa fa-check"></i><b>3.3</b> A simple way to get data</a></li>
 <li class="chapter" data-level="3.4" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#cleaning-the-data"><i class="fa fa-check"></i><b>3.4</b> Cleaning the data</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="aggregates.html"><a href="aggregates.html"><i class="fa fa-check"></i><b>4</b> Aggregates</a><ul>
+<li class="chapter" data-level="4" data-path="aggregates.html"><a href="aggregates.html"><i class="fa fa-check"></i><b>4</b> Aggregates</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="aggregates.html"><a href="aggregates.html#basic-data-analysis-group-by-and-count"><i class="fa fa-check"></i><b>4.1</b> Basic data analysis: Group By and Count</a></li>
 <li class="chapter" data-level="4.2" data-path="aggregates.html"><a href="aggregates.html#other-aggregates-mean-and-median"><i class="fa fa-check"></i><b>4.2</b> Other aggregates: Mean and median</a></li>
 <li class="chapter" data-level="4.3" data-path="aggregates.html"><a href="aggregates.html#even-more-aggregates"><i class="fa fa-check"></i><b>4.3</b> Even more aggregates</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="mutating-data.html"><a href="mutating-data.html"><i class="fa fa-check"></i><b>5</b> Mutating data</a><ul>
+<li class="chapter" data-level="5" data-path="mutating-data.html"><a href="mutating-data.html"><i class="fa fa-check"></i><b>5</b> Mutating data</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="mutating-data.html"><a href="mutating-data.html#a-more-complex-example"><i class="fa fa-check"></i><b>5.1</b> A more complex example</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="filters-and-selections.html"><a href="filters-and-selections.html"><i class="fa fa-check"></i><b>6</b> Filters and selections</a><ul>
+<li class="chapter" data-level="6" data-path="filters-and-selections.html"><a href="filters-and-selections.html"><i class="fa fa-check"></i><b>6</b> Filters and selections</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="filters-and-selections.html"><a href="filters-and-selections.html#selecting-data-to-make-it-easier-to-read"><i class="fa fa-check"></i><b>6.1</b> Selecting data to make it easier to read</a></li>
 <li class="chapter" data-level="6.2" data-path="filters-and-selections.html"><a href="filters-and-selections.html#using-conditional-filters-to-set-limits"><i class="fa fa-check"></i><b>6.2</b> Using conditional filters to set limits</a></li>
 <li class="chapter" data-level="6.3" data-path="filters-and-selections.html"><a href="filters-and-selections.html#top-list"><i class="fa fa-check"></i><b>6.3</b> Top list</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="transforming-data.html"><a href="transforming-data.html"><i class="fa fa-check"></i><b>7</b> Transforming data</a><ul>
+<li class="chapter" data-level="7" data-path="transforming-data.html"><a href="transforming-data.html"><i class="fa fa-check"></i><b>7</b> Transforming data</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="transforming-data.html"><a href="transforming-data.html#making-long-data-wide"><i class="fa fa-check"></i><b>7.1</b> Making long data wide</a></li>
 <li class="chapter" data-level="7.2" data-path="transforming-data.html"><a href="transforming-data.html#why-this-matters"><i class="fa fa-check"></i><b>7.2</b> Why this matters</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="significance-tests.html"><a href="significance-tests.html"><i class="fa fa-check"></i><b>8</b> Significance tests</a><ul>
+<li class="chapter" data-level="8" data-path="significance-tests.html"><a href="significance-tests.html"><i class="fa fa-check"></i><b>8</b> Significance tests</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="significance-tests.html"><a href="significance-tests.html#accepting-the-null-hypothesis"><i class="fa fa-check"></i><b>8.1</b> Accepting the null hypothesis</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html"><i class="fa fa-check"></i><b>9</b> Correlations and regression</a><ul>
+<li class="chapter" data-level="9" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html"><i class="fa fa-check"></i><b>9</b> Correlations and regression</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html#a-more-predictive-example"><i class="fa fa-check"></i><b>9.1</b> A more predictive example</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="multiple-regression.html"><a href="multiple-regression.html"><i class="fa fa-check"></i><b>10</b> Multiple regression</a></li>
-<li class="chapter" data-level="11" data-path="residuals.html"><a href="residuals.html"><i class="fa fa-check"></i><b>11</b> Residuals</a><ul>
+<li class="chapter" data-level="11" data-path="residuals.html"><a href="residuals.html"><i class="fa fa-check"></i><b>11</b> Residuals</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="residuals.html"><a href="residuals.html#penalties"><i class="fa fa-check"></i><b>11.1</b> Penalties</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z-scores</a><ul>
+<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z-scores</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="z-scores.html"><a href="z-scores.html#calculating-a-z-score-in-r"><i class="fa fa-check"></i><b>12.1</b> Calculating a Z score in R</a></li>
 <li class="chapter" data-level="12.2" data-path="z-scores.html"><a href="z-scores.html#writing-about-z-scores"><i class="fa fa-check"></i><b>12.2</b> Writing about z-scores</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html"><i class="fa fa-check"></i><b>13</b> Intro to ggplot</a><ul>
+<li class="chapter" data-level="13" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html"><i class="fa fa-check"></i><b>13</b> Intro to ggplot</a>
+<ul>
 <li class="chapter" data-level="13.1" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#the-bar-chart"><i class="fa fa-check"></i><b>13.1</b> The bar chart</a></li>
 <li class="chapter" data-level="13.2" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#scales"><i class="fa fa-check"></i><b>13.2</b> Scales</a></li>
 <li class="chapter" data-level="13.3" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#styling"><i class="fa fa-check"></i><b>13.3</b> Styling</a></li>
 <li class="chapter" data-level="13.4" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#one-last-trick-coord-flip"><i class="fa fa-check"></i><b>13.4</b> One last trick: coord flip</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="stacked-bar-charts.html"><a href="stacked-bar-charts.html"><i class="fa fa-check"></i><b>14</b> Stacked bar charts</a></li>
-<li class="chapter" data-level="15" data-path="waffle-charts.html"><a href="waffle-charts.html"><i class="fa fa-check"></i><b>15</b> Waffle charts</a><ul>
+<li class="chapter" data-level="15" data-path="waffle-charts.html"><a href="waffle-charts.html"><i class="fa fa-check"></i><b>15</b> Waffle charts</a>
+<ul>
 <li class="chapter" data-level="15.1" data-path="waffle-charts.html"><a href="waffle-charts.html#waffles-two-ways-part-1"><i class="fa fa-check"></i><b>15.1</b> Waffles two ways: Part 1</a></li>
 <li class="chapter" data-level="15.2" data-path="waffle-charts.html"><a href="waffle-charts.html#waffles-two-ways-part-2"><i class="fa fa-check"></i><b>15.2</b> Waffles two ways: Part 2</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="line-charts.html"><a href="line-charts.html"><i class="fa fa-check"></i><b>16</b> Line charts</a><ul>
+<li class="chapter" data-level="16" data-path="line-charts.html"><a href="line-charts.html"><i class="fa fa-check"></i><b>16</b> Line charts</a>
+<ul>
 <li class="chapter" data-level="16.1" data-path="line-charts.html"><a href="line-charts.html#this-is-too-simple."><i class="fa fa-check"></i><b>16.1</b> This is too simple.</a></li>
 <li class="chapter" data-level="16.2" data-path="line-charts.html"><a href="line-charts.html#but-what-if-i-wanted-to-add-a-lot-of-lines."><i class="fa fa-check"></i><b>16.2</b> But what if I wanted to add a lot of lines.</a></li>
 </ul></li>
 <li class="chapter" data-level="17" data-path="step-charts.html"><a href="step-charts.html"><i class="fa fa-check"></i><b>17</b> Step charts</a></li>
 <li class="chapter" data-level="18" data-path="ridge-charts.html"><a href="ridge-charts.html"><i class="fa fa-check"></i><b>18</b> Ridge charts</a></li>
-<li class="chapter" data-level="19" data-path="dumbbell-and-lollipop-charts.html"><a href="dumbbell-and-lollipop-charts.html"><i class="fa fa-check"></i><b>19</b> Dumbbell and lollipop charts</a><ul>
+<li class="chapter" data-level="19" data-path="dumbbell-and-lollipop-charts.html"><a href="dumbbell-and-lollipop-charts.html"><i class="fa fa-check"></i><b>19</b> Dumbbell and lollipop charts</a>
+<ul>
 <li class="chapter" data-level="19.1" data-path="dumbbell-and-lollipop-charts.html"><a href="dumbbell-and-lollipop-charts.html#dumbbell-plots"><i class="fa fa-check"></i><b>19.1</b> Dumbbell plots</a></li>
 <li class="chapter" data-level="19.2" data-path="dumbbell-and-lollipop-charts.html"><a href="dumbbell-and-lollipop-charts.html#lollipop-charts"><i class="fa fa-check"></i><b>19.2</b> Lollipop charts</a></li>
 </ul></li>
 <li class="chapter" data-level="20" data-path="scatterplots.html"><a href="scatterplots.html"><i class="fa fa-check"></i><b>20</b> Scatterplots</a></li>
-<li class="chapter" data-level="21" data-path="facet-wraps.html"><a href="facet-wraps.html"><i class="fa fa-check"></i><b>21</b> Facet wraps</a><ul>
+<li class="chapter" data-level="21" data-path="facet-wraps.html"><a href="facet-wraps.html"><i class="fa fa-check"></i><b>21</b> Facet wraps</a>
+<ul>
 <li class="chapter" data-level="21.1" data-path="facet-wraps.html"><a href="facet-wraps.html#facet-grid-vs-facet-wraps"><i class="fa fa-check"></i><b>21.1</b> Facet grid vs facet wraps</a></li>
 <li class="chapter" data-level="21.2" data-path="facet-wraps.html"><a href="facet-wraps.html#other-types"><i class="fa fa-check"></i><b>21.2</b> Other types</a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>22</b> Tables</a><ul>
+<li class="chapter" data-level="22" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>22</b> Tables</a>
+<ul>
 <li class="chapter" data-level="22.1" data-path="tables.html"><a href="tables.html#exporting-tables"><i class="fa fa-check"></i><b>22.1</b> Exporting tables</a></li>
 </ul></li>
 <li class="chapter" data-level="23" data-path="bubble-charts.html"><a href="bubble-charts.html"><i class="fa fa-check"></i><b>23</b> Bubble charts</a></li>
-<li class="chapter" data-level="24" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html"><i class="fa fa-check"></i><b>24</b> Circular bar plots</a><ul>
+<li class="chapter" data-level="24" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html"><i class="fa fa-check"></i><b>24</b> Circular bar plots</a>
+<ul>
 <li class="chapter" data-level="24.1" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html#does-november-basketball-matter"><i class="fa fa-check"></i><b>24.1</b> Does November basketball matter?</a></li>
 <li class="chapter" data-level="24.2" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html#does-it-show-you-where-you-are"><i class="fa fa-check"></i><b>24.2</b> Does it show you where you are?</a></li>
 </ul></li>
-<li class="chapter" data-level="25" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html"><i class="fa fa-check"></i><b>25</b> Intro to rvest</a><ul>
+<li class="chapter" data-level="25" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html"><i class="fa fa-check"></i><b>25</b> Intro to rvest</a>
+<ul>
 <li class="chapter" data-level="25.1" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html#a-slightly-more-complicated-example"><i class="fa fa-check"></i><b>25.1</b> A slightly more complicated example</a></li>
 <li class="chapter" data-level="25.2" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html#an-even-more-complicated-example"><i class="fa fa-check"></i><b>25.2</b> An even more complicated example</a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="advanced-rvest.html"><a href="advanced-rvest.html"><i class="fa fa-check"></i><b>26</b> Advanced rvest</a><ul>
+<li class="chapter" data-level="26" data-path="advanced-rvest.html"><a href="advanced-rvest.html"><i class="fa fa-check"></i><b>26</b> Advanced rvest</a>
+<ul>
 <li class="chapter" data-level="26.1" data-path="advanced-rvest.html"><a href="advanced-rvest.html#one-last-bit"><i class="fa fa-check"></i><b>26.1</b> One last bit</a></li>
 </ul></li>
 <li class="chapter" data-level="27" data-path="annotations.html"><a href="annotations.html"><i class="fa fa-check"></i><b>27</b> Annotations</a></li>
-<li class="chapter" data-level="28" data-path="finishing-touches.html"><a href="finishing-touches.html"><i class="fa fa-check"></i><b>28</b> Finishing touches</a><ul>
+<li class="chapter" data-level="28" data-path="finishing-touches.html"><a href="finishing-touches.html"><i class="fa fa-check"></i><b>28</b> Finishing touches</a>
+<ul>
 <li class="chapter" data-level="28.1" data-path="finishing-touches.html"><a href="finishing-touches.html#graphics-vs-visual-stories"><i class="fa fa-check"></i><b>28.1</b> Graphics vs visual stories</a></li>
 <li class="chapter" data-level="28.2" data-path="finishing-touches.html"><a href="finishing-touches.html#getting-ggplot-closer-to-output"><i class="fa fa-check"></i><b>28.2</b> Getting ggplot closer to output</a></li>
 <li class="chapter" data-level="28.3" data-path="finishing-touches.html"><a href="finishing-touches.html#waffle-charts-require-special-attention"><i class="fa fa-check"></i><b>28.3</b> Waffle charts require special attention</a></li>
 </ul></li>
 <li class="chapter" data-level="29" data-path="headlines.html"><a href="headlines.html"><i class="fa fa-check"></i><b>29</b> Headlines</a></li>
-<li class="chapter" data-level="30" data-path="plotly.html"><a href="plotly.html"><i class="fa fa-check"></i><b>30</b> Plotly</a><ul>
+<li class="chapter" data-level="30" data-path="plotly.html"><a href="plotly.html"><i class="fa fa-check"></i><b>30</b> Plotly</a>
+<ul>
 <li class="chapter" data-level="30.1" data-path="plotly.html"><a href="plotly.html#publishing-using-plotly"><i class="fa fa-check"></i><b>30.1</b> Publishing using Plotly</a></li>
 </ul></li>
-<li class="chapter" data-level="31" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>31</b> Clustering</a><ul>
+<li class="chapter" data-level="31" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>31</b> Clustering</a>
+<ul>
 <li class="chapter" data-level="31.1" data-path="clustering.html"><a href="clustering.html#advanced-metrics"><i class="fa fa-check"></i><b>31.1</b> Advanced metrics</a></li>
 </ul></li>
-<li class="chapter" data-level="32" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html"><i class="fa fa-check"></i><b>32</b> Rtweet and Text Analysis</a><ul>
-<li class="chapter" data-level="32.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#prerequisites"><i class="fa fa-check"></i><b>32.1</b> Prerequisites</a><ul>
+<li class="chapter" data-level="32" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html"><i class="fa fa-check"></i><b>32</b> Rtweet and Text Analysis</a>
+<ul>
+<li class="chapter" data-level="32.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#prerequisites"><i class="fa fa-check"></i><b>32.1</b> Prerequisites</a>
+<ul>
 <li class="chapter" data-level="32.1.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#tools-for-text-analysis"><i class="fa fa-check"></i><b>32.1.1</b> Tools for text analysis</a></li>
 <li class="chapter" data-level="32.1.2" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#working-with-string-data"><i class="fa fa-check"></i><b>32.1.2</b> Working with string data</a></li>
 </ul></li>
 <li class="chapter" data-level="32.2" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#verifying-your-account-to-access-twitter-data"><i class="fa fa-check"></i><b>32.2</b> Verifying your account to access Twitter data</a></li>
 <li class="chapter" data-level="32.3" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#the-data-used-here"><i class="fa fa-check"></i><b>32.3</b> The data used here</a></li>
 <li class="chapter" data-level="32.4" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#data-exploration"><i class="fa fa-check"></i><b>32.4</b> Data Exploration</a></li>
-<li class="chapter" data-level="32.5" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#cleaning-data-for-analysis"><i class="fa fa-check"></i><b>32.5</b> Cleaning data for analysis</a><ul>
+<li class="chapter" data-level="32.5" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#cleaning-data-for-analysis"><i class="fa fa-check"></i><b>32.5</b> Cleaning data for analysis</a>
+<ul>
 <li class="chapter" data-level="32.5.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#fixing-the-date-and-focusing-only-on-game-tweets"><i class="fa fa-check"></i><b>32.5.1</b> Fixing the date and focusing only on game tweets</a></li>
 </ul></li>
 <li class="chapter" data-level="32.6" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#number-of-tweets-throughout-the-game"><i class="fa fa-check"></i><b>32.6</b> Number of tweets throughout the game</a></li>
-<li class="chapter" data-level="32.7" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#tidying-the-text-data-for-analysis-applying-the-sentiment-scores"><i class="fa fa-check"></i><b>32.7</b> Tidying the text data for analysis, applying the sentiment scores</a><ul>
+<li class="chapter" data-level="32.7" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#tidying-the-text-data-for-analysis-applying-the-sentiment-scores"><i class="fa fa-check"></i><b>32.7</b> Tidying the text data for analysis, applying the sentiment scores</a>
+<ul>
 <li class="chapter" data-level="32.7.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#example-2---nebraskas-loss-to-purdue-what-were-fans-sentiments-towards-this-loss"><i class="fa fa-check"></i><b>32.7.1</b> Example 2 - Nebraska’s loss to Purdue, what were fan’s sentiments towards this loss?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="33" data-path="arranging-multiple-plots-together.html"><a href="arranging-multiple-plots-together.html"><i class="fa fa-check"></i><b>33</b> Arranging multiple plots together</a></li>
-<li class="chapter" data-level="34" data-path="encircling-points-on-a-scatterplot.html"><a href="encircling-points-on-a-scatterplot.html"><i class="fa fa-check"></i><b>34</b> Encircling points on a scatterplot</a><ul>
+<li class="chapter" data-level="34" data-path="encircling-points-on-a-scatterplot.html"><a href="encircling-points-on-a-scatterplot.html"><i class="fa fa-check"></i><b>34</b> Encircling points on a scatterplot</a>
+<ul>
 <li class="chapter" data-level="34.1" data-path="encircling-points-on-a-scatterplot.html"><a href="encircling-points-on-a-scatterplot.html#a-different-more-local-example"><i class="fa fa-check"></i><b>34.1</b> A different, more local example</a></li>
 </ul></li>
 <li class="chapter" data-level="35" data-path="bump-charts.html"><a href="bump-charts.html"><i class="fa fa-check"></i><b>35</b> Bump charts</a></li>
-<li class="chapter" data-level="36" data-path="text-cleaning.html"><a href="text-cleaning.html"><i class="fa fa-check"></i><b>36</b> Text cleaning</a><ul>
+<li class="chapter" data-level="36" data-path="text-cleaning.html"><a href="text-cleaning.html"><i class="fa fa-check"></i><b>36</b> Text cleaning</a>
+<ul>
 <li class="chapter" data-level="36.1" data-path="text-cleaning.html"><a href="text-cleaning.html#stripping-out-text"><i class="fa fa-check"></i><b>36.1</b> Stripping out text</a></li>
 <li class="chapter" data-level="36.2" data-path="text-cleaning.html"><a href="text-cleaning.html#another-example-splitting-columns"><i class="fa fa-check"></i><b>36.2</b> Another example: splitting columns</a></li>
 </ul></li>
 <li class="chapter" data-level="37" data-path="assignments.html"><a href="assignments.html"><i class="fa fa-check"></i><b>37</b> Assignments</a></li>
-<li class="chapter" data-level="38" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>38</b> Appendix</a><ul>
+<li class="chapter" data-level="38" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>38</b> Appendix</a>
+<ul>
 <li class="chapter" data-level="38.1" data-path="appendix.html"><a href="appendix.html#how-to-get-help-in-this-class"><i class="fa fa-check"></i><b>38.1</b> How to get help in this class</a></li>
 </ul></li>
-<li class="chapter" data-level="39" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>39</b> Simulations</a><ul>
+<li class="chapter" data-level="39" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>39</b> Simulations</a>
+<ul>
 <li class="chapter" data-level="39.1" data-path="simulations.html"><a href="simulations.html#cold-streaks"><i class="fa fa-check"></i><b>39.1</b> Cold streaks</a></li>
 </ul></li>
-<li class="chapter" data-level="40" data-path="beeswarm-plots.html"><a href="beeswarm-plots.html"><i class="fa fa-check"></i><b>40</b> Beeswarm plots</a><ul>
+<li class="chapter" data-level="40" data-path="beeswarm-plots.html"><a href="beeswarm-plots.html"><i class="fa fa-check"></i><b>40</b> Beeswarm plots</a>
+<ul>
 <li class="chapter" data-level="40.1" data-path="beeswarm-plots.html"><a href="beeswarm-plots.html#a-few-other-options"><i class="fa fa-check"></i><b>40.1</b> A few other options</a></li>
+</ul></li>
+<li class="chapter" data-level="41" data-path="building-your-own-blog-with-blogdown.html"><a href="building-your-own-blog-with-blogdown.html"><i class="fa fa-check"></i><b>41</b> Building your own blog with blogdown</a>
+<ul>
+<li class="chapter" data-level="41.1" data-path="building-your-own-blog-with-blogdown.html"><a href="building-your-own-blog-with-blogdown.html#setup"><i class="fa fa-check"></i><b>41.1</b> Setup</a></li>
+<li class="chapter" data-level="41.2" data-path="building-your-own-blog-with-blogdown.html"><a href="building-your-own-blog-with-blogdown.html#editing-existing-markdown-content"><i class="fa fa-check"></i><b>41.2</b> Editing existing Markdown content</a></li>
+<li class="chapter" data-level="41.3" data-path="building-your-own-blog-with-blogdown.html"><a href="building-your-own-blog-with-blogdown.html#creating-a-new-post-in-r-markdown"><i class="fa fa-check"></i><b>41.3</b> Creating a new post in R Markdown</a></li>
+<li class="chapter" data-level="41.4" data-path="building-your-own-blog-with-blogdown.html"><a href="building-your-own-blog-with-blogdown.html#publishing-your-site"><i class="fa fa-check"></i><b>41.4</b> Publishing your site</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -306,7 +346,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="tables" class="section level1">
+<div id="tables" class="section level1" number="22">
 <h1><span class="header-section-number">Chapter 22</span> Tables</h1>
 <p>But not a table. A table with features.</p>
 <p>Sometimes, the best way to show your data is with a table – simple rows and columns. It allows a reader to compare whatever they want to compare a little easier than a graph where you’ve chosen what to highlight. R has a neat package called <code>kableExtra</code>.</p>
@@ -317,15 +357,16 @@ install.packages(&quot;htmltools&quot;)
 install.packages(&quot;webshot&quot;)
 webshot::install_phantomjs()</code></pre>
 <p>So what does all of these libraries do? Let’s gather a few and <a href="https://unl.box.com/s/th02njntiobd2azw7zhebgf9yb1o7x8i">get some data</a> of every game in the last 5 years.</p>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="tables.html#cb340-1"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb340-2"><a href="tables.html#cb340-2"></a><span class="kw">library</span>(kableExtra)</span></code></pre></div>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="tables.html#cb321-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb321-2"><a href="tables.html#cb321-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span></code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;kableExtra&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:dplyr&#39;:
 ## 
 ##     group_rows</code></pre>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="tables.html#cb343-1"></a>logs &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/logs1520.csv&quot;</span>)</span></code></pre></div>
-<pre><code>## Parsed with column specification:
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="tables.html#cb324-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/logs1520.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
 ## cols(
 ##   .default = col_double(),
 ##   Date = col_date(format = &quot;&quot;),
@@ -336,25 +377,25 @@ webshot::install_phantomjs()</code></pre>
 ##   Team = col_character(),
 ##   Conference = col_character(),
 ##   season = col_character()
-## )</code></pre>
-<pre><code>## See spec(...) for full column specifications.</code></pre>
+## )
+## ℹ Use `spec()` for the full column specifications.</code></pre>
 <p>Let’s ask this question: Which college football team saw the greatest increase in three point attempts last season as a percentage of shots? The simplest way to calculate that is by percent change.</p>
 <p>We’ve got a little work to do, putting together ideas we’ve used before. What we need to end up with is some data that looks like this:</p>
 <p><code>Team | 2018-2019 season threes | 2019-2020 season threes | pct change</code></p>
 <p>To get that, we’ll need to do some filtering to get the right seasons, some grouping and summarizing to get the right number, some pivoting to get it organized correctly so we can mutate the percent change.</p>
-<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="tables.html#cb346-1"></a>threechange &lt;-<span class="st"> </span>logs <span class="op">%&gt;%</span></span>
-<span id="cb346-2"><a href="tables.html#cb346-2"></a><span class="st">  </span><span class="kw">filter</span>(season <span class="op">==</span><span class="st"> &quot;2018-2019&quot;</span> <span class="op">|</span><span class="st"> </span>season <span class="op">==</span><span class="st"> &quot;2019-2020&quot;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb346-3"><a href="tables.html#cb346-3"></a><span class="st">  </span><span class="kw">group_by</span>(Team, Conference, season) <span class="op">%&gt;%</span></span>
-<span id="cb346-4"><a href="tables.html#cb346-4"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Total3PA =</span> <span class="kw">sum</span>(Team3PA)) <span class="op">%&gt;%</span></span>
-<span id="cb346-5"><a href="tables.html#cb346-5"></a><span class="st">  </span><span class="kw">pivot_wider</span>(<span class="dt">names_from=</span>season, <span class="dt">values_from =</span> Total3PA) <span class="op">%&gt;%</span></span>
-<span id="cb346-6"><a href="tables.html#cb346-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">PercentChange =</span> (<span class="st">`</span><span class="dt">2019-2020</span><span class="st">`</span><span class="op">-</span><span class="st">`</span><span class="dt">2018-2019</span><span class="st">`</span>)<span class="op">/</span><span class="st">`</span><span class="dt">2018-2019</span><span class="st">`</span>) <span class="op">%&gt;%</span></span>
-<span id="cb346-7"><a href="tables.html#cb346-7"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(PercentChange)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb346-8"><a href="tables.html#cb346-8"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></span>
-<span id="cb346-9"><a href="tables.html#cb346-9"></a><span class="st">  </span><span class="kw">top_n</span>(<span class="dv">10</span>) <span class="co"># just want a top 10 list</span></span></code></pre></div>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="tables.html#cb326-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span></span>
+<span id="cb326-2"><a href="tables.html#cb326-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(season <span class="sc">==</span> <span class="st">&quot;2018-2019&quot;</span> <span class="sc">|</span> season <span class="sc">==</span> <span class="st">&quot;2019-2020&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb326-3"><a href="tables.html#cb326-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Team, Conference, season) <span class="sc">%&gt;%</span></span>
+<span id="cb326-4"><a href="tables.html#cb326-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Total3PA =</span> <span class="fu">sum</span>(Team3PA)) <span class="sc">%&gt;%</span></span>
+<span id="cb326-5"><a href="tables.html#cb326-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from=</span>season, <span class="at">values_from =</span> Total3PA) <span class="sc">%&gt;%</span></span>
+<span id="cb326-6"><a href="tables.html#cb326-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">PercentChange =</span> (<span class="st">`</span><span class="at">2019-2020</span><span class="st">`</span><span class="sc">-</span><span class="st">`</span><span class="at">2018-2019</span><span class="st">`</span>)<span class="sc">/</span><span class="st">`</span><span class="at">2018-2019</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb326-7"><a href="tables.html#cb326-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(PercentChange)) <span class="sc">%&gt;%</span> </span>
+<span id="cb326-8"><a href="tables.html#cb326-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb326-9"><a href="tables.html#cb326-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">10</span>) <span class="co"># just want a top 10 list</span></span></code></pre></div>
 <pre><code>## `summarise()` regrouping output by &#39;Team&#39;, &#39;Conference&#39; (override with `.groups` argument)</code></pre>
 <pre><code>## Selecting by PercentChange</code></pre>
 <p>We’ve output tables to the screen a thousand times in this class with <code>head</code>, but kable makes them look decent with very little code.</p>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="tables.html#cb349-1"></a>threechange <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="tables.html#cb329-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -550,9 +591,9 @@ Southland
 </table>
 <p>So there you have it. Mississippi Valley State changed their team so much they took 51 percent more threes last season from the season before. Where did Nebraska come out? Isn’t Fred Ball supposed to be a lot of threes? We ranked 111th in college basketball in terms of change from the season before. Believe it or not, Nebraska took four fewer threes last season under Fred Ball than the last season of Tim Miles.</p>
 <p>Kable has a mountain of customization options. The good news is that it works in a very familiar pattern. We’ll start with default styling.</p>
-<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="tables.html#cb350-1"></a>threechange <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb350-2"><a href="tables.html#cb350-2"></a><span class="st">  </span><span class="kw">kable</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb350-3"><a href="tables.html#cb350-3"></a><span class="st">  </span><span class="kw">kable_styling</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="tables.html#cb330-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> </span>
+<span id="cb330-2"><a href="tables.html#cb330-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb330-3"><a href="tables.html#cb330-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>()</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -747,9 +788,9 @@ Southland
 </tbody>
 </table>
 <p>Let’s do more than the defaults, which you can see are pretty decent. Let’s stripe every other row with a little bit of grey, and let’s smush the width of the rows.</p>
-<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="tables.html#cb351-1"></a>threechange <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb351-2"><a href="tables.html#cb351-2"></a><span class="st">  </span><span class="kw">kable</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb351-3"><a href="tables.html#cb351-3"></a><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">bootstrap_options =</span> <span class="kw">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="tables.html#cb331-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> </span>
+<span id="cb331-2"><a href="tables.html#cb331-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb331-3"><a href="tables.html#cb331-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>))</span></code></pre></div>
 <table class="table table-striped table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -945,10 +986,10 @@ Southland
 </table>
 <p>Throughout the semester, we’ve been using color and other signals to highlight things. Let’s pretend we’re doing a project on Minnesota. We can use row_spec to highlight things.</p>
 <p>What row_spec is doing here is we’re specifying which row – 6 – and making all the text on that row bold. We’re making the color of the text white, because we’re going to set the background to a color – in this case, the hex color for Minnesota gold.</p>
-<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="tables.html#cb352-1"></a>threechange <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb352-2"><a href="tables.html#cb352-2"></a><span class="st">  </span><span class="kw">kable</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb352-3"><a href="tables.html#cb352-3"></a><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">bootstrap_options =</span> <span class="kw">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb352-4"><a href="tables.html#cb352-4"></a><span class="st">  </span><span class="kw">row_spec</span>(<span class="dv">6</span>, <span class="dt">bold =</span> T, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">background =</span> <span class="st">&quot;#FBB93C&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="tables.html#cb332-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> </span>
+<span id="cb332-2"><a href="tables.html#cb332-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb332-3"><a href="tables.html#cb332-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb332-4"><a href="tables.html#cb332-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">row_spec</span>(<span class="dv">6</span>, <span class="at">bold =</span> T, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">background =</span> <span class="st">&quot;#FBB93C&quot;</span>)</span></code></pre></div>
 <table class="table table-striped table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1143,11 +1184,11 @@ Southland
 </tbody>
 </table>
 <p>There’s also something called column_spec where we can change the styling on individual columns. What if we wanted to make all the team names bold?</p>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="tables.html#cb353-1"></a>threechange <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb353-2"><a href="tables.html#cb353-2"></a><span class="st">  </span><span class="kw">kable</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb353-3"><a href="tables.html#cb353-3"></a><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">bootstrap_options =</span> <span class="kw">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb353-4"><a href="tables.html#cb353-4"></a><span class="st">  </span><span class="kw">row_spec</span>(<span class="dv">6</span>, <span class="dt">bold =</span> T, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">background =</span> <span class="st">&quot;#FBB93C&quot;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb353-5"><a href="tables.html#cb353-5"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dv">1</span>, <span class="dt">bold=</span>T)</span></code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="tables.html#cb333-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> </span>
+<span id="cb333-2"><a href="tables.html#cb333-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb333-3"><a href="tables.html#cb333-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb333-4"><a href="tables.html#cb333-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">row_spec</span>(<span class="dv">6</span>, <span class="at">bold =</span> T, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">background =</span> <span class="st">&quot;#FBB93C&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb333-5"><a href="tables.html#cb333-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold=</span>T)</span></code></pre></div>
 <table class="table table-striped table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1344,19 +1385,19 @@ Southland
 <p>Honestly, this is really good right here. You’d see this published … except for one thing: the percentages.</p>
 <p>We could go back up to the top and multiply by 100, but we’d still be missing the percent sign. Well, there’s another library for making interesting tables that, in my opinion, has some flaws but does some interesting things too called <code>formattable</code>.</p>
 <p>Go to the console and install <code>formattable</code> with <code>install.packages("formattable")</code>.</p>
-<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="tables.html#cb354-1"></a><span class="kw">library</span>(formattable)</span></code></pre></div>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="tables.html#cb334-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(formattable)</span></code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;formattable&#39;</code></pre>
 <pre><code>## The following objects are masked from &#39;package:scales&#39;:
 ## 
 ##     comma, percent, scientific</code></pre>
 <p>Then, we’re going to use mutate here to use formattables <code>percent()</code> function to fix Change. Because it uses some HTML wizardry under the hood, we have to set kable to not <code>escape</code> the HTML.</p>
-<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="tables.html#cb357-1"></a>threechange <span class="op">%&gt;%</span></span>
-<span id="cb357-2"><a href="tables.html#cb357-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Change =</span> <span class="kw">percent</span>(PercentChange)) <span class="op">%&gt;%</span></span>
-<span id="cb357-3"><a href="tables.html#cb357-3"></a><span class="st">  </span><span class="kw">kable</span>(<span class="dt">escape=</span>F) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb357-4"><a href="tables.html#cb357-4"></a><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">bootstrap_options =</span> <span class="kw">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb357-5"><a href="tables.html#cb357-5"></a><span class="st">  </span><span class="kw">row_spec</span>(<span class="dv">6</span>, <span class="dt">bold =</span> T, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">background =</span> <span class="st">&quot;#FBB93C&quot;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb357-6"><a href="tables.html#cb357-6"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dv">1</span>, <span class="dt">bold=</span>T)</span></code></pre></div>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="tables.html#cb337-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span></span>
+<span id="cb337-2"><a href="tables.html#cb337-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Change =</span> <span class="fu">percent</span>(PercentChange)) <span class="sc">%&gt;%</span></span>
+<span id="cb337-3"><a href="tables.html#cb337-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">escape=</span>F) <span class="sc">%&gt;%</span> </span>
+<span id="cb337-4"><a href="tables.html#cb337-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb337-5"><a href="tables.html#cb337-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">row_spec</span>(<span class="dv">6</span>, <span class="at">bold =</span> T, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">background =</span> <span class="st">&quot;#FBB93C&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb337-6"><a href="tables.html#cb337-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold=</span>T)</span></code></pre></div>
 <table class="table table-striped table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1584,16 +1625,16 @@ Southland
 </tbody>
 </table>
 <p>Another way to highlight things: color ramps. We can change the color of the box covering the percentage using another mutate like this:</p>
-<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="tables.html#cb358-1"></a>threechange <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb358-2"><a href="tables.html#cb358-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Change =</span> <span class="kw">percent</span>(PercentChange)) <span class="op">%&gt;%</span></span>
-<span id="cb358-3"><a href="tables.html#cb358-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Change =</span> <span class="kw">cell_spec</span>(</span>
-<span id="cb358-4"><a href="tables.html#cb358-4"></a>    Change, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">bold =</span> T,</span>
-<span id="cb358-5"><a href="tables.html#cb358-5"></a>    <span class="dt">background =</span> <span class="kw">spec_color</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">end =</span> <span class="fl">0.75</span>, <span class="dt">option =</span> <span class="st">&quot;B&quot;</span>, <span class="dt">direction =</span> <span class="dv">-1</span>)</span>
-<span id="cb358-6"><a href="tables.html#cb358-6"></a>  )) <span class="op">%&gt;%</span></span>
-<span id="cb358-7"><a href="tables.html#cb358-7"></a><span class="st">  </span><span class="kw">kable</span>(<span class="dt">escape=</span>F) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb358-8"><a href="tables.html#cb358-8"></a><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">bootstrap_options =</span> <span class="kw">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb358-9"><a href="tables.html#cb358-9"></a><span class="st">  </span><span class="kw">row_spec</span>(<span class="dv">6</span>, <span class="dt">bold =</span> T, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">background =</span> <span class="st">&quot;#FBB93C&quot;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb358-10"><a href="tables.html#cb358-10"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dv">1</span>, <span class="dt">bold=</span>T)</span></code></pre></div>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="tables.html#cb338-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> </span>
+<span id="cb338-2"><a href="tables.html#cb338-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Change =</span> <span class="fu">percent</span>(PercentChange)) <span class="sc">%&gt;%</span></span>
+<span id="cb338-3"><a href="tables.html#cb338-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Change =</span> <span class="fu">cell_spec</span>(</span>
+<span id="cb338-4"><a href="tables.html#cb338-4" aria-hidden="true" tabindex="-1"></a>    Change, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">bold =</span> T,</span>
+<span id="cb338-5"><a href="tables.html#cb338-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">background =</span> <span class="fu">spec_color</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">end =</span> <span class="fl">0.75</span>, <span class="at">option =</span> <span class="st">&quot;B&quot;</span>, <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb338-6"><a href="tables.html#cb338-6" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span></span>
+<span id="cb338-7"><a href="tables.html#cb338-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">escape=</span>F) <span class="sc">%&gt;%</span> </span>
+<span id="cb338-8"><a href="tables.html#cb338-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb338-9"><a href="tables.html#cb338-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">row_spec</span>(<span class="dv">6</span>, <span class="at">bold =</span> T, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">background =</span> <span class="st">&quot;#FBB93C&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb338-10"><a href="tables.html#cb338-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold=</span>T)</span></code></pre></div>
 <table class="table table-striped table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1821,24 +1862,24 @@ Southland
 </tbody>
 </table>
 <p>If this is intersting to you, <a href="https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html#overview">there’s more you can do</a>.</p>
-<div id="exporting-tables" class="section level2">
+<div id="exporting-tables" class="section level2" number="22.1">
 <h2><span class="header-section-number">22.1</span> Exporting tables</h2>
 <p>One of the major shortcomings with <code>formattable</code> is a very limited ability to export tables. Fortunately, <code>kable</code> appears to have somewhat solved that problem.</p>
 <p>But, for this to be a finished product, we need to add a headline, credit line and source line.</p>
 <p>Good news bad news: The bad news is that <code>kable</code> doesn’t have a good way to add a headline. The good news is we can do that in illustrator pretty easily.</p>
 <p>The other good news bad news: <code>kable</code> isn’t going to export this as an actual vector file. It’s going to make it an image and embed that into a pdf. That has consequences if we want to edit it.</p>
 <p>To export it, we merely add a save_kable to the end and give it a file path.</p>
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="tables.html#cb359-1"></a>threechange <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb359-2"><a href="tables.html#cb359-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Change =</span> <span class="kw">percent</span>(PercentChange)) <span class="op">%&gt;%</span></span>
-<span id="cb359-3"><a href="tables.html#cb359-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Change =</span> <span class="kw">cell_spec</span>(</span>
-<span id="cb359-4"><a href="tables.html#cb359-4"></a>    Change, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">bold =</span> T,</span>
-<span id="cb359-5"><a href="tables.html#cb359-5"></a>    <span class="dt">background =</span> <span class="kw">spec_color</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">end =</span> <span class="fl">0.75</span>, <span class="dt">option =</span> <span class="st">&quot;B&quot;</span>, <span class="dt">direction =</span> <span class="dv">-1</span>)</span>
-<span id="cb359-6"><a href="tables.html#cb359-6"></a>  )) <span class="op">%&gt;%</span></span>
-<span id="cb359-7"><a href="tables.html#cb359-7"></a><span class="st">  </span><span class="kw">kable</span>(<span class="dt">escape=</span>F) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb359-8"><a href="tables.html#cb359-8"></a><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">bootstrap_options =</span> <span class="kw">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb359-9"><a href="tables.html#cb359-9"></a><span class="st">  </span><span class="kw">row_spec</span>(<span class="dv">6</span>, <span class="dt">bold =</span> T, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">background =</span> <span class="st">&quot;#FBB93C&quot;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb359-10"><a href="tables.html#cb359-10"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dv">1</span>, <span class="dt">bold=</span>T) <span class="op">%&gt;%</span></span>
-<span id="cb359-11"><a href="tables.html#cb359-11"></a><span class="st">  </span><span class="kw">save_kable</span>(<span class="st">&quot;minnesota.pdf&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="tables.html#cb339-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> </span>
+<span id="cb339-2"><a href="tables.html#cb339-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Change =</span> <span class="fu">percent</span>(PercentChange)) <span class="sc">%&gt;%</span></span>
+<span id="cb339-3"><a href="tables.html#cb339-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Change =</span> <span class="fu">cell_spec</span>(</span>
+<span id="cb339-4"><a href="tables.html#cb339-4" aria-hidden="true" tabindex="-1"></a>    Change, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">bold =</span> T,</span>
+<span id="cb339-5"><a href="tables.html#cb339-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">background =</span> <span class="fu">spec_color</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">end =</span> <span class="fl">0.75</span>, <span class="at">option =</span> <span class="st">&quot;B&quot;</span>, <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb339-6"><a href="tables.html#cb339-6" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span></span>
+<span id="cb339-7"><a href="tables.html#cb339-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">escape=</span>F) <span class="sc">%&gt;%</span> </span>
+<span id="cb339-8"><a href="tables.html#cb339-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb339-9"><a href="tables.html#cb339-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">row_spec</span>(<span class="dv">6</span>, <span class="at">bold =</span> T, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">background =</span> <span class="st">&quot;#FBB93C&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb339-10"><a href="tables.html#cb339-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold=</span>T) <span class="sc">%&gt;%</span></span>
+<span id="cb339-11"><a href="tables.html#cb339-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">save_kable</span>(<span class="st">&quot;minnesota.pdf&quot;</span>)</span></code></pre></div>
 <p>To fix this, we need to pull it into Illustrator. In there, we’re going to expand the artboard, add a headline and chatter, then add source and credit lines at the bottom, and finish with touching up the artboards.</p>
 <p>Here’s a video walkthrough:</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/AeZ5uiCpJro" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>

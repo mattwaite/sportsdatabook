@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 31 Clustering | Sports Data Analysis and Visualization</title>
   <meta name="description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 31 Clustering | Sports Data Analysis and Visualization" />
   <meta property="og:type" content="book" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="plotly.html"/>
 <link rel="next" href="rtweet-and-text-analysis.html"/>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,10 +51,11 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
 <script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
@@ -72,18 +74,17 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -103,7 +104,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {  background-color: #f8f8f8; }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -151,140 +152,179 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Sports Data Analysis and Visualization</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Throwing cold water on hot takes</a><ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Throwing cold water on hot takes</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#requirements-and-conventions"><i class="fa fa-check"></i><b>1.1</b> Requirements and Conventions</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i><b>1.2</b> About this book</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="the-very-basics.html"><a href="the-very-basics.html"><i class="fa fa-check"></i><b>2</b> The very basics</a><ul>
+<li class="chapter" data-level="2" data-path="the-very-basics.html"><a href="the-very-basics.html"><i class="fa fa-check"></i><b>2</b> The very basics</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="the-very-basics.html"><a href="the-very-basics.html#adding-libraries-part-1"><i class="fa fa-check"></i><b>2.1</b> Adding libraries, part 1</a></li>
 <li class="chapter" data-level="2.2" data-path="the-very-basics.html"><a href="the-very-basics.html#adding-libraries-part-2"><i class="fa fa-check"></i><b>2.2</b> Adding libraries, part 2</a></li>
 <li class="chapter" data-level="2.3" data-path="the-very-basics.html"><a href="the-very-basics.html#notebooks"><i class="fa fa-check"></i><b>2.3</b> Notebooks</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html"><i class="fa fa-check"></i><b>3</b> Data, structures and types</a><ul>
+<li class="chapter" data-level="3" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html"><i class="fa fa-check"></i><b>3</b> Data, structures and types</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#rows-and-columns"><i class="fa fa-check"></i><b>3.1</b> Rows and columns</a></li>
 <li class="chapter" data-level="3.2" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#types"><i class="fa fa-check"></i><b>3.2</b> Types</a></li>
 <li class="chapter" data-level="3.3" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#a-simple-way-to-get-data"><i class="fa fa-check"></i><b>3.3</b> A simple way to get data</a></li>
 <li class="chapter" data-level="3.4" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#cleaning-the-data"><i class="fa fa-check"></i><b>3.4</b> Cleaning the data</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="aggregates.html"><a href="aggregates.html"><i class="fa fa-check"></i><b>4</b> Aggregates</a><ul>
+<li class="chapter" data-level="4" data-path="aggregates.html"><a href="aggregates.html"><i class="fa fa-check"></i><b>4</b> Aggregates</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="aggregates.html"><a href="aggregates.html#basic-data-analysis-group-by-and-count"><i class="fa fa-check"></i><b>4.1</b> Basic data analysis: Group By and Count</a></li>
 <li class="chapter" data-level="4.2" data-path="aggregates.html"><a href="aggregates.html#other-aggregates-mean-and-median"><i class="fa fa-check"></i><b>4.2</b> Other aggregates: Mean and median</a></li>
 <li class="chapter" data-level="4.3" data-path="aggregates.html"><a href="aggregates.html#even-more-aggregates"><i class="fa fa-check"></i><b>4.3</b> Even more aggregates</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="mutating-data.html"><a href="mutating-data.html"><i class="fa fa-check"></i><b>5</b> Mutating data</a><ul>
+<li class="chapter" data-level="5" data-path="mutating-data.html"><a href="mutating-data.html"><i class="fa fa-check"></i><b>5</b> Mutating data</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="mutating-data.html"><a href="mutating-data.html#a-more-complex-example"><i class="fa fa-check"></i><b>5.1</b> A more complex example</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="filters-and-selections.html"><a href="filters-and-selections.html"><i class="fa fa-check"></i><b>6</b> Filters and selections</a><ul>
+<li class="chapter" data-level="6" data-path="filters-and-selections.html"><a href="filters-and-selections.html"><i class="fa fa-check"></i><b>6</b> Filters and selections</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="filters-and-selections.html"><a href="filters-and-selections.html#selecting-data-to-make-it-easier-to-read"><i class="fa fa-check"></i><b>6.1</b> Selecting data to make it easier to read</a></li>
 <li class="chapter" data-level="6.2" data-path="filters-and-selections.html"><a href="filters-and-selections.html#using-conditional-filters-to-set-limits"><i class="fa fa-check"></i><b>6.2</b> Using conditional filters to set limits</a></li>
 <li class="chapter" data-level="6.3" data-path="filters-and-selections.html"><a href="filters-and-selections.html#top-list"><i class="fa fa-check"></i><b>6.3</b> Top list</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="transforming-data.html"><a href="transforming-data.html"><i class="fa fa-check"></i><b>7</b> Transforming data</a><ul>
+<li class="chapter" data-level="7" data-path="transforming-data.html"><a href="transforming-data.html"><i class="fa fa-check"></i><b>7</b> Transforming data</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="transforming-data.html"><a href="transforming-data.html#making-long-data-wide"><i class="fa fa-check"></i><b>7.1</b> Making long data wide</a></li>
 <li class="chapter" data-level="7.2" data-path="transforming-data.html"><a href="transforming-data.html#why-this-matters"><i class="fa fa-check"></i><b>7.2</b> Why this matters</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="significance-tests.html"><a href="significance-tests.html"><i class="fa fa-check"></i><b>8</b> Significance tests</a><ul>
+<li class="chapter" data-level="8" data-path="significance-tests.html"><a href="significance-tests.html"><i class="fa fa-check"></i><b>8</b> Significance tests</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="significance-tests.html"><a href="significance-tests.html#accepting-the-null-hypothesis"><i class="fa fa-check"></i><b>8.1</b> Accepting the null hypothesis</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html"><i class="fa fa-check"></i><b>9</b> Correlations and regression</a><ul>
+<li class="chapter" data-level="9" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html"><i class="fa fa-check"></i><b>9</b> Correlations and regression</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html#a-more-predictive-example"><i class="fa fa-check"></i><b>9.1</b> A more predictive example</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="multiple-regression.html"><a href="multiple-regression.html"><i class="fa fa-check"></i><b>10</b> Multiple regression</a></li>
-<li class="chapter" data-level="11" data-path="residuals.html"><a href="residuals.html"><i class="fa fa-check"></i><b>11</b> Residuals</a><ul>
+<li class="chapter" data-level="11" data-path="residuals.html"><a href="residuals.html"><i class="fa fa-check"></i><b>11</b> Residuals</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="residuals.html"><a href="residuals.html#penalties"><i class="fa fa-check"></i><b>11.1</b> Penalties</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z-scores</a><ul>
+<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z-scores</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="z-scores.html"><a href="z-scores.html#calculating-a-z-score-in-r"><i class="fa fa-check"></i><b>12.1</b> Calculating a Z score in R</a></li>
 <li class="chapter" data-level="12.2" data-path="z-scores.html"><a href="z-scores.html#writing-about-z-scores"><i class="fa fa-check"></i><b>12.2</b> Writing about z-scores</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html"><i class="fa fa-check"></i><b>13</b> Intro to ggplot</a><ul>
+<li class="chapter" data-level="13" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html"><i class="fa fa-check"></i><b>13</b> Intro to ggplot</a>
+<ul>
 <li class="chapter" data-level="13.1" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#the-bar-chart"><i class="fa fa-check"></i><b>13.1</b> The bar chart</a></li>
 <li class="chapter" data-level="13.2" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#scales"><i class="fa fa-check"></i><b>13.2</b> Scales</a></li>
 <li class="chapter" data-level="13.3" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#styling"><i class="fa fa-check"></i><b>13.3</b> Styling</a></li>
 <li class="chapter" data-level="13.4" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#one-last-trick-coord-flip"><i class="fa fa-check"></i><b>13.4</b> One last trick: coord flip</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="stacked-bar-charts.html"><a href="stacked-bar-charts.html"><i class="fa fa-check"></i><b>14</b> Stacked bar charts</a></li>
-<li class="chapter" data-level="15" data-path="waffle-charts.html"><a href="waffle-charts.html"><i class="fa fa-check"></i><b>15</b> Waffle charts</a><ul>
+<li class="chapter" data-level="15" data-path="waffle-charts.html"><a href="waffle-charts.html"><i class="fa fa-check"></i><b>15</b> Waffle charts</a>
+<ul>
 <li class="chapter" data-level="15.1" data-path="waffle-charts.html"><a href="waffle-charts.html#waffles-two-ways-part-1"><i class="fa fa-check"></i><b>15.1</b> Waffles two ways: Part 1</a></li>
 <li class="chapter" data-level="15.2" data-path="waffle-charts.html"><a href="waffle-charts.html#waffles-two-ways-part-2"><i class="fa fa-check"></i><b>15.2</b> Waffles two ways: Part 2</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="line-charts.html"><a href="line-charts.html"><i class="fa fa-check"></i><b>16</b> Line charts</a><ul>
+<li class="chapter" data-level="16" data-path="line-charts.html"><a href="line-charts.html"><i class="fa fa-check"></i><b>16</b> Line charts</a>
+<ul>
 <li class="chapter" data-level="16.1" data-path="line-charts.html"><a href="line-charts.html#this-is-too-simple."><i class="fa fa-check"></i><b>16.1</b> This is too simple.</a></li>
 <li class="chapter" data-level="16.2" data-path="line-charts.html"><a href="line-charts.html#but-what-if-i-wanted-to-add-a-lot-of-lines."><i class="fa fa-check"></i><b>16.2</b> But what if I wanted to add a lot of lines.</a></li>
 </ul></li>
 <li class="chapter" data-level="17" data-path="step-charts.html"><a href="step-charts.html"><i class="fa fa-check"></i><b>17</b> Step charts</a></li>
 <li class="chapter" data-level="18" data-path="ridge-charts.html"><a href="ridge-charts.html"><i class="fa fa-check"></i><b>18</b> Ridge charts</a></li>
-<li class="chapter" data-level="19" data-path="dumbbell-and-lollipop-charts.html"><a href="dumbbell-and-lollipop-charts.html"><i class="fa fa-check"></i><b>19</b> Dumbbell and lollipop charts</a><ul>
+<li class="chapter" data-level="19" data-path="dumbbell-and-lollipop-charts.html"><a href="dumbbell-and-lollipop-charts.html"><i class="fa fa-check"></i><b>19</b> Dumbbell and lollipop charts</a>
+<ul>
 <li class="chapter" data-level="19.1" data-path="dumbbell-and-lollipop-charts.html"><a href="dumbbell-and-lollipop-charts.html#dumbbell-plots"><i class="fa fa-check"></i><b>19.1</b> Dumbbell plots</a></li>
 <li class="chapter" data-level="19.2" data-path="dumbbell-and-lollipop-charts.html"><a href="dumbbell-and-lollipop-charts.html#lollipop-charts"><i class="fa fa-check"></i><b>19.2</b> Lollipop charts</a></li>
 </ul></li>
 <li class="chapter" data-level="20" data-path="scatterplots.html"><a href="scatterplots.html"><i class="fa fa-check"></i><b>20</b> Scatterplots</a></li>
-<li class="chapter" data-level="21" data-path="facet-wraps.html"><a href="facet-wraps.html"><i class="fa fa-check"></i><b>21</b> Facet wraps</a><ul>
+<li class="chapter" data-level="21" data-path="facet-wraps.html"><a href="facet-wraps.html"><i class="fa fa-check"></i><b>21</b> Facet wraps</a>
+<ul>
 <li class="chapter" data-level="21.1" data-path="facet-wraps.html"><a href="facet-wraps.html#facet-grid-vs-facet-wraps"><i class="fa fa-check"></i><b>21.1</b> Facet grid vs facet wraps</a></li>
 <li class="chapter" data-level="21.2" data-path="facet-wraps.html"><a href="facet-wraps.html#other-types"><i class="fa fa-check"></i><b>21.2</b> Other types</a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>22</b> Tables</a><ul>
+<li class="chapter" data-level="22" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>22</b> Tables</a>
+<ul>
 <li class="chapter" data-level="22.1" data-path="tables.html"><a href="tables.html#exporting-tables"><i class="fa fa-check"></i><b>22.1</b> Exporting tables</a></li>
 </ul></li>
 <li class="chapter" data-level="23" data-path="bubble-charts.html"><a href="bubble-charts.html"><i class="fa fa-check"></i><b>23</b> Bubble charts</a></li>
-<li class="chapter" data-level="24" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html"><i class="fa fa-check"></i><b>24</b> Circular bar plots</a><ul>
+<li class="chapter" data-level="24" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html"><i class="fa fa-check"></i><b>24</b> Circular bar plots</a>
+<ul>
 <li class="chapter" data-level="24.1" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html#does-november-basketball-matter"><i class="fa fa-check"></i><b>24.1</b> Does November basketball matter?</a></li>
 <li class="chapter" data-level="24.2" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html#does-it-show-you-where-you-are"><i class="fa fa-check"></i><b>24.2</b> Does it show you where you are?</a></li>
 </ul></li>
-<li class="chapter" data-level="25" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html"><i class="fa fa-check"></i><b>25</b> Intro to rvest</a><ul>
+<li class="chapter" data-level="25" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html"><i class="fa fa-check"></i><b>25</b> Intro to rvest</a>
+<ul>
 <li class="chapter" data-level="25.1" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html#a-slightly-more-complicated-example"><i class="fa fa-check"></i><b>25.1</b> A slightly more complicated example</a></li>
 <li class="chapter" data-level="25.2" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html#an-even-more-complicated-example"><i class="fa fa-check"></i><b>25.2</b> An even more complicated example</a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="advanced-rvest.html"><a href="advanced-rvest.html"><i class="fa fa-check"></i><b>26</b> Advanced rvest</a><ul>
+<li class="chapter" data-level="26" data-path="advanced-rvest.html"><a href="advanced-rvest.html"><i class="fa fa-check"></i><b>26</b> Advanced rvest</a>
+<ul>
 <li class="chapter" data-level="26.1" data-path="advanced-rvest.html"><a href="advanced-rvest.html#one-last-bit"><i class="fa fa-check"></i><b>26.1</b> One last bit</a></li>
 </ul></li>
 <li class="chapter" data-level="27" data-path="annotations.html"><a href="annotations.html"><i class="fa fa-check"></i><b>27</b> Annotations</a></li>
-<li class="chapter" data-level="28" data-path="finishing-touches.html"><a href="finishing-touches.html"><i class="fa fa-check"></i><b>28</b> Finishing touches</a><ul>
+<li class="chapter" data-level="28" data-path="finishing-touches.html"><a href="finishing-touches.html"><i class="fa fa-check"></i><b>28</b> Finishing touches</a>
+<ul>
 <li class="chapter" data-level="28.1" data-path="finishing-touches.html"><a href="finishing-touches.html#graphics-vs-visual-stories"><i class="fa fa-check"></i><b>28.1</b> Graphics vs visual stories</a></li>
 <li class="chapter" data-level="28.2" data-path="finishing-touches.html"><a href="finishing-touches.html#getting-ggplot-closer-to-output"><i class="fa fa-check"></i><b>28.2</b> Getting ggplot closer to output</a></li>
 <li class="chapter" data-level="28.3" data-path="finishing-touches.html"><a href="finishing-touches.html#waffle-charts-require-special-attention"><i class="fa fa-check"></i><b>28.3</b> Waffle charts require special attention</a></li>
 </ul></li>
 <li class="chapter" data-level="29" data-path="headlines.html"><a href="headlines.html"><i class="fa fa-check"></i><b>29</b> Headlines</a></li>
-<li class="chapter" data-level="30" data-path="plotly.html"><a href="plotly.html"><i class="fa fa-check"></i><b>30</b> Plotly</a><ul>
+<li class="chapter" data-level="30" data-path="plotly.html"><a href="plotly.html"><i class="fa fa-check"></i><b>30</b> Plotly</a>
+<ul>
 <li class="chapter" data-level="30.1" data-path="plotly.html"><a href="plotly.html#publishing-using-plotly"><i class="fa fa-check"></i><b>30.1</b> Publishing using Plotly</a></li>
 </ul></li>
-<li class="chapter" data-level="31" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>31</b> Clustering</a><ul>
+<li class="chapter" data-level="31" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>31</b> Clustering</a>
+<ul>
 <li class="chapter" data-level="31.1" data-path="clustering.html"><a href="clustering.html#advanced-metrics"><i class="fa fa-check"></i><b>31.1</b> Advanced metrics</a></li>
 </ul></li>
-<li class="chapter" data-level="32" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html"><i class="fa fa-check"></i><b>32</b> Rtweet and Text Analysis</a><ul>
-<li class="chapter" data-level="32.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#prerequisites"><i class="fa fa-check"></i><b>32.1</b> Prerequisites</a><ul>
+<li class="chapter" data-level="32" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html"><i class="fa fa-check"></i><b>32</b> Rtweet and Text Analysis</a>
+<ul>
+<li class="chapter" data-level="32.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#prerequisites"><i class="fa fa-check"></i><b>32.1</b> Prerequisites</a>
+<ul>
 <li class="chapter" data-level="32.1.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#tools-for-text-analysis"><i class="fa fa-check"></i><b>32.1.1</b> Tools for text analysis</a></li>
 <li class="chapter" data-level="32.1.2" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#working-with-string-data"><i class="fa fa-check"></i><b>32.1.2</b> Working with string data</a></li>
 </ul></li>
 <li class="chapter" data-level="32.2" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#verifying-your-account-to-access-twitter-data"><i class="fa fa-check"></i><b>32.2</b> Verifying your account to access Twitter data</a></li>
 <li class="chapter" data-level="32.3" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#the-data-used-here"><i class="fa fa-check"></i><b>32.3</b> The data used here</a></li>
 <li class="chapter" data-level="32.4" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#data-exploration"><i class="fa fa-check"></i><b>32.4</b> Data Exploration</a></li>
-<li class="chapter" data-level="32.5" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#cleaning-data-for-analysis"><i class="fa fa-check"></i><b>32.5</b> Cleaning data for analysis</a><ul>
+<li class="chapter" data-level="32.5" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#cleaning-data-for-analysis"><i class="fa fa-check"></i><b>32.5</b> Cleaning data for analysis</a>
+<ul>
 <li class="chapter" data-level="32.5.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#fixing-the-date-and-focusing-only-on-game-tweets"><i class="fa fa-check"></i><b>32.5.1</b> Fixing the date and focusing only on game tweets</a></li>
 </ul></li>
 <li class="chapter" data-level="32.6" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#number-of-tweets-throughout-the-game"><i class="fa fa-check"></i><b>32.6</b> Number of tweets throughout the game</a></li>
-<li class="chapter" data-level="32.7" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#tidying-the-text-data-for-analysis-applying-the-sentiment-scores"><i class="fa fa-check"></i><b>32.7</b> Tidying the text data for analysis, applying the sentiment scores</a><ul>
+<li class="chapter" data-level="32.7" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#tidying-the-text-data-for-analysis-applying-the-sentiment-scores"><i class="fa fa-check"></i><b>32.7</b> Tidying the text data for analysis, applying the sentiment scores</a>
+<ul>
 <li class="chapter" data-level="32.7.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#example-2---nebraskas-loss-to-purdue-what-were-fans-sentiments-towards-this-loss"><i class="fa fa-check"></i><b>32.7.1</b> Example 2 - Nebraska’s loss to Purdue, what were fan’s sentiments towards this loss?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="33" data-path="arranging-multiple-plots-together.html"><a href="arranging-multiple-plots-together.html"><i class="fa fa-check"></i><b>33</b> Arranging multiple plots together</a></li>
-<li class="chapter" data-level="34" data-path="encircling-points-on-a-scatterplot.html"><a href="encircling-points-on-a-scatterplot.html"><i class="fa fa-check"></i><b>34</b> Encircling points on a scatterplot</a><ul>
+<li class="chapter" data-level="34" data-path="encircling-points-on-a-scatterplot.html"><a href="encircling-points-on-a-scatterplot.html"><i class="fa fa-check"></i><b>34</b> Encircling points on a scatterplot</a>
+<ul>
 <li class="chapter" data-level="34.1" data-path="encircling-points-on-a-scatterplot.html"><a href="encircling-points-on-a-scatterplot.html#a-different-more-local-example"><i class="fa fa-check"></i><b>34.1</b> A different, more local example</a></li>
 </ul></li>
 <li class="chapter" data-level="35" data-path="bump-charts.html"><a href="bump-charts.html"><i class="fa fa-check"></i><b>35</b> Bump charts</a></li>
-<li class="chapter" data-level="36" data-path="text-cleaning.html"><a href="text-cleaning.html"><i class="fa fa-check"></i><b>36</b> Text cleaning</a><ul>
+<li class="chapter" data-level="36" data-path="text-cleaning.html"><a href="text-cleaning.html"><i class="fa fa-check"></i><b>36</b> Text cleaning</a>
+<ul>
 <li class="chapter" data-level="36.1" data-path="text-cleaning.html"><a href="text-cleaning.html#stripping-out-text"><i class="fa fa-check"></i><b>36.1</b> Stripping out text</a></li>
 <li class="chapter" data-level="36.2" data-path="text-cleaning.html"><a href="text-cleaning.html#another-example-splitting-columns"><i class="fa fa-check"></i><b>36.2</b> Another example: splitting columns</a></li>
 </ul></li>
 <li class="chapter" data-level="37" data-path="assignments.html"><a href="assignments.html"><i class="fa fa-check"></i><b>37</b> Assignments</a></li>
-<li class="chapter" data-level="38" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>38</b> Appendix</a><ul>
+<li class="chapter" data-level="38" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>38</b> Appendix</a>
+<ul>
 <li class="chapter" data-level="38.1" data-path="appendix.html"><a href="appendix.html#how-to-get-help-in-this-class"><i class="fa fa-check"></i><b>38.1</b> How to get help in this class</a></li>
 </ul></li>
-<li class="chapter" data-level="39" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>39</b> Simulations</a><ul>
+<li class="chapter" data-level="39" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>39</b> Simulations</a>
+<ul>
 <li class="chapter" data-level="39.1" data-path="simulations.html"><a href="simulations.html#cold-streaks"><i class="fa fa-check"></i><b>39.1</b> Cold streaks</a></li>
 </ul></li>
-<li class="chapter" data-level="40" data-path="beeswarm-plots.html"><a href="beeswarm-plots.html"><i class="fa fa-check"></i><b>40</b> Beeswarm plots</a><ul>
+<li class="chapter" data-level="40" data-path="beeswarm-plots.html"><a href="beeswarm-plots.html"><i class="fa fa-check"></i><b>40</b> Beeswarm plots</a>
+<ul>
 <li class="chapter" data-level="40.1" data-path="beeswarm-plots.html"><a href="beeswarm-plots.html#a-few-other-options"><i class="fa fa-check"></i><b>40.1</b> A few other options</a></li>
+</ul></li>
+<li class="chapter" data-level="41" data-path="building-your-own-blog-with-blogdown.html"><a href="building-your-own-blog-with-blogdown.html"><i class="fa fa-check"></i><b>41</b> Building your own blog with blogdown</a>
+<ul>
+<li class="chapter" data-level="41.1" data-path="building-your-own-blog-with-blogdown.html"><a href="building-your-own-blog-with-blogdown.html#setup"><i class="fa fa-check"></i><b>41.1</b> Setup</a></li>
+<li class="chapter" data-level="41.2" data-path="building-your-own-blog-with-blogdown.html"><a href="building-your-own-blog-with-blogdown.html#editing-existing-markdown-content"><i class="fa fa-check"></i><b>41.2</b> Editing existing Markdown content</a></li>
+<li class="chapter" data-level="41.3" data-path="building-your-own-blog-with-blogdown.html"><a href="building-your-own-blog-with-blogdown.html#creating-a-new-post-in-r-markdown"><i class="fa fa-check"></i><b>41.3</b> Creating a new post in R Markdown</a></li>
+<li class="chapter" data-level="41.4" data-path="building-your-own-blog-with-blogdown.html"><a href="building-your-own-blog-with-blogdown.html#publishing-your-site"><i class="fa fa-check"></i><b>41.4</b> Publishing your site</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -306,7 +346,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="clustering" class="section level1">
+<div id="clustering" class="section level1" number="31">
 <h1><span class="header-section-number">Chapter 31</span> Clustering</h1>
 <p>One common effort in sports is to classify teams and players – who are this players peers? What teams are like this one? Who should we compare a player to? Truth is, most sports commentators use nothing more sophisticated that looking at a couple of stats or use the “eye test” to say a player is like this or that.</p>
 <p>There’s better ways.</p>
@@ -315,13 +355,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>For this exercise, I want to look at Cam Mack, Nebraska’s point guard and probably the most interesting player on Fred Hoiberg’s first team. This is Mack’s first year in major college basketball – he played a year at a community college – so we don’t have much to go on. But with a season in the books, who does Cam Mack compare to?</p>
 <p>To answer this, we’ll use k-means clustering.</p>
 <p>First thing we do is load some libraries and set a seed, so if we run this repeatedly, our random numbers are generated from the same base. If you don’t have the cluster library, just add it on the console with <code>install.packages("cluster")</code></p>
-<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb523-1"><a href="clustering.html#cb523-1"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb523-2"><a href="clustering.html#cb523-2"></a><span class="kw">library</span>(cluster)</span>
-<span id="cb523-3"><a href="clustering.html#cb523-3"></a></span>
-<span id="cb523-4"><a href="clustering.html#cb523-4"></a><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="clustering.html#cb499-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb499-2"><a href="clustering.html#cb499-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cluster)</span>
+<span id="cb499-3"><a href="clustering.html#cb499-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb499-4"><a href="clustering.html#cb499-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span></code></pre></div>
 <p>I’ve gone and scraped <a href="https://unl.box.com/s/0g56ve61y6hakyxzr1u4t534721bqvg8">stats for every player in this current season</a> so let’s load that up.</p>
-<div class="sourceCode" id="cb524"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb524-1"><a href="clustering.html#cb524-1"></a>players &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/players20.csv&quot;</span>)</span></code></pre></div>
-<pre><code>## Parsed with column specification:
+<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="clustering.html#cb500-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/players20.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
 ## cols(
 ##   .default = col_double(),
 ##   Team = col_character(),
@@ -332,31 +373,31 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ##   Hometown = col_character(),
 ##   `High School` = col_character(),
 ##   Summary = col_character()
-## )</code></pre>
-<pre><code>## See spec(...) for full column specifications.</code></pre>
+## )
+## ℹ Use `spec()` for the full column specifications.</code></pre>
 <p>To cluster this data properly, we have some work to do.</p>
 <p>First, it won’t do to have players who haven’t played, so we can use filter to find anyone with greater than 0 minutes played. Next, Cam Mack is a guard, so let’s just look at guards. Third, we want to limit the data to things that make sense to look at for Cam Mack – things like shooting, three point shooting, assists, turnovers and points.</p>
-<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="clustering.html#cb527-1"></a>playersselected &lt;-<span class="st"> </span>players <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb527-2"><a href="clustering.html#cb527-2"></a><span class="st">  </span><span class="kw">filter</span>(MP<span class="op">&gt;</span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Pos <span class="op">==</span><span class="st"> &quot;G&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb527-3"><a href="clustering.html#cb527-3"></a><span class="st">  </span><span class="kw">select</span>(Player, Team, Pos, MP, <span class="st">`</span><span class="dt">FG%</span><span class="st">`</span>, <span class="st">`</span><span class="dt">3P%</span><span class="st">`</span>, AST, TOV, PTS) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb527-4"><a href="clustering.html#cb527-4"></a><span class="st">  </span><span class="kw">na.omit</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="clustering.html#cb502-1" aria-hidden="true" tabindex="-1"></a>playersselected <span class="ot">&lt;-</span> players <span class="sc">%&gt;%</span> </span>
+<span id="cb502-2"><a href="clustering.html#cb502-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(MP<span class="sc">&gt;</span><span class="dv">0</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Pos <span class="sc">==</span> <span class="st">&quot;G&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb502-3"><a href="clustering.html#cb502-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Player, Team, Pos, MP, <span class="st">`</span><span class="at">FG%</span><span class="st">`</span>, <span class="st">`</span><span class="at">3P%</span><span class="st">`</span>, AST, TOV, PTS) <span class="sc">%&gt;%</span> </span>
+<span id="cb502-4"><a href="clustering.html#cb502-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() </span></code></pre></div>
 <p>Now, k-means clustering doesn’t work as well with data that can be on different scales. So comparing a percentage to a count metric – shooting percentage to points – would create chaos because shooting percentages are a fraction of 1 and points, depending on when they are in the season, could be quite large. So we have to scale each metric – put them on a similar basis using the distance from the max value as our guide. Also, k-means clustering won’t work with text data, so we need to create a dataframe that’s just the numbers, but scaled. We can do that with another select, and using mutate_all with the scale function. The <code>na.omit()</code> means get rid of any blanks, because they too will cause errors.</p>
-<div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb528-1"><a href="clustering.html#cb528-1"></a>playersscaled &lt;-<span class="st"> </span>playersselected <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb528-2"><a href="clustering.html#cb528-2"></a><span class="st">  </span><span class="kw">select</span>(MP, <span class="st">`</span><span class="dt">FG%</span><span class="st">`</span>, <span class="st">`</span><span class="dt">3P%</span><span class="st">`</span>, AST, TOV, PTS) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb528-3"><a href="clustering.html#cb528-3"></a><span class="st">  </span><span class="kw">mutate_all</span>(scale) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb528-4"><a href="clustering.html#cb528-4"></a><span class="st">  </span><span class="kw">na.omit</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb503-1"><a href="clustering.html#cb503-1" aria-hidden="true" tabindex="-1"></a>playersscaled <span class="ot">&lt;-</span> playersselected <span class="sc">%&gt;%</span> </span>
+<span id="cb503-2"><a href="clustering.html#cb503-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(MP, <span class="st">`</span><span class="at">FG%</span><span class="st">`</span>, <span class="st">`</span><span class="at">3P%</span><span class="st">`</span>, AST, TOV, PTS) <span class="sc">%&gt;%</span> </span>
+<span id="cb503-3"><a href="clustering.html#cb503-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_all</span>(scale) <span class="sc">%&gt;%</span> </span>
+<span id="cb503-4"><a href="clustering.html#cb503-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>()</span></code></pre></div>
 <p>With k-means clustering, we decide how many clusters we want. Most often, researchers will try a handful of different cluster numbers and see what works. But there are methods for finding the optimal number. One method is called the Elbow method. One implementation of this, <a href="https://uc-r.github.io/kmeans_clustering">borrowed from the University of Cincinnati’s Business Analytics program</a>, does this quite nicely with a graph that will help you decide for yourself.</p>
 <p>All you need to do in this code is change out the data frame – <code>playersscaled</code> in this case – and run it.</p>
-<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="clustering.html#cb529-1"></a><span class="co"># function to compute total within-cluster sum of square </span></span>
-<span id="cb529-2"><a href="clustering.html#cb529-2"></a>wss &lt;-<span class="st"> </span><span class="cf">function</span>(k) {</span>
-<span id="cb529-3"><a href="clustering.html#cb529-3"></a>  <span class="kw">kmeans</span>(playersscaled, k, <span class="dt">nstart =</span> <span class="dv">10</span> )<span class="op">$</span>tot.withinss</span>
-<span id="cb529-4"><a href="clustering.html#cb529-4"></a>}</span>
-<span id="cb529-5"><a href="clustering.html#cb529-5"></a></span>
-<span id="cb529-6"><a href="clustering.html#cb529-6"></a><span class="co"># Compute and plot wss for k = 1 to k = 15</span></span>
-<span id="cb529-7"><a href="clustering.html#cb529-7"></a>k.values &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">15</span></span>
-<span id="cb529-8"><a href="clustering.html#cb529-8"></a></span>
-<span id="cb529-9"><a href="clustering.html#cb529-9"></a><span class="co"># extract wss for 2-15 clusters</span></span>
-<span id="cb529-10"><a href="clustering.html#cb529-10"></a>wss_values &lt;-<span class="st"> </span><span class="kw">map_dbl</span>(k.values, wss)</span></code></pre></div>
+<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="clustering.html#cb504-1" aria-hidden="true" tabindex="-1"></a><span class="co"># function to compute total within-cluster sum of square </span></span>
+<span id="cb504-2"><a href="clustering.html#cb504-2" aria-hidden="true" tabindex="-1"></a>wss <span class="ot">&lt;-</span> <span class="cf">function</span>(k) {</span>
+<span id="cb504-3"><a href="clustering.html#cb504-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kmeans</span>(playersscaled, k, <span class="at">nstart =</span> <span class="dv">10</span> )<span class="sc">$</span>tot.withinss</span>
+<span id="cb504-4"><a href="clustering.html#cb504-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb504-5"><a href="clustering.html#cb504-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb504-6"><a href="clustering.html#cb504-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute and plot wss for k = 1 to k = 15</span></span>
+<span id="cb504-7"><a href="clustering.html#cb504-7" aria-hidden="true" tabindex="-1"></a>k.values <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">15</span></span>
+<span id="cb504-8"><a href="clustering.html#cb504-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb504-9"><a href="clustering.html#cb504-9" aria-hidden="true" tabindex="-1"></a><span class="co"># extract wss for 2-15 clusters</span></span>
+<span id="cb504-10"><a href="clustering.html#cb504-10" aria-hidden="true" tabindex="-1"></a>wss_values <span class="ot">&lt;-</span> <span class="fu">map_dbl</span>(k.values, wss)</span></code></pre></div>
 <pre><code>## Warning: did not converge in 10 iterations
 
 ## Warning: did not converge in 10 iterations
@@ -370,15 +411,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## Warning: did not converge in 10 iterations
 
 ## Warning: did not converge in 10 iterations</code></pre>
-<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb531-1"><a href="clustering.html#cb531-1"></a><span class="kw">plot</span>(k.values, wss_values,</span>
-<span id="cb531-2"><a href="clustering.html#cb531-2"></a>       <span class="dt">type=</span><span class="st">&quot;b&quot;</span>, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">frame =</span> <span class="ot">FALSE</span>, </span>
-<span id="cb531-3"><a href="clustering.html#cb531-3"></a>       <span class="dt">xlab=</span><span class="st">&quot;Number of clusters K&quot;</span>,</span>
-<span id="cb531-4"><a href="clustering.html#cb531-4"></a>       <span class="dt">ylab=</span><span class="st">&quot;Total within-clusters sum of squares&quot;</span>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-320-1.png" width="672" /></p>
+<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="clustering.html#cb506-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(k.values, wss_values,</span>
+<span id="cb506-2"><a href="clustering.html#cb506-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">type=</span><span class="st">&quot;b&quot;</span>, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">frame =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb506-3"><a href="clustering.html#cb506-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab=</span><span class="st">&quot;Number of clusters K&quot;</span>,</span>
+<span id="cb506-4"><a href="clustering.html#cb506-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab=</span><span class="st">&quot;Total within-clusters sum of squares&quot;</span>)</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-319-1.png" width="672" /></p>
 <p>The Elbow method – so named because you’re looking for the “elbow” where the line flattens out. In this case, it looks like a K of 5 is ideal. So let’s try that. We’re going to use the kmeans function, saving it to an object called k5. We just need to tell it our dataframe name, how many centers (k) we want, and we’ll use a sensible default for how many different configurations to try.</p>
-<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb532-1"><a href="clustering.html#cb532-1"></a>k5 &lt;-<span class="st"> </span><span class="kw">kmeans</span>(playersscaled, <span class="dt">centers =</span> <span class="dv">5</span>, <span class="dt">nstart =</span> <span class="dv">25</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="clustering.html#cb507-1" aria-hidden="true" tabindex="-1"></a>k5 <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(playersscaled, <span class="at">centers =</span> <span class="dv">5</span>, <span class="at">nstart =</span> <span class="dv">25</span>)</span></code></pre></div>
 <p>Let’s look at what we get.</p>
-<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb533-1"><a href="clustering.html#cb533-1"></a>k5</span></code></pre></div>
+<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="clustering.html#cb508-1" aria-hidden="true" tabindex="-1"></a>k5</span></code></pre></div>
 <pre><code>## K-means clustering with 5 clusters of sizes 242, 58, 495, 989, 863
 ## 
 ## Cluster means:
@@ -473,23 +514,23 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## [6] &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;</code></pre>
 <p>Interpreting this output, the very first thing you need to know is that <strong>the cluster numbers are meaningless</strong>. They aren’t ranks. They aren’t anything. After you have taken that on board, look at the cluster sizes at the top. Clusters 1 and 2 are pretty large compared to others. That’s notable. Then we can look at the cluster means. For reference, 0 is going to be average. So group 1 is below average on minutes played. Group 2 is slightly above, group 5 is well above.</p>
 <p>So which group is Cam Mack in? Well, first we have to put our data back together again. In K5, there is a list of cluster assignments in the same order we put them in, but recall we have no names. So we need to re-combine them with our original data. We can do that with the following:</p>
-<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb535-1"><a href="clustering.html#cb535-1"></a>playercluster &lt;-<span class="st"> </span><span class="kw">data.frame</span>(playersselected, k5<span class="op">$</span>cluster) </span></code></pre></div>
+<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb510-1"><a href="clustering.html#cb510-1" aria-hidden="true" tabindex="-1"></a>playercluster <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(playersselected, k5<span class="sc">$</span>cluster) </span></code></pre></div>
 <p>Now we have a dataframe called playercluster that has our player names and what cluster they are in. The fastest way to find Cam Mack is to double click on the playercluster table in the environment and use the search in the top right of the table. Because this is based on some random selections of points to start the groupings, these may change from person to person, but Mack is in Group 1 in my data.</p>
 <p>We now have a dataset and can plot it like anything else. Let’s get Cam Mack and then plot him against the rest of college basketball on assists versus minutes played.</p>
-<div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb536-1"><a href="clustering.html#cb536-1"></a>cm &lt;-<span class="st"> </span>playercluster <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Player <span class="op">==</span><span class="st"> &quot;Cam Mack&quot;</span>)</span>
-<span id="cb536-2"><a href="clustering.html#cb536-2"></a></span>
-<span id="cb536-3"><a href="clustering.html#cb536-3"></a>cm</span></code></pre></div>
+<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="clustering.html#cb511-1" aria-hidden="true" tabindex="-1"></a>cm <span class="ot">&lt;-</span> playercluster <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">&quot;Cam Mack&quot;</span>)</span>
+<span id="cb511-2"><a href="clustering.html#cb511-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb511-3"><a href="clustering.html#cb511-3" aria-hidden="true" tabindex="-1"></a>cm</span></code></pre></div>
 <pre><code>##     Player                 Team Pos  MP  FG.  X3P. AST TOV PTS k5.cluster
 ## 1 Cam Mack Nebraska Cornhuskers   G 931 0.39 0.339 172  71 324          3</code></pre>
 <p>So Cam’s in cluster 5, which if you look at our clusters, puts him in the cluster with all above average metrics. What does that look like? We know Cam was an assist machine, so where do group 5 people grade out on assists?</p>
-<div class="sourceCode" id="cb538"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb538-1"><a href="clustering.html#cb538-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb538-2"><a href="clustering.html#cb538-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>playercluster, <span class="kw">aes</span>(<span class="dt">x=</span>MP, <span class="dt">y=</span>AST, <span class="dt">color=</span>k5.cluster)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb538-3"><a href="clustering.html#cb538-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>cm, <span class="kw">aes</span>(<span class="dt">x=</span>MP, <span class="dt">y=</span>AST), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-325-1.png" width="672" /></p>
+<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb513-1"><a href="clustering.html#cb513-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb513-2"><a href="clustering.html#cb513-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>playercluster, <span class="fu">aes</span>(<span class="at">x=</span>MP, <span class="at">y=</span>AST, <span class="at">color=</span>k5.cluster)) <span class="sc">+</span> </span>
+<span id="cb513-3"><a href="clustering.html#cb513-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>cm, <span class="fu">aes</span>(<span class="at">x=</span>MP, <span class="at">y=</span>AST), <span class="at">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-324-1.png" width="672" /></p>
 <p>Not bad, not bad. But who are Cam Mack’s peers? If we look at the numbers in Group 5, there’s 495 of them. So let’s limit them to just Big Ten guards. Unfortunately, my scraper didn’t quite work and in the place of Conference is the coach’s name. So I’m going to have to do this the hard way and make a list of Big Ten teams and filter on that. Then I’ll sort by minutes played.</p>
-<div class="sourceCode" id="cb539"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb539-1"><a href="clustering.html#cb539-1"></a>big10 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Nebraska Cornhuskers&quot;</span>, <span class="st">&quot;Iowa Hawkeyes&quot;</span>, <span class="st">&quot;Minnesota Golden Gophers&quot;</span>, <span class="st">&quot;Illinois Fighting Illini&quot;</span>, <span class="st">&quot;Northwestern Wildcats&quot;</span>, <span class="st">&quot;Wisconsin Badgers&quot;</span>, <span class="st">&quot;Indiana Hoosiers&quot;</span>, <span class="st">&quot;Purdue Boilermakers&quot;</span>, <span class="st">&quot;Ohio State Buckeyes&quot;</span>, <span class="st">&quot;Michigan Wolverines&quot;</span>, <span class="st">&quot;Michigan State Spartans&quot;</span>, <span class="st">&quot;Penn State Nittany Lions&quot;</span>, <span class="st">&quot;Rutgers Scarlet Knights&quot;</span>, <span class="st">&quot;Maryland Terrapins&quot;</span>)</span>
-<span id="cb539-2"><a href="clustering.html#cb539-2"></a></span>
-<span id="cb539-3"><a href="clustering.html#cb539-3"></a>playercluster <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(k5.cluster <span class="op">==</span><span class="st"> </span><span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Team <span class="op">%in%</span><span class="st"> </span>big10) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="kw">desc</span>(MP))</span></code></pre></div>
+<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb514-1"><a href="clustering.html#cb514-1" aria-hidden="true" tabindex="-1"></a>big10 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Nebraska Cornhuskers&quot;</span>, <span class="st">&quot;Iowa Hawkeyes&quot;</span>, <span class="st">&quot;Minnesota Golden Gophers&quot;</span>, <span class="st">&quot;Illinois Fighting Illini&quot;</span>, <span class="st">&quot;Northwestern Wildcats&quot;</span>, <span class="st">&quot;Wisconsin Badgers&quot;</span>, <span class="st">&quot;Indiana Hoosiers&quot;</span>, <span class="st">&quot;Purdue Boilermakers&quot;</span>, <span class="st">&quot;Ohio State Buckeyes&quot;</span>, <span class="st">&quot;Michigan Wolverines&quot;</span>, <span class="st">&quot;Michigan State Spartans&quot;</span>, <span class="st">&quot;Penn State Nittany Lions&quot;</span>, <span class="st">&quot;Rutgers Scarlet Knights&quot;</span>, <span class="st">&quot;Maryland Terrapins&quot;</span>)</span>
+<span id="cb514-2"><a href="clustering.html#cb514-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb514-3"><a href="clustering.html#cb514-3" aria-hidden="true" tabindex="-1"></a>playercluster <span class="sc">%&gt;%</span> <span class="fu">filter</span>(k5.cluster <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Team <span class="sc">%in%</span> big10) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(MP))</span></code></pre></div>
 <pre><code>##               Player                     Team Pos  MP   FG.  X3P. AST TOV PTS
 ## 1  Da&#39;Monte Williams Illinois Fighting Illini   G 592 0.302 0.211  37  20  64
 ## 2      Tre&#39; Williams Minnesota Golden Gophers   G 445 0.286 0.263  23  24  84
@@ -543,154 +584,169 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 24          5
 ## 25          5</code></pre>
 <p>So there are the 11 guards most like Cam Mack in the Big Ten. Safe to say, these are the 11 best guards in the conference.</p>
-<div id="advanced-metrics" class="section level2">
+<div id="advanced-metrics" class="section level2" number="31.1">
 <h2><span class="header-section-number">31.1</span> Advanced metrics</h2>
 <p>How much does this change if we change the metrics? I used pretty standard box score metrics above. What if we did it using Player Efficiency Rating, True Shooting Percentage, Point Production, Assist Percentage, Win Shares Per 40 Minutes and Box Plus Minus (you can get definitions of all of them by <a href="https://www.sports-reference.com/cbb/schools/nebraska/2020.html">hovering over the stats on Nebraksa’s stats page</a>).</p>
 <p>We’ll repeat the process. Filter out players who don’t play, players with stats missing, and just focus on those stats listed above.</p>
-<div class="sourceCode" id="cb541"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb541-1"><a href="clustering.html#cb541-1"></a>playersadvanced &lt;-<span class="st"> </span>players <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb541-2"><a href="clustering.html#cb541-2"></a><span class="st">  </span><span class="kw">filter</span>(MP<span class="op">&gt;</span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb541-3"><a href="clustering.html#cb541-3"></a><span class="st">  </span><span class="kw">filter</span>(Pos <span class="op">==</span><span class="st"> &quot;G&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb541-4"><a href="clustering.html#cb541-4"></a><span class="st">  </span><span class="kw">select</span>(Player, Team, Pos, PER, <span class="st">`</span><span class="dt">TS%</span><span class="st">`</span>, PProd, <span class="st">`</span><span class="dt">AST%</span><span class="st">`</span>, <span class="st">`</span><span class="dt">WS/40</span><span class="st">`</span>, BPM) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb541-5"><a href="clustering.html#cb541-5"></a><span class="st">  </span><span class="kw">na.omit</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb516-1"><a href="clustering.html#cb516-1" aria-hidden="true" tabindex="-1"></a>playersadvanced <span class="ot">&lt;-</span> players <span class="sc">%&gt;%</span> </span>
+<span id="cb516-2"><a href="clustering.html#cb516-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(MP<span class="sc">&gt;</span><span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb516-3"><a href="clustering.html#cb516-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Pos <span class="sc">==</span> <span class="st">&quot;G&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb516-4"><a href="clustering.html#cb516-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Player, Team, Pos, PER, <span class="st">`</span><span class="at">TS%</span><span class="st">`</span>, PProd, <span class="st">`</span><span class="at">AST%</span><span class="st">`</span>, <span class="st">`</span><span class="at">WS/40</span><span class="st">`</span>, BPM) <span class="sc">%&gt;%</span> </span>
+<span id="cb516-5"><a href="clustering.html#cb516-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() </span></code></pre></div>
 <p>Now to scale them.</p>
-<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb542-1"><a href="clustering.html#cb542-1"></a>playersadvscaled &lt;-<span class="st"> </span>playersadvanced <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb542-2"><a href="clustering.html#cb542-2"></a><span class="st">  </span><span class="kw">select</span>(PER, <span class="st">`</span><span class="dt">TS%</span><span class="st">`</span>, PProd, <span class="st">`</span><span class="dt">AST%</span><span class="st">`</span>, <span class="st">`</span><span class="dt">WS/40</span><span class="st">`</span>, BPM) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb542-3"><a href="clustering.html#cb542-3"></a><span class="st">  </span><span class="kw">mutate_all</span>(scale) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb542-4"><a href="clustering.html#cb542-4"></a><span class="st">  </span><span class="kw">na.omit</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="clustering.html#cb517-1" aria-hidden="true" tabindex="-1"></a>playersadvscaled <span class="ot">&lt;-</span> playersadvanced <span class="sc">%&gt;%</span> </span>
+<span id="cb517-2"><a href="clustering.html#cb517-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(PER, <span class="st">`</span><span class="at">TS%</span><span class="st">`</span>, PProd, <span class="st">`</span><span class="at">AST%</span><span class="st">`</span>, <span class="st">`</span><span class="at">WS/40</span><span class="st">`</span>, BPM) <span class="sc">%&gt;%</span> </span>
+<span id="cb517-3"><a href="clustering.html#cb517-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_all</span>(scale) <span class="sc">%&gt;%</span> </span>
+<span id="cb517-4"><a href="clustering.html#cb517-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>()</span></code></pre></div>
 <p>Let’s find the optimal number of clusters.</p>
-<div class="sourceCode" id="cb543"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb543-1"><a href="clustering.html#cb543-1"></a><span class="co"># function to compute total within-cluster sum of square </span></span>
-<span id="cb543-2"><a href="clustering.html#cb543-2"></a>wss &lt;-<span class="st"> </span><span class="cf">function</span>(k) {</span>
-<span id="cb543-3"><a href="clustering.html#cb543-3"></a>  <span class="kw">kmeans</span>(playersadvscaled, k, <span class="dt">nstart =</span> <span class="dv">10</span> )<span class="op">$</span>tot.withinss</span>
-<span id="cb543-4"><a href="clustering.html#cb543-4"></a>}</span>
-<span id="cb543-5"><a href="clustering.html#cb543-5"></a></span>
-<span id="cb543-6"><a href="clustering.html#cb543-6"></a><span class="co"># Compute and plot wss for k = 1 to k = 15</span></span>
-<span id="cb543-7"><a href="clustering.html#cb543-7"></a>k.values &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">15</span></span>
-<span id="cb543-8"><a href="clustering.html#cb543-8"></a></span>
-<span id="cb543-9"><a href="clustering.html#cb543-9"></a><span class="co"># extract wss for 2-15 clusters</span></span>
-<span id="cb543-10"><a href="clustering.html#cb543-10"></a>wss_values &lt;-<span class="st"> </span><span class="kw">map_dbl</span>(k.values, wss)</span>
-<span id="cb543-11"><a href="clustering.html#cb543-11"></a></span>
-<span id="cb543-12"><a href="clustering.html#cb543-12"></a><span class="kw">plot</span>(k.values, wss_values,</span>
-<span id="cb543-13"><a href="clustering.html#cb543-13"></a>       <span class="dt">type=</span><span class="st">&quot;b&quot;</span>, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">frame =</span> <span class="ot">FALSE</span>, </span>
-<span id="cb543-14"><a href="clustering.html#cb543-14"></a>       <span class="dt">xlab=</span><span class="st">&quot;Number of clusters K&quot;</span>,</span>
-<span id="cb543-15"><a href="clustering.html#cb543-15"></a>       <span class="dt">ylab=</span><span class="st">&quot;Total within-clusters sum of squares&quot;</span>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-329-1.png" width="672" /></p>
+<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb518-1"><a href="clustering.html#cb518-1" aria-hidden="true" tabindex="-1"></a><span class="co"># function to compute total within-cluster sum of square </span></span>
+<span id="cb518-2"><a href="clustering.html#cb518-2" aria-hidden="true" tabindex="-1"></a>wss <span class="ot">&lt;-</span> <span class="cf">function</span>(k) {</span>
+<span id="cb518-3"><a href="clustering.html#cb518-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kmeans</span>(playersadvscaled, k, <span class="at">nstart =</span> <span class="dv">10</span> )<span class="sc">$</span>tot.withinss</span>
+<span id="cb518-4"><a href="clustering.html#cb518-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb518-5"><a href="clustering.html#cb518-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb518-6"><a href="clustering.html#cb518-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute and plot wss for k = 1 to k = 15</span></span>
+<span id="cb518-7"><a href="clustering.html#cb518-7" aria-hidden="true" tabindex="-1"></a>k.values <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">15</span></span>
+<span id="cb518-8"><a href="clustering.html#cb518-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb518-9"><a href="clustering.html#cb518-9" aria-hidden="true" tabindex="-1"></a><span class="co"># extract wss for 2-15 clusters</span></span>
+<span id="cb518-10"><a href="clustering.html#cb518-10" aria-hidden="true" tabindex="-1"></a>wss_values <span class="ot">&lt;-</span> <span class="fu">map_dbl</span>(k.values, wss)</span></code></pre></div>
+<pre><code>## Warning: did not converge in 10 iterations</code></pre>
+<div class="sourceCode" id="cb520"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb520-1"><a href="clustering.html#cb520-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(k.values, wss_values,</span>
+<span id="cb520-2"><a href="clustering.html#cb520-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">type=</span><span class="st">&quot;b&quot;</span>, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">frame =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb520-3"><a href="clustering.html#cb520-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab=</span><span class="st">&quot;Number of clusters K&quot;</span>,</span>
+<span id="cb520-4"><a href="clustering.html#cb520-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab=</span><span class="st">&quot;Total within-clusters sum of squares&quot;</span>)</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-328-1.png" width="672" /></p>
 <p>Looks like 5 again.</p>
-<div class="sourceCode" id="cb544"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb544-1"><a href="clustering.html#cb544-1"></a>advk5 &lt;-<span class="st"> </span><span class="kw">kmeans</span>(playersadvscaled, <span class="dt">centers =</span> <span class="dv">5</span>, <span class="dt">nstart =</span> <span class="dv">25</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb521-1"><a href="clustering.html#cb521-1" aria-hidden="true" tabindex="-1"></a>advk5 <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(playersadvscaled, <span class="at">centers =</span> <span class="dv">5</span>, <span class="at">nstart =</span> <span class="dv">25</span>)</span></code></pre></div>
 <p>What do we have here?</p>
-<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb545-1"><a href="clustering.html#cb545-1"></a>advk5</span></code></pre></div>
-<pre><code>## K-means clustering with 5 clusters of sizes 104, 1253, 9, 632, 766
+<div class="sourceCode" id="cb522"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb522-1"><a href="clustering.html#cb522-1" aria-hidden="true" tabindex="-1"></a>advk5</span></code></pre></div>
+<pre><code>## K-means clustering with 5 clusters of sizes 1477, 1030, 166, 3, 88
 ## 
 ## Cluster means:
-##          PER        TS%      PProd       AST%      WS/40        BPM
-## 1 -2.6922417 -2.6802561 -1.1497380 -1.0109009 -2.8398288 -2.8455990
-## 2  0.1594366  0.3741799 -0.2279088 -0.2650562  0.2130658  0.2118878
-## 3  8.9269330  4.3359455 -1.1326482  2.2478231  8.0858448  6.3926472
-## 4 -0.6089002 -0.6736304 -0.8322766 -0.2324539 -0.5651578 -0.6493960
-## 5  0.5022214  0.2566711  1.2288970  0.7362004  0.4083263  0.5004325
+##          PER         TS%      PProd       AST%      WS/40        BPM
+## 1 -0.1853781 -0.06873982 -0.5343488 -0.2696473 -0.1184126 -0.1622670
+## 2  0.4087876  0.24526817  1.0477637  0.4472182  0.3563642  0.4575732
+## 3 -2.1693836 -2.42045625 -1.1410523 -0.7345409 -2.2297633 -2.2703594
+## 4 14.5515907  4.92713793 -1.1318648 -1.3849128 16.0721265  8.9433106
+## 5  1.9228983  2.68087293 -1.1040127  0.7241224  1.4745973  1.3456549
 ## 
 ## Clustering vector:
-##    [1] 5 2 2 2 2 4 2 4 2 5 2 5 2 2 4 2 5 2 2 2 4 4 2 1 5 2 2 2 2 4 2 2 5 5 5 2 2
-##   [38] 2 4 5 5 2 2 2 2 2 4 4 5 2 2 2 2 2 2 1 5 5 2 2 5 2 2 2 2 5 5 5 2 2 2 4 4 4
-##   [75] 4 4 5 2 5 2 5 4 1 2 4 5 2 2 2 2 4 2 4 5 5 2 2 2 4 4 5 5 2 4 4 4 4 5 2 2 2
-##  [112] 2 2 4 4 2 5 5 2 2 2 2 4 4 5 5 2 4 2 4 4 5 5 2 2 4 2 3 1 5 2 2 2 4 2 5 2 2
-##  [149] 2 2 4 2 1 5 5 2 2 5 2 4 5 5 2 4 2 4 3 4 1 5 5 2 2 2 5 2 4 5 5 2 5 2 2 2 4
-##  [186] 5 5 5 2 2 2 2 2 2 4 5 5 4 4 5 2 2 2 4 2 4 2 5 5 2 2 4 2 2 3 4 5 2 2 5 2 2
-##  [223] 2 4 2 4 5 2 2 2 2 4 4 5 5 2 2 2 2 2 4 5 2 5 5 2 5 2 5 2 2 2 2 2 4 1 5 5 5
-##  [260] 2 4 2 1 5 5 5 2 2 2 2 2 4 5 1 1 5 5 2 2 2 2 2 4 4 5 5 2 2 2 2 2 2 2 5 2 2
-##  [297] 2 5 4 5 5 5 2 4 1 5 5 5 2 5 2 2 2 5 5 2 5 2 2 2 2 2 5 2 4 4 4 4 4 4 5 5 2
-##  [334] 2 4 4 5 5 2 2 4 2 2 5 2 4 2 4 2 4 5 5 2 2 4 2 2 5 5 2 4 4 4 4 5 2 5 4 2 4
-##  [371] 4 5 5 2 2 4 4 4 4 4 5 2 5 2 5 2 2 5 5 5 2 2 2 2 4 4 4 4 2 4 5 5 2 5 4 2 4
-##  [408] 2 1 5 5 2 2 4 4 5 5 5 2 2 2 1 5 5 4 4 1 2 1 5 5 2 2 4 4 4 5 2 2 2 4 4 4 4
-##  [445] 2 5 5 2 5 2 2 2 4 5 5 2 2 2 4 5 5 2 2 2 2 2 1 1 5 5 2 2 4 4 4 4 5 5 2 2 4
-##  [482] 4 1 5 2 2 2 4 4 2 4 5 5 2 2 2 2 4 4 5 5 4 4 4 4 4 4 1 5 5 2 2 4 2 4 1 5 5
-##  [519] 2 2 5 4 4 5 5 5 2 4 4 4 4 4 5 2 2 5 4 4 4 1 1 5 2 2 4 4 4 4 5 2 2 2 4 4 2
-##  [556] 2 5 5 2 2 2 2 4 2 5 5 5 5 2 2 4 1 5 2 2 2 5 2 2 4 2 5 5 2 2 4 2 5 5 2 2 4
-##  [593] 2 2 4 5 2 2 4 2 4 4 1 5 5 2 2 2 4 2 1 5 5 5 2 2 4 2 4 1 5 5 2 2 2 2 4 5 5
-##  [630] 2 2 2 2 4 4 2 5 2 2 2 4 1 1 5 5 5 2 2 2 4 4 4 5 5 5 2 2 5 5 2 2 2 4 2 1 5
-##  [667] 2 5 2 2 2 4 5 2 4 4 4 3 1 4 5 5 2 2 5 2 2 2 2 5 2 5 4 2 4 1 5 2 5 2 2 2 5
-##  [704] 5 2 5 2 2 2 4 3 5 2 2 2 4 4 5 5 2 2 2 4 2 4 2 2 1 5 2 5 2 5 4 2 2 2 5 5 2
-##  [741] 4 4 4 5 5 2 2 2 2 2 4 1 5 5 5 2 5 2 4 1 5 5 2 2 2 4 4 4 5 5 5 2 2 2 4 5 5
-##  [778] 5 5 4 2 2 4 2 5 5 5 2 5 5 2 2 2 2 4 2 4 5 5 2 4 4 1 5 5 2 2 2 5 2 5 5 5 2
-##  [815] 2 2 5 5 5 2 2 2 4 2 4 5 2 2 5 4 2 4 2 4 5 2 2 2 2 2 4 2 4 4 5 1 5 5 5 2 2
-##  [852] 4 4 5 5 2 2 2 2 4 5 5 5 2 2 4 2 4 4 4 5 2 4 2 2 4 1 5 2 2 2 2 2 4 2 2 5 2
-##  [889] 5 2 2 2 4 2 5 2 5 2 2 2 5 2 5 5 5 2 2 5 2 2 2 4 4 5 5 2 2 4 2 2 5 5 5 2 4
-##  [926] 4 4 2 5 2 2 2 2 1 5 5 2 2 4 4 2 4 2 5 2 2 4 4 4 4 5 5 5 2 2 5 2 4 2 4 4 4
-##  [963] 4 4 5 5 2 5 2 4 4 5 5 2 4 5 2 2 2 5 2 4 4 2 2 4 5 5 5 5 2 4 4 2 2 5 5 5 2
-## [1000] 2 2 5 2 2 2 2 2 4 5 5 2 2 2 2 4 5 2 2 2 4 2 4 1 5 5 5 2 2 2 2 2 4 5 5 2 2
-## [1037] 2 2 2 2 2 5 5 2 2 2 1 5 5 2 2 4 2 4 5 5 2 2 2 2 2 4 2 5 5 2 2 2 2 4 2 4 5
-## [1074] 5 5 2 2 2 4 2 2 4 5 5 5 2 4 4 5 2 5 2 2 4 2 2 5 4 2 2 2 4 1 4 5 2 2 2 4 4
-## [1111] 5 5 5 5 4 2 4 4 4 5 5 5 2 4 4 1 5 5 5 5 2 2 4 2 4 2 2 5 2 4 2 4 4 4 5 5 5
-## [1148] 2 2 2 2 2 4 5 5 2 2 2 4 2 4 2 5 5 2 2 2 4 2 4 5 5 2 2 2 2 5 2 2 2 2 5 5 2
-## [1185] 2 2 2 2 5 2 2 1 5 2 5 2 2 2 5 5 5 5 4 1 5 5 5 2 2 2 1 5 5 2 2 2 2 4 2 5 5
-## [1222] 2 2 2 4 4 4 5 2 5 4 2 3 4 2 4 5 2 5 2 4 2 4 5 2 5 4 4 4 4 4 1 5 2 2 2 2 2
-## [1259] 4 4 2 5 2 5 5 2 4 5 5 2 2 4 5 5 2 4 4 5 5 5 2 2 4 4 5 5 2 2 4 4 2 2 5 2 2
-## [1296] 2 4 4 2 2 5 2 2 2 2 2 2 5 5 2 2 2 2 4 4 5 5 5 4 4 4 1 5 5 2 5 2 4 5 2 2 4
-## [1333] 4 1 5 5 2 2 2 2 2 4 5 5 5 5 2 2 4 5 5 2 2 4 2 4 5 5 2 2 2 5 2 4 4 5 5 5 2
-## [1370] 2 4 2 5 5 5 2 5 2 4 5 2 2 2 2 4 4 4 5 5 5 2 2 2 2 4 2 5 2 2 5 5 2 4 5 5 5
-## [1407] 2 2 2 2 2 5 5 2 2 2 4 4 2 4 5 5 2 2 4 2 4 1 5 5 5 5 4 4 2 2 2 4 4 4 4 4 4
-## [1444] 4 4 5 2 5 2 5 4 2 4 5 5 2 2 4 2 5 5 5 2 2 2 5 2 2 2 4 4 1 4 1 2 5 5 2 2 2
-## [1481] 4 3 2 1 5 2 4 4 4 4 4 5 5 2 5 2 4 4 4 4 1 1 2 2 2 4 4 5 5 2 2 2 2 2 4 1 2
-## [1518] 5 5 2 2 2 2 5 2 5 5 2 2 2 4 2 5 5 2 2 4 4 4 5 5 2 2 4 2 4 5 5 2 2 4 4 4 4
-## [1555] 5 5 2 2 2 4 5 5 2 2 5 4 2 4 5 5 2 4 2 2 2 5 2 2 2 4 2 4 4 4 5 5 2 2 2 2 4
-## [1592] 2 5 5 2 2 4 4 1 5 5 5 2 2 4 5 5 2 2 2 2 2 2 2 2 2 2 5 2 1 5 5 5 2 2 5 5 5
-## [1629] 2 2 2 2 5 4 4 4 4 4 4 4 5 5 5 2 2 2 2 2 2 5 2 2 5 4 5 5 5 4 4 4 4 2 2 2 2
-## [1666] 2 4 4 4 4 5 2 2 2 2 2 2 2 4 5 5 5 2 4 2 4 4 4 3 4 4 1 5 5 5 4 4 4 4 5 2 2
-## [1703] 2 2 4 1 5 5 5 5 2 2 2 1 5 5 2 2 2 4 2 2 2 4 5 2 5 2 4 4 1 1 5 5 5 2 2 1 5
-## [1740] 5 5 2 2 4 2 2 4 1 2 5 5 2 2 4 4 4 2 5 5 2 2 2 4 4 5 2 2 2 2 2 2 4 2 5 5 2
-## [1777] 2 2 5 2 2 4 2 2 4 2 4 5 2 2 4 5 4 2 2 5 5 2 2 5 4 4 4 5 5 5 5 2 5 2 4 4 2
-## [1814] 2 4 5 4 5 4 4 4 4 5 5 5 2 4 2 4 2 1 5 2 2 2 4 4 2 5 5 2 2 2 4 5 2 2 2 2 2
-## [1851] 2 1 5 2 5 2 2 4 2 5 5 2 4 2 2 4 4 4 2 1 5 5 5 5 2 2 2 2 5 5 2 2 4 5 2 2 2
-## [1888] 2 4 2 4 2 2 4 5 5 5 2 2 2 5 5 2 2 2 2 4 1 5 5 2 2 4 4 5 5 5 5 5 5 2 4 1 5
-## [1925] 5 5 5 2 4 2 2 4 2 5 5 2 5 5 2 4 4 5 2 5 2 4 4 2 4 5 5 2 2 2 4 4 1 5 5 5 4
-## [1962] 2 4 2 1 5 5 5 2 2 4 2 1 5 2 2 5 5 2 2 4 4 5 2 2 2 2 4 4 5 2 2 2 4 2 5 5 2
-## [1999] 2 2 2 2 5 4 4 5 2 2 2 2 2 2 4 4 5 2 5 2 2 2 4 1 5 2 5 4 2 4 5 5 2 2 4 2 2
-## [2036] 5 5 2 2 2 4 4 2 5 2 2 2 5 2 2 4 2 2 2 5 2 4 5 5 5 2 2 4 4 4 1 1 5 5 2 5 2
-## [2073] 2 2 2 2 4 2 2 2 2 2 2 2 1 5 5 2 2 2 4 2 5 5 5 5 2 2 2 4 4 5 5 5 5 2 1 5 2
-## [2110] 2 2 4 4 4 2 1 5 5 2 2 4 4 2 2 5 5 2 2 4 5 5 2 2 4 5 2 2 2 2 2 2 2 2 4 5 2
-## [2147] 2 2 4 1 5 2 2 2 2 4 4 4 4 5 5 4 4 4 2 4 2 5 5 5 2 2 2 1 5 4 2 2 2 2 4 4 4
-## [2184] 5 5 2 5 2 2 2 2 2 1 5 5 2 2 2 2 2 2 4 5 2 2 2 2 2 2 4 5 5 5 5 2 2 2 2 2 5
-## [2221] 2 2 2 2 4 4 5 5 2 2 4 4 2 4 2 5 5 5 2 2 2 1 1 5 2 2 2 4 4 4 4 4 5 5 5 2 4
-## [2258] 2 2 5 5 2 2 2 2 2 2 5 5 2 4 4 4 4 3 5 5 2 2 2 4 2 2 5 2 2 2 2 2 4 4 2 5 2
-## [2295] 4 2 4 4 4 2 2 5 5 2 2 2 2 2 2 2 2 5 2 2 5 2 2 4 1 5 5 2 2 4 2 4 4 5 2 4 4
-## [2332] 4 5 5 2 2 2 5 4 4 4 5 5 2 2 2 2 4 4 4 5 5 5 2 2 4 2 4 2 5 5 2 2 2 4 5 2 5
-## [2369] 2 2 2 2 4 2 2 4 2 4 4 4 4 4 5 5 5 2 4 4 4 5 5 2 4 4 2 5 5 2 2 2 2 2 4 2 5
-## [2406] 2 5 4 2 2 1 5 5 2 2 2 2 2 2 2 5 2 4 2 4 5 5 2 4 2 4 5 5 2 5 2 2 2 4 4 2 5
-## [2443] 2 5 2 2 2 2 2 5 5 5 4 4 5 5 2 4 2 2 4 2 5 2 2 2 5 2 2 2 2 4 2 5 5 4 2 5 5
-## [2480] 2 2 2 4 1 1 5 2 5 2 4 4 5 5 2 2 5 4 5 5 2 4 4 2 4 4 4 5 5 2 2 2 4 2 2 2 4
-## [2517] 5 5 2 2 4 2 2 5 5 5 2 2 5 4 2 2 2 5 5 2 2 2 2 4 4 1 1 5 5 2 4 4 1 1 5 5 2
-## [2554] 2 2 2 5 2 5 2 2 4 2 2 2 5 2 2 5 2 2 2 2 5 5 2 2 2 2 2 2 4 5 5 5 2 2 2 4 1
-## [2591] 5 5 2 2 2 2 4 5 5 2 5 5 2 2 2 2 5 5 2 2 4 4 2 1 5 2 2 2 4 4 4 2 1 5 5 5 2
-## [2628] 2 1 5 5 5 2 2 2 4 1 4 4 4 4 2 4 2 4 2 4 1 5 2 5 2 2 4 2 1 5 5 2 5 2 2 5 5
-## [2665] 2 2 2 2 4 2 5 5 2 4 2 4 4 4 1 5 2 2 2 2 2 1 4 5 5 2 2 2 2 4 2 1 5 5 2 2 2
-## [2702] 4 4 4 5 5 5 2 2 4 5 2 4 2 2 2 4 4 2 4 4 5 5 5 2 2 4 2 1 1 5 2 5 4 4 4 4 1
-## [2739] 5 5 2 4 4 2 4 5 2 2 2 2 2 2 2 4 2 2 5 5 5 4 2 2 2 2
+##    [1] 2 1 1 1 1 1 1 1 1 2 2 2 1 2 1 5 2 2 1 1 1 1 1 3 2 1 1 2 1 1 1 5 2 2 2 1 1
+##   [38] 1 3 2 2 2 2 1 1 1 1 1 2 2 2 2 1 1 5 3 2 2 2 1 2 2 1 1 5 2 2 2 1 1 1 1 1 1
+##   [75] 1 1 2 2 2 1 2 1 3 1 3 2 1 2 1 1 1 1 1 2 2 2 1 1 1 3 2 2 1 1 1 1 3 2 2 1 1
+##  [112] 1 1 1 1 1 2 2 1 1 1 1 1 3 2 2 1 1 1 1 1 2 2 1 1 1 5 5 3 2 1 1 1 1 1 2 2 2
+##  [149] 1 1 1 1 3 2 2 2 1 2 1 1 2 2 1 1 1 1 5 1 3 2 2 2 1 2 2 2 3 2 2 2 2 1 1 1 1
+##  [186] 2 2 2 1 1 1 1 1 1 1 2 2 1 3 2 2 2 2 1 1 1 1 2 2 1 1 1 1 5 4 1 2 2 1 2 2 1
+##  [223] 1 1 1 1 2 2 1 1 1 3 3 2 2 2 2 1 1 1 1 2 1 2 2 1 2 2 2 1 1 1 1 5 1 3 2 2 2
+##  [260] 1 1 1 3 2 2 2 2 1 1 1 1 1 5 3 3 2 2 1 1 1 1 1 1 3 2 2 2 1 1 1 2 1 1 2 2 1
+##  [297] 1 5 1 2 2 2 1 1 3 2 2 2 2 2 1 1 1 2 2 1 2 1 1 1 1 1 2 1 1 1 1 1 1 1 2 2 1
+##  [334] 1 1 1 2 2 1 1 1 1 1 2 2 1 1 1 1 1 2 2 1 1 1 1 1 2 2 2 1 1 1 3 2 2 2 1 1 1
+##  [371] 1 2 2 2 1 1 1 1 3 3 2 2 2 2 2 1 1 2 2 2 1 1 1 1 1 1 1 1 1 1 2 2 2 2 1 1 1
+##  [408] 1 3 2 2 1 1 1 1 2 2 2 1 1 5 3 2 2 1 1 3 1 3 2 2 1 1 1 1 1 2 2 2 1 1 1 1 1
+##  [445] 5 2 2 2 2 2 1 1 1 2 2 2 1 1 1 2 2 2 2 2 1 1 3 3 2 2 2 1 1 1 1 1 2 2 2 1 1
+##  [482] 1 3 2 2 1 1 1 1 1 1 2 2 2 2 1 1 1 1 2 2 1 1 1 1 1 1 3 2 2 1 1 1 1 1 3 2 2
+##  [519] 1 1 2 1 1 2 2 2 2 1 1 1 1 1 2 1 1 2 1 1 1 3 3 2 1 1 1 1 1 1 2 1 1 1 1 1 1
+##  [556] 2 2 2 2 1 1 1 1 5 2 2 2 2 1 1 1 3 2 2 2 2 2 1 1 1 1 2 2 2 1 1 5 2 2 1 1 1
+##  [593] 1 1 1 2 1 2 1 1 1 1 3 2 2 1 1 1 1 1 3 2 2 2 1 1 1 1 3 3 2 2 2 1 1 1 1 2 2
+##  [630] 1 1 1 1 1 1 1 2 2 2 1 1 3 3 2 2 2 1 1 1 1 1 1 2 2 2 1 1 2 2 2 1 1 1 1 3 2
+##  [667] 2 2 1 1 1 3 2 2 1 1 1 5 3 1 2 2 2 2 2 1 1 2 1 2 2 2 1 1 1 3 2 2 2 1 1 1 2
+##  [704] 2 1 2 1 1 1 1 4 2 1 1 1 1 1 2 2 1 1 1 1 1 1 1 1 3 2 2 2 1 2 1 1 1 2 2 2 1
+##  [741] 1 3 1 2 2 2 2 1 2 5 1 3 2 2 2 2 2 1 1 3 2 2 1 1 1 1 1 1 2 2 2 1 1 1 3 2 2
+##  [778] 2 2 1 1 1 1 1 2 2 2 1 2 2 1 1 1 1 1 1 1 2 2 1 1 1 3 2 2 2 1 2 2 1 2 2 2 2
+##  [815] 1 1 5 2 2 1 1 1 1 1 1 2 1 1 2 1 1 1 1 3 2 2 1 1 2 1 1 1 1 1 5 3 2 2 2 1 1
+##  [852] 1 1 2 2 2 1 1 1 1 2 2 2 2 1 1 1 1 1 1 2 2 1 1 1 1 3 2 2 2 1 1 1 1 1 1 2 2
+##  [889] 2 1 2 5 3 1 2 1 2 1 2 1 2 1 2 2 2 2 1 2 2 1 1 1 1 2 2 1 2 1 1 1 2 2 2 1 1
+##  [926] 1 1 5 2 2 1 1 5 3 2 2 1 1 1 1 1 1 5 2 2 1 1 1 1 3 2 2 2 2 1 2 1 1 1 1 1 1
+##  [963] 1 1 2 2 2 2 1 1 1 2 2 1 1 2 1 1 2 2 1 1 1 1 1 1 2 2 2 2 1 1 1 1 1 2 2 2 2
+## [1000] 1 1 2 2 2 1 1 1 1 2 2 2 1 1 1 1 2 2 1 1 1 1 1 3 2 2 2 2 1 1 1 1 3 2 2 2 1
+## [1037] 1 1 1 1 1 2 2 2 1 1 3 2 2 1 1 1 1 3 2 2 1 1 1 1 1 1 1 2 2 1 1 1 1 1 5 1 2
+## [1074] 2 2 1 1 1 1 1 5 1 2 2 2 1 3 1 2 2 2 1 1 1 1 1 2 1 1 1 1 1 3 1 2 1 1 1 1 3
+## [1111] 2 2 2 2 1 1 1 1 3 2 2 2 1 1 1 3 2 2 2 2 1 1 1 1 1 1 5 2 1 1 1 1 1 1 2 2 2
+## [1148] 1 1 1 1 1 1 2 2 1 1 1 1 1 1 1 2 2 1 1 1 1 1 1 2 2 2 2 1 1 2 1 1 1 1 2 2 1
+## [1185] 1 1 1 1 5 5 5 3 2 1 2 2 1 1 2 2 2 2 1 3 2 2 2 2 1 1 3 2 2 2 2 1 1 1 1 2 2
+## [1222] 2 2 2 1 1 1 2 2 2 1 1 5 1 5 3 2 2 2 1 1 1 1 2 2 2 1 1 1 3 1 3 2 2 1 2 1 1
+## [1259] 1 3 1 2 2 2 2 1 3 2 2 1 1 1 2 2 1 1 1 2 2 2 1 1 1 1 2 2 1 1 1 1 1 5 2 1 1
+## [1296] 1 1 1 1 2 2 2 1 1 1 1 2 2 2 2 1 1 1 3 1 2 2 2 1 1 1 3 2 2 2 2 2 3 2 2 2 1
+## [1333] 3 3 2 2 2 1 1 1 5 1 2 2 2 2 1 1 1 2 2 2 2 1 5 3 5 2 1 1 2 5 1 1 1 2 2 2 2
+## [1370] 1 1 5 2 2 2 1 2 1 3 2 2 1 2 1 1 1 1 5 2 2 2 1 1 1 1 1 2 1 2 2 2 1 1 2 2 2
+## [1407] 1 1 1 1 1 2 2 1 1 1 1 1 5 3 2 2 2 2 1 1 1 3 2 2 2 2 1 1 5 1 1 1 1 1 1 1 1
+## [1444] 1 3 2 2 2 1 2 1 1 1 2 2 1 1 1 1 2 2 2 1 1 5 2 1 1 1 1 1 3 3 3 1 2 2 2 1 1
+## [1481] 1 5 1 3 2 1 1 1 1 1 3 2 2 1 2 1 1 1 1 1 3 3 1 1 1 1 1 2 2 2 2 1 1 1 3 3 2
+## [1518] 2 2 2 1 1 1 2 2 2 2 1 1 1 1 1 2 2 1 1 1 1 1 2 2 1 1 1 1 1 2 2 1 1 1 1 1 1
+## [1555] 2 2 1 1 1 1 2 2 1 2 2 1 5 1 2 2 2 1 1 1 1 2 2 2 1 1 1 1 1 1 2 2 2 2 1 1 1
+## [1592] 1 2 2 1 1 1 3 3 2 2 2 1 1 1 2 2 1 1 1 1 1 2 2 2 1 1 2 1 3 2 2 2 1 1 2 2 2
+## [1629] 1 1 1 1 2 1 1 1 1 1 1 1 2 2 2 1 1 1 1 1 5 2 1 2 2 1 2 2 2 1 1 1 1 2 1 2 1
+## [1666] 1 1 1 3 1 2 2 1 1 1 2 1 1 1 2 2 2 1 1 1 1 1 1 5 1 1 3 2 2 2 1 1 1 1 2 2 2
+## [1703] 1 1 1 3 2 2 2 2 1 1 1 3 2 2 1 1 1 1 1 1 5 3 2 2 2 1 1 1 3 3 2 2 2 1 5 3 2
+## [1740] 2 2 1 2 1 1 1 1 3 2 2 2 1 1 1 1 1 5 2 2 2 2 1 1 1 2 2 2 1 1 2 1 1 1 2 2 1
+## [1777] 1 1 2 2 1 1 1 1 1 1 3 2 2 1 1 5 1 1 5 2 2 2 1 2 1 1 1 2 2 2 2 2 2 2 1 1 1
+## [1814] 1 1 2 1 2 1 1 1 1 2 2 2 2 1 1 1 1 3 2 2 1 1 1 1 1 2 2 1 1 1 1 2 2 1 1 1 1
+## [1851] 2 3 2 2 2 1 1 1 1 2 2 1 1 1 1 1 1 1 5 3 2 2 2 2 2 1 1 5 2 2 2 1 1 2 1 1 1
+## [1888] 1 1 5 1 2 5 1 2 2 2 1 1 1 2 2 1 2 1 1 1 3 2 2 1 1 1 1 5 5 2 2 2 2 2 3 3 2
+## [1925] 2 2 2 1 1 5 1 1 1 2 2 2 2 2 2 1 3 2 2 2 1 1 1 5 1 2 2 1 2 1 1 3 3 2 2 2 1
+## [1962] 1 1 1 3 2 2 2 1 1 1 1 3 2 2 1 2 2 1 1 1 1 2 1 2 1 1 1 1 2 2 2 1 1 1 2 2 2
+## [1999] 2 1 1 5 5 1 3 2 2 1 1 1 2 1 1 1 2 2 2 1 1 1 1 3 2 2 2 1 1 1 2 2 1 1 1 1 5
+## [2036] 2 2 1 1 1 1 1 1 2 2 1 1 2 2 1 1 1 1 1 5 1 1 2 2 2 1 1 1 1 1 3 3 2 2 1 1 2
+## [2073] 1 1 1 1 1 1 2 2 1 1 1 1 3 2 2 1 1 1 1 1 2 2 2 2 1 1 2 1 1 2 2 2 2 2 3 2 1
+## [2110] 1 1 1 1 1 1 3 2 2 1 1 1 1 5 5 2 2 1 2 1 2 2 1 1 3 2 2 2 2 1 1 1 1 5 3 2 1
+## [2147] 1 1 1 3 2 2 1 1 1 1 3 1 3 2 2 1 1 1 1 1 1 2 2 2 1 1 1 3 2 1 1 1 1 1 1 1 1
+## [2184] 2 2 2 2 1 1 5 5 5 3 2 2 2 2 1 1 1 5 3 2 2 1 1 1 1 1 1 5 2 2 2 2 1 1 1 1 2
+## [2221] 1 1 1 5 1 1 2 2 2 1 1 1 1 1 1 2 2 2 1 1 1 3 3 2 1 1 1 1 1 1 1 1 2 2 2 1 1
+## [2258] 1 1 2 2 2 1 1 1 2 5 2 2 1 1 1 1 1 4 2 2 2 1 1 1 1 5 2 2 2 2 1 2 1 1 2 2 2
+## [2295] 1 1 1 1 1 5 1 2 2 2 1 1 1 1 1 1 1 2 2 2 2 1 1 1 3 2 2 2 1 1 1 1 1 2 2 1 1
+## [2332] 1 2 2 1 1 1 2 1 1 1 2 2 2 2 1 1 1 3 1 2 2 2 2 1 1 1 1 2 2 2 1 1 1 1 2 2 2
+## [2369] 1 1 1 1 1 1 1 1 1 1 1 1 1 3 2 2 2 1 1 1 1 2 2 1 1 1 1 2 2 2 2 1 1 1 1 5 2
+## [2406] 1 2 1 1 1 3 2 2 2 1 1 1 2 2 1 2 1 1 1 1 2 2 1 1 1 1 2 2 2 2 1 1 1 1 1 5 2
+## [2443] 2 2 1 1 1 1 5 2 2 2 1 3 2 2 1 1 1 5 1 2 2 2 1 1 2 1 1 2 1 1 1 2 2 1 1 2 2
+## [2480] 2 2 1 1 3 3 2 2 2 1 1 1 2 2 1 2 2 1 5 2 2 1 1 1 1 1 3 2 2 2 2 2 1 1 1 5 3
+## [2517] 2 2 2 1 1 1 1 2 2 2 1 1 2 1 1 1 5 2 2 1 1 1 1 1 1 3 3 2 2 1 1 1 3 3 2 2 2
+## [2554] 1 1 1 5 5 2 1 1 1 1 1 1 2 1 1 2 1 1 1 1 2 2 2 1 1 1 1 1 1 2 2 2 1 2 2 3 3
+## [2591] 2 2 1 1 1 1 1 2 2 2 2 2 1 1 1 5 2 2 1 1 1 1 1 3 2 2 2 1 1 1 1 1 3 2 2 2 2
+## [2628] 1 3 2 2 2 2 1 1 1 3 1 1 1 1 1 1 1 1 1 1 3 2 2 2 1 1 1 1 3 2 2 2 2 2 1 2 2
+## [2665] 2 1 1 1 1 1 2 2 1 1 1 1 3 1 3 2 2 2 1 1 1 3 3 2 2 2 1 1 1 1 5 3 2 2 1 1 1
+## [2702] 1 1 1 2 2 2 1 1 1 2 2 1 1 1 1 1 1 1 1 1 2 2 2 1 1 1 1 3 3 2 1 2 1 1 1 3 3
+## [2739] 2 2 2 1 1 5 3 2 2 2 1 1 1 1 5 1 5 1 2 2 2 1 1 1 1 1
 ## 
 ## Within cluster sum of squares by cluster:
-## [1]  737.6141 2624.4456  722.9391 1248.0870 1849.5824
-##  (between_SS / total_SS =  56.7 %)
+## [1] 2608.03836 1795.99837 1233.54705   29.44812 1412.27741
+##  (between_SS / total_SS =  57.3 %)
 ## 
 ## Available components:
 ## 
 ## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot;
 ## [6] &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;</code></pre>
 <p>Looks like this time, cluster 1 is all below average and cluster 5 is mostly above. Which cluster is Cam Mack in?</p>
-<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb547-1"><a href="clustering.html#cb547-1"></a>playeradvcluster &lt;-<span class="st"> </span><span class="kw">data.frame</span>(playersadvanced, advk5<span class="op">$</span>cluster) </span></code></pre></div>
-<div class="sourceCode" id="cb548"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb548-1"><a href="clustering.html#cb548-1"></a>cmadv &lt;-<span class="st"> </span>playeradvcluster <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Player <span class="op">==</span><span class="st"> &quot;Cam Mack&quot;</span>)</span>
-<span id="cb548-2"><a href="clustering.html#cb548-2"></a></span>
-<span id="cb548-3"><a href="clustering.html#cb548-3"></a>cmadv</span></code></pre></div>
+<div class="sourceCode" id="cb524"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb524-1"><a href="clustering.html#cb524-1" aria-hidden="true" tabindex="-1"></a>playeradvcluster <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(playersadvanced, advk5<span class="sc">$</span>cluster) </span></code></pre></div>
+<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb525-1"><a href="clustering.html#cb525-1" aria-hidden="true" tabindex="-1"></a>cmadv <span class="ot">&lt;-</span> playeradvcluster <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">&quot;Cam Mack&quot;</span>)</span>
+<span id="cb525-2"><a href="clustering.html#cb525-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb525-3"><a href="clustering.html#cb525-3" aria-hidden="true" tabindex="-1"></a>cmadv</span></code></pre></div>
 <pre><code>##     Player                 Team Pos  PER   TS. PProd AST. WS.40 BPM
 ## 1 Cam Mack Nebraska Cornhuskers   G 15.9 0.481   382 36.4 0.081 3.9
 ##   advk5.cluster
-## 1             5</code></pre>
+## 1             2</code></pre>
 <p>Cluster 3 on my dataset. So in this season, we can say he’s in a big group of players who are all above average on these advanced metrics.</p>
 <p>Now who are his Big Ten peers?</p>
-<div class="sourceCode" id="cb550"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb550-1"><a href="clustering.html#cb550-1"></a>playeradvcluster <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb550-2"><a href="clustering.html#cb550-2"></a><span class="st">  </span><span class="kw">filter</span>(advk5.cluster <span class="op">==</span><span class="st"> </span><span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb550-3"><a href="clustering.html#cb550-3"></a><span class="st">  </span><span class="kw">filter</span>(Team <span class="op">%in%</span><span class="st"> </span>big10) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb550-4"><a href="clustering.html#cb550-4"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(PProd))</span></code></pre></div>
-<pre><code>##  [1] Player        Team          Pos           PER           TS.          
-##  [6] PProd         AST.          WS.40         BPM           advk5.cluster
-## &lt;0 rows&gt; (or 0-length row.names)</code></pre>
+<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="clustering.html#cb527-1" aria-hidden="true" tabindex="-1"></a>playeradvcluster <span class="sc">%&gt;%</span> </span>
+<span id="cb527-2"><a href="clustering.html#cb527-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(advk5.cluster <span class="sc">==</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb527-3"><a href="clustering.html#cb527-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Team <span class="sc">%in%</span> big10) <span class="sc">%&gt;%</span> </span>
+<span id="cb527-4"><a href="clustering.html#cb527-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(PProd))</span></code></pre></div>
+<pre><code>##                Player                     Team Pos   PER   TS. PProd AST.
+## 1      Bryan Greenlee Minnesota Golden Gophers   G  -6.7 0.143     3 10.9
+## 2         Luke Wilson      Michigan Wolverines   G  -5.1 0.214     3 17.0
+## 3      Kyle McCloskey Penn State Nittany Lions   G  -9.5 0.119     2  5.8
+## 4       Nicolas Hobbs            Iowa Hawkeyes   G -17.9 0.167     2  0.0
+## 5 Carter Higginbottom        Wisconsin Badgers   G -11.0 0.000     0  0.0
+## 6          Peter Kiss  Rutgers Scarlet Knights   G -10.5 0.000     0 11.7
+## 7        Brady Rudrud Minnesota Golden Gophers   G -23.8 0.000     0  0.0
+## 8      Adrian Chapman         Indiana Hoosiers   G -46.4 0.000     0  0.0
+##    WS.40   BPM advk5.cluster
+## 1 -0.132  -7.7             3
+## 2 -0.153 -11.2             3
+## 3 -0.155  -9.6             3
+## 4 -0.286 -23.1             3
+## 5 -0.168 -13.0             3
+## 6 -0.189  -7.7             3
+## 7 -0.332 -22.6             3
+## 8 -0.641 -49.1             3</code></pre>
 <p>Sorting on Points Produced, Cam Mack is sixth out of the 35 guards in the Big Ten who land in Cluster 3. Seems advanced metrics take a little bit of the shine off of Cam. But then, so does leaving the program after one suspension-riddled season.</p>
 
 </div>

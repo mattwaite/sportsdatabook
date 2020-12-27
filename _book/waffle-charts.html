@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 15 Waffle charts | Sports Data Analysis and Visualization</title>
   <meta name="description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 15 Waffle charts | Sports Data Analysis and Visualization" />
   <meta property="og:type" content="book" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="stacked-bar-charts.html"/>
 <link rel="next" href="line-charts.html"/>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,10 +51,11 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
 <script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
@@ -72,18 +74,17 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -103,7 +104,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {  background-color: #f8f8f8; }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -151,140 +152,179 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Sports Data Analysis and Visualization</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Throwing cold water on hot takes</a><ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Throwing cold water on hot takes</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#requirements-and-conventions"><i class="fa fa-check"></i><b>1.1</b> Requirements and Conventions</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i><b>1.2</b> About this book</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="the-very-basics.html"><a href="the-very-basics.html"><i class="fa fa-check"></i><b>2</b> The very basics</a><ul>
+<li class="chapter" data-level="2" data-path="the-very-basics.html"><a href="the-very-basics.html"><i class="fa fa-check"></i><b>2</b> The very basics</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="the-very-basics.html"><a href="the-very-basics.html#adding-libraries-part-1"><i class="fa fa-check"></i><b>2.1</b> Adding libraries, part 1</a></li>
 <li class="chapter" data-level="2.2" data-path="the-very-basics.html"><a href="the-very-basics.html#adding-libraries-part-2"><i class="fa fa-check"></i><b>2.2</b> Adding libraries, part 2</a></li>
 <li class="chapter" data-level="2.3" data-path="the-very-basics.html"><a href="the-very-basics.html#notebooks"><i class="fa fa-check"></i><b>2.3</b> Notebooks</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html"><i class="fa fa-check"></i><b>3</b> Data, structures and types</a><ul>
+<li class="chapter" data-level="3" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html"><i class="fa fa-check"></i><b>3</b> Data, structures and types</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#rows-and-columns"><i class="fa fa-check"></i><b>3.1</b> Rows and columns</a></li>
 <li class="chapter" data-level="3.2" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#types"><i class="fa fa-check"></i><b>3.2</b> Types</a></li>
 <li class="chapter" data-level="3.3" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#a-simple-way-to-get-data"><i class="fa fa-check"></i><b>3.3</b> A simple way to get data</a></li>
 <li class="chapter" data-level="3.4" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#cleaning-the-data"><i class="fa fa-check"></i><b>3.4</b> Cleaning the data</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="aggregates.html"><a href="aggregates.html"><i class="fa fa-check"></i><b>4</b> Aggregates</a><ul>
+<li class="chapter" data-level="4" data-path="aggregates.html"><a href="aggregates.html"><i class="fa fa-check"></i><b>4</b> Aggregates</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="aggregates.html"><a href="aggregates.html#basic-data-analysis-group-by-and-count"><i class="fa fa-check"></i><b>4.1</b> Basic data analysis: Group By and Count</a></li>
 <li class="chapter" data-level="4.2" data-path="aggregates.html"><a href="aggregates.html#other-aggregates-mean-and-median"><i class="fa fa-check"></i><b>4.2</b> Other aggregates: Mean and median</a></li>
 <li class="chapter" data-level="4.3" data-path="aggregates.html"><a href="aggregates.html#even-more-aggregates"><i class="fa fa-check"></i><b>4.3</b> Even more aggregates</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="mutating-data.html"><a href="mutating-data.html"><i class="fa fa-check"></i><b>5</b> Mutating data</a><ul>
+<li class="chapter" data-level="5" data-path="mutating-data.html"><a href="mutating-data.html"><i class="fa fa-check"></i><b>5</b> Mutating data</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="mutating-data.html"><a href="mutating-data.html#a-more-complex-example"><i class="fa fa-check"></i><b>5.1</b> A more complex example</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="filters-and-selections.html"><a href="filters-and-selections.html"><i class="fa fa-check"></i><b>6</b> Filters and selections</a><ul>
+<li class="chapter" data-level="6" data-path="filters-and-selections.html"><a href="filters-and-selections.html"><i class="fa fa-check"></i><b>6</b> Filters and selections</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="filters-and-selections.html"><a href="filters-and-selections.html#selecting-data-to-make-it-easier-to-read"><i class="fa fa-check"></i><b>6.1</b> Selecting data to make it easier to read</a></li>
 <li class="chapter" data-level="6.2" data-path="filters-and-selections.html"><a href="filters-and-selections.html#using-conditional-filters-to-set-limits"><i class="fa fa-check"></i><b>6.2</b> Using conditional filters to set limits</a></li>
 <li class="chapter" data-level="6.3" data-path="filters-and-selections.html"><a href="filters-and-selections.html#top-list"><i class="fa fa-check"></i><b>6.3</b> Top list</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="transforming-data.html"><a href="transforming-data.html"><i class="fa fa-check"></i><b>7</b> Transforming data</a><ul>
+<li class="chapter" data-level="7" data-path="transforming-data.html"><a href="transforming-data.html"><i class="fa fa-check"></i><b>7</b> Transforming data</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="transforming-data.html"><a href="transforming-data.html#making-long-data-wide"><i class="fa fa-check"></i><b>7.1</b> Making long data wide</a></li>
 <li class="chapter" data-level="7.2" data-path="transforming-data.html"><a href="transforming-data.html#why-this-matters"><i class="fa fa-check"></i><b>7.2</b> Why this matters</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="significance-tests.html"><a href="significance-tests.html"><i class="fa fa-check"></i><b>8</b> Significance tests</a><ul>
+<li class="chapter" data-level="8" data-path="significance-tests.html"><a href="significance-tests.html"><i class="fa fa-check"></i><b>8</b> Significance tests</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="significance-tests.html"><a href="significance-tests.html#accepting-the-null-hypothesis"><i class="fa fa-check"></i><b>8.1</b> Accepting the null hypothesis</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html"><i class="fa fa-check"></i><b>9</b> Correlations and regression</a><ul>
+<li class="chapter" data-level="9" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html"><i class="fa fa-check"></i><b>9</b> Correlations and regression</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html#a-more-predictive-example"><i class="fa fa-check"></i><b>9.1</b> A more predictive example</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="multiple-regression.html"><a href="multiple-regression.html"><i class="fa fa-check"></i><b>10</b> Multiple regression</a></li>
-<li class="chapter" data-level="11" data-path="residuals.html"><a href="residuals.html"><i class="fa fa-check"></i><b>11</b> Residuals</a><ul>
+<li class="chapter" data-level="11" data-path="residuals.html"><a href="residuals.html"><i class="fa fa-check"></i><b>11</b> Residuals</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="residuals.html"><a href="residuals.html#penalties"><i class="fa fa-check"></i><b>11.1</b> Penalties</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z-scores</a><ul>
+<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z-scores</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="z-scores.html"><a href="z-scores.html#calculating-a-z-score-in-r"><i class="fa fa-check"></i><b>12.1</b> Calculating a Z score in R</a></li>
 <li class="chapter" data-level="12.2" data-path="z-scores.html"><a href="z-scores.html#writing-about-z-scores"><i class="fa fa-check"></i><b>12.2</b> Writing about z-scores</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html"><i class="fa fa-check"></i><b>13</b> Intro to ggplot</a><ul>
+<li class="chapter" data-level="13" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html"><i class="fa fa-check"></i><b>13</b> Intro to ggplot</a>
+<ul>
 <li class="chapter" data-level="13.1" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#the-bar-chart"><i class="fa fa-check"></i><b>13.1</b> The bar chart</a></li>
 <li class="chapter" data-level="13.2" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#scales"><i class="fa fa-check"></i><b>13.2</b> Scales</a></li>
 <li class="chapter" data-level="13.3" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#styling"><i class="fa fa-check"></i><b>13.3</b> Styling</a></li>
 <li class="chapter" data-level="13.4" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#one-last-trick-coord-flip"><i class="fa fa-check"></i><b>13.4</b> One last trick: coord flip</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="stacked-bar-charts.html"><a href="stacked-bar-charts.html"><i class="fa fa-check"></i><b>14</b> Stacked bar charts</a></li>
-<li class="chapter" data-level="15" data-path="waffle-charts.html"><a href="waffle-charts.html"><i class="fa fa-check"></i><b>15</b> Waffle charts</a><ul>
+<li class="chapter" data-level="15" data-path="waffle-charts.html"><a href="waffle-charts.html"><i class="fa fa-check"></i><b>15</b> Waffle charts</a>
+<ul>
 <li class="chapter" data-level="15.1" data-path="waffle-charts.html"><a href="waffle-charts.html#waffles-two-ways-part-1"><i class="fa fa-check"></i><b>15.1</b> Waffles two ways: Part 1</a></li>
 <li class="chapter" data-level="15.2" data-path="waffle-charts.html"><a href="waffle-charts.html#waffles-two-ways-part-2"><i class="fa fa-check"></i><b>15.2</b> Waffles two ways: Part 2</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="line-charts.html"><a href="line-charts.html"><i class="fa fa-check"></i><b>16</b> Line charts</a><ul>
+<li class="chapter" data-level="16" data-path="line-charts.html"><a href="line-charts.html"><i class="fa fa-check"></i><b>16</b> Line charts</a>
+<ul>
 <li class="chapter" data-level="16.1" data-path="line-charts.html"><a href="line-charts.html#this-is-too-simple."><i class="fa fa-check"></i><b>16.1</b> This is too simple.</a></li>
 <li class="chapter" data-level="16.2" data-path="line-charts.html"><a href="line-charts.html#but-what-if-i-wanted-to-add-a-lot-of-lines."><i class="fa fa-check"></i><b>16.2</b> But what if I wanted to add a lot of lines.</a></li>
 </ul></li>
 <li class="chapter" data-level="17" data-path="step-charts.html"><a href="step-charts.html"><i class="fa fa-check"></i><b>17</b> Step charts</a></li>
 <li class="chapter" data-level="18" data-path="ridge-charts.html"><a href="ridge-charts.html"><i class="fa fa-check"></i><b>18</b> Ridge charts</a></li>
-<li class="chapter" data-level="19" data-path="dumbbell-and-lollipop-charts.html"><a href="dumbbell-and-lollipop-charts.html"><i class="fa fa-check"></i><b>19</b> Dumbbell and lollipop charts</a><ul>
+<li class="chapter" data-level="19" data-path="dumbbell-and-lollipop-charts.html"><a href="dumbbell-and-lollipop-charts.html"><i class="fa fa-check"></i><b>19</b> Dumbbell and lollipop charts</a>
+<ul>
 <li class="chapter" data-level="19.1" data-path="dumbbell-and-lollipop-charts.html"><a href="dumbbell-and-lollipop-charts.html#dumbbell-plots"><i class="fa fa-check"></i><b>19.1</b> Dumbbell plots</a></li>
 <li class="chapter" data-level="19.2" data-path="dumbbell-and-lollipop-charts.html"><a href="dumbbell-and-lollipop-charts.html#lollipop-charts"><i class="fa fa-check"></i><b>19.2</b> Lollipop charts</a></li>
 </ul></li>
 <li class="chapter" data-level="20" data-path="scatterplots.html"><a href="scatterplots.html"><i class="fa fa-check"></i><b>20</b> Scatterplots</a></li>
-<li class="chapter" data-level="21" data-path="facet-wraps.html"><a href="facet-wraps.html"><i class="fa fa-check"></i><b>21</b> Facet wraps</a><ul>
+<li class="chapter" data-level="21" data-path="facet-wraps.html"><a href="facet-wraps.html"><i class="fa fa-check"></i><b>21</b> Facet wraps</a>
+<ul>
 <li class="chapter" data-level="21.1" data-path="facet-wraps.html"><a href="facet-wraps.html#facet-grid-vs-facet-wraps"><i class="fa fa-check"></i><b>21.1</b> Facet grid vs facet wraps</a></li>
 <li class="chapter" data-level="21.2" data-path="facet-wraps.html"><a href="facet-wraps.html#other-types"><i class="fa fa-check"></i><b>21.2</b> Other types</a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>22</b> Tables</a><ul>
+<li class="chapter" data-level="22" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>22</b> Tables</a>
+<ul>
 <li class="chapter" data-level="22.1" data-path="tables.html"><a href="tables.html#exporting-tables"><i class="fa fa-check"></i><b>22.1</b> Exporting tables</a></li>
 </ul></li>
 <li class="chapter" data-level="23" data-path="bubble-charts.html"><a href="bubble-charts.html"><i class="fa fa-check"></i><b>23</b> Bubble charts</a></li>
-<li class="chapter" data-level="24" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html"><i class="fa fa-check"></i><b>24</b> Circular bar plots</a><ul>
+<li class="chapter" data-level="24" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html"><i class="fa fa-check"></i><b>24</b> Circular bar plots</a>
+<ul>
 <li class="chapter" data-level="24.1" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html#does-november-basketball-matter"><i class="fa fa-check"></i><b>24.1</b> Does November basketball matter?</a></li>
 <li class="chapter" data-level="24.2" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html#does-it-show-you-where-you-are"><i class="fa fa-check"></i><b>24.2</b> Does it show you where you are?</a></li>
 </ul></li>
-<li class="chapter" data-level="25" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html"><i class="fa fa-check"></i><b>25</b> Intro to rvest</a><ul>
+<li class="chapter" data-level="25" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html"><i class="fa fa-check"></i><b>25</b> Intro to rvest</a>
+<ul>
 <li class="chapter" data-level="25.1" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html#a-slightly-more-complicated-example"><i class="fa fa-check"></i><b>25.1</b> A slightly more complicated example</a></li>
 <li class="chapter" data-level="25.2" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html#an-even-more-complicated-example"><i class="fa fa-check"></i><b>25.2</b> An even more complicated example</a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="advanced-rvest.html"><a href="advanced-rvest.html"><i class="fa fa-check"></i><b>26</b> Advanced rvest</a><ul>
+<li class="chapter" data-level="26" data-path="advanced-rvest.html"><a href="advanced-rvest.html"><i class="fa fa-check"></i><b>26</b> Advanced rvest</a>
+<ul>
 <li class="chapter" data-level="26.1" data-path="advanced-rvest.html"><a href="advanced-rvest.html#one-last-bit"><i class="fa fa-check"></i><b>26.1</b> One last bit</a></li>
 </ul></li>
 <li class="chapter" data-level="27" data-path="annotations.html"><a href="annotations.html"><i class="fa fa-check"></i><b>27</b> Annotations</a></li>
-<li class="chapter" data-level="28" data-path="finishing-touches.html"><a href="finishing-touches.html"><i class="fa fa-check"></i><b>28</b> Finishing touches</a><ul>
+<li class="chapter" data-level="28" data-path="finishing-touches.html"><a href="finishing-touches.html"><i class="fa fa-check"></i><b>28</b> Finishing touches</a>
+<ul>
 <li class="chapter" data-level="28.1" data-path="finishing-touches.html"><a href="finishing-touches.html#graphics-vs-visual-stories"><i class="fa fa-check"></i><b>28.1</b> Graphics vs visual stories</a></li>
 <li class="chapter" data-level="28.2" data-path="finishing-touches.html"><a href="finishing-touches.html#getting-ggplot-closer-to-output"><i class="fa fa-check"></i><b>28.2</b> Getting ggplot closer to output</a></li>
 <li class="chapter" data-level="28.3" data-path="finishing-touches.html"><a href="finishing-touches.html#waffle-charts-require-special-attention"><i class="fa fa-check"></i><b>28.3</b> Waffle charts require special attention</a></li>
 </ul></li>
 <li class="chapter" data-level="29" data-path="headlines.html"><a href="headlines.html"><i class="fa fa-check"></i><b>29</b> Headlines</a></li>
-<li class="chapter" data-level="30" data-path="plotly.html"><a href="plotly.html"><i class="fa fa-check"></i><b>30</b> Plotly</a><ul>
+<li class="chapter" data-level="30" data-path="plotly.html"><a href="plotly.html"><i class="fa fa-check"></i><b>30</b> Plotly</a>
+<ul>
 <li class="chapter" data-level="30.1" data-path="plotly.html"><a href="plotly.html#publishing-using-plotly"><i class="fa fa-check"></i><b>30.1</b> Publishing using Plotly</a></li>
 </ul></li>
-<li class="chapter" data-level="31" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>31</b> Clustering</a><ul>
+<li class="chapter" data-level="31" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>31</b> Clustering</a>
+<ul>
 <li class="chapter" data-level="31.1" data-path="clustering.html"><a href="clustering.html#advanced-metrics"><i class="fa fa-check"></i><b>31.1</b> Advanced metrics</a></li>
 </ul></li>
-<li class="chapter" data-level="32" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html"><i class="fa fa-check"></i><b>32</b> Rtweet and Text Analysis</a><ul>
-<li class="chapter" data-level="32.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#prerequisites"><i class="fa fa-check"></i><b>32.1</b> Prerequisites</a><ul>
+<li class="chapter" data-level="32" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html"><i class="fa fa-check"></i><b>32</b> Rtweet and Text Analysis</a>
+<ul>
+<li class="chapter" data-level="32.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#prerequisites"><i class="fa fa-check"></i><b>32.1</b> Prerequisites</a>
+<ul>
 <li class="chapter" data-level="32.1.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#tools-for-text-analysis"><i class="fa fa-check"></i><b>32.1.1</b> Tools for text analysis</a></li>
 <li class="chapter" data-level="32.1.2" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#working-with-string-data"><i class="fa fa-check"></i><b>32.1.2</b> Working with string data</a></li>
 </ul></li>
 <li class="chapter" data-level="32.2" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#verifying-your-account-to-access-twitter-data"><i class="fa fa-check"></i><b>32.2</b> Verifying your account to access Twitter data</a></li>
 <li class="chapter" data-level="32.3" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#the-data-used-here"><i class="fa fa-check"></i><b>32.3</b> The data used here</a></li>
 <li class="chapter" data-level="32.4" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#data-exploration"><i class="fa fa-check"></i><b>32.4</b> Data Exploration</a></li>
-<li class="chapter" data-level="32.5" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#cleaning-data-for-analysis"><i class="fa fa-check"></i><b>32.5</b> Cleaning data for analysis</a><ul>
+<li class="chapter" data-level="32.5" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#cleaning-data-for-analysis"><i class="fa fa-check"></i><b>32.5</b> Cleaning data for analysis</a>
+<ul>
 <li class="chapter" data-level="32.5.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#fixing-the-date-and-focusing-only-on-game-tweets"><i class="fa fa-check"></i><b>32.5.1</b> Fixing the date and focusing only on game tweets</a></li>
 </ul></li>
 <li class="chapter" data-level="32.6" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#number-of-tweets-throughout-the-game"><i class="fa fa-check"></i><b>32.6</b> Number of tweets throughout the game</a></li>
-<li class="chapter" data-level="32.7" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#tidying-the-text-data-for-analysis-applying-the-sentiment-scores"><i class="fa fa-check"></i><b>32.7</b> Tidying the text data for analysis, applying the sentiment scores</a><ul>
+<li class="chapter" data-level="32.7" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#tidying-the-text-data-for-analysis-applying-the-sentiment-scores"><i class="fa fa-check"></i><b>32.7</b> Tidying the text data for analysis, applying the sentiment scores</a>
+<ul>
 <li class="chapter" data-level="32.7.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#example-2---nebraskas-loss-to-purdue-what-were-fans-sentiments-towards-this-loss"><i class="fa fa-check"></i><b>32.7.1</b> Example 2 - Nebraska’s loss to Purdue, what were fan’s sentiments towards this loss?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="33" data-path="arranging-multiple-plots-together.html"><a href="arranging-multiple-plots-together.html"><i class="fa fa-check"></i><b>33</b> Arranging multiple plots together</a></li>
-<li class="chapter" data-level="34" data-path="encircling-points-on-a-scatterplot.html"><a href="encircling-points-on-a-scatterplot.html"><i class="fa fa-check"></i><b>34</b> Encircling points on a scatterplot</a><ul>
+<li class="chapter" data-level="34" data-path="encircling-points-on-a-scatterplot.html"><a href="encircling-points-on-a-scatterplot.html"><i class="fa fa-check"></i><b>34</b> Encircling points on a scatterplot</a>
+<ul>
 <li class="chapter" data-level="34.1" data-path="encircling-points-on-a-scatterplot.html"><a href="encircling-points-on-a-scatterplot.html#a-different-more-local-example"><i class="fa fa-check"></i><b>34.1</b> A different, more local example</a></li>
 </ul></li>
 <li class="chapter" data-level="35" data-path="bump-charts.html"><a href="bump-charts.html"><i class="fa fa-check"></i><b>35</b> Bump charts</a></li>
-<li class="chapter" data-level="36" data-path="text-cleaning.html"><a href="text-cleaning.html"><i class="fa fa-check"></i><b>36</b> Text cleaning</a><ul>
+<li class="chapter" data-level="36" data-path="text-cleaning.html"><a href="text-cleaning.html"><i class="fa fa-check"></i><b>36</b> Text cleaning</a>
+<ul>
 <li class="chapter" data-level="36.1" data-path="text-cleaning.html"><a href="text-cleaning.html#stripping-out-text"><i class="fa fa-check"></i><b>36.1</b> Stripping out text</a></li>
 <li class="chapter" data-level="36.2" data-path="text-cleaning.html"><a href="text-cleaning.html#another-example-splitting-columns"><i class="fa fa-check"></i><b>36.2</b> Another example: splitting columns</a></li>
 </ul></li>
 <li class="chapter" data-level="37" data-path="assignments.html"><a href="assignments.html"><i class="fa fa-check"></i><b>37</b> Assignments</a></li>
-<li class="chapter" data-level="38" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>38</b> Appendix</a><ul>
+<li class="chapter" data-level="38" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>38</b> Appendix</a>
+<ul>
 <li class="chapter" data-level="38.1" data-path="appendix.html"><a href="appendix.html#how-to-get-help-in-this-class"><i class="fa fa-check"></i><b>38.1</b> How to get help in this class</a></li>
 </ul></li>
-<li class="chapter" data-level="39" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>39</b> Simulations</a><ul>
+<li class="chapter" data-level="39" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>39</b> Simulations</a>
+<ul>
 <li class="chapter" data-level="39.1" data-path="simulations.html"><a href="simulations.html#cold-streaks"><i class="fa fa-check"></i><b>39.1</b> Cold streaks</a></li>
 </ul></li>
-<li class="chapter" data-level="40" data-path="beeswarm-plots.html"><a href="beeswarm-plots.html"><i class="fa fa-check"></i><b>40</b> Beeswarm plots</a><ul>
+<li class="chapter" data-level="40" data-path="beeswarm-plots.html"><a href="beeswarm-plots.html"><i class="fa fa-check"></i><b>40</b> Beeswarm plots</a>
+<ul>
 <li class="chapter" data-level="40.1" data-path="beeswarm-plots.html"><a href="beeswarm-plots.html#a-few-other-options"><i class="fa fa-check"></i><b>40.1</b> A few other options</a></li>
+</ul></li>
+<li class="chapter" data-level="41" data-path="building-your-own-blog-with-blogdown.html"><a href="building-your-own-blog-with-blogdown.html"><i class="fa fa-check"></i><b>41</b> Building your own blog with blogdown</a>
+<ul>
+<li class="chapter" data-level="41.1" data-path="building-your-own-blog-with-blogdown.html"><a href="building-your-own-blog-with-blogdown.html#setup"><i class="fa fa-check"></i><b>41.1</b> Setup</a></li>
+<li class="chapter" data-level="41.2" data-path="building-your-own-blog-with-blogdown.html"><a href="building-your-own-blog-with-blogdown.html#editing-existing-markdown-content"><i class="fa fa-check"></i><b>41.2</b> Editing existing Markdown content</a></li>
+<li class="chapter" data-level="41.3" data-path="building-your-own-blog-with-blogdown.html"><a href="building-your-own-blog-with-blogdown.html#creating-a-new-post-in-r-markdown"><i class="fa fa-check"></i><b>41.3</b> Creating a new post in R Markdown</a></li>
+<li class="chapter" data-level="41.4" data-path="building-your-own-blog-with-blogdown.html"><a href="building-your-own-blog-with-blogdown.html#publishing-your-site"><i class="fa fa-check"></i><b>41.4</b> Publishing your site</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -306,115 +346,96 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="waffle-charts" class="section level1">
+<div id="waffle-charts" class="section level1" number="15">
 <h1><span class="header-section-number">Chapter 15</span> Waffle charts</h1>
-<p>Pie charts are the devil. They should be an instant F in any data visualization class. I’ll give you an example of why.</p>
-<p>What’s the racial breakdown of journalism majors at UNL?</p>
-<p>Here it is in a pie chart:</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="waffle-charts.html#cb222-1"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb222-2"><a href="waffle-charts.html#cb222-2"></a></span>
-<span id="cb222-3"><a href="waffle-charts.html#cb222-3"></a>enrollment &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;~/Box/Courses/JOUR407-Data-Visualization/Data/collegeenrollment.csv&quot;</span>)</span>
-<span id="cb222-4"><a href="waffle-charts.html#cb222-4"></a></span>
-<span id="cb222-5"><a href="waffle-charts.html#cb222-5"></a>jour &lt;-<span class="st"> </span><span class="kw">filter</span>(enrollment, MajorName <span class="op">==</span><span class="st"> &quot;Journalism&quot;</span>)</span>
-<span id="cb222-6"><a href="waffle-charts.html#cb222-6"></a></span>
-<span id="cb222-7"><a href="waffle-charts.html#cb222-7"></a>jdf &lt;-<span class="st"> </span>jour <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb222-8"><a href="waffle-charts.html#cb222-8"></a><span class="kw">group_by</span>(Race) <span class="op">%&gt;%</span></span>
-<span id="cb222-9"><a href="waffle-charts.html#cb222-9"></a><span class="kw">summarise</span>(</span>
-<span id="cb222-10"><a href="waffle-charts.html#cb222-10"></a>       <span class="dt">total=</span><span class="kw">sum</span>(Count)) <span class="op">%&gt;%</span></span>
-<span id="cb222-11"><a href="waffle-charts.html#cb222-11"></a><span class="kw">select</span>(Race, total) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb222-12"><a href="waffle-charts.html#cb222-12"></a><span class="kw">filter</span>(total <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
-<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="waffle-charts.html#cb224-1"></a><span class="kw">ggplot</span>(jdf, <span class="kw">aes</span>(<span class="dt">x=</span><span class="st">&quot;&quot;</span>, <span class="dt">y=</span>total, <span class="dt">fill=</span>Race)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">width =</span> <span class="dv">1</span>, <span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">coord_polar</span>(<span class="st">&quot;y&quot;</span>, <span class="dt">start=</span><span class="dv">0</span>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-126-1.png" width="672" /></p>
-<p>You can see, it’s pretty white. But … what about beyond that? How carefully can you evaluate angles and area?</p>
-<p>Not well.</p>
+<p>Pie charts are the devil. They should be an instant F in any data visualization class. The problem? How carefully can you evaluate angles and area? Unless they are blindingly obvious and only a few categories, not well. If you’ve got 25 categories, how can you tell the difference between 7 and 9 percent? You can’t.</p>
 <p>So let’s introduce a better way: The Waffle Chart. Some call it a square pie chart. I personally hate that. Waffles it is.</p>
 <p><strong>A waffle chart is designed to show you parts of the whole – proportionality</strong>. How many yards on offense come from rushing or passing. How many singles, doubles, triples and home runs make up a teams hits. How many shots a basketball team takes are two pointers versus three pointers.</p>
 <p>First, install the library in the console. We want a newer version of the <code>waffle</code> library than is in CRAN – where you normally get libraries from – so copy and paste this into your console:</p>
 <p><code>install.packages("waffle")</code></p>
 <p>Now load it:</p>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="waffle-charts.html#cb225-1"></a><span class="kw">library</span>(waffle)</span></code></pre></div>
-<div id="waffles-two-ways-part-1" class="section level2">
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="waffle-charts.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(waffle)</span></code></pre></div>
+<div id="waffles-two-ways-part-1" class="section level2" number="15.1">
 <h2><span class="header-section-number">15.1</span> Waffles two ways: Part 1</h2>
 <p>Let’s look at the debacle that was Nebraska vs. Ohio State this past fall in college football. <a href="https://www.espn.com/college-football/matchup?gameId=401112241">Here’s the box score</a>, which we’ll use for this part of the walkthrough.</p>
 <p>Maybe the easiest way to do waffle charts, at least at first, is to make vectors of your data and plug them in. To make a vector, we use the <code>c</code> or concatenate function.</p>
 <p>So let’s look at offense. Rushing vs passing.</p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="waffle-charts.html#cb226-1"></a>nu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Rushing&quot;</span>=<span class="dv">184</span>, <span class="st">&quot;Passing&quot;</span>=<span class="dv">47</span>)</span>
-<span id="cb226-2"><a href="waffle-charts.html#cb226-2"></a>oh &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Rushing&quot;</span>=<span class="dv">368</span>, <span class="st">&quot;Passing&quot;</span>=<span class="dv">212</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="waffle-charts.html#cb214-1" aria-hidden="true" tabindex="-1"></a>nu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Rushing&quot;</span><span class="ot">=</span><span class="dv">184</span>, <span class="st">&quot;Passing&quot;</span><span class="ot">=</span><span class="dv">47</span>)</span>
+<span id="cb214-2"><a href="waffle-charts.html#cb214-2" aria-hidden="true" tabindex="-1"></a>oh <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Rushing&quot;</span><span class="ot">=</span><span class="dv">368</span>, <span class="st">&quot;Passing&quot;</span><span class="ot">=</span><span class="dv">212</span>)</span></code></pre></div>
 <p>So what does the breakdown of the night look like?</p>
 <p>The waffle library can break this down in a way that’s easier on the eyes than a pie chart. We call the library, add the data, specify the number of rows, give it a title and an x value label, and to clean up a quirk of the library, we’ve got to specify colors.</p>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="waffle-charts.html#cb227-1"></a><span class="kw">waffle</span>(</span>
-<span id="cb227-2"><a href="waffle-charts.html#cb227-2"></a>        nu, </span>
-<span id="cb227-3"><a href="waffle-charts.html#cb227-3"></a>        <span class="dt">rows =</span> <span class="dv">10</span>, </span>
-<span id="cb227-4"><a href="waffle-charts.html#cb227-4"></a>        <span class="dt">title=</span><span class="st">&quot;Nebraska&#39;s offense&quot;</span>, </span>
-<span id="cb227-5"><a href="waffle-charts.html#cb227-5"></a>        <span class="dt">xlab=</span><span class="st">&quot;1 square = 1 yard&quot;</span>, </span>
-<span id="cb227-6"><a href="waffle-charts.html#cb227-6"></a>        <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb227-7"><a href="waffle-charts.html#cb227-7"></a>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-129-1.png" width="672" /></p>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="waffle-charts.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">waffle</span>(</span>
+<span id="cb215-2"><a href="waffle-charts.html#cb215-2" aria-hidden="true" tabindex="-1"></a>        nu, </span>
+<span id="cb215-3"><a href="waffle-charts.html#cb215-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">rows =</span> <span class="dv">10</span>, </span>
+<span id="cb215-4"><a href="waffle-charts.html#cb215-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">title=</span><span class="st">&quot;Nebraska&#39;s offense&quot;</span>, </span>
+<span id="cb215-5"><a href="waffle-charts.html#cb215-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span><span class="st">&quot;1 square = 1 yard&quot;</span>, </span>
+<span id="cb215-6"><a href="waffle-charts.html#cb215-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb215-7"><a href="waffle-charts.html#cb215-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-128-1.png" width="672" /></p>
 <p>Or, we could make this two teams in the same chart.</p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="waffle-charts.html#cb228-1"></a>passing &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Nebraska&quot;</span>=<span class="dv">47</span>, <span class="st">&quot;Ohio State&quot;</span>=<span class="dv">212</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="waffle-charts.html#cb229-1"></a><span class="kw">waffle</span>(</span>
-<span id="cb229-2"><a href="waffle-charts.html#cb229-2"></a>        passing, </span>
-<span id="cb229-3"><a href="waffle-charts.html#cb229-3"></a>        <span class="dt">rows =</span> <span class="dv">10</span>, </span>
-<span id="cb229-4"><a href="waffle-charts.html#cb229-4"></a>        <span class="dt">title=</span><span class="st">&quot;Nebraska vs Ohio State: passing&quot;</span>, </span>
-<span id="cb229-5"><a href="waffle-charts.html#cb229-5"></a>        <span class="dt">xlab=</span><span class="st">&quot;1 square = 1 yard&quot;</span>, </span>
-<span id="cb229-6"><a href="waffle-charts.html#cb229-6"></a>        <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;black&quot;</span>)</span>
-<span id="cb229-7"><a href="waffle-charts.html#cb229-7"></a>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="waffle-charts.html#cb216-1" aria-hidden="true" tabindex="-1"></a>passing <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Nebraska&quot;</span><span class="ot">=</span><span class="dv">47</span>, <span class="st">&quot;Ohio State&quot;</span><span class="ot">=</span><span class="dv">212</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="waffle-charts.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="fu">waffle</span>(</span>
+<span id="cb217-2"><a href="waffle-charts.html#cb217-2" aria-hidden="true" tabindex="-1"></a>        passing, </span>
+<span id="cb217-3"><a href="waffle-charts.html#cb217-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">rows =</span> <span class="dv">10</span>, </span>
+<span id="cb217-4"><a href="waffle-charts.html#cb217-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">title=</span><span class="st">&quot;Nebraska vs Ohio State: passing&quot;</span>, </span>
+<span id="cb217-5"><a href="waffle-charts.html#cb217-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span><span class="st">&quot;1 square = 1 yard&quot;</span>, </span>
+<span id="cb217-6"><a href="waffle-charts.html#cb217-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb217-7"><a href="waffle-charts.html#cb217-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-130-1.png" width="672" /></p>
 <p>So what does it look like if we compare the two teams using the two vectors in the same chart? To do that – and I am not making this up – you have to create a waffle iron. Get it? Waffle charts? Iron?</p>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="waffle-charts.html#cb230-1"></a><span class="kw">iron</span>(</span>
-<span id="cb230-2"><a href="waffle-charts.html#cb230-2"></a> <span class="kw">waffle</span>(nu, </span>
-<span id="cb230-3"><a href="waffle-charts.html#cb230-3"></a>        <span class="dt">rows =</span> <span class="dv">10</span>, </span>
-<span id="cb230-4"><a href="waffle-charts.html#cb230-4"></a>        <span class="dt">title=</span><span class="st">&quot;Nebraska&#39;s offense&quot;</span>, </span>
-<span id="cb230-5"><a href="waffle-charts.html#cb230-5"></a>        <span class="dt">xlab=</span><span class="st">&quot;1 square = 1 yard&quot;</span>, </span>
-<span id="cb230-6"><a href="waffle-charts.html#cb230-6"></a>        <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb230-7"><a href="waffle-charts.html#cb230-7"></a>        ),</span>
-<span id="cb230-8"><a href="waffle-charts.html#cb230-8"></a> <span class="kw">waffle</span>(oh, </span>
-<span id="cb230-9"><a href="waffle-charts.html#cb230-9"></a>        <span class="dt">rows =</span> <span class="dv">10</span>, </span>
-<span id="cb230-10"><a href="waffle-charts.html#cb230-10"></a>        <span class="dt">title=</span><span class="st">&quot;Ohio State&#39;s offense&quot;</span>, </span>
-<span id="cb230-11"><a href="waffle-charts.html#cb230-11"></a>        <span class="dt">xlab=</span><span class="st">&quot;1 square = 1 yard&quot;</span>, </span>
-<span id="cb230-12"><a href="waffle-charts.html#cb230-12"></a>        <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb230-13"><a href="waffle-charts.html#cb230-13"></a>        )</span>
-<span id="cb230-14"><a href="waffle-charts.html#cb230-14"></a>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-132-1.png" width="672" /></p>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="waffle-charts.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="fu">iron</span>(</span>
+<span id="cb218-2"><a href="waffle-charts.html#cb218-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">waffle</span>(nu, </span>
+<span id="cb218-3"><a href="waffle-charts.html#cb218-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">rows =</span> <span class="dv">10</span>, </span>
+<span id="cb218-4"><a href="waffle-charts.html#cb218-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">title=</span><span class="st">&quot;Nebraska&#39;s offense&quot;</span>, </span>
+<span id="cb218-5"><a href="waffle-charts.html#cb218-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span><span class="st">&quot;1 square = 1 yard&quot;</span>, </span>
+<span id="cb218-6"><a href="waffle-charts.html#cb218-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb218-7"><a href="waffle-charts.html#cb218-7" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb218-8"><a href="waffle-charts.html#cb218-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">waffle</span>(oh, </span>
+<span id="cb218-9"><a href="waffle-charts.html#cb218-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">rows =</span> <span class="dv">10</span>, </span>
+<span id="cb218-10"><a href="waffle-charts.html#cb218-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">title=</span><span class="st">&quot;Ohio State&#39;s offense&quot;</span>, </span>
+<span id="cb218-11"><a href="waffle-charts.html#cb218-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span><span class="st">&quot;1 square = 1 yard&quot;</span>, </span>
+<span id="cb218-12"><a href="waffle-charts.html#cb218-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb218-13"><a href="waffle-charts.html#cb218-13" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb218-14"><a href="waffle-charts.html#cb218-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
 <p>What do you notice about this chart? Notice how the squares aren’t the same size? Well, Ohio State out-gained Nebraska by a long way. So the squares aren’t the same size because the numbers aren’t the same. We can fix that by adding an unnamed padding number so the number of yards add up to the same thing. Let’s make the total for everyone be 580, Ohio State’s total yards of offense. So to do that, we need to add a padding of 349 to Nebraska. REMEMBER: Don’t name it or it’ll show up in the legend.</p>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="waffle-charts.html#cb231-1"></a>nu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Rushing&quot;</span>=<span class="dv">184</span>, <span class="st">&quot;Passing&quot;</span>=<span class="dv">47</span>, <span class="dv">349</span>)</span>
-<span id="cb231-2"><a href="waffle-charts.html#cb231-2"></a>oh &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Rushing&quot;</span>=<span class="dv">368</span>, <span class="st">&quot;Passing&quot;</span>=<span class="dv">212</span>, <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="waffle-charts.html#cb219-1" aria-hidden="true" tabindex="-1"></a>nu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Rushing&quot;</span><span class="ot">=</span><span class="dv">184</span>, <span class="st">&quot;Passing&quot;</span><span class="ot">=</span><span class="dv">47</span>, <span class="dv">349</span>)</span>
+<span id="cb219-2"><a href="waffle-charts.html#cb219-2" aria-hidden="true" tabindex="-1"></a>oh <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Rushing&quot;</span><span class="ot">=</span><span class="dv">368</span>, <span class="st">&quot;Passing&quot;</span><span class="ot">=</span><span class="dv">212</span>, <span class="dv">0</span>)</span></code></pre></div>
 <p>Now, in our waffle iron, if we don’t give that padding a color, we’ll get an error. So we need to make it white. Which, given our white background, means it will disappear.</p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="waffle-charts.html#cb232-1"></a><span class="kw">iron</span>(</span>
-<span id="cb232-2"><a href="waffle-charts.html#cb232-2"></a> <span class="kw">waffle</span>(nu, </span>
-<span id="cb232-3"><a href="waffle-charts.html#cb232-3"></a>        <span class="dt">rows =</span> <span class="dv">10</span>, </span>
-<span id="cb232-4"><a href="waffle-charts.html#cb232-4"></a>        <span class="dt">title=</span><span class="st">&quot;Nebraska&#39;s offense&quot;</span>, </span>
-<span id="cb232-5"><a href="waffle-charts.html#cb232-5"></a>        <span class="dt">xlab=</span><span class="st">&quot;1 square = 1 yard&quot;</span>, </span>
-<span id="cb232-6"><a href="waffle-charts.html#cb232-6"></a>        <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>)</span>
-<span id="cb232-7"><a href="waffle-charts.html#cb232-7"></a>        ),</span>
-<span id="cb232-8"><a href="waffle-charts.html#cb232-8"></a> <span class="kw">waffle</span>(oh, </span>
-<span id="cb232-9"><a href="waffle-charts.html#cb232-9"></a>        <span class="dt">rows =</span> <span class="dv">10</span>, </span>
-<span id="cb232-10"><a href="waffle-charts.html#cb232-10"></a>        <span class="dt">title=</span><span class="st">&quot;Ohio State&#39;s offense&quot;</span>, </span>
-<span id="cb232-11"><a href="waffle-charts.html#cb232-11"></a>        <span class="dt">xlab=</span><span class="st">&quot;1 square = 1 yard&quot;</span>, </span>
-<span id="cb232-12"><a href="waffle-charts.html#cb232-12"></a>        <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>)</span>
-<span id="cb232-13"><a href="waffle-charts.html#cb232-13"></a>        )</span>
-<span id="cb232-14"><a href="waffle-charts.html#cb232-14"></a>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-134-1.png" width="672" /></p>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="waffle-charts.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="fu">iron</span>(</span>
+<span id="cb220-2"><a href="waffle-charts.html#cb220-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">waffle</span>(nu, </span>
+<span id="cb220-3"><a href="waffle-charts.html#cb220-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">rows =</span> <span class="dv">10</span>, </span>
+<span id="cb220-4"><a href="waffle-charts.html#cb220-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">title=</span><span class="st">&quot;Nebraska&#39;s offense&quot;</span>, </span>
+<span id="cb220-5"><a href="waffle-charts.html#cb220-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span><span class="st">&quot;1 square = 1 yard&quot;</span>, </span>
+<span id="cb220-6"><a href="waffle-charts.html#cb220-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>)</span>
+<span id="cb220-7"><a href="waffle-charts.html#cb220-7" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb220-8"><a href="waffle-charts.html#cb220-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">waffle</span>(oh, </span>
+<span id="cb220-9"><a href="waffle-charts.html#cb220-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">rows =</span> <span class="dv">10</span>, </span>
+<span id="cb220-10"><a href="waffle-charts.html#cb220-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">title=</span><span class="st">&quot;Ohio State&#39;s offense&quot;</span>, </span>
+<span id="cb220-11"><a href="waffle-charts.html#cb220-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span><span class="st">&quot;1 square = 1 yard&quot;</span>, </span>
+<span id="cb220-12"><a href="waffle-charts.html#cb220-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>)</span>
+<span id="cb220-13"><a href="waffle-charts.html#cb220-13" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb220-14"><a href="waffle-charts.html#cb220-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-133-1.png" width="672" /></p>
 <p>One last thing we can do is change the 1 square = 1 yard bit – which makes the squares really small in this case – by dividing our vector. Remember what you learned in Swirl about math on vectors?</p>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="waffle-charts.html#cb233-1"></a><span class="kw">iron</span>(</span>
-<span id="cb233-2"><a href="waffle-charts.html#cb233-2"></a> <span class="kw">waffle</span>(nu<span class="op">/</span><span class="dv">2</span>, </span>
-<span id="cb233-3"><a href="waffle-charts.html#cb233-3"></a>        <span class="dt">rows =</span> <span class="dv">10</span>, </span>
-<span id="cb233-4"><a href="waffle-charts.html#cb233-4"></a>        <span class="dt">title=</span><span class="st">&quot;Nebraska&#39;s offense&quot;</span>, </span>
-<span id="cb233-5"><a href="waffle-charts.html#cb233-5"></a>        <span class="dt">xlab=</span><span class="st">&quot;1 square = 2 yards&quot;</span>, </span>
-<span id="cb233-6"><a href="waffle-charts.html#cb233-6"></a>        <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>)</span>
-<span id="cb233-7"><a href="waffle-charts.html#cb233-7"></a>        ),</span>
-<span id="cb233-8"><a href="waffle-charts.html#cb233-8"></a> <span class="kw">waffle</span>(oh<span class="op">/</span><span class="dv">2</span>, </span>
-<span id="cb233-9"><a href="waffle-charts.html#cb233-9"></a>        <span class="dt">rows =</span> <span class="dv">10</span>, </span>
-<span id="cb233-10"><a href="waffle-charts.html#cb233-10"></a>        <span class="dt">title=</span><span class="st">&quot;Ohio State&#39;s offense&quot;</span>, </span>
-<span id="cb233-11"><a href="waffle-charts.html#cb233-11"></a>        <span class="dt">xlab=</span><span class="st">&quot;1 square = 2 yards&quot;</span>, </span>
-<span id="cb233-12"><a href="waffle-charts.html#cb233-12"></a>        <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>)</span>
-<span id="cb233-13"><a href="waffle-charts.html#cb233-13"></a>        )</span>
-<span id="cb233-14"><a href="waffle-charts.html#cb233-14"></a>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-135-1.png" width="672" /></p>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="waffle-charts.html#cb221-1" aria-hidden="true" tabindex="-1"></a><span class="fu">iron</span>(</span>
+<span id="cb221-2"><a href="waffle-charts.html#cb221-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">waffle</span>(nu<span class="sc">/</span><span class="dv">2</span>, </span>
+<span id="cb221-3"><a href="waffle-charts.html#cb221-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">rows =</span> <span class="dv">10</span>, </span>
+<span id="cb221-4"><a href="waffle-charts.html#cb221-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">title=</span><span class="st">&quot;Nebraska&#39;s offense&quot;</span>, </span>
+<span id="cb221-5"><a href="waffle-charts.html#cb221-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span><span class="st">&quot;1 square = 2 yards&quot;</span>, </span>
+<span id="cb221-6"><a href="waffle-charts.html#cb221-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>)</span>
+<span id="cb221-7"><a href="waffle-charts.html#cb221-7" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb221-8"><a href="waffle-charts.html#cb221-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">waffle</span>(oh<span class="sc">/</span><span class="dv">2</span>, </span>
+<span id="cb221-9"><a href="waffle-charts.html#cb221-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">rows =</span> <span class="dv">10</span>, </span>
+<span id="cb221-10"><a href="waffle-charts.html#cb221-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">title=</span><span class="st">&quot;Ohio State&#39;s offense&quot;</span>, </span>
+<span id="cb221-11"><a href="waffle-charts.html#cb221-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span><span class="st">&quot;1 square = 2 yards&quot;</span>, </span>
+<span id="cb221-12"><a href="waffle-charts.html#cb221-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>)</span>
+<span id="cb221-13"><a href="waffle-charts.html#cb221-13" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb221-14"><a href="waffle-charts.html#cb221-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-134-1.png" width="672" /></p>
 <p>News flash: Ohio State crushed Nebraska.</p>
 </div>
-<div id="waffles-two-ways-part-2" class="section level2">
+<div id="waffles-two-ways-part-2" class="section level2" number="15.2">
 <h2><span class="header-section-number">15.2</span> Waffles two ways: Part 2</h2>
 <p>For this part, we want a newer version of the <code>waffle</code> library than is in CRAN – where you normally get libraries from.</p>
 <p><strong>WARNING: This didn’t work in a variety of environments, so it may not work on yours.</strong></p>
@@ -422,8 +443,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><code>install.packages("waffle", repos = "https://cinc.rud.is")</code></p>
 <p>At first, this way might seem harder than doing it the way we just walked through, but the benefits will come later when it’s far, far easier to style this chart, where the previous charts are harder.</p>
 <p>We have the log of every game in college football – <a href="https://unl.box.com/s/2prgq48ctoxlukn6kmfjw0u1opda5s0m">you can get it here</a> – and we can find this game with some simple filtering.</p>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="waffle-charts.html#cb234-1"></a>fblogs &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/footballlogs19.csv&quot;</span>)</span></code></pre></div>
-<pre><code>## Parsed with column specification:
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="waffle-charts.html#cb222-1" aria-hidden="true" tabindex="-1"></a>fblogs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/footballlogs19.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
 ## cols(
 ##   .default = col_double(),
 ##   Date = col_date(format = &quot;&quot;),
@@ -435,9 +457,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ##   Outcome = col_character(),
 ##   Team = col_character(),
 ##   Conference = col_character()
-## )</code></pre>
-<pre><code>## See spec(...) for full column specifications.</code></pre>
-<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="waffle-charts.html#cb237-1"></a>fblogs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Team <span class="op">==</span><span class="st"> &quot;Nebraska&quot;</span> <span class="op">&amp;</span><span class="st"> </span>Opponent <span class="op">==</span><span class="st"> &quot;Ohio State&quot;</span>)</span></code></pre></div>
+## )
+## ℹ Use `spec()` for the full column specifications.</code></pre>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="waffle-charts.html#cb224-1" aria-hidden="true" tabindex="-1"></a>fblogs <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">&quot;Nebraska&quot;</span> <span class="sc">&amp;</span> Opponent <span class="sc">==</span> <span class="st">&quot;Ohio State&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 54
 ##    Game Date       HomeAway Opponent Result PassingCmp PassingAtt PassingPct
 ##   &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
@@ -457,55 +479,55 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## #   DefPenaltyYds &lt;dbl&gt;, DefFumbles &lt;dbl&gt;, DefInterceptions &lt;dbl&gt;,
 ## #   DefTotalTurnovers &lt;dbl&gt;, Team &lt;chr&gt;, Conference &lt;chr&gt;</code></pre>
 <p>That’s the game. So now we need to make this long data – same as we did with the stacked bar charts – and we’ll focus on total yards.</p>
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="waffle-charts.html#cb239-1"></a>fblogs <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb239-2"><a href="waffle-charts.html#cb239-2"></a><span class="st">        </span><span class="kw">filter</span>(Team <span class="op">==</span><span class="st"> &quot;Nebraska&quot;</span> <span class="op">&amp;</span><span class="st"> </span>Opponent <span class="op">==</span><span class="st"> &quot;Ohio State&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb239-3"><a href="waffle-charts.html#cb239-3"></a><span class="st">        </span><span class="kw">select</span>(Team, OffensiveYards, DefYards) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb239-4"><a href="waffle-charts.html#cb239-4"></a><span class="st">        </span><span class="kw">pivot_longer</span>(</span>
-<span id="cb239-5"><a href="waffle-charts.html#cb239-5"></a>                <span class="dt">cols=</span><span class="kw">c</span>(<span class="st">&quot;OffensiveYards&quot;</span>, <span class="st">&quot;DefYards&quot;</span>), </span>
-<span id="cb239-6"><a href="waffle-charts.html#cb239-6"></a>                <span class="dt">names_to=</span><span class="st">&quot;Type&quot;</span>, </span>
-<span id="cb239-7"><a href="waffle-charts.html#cb239-7"></a>                <span class="dt">values_to=</span><span class="st">&quot;Yards&quot;</span></span>
-<span id="cb239-8"><a href="waffle-charts.html#cb239-8"></a>                )</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="waffle-charts.html#cb226-1" aria-hidden="true" tabindex="-1"></a>fblogs <span class="sc">%&gt;%</span> </span>
+<span id="cb226-2"><a href="waffle-charts.html#cb226-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">&quot;Nebraska&quot;</span> <span class="sc">&amp;</span> Opponent <span class="sc">==</span> <span class="st">&quot;Ohio State&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb226-3"><a href="waffle-charts.html#cb226-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(Team, OffensiveYards, DefYards) <span class="sc">%&gt;%</span> </span>
+<span id="cb226-4"><a href="waffle-charts.html#cb226-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pivot_longer</span>(</span>
+<span id="cb226-5"><a href="waffle-charts.html#cb226-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">cols=</span><span class="fu">c</span>(<span class="st">&quot;OffensiveYards&quot;</span>, <span class="st">&quot;DefYards&quot;</span>), </span>
+<span id="cb226-6"><a href="waffle-charts.html#cb226-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">names_to=</span><span class="st">&quot;Type&quot;</span>, </span>
+<span id="cb226-7"><a href="waffle-charts.html#cb226-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">values_to=</span><span class="st">&quot;Yards&quot;</span></span>
+<span id="cb226-8"><a href="waffle-charts.html#cb226-8" aria-hidden="true" tabindex="-1"></a>                )</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 3
 ##   Team     Type           Yards
 ##   &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;
 ## 1 Nebraska OffensiveYards   231
 ## 2 Nebraska DefYards         583</code></pre>
 <p>That does what we want, so let’s save that to a new dataframe.</p>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="waffle-charts.html#cb241-1"></a>nuoh &lt;-<span class="st"> </span>fblogs <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb241-2"><a href="waffle-charts.html#cb241-2"></a><span class="st">        </span><span class="kw">filter</span>(Team <span class="op">==</span><span class="st"> &quot;Nebraska&quot;</span> <span class="op">&amp;</span><span class="st"> </span>Opponent <span class="op">==</span><span class="st"> &quot;Ohio State&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb241-3"><a href="waffle-charts.html#cb241-3"></a><span class="st">        </span><span class="kw">select</span>(Team, OffensiveYards, DefYards) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb241-4"><a href="waffle-charts.html#cb241-4"></a><span class="st">        </span><span class="kw">pivot_longer</span>(</span>
-<span id="cb241-5"><a href="waffle-charts.html#cb241-5"></a>                <span class="dt">cols=</span><span class="kw">c</span>(<span class="st">&quot;OffensiveYards&quot;</span>, <span class="st">&quot;DefYards&quot;</span>), </span>
-<span id="cb241-6"><a href="waffle-charts.html#cb241-6"></a>                <span class="dt">names_to=</span><span class="st">&quot;Type&quot;</span>, </span>
-<span id="cb241-7"><a href="waffle-charts.html#cb241-7"></a>                <span class="dt">values_to=</span><span class="st">&quot;Yards&quot;</span></span>
-<span id="cb241-8"><a href="waffle-charts.html#cb241-8"></a>                )</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="waffle-charts.html#cb228-1" aria-hidden="true" tabindex="-1"></a>nuoh <span class="ot">&lt;-</span> fblogs <span class="sc">%&gt;%</span> </span>
+<span id="cb228-2"><a href="waffle-charts.html#cb228-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">&quot;Nebraska&quot;</span> <span class="sc">&amp;</span> Opponent <span class="sc">==</span> <span class="st">&quot;Ohio State&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb228-3"><a href="waffle-charts.html#cb228-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(Team, OffensiveYards, DefYards) <span class="sc">%&gt;%</span> </span>
+<span id="cb228-4"><a href="waffle-charts.html#cb228-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pivot_longer</span>(</span>
+<span id="cb228-5"><a href="waffle-charts.html#cb228-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">cols=</span><span class="fu">c</span>(<span class="st">&quot;OffensiveYards&quot;</span>, <span class="st">&quot;DefYards&quot;</span>), </span>
+<span id="cb228-6"><a href="waffle-charts.html#cb228-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">names_to=</span><span class="st">&quot;Type&quot;</span>, </span>
+<span id="cb228-7"><a href="waffle-charts.html#cb228-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">values_to=</span><span class="st">&quot;Yards&quot;</span></span>
+<span id="cb228-8"><a href="waffle-charts.html#cb228-8" aria-hidden="true" tabindex="-1"></a>                )</span></code></pre></div>
 <p>Now we can use a new geom – <code>geom_waffle</code> – that the <code>waffle</code> library has added to <code>ggplot</code>. The <code>geom_waffle</code> takes two required inputs: <code>fill</code> and <code>value</code>, but otherwise, it looks the same as previous things we’ve done.</p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="waffle-charts.html#cb242-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_waffle</span>(</span>
-<span id="cb242-2"><a href="waffle-charts.html#cb242-2"></a>  <span class="dt">data=</span>nuoh,</span>
-<span id="cb242-3"><a href="waffle-charts.html#cb242-3"></a>  <span class="kw">aes</span>(<span class="dt">fill=</span>Type, <span class="dt">values=</span>Yards))</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-140-1.png" width="672" />
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="waffle-charts.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_waffle</span>(</span>
+<span id="cb229-2"><a href="waffle-charts.html#cb229-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>nuoh,</span>
+<span id="cb229-3"><a href="waffle-charts.html#cb229-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">fill=</span>Type, <span class="at">values=</span>Yards))</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-139-1.png" width="672" />
 First, we can see that going this route changes the boxes to narrow rectangles. That’s to fill the space given.</p>
 <p>If we want to split them, we can use something called a <code>facet_wrap</code> which we will spend a whole class on later, so don’t worry about this now. Just know we can split it by <code>Type</code> this way.</p>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="waffle-charts.html#cb243-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_waffle</span>(</span>
-<span id="cb243-2"><a href="waffle-charts.html#cb243-2"></a>  <span class="dt">data=</span>nuoh,</span>
-<span id="cb243-3"><a href="waffle-charts.html#cb243-3"></a>  <span class="kw">aes</span>(<span class="dt">fill=</span>Type, <span class="dt">values=</span>Yards)</span>
-<span id="cb243-4"><a href="waffle-charts.html#cb243-4"></a>) <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Type)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-141-1.png" width="672" />
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="waffle-charts.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_waffle</span>(</span>
+<span id="cb230-2"><a href="waffle-charts.html#cb230-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>nuoh,</span>
+<span id="cb230-3"><a href="waffle-charts.html#cb230-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">fill=</span>Type, <span class="at">values=</span>Yards)</span>
+<span id="cb230-4"><a href="waffle-charts.html#cb230-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>Type)</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-140-1.png" width="672" />
 Now we can stack the two charts so they aren’t side by side using <code>ncol</code> inside the <code>facet_wrap</code>.</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="waffle-charts.html#cb244-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_waffle</span>(</span>
-<span id="cb244-2"><a href="waffle-charts.html#cb244-2"></a>  <span class="dt">data=</span>nuoh,</span>
-<span id="cb244-3"><a href="waffle-charts.html#cb244-3"></a>  <span class="kw">aes</span>(<span class="dt">fill=</span>Type, <span class="dt">values=</span>Yards)</span>
-<span id="cb244-4"><a href="waffle-charts.html#cb244-4"></a>) <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Type, <span class="dt">ncol=</span><span class="dv">1</span>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-142-1.png" width="672" />
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="waffle-charts.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_waffle</span>(</span>
+<span id="cb231-2"><a href="waffle-charts.html#cb231-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>nuoh,</span>
+<span id="cb231-3"><a href="waffle-charts.html#cb231-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">fill=</span>Type, <span class="at">values=</span>Yards)</span>
+<span id="cb231-4"><a href="waffle-charts.html#cb231-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>Type, <span class="at">ncol=</span><span class="dv">1</span>)</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-141-1.png" width="672" />
 Now it’s just a matter of formatting, labeling and general cleanup. We’ll focus on that later as well, but here’s a quick way to get started, which we did in the bar chart chapter.</p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="waffle-charts.html#cb245-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_waffle</span>(</span>
-<span id="cb245-2"><a href="waffle-charts.html#cb245-2"></a>  <span class="dt">data=</span>nuoh,</span>
-<span id="cb245-3"><a href="waffle-charts.html#cb245-3"></a>  <span class="kw">aes</span>(<span class="dt">fill=</span>Type, <span class="dt">values=</span>Yards)</span>
-<span id="cb245-4"><a href="waffle-charts.html#cb245-4"></a>) <span class="op">+</span><span class="st">  </span></span>
-<span id="cb245-5"><a href="waffle-charts.html#cb245-5"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Type, <span class="dt">ncol=</span><span class="dv">1</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb245-6"><a href="waffle-charts.html#cb245-6"></a><span class="st">    </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb245-7"><a href="waffle-charts.html#cb245-7"></a><span class="st">    </span><span class="kw">theme_enhance_waffle</span>()</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-143-1.png" width="672" /></p>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="waffle-charts.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_waffle</span>(</span>
+<span id="cb232-2"><a href="waffle-charts.html#cb232-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>nuoh,</span>
+<span id="cb232-3"><a href="waffle-charts.html#cb232-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">fill=</span>Type, <span class="at">values=</span>Yards)</span>
+<span id="cb232-4"><a href="waffle-charts.html#cb232-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span>  </span>
+<span id="cb232-5"><a href="waffle-charts.html#cb232-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>Type, <span class="at">ncol=</span><span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb232-6"><a href="waffle-charts.html#cb232-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb232-7"><a href="waffle-charts.html#cb232-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_enhance_waffle</span>()</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-142-1.png" width="672" /></p>
 
 </div>
 </div>

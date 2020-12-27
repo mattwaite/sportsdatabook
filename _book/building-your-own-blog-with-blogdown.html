@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 41 Building your own blog with blogdown | Sports Data Analysis and Visualization</title>
+  <meta name="description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 41 Building your own blog with blogdown | Sports Data Analysis and Visualization" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 41 Building your own blog with blogdown | Sports Data Analysis and Visualization" />
+  
+  <meta name="twitter:description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
+  
+
+<meta name="author" content="By Matt Waite" />
+
+
+<meta name="date" content="2019-07-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="beeswarm-plots.html"/>
+
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-160712129-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-160712129-1');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Sports Data Analysis and Visualization</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Throwing cold water on hot takes</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#requirements-and-conventions"><i class="fa fa-check"></i><b>1.1</b> Requirements and Conventions</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i><b>1.2</b> About this book</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="the-very-basics.html"><a href="the-very-basics.html"><i class="fa fa-check"></i><b>2</b> The very basics</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="the-very-basics.html"><a href="the-very-basics.html#adding-libraries-part-1"><i class="fa fa-check"></i><b>2.1</b> Adding libraries, part 1</a></li>
+<li class="chapter" data-level="2.2" data-path="the-very-basics.html"><a href="the-very-basics.html#adding-libraries-part-2"><i class="fa fa-check"></i><b>2.2</b> Adding libraries, part 2</a></li>
+<li class="chapter" data-level="2.3" data-path="the-very-basics.html"><a href="the-very-basics.html#notebooks"><i class="fa fa-check"></i><b>2.3</b> Notebooks</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html"><i class="fa fa-check"></i><b>3</b> Data, structures and types</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#rows-and-columns"><i class="fa fa-check"></i><b>3.1</b> Rows and columns</a></li>
+<li class="chapter" data-level="3.2" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#types"><i class="fa fa-check"></i><b>3.2</b> Types</a></li>
+<li class="chapter" data-level="3.3" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#a-simple-way-to-get-data"><i class="fa fa-check"></i><b>3.3</b> A simple way to get data</a></li>
+<li class="chapter" data-level="3.4" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#cleaning-the-data"><i class="fa fa-check"></i><b>3.4</b> Cleaning the data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="aggregates.html"><a href="aggregates.html"><i class="fa fa-check"></i><b>4</b> Aggregates</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="aggregates.html"><a href="aggregates.html#basic-data-analysis-group-by-and-count"><i class="fa fa-check"></i><b>4.1</b> Basic data analysis: Group By and Count</a></li>
+<li class="chapter" data-level="4.2" data-path="aggregates.html"><a href="aggregates.html#other-aggregates-mean-and-median"><i class="fa fa-check"></i><b>4.2</b> Other aggregates: Mean and median</a></li>
+<li class="chapter" data-level="4.3" data-path="aggregates.html"><a href="aggregates.html#even-more-aggregates"><i class="fa fa-check"></i><b>4.3</b> Even more aggregates</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="mutating-data.html"><a href="mutating-data.html"><i class="fa fa-check"></i><b>5</b> Mutating data</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="mutating-data.html"><a href="mutating-data.html#a-more-complex-example"><i class="fa fa-check"></i><b>5.1</b> A more complex example</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="filters-and-selections.html"><a href="filters-and-selections.html"><i class="fa fa-check"></i><b>6</b> Filters and selections</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="filters-and-selections.html"><a href="filters-and-selections.html#selecting-data-to-make-it-easier-to-read"><i class="fa fa-check"></i><b>6.1</b> Selecting data to make it easier to read</a></li>
+<li class="chapter" data-level="6.2" data-path="filters-and-selections.html"><a href="filters-and-selections.html#using-conditional-filters-to-set-limits"><i class="fa fa-check"></i><b>6.2</b> Using conditional filters to set limits</a></li>
+<li class="chapter" data-level="6.3" data-path="filters-and-selections.html"><a href="filters-and-selections.html#top-list"><i class="fa fa-check"></i><b>6.3</b> Top list</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="transforming-data.html"><a href="transforming-data.html"><i class="fa fa-check"></i><b>7</b> Transforming data</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="transforming-data.html"><a href="transforming-data.html#making-long-data-wide"><i class="fa fa-check"></i><b>7.1</b> Making long data wide</a></li>
+<li class="chapter" data-level="7.2" data-path="transforming-data.html"><a href="transforming-data.html#why-this-matters"><i class="fa fa-check"></i><b>7.2</b> Why this matters</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="significance-tests.html"><a href="significance-tests.html"><i class="fa fa-check"></i><b>8</b> Significance tests</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="significance-tests.html"><a href="significance-tests.html#accepting-the-null-hypothesis"><i class="fa fa-check"></i><b>8.1</b> Accepting the null hypothesis</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html"><i class="fa fa-check"></i><b>9</b> Correlations and regression</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="correlations-and-regression.html"><a href="correlations-and-regression.html#a-more-predictive-example"><i class="fa fa-check"></i><b>9.1</b> A more predictive example</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="multiple-regression.html"><a href="multiple-regression.html"><i class="fa fa-check"></i><b>10</b> Multiple regression</a></li>
+<li class="chapter" data-level="11" data-path="residuals.html"><a href="residuals.html"><i class="fa fa-check"></i><b>11</b> Residuals</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="residuals.html"><a href="residuals.html#penalties"><i class="fa fa-check"></i><b>11.1</b> Penalties</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="z-scores.html"><a href="z-scores.html"><i class="fa fa-check"></i><b>12</b> Z-scores</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="z-scores.html"><a href="z-scores.html#calculating-a-z-score-in-r"><i class="fa fa-check"></i><b>12.1</b> Calculating a Z score in R</a></li>
+<li class="chapter" data-level="12.2" data-path="z-scores.html"><a href="z-scores.html#writing-about-z-scores"><i class="fa fa-check"></i><b>12.2</b> Writing about z-scores</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html"><i class="fa fa-check"></i><b>13</b> Intro to ggplot</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#the-bar-chart"><i class="fa fa-check"></i><b>13.1</b> The bar chart</a></li>
+<li class="chapter" data-level="13.2" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#scales"><i class="fa fa-check"></i><b>13.2</b> Scales</a></li>
+<li class="chapter" data-level="13.3" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#styling"><i class="fa fa-check"></i><b>13.3</b> Styling</a></li>
+<li class="chapter" data-level="13.4" data-path="intro-to-ggplot.html"><a href="intro-to-ggplot.html#one-last-trick-coord-flip"><i class="fa fa-check"></i><b>13.4</b> One last trick: coord flip</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="stacked-bar-charts.html"><a href="stacked-bar-charts.html"><i class="fa fa-check"></i><b>14</b> Stacked bar charts</a></li>
+<li class="chapter" data-level="15" data-path="waffle-charts.html"><a href="waffle-charts.html"><i class="fa fa-check"></i><b>15</b> Waffle charts</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="waffle-charts.html"><a href="waffle-charts.html#waffles-two-ways-part-1"><i class="fa fa-check"></i><b>15.1</b> Waffles two ways: Part 1</a></li>
+<li class="chapter" data-level="15.2" data-path="waffle-charts.html"><a href="waffle-charts.html#waffles-two-ways-part-2"><i class="fa fa-check"></i><b>15.2</b> Waffles two ways: Part 2</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="line-charts.html"><a href="line-charts.html"><i class="fa fa-check"></i><b>16</b> Line charts</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="line-charts.html"><a href="line-charts.html#this-is-too-simple."><i class="fa fa-check"></i><b>16.1</b> This is too simple.</a></li>
+<li class="chapter" data-level="16.2" data-path="line-charts.html"><a href="line-charts.html#but-what-if-i-wanted-to-add-a-lot-of-lines."><i class="fa fa-check"></i><b>16.2</b> But what if I wanted to add a lot of lines.</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="step-charts.html"><a href="step-charts.html"><i class="fa fa-check"></i><b>17</b> Step charts</a></li>
+<li class="chapter" data-level="18" data-path="ridge-charts.html"><a href="ridge-charts.html"><i class="fa fa-check"></i><b>18</b> Ridge charts</a></li>
+<li class="chapter" data-level="19" data-path="dumbbell-and-lollipop-charts.html"><a href="dumbbell-and-lollipop-charts.html"><i class="fa fa-check"></i><b>19</b> Dumbbell and lollipop charts</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="dumbbell-and-lollipop-charts.html"><a href="dumbbell-and-lollipop-charts.html#dumbbell-plots"><i class="fa fa-check"></i><b>19.1</b> Dumbbell plots</a></li>
+<li class="chapter" data-level="19.2" data-path="dumbbell-and-lollipop-charts.html"><a href="dumbbell-and-lollipop-charts.html#lollipop-charts"><i class="fa fa-check"></i><b>19.2</b> Lollipop charts</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="scatterplots.html"><a href="scatterplots.html"><i class="fa fa-check"></i><b>20</b> Scatterplots</a></li>
+<li class="chapter" data-level="21" data-path="facet-wraps.html"><a href="facet-wraps.html"><i class="fa fa-check"></i><b>21</b> Facet wraps</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="facet-wraps.html"><a href="facet-wraps.html#facet-grid-vs-facet-wraps"><i class="fa fa-check"></i><b>21.1</b> Facet grid vs facet wraps</a></li>
+<li class="chapter" data-level="21.2" data-path="facet-wraps.html"><a href="facet-wraps.html#other-types"><i class="fa fa-check"></i><b>21.2</b> Other types</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>22</b> Tables</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="tables.html"><a href="tables.html#exporting-tables"><i class="fa fa-check"></i><b>22.1</b> Exporting tables</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="bubble-charts.html"><a href="bubble-charts.html"><i class="fa fa-check"></i><b>23</b> Bubble charts</a></li>
+<li class="chapter" data-level="24" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html"><i class="fa fa-check"></i><b>24</b> Circular bar plots</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html#does-november-basketball-matter"><i class="fa fa-check"></i><b>24.1</b> Does November basketball matter?</a></li>
+<li class="chapter" data-level="24.2" data-path="circular-bar-plots.html"><a href="circular-bar-plots.html#does-it-show-you-where-you-are"><i class="fa fa-check"></i><b>24.2</b> Does it show you where you are?</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html"><i class="fa fa-check"></i><b>25</b> Intro to rvest</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html#a-slightly-more-complicated-example"><i class="fa fa-check"></i><b>25.1</b> A slightly more complicated example</a></li>
+<li class="chapter" data-level="25.2" data-path="intro-to-rvest.html"><a href="intro-to-rvest.html#an-even-more-complicated-example"><i class="fa fa-check"></i><b>25.2</b> An even more complicated example</a></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="advanced-rvest.html"><a href="advanced-rvest.html"><i class="fa fa-check"></i><b>26</b> Advanced rvest</a>
+<ul>
+<li class="chapter" data-level="26.1" data-path="advanced-rvest.html"><a href="advanced-rvest.html#one-last-bit"><i class="fa fa-check"></i><b>26.1</b> One last bit</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="annotations.html"><a href="annotations.html"><i class="fa fa-check"></i><b>27</b> Annotations</a></li>
+<li class="chapter" data-level="28" data-path="finishing-touches.html"><a href="finishing-touches.html"><i class="fa fa-check"></i><b>28</b> Finishing touches</a>
+<ul>
+<li class="chapter" data-level="28.1" data-path="finishing-touches.html"><a href="finishing-touches.html#graphics-vs-visual-stories"><i class="fa fa-check"></i><b>28.1</b> Graphics vs visual stories</a></li>
+<li class="chapter" data-level="28.2" data-path="finishing-touches.html"><a href="finishing-touches.html#getting-ggplot-closer-to-output"><i class="fa fa-check"></i><b>28.2</b> Getting ggplot closer to output</a></li>
+<li class="chapter" data-level="28.3" data-path="finishing-touches.html"><a href="finishing-touches.html#waffle-charts-require-special-attention"><i class="fa fa-check"></i><b>28.3</b> Waffle charts require special attention</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="headlines.html"><a href="headlines.html"><i class="fa fa-check"></i><b>29</b> Headlines</a></li>
+<li class="chapter" data-level="30" data-path="plotly.html"><a href="plotly.html"><i class="fa fa-check"></i><b>30</b> Plotly</a>
+<ul>
+<li class="chapter" data-level="30.1" data-path="plotly.html"><a href="plotly.html#publishing-using-plotly"><i class="fa fa-check"></i><b>30.1</b> Publishing using Plotly</a></li>
+</ul></li>
+<li class="chapter" data-level="31" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>31</b> Clustering</a>
+<ul>
+<li class="chapter" data-level="31.1" data-path="clustering.html"><a href="clustering.html#advanced-metrics"><i class="fa fa-check"></i><b>31.1</b> Advanced metrics</a></li>
+</ul></li>
+<li class="chapter" data-level="32" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html"><i class="fa fa-check"></i><b>32</b> Rtweet and Text Analysis</a>
+<ul>
+<li class="chapter" data-level="32.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#prerequisites"><i class="fa fa-check"></i><b>32.1</b> Prerequisites</a>
+<ul>
+<li class="chapter" data-level="32.1.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#tools-for-text-analysis"><i class="fa fa-check"></i><b>32.1.1</b> Tools for text analysis</a></li>
+<li class="chapter" data-level="32.1.2" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#working-with-string-data"><i class="fa fa-check"></i><b>32.1.2</b> Working with string data</a></li>
+</ul></li>
+<li class="chapter" data-level="32.2" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#verifying-your-account-to-access-twitter-data"><i class="fa fa-check"></i><b>32.2</b> Verifying your account to access Twitter data</a></li>
+<li class="chapter" data-level="32.3" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#the-data-used-here"><i class="fa fa-check"></i><b>32.3</b> The data used here</a></li>
+<li class="chapter" data-level="32.4" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#data-exploration"><i class="fa fa-check"></i><b>32.4</b> Data Exploration</a></li>
+<li class="chapter" data-level="32.5" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#cleaning-data-for-analysis"><i class="fa fa-check"></i><b>32.5</b> Cleaning data for analysis</a>
+<ul>
+<li class="chapter" data-level="32.5.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#fixing-the-date-and-focusing-only-on-game-tweets"><i class="fa fa-check"></i><b>32.5.1</b> Fixing the date and focusing only on game tweets</a></li>
+</ul></li>
+<li class="chapter" data-level="32.6" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#number-of-tweets-throughout-the-game"><i class="fa fa-check"></i><b>32.6</b> Number of tweets throughout the game</a></li>
+<li class="chapter" data-level="32.7" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#tidying-the-text-data-for-analysis-applying-the-sentiment-scores"><i class="fa fa-check"></i><b>32.7</b> Tidying the text data for analysis, applying the sentiment scores</a>
+<ul>
+<li class="chapter" data-level="32.7.1" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html#example-2---nebraskas-loss-to-purdue-what-were-fans-sentiments-towards-this-loss"><i class="fa fa-check"></i><b>32.7.1</b> Example 2 - Nebraska’s loss to Purdue, what were fan’s sentiments towards this loss?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="33" data-path="arranging-multiple-plots-together.html"><a href="arranging-multiple-plots-together.html"><i class="fa fa-check"></i><b>33</b> Arranging multiple plots together</a></li>
+<li class="chapter" data-level="34" data-path="encircling-points-on-a-scatterplot.html"><a href="encircling-points-on-a-scatterplot.html"><i class="fa fa-check"></i><b>34</b> Encircling points on a scatterplot</a>
+<ul>
+<li class="chapter" data-level="34.1" data-path="encircling-points-on-a-scatterplot.html"><a href="encircling-points-on-a-scatterplot.html#a-different-more-local-example"><i class="fa fa-check"></i><b>34.1</b> A different, more local example</a></li>
+</ul></li>
+<li class="chapter" data-level="35" data-path="bump-charts.html"><a href="bump-charts.html"><i class="fa fa-check"></i><b>35</b> Bump charts</a></li>
+<li class="chapter" data-level="36" data-path="text-cleaning.html"><a href="text-cleaning.html"><i class="fa fa-check"></i><b>36</b> Text cleaning</a>
+<ul>
+<li class="chapter" data-level="36.1" data-path="text-cleaning.html"><a href="text-cleaning.html#stripping-out-text"><i class="fa fa-check"></i><b>36.1</b> Stripping out text</a></li>
+<li class="chapter" data-level="36.2" data-path="text-cleaning.html"><a href="text-cleaning.html#another-example-splitting-columns"><i class="fa fa-check"></i><b>36.2</b> Another example: splitting columns</a></li>
+</ul></li>
+<li class="chapter" data-level="37" data-path="assignments.html"><a href="assignments.html"><i class="fa fa-check"></i><b>37</b> Assignments</a></li>
+<li class="chapter" data-level="38" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>38</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="38.1" data-path="appendix.html"><a href="appendix.html#how-to-get-help-in-this-class"><i class="fa fa-check"></i><b>38.1</b> How to get help in this class</a></li>
+</ul></li>
+<li class="chapter" data-level="39" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>39</b> Simulations</a>
+<ul>
+<li class="chapter" data-level="39.1" data-path="simulations.html"><a href="simulations.html#cold-streaks"><i class="fa fa-check"></i><b>39.1</b> Cold streaks</a></li>
+</ul></li>
+<li class="chapter" data-level="40" data-path="beeswarm-plots.html"><a href="beeswarm-plots.html"><i class="fa fa-check"></i><b>40</b> Beeswarm plots</a>
+<ul>
+<li class="chapter" data-level="40.1" data-path="beeswarm-plots.html"><a href="beeswarm-plots.html#a-few-other-options"><i class="fa fa-check"></i><b>40.1</b> A few other options</a></li>
+</ul></li>
+<li class="chapter" data-level="41" data-path="building-your-own-blog-with-blogdown.html"><a href="building-your-own-blog-with-blogdown.html"><i class="fa fa-check"></i><b>41</b> Building your own blog with blogdown</a>
+<ul>
+<li class="chapter" data-level="41.1" data-path="building-your-own-blog-with-blogdown.html"><a href="building-your-own-blog-with-blogdown.html#setup"><i class="fa fa-check"></i><b>41.1</b> Setup</a></li>
+<li class="chapter" data-level="41.2" data-path="building-your-own-blog-with-blogdown.html"><a href="building-your-own-blog-with-blogdown.html#editing-existing-markdown-content"><i class="fa fa-check"></i><b>41.2</b> Editing existing Markdown content</a></li>
+<li class="chapter" data-level="41.3" data-path="building-your-own-blog-with-blogdown.html"><a href="building-your-own-blog-with-blogdown.html#creating-a-new-post-in-r-markdown"><i class="fa fa-check"></i><b>41.3</b> Creating a new post in R Markdown</a></li>
+<li class="chapter" data-level="41.4" data-path="building-your-own-blog-with-blogdown.html"><a href="building-your-own-blog-with-blogdown.html#publishing-your-site"><i class="fa fa-check"></i><b>41.4</b> Publishing your site</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Sports Data Analysis and Visualization</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="building-your-own-blog-with-blogdown" class="section level1" number="41">
+<h1><span class="header-section-number">Chapter 41</span> Building your own blog with blogdown</h1>
+<p>If you listen to the <a href="https://www.measurablespod.com/podcast">Measurables Podcast</a> for about two episodes, you’ll detect a pattern. The host asks each guest how they got started in sports analytics. To a one, they’ll say they found public data and started blogging about their analysis of it. For nearly every single guest, this is their path into the field. They started messing around with data in a toolset, found something interesting and wrote a post about what they found and how they found it. Other analysts noticed it, or a hiring manager liked what they read, and the rest is history, as they say.</p>
+<p>So, let’s do that. Let’s get you a blog so you can post your work.</p>
+<p>Here’s our requirements:</p>
+<ol style="list-style-type: decimal">
+<li>This doesn’t cost you anything.</li>
+<li>There’s zero maintenance work or upkeep. No servers to manage. No account to pay for.</li>
+<li>Since you’re going to be writing about your code, you should be able to create your blog posts in R Studio.</li>
+</ol>
+<div id="setup" class="section level2" number="41.1">
+<h2><span class="header-section-number">41.1</span> Setup</h2>
+<p>With those requirements in mind, we’re going to use a library called Blogdown, which creates blog posts from R Markdown files, similar to what you’ve been working with in this book.</p>
+<p>It installs how you think it should. Go into the console and run this:</p>
+<div class="sourceCode" id="cb650"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb650-1"><a href="building-your-own-blog-with-blogdown.html#cb650-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&#39;blogdown&#39;</span>) </span></code></pre></div>
+<p>After that, run this:</p>
+<div class="sourceCode" id="cb651"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb651-1"><a href="building-your-own-blog-with-blogdown.html#cb651-1" aria-hidden="true" tabindex="-1"></a>blogdown<span class="sc">::</span><span class="fu">install_hugo</span>()</span></code></pre></div>
+<p>After that, we’re ready to start making a blog. To do that, go to File &gt; New Project and select New Directory (or Version Control if you know what you’re doing).</p>
+<p><img src="images/blog1.png" width="706" /></p>
+<p>In the Project Type view, you may have to scroll down to find “Website using blogdown” but that’s your choice. Mine will probably look different than yours, but below is what the line you’re looking for looks like.</p>
+<p><img src="images/blog2.png" width="554" /></p>
+<p>And now we’ve come to our first decision point.</p>
+<p>First, name the directory you’re going to put this into. Keep it simple. Then decide where on your computer you’re going to put it.</p>
+<p>Now for the big decision: What theme to use. There’s four choices, but the default theme is the most fully documented. If you want to use another theme, you’ll be better off creating two projects: the one you’re going to publish, and the lithium theme you can steal stuff from.</p>
+<p>Here’s the easiest themes to work with:</p>
+<ul>
+<li><a href="https://github.com/yihui/hugo-lithium">yihui/hugo-lithium</a></li>
+<li><a href="https://github.com/yihui/hugo-prose">yihui/hugo-prose</a></li>
+<li><a href="https://github.com/yihui/hugo-ivy">yihui/hugo-ivy</a></li>
+<li><a href="https://github.com/yihui/hugo-xmin">yihui/hugo-xmin</a></li>
+</ul>
+<p><img src="images/blog3.png" width="597" /></p>
+<p>When you hit Create Project, you should get an R Studio screen with a file open called config.toml. This file will look different depending on which theme you used. If you used the lithium theme, your config.toml is pretty fully featured. If you tried ivy, for example, it’s not. This configuration file needs to have a few things on it. This is the config.toml for my website, but you should use it as a guide for what yours will need:</p>
+<pre><code>theme = &quot;hugo-ivy&quot;
+baseURL = &quot;http://mattwaite.github.io/&quot;
+languageCode = &quot;en-us&quot;
+title = &quot;Matt Waite&quot;
+
+googleAnalytics = &quot;&quot;
+
+ignoreFiles = [&quot;\\.Rmd$&quot;, &quot;\\.Rmarkdown$&quot;, &quot;_cache$&quot;, &quot;\\.knit\\.md$&quot;, &quot;\\.utf8\\.md$&quot;]
+
+[permalinks]
+    post = &quot;/:year/:month/:day/:slug/&quot;
+
+[[menu.main]]
+    name = &quot;About&quot;
+    url = &quot;/about/&quot;
+[[menu.main]]
+    name = &quot;GitHub&quot;
+    url = &quot;https://github.com/mattwaite&quot;
+[[menu.main]]
+    name = &quot;Twitter&quot;
+    url = &quot;https://twitter.com/mattwaite&quot;
+
+[params]
+    description = &quot;A website built through Hugo and blogdown.&quot;
+
+    # options for highlight.js (version, additional languages, and theme)
+    highlightjsVersion = &quot;9.12.0&quot;
+    highlightjsCDN = &quot;//cdnjs.cloudflare.com/ajax/libs&quot;
+    highlightjsLang = [&quot;r&quot;, &quot;yaml&quot;]
+    highlightjsTheme = &quot;github&quot;
+
+    MathJaxCDN = &quot;//cdnjs.cloudflare.com/ajax/libs&quot;
+    MathJaxVersion = &quot;2.7.5&quot;
+
+    # path to the favicon, under &quot;static&quot;
+    favicon = &quot;favicon.ico&quot;</code></pre>
+<p>The top parts are generally filled in regardless of the theme. You’ll obviously want to change the base url and the title. For Google Analytics, you’ll add your tracking id there if and when you want to set that up. Leave ignorefiles and permalinks alone. For your menu – that is up to you. If someone wanting to hire you came across your site, what would you include here? Another thing to change? The description. It will be the text that appears below the name in Google.</p>
+<p>Notice that you have a version of your site in the Viewer tab on R Studio. Change the title of your site and save it. See it change? If you’re using the lithium theme, change one of the menu items and save it. That’s how you’ll see your site change.</p>
+</div>
+<div id="editing-existing-markdown-content" class="section level2" number="41.2">
+<h2><span class="header-section-number">41.2</span> Editing existing Markdown content</h2>
+<p>There’s two types of files you can work with – plain Markdown files or R Markdown files. Plain Markdown are generally pages without code. R Markdown are the ones with the code.</p>
+<p>Let’s start with a simple Markdown file – the homepage of the site. To edit files, use the Files tab. All of the material you’ll be editing is in the content folder.</p>
+<p><img src="images/blog4.png" width="997" /></p>
+<p>Let’s start with editing the about.md file. Some templates also have a _index.md file, which is the static part of the homepage.</p>
+<p><img src="images/blog5.png" width="1037" /></p>
+<p>At the top, you will have something called a yaml header, which are things that set up the page. They are quite simple to figure out. Here’s the yaml header the Ivy theme generates. Obviously, I need to change the author, the date and the title for my site.</p>
+<pre><code>---
+author: Yihui Xie
+date: &quot;2017-08-06&quot;
+title: About Hugo Ivy
+---</code></pre>
+<p>Change yours, then change the text below the yaml header, and then save it. Click on the Viewer tab and check out your work.</p>
+</div>
+<div id="creating-a-new-post-in-r-markdown" class="section level2" number="41.3">
+<h2><span class="header-section-number">41.3</span> Creating a new post in R Markdown</h2>
+<p>You’ll notice in your content folder that there is a folder called post, and in there are multiple posts. Depending on your theme, you might just have folders in post, and you might have some markdown files. They work mostly the same way.</p>
+<p>The magic here is how you name them. You’ll remember from confic.toml that we have a post url format that goes post / year / month / day / slug. The reason for that is that urls matter for Google. Clean urls with meaningful information in them rank higher.</p>
+<p>So in post, you’ll see the folders are named similarly – a date separated by dashes followed by a slug – the headline of your post in all lower case with dashes instead of spaces. So if I were writing a post called “I love sports data,” the slug version of that would be i-love-sports-data. If I were writing it on December 15, which I am, my folder would be 2020-12-15-i-love-sports-data.
+So let’s create a post. You can name it what you want, but the folder name needs to be in the form of year-month-day-a-title-here. Start by creating the folder.</p>
+<p><img src="images/blog6.png" width="1182" /></p>
+<p>Then, start a new R notebook and save it into your new folder. It must be named index (which is a website thing, if you’re wondering).</p>
+<p>Your typical yaml header in an R notebook doesn’t have all the parts you need. For example, here’s one for a post about this book.</p>
+<pre><code>---
+title: &quot;Sports Data Analysis and Visualization&quot;
+author: &quot;Matt Waite&quot;
+date: 2019-07-29T21:13:14-05:00
+categories: [&quot;Books&quot;]
+tags: [&quot;R&quot;, &quot;data&quot;, &quot;sports&quot;]
+---</code></pre>
+<p>You need a title, an author and date. Categories and tags are optional, but I think they help people explore a site and aren’t that hard to deal with.</p>
+<p>Below the yaml header? That’s up to you. Go do some of that writing stuff you do.</p>
+</div>
+<div id="publishing-your-site" class="section level2" number="41.4">
+<h2><span class="header-section-number">41.4</span> Publishing your site</h2>
+<p>Blogdown is built on top of the Hugo static site generator. What that means is that Blogdown is going to take your Markdown files and create static html. What does static html mean? It means there’s no server creating it on the fly – that’s called dynamic html – so this can be hosted on the simplest of servers.</p>
+<p>Publishing takes a lot of steps to get set up, but once it is, it’s easy.</p>
+<p><strong>Step 1: Get a Github account</strong></p>
+<p>Go to <a href="https://github.com/">Github</a> and sign up for an account. NOTE: Your username will be part of your website address, and you could potentially be sending this to employers. I’m sure blaze420rryday has been your handle since middle school, but do you want an employer to see that? My Github user name is mattwaite. See what I’m getting at here?</p>
+<p><strong>Step 2: Set up your website repository</strong></p>
+<p>For the low low price of nothing, Github will host a website for you, and we are going to take them up on that bargain. There’s several tricks to getting this to work, but none of them are hard. They just require you to be specific.</p>
+<p>To start, you can click on the plus sign in the top right corner or hit the green new button, depending on what your page looks like vs mine (I’m reasonably active github user, so mine will look different from yours).</p>
+<p><img src="images/blog7.png" width="596" /></p>
+<p>In the create a new repository page, the name of your respository needs to follow this pattern: yourusernamehere.github.io where yourusernamehere is … your username. So my site is mattwaite.github.io because my username is mattwaite. This is why you do not want to select swaggylovedoctor as your username, no matter how attached to it you are. Your employment chances are zero with something dumb like that.</p>
+<p>After you’ve named the repository correctly, leave it public, check add .gitignore and leave the rest. Click create repository.</p>
+<p><strong>Step 3:</strong></p>
+<p>Before you close the tab with github on it, copy the url of the repository. For example, mine looks like this: <a href="https://github.com/mattwaite/mattwaite.github.io" class="uri">https://github.com/mattwaite/mattwaite.github.io</a></p>
+<p>Github is a version control system and a social network mixed together. Version control is like Track Changes in Word, but on steroids. If you plan on a career in analytics or data science, Github is a skill you will have to learn, but it’s beyond the scope of this book.</p>
+<p>To work around this, we’re going to use R Studio to manage our interactions with Github. The first thing we need to do is create a new project for our website repository. Go to File &gt; New Project</p>
+<p>First: Choose Version Control</p>
+<p><img src="images/blog9.png" width="474" /></p>
+<p>Second: Choose Github.</p>
+<p>Third: Paste your github repository url into the Repository URL box. That will autofill the Project Director Name.</p>
+<p><strong>MOST IMPORTANTLY</strong> here, you need to put your website project in the same directory as your blog project. So if your blog project is in your Documents folder, put your website in your Documents folder. If you’ve got your blog project in some homework folder somewhere, put the website there too. But when you’re done, you should have a place on your computer somewhere that has two folders:</p>
+<p>blog-project-name/
+username.github.io/</p>
+<p>After you’ve put it in the right place, check the Open in new session box and hit Create Project.</p>
+<p><img src="images/blog11.png" width="616" /></p>
+<p><strong>Step 4:</strong></p>
+<p>Let’s make your first file in your website. It’s a simple file. Go to File &gt; New File &gt; Text File.</p>
+<p>Copy and paste this block into that file:</p>
+<pre><code>.DS_Store
+*/.DS_Store
+.Rproj.user
+*.Rproj
+.Rhistory</code></pre>
+<p>If you’re on windows, the first two lines are unnecessary, but won’t hurt anything.</p>
+<p>Go to File &gt; Save and name this file .gitignore</p>
+<p>You will get a warning about file starting with a . being reserved for the system and will be hidden. Good news! That’s exactly what this is. This tells git to ignore these files. They’re files you don’t want on Github, so this prevents that.</p>
+<p>After you save it, click on the Git tab in the top right. You should see your .gitignore file there and you may see others. Click the Commit button.</p>
+<p><img src="images/blog12.png" width="363" /></p>
+<p>This is where you will commit files to your repository. Github is a two step process for getting files from your computer to Github. The first is committing the files. The second is pushing them. Committing files is a three step process. You first have to check the box next to the files you are committing, then write a commit message – a note to yourself what this is – and then hitting commit.</p>
+<p><img src="images/blog13.png" width="501" /></p>
+<p>In your commit message, type “Updating gitignore”</p>
+<p>Click commit. A window should pop up with some information. Unless you get an error saying the commit failed, you can close this window.</p>
+<p>You’re halfway home. Now click the push button in the top right. Once you do that, your new file will be on Github. Congrats, you’ve sent your first file to version control.</p>
+<p><strong>Step 5</strong></p>
+<p>Now we’re set up to make a website, but we need to tell your website project that you want to publish to your github folder, not the default.</p>
+<p>Open config.toml in your blog project. Near the top, above ignoreFiles, add this line, replacing yourusername with … your user name. This says publish to your github project that you put in the same folder as your blog project:</p>
+<pre><code>publishDir = &quot;../yourusername.github.io&quot;</code></pre>
+<p>Save config.toml.</p>
+<p>Now you need to do the work to make your site. Change the title, the description, edit the about page, write a post.</p>
+<p>Once you are ready to build your site, you need to click on the Build tab and then on Build Website.</p>
+<p><img src="images/blog8.png" width="1045" /></p>
+<p>If it worked, you should see two things: A window should pop up with your site in it (and it may be that the css doesn’t work, which isn’t an issue when you publish to Github) and output in the build screen that tells you what it did.</p>
+<p><img src="images/blog14.png" width="880" /></p>
+<p><strong>Step 6</strong></p>
+<p>At long last, we’re ready to see your work on the internet. After you have built your website, flip over to your username.github.io project in R studio.</p>
+<p>Click the Git tab.</p>
+<p>You should see a LOT more files – your website. Click the Commit tab and follow the steps in Step 4 – check the boxes next to all the files (or click on the first one, hold shift and click on the last one, then check any box), then add a commit message (“first website commit” or “updating my website”) and click Commit. Then, once that’s done, click Push.</p>
+<p>In a few minutes, you should be able to go to username.github.io in a browser and you’ll see your site. <a href="http://mattwaite.github.io/">Here’s mine</a>.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="beeswarm-plots.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["SportsData.pdf", "SportsData.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1507,32 +1507,7 @@ And just like that, Ohio State comes out on top, with Wisconsin second and ... I
 
 # Waffle charts
 
-Pie charts are the devil. They should be an instant F in any data visualization class. I'll give you an example of why.
-
-What's the racial breakdown of journalism majors at UNL?
-
-Here it is in a pie chart:
-
-```{r}
-library(tidyverse)
-
-enrollment <- read.csv("~/Box/Courses/JOUR407-Data-Visualization/Data/collegeenrollment.csv")
-
-jour <- filter(enrollment, MajorName == "Journalism")
-
-jdf <- jour %>% 
-group_by(Race) %>%
-summarise(
-       total=sum(Count)) %>%
-select(Race, total) %>% 
-filter(total != 0)
-
-ggplot(jdf, aes(x="", y=total, fill=Race)) + geom_bar(width = 1, stat = "identity") + coord_polar("y", start=0)
-```
-
-You can see, it's pretty white. But ... what about beyond that? How carefully can you evaluate angles and area?
-
-Not well.
+Pie charts are the devil. They should be an instant F in any data visualization class. The problem? How carefully can you evaluate angles and area? Unless they are blindingly obvious and only a few categories, not well. If you've got 25 categories, how can you tell the difference between 7 and 9 percent? You can't.
 
 So let's introduce a better way: The Waffle Chart. Some call it a square pie chart. I personally hate that. Waffles it is. 
 
@@ -4089,7 +4064,7 @@ Before you can access Twitter data, you will need to verify your account. The `r
 
 Before you run the following code chunk, though, be aware a few things will take place. First, a browser window will open up asking you to verify that `rtweet` is allowed to access Twitter data via the API on behalf of your account. Accept this request and enter your credentials if you are asked to. Once you do this, you should get a message in your browser stating you have successfully authenticated the `rtweet` package. The data will then begin to download. The amount of time needed to import this data will depend on how many tweets the hashtag(s) are associated with. More tweets generally means longer import times. 
 
-```{r}
+```{r eval=FALSE}
 
 huskers <- search_tweets(
   "#huskers", n = 8000, include_rts = FALSE
@@ -5288,4 +5263,293 @@ Which one is right for you? You're going to have to experiment and decide. This 
 
 
 <!--chapter:end:39-beeswarmplots.Rmd-->
+
+# Building your own blog with blogdown
+
+If you listen to the [Measurables Podcast](https://www.measurablespod.com/podcast) for about two episodes, you'll detect a pattern. The host asks each guest how they got started in sports analytics. To a one, they'll say they found public data and started blogging about their analysis of it. For nearly every single guest, this is their path into the field. They started messing around with data in a toolset, found something interesting and wrote a post about what they found and how they found it. Other analysts noticed it, or a hiring manager liked what they read, and the rest is history, as they say. 
+
+So, let's do that. Let's get you a blog so you can post your work.
+
+Here's our requirements: 
+
+1. This doesn't cost you anything.
+2. There's zero maintenance work or upkeep. No servers to manage. No account to pay for.
+3. Since you're going to be writing about your code, you should be able to create your blog posts in R Studio.
+
+## Setup
+
+With those requirements in mind, we're going to use a library called Blogdown, which creates blog posts from R Markdown files, similar to what you've been working with in this book. 
+
+It installs how you think it should. Go into the console and run this:
+
+```{r eval=FALSE}
+install.packages('blogdown') 
+```
+
+After that, run this:
+
+```{r eval=FALSE}
+blogdown::install_hugo()
+```
+
+After that, we're ready to start making a blog. To do that, go to File > New Project and select New Directory (or Version Control if you know what you're doing).
+
+```{r, echo=FALSE}
+knitr::include_graphics(rep("images/blog1.png"))
+```
+
+In the Project Type view, you may have to scroll down to find "Website using blogdown" but that's your choice. Mine will probably look different than yours, but below is what the line you're looking for looks like.
+
+```{r, echo=FALSE}
+knitr::include_graphics(rep("images/blog2.png"))
+```
+
+And now we've come to our first decision point. 
+
+First, name the directory you're going to put this into. Keep it simple. Then decide where on your computer you're going to put it. 
+
+Now for the big decision: What theme to use. There's four choices, but the default theme is the most fully documented. If you want to use another theme, you'll be better off creating two projects: the one you're going to publish, and the lithium theme you can steal stuff from.
+
+Here's the easiest themes to work with: 
+
+* [yihui/hugo-lithium](https://github.com/yihui/hugo-lithium)
+* [yihui/hugo-prose](https://github.com/yihui/hugo-prose)
+* [yihui/hugo-ivy](https://github.com/yihui/hugo-ivy)
+* [yihui/hugo-xmin](https://github.com/yihui/hugo-xmin)
+
+```{r, echo=FALSE}
+knitr::include_graphics(rep("images/blog3.png"))
+```
+
+When you hit Create Project, you should get an R Studio screen with a file open called config.toml. This file will look different depending on which theme you used. If you used the lithium theme, your config.toml is pretty fully featured. If you tried ivy, for example, it's not. This configuration file needs to have a few things on it. This is the config.toml for my website, but you should use it as a guide for what yours will need:
+
+```
+theme = "hugo-ivy"
+baseURL = "http://mattwaite.github.io/"
+languageCode = "en-us"
+title = "Matt Waite"
+
+googleAnalytics = ""
+
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_cache$", "\\.knit\\.md$", "\\.utf8\\.md$"]
+
+[permalinks]
+    post = "/:year/:month/:day/:slug/"
+
+[[menu.main]]
+    name = "About"
+    url = "/about/"
+[[menu.main]]
+    name = "GitHub"
+    url = "https://github.com/mattwaite"
+[[menu.main]]
+    name = "Twitter"
+    url = "https://twitter.com/mattwaite"
+
+[params]
+    description = "A website built through Hugo and blogdown."
+
+    # options for highlight.js (version, additional languages, and theme)
+    highlightjsVersion = "9.12.0"
+    highlightjsCDN = "//cdnjs.cloudflare.com/ajax/libs"
+    highlightjsLang = ["r", "yaml"]
+    highlightjsTheme = "github"
+
+    MathJaxCDN = "//cdnjs.cloudflare.com/ajax/libs"
+    MathJaxVersion = "2.7.5"
+
+    # path to the favicon, under "static"
+    favicon = "favicon.ico"
+```
+
+The top parts are generally filled in regardless of the theme. You'll obviously want to change the base url and the title. For Google Analytics, you'll add your tracking id there if and when you want to set that up. Leave ignorefiles and permalinks alone. For your menu -- that is up to you. If someone wanting to hire you came across your site, what would you include here? Another thing to change? The description. It will be the text that appears below the name in Google. 
+
+Notice that you have a version of your site in the Viewer tab on R Studio. Change the title of your site and save it. See it change? If you're using the lithium theme, change one of the menu items and save it. That's how you'll see your site change. 
+
+## Editing existing Markdown content
+
+There's two types of files you can work with -- plain Markdown files or R Markdown files. Plain Markdown are generally pages without code. R Markdown are the ones with the code. 
+
+Let's start with a simple Markdown file -- the homepage of the site. To edit files, use the Files tab. All of the material you'll be editing is in the content folder. 
+
+```{r, echo=FALSE}
+knitr::include_graphics(rep("images/blog4.png"))
+```
+
+Let's start with editing the about.md file. Some templates also have a _index.md file, which is the static part of the homepage.  
+
+```{r, echo=FALSE}
+knitr::include_graphics(rep("images/blog5.png"))
+```
+
+At the top, you will have something called a yaml header, which are things that set up the page. They are quite simple to figure out. Here's the yaml header the Ivy theme generates. Obviously, I need to change the author, the date and the title for my site. 
+
+```
+---
+author: Yihui Xie
+date: "2017-08-06"
+title: About Hugo Ivy
+---
+```
+
+Change yours, then change the text below the yaml header, and then save it. Click on the Viewer tab and check out your work.
+
+## Creating a new post in R Markdown
+
+You'll notice in your content folder that there is a folder called post, and in there are multiple posts. Depending on your theme, you might just have folders in post, and you might have some markdown files. They work mostly the same way.
+
+The magic here is how you name them. You'll remember from confic.toml that we have a post url format that goes post / year / month / day / slug. The reason for that is that urls matter for Google. Clean urls with meaningful information in them rank higher. 
+
+So in post, you'll see the folders are named similarly -- a date separated by dashes followed by a slug -- the headline of your post in all lower case with dashes instead of spaces. So if I were writing a post called "I love sports data", the slug version of that would be i-love-sports-data. If I were writing it on December 15, which I am, my folder would be 2020-12-15-i-love-sports-data. 
+So let's create a post. You can name it what you want, but the folder name needs to be in the form of year-month-day-a-title-here. Start by creating the folder. 
+
+```{r, echo=FALSE}
+knitr::include_graphics(rep("images/blog6.png"))
+```
+
+Then, start a new R notebook and save it into your new folder. It must be named index (which is a website thing, if you're wondering).
+
+Your typical yaml header in an R notebook doesn't have all the parts you need. For example, here's one for a post about this book. 
+
+```
+---
+title: "Sports Data Analysis and Visualization"
+author: "Matt Waite"
+date: 2019-07-29T21:13:14-05:00
+categories: ["Books"]
+tags: ["R", "data", "sports"]
+---
+```
+
+You need a title, an author and date. Categories and tags are optional, but I think they help people explore a site and aren't that hard to deal with. 
+
+Below the yaml header? That's up to you. Go do some of that writing stuff you do.
+
+## Publishing your site
+
+Blogdown is built on top of the Hugo static site generator. What that means is that Blogdown is going to take your Markdown files and create static html. What does static html mean? It means there's no server creating it on the fly -- that's called dynamic html -- so this can be hosted on the simplest of servers.
+
+Publishing takes a lot of steps to get set up, but once it is, it's easy. 
+
+**Step 1: Get a Github account**
+
+Go to [Github](https://github.com/) and sign up for an account. NOTE: Your username will be part of your website address, and you could potentially be sending this to employers. I'm sure blaze420rryday has been your handle since middle school, but do you want an employer to see that? My Github user name is mattwaite. See what I'm getting at here? 
+
+**Step 2: Set up your website repository**
+
+For the low low price of nothing, Github will host a website for you, and we are going to take them up on that bargain. There's several tricks to getting this to work, but none of them are hard. They just require you to be specific.
+
+To start, you can click on the plus sign in the top right corner or hit the green new button, depending on what your page looks like vs mine (I'm reasonably active github user, so mine will look different from yours). 
+
+```{r, echo=FALSE}
+knitr::include_graphics(rep("images/blog7.png"))
+```
+
+In the create a new repository page, the name of your respository needs to follow this pattern: yourusernamehere.github.io where yourusernamehere is ... your username. So my site is mattwaite.github.io because my username is mattwaite. This is why you do not want to select swaggylovedoctor as your username, no matter how attached to it you are. Your employment chances are zero with something dumb like that. 
+
+After you've named the repository correctly, leave it public, check add .gitignore and leave the rest. Click create repository.
+
+**Step 3:**
+
+Before you close the tab with github on it, copy the url of the repository. For example, mine looks like this: https://github.com/mattwaite/mattwaite.github.io
+
+Github is a version control system and a social network mixed together. Version control is like Track Changes in Word, but on steroids. If you plan on a career in analytics or data science, Github is a skill you will have to learn, but it's beyond the scope of this book. 
+
+To work around this, we're going to use R Studio to manage our interactions with Github. The first thing we need to do is create a new project for our website repository. Go to File > New Project
+
+First: Choose Version Control
+
+```{r, echo=FALSE}
+knitr::include_graphics(rep("images/blog9.png"))
+```
+
+Second: Choose Github.
+
+Third: Paste your github repository url into the Repository URL box. That will autofill the Project Director Name. 
+
+**MOST IMPORTANTLY** here, you need to put your website project in the same directory as your blog project. So if your blog project is in your Documents folder, put your website in your Documents folder. If you've got your blog project in some homework folder somewhere, put the website there too. But when you're done, you should have a place on your computer somewhere that has two folders:
+
+blog-project-name/
+username.github.io/
+
+After you've put it in the right place, check the Open in new session box and hit Create Project.
+
+```{r, echo=FALSE}
+knitr::include_graphics(rep("images/blog11.png"))
+```
+
+**Step 4:**
+
+Let's make your first file in your website. It's a simple file. Go to File > New File > Text File. 
+
+Copy and paste this block into that file:
+
+```
+.DS_Store
+*/.DS_Store
+.Rproj.user
+*.Rproj
+.Rhistory
+```
+If you're on windows, the first two lines are unnecessary, but won't hurt anything. 
+
+Go to File > Save and name this file .gitignore 
+
+You will get a warning about file starting with a . being reserved for the system and will be hidden. Good news! That's exactly what this is. This tells git to ignore these files. They're files you don't want on Github, so this prevents that. 
+
+After you save it, click on the Git tab in the top right. You should see your .gitignore file there and you may see others. Click the Commit button.
+
+```{r, echo=FALSE}
+knitr::include_graphics(rep("images/blog12.png"))
+```
+
+This is where you will commit files to your repository. Github is a two step process for getting files from your computer to Github. The first is committing the files. The second is pushing them. Committing files is a three step process. You first have to check the box next to the files you are committing, then write a commit message -- a note to yourself what this is -- and then hitting commit.
+
+```{r, echo=FALSE}
+knitr::include_graphics(rep("images/blog13.png"))
+```
+
+In your commit message, type "Updating gitignore"
+
+Click commit. A window should pop up with some information. Unless you get an error saying the commit failed, you can close this window. 
+
+You're halfway home. Now click the push button in the top right. Once you do that, your new file will be on Github. Congrats, you've sent your first file to version control.
+
+**Step 5**
+
+Now we're set up to make a website, but we need to tell your website project that you want to publish to your github folder, not the default.
+
+Open config.toml in your blog project. Near the top, above ignoreFiles, add this line, replacing yourusername with ... your user name. This says publish to your github project that you put in the same folder as your blog project:
+
+```
+publishDir = "../yourusername.github.io"
+```
+
+Save config.toml. 
+
+Now you need to do the work to make your site. Change the title, the description, edit the about page, write a post. 
+
+Once you are ready to build your site, you need to click on the Build tab and then on Build Website. 
+
+```{r, echo=FALSE}
+knitr::include_graphics(rep("images/blog8.png"))
+```
+
+If it worked, you should see two things: A window should pop up with your site in it (and it may be that the css doesn't work, which isn't an issue when you publish to Github) and output in the build screen that tells you what it did.
+
+```{r, echo=FALSE}
+knitr::include_graphics(rep("images/blog14.png"))
+```
+
+**Step 6**
+
+At long last, we're ready to see your work on the internet. After you have built your website, flip over to your username.github.io project in R studio.
+
+Click the Git tab.
+
+You should see a LOT more files -- your website. Click the Commit tab and follow the steps in Step 4 -- check the boxes next to all the files (or click on the first one, hold shift and click on the last one, then check any box), then add a commit message ("first website commit" or "updating my website") and click Commit. Then, once that's done, click Push. 
+
+In a few minutes, you should be able to go to username.github.io in a browser and you'll see your site. [Here's mine](http://mattwaite.github.io/).
+
+<!--chapter:end:40-blogging.Rmd-->
 
