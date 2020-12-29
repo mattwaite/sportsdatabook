@@ -12,7 +12,7 @@ First, install the library in the console. We want a newer version of the `waffl
 
 Now load it: 
 
-```{r}
+```{r, message=FALSE,  warning=FALSE}
 library(waffle)
 ```
 
@@ -25,8 +25,8 @@ Maybe the easiest way to do waffle charts, at least at first, is to make vectors
 So let's look at offense. Rushing vs passing. 
 
 ```{r}
-nu <- c("Rushing"=184, "Passing"=47)
-oh <- c("Rushing"=368, "Passing"=212)
+nu <- c("Rushing"=217, "Passing"=160)
+oh <- c("Rushing"=215, "Passing"=276)
 ```
 
 So what does the breakdown of the night look like?
@@ -46,7 +46,7 @@ waffle(
 Or, we could make this two teams in the same chart.
 
 ```{r}
-passing <- c("Nebraska"=47, "Ohio State"=212)
+passing <- c("Nebraska"=160, "Ohio State"=276)
 ```
 
 ```{r}
@@ -78,11 +78,11 @@ iron(
 )
 ```
 
-What do you notice about this chart? Notice how the squares aren't the same size? Well, Ohio State out-gained Nebraska by a long way. So the squares aren't the same size because the numbers aren't the same. We can fix that by adding an unnamed padding number so the number of yards add up to the same thing. Let's make the total for everyone be 580, Ohio State's total yards of offense. So to do that, we need to add a padding of 349 to Nebraska. REMEMBER: Don't name it or it'll show up in the legend.
+What do you notice about this chart? Notice how the squares aren't the same size? Well, Ohio State out-gained Nebraska by a long way. So the squares aren't the same size because the numbers aren't the same. We can fix that by adding an unnamed padding number so the number of yards add up to the same thing. Let's make the total for everyone be 491, Ohio State's total yards of offense. So to do that, we need to add a padding of 114 to Nebraska. REMEMBER: Don't name it or it'll show up in the legend.
 
 ```{r}
-nu <- c("Rushing"=184, "Passing"=47, 349)
-oh <- c("Rushing"=368, "Passing"=212, 0)
+nu <- c("Rushing"=217, "Passing"=160, 114)
+oh <- c("Rushing"=215, "Passing"=276)
 ```
 
 Now, in our waffle iron, if we don't give that padding a color, we'll get an error. So we need to make it white. Which, given our white background, means it will disappear.
@@ -123,7 +123,7 @@ iron(
 )
 ```
 
-News flash: Ohio State crushed Nebraska. 
+News flash: Ohio State beat Nebraska. 
 
 ## Waffles two ways: Part 2
 

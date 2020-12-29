@@ -2,15 +2,38 @@
 
 One of the elements of data visualization excellence is **inviting comparison**. Often that comes in showing **what proportion a thing is in relation to the whole thing**. With bar charts, we're showing magnitude of the whole thing. If we have information about the parts of the whole, **we can stack them on top of each other to compare them, showing both the whole and the components**. And it's a simple change to what we've already done. 
 
-```{r}
+We're going to use a dataset of college football games from this season. 
+
+```{r echo=FALSE, class.output="bg-info", results="asis",  message=FALSE,  warning=FALSE}
+library(downloadthis)
+library(glue)
+
+dllink <- download_link(
+  link = "http://mattwaite.github.io/sportsdatafiles/footballlogs20.csv",
+  button_label = "Download csv file",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
+
+```
+
+Load the tidyverse.
+
+```{r, message=FALSE,  warning=FALSE}
 library(tidyverse)
 ```
-We're going to use a dataset of college football games last season. [You can get it here](https://unl.box.com/s/2prgq48ctoxlukn6kmfjw0u1opda5s0m). 
+
+And the data.
 
 ```{r}
-football <- read_csv("data/footballlogs19.csv")
+football <- read_csv("data/footballlogs20.csv")
 ```
-What we have here is every game in college football last season. The question we want to answer is this: Who had the most prolific offenses in the Big Ten last season? And how did they get there? 
+
+What we have here is every game in college football this season. The question we want to answer is this: Who had the most prolific offenses in the Big Ten? And how did they get there? 
 
 So to make this chart, we have to just add one thing to a bar chart like we did in the previous chapter. However, it's not that simple.
 
@@ -74,4 +97,6 @@ ggplot(yardswide, aes(x=reorder(Team, Yards), weight=Yards, fill=Type)) +
   coord_flip()
 ```
 
-And just like that, Ohio State comes out on top, with Wisconsin second and ... Indiana? ... third. Huh.
+And just like that ... Penn State comes out on top? Huh. And look who is third.
+
+What else is the problem here? Hint: there was a global pandemic going on.

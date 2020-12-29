@@ -8,14 +8,35 @@ To replicate this, we need cumulative data -- data that is the running total of 
 
 Step charts can be used for all kinds of things -- showing how a player's career has evolved over time, how a team fares over a season, or franchise history. Let's walk through an example. 
 
-```{r}
+Let's look at Fred Hoiberg's first team.
+
+```{r echo=FALSE, class.output="bg-info", results="asis",  message=FALSE,  warning=FALSE}
+library(downloadthis)
+library(glue)
+
+dllink <- download_link(
+  link = "http://mattwaite.github.io/sportsdatafiles/logs20.csv",
+  button_label = "Download csv file",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
+
+```
+
+We'll need the tidyverse.
+
+```{r, message=FALSE,  warning=FALSE}
 library(tidyverse)
 ```
 
-And we'll use [our basketball log data](https://unl.box.com/s/a8m91bro10t89watsyo13yjegb1fy009). 
+And we need to load our logs data we just downloaded.
 
 ```{r}
-logs <- read_csv("data/logs19.csv")
+logs <- read_csv("data/logs20.csv")
 ```
 
 Here we're going to look at the scoring differential of teams. If you score more than your opponent, you win. So it stands to reason that if you score a lot more than your opponent over the course of a season, you should be very good, right? Let's see.
@@ -47,13 +68,12 @@ Let's try a different element of the aesthetic: color, but this time inside the 
 ggplot() + geom_step(data=bigdiff, aes(x=Date, y=CumDiff, group=Team, color=Team))
 ```
 
-From this, we can see two teams in the Big Ten had negative point differentials last season -- Illinois and Rutgers. 
+From this, we can see two teams in the Big Ten had negative point differentials last season -- Nebraska and Northwestern. But which is which? 
 
-Let's look at those top teams plus Nebraska.
+Let's look at the top team plus Nebraska.
 
 ```{r}
 nu <- bigdiff %>% filter(Team == "Nebraska Cornhuskers")
-mi <- bigdiff %>% filter(Team == "Michigan Wolverines")
 ms <- bigdiff %>% filter(Team == "Michigan State Spartans")
 ```
 
@@ -65,9 +85,14 @@ The second thing I'm going to add is the annotation layer. In this case, I am ad
 ggplot() + 
   geom_step(data=bigdiff, aes(x=Date, y=CumDiff, group=Team), color="light grey") +
   geom_step(data=nu, aes(x=Date, y=CumDiff, group=Team), color="red") + 
-  geom_step(data=mi, aes(x=Date, y=CumDiff, group=Team), color="blue") + 
   geom_step(data=ms, aes(x=Date, y=CumDiff, group=Team), color="green") +
-  annotate("text", x=(as.Date("2018-12-10")), y=220, label="Nebraska") +
-  labs(x="Date", y="Cumulative Point Differential", title="Nebraska was among the league's most dominant", subtitle="Before the misseason skid, Nebraska was at the top of the Big Ten in point differential", caption="Source: Sports-Reference.com | By Matt Waite") +
+  annotate("text", x=(as.Date("2019-12-10")), y=-70, label="Nebraska") +
+  annotate("text", x=(as.Date("2020-02-01")), y=330, label="Michigan State") +
+  labs(
+    x="Date", 
+    y="Cumulative Point Differential", 
+    title="Nebraska's season long slide", 
+    subtitle="The Huskers started slow and never got going", 
+    caption="Source: Sports-Reference.com | By Matt Waite") +
   theme_minimal()
 ```

@@ -1,6 +1,6 @@
 # Circular bar plots
 
-At the 27:36 mark in the [Half Court Podcast](https://www.omaha.com/sports/podcasts/half-court-press/half-court-press-creighton-cruises-in-opener-nebraska-stunned-in/article_67081a35-3a8f-5e9e-ae67-e88fcacbb362.html), Omaha World Herald Writer Chris Heady said "November basketball doesn't matter, but it shows you where you are."
+At the 27:36 mark in the [Half Court Podcast](https://www.omaha.com/sports/podcasts/half-court-press/half-court-press-creighton-cruises-in-opener-nebraska-stunned-in/article_67081a35-3a8f-5e9e-ae67-e88fcacbb362.html), former Omaha World Herald Writer Chris Heady said "November basketball doesn't matter, but it shows you where you are."
 
 It's a tempting phrase to believe, especially a day after Nebraska lost the first game of the Fred Hoiberg era at home to a baseball school, UC Riverside. And it wasn't close. The Huskers, because of a total roster turnover, were a complete mystery before the game. And what happened during it wasn't pretty, so there was a little soul searching going on in Lincoln.
 
@@ -8,14 +8,33 @@ But does November basketball really not matter?
 
 Let's look, using a new form of chart called a circular bar plot. It's a chart type that combines several forms we've used before: bar charts to show magnitude, stacked bar charts to show proportion, but we're going to add bending the chart around a circle to add some visual interstingness to it. We're also going to use time as an x-axis value to make a not subtle circle of time reference -- a common technique with circular bar charts. 
 
-First we need some libraries.
+We'll use a dataset of every college basketball game last season.
 
-```{r}
+```{r echo=FALSE, class.output="bg-info", results="asis",  message=FALSE,  warning=FALSE}
+library(downloadthis)
+library(glue)
+
+dllink <- download_link(
+  link = "http://mattwaite.github.io/sportsdatafiles/logs20.csv",
+  button_label = "Download csv file",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
+
+```
+
+Load your libraries.
+
+```{r, message=FALSE,  warning=FALSE}
 library(tidyverse)
 library(lubridate)
 ```
 
-Let's import [every basketball game from this year](https://unl.box.com/s/wnlh0u9low1yh56enion8zjmu8r7dc8p). 
+And load your data.
 
 ```{r}
 logs <- read_csv("data/logs20.csv")

@@ -10,11 +10,31 @@ The question before you is this: is that true? Does keeping a lid on your oppone
 
 This is what we're going to start to answer today. And we'll do it with scatterplots and regressions. Scatterplots are very good at showing **relationships between two numbers**. 
 
-First, we need libraries and [data](https://unl.box.com/s/yc01x7ae7r2jtuixo4j3s3s0ed7o5f8g).
+First, we need libraries and every college basketball game last year.
 
-```{r}
+```{r echo=FALSE, class.output="bg-info", results="asis",  message=FALSE,  warning=FALSE}
+library(downloadthis)
+library(glue)
+
+dllink <- download_link(
+  link = "http://mattwaite.github.io/sportsdatafiles/logs20.csv",
+  button_label = "Download csv file",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
+```
+
+Load the tidyverse.
+
+```{r, message=FALSE,  warning=FALSE}
 library(tidyverse)
 ```
+
+And the data.
 
 ```{r}
 logs <- read_csv("data/logs20.csv")

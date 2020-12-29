@@ -10,17 +10,35 @@ To use both of them, you need to add a new library:
 
 Let's give it a whirl.
 
-```{r}
+```{r, message=FALSE,  warning=FALSE}
 library(tidyverse)
 library(ggalt)
 ```
 
 ## Dumbbell plots
 
-For this, let's use [last season's college football data](https://unl.box.com/s/2prgq48ctoxlukn6kmfjw0u1opda5s0m).
+For this, let's use college football game logs.
+
+```{r echo=FALSE, class.output="bg-info", results="asis",  message=FALSE,  warning=FALSE}
+library(downloadthis)
+library(glue)
+
+dllink <- download_link(
+  link = "http://mattwaite.github.io/sportsdatafiles/footballlogs20.csv",
+  button_label = "Download csv file",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
+```
+
+And load it.
 
 ```{r}
-logs <- read_csv("data/footballlogs19.csv")
+logs <- read_csv("data/footballlogs20.csv")
 ```
 
 For the first example, let's look at the difference between a team's giveaways -- turnovers lost -- versus takeaways, turnovers gained. To get this, we're going to add up all offensive turnovers and defensive turnovers for a team in a season and take a look at where they come out. To make this readable, I'm going to focus on the Big Ten.
@@ -90,7 +108,7 @@ ggplot() +
   theme_minimal()
 ```
 
-Believe it or not, Illinois had the most takeaways in the Big Ten last season. Don't sleep on the Fighting Lovie Smiths.
+Believe it or not, Indiana had the most takeaways in the Big Ten last season. Don't sleep on the Fighting Basketball School.
 
 ## Lollipop charts
 
@@ -114,7 +132,7 @@ ggplot() +
     aes(y=reorder(Team, Takeaways), x=Takeaways), 
     horizontal = TRUE
     ) + theme_minimal() + 
-  labs(title = "Nebraska's defense wasn't as bad as you think", y="Team")
+  labs(title = "Nebraska's defense improved, but needs more takeaways", y="Team")
 ```
 
 How about some layering? 
@@ -140,4 +158,4 @@ ggplot() +
   labs(title = "Nebraska's defense wasn't as bad as you think", y="Team")
 ```
 
-The headline says it all. Nebraska's defense was middle of the league in takeaways. 
+The headline says it all.

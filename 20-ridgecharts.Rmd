@@ -6,12 +6,31 @@ In the console, run this: `install.packages("ggridges")`
 
 Now we can add those libraries. 
 
-```{r}
+```{r, message=FALSE,  warning=FALSE}
 library(tidyverse)
 library(ggridges)
 ```
 
-So for this, let's look at every basketball game played since the 2014-15 season. That's more than 28,000 basketball games. [Download that data here](https://unl.box.com/s/u9407jj007fxtnu1vbkybdawaqg6j3fw).
+So for this, let's look at every basketball game played since the 2014-15 season.
+
+```{r echo=FALSE, class.output="bg-info", results="asis",  message=FALSE,  warning=FALSE}
+library(downloadthis)
+library(glue)
+
+dllink <- download_link(
+  link = "http://mattwaite.github.io/sportsdatafiles/logs1520.csv",
+  button_label = "Download csv file",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
+
+```
+
+We load that like this.
 
 ```{r}
 logs <- read_csv("data/logs1519.csv")
@@ -20,7 +39,6 @@ logs <- read_csv("data/logs1519.csv")
 So I want to group teams by wins. Wins are the only thing that matter -- ask Tim Miles. So our data has a column called W_L that lists if the team won or lost. The problem is it doesn't just say W or L. If the game went to overtime, it lists that. That complicates counting wins. And, with ridgeplots, I want to be be able to separate EVERY GAME by how many wins the team had over a SEASON. So I've got some work to do.
 
 First, here's a trick to find a string of text and make that. It's called `grepl` and the basic syntax is grepl for this string in this field and then do what I tell you. In this case, we're going to create a new field called winloss look for W or L (and ignore any OT notation) and give wins a 1 and losses a 0. 
-
 
 ```{r}
 winlosslogs <- logs %>% mutate(winloss = case_when(

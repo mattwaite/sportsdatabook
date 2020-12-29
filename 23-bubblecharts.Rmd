@@ -10,7 +10,7 @@ First, I'm going to show you an example of them not working to illustrate the po
 
 I'm going to load up my libraries. 
 
-```{r}
+```{r, message=FALSE,  warning=FALSE}
 library(tidyverse)
 ```
 
@@ -18,10 +18,28 @@ So for this example, I want to look at where Big Ten teams compare to the rest o
 
 I'm going to create a scatterplot with offensive yards per play on the X axis and defensive yards per play on the y axis. We can then divide the grid into four quadrants. Teams with high yards per offensive play and low defensive yards per play are teams with good offenses and good defenses. The opposite means bad defense, bad offense. Then, to drive the point home, I'm going to make the dot the size of the total wins on the season -- the bubble in my bubble charts. 
 
-[We'll use last season's college football games](https://unl.box.com/s/2prgq48ctoxlukn6kmfjw0u1opda5s0m). 
+We'll use this season's college football games. 
+
+```{r echo=FALSE, class.output="bg-info", results="asis",  message=FALSE,  warning=FALSE}
+library(downloadthis)
+library(glue)
+
+dllink <- download_link(
+  link = "http://mattwaite.github.io/sportsdatafiles/footballlogs20.csv",
+  button_label = "Download csv file",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
+```
+
+And load it.
 
 ```{r}
-logs <- read_csv("data/footballlogs19.csv")
+logs <- read_csv("data/footballlogs20.csv")
 ```
 
 To do this, I've got some work to do. First, I need to mutate the outcomes of the games into 1s and 0s so I can add up the wins. We've done this before, so this won't be new to you, just adjusted slightly from basketball data.
@@ -155,7 +173,7 @@ ggplot() +
     aes(x=OffensiveYPP, y=DefensiveYPP, label=Team)
   )
 ```
-Well, what do you know about that? Nebraska was ... really average last season.
+Well, what do you know about that? Nebraska was ... really a mixed bag this season.
 
 All that's left is some labels and some finishing touches. 
 
@@ -176,7 +194,7 @@ ggplot() +
     data=bigten, 
     aes(x=OffensiveYPP, y=DefensiveYPP, label=Team)
   ) +
-  labs(title="Nebraska: Average at football", subtitle="The Husker's were dead in the middle, neither good nor bad at anything.", caption="Source: NCAA | By Matt Waite")  + theme_minimal() + 
+  labs(title="Nebraska: Average at football?", subtitle="The Husker's were kinda in the middle of everything, neither good nor bad at anything.", caption="Source: NCAA | By Matt Waite")  + theme_minimal() + 
   theme(
     plot.title = element_text(size = 16, face = "bold"),
     axis.title = element_text(size = 8), 

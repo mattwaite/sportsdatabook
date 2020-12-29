@@ -6,19 +6,38 @@ So far, we've talked about bar charts -- stacked or otherwise -- are good for sh
 
 Let's look at how we can answer this question: Why was Nebraska terrible at basketball last season?
 
+We'll need the logs of every game in college basketball for this.
+
+```{r echo=FALSE, class.output="bg-info", results="asis",  message=FALSE,  warning=FALSE}
+library(downloadthis)
+library(glue)
+
+dllink <- download_link(
+  link = "http://mattwaite.github.io/sportsdatafiles/logs20.csv",
+  button_label = "Download csv file",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
+
+```
+
 Let's start getting all that we need. We can use the tidyverse shortcut. 
 
-```{r}
+```{r, message=FALSE,  warning=FALSE}
 library(tidyverse)
 ```
 
-Now we'll [import the data you need](https://unl.box.com/s/fozp95j76gbc08qqoe01ozcxzsz801ns). Mine looks like this: 
+And now load the data.
 
 ```{r}
-logs <- read_csv("data/logs19.csv")
+logs <- read_csv("data/logs20.csv")
 ```
 
-This data has every game from every team in it, so we need to use filtering to limit it, because we just want to look at Nebraska. If you don't remember, flip back to chapter 5. 
+This data has every game from every team in it, so we need to use filtering to limit it, because we just want to look at Nebraska. If you don't remember, flip back to chapter 6. 
 
 ```{r}
 nu <- logs %>% filter(Team == "Nebraska Cornhuskers")
@@ -29,13 +48,15 @@ Because this data has just Nebraska data in it, the dates are formatted correctl
 Line charts, unlike bar charts, do have a y-axis. So in our ggplot step, we have to define what our x and y axes are. In this case, the x axis is our Date -- the most common x axis in line charts is going to be a date of some variety -- and y in this case is up to us. We've seen from previous walkthroughs that how well a team shoots the ball has a lot to do with how well a team does in a season, so let's chart that. 
 
 ```{r}
-ggplot(nu, aes(x=Date, y=TeamFGPCT)) + geom_line()
+ggplot() + geom_line(data=nu, aes(x=Date, y=TeamFGPCT))
 ```
 
 See a problem here? Note the Y axis doesn't start with zero. That makes this look worse than it is (and that February swoon is pretty bad). To make the axis what you want, you can use `scale_x_continuous` or `scale_y_continuous` and pass in a list with the bottom and top value you want. You do that like this:
 
 ```{r}
-ggplot(nu, aes(x=Date, y=TeamFGPCT)) + geom_line() + scale_y_continuous(limits = c(0, .6))
+ggplot() + 
+  geom_line(data=nu, aes(x=Date, y=TeamFGPCT)) + 
+  scale_y_continuous(limits = c(0, .6))
 ```
 
 Note also that our X axis labels are automated. It knows it's a date and it just labels it by month.
@@ -59,13 +80,18 @@ ggplot() + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red")
 Now, by using +, we can add Michigan State to it. REMEMBER COPY AND PASTE IS A THING. Nothing changes except what data you are using.
 
 ```{r}
-ggplot() + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + geom_line(data=msu, aes(x=Date, y=TeamFGPCT), color="green")
+ggplot() + 
+  geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + 
+  geom_line(data=msu, aes(x=Date, y=TeamFGPCT), color="green")
 ```
 
 Let's flatten our lines out by zeroing the Y axis.
 
 ```{r}
-ggplot() + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + geom_line(data=msu, aes(x=Date, y=TeamFGPCT), color="green") + scale_y_continuous(limits = c(0, .65))
+ggplot() + 
+  geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + 
+  geom_line(data=msu, aes(x=Date, y=TeamFGPCT), color="green") + 
+  scale_y_continuous(limits = c(0, .65))
 ```
 
 So visually speaking, the difference between Nebraska and Michigan State's season is that Michigan State stayed mostly on an even keel, and Nebraska went on a two month swoon.
@@ -83,7 +109,11 @@ p5conf <- logs %>% filter(Conference %in% powerfive)
 I can keep layering on layers all day if I want. And if my dataset has more than one team in it, I need to use the `group` command. And, the layering comes in order -- so if you're going to layer a bunch of lines with a smaller group of lines, you want the bunch on the bottom. So to do that, your code stacks from the bottom. The first geom in the code gets rendered first. The second gets layered on top of that. The third gets layered on that and so on. 
 
 ```{r}
-ggplot() + geom_line(data=p5conf, aes(x=Date, y=TeamFGPCT, group=Team), color="grey") + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + geom_line(data=msu, aes(x=Date, y=TeamFGPCT), color="green") + scale_y_continuous(limits = c(0, .65))
+ggplot() + 
+  geom_line(data=p5conf, aes(x=Date, y=TeamFGPCT, group=Team), color="grey") + 
+  geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + 
+  geom_line(data=msu, aes(x=Date, y=TeamFGPCT), color="green") + 
+  scale_y_continuous(limits = c(0, .65))
 ```
 
 What do we see here? How has Nebraska and Michigan State's season evolved against all the rest of the teams in college basketball?
@@ -95,5 +125,10 @@ average <- logs %>% group_by(Date) %>% summarise(mean_shooting=mean(TeamFGPCT))
 ```
 
 ```{r}
-ggplot() + geom_line(data=p5conf, aes(x=Date, y=TeamFGPCT, group=Team), color="grey") + geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + geom_line(data=msu, aes(x=Date, y=TeamFGPCT), color="green") + geom_line(data=average, aes(x=Date, y=mean_shooting), color="black") + scale_y_continuous(limits = c(0, .65))
+ggplot() + 
+  geom_line(data=p5conf, aes(x=Date, y=TeamFGPCT, group=Team), color="grey") + 
+  geom_line(data=nu, aes(x=Date, y=TeamFGPCT), color="red") + 
+  geom_line(data=msu, aes(x=Date, y=TeamFGPCT), color="green") + 
+  geom_line(data=average, aes(x=Date, y=mean_shooting), color="black") + 
+  scale_y_continuous(limits = c(0, .65))
 ```

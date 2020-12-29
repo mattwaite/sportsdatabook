@@ -17,17 +17,38 @@ Here are some `ggplot2` resources you'll want to keep handy:
 
 Let's dive in using data we've already seen before -- football attendance. This workflow will represent a clear picture of what your work in this class will be like for much of the rest of the semester. One way to think of this workflow is that your R Notebook is now your digital sketchbook, where you will try different types of visualizations to find ones that work. Then, you will either write the code that adds necessary and required parts to finish it, or you'll export your work into a program like Illustrator to finish the work. 
 
-To begin, we'll import libraries as we have all along. We'll read in the data, then create a new dataframe that represents [our attendance data](https://unl.box.com/s/oajabnn5614s22jstgcd9ojxo2njn6jt), similar to what we've done before. 
+To begin, we'll use data we've seen before: college football attendance.
 
-```{r}
+```{r echo=FALSE, class.output="bg-info", results="asis",  message=FALSE,  warning=FALSE}
+library(downloadthis)
+library(glue)
+
+dllink <- download_link(
+  link = "http://mattwaite.github.io/sportsdatafiles/attendance.csv",
+  button_label = "Download csv file",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
+
+```
+
+Now load the tidyverse.
+
+```{r, message=FALSE,  warning=FALSE}
 library(tidyverse)
 ```
+
+And the data.
 
 ```{r}
 attendance <- read_csv('data/attendance.csv')
 ```
 
-First, let's get a top 10 list by announced attendance in the most recent season we have data. We'll use the same tricks we used in the filtering assignment. 
+First, let's get a top 10 list by announced attendance in the most recent season we have data. We'll use the same tricks we used in the filtering assignment.
 
 ```{r}
 attendance %>% 
@@ -51,9 +72,9 @@ The easiest thing we can do is create a simple bar chart of our data. **Bar char
 
 We could, for instance, create a bar chart of the total attendance. To do that, we simply tell `ggplot2` what our dataset is, what element of the data we want to make the bar chart out of (which is the aesthetic), and the geometry type (which is the geom). It looks like this:
 
-`ggplot(top10, aes(x=Institution)) + geom_bar()` 
+`ggplot() + geom_bar(data=top10, aes(x=Institution))` 
 
-Note: attendance is our data, `aes` means aesthetics, `x=Institution` explicitly tells `ggplot2` that our x value -- our horizontal value -- is the Institution field from the data, and then we add on the `geom_bar()` as the geometry. And what do we get when we run that? 
+Note: top10 is our data, `aes` means aesthetics, `x=Institution` explicitly tells `ggplot2` that our x value -- our horizontal value -- is the Institution field from the data, and then we add on the `geom_bar()` as the geometry. And what do we get when we run that? 
 
 ```{r}
 ggplot(top10, aes(x=Institution)) + geom_bar()
@@ -62,8 +83,8 @@ ggplot(top10, aes(x=Institution)) + geom_bar()
 We get ... weirdness. We expected to see bars of different sizes, but we get all with a count of 1. What gives? Well, this is the default behavior. What we have here is something called a histogram, where `ggplot2` helpfully counted up the number of times the Institution appears and counted them up. Since we only have one record per Institution, the count is always 1. How do we fix this? By adding `weight` to our aesthetic. 
 
 ```{r}
-ggplot(top10, aes(x=Institution, weight=`2018`)) + 
-  geom_bar()
+ggplot() + 
+  geom_bar(data=top10, aes(x=Institution, weight=`2018`))
 ```
 
 Closer. But ... what order is that in? And what happened to our count numbers on the left? Why are they in scientific notation?
@@ -71,13 +92,13 @@ Closer. But ... what order is that in? And what happened to our count numbers on
 Let's deal with the ordering first. `ggplot2`'s default behavior is to sort the data by the x axis variable. So it's in alphabetical order. To change that, we have to `reorder` it. With `reorder`, we first have to tell `ggplot` what we are reordering, and then we have to tell it HOW we are reordering it. So it's reorder(FIELD, SORTFIELD). 
 
 ```{r}
-ggplot(top10, aes(x=reorder(Institution, `2018`), weight=`2018`)) + geom_bar()
+ggplot() + geom_bar(data=top10, aes(x=reorder(Institution, `2018`), weight=`2018`))
 ```
 
 Better. We can argue about if the right order is smallest to largest or largest to smallest. But this gets us close. By the way, to sort it largest to smallest, put a negative sign in front of the sort field. 
 
 ```{r}
-ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + geom_bar()
+ggplot() + geom_bar(data=top10, aes(x=reorder(Institution, -`2018`), weight=`2018`))
 ```
 
 ## Scales
@@ -93,8 +114,8 @@ library(scales)
 To alter the scale, we add a piece to our plot with `+` and we tell it which scale is getting altered and what kind of data it is. In our case, our Y axis is what is needing to be altered, and it's continuous data (meaning it can be any number between x and y, vs discrete data which are categorical). So we need to add `scale_y_continuous` and the information we want to pass it is to alter the labels with a function called `comma`. 
 
 ```{r}
-ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + 
-  geom_bar() + 
+ggplot() + 
+  geom_bar(data=top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + 
   scale_y_continuous(labels=comma)
 ```
 
@@ -105,8 +126,8 @@ Better.
 We are going to spend a lot more time on styling, but let's add some simple labels to this with a new bit called `labs` which is short for labels. 
 
 ```{r}
-ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + 
-  geom_bar() + 
+ggplot() + 
+  geom_bar(data=top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + 
   scale_y_continuous(labels=comma) + 
   labs(
     title="Top 10 Football Programs By Attendance", 
@@ -118,8 +139,8 @@ ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) +
 The library has lots and lots of ways to alter the styling -- we can programmatically control nearly every part of the look and feel of the chart. One simple way is to apply themes in the library already. We do that the same way we've done other things -- we add them. Here's the light theme. 
 
 ```{r}
-ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + 
-  geom_bar() + 
+ggplot() + 
+  geom_bar(data=top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + 
   scale_y_continuous(labels=comma) + 
   labs(
     title="Top 10 Football Programs By Attendance", 
@@ -131,8 +152,8 @@ ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) +
 Or the minimal theme:
 
 ```{r}
-ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + 
-  geom_bar() + 
+ggplot() + 
+  geom_bar(data=top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + 
   scale_y_continuous(labels=comma) + 
   labs(
     title="Top 10 Football Programs By Attendance", 
@@ -148,8 +169,8 @@ Later on, we'll write our own themes. For now, the built in ones will get us clo
 Sometimes, we don't want vertical bars. Maybe we think this would look better horizontal. How do we do that? By adding `coord_flip()` to our code. It does what it says -- it inverts the coordinates of the figures.
 
 ```{r}
-ggplot(top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + 
-  geom_bar() + 
+ggplot() + 
+  geom_bar(data=top10, aes(x=reorder(Institution, -`2018`), weight=`2018`)) + 
   scale_y_continuous(labels=comma) + 
   labs(
     title="Top 10 Football Programs By Attendance", 

@@ -1,6 +1,8 @@
 # Simulations
 
-Two seasons ago, James Palmer Jr. shot 139 three point attempts and made 43 of them for a .309 shooting percentage last year. A few weeks into last season, he was 7 for 39 -- a paltry .179. Is something wrong or is this just bad luck? 
+In the 2017-2018 season, James Palmer Jr. took 139 three point attempts and made 43 of them for a .309 shooting percentage. A few weeks into the next season, he was 7 for 39 -- a paltry .179. 
+
+Is something wrong or is this just bad luck? 
 
 Luck is something that comes up a lot in sports. Is a team unlucky? Or a player? One way we can get to this, we can get to that is by simulating things based on their typical percentages. Simulations work by choosing random values within a range based on a distribution. The most common distribution is the normal or binomial distribution. The normal distribution is where the most cases appear around the mean, 66 percent of cases are within one standard deviation from the mean, and the further away from the mean you get, the more rare things become.
 
@@ -30,7 +32,7 @@ So what we see is given his season long shooting percentage, it's not out of the
 
 ## Cold streaks
 
-During the Western Illinois game, the team, shooting .329 on the season from behind the arc, went 0-15 in the second half. How strange is that? 
+During the Western Illinois game in the 2018-2019 season, the team, shooting .329 on the season from behind the arc, went 0-15 in the second half. How strange is that? 
 
 ```{r}
 set.seed(1234)
@@ -42,4 +44,3 @@ hist(simulations)
 table(simulations)
 ```
 Short answer: Really weird. If you simulate 15 threes 1000 times, sometimes you'll see them miss all of them, but only a few times -- five times, in this case. Most of the time, the team won't go 0-15 even once. So going ice cold is not totally out of the realm of random chance, but it's highly unlikely.
-
