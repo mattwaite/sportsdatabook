@@ -12,13 +12,13 @@ To use a library, you need to import it. Good practice -- one I'm going to insis
 
 That code looks like this:
 
-```{r}
+```{r, message=FALSE,  warning=FALSE}
 library(readr)
 ```
 
 To load them both, you need to run that code twice:
 
-```{r}
+```{r, message=FALSE,  warning=FALSE}
 library(readr)
 library(dplyr)
 ```
@@ -27,7 +27,7 @@ You can keep doing that for as many libraries as you need. I've seen notebooks w
 
 But the tidyverse has a neat little trick. We can load most of the libraries we'll need for the whole semester with one line: 
 
-```{r}
+```{r, message=FALSE,  warning=FALSE}
 library(tidyverse)
 ```
 
@@ -37,7 +37,26 @@ library(tidyverse)
 
 The first thing we need to do is get some data to work with. We do that by reading it in. In our case, we're going to read data from a csv file -- a comma-separated values file.
 
-The CSV file we're going to read from is a [Basketball Reference](https://www.basketball-reference.com/leagues/NBA_2020_advanced.html) of advanced metrics for NBA players this season. [You can download the CSV here](https://unl.box.com/s/5v1d70ab0xyaajkolynd54a1t4p38b3v). The Sports Reference sites are a godsend of data, a trove of stuff, and we're going to use it a lot in this class.
+The CSV file we're going to read from is a [Basketball Reference](https://www.basketball-reference.com/leagues/NBA_2020_advanced.html) page of advanced metrics for NBA players this season. The Sports Reference sites are a godsend of data, a trove of stuff, and we're going to use it a lot in this class.
+
+
+```{r echo=FALSE, class.output="bg-info", results="asis",  message=FALSE,  warning=FALSE}
+library(downloadthis)
+library(glue)
+
+dllink <- download_link(
+  link = "http://mattwaite.github.io/sportsdatafiles/nbaadvancedplayers1920.csv",
+  button_label = "Download csv file",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
+
+```
+
 
 So step 2, after setting up our libraries, is most often going to be importing data. In order to analyze data, we need data, so it stands to reason that this would be something we'd do very early.
 

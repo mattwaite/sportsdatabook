@@ -14,11 +14,32 @@ So let's use last year's Nebraska basketball team, which if haven't been paying 
 
 ## Calculating a Z score in R
 
-```{r}
+For this we'll need the logs of all college basketball games last season. 
+
+```{r echo=FALSE, class.output="bg-info", results="asis",  message=FALSE,  warning=FALSE}
+library(downloadthis)
+library(glue)
+
+dllink <- download_link(
+  link = "http://mattwaite.github.io/sportsdatafiles/logs20.csv",
+  button_label = "Download csv file",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
+
+```
+
+Load the tidyverse.
+
+```{r message=FALSE,  warning=FALSE}
 library(tidyverse)
 ```
 
-Let's look at the current state of Nebraska basketball using the [same logs data we've been using for the 2019-2020 season](https://unl.box.com/s/yc01x7ae7r2jtuixo4j3s3s0ed7o5f8g). 
+And load the data.
 
 ```{r}
 gamelogs <- read_csv("data/logs20.csv")

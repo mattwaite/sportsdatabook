@@ -1,6 +1,6 @@
 # Residuals
 
-When looking at a linear model of your data, there's a measure you need to be aware of called residuals. The residual is the distance between what the model predicted and what the real outcome is. Take our model at the end of the correlation and regression chapter. Our model predicted Nebraska, given a -40 net yardage deficit would lose to Iowa by -3.95 points. They lost by -3. So our residual is -.95. If Iowa fakes that last second field goal and scores a touchdown, our residual would have been -7. 
+When looking at a linear model of your data, there's a measure you need to be aware of called residuals. The residual is the distance between what the model predicted and what the real outcome is. Take our model at the end of the correlation and regression chapter. Our model predicted Nebraska, given a 5 net yardage margin would beat Iowa by 1.96 points. They lost by 6. So our residual is -7.96. 
 
 Residuals can tell you several things, but most important is if a linear model the right model for your data. If the residuals appear to be random, then a linear model is appropriate. If they have a pattern, it means something else is going on in your data and a linear model isn't appropriate. 
 
@@ -8,14 +8,31 @@ Residuals can also tell you who is underperforming and overperforming the model.
 
 Let's go back to our net yards model.
 
-Let's first attach libraries and [get some data](https://unl.box.com/s/2prgq48ctoxlukn6kmfjw0u1opda5s0m). 
+```{r echo=FALSE, class.output="bg-info", results="asis",  message=FALSE,  warning=FALSE}
+library(downloadthis)
+library(glue)
 
-```{r}
+dllink <- download_link(
+  link = "http://mattwaite.github.io/sportsdatafiles/footballlogs20.csv",
+  button_label = "Download csv file",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
+
+```
+
+Then load the tidyverse.
+
+```{r, message=FALSE,  warning=FALSE}
 library(tidyverse)
 ```
 
 ```{r}
-logs <- read_csv("data/footballlogs19.csv")
+logs <- read_csv("data/footballlogs20.csv")
 ```
 
 First, let's make the columns we'll need.
@@ -51,7 +68,7 @@ residualmodel %>% arrange(desc(residuals)) %>% select(Team, Opponent, Result, Ne
 ```
 So looking at this table, what you see here are the teams who scored more than their net yards would indicate. One of them should jump off the page at you.
 
-Remember Nebraska vs Illinois? We came back to win and everyone was happy and relieved at the same time? We outgained Illinois by **386 yards** in that game and won by 4. Our model predicted Nebraska should have won that game by 36.8 points. Illinois outscored the model by almost as many points as they had. Just goes to show you: you can have all the advantages and you can still screw it up. Just ask Buffalo: They were only outgained by Penn State by 70 yards and still lost by 32. 
+Remember Nebraska vs Rutgers? We won and everyone was happy and rel*ieved the season was over? We outgained Rutgers by **368 yards** in that game and won by 7. Our model predicted Nebraska should have won that game by **37** points. We should have blown Rutgers out of their own barn. But Rutgers isn't as hard done as Arizona, which should have lost by 48, but ended up losing by 63.  
 
 But, before we can bestow any validity on this model, we need to see if this linear model is appropriate. We've done that some looking at our p-values and R-squared values. But one more check is to look at the residuals themselves. We do that by plotting the residuals with the predictor. We'll get into plotting soon, but for now just seeing it is enough.
 
@@ -90,9 +107,9 @@ summary(pfit)
 
 So from top to bottom:
 
-* Our min and max go from -73 to positive 77
-* Our adjusted R-squared is ... -0.0004139. Not much at all. 
-* Our p-value is ... 0.576, which is more than than .05. 
+* Our min and max go from -67 to positive 65
+* Our adjusted R-squared is ... -0.0008935. Not much at all. 
+* Our p-value is ... 0.8307, which is more than than .05. 
 
 So what we can say about this model is that it's statistically insignificant and utterly meaningless. Normally, we'd stop right here -- why bother going forward with a predictive model that isn't predictive? But let's do it anyway. 
 
@@ -105,7 +122,7 @@ penalties$residuals <- residuals(pfit)
 penalties %>% arrange(desc(residuals)) %>% select(Team, Opponent, Result, TotalPenaltyYards, residuals)
 ```
 
-First, note all of the biggest misses here are all blowout games. The worst game of the season last year was, by far, Maryland vs Howard, a 79-0 shellacking that should never have happened. The differential was 79 points. The model missed that differential by ... 76.9 points. In other words, this model is terrible. But let's look at it anyway. 
+First, note all of the biggest misses here are all blowout games. The worst games of the season, the worst being Clemson vs Georgia Tech. The model missed that differential by ... 65 points. The margin of victory? 66 points. In other words, this model is terrible. But let's look at it anyway. 
 
 ```{r echo=FALSE}
 ggplot(penalties, aes(x=TotalPenaltyYards, y=residuals)) + geom_point()
