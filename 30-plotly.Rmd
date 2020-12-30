@@ -9,12 +9,30 @@ The library we're going to look at in this chapter is from a company called Plot
 You will need to install plotly. Go to the console -- not in the notebook -- and run `install.packages("plotly")`.
 
 Then we'll load it:
-```{r}
+```{r, message=FALSE,  warning=FALSE}
 library(tidyverse)
 library(plotly)
 ```
 
-To start out, we'll make a graph similar to something we've already done. We're going to use a [dataset of batting stats from the 2019 season](https://unl.box.com/s/xg0eqvmz9ynnegvjabv21ev5qlsd7mjs). This dataset has players who had more than 190 plate appearances and includes their basic stats and some advanced metrics. 
+To start out, we'll make a graph similar to something we've already done. We're going to use a dataset of batting stats from the 2019 season. This dataset has players who had more than 190 plate appearances and includes their basic stats and some advanced metrics. 
+
+```{r echo=FALSE, class.output="bg-info", results="asis",  message=FALSE,  warning=FALSE}
+library(downloadthis)
+library(glue)
+
+dllink <- download_link(
+  link = "http://mattwaite.github.io/sportsdatafiles/batting.csv",
+  button_label = "Download csv file",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
+```
+
+Now load it.
 
 ```{r}
 batting <- read_csv("data/batting.csv")

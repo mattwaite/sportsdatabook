@@ -10,12 +10,30 @@ Install it in the console with `install.packages("ggalt")`
 
 There's a bunch of things that `ggalt` does, but one of the most useful for us is the function `encircle`. Let's dive in.
 
-```{r}
+```{r, message=FALSE,  warning=FALSE}
 library(tidyverse)
 library(ggalt)
 ```
 
-Let's say we want to highlight the top scorers in college basketball. So let's load up [our player data](https://unl.box.com/s/0g56ve61y6hakyxzr1u4t534721bqvg8) and while we're at it, let's filter out anyone who hasn't played. 
+Let's say we want to highlight the top scorers in college basketball. So let's use our player data.
+
+```{r echo=FALSE, class.output="bg-info", results="asis",  message=FALSE,  warning=FALSE}
+library(downloadthis)
+library(glue)
+
+dllink <- download_link(
+  link = "http://mattwaite.github.io/sportsdatafiles/players20.csv",
+  button_label = "Download csv file",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
+```
+
+And while we're loading it, let's filter out anyone who hasn't played. 
 
 ```{r}
 players <- read_csv("data/players20.csv") %>% filter(MP > 0)

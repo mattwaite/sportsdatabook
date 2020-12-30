@@ -194,7 +194,7 @@ ggplot() +
     data=bigten, 
     aes(x=OffensiveYPP, y=DefensiveYPP, label=Team)
   ) +
-  labs(title="Nebraska: Average at football?", subtitle="The Husker's were kinda in the middle of everything, neither good nor bad at anything.", caption="Source: NCAA | By Matt Waite")  + theme_minimal() + 
+  labs(title="Nebraska: Average at football?", subtitle="The Huskers were kinda in the middle of everything, neither good nor bad at anything.", caption="Source: NCAA | By Matt Waite")  + theme_minimal() + 
   theme(
     plot.title = element_text(size = 16, face = "bold"),
     axis.title = element_text(size = 8), 

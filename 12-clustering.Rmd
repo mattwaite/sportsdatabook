@@ -37,7 +37,6 @@ dllink <- download_link(
 )
 
 glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
-
 ```
 
 Now load that data.

@@ -1,6 +1,6 @@
 # Headlines
 
-Let's review the pieces of a good graphic: 
+These are the pieces of a good graphic: 
 
 * Headline
 * Chatter
@@ -16,10 +16,12 @@ The second item is the chatter -- the text underneath that headline. It needs to
 
 The two bits of text are extremely important. Let's set up a chart and talk about how to do it wrong and how to do it better.
 
-```{r}
+```{r, message=FALSE,  warning=FALSE}
 library(tidyverse)
 library(ggrepel)
 ```
+
+The data and the chart code isn't important for you to follow along. The code is nothing special. The issues will be with the words that you'll see below.
 
 ```{r}
 scoring <- read_csv("data/scoringoffense.csv")

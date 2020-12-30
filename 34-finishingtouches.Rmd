@@ -30,11 +30,39 @@ While the elements above are nearly required in every chart, they aren't when yo
 
 Let's explore fixing up ggplot's output before we send it to a finishing program like Adobe Illustrator. We'll need a graphic to work with first. 
 
-```{r}
+```{r, message=FALSE,  warning=FALSE}
 library(tidyverse)
 library(ggrepel)
 ```
 
+Here's the data we'll use:
+
+```{r echo=FALSE, class.output="bg-info", results="asis",  message=FALSE,  warning=FALSE}
+library(downloadthis)
+library(glue)
+
+dllink1 <- download_link(
+  link = "http://mattwaite.github.io/sportsdatafiles/scoringoffense.csv",
+  button_label = "Download csv file",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+dllink2 <- download_link(
+  link = "http://mattwaite.github.io/sportsdatafiles/totaloffense.csv",
+  button_label = "Download csv file",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink1}</p><p>{dllink2}</p></pre>")
+```
+
+Let's load them and join them together.
 
 ```{r}
 scoring <- read_csv("data/scoringoffense.csv")

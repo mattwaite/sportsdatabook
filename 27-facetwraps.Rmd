@@ -6,11 +6,29 @@ One thing we noticed earlier in the semester -- it seems that a lot of teams sho
 
 As always, we start with libraries. 
 
-```{r}
+```{r, message=FALSE,  warning=FALSE}
 library(tidyverse)
 ```
 
-[Now data](https://unl.box.com/s/yc01x7ae7r2jtuixo4j3s3s0ed7o5f8g).
+We're going to use the logs of college basketball games last season.
+
+```{r echo=FALSE, class.output="bg-info", results="asis",  message=FALSE,  warning=FALSE}
+library(downloadthis)
+library(glue)
+
+dllink <- download_link(
+  link = "http://mattwaite.github.io/sportsdatafiles/logs20.csv",
+  button_label = "Download csv file",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
+```
+
+And load it.
 
 ```{r}
 logs <- read_csv("data/logs20.csv")

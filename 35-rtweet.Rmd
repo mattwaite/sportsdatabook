@@ -50,7 +50,7 @@ install.packages("lubridate") # Provides functions to make working with dates/ti
 
 ```
 
-```{r}
+```{r, message=FALSE,  warning=FALSE}
 
 # Load the packages to be used in your analysis session
 

@@ -8,7 +8,7 @@ First things first: Install ggbeeswarm with `install.packages("ggbeeswarm")`
 
 Like ggalt and ggrepel, ggbeeswarm adds a couple new geoms to ggplot. We'll need to load it, the tidyverse and, for later, ggrepel.
 
-```{r}
+```{r, message=FALSE,  warning=FALSE}
 library(tidyverse)
 library(ggbeeswarm)
 library(ggrepel)
@@ -20,7 +20,23 @@ Another bit of setup: we need to set the seed for the random number generator. T
 set.seed(1234)
 ```
 
-So let's look at last year's basketball team as a group of shooters. The team was disappointing -- we know that -- but what kind of a problem is it going to be that we're returning basically noone from it? 
+So let's look at last year's basketball team as a group of shooters. The team was disappointing -- we know that -- but what kind of a problem is it going to be that we're returning basically no one from it? 
+
+```{r echo=FALSE, class.output="bg-info", results="asis",  message=FALSE,  warning=FALSE}
+library(downloadthis)
+library(glue)
+
+dllink <- download_link(
+  link = "http://mattwaite.github.io/sportsdatafiles/players20.csv",
+  button_label = "Download csv file",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
+```
 
 First we'll load our player data.
 
@@ -144,6 +160,3 @@ ggplot() +
 `geom_jitter` spreads out the dots evenly across the width of the column, randomly deciding where in the line of the true shooting percentage they appear. 
 
 Which one is right for you? You're going to have to experiment and decide. This is the art in the art and a science. 
-
-
-

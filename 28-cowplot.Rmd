@@ -8,15 +8,33 @@ There is.
 
 It's called `cowplot`, and it's pretty easy to use. First install cowplot with install.packages("cowplot"). Then let's load tidyverse and cowplot.
 
-```{r}
+```{r, message=FALSE,  warning=FALSE}
 library(tidyverse)
 library(cowplot)
 ```
 
-What follows is just stuff for me to set up a couple of bar charts. You can run it -- it'll work on your machine without changing a thing -- but what I'm doing here isn't important. The stuff you need to do is below.
+We'll use the college football attendance data we've used before.
+
+```{r echo=FALSE, class.output="bg-info", results="asis",  message=FALSE,  warning=FALSE}
+library(downloadthis)
+library(glue)
+
+dllink <- download_link(
+  link = "http://mattwaite.github.io/sportsdatafiles/attendance.csv",
+  button_label = "Download csv file",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
+```
+
+And load it.
 
 ```{r}
-attendance <- read_csv("https://raw.githubusercontent.com/mattwaite/sportsdatabook/Master/data/attendance.csv")
+attendance <- read_csv("data/attendance.csv")
 ```
 
 Making a quick percent change.

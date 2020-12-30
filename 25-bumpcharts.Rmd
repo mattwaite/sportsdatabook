@@ -6,12 +6,29 @@ The requirements are that you have a row of data for a team, in that week, with 
 
 This is another extension to ggplot, and you'll install it the usual way: `install.packages("ggbump")`
 
-```{r}
+```{r, message=FALSE,  warning=FALSE}
 library(tidyverse)
 library(ggbump)
 ```
 
-[Here's the dataset](https://unl.box.com/s/zgb8hv2fdzz36lcs5bcje59ri84dqjai) we'll use, which I scraped out of the college football playoff [website](https://collegefootballplayoff.com/rankings.aspx): 
+Let's use last season's college football playoff rankings (this year wasn't done as of this writing): 
+
+```{r echo=FALSE, class.output="bg-info", results="asis",  message=FALSE,  warning=FALSE}
+library(downloadthis)
+library(glue)
+
+dllink <- download_link(
+  link = "http://mattwaite.github.io/sportsdatafiles/cfbranking.csv",
+  button_label = "Download csv file",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
+```
+
 
 ```{r}
 rankings <- read_csv("data/cfbranking.csv")

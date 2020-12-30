@@ -15,7 +15,7 @@ So we can see from this that we've got some problems.
 
 So let's start with that last question first and grab libraries we need.
 
-```{r}
+```{r, message=FALSE,  warning=FALSE}
 library(tidyverse)
 library(rvest)
 library(lubridate)

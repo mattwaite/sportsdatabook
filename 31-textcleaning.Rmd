@@ -6,7 +6,7 @@ There's a ton of tools in the tidyverse to fix this, and you already have some t
 
 First, you know what you need.
 
-```{r}
+```{r, message=FALSE,  warning=FALSE}
 library(tidyverse)
 ```
 
@@ -14,7 +14,25 @@ Now, two examples.
 
 ## Stripping out text
 
-Throughout this class, we've used data from Sports Reference. If you've used their Share > CSV method to copy data from a table, you may have noticed some extra cruft in the player name field. If you haven't seen it, I'll give you an example -- [here's a dataset of NBA players and their advanced metrics](https://unl.box.com/s/bx89eg0ooccpovm3ii7jnbjj3xaby2qd).
+Throughout this class, we've used data from Sports Reference. If you've used their Share > CSV method to copy data from a table, you may have noticed some extra cruft in the player name field. If you haven't seen it, I'll give you an example -- a dataset of NBA players and their advanced metrics.
+
+```{r echo=FALSE, class.output="bg-info", results="asis",  message=FALSE,  warning=FALSE}
+library(downloadthis)
+library(glue)
+
+dllink <- download_link(
+  link = "http://mattwaite.github.io/sportsdatafiles/nbaplayers.csv",
+  button_label = "Download csv file",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
+```
+
+Now load it.
 
 ```{r}
 nbaplayers <- read_csv("data/nbaplayers.csv")

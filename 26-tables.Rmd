@@ -14,18 +14,38 @@ install.packages("webshot")
 webshot::install_phantomjs()
 ```
 
-So what does all of these libraries do? Let's gather a few and [get some data](https://unl.box.com/s/th02njntiobd2azw7zhebgf9yb1o7x8i) of every game in the last 5 years. 
+So what does all of these libraries do? Let's gather a few and use data of every game in the last 5 years.
 
-```{r}
+```{r echo=FALSE, class.output="bg-info", results="asis",  message=FALSE,  warning=FALSE}
+library(downloadthis)
+library(glue)
+
+dllink <- download_link(
+  link = "http://mattwaite.github.io/sportsdatafiles/logs1520.csv",
+  button_label = "Download csv file",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
+```
+
+Load libraries.
+
+```{r, message=FALSE,  warning=FALSE}
 library(tidyverse)
 library(kableExtra)
 ```
+
+And the data.
 
 ```{r}
 logs <- read_csv("data/logs1520.csv")
 ```
 
-Let's ask this question: Which college football team saw the greatest increase in three point attempts last season as a percentage of shots? The simplest way to calculate that is by percent change. 
+Let's ask this question: Which college basketball team saw the greatest increase in three point attempts last season as a percentage of shots? The simplest way to calculate that is by percent change. 
 
 We've got a little work to do, putting together ideas we've used before. What we need to end up with is some data that looks like this:
 
@@ -138,7 +158,7 @@ The other good news bad news: `kable` isn't going to export this as an actual ve
 
 To export it, we merely add a save_kable to the end and give it a file path.
 
-```{r eval=FALSE}
+```
 threechange %>% 
   mutate(Change = percent(PercentChange)) %>%
   mutate(Change = cell_spec(

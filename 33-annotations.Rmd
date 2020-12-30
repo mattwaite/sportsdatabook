@@ -6,15 +6,33 @@ For this, we're going to go back to some code we started in Bubble Charts and we
 
 For this, we'll need to add a new library to the mix called `ggrepel`. You'll need to install it in the console with `install.packages("ggrepel")`. 
 
-```{r}
+```{r, message=FALSE,  warning=FALSE}
 library(tidyverse)
 library(ggrepel)
 ```
 
-Now we'll grab the data.
+Now we'll grab the data, each football game in 2020.
+
+```{r echo=FALSE, class.output="bg-info", results="asis",  message=FALSE,  warning=FALSE}
+library(downloadthis)
+library(glue)
+
+dllink <- download_link(
+  link = "http://mattwaite.github.io/sportsdatafiles/footballlogs20.csv",
+  button_label = "Download csv file",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
+```
+
+Now load it.
 
 ```{r}
-logs <- read_csv("data/footballlogs19.csv")
+logs <- read_csv("data/footballlogs20.csv")
 ```
 
 I'm going to set up a point chart that places teams on two-axes -- yards per play on offense on the x axis, and yards per play on defense. We did this in the bubble charts example.
@@ -43,7 +61,7 @@ averages
 I also want to highlight playoff teams.
 
 ```{r}
-playoff_teams <- c("Oklahoma", "LSU", "Clemson", "Ohio State")
+playoff_teams <- c("Notre Dame", "Alabama", "Clemson", "Ohio State")
 
 playoffs <- ypp %>% filter(Team %in% playoff_teams)
 ```
@@ -56,12 +74,12 @@ The rest is just adding labels and messing with the theme.
 ggplot() + 
   geom_point(data=ypp, aes(x=OffensiveYPP, y=DefensiveYPP), color="light grey") +
   geom_point(data=playoffs, aes(x=OffensiveYPP, y=DefensiveYPP)) +
-  geom_hline(yintercept=5.673263, color="dark grey") + 
-  geom_vline(xintercept=5.820543, color="dark grey") + 
+  geom_hline(yintercept=5.7, color="dark grey") + 
+  geom_vline(xintercept=5.7, color="dark grey") + 
   geom_text(aes(x=6.8, y=5, label="Good Offense, Good Defense"), color="blue") +
   geom_text(aes(x=5, y=6, label="Bad Defense, Bad Offense"), color="blue") +
   geom_text_repel(data=playoffs, aes(x=OffensiveYPP, y=DefensiveYPP, label=Team)) +
-  labs(x="Offensive Yards Per Play", y="Defensive Points Per Play", title="Why does Oklahoma suck so much?", subtitle="Their offense is great. Their defense? Average at best. Worst in the playoffs.", caption="Source: Sports-Reference.com | By Matt Waite") +
+  labs(x="Offensive Yards Per Play", y="Defensive Points Per Play", title="All four playoff teams are good", subtitle="Each of the four have above average offenses and defenses.", caption="Source: Sports-Reference.com | By Matt Waite") +
   theme_minimal() + 
   theme(
     plot.title = element_text(size = 16, face = "bold"),

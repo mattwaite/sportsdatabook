@@ -6,7 +6,7 @@ Let's grab [a simple, basic HTML table from College Football Stats](http://www.c
 
 First we'll need some libraries. We're going to use a library called `rvest`, which you can get by running `install.packages('rvest')` in the console. 
 
-```{r}
+```{r, message=FALSE,  warning=FALSE}
 library(rvest)
 library(tidyverse)
 ```
