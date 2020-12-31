@@ -5,7 +5,7 @@ author: "By Matt Waite"
 date: July 29, 2019
 bibliography:
 - packages.bib
-description: This book is the companion to the University of Nebraska-Lincoln's SPMC350 course in the College of Journalism and Mass Communications.
+description: "This book is the companion to the University of Nebraska-Lincoln's SPMC350 course in the College of Journalism and Mass Communications."
 documentclass: book
 link-citations: yes
 site: bookdown::bookdown_site

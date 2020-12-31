@@ -80,7 +80,7 @@ library(downloadthis)
 library(glue)
 
 dllink <- download_link(
-  link = "http://mattwaite.github.io/sportsdatafiles/players19.csv",
+  link = "http://mattwaite.github.io/sportsdatafiles/players20.csv",
   button_label = "Download csv file",
   button_type = "danger",
   has_icon = TRUE,
@@ -95,7 +95,7 @@ glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
 Import it like this:
 
 ```{r}
-players <- read_csv("data/players19.csv")
+players <- read_csv("data/players20.csv")
 ```
 
 The basic true shooting percentage formula is `(Points / (2*(FieldGoalAttempts + (.44 * FreeThrowAttempts)))) * 100`. Let's talk that through. Points divided by a lot. It's really field goal attempts plus 44 percent of the free throw attempts. Why? Because that's about what a free throw is worth, compared to other ways to score. After adding those things together, you double it. And after you divide points by that number, you multiply the whole lot by 100. 
@@ -116,7 +116,7 @@ players %>%
   arrange(desc(trueshooting))
 ```
 
-You'll be forgiven if you did not hear about Texas Longhorns shooting sensation Drayton Whiteside. He played in six games, took one shot and [actually hit it](https://youtu.be/QNviQf9X4rM?t=186). It happened to be a three pointer, which is one more three pointer than I've hit in college basketball. So props to him. Does that mean he had the best true shooting season in college basketball last year? 
+You'll be forgiven if you did not hear about Vanderbilt's shooting sensation Trace Arbuckle. He played in one game, took one shot and actually hit it. It happened to be a three pointer, which is one more three pointer than I've hit in college basketball. So props to him. Does that mean he had the best true shooting season in college basketball last year? 
 
 Not hardly. 
 
