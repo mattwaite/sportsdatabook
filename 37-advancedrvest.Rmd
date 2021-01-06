@@ -114,7 +114,7 @@ for (i in schools){
 
 table <- table[[1]] %>% rename(Game=X1, Date=X2, HomeAway=X3, Opponent=X4, W_L=X5, TeamScore=X6, OpponentScore=X7, TeamFG=X8, TeamFGA=X9, TeamFGPCT=X10, Team3P=X11, Team3PA=X12, Team3PPCT=X13, TeamFT=X14, TeamFTA=X15, TeamFTPCT=X16, TeamOffRebounds=X17, TeamTotalRebounds=X18, TeamAssists=X19, TeamSteals=X20, TeamBlocks=X21, TeamTurnovers=X22, TeamPersonalFouls=X23, Blank=X24, OpponentFG=X25, OpponentFGA=X26, OpponentFGPCT=X27, Opponent3P=X28, Opponent3PA=X29, Opponent3PPCT=X30, OpponentFT=X31, OpponentFTA=X32, OpponentFTPCT=X33, OpponentOffRebounds=X34, OpponentTotalRebounds=X35, OpponentAssists=X36, OpponentSteals=X37, OpponentBlocks=X38, OpponentTurnovers=X39, OpponentPersonalFouls=X40) %>% filter(Game != "") %>% filter(Game != "G") %>% mutate(Team=team, Conference=conference) %>% mutate_at(vars(-Team, -Conference, -Date, -Opponent, -HomeAway, -W_L), as.numeric) %>% mutate(Date = ymd(Date))
 
-  logs <- rbind(logs, table)  # binding them all together
+  logs <- bind_rows(logs, table)  # binding them all together
   Sys.sleep(3)  # Sys.sleep(3) pauses the loop for 3s so as not to overwhelm website's server
 }
 ```
@@ -134,7 +134,7 @@ This part:
 
 What follows that is taken straight from our example of just doing one.
 
-The last bits are using rbind to take our data and mash it into a bigger table, over and over and over again until we have them all in a single table. Then, we tell our scraper to wait a few seconds because we don't want our script to machine gun requests at their server as fast as it can go. That's a guaranteed way to get them to block scrapers, and could knock them off the internet. Aggressive scrapers aren't cool. Don't do it. 
+The last bits are using bind_rows to take our data and mash it into a bigger table, over and over and over again until we have them all in a single table. Then, we tell our scraper to wait a few seconds because we don't want our script to machine gun requests at their server as fast as it can go. That's a guaranteed way to get them to block scrapers, and could knock them off the internet. Aggressive scrapers aren't cool. Don't do it. 
 
 Lastly, we write it out to a csv file. 
 

@@ -1,6 +1,6 @@
 # Annotations
 
-Some of the best sports data visualizations start with a provocative question. How about this one: Why does Oklahoma always blow it in the college football playoffs? 
+Some of the best sports data visualizations start with a provocative question. How about this one: Who really belongs in the college football playoffs and why is it never Notre Dame? 
 
 For this, we're going to go back to some code we started in Bubble Charts and we're going to add some annotations to it. Annotations help us draw attention to things, or help the reader understand what they're looking at. They're labels on things, be that the teams we want to highlight or regions of the chart or lines or all of those things. 
 

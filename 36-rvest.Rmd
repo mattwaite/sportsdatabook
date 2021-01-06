@@ -78,10 +78,10 @@ scoringoffense19 <- scoringoffense %>% rename(Rank = 1) %>% mutate(YEAR = 2019)
 scoringoffense18 <- scoringoffense18 %>% rename(Rank = 1) %>% mutate(YEAR = 2018)
 ```
 
-And now, to combine the two tables together length-wise -- we need to make long data -- we'll use a base R function called `rbind`. The good thing is rbind is simple. The bad part is it can only do two tables at a time, so if you have more than that, you'll need to do it in steps.
+And now, to combine the two tables together length-wise -- we need to make long data -- we'll use a dpylr function called `bind_rows`. The good thing is bind_rows is simple.
 
 ```{r}
-combined <- rbind(scoringoffense19, scoringoffense18)
+combined <- bind_rows(scoringoffense19, scoringoffense18)
 ```
 
 Note in the environment tab we now have a data frame called combined that has 260 observations -- which just so happens to be what 130 from 2019 and 130 from 2018 add up to. 
