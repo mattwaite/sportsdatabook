@@ -62,7 +62,7 @@ In R, there is a `cor` function, and it works much the same as `mean` or `median
 newcorrelations %>% summarise(correlation = cor(differential, TotalPenaltyYards, method="pearson"))
 ```
 
-So on a scale of -1 to 1, where 0 means there's no relationship at all and 1 or -1 means a perfect relationship, penalty yards and whether or not the team scores more points than it give up are at -0.0065. You could say they're .7 percent related toward the negative -- more penalties, the lower your differential. Another way to say it? They're 99.3 percent not related.
+So on a scale of -1 to 1, where 0 means there's no relationship at all and 1 or -1 means a perfect relationship, penalty yards and whether or not the team scores more points than it give up are at -0.0068. You could say they're .7 percent related toward the negative -- more penalties, the lower your differential. Another way to say it? They're 99.3 percent not related.
 
 What about the number of penalties instead of the yards?
 
@@ -72,7 +72,7 @@ newcorrelations %>%
 ```
 So wait, what does this all mean? 
 
-It means that when you look at every game in college football, the number of penalties and penalty yards does have a negative impact on the score difference between your team and the other team. But the relationship between penalties, penalty yards and the difference between scores is barely anything at all. Like 99 percent plus not related.
+It means that when you look at every game in college football, the number of penalties and penalty yards does have a negative impact on the score difference between your team and the other team. But the relationship between penalties, penalty yards and the difference between scores is barely anything at all. Like 99+ percent plus not related.
 
 Normally, at this point, you'd quit while you were ahead. A correlation coefficient that shows there's no relationship between two things means stop. It's pointless to go on. But let's beat a dead horse a bit for the sake of talk radio callers who want to complain about undisciplined football teams.
 
@@ -89,9 +89,9 @@ summary(fit)
 
 There's three things we need here: 
 
-1. First we want to look at the p-value. It's at the bottom right corner of the output. In the case of Total Penalty Yards, the p-value is .8307. The threshold we're looking for here is .05. If it's less than .05, then the relationship is considered to be *statistically significant*. Significance here does not mean it's a big deal. It means it's not random. That's it. Just that. Not random. So in our case, the relationship between total penalty yards and a team's aggregate point differential are **not statistically significant**. The differences in score difference and penalty yards could be completely random. This is another sign we should just stop with this.
+1. First we want to look at the p-value. It's at the bottom right corner of the output. In the case of Total Penalty Yards, the p-value is .8226. The threshold we're looking for here is .05. If it's less than .05, then the relationship is considered to be *statistically significant*. Significance here does not mean it's a big deal. It means it's not random. That's it. Just that. Not random. So in our case, the relationship between total penalty yards and a team's aggregate point differential are **not statistically significant**. The differences in score difference and penalty yards could be completely random. This is another sign we should just stop with this.
 2. Second, we look at the Adjusted R-squared value. It's right above the p-value. Adjusted R-squared is a measure of how much of the difference between teams aggregate point values can be explained by penalty yards. Our correlation coefficient said they're .7 percent related to each other, but penalty yard's ability to explain the difference between teams? About .08 percent. That's ... not much. It's really nothing. Again, we should quit.
-3. The third thing we can look at, and we only bother if the first two are meaningful, is the coefficients. In the middle, you can see the (Intercept) is 1.226995 and the TotalPenaltyYards coefficient is -0.003383. Remember high school algebra? Remember learning the equation of a line? Remember swearing that learning `y=mx+b` is stupid because you'll never need it again? Surprise. It's useful again. In this case, we could try to predict a team's score differential in a game -- will they score more than they give up -- by using `y=mx+b`. In this case, y is the aggregate score, m is -0.003383 and b is 1.226995. So we would multiply a teams total penalty yards by -0.003383 and then add 1.226995 to it. The result would tell you what the total aggregate score in the game would be, according to our model. Chance that your even close with this? About .08 percent. In other words, you've got a 99.92 percent chance of being completely wrong. Did I say we should quit? Yeah. 
+3. The third thing we can look at, and we only bother if the first two are meaningful, is the coefficients. In the middle, you can see the (Intercept) is 1.21614 and the TotalPenaltyYards coefficient is -0.00349. Remember high school algebra? Remember learning the equation of a line? Remember swearing that learning `y=mx+b` is stupid because you'll never need it again? Surprise. It's useful again. In this case, we could try to predict a team's score differential in a game -- will they score more than they give up -- by using `y=mx+b`. In this case, y is the aggregate score, m is -0.00349 and b is 1.21614. So we would multiply a teams total penalty yards by -0.00349 and then add 1.21614 to it. The result would tell you what the total aggregate score in the game would be, according to our model. Chance that your even close with this? About .08 percent. In other words, you've got a 99.92 percent chance of being completely wrong. Did I say we should quit? Yeah. 
 
 So penalty yards are totally meaningless to the outcome of a game.
 
@@ -117,7 +117,7 @@ regressions %>%
   summarise(correlation = cor(differential, NetYards, method="pearson"))
 ```
 
-Answer: 81 percent. Not a perfect relationship, but very good. But how meaningful is that relationship and how predictive is it?
+Answer: 80 percent. Not a perfect relationship, but very good. But how meaningful is that relationship and how predictive is it?
 
 ```{r}
 net <- lm(differential ~ NetYards, data = regressions)
@@ -126,12 +126,12 @@ summary(net)
 
 First we check p-value. See that e-16? That means scientific notation. That means our number is 2.2 times 10 to the -16 power. So -.000000000000000022. That's sixteen zeros between the decimal and 22. Is that less than .05? Uh, yeah. So this is really, really, really not random. But anyone who has watched a game of football knows this is true. It makes intuitive sense. 
 
-Second, Adjusted R-squared: 0.6486. So we can predict a whopping 65 percent of the difference in the score differential by simply looking at the net yards the team has.
+Second, Adjusted R-squared: 0.6414. So we can predict a whopping 64 percent of the difference in the score differential by simply looking at the net yards the team has.
 
-Third, the coefficients: In this case, our `y=mx+b` formula looks like `y = 0.102473x + 0.315632`. So if we were applying this, let's look at Nebraska's 26-20 loss to Iowa in 2020. Nebraska's net yards that game? 16. That's right -- we outgained them.  
+Third, the coefficients: In this case, our `y=mx+b` formula looks like `y = 0.101704x + 0.311030`. So if we were applying this, let's look at Nebraska's 26-20 loss to Iowa in 2020. Nebraska's net yards that game? 16. That's right -- we outgained them.  
 
 ```{r}
-(0.102473*16)+0.315632 
+(0.101704*16)+0.311030 
 ```
 
-So by our model, Nebraska should have won by 1.96 points. Some games are closer than others. But when you can explain 65 percent of the difference, this is the kind of result you get. What would improve the model? Using more data to start. And using more inputs.
+So by our model, Nebraska should have won by 1.94 points. Some games are closer than others. But when you can explain 65 percent of the difference, this is the kind of result you get. What would improve the model? Using more data to start. And using more inputs.
