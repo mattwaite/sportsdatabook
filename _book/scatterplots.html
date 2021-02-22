@@ -77,6 +77,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -394,13 +395,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <p>Now let’s look at the scatterplot. With a scatterplot, we put what predicts the thing on the X axis, and the thing being predicted on the Y axis. In this case, X is our three pointers given up, y is our wins.</p>
 <div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="scatterplots.html#cb343-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">data=</span>threedef, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins))</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-252-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-251-1.png" width="672" /></p>
 <p>Let’s talk about this. This seems kind of random, but clustered around the middle and maybe sloping down to the right. That would mean the more threes you give up, the less you win. And that makes intuitive sense. But can we get a better sense of this? Yes, by adding another geom – <code>geom_smooth</code>. It’s identical to our <code>geom_point</code>, but we add a method to the end, which in this case we’re using the linear method or <code>lm</code>.</p>
 <div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="scatterplots.html#cb344-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb344-2"><a href="scatterplots.html#cb344-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>threedef, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins)) <span class="sc">+</span></span>
 <span id="cb344-3"><a href="scatterplots.html#cb344-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data=</span>threedef, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins), <span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-253-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-252-1.png" width="672" /></p>
 <p>So it does slope down to the right like we expect, but this still doesn’t look good to me. It’s very spread out. Which is a clue that you should be asking a question here: how strong of a relationship is this? How much can threes given up explain wins? Can we put some numbers to this?</p>
 <p>Of course we can. We can apply a linear model to this – remember Chapter 9? We’re going to create an object called fit, and then we’re going to put into that object a linear model – <code>lm</code> – and the way to read this is “wins are predicted by opponent threes.” Then we just want the summary of that model.</p>
 <div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="scatterplots.html#cb346-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(Wins <span class="sc">~</span> TotalOpp3P, <span class="at">data =</span> threedef)</span>
@@ -438,7 +439,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb349-3"><a href="scatterplots.html#cb349-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data=</span>threedef, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins), <span class="at">method=</span><span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
 <span id="cb349-4"><a href="scatterplots.html#cb349-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins), <span class="at">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-256-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-255-1.png" width="672" /></p>
 
 </div>
             </section>

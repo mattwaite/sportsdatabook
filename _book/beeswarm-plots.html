@@ -77,6 +77,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -387,7 +388,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="beeswarm-plots.html#cb375-1" aria-hidden="true" tabindex="-1"></a>shooters <span class="ot">&lt;-</span> activeplayers <span class="sc">%&gt;%</span> <span class="fu">filter</span>(FGA <span class="sc">&gt;</span> <span class="dv">197</span>)</span></code></pre></div>
 <p>Now we’ve got enough for a beeswarm plot. It works very much like you would expect – the group value is the x, the number is the y. We’re going to beeswarm by position, and the dots will be true shooting percentage.</p>
 <div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="beeswarm-plots.html#cb376-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_beeswarm</span>(<span class="at">data=</span>shooters, <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;grey&quot;</span>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-279-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-278-1.png" width="672" /></p>
 <p>You can see that there’s a lot fewer centers who have attempted more than 197 shots than guards, but then there’s a lot more guards in college basketball than anything else. In the guards column, note that fat width of the swarm is between .5 and .55. So that means most guards who shoot more than 197 shots end up in that area. They’re the average shooter at that level. You can see, some are better, some are worse.</p>
 <p>So where are the Nebraska players in that mix?</p>
 <p>We’ll filter players on Nebraska who meet our criteria.</p>
@@ -407,7 +408,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb378-7"><a href="beeswarm-plots.html#cb378-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>nu, </span>
 <span id="cb378-8"><a href="beeswarm-plots.html#cb378-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">groupOnX=</span><span class="cn">TRUE</span>, </span>
 <span id="cb378-9"><a href="beeswarm-plots.html#cb378-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-281-1.png" width="672" />
+<p><img src="SportsData_files/figure-html/unnamed-chunk-280-1.png" width="672" />
 Ooof. Best we can muster is middle of the fat part. Who is that?</p>
 <p>This is where we can use ggrepel. Let’s add a text layer and label the dots.</p>
 <div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="beeswarm-plots.html#cb379-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
@@ -422,7 +423,7 @@ Ooof. Best we can muster is middle of the fat part. Who is that?</p>
 <span id="cb379-10"><a href="beeswarm-plots.html#cb379-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(</span>
 <span id="cb379-11"><a href="beeswarm-plots.html#cb379-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>nu, </span>
 <span id="cb379-12"><a href="beeswarm-plots.html#cb379-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>, <span class="at">label=</span>Player))</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-282-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-281-1.png" width="672" /></p>
 <p>So Haanif Cheatham was our best shooter by true shooting percentage. The rest were below average shooters for that volume of shooting.</p>
 <div id="a-few-other-options" class="section level2" number="25.1">
 <h2><span class="header-section-number">25.1</span> A few other options</h2>
@@ -440,7 +441,7 @@ Ooof. Best we can muster is middle of the fat part. Who is that?</p>
 <span id="cb380-10"><a href="beeswarm-plots.html#cb380-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(</span>
 <span id="cb380-11"><a href="beeswarm-plots.html#cb380-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>nu, </span>
 <span id="cb380-12"><a href="beeswarm-plots.html#cb380-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>, <span class="at">label=</span>Player))</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-283-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-282-1.png" width="672" /></p>
 <p>Quasirandom spreads out the dots you see in beeswarm using – you guessed it – quasirandom spacing.</p>
 <p>For <code>geom_jitter</code>, we need to remove the groupOnX value. Why? No clue.</p>
 <div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="beeswarm-plots.html#cb381-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
@@ -453,7 +454,7 @@ Ooof. Best we can muster is middle of the fat part. Who is that?</p>
 <span id="cb381-8"><a href="beeswarm-plots.html#cb381-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(</span>
 <span id="cb381-9"><a href="beeswarm-plots.html#cb381-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>nu, </span>
 <span id="cb381-10"><a href="beeswarm-plots.html#cb381-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>, <span class="at">label=</span>Player))</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-284-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-283-1.png" width="672" /></p>
 <p><code>geom_jitter</code> spreads out the dots evenly across the width of the column, randomly deciding where in the line of the true shooting percentage they appear.</p>
 <p>Which one is right for you? You’re going to have to experiment and decide. This is the art in the art and a science.</p>
 

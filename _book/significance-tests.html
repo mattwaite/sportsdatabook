@@ -77,6 +77,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -363,9 +364,9 @@ If it is, then we know certain things about it. Like the mean – the average �
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>Load the tidyverse.</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="significance-tests.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="significance-tests.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p>And import the data.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="significance-tests.html#cb89-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/nbabubble.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="significance-tests.html#cb88-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/nbabubble.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## ── Column specification ────────────────────────────────────────────────────────
 ## cols(
@@ -382,9 +383,9 @@ If it is, then we know certain things about it. Like the mean – the average �
 ## ℹ Use `spec()` for the full column specifications.</code></pre>
 <p>First, let’s just look at scoring. Here’s a theory: fans make players nervous. The screaming makes players tense up, and tension makes for bad shooting. An alternative to this: screaming fans make you defend harder. So my hypothesis is that not only is the scoring different, it’s lower.</p>
 <p>First things first, let’s create a new field, called <code>totalpoints</code> and add the two scores together. We’ll need this, so we’re going to make this a new dataframe called <code>points</code>.</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="significance-tests.html#cb91-1" aria-hidden="true" tabindex="-1"></a>points <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">totalpoints =</span> TeamScore <span class="sc">+</span> OpponentScore )</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="significance-tests.html#cb90-1" aria-hidden="true" tabindex="-1"></a>points <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">totalpoints =</span> TeamScore <span class="sc">+</span> OpponentScore )</span></code></pre></div>
 <p>Typically speaking, with significance tests, the process involves creating two different means and then running a bunch of formulas on them. R makes this easy by giving you a <code>t.test</code> function, which does all the work for you. What we have to tell it is what is the value we are testing, over which groups, and from what data. It looks like this:</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="significance-tests.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(totalpoints <span class="sc">~</span> COVID, <span class="at">data=</span>points)</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="significance-tests.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(totalpoints <span class="sc">~</span> COVID, <span class="at">data=</span>points)</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
@@ -406,9 +407,9 @@ If it is, then we know certain things about it. Like the mean – the average �
 <p>Let’s test another thing that may have been impacted by bubble games: home court advantage. If you’re the home team, but you’re not at home, does it affect you? It has to, right? Your fans aren’t there. Home and away are just positions on the scoreboard. It can’t matter, can it?</p>
 <p>My hypothesis is that home court is no longer an advantage, and the home team will score less relative to the away team.</p>
 <p>First things first: We need to make a dataframe where Team is the home team. And then we’ll create a differential between the home team and away team. If home court is an advantage, the differential should average out to be positive – the home team scores more than the away team.</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="significance-tests.html#cb94-1" aria-hidden="true" tabindex="-1"></a>homecourt <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">is.na</span>(HomeAway) <span class="sc">==</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">differential =</span> TeamScore <span class="sc">-</span> OpponentScore)</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="significance-tests.html#cb93-1" aria-hidden="true" tabindex="-1"></a>homecourt <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">is.na</span>(HomeAway) <span class="sc">==</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">differential =</span> TeamScore <span class="sc">-</span> OpponentScore)</span></code></pre></div>
 <p>Now let’s test it.</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="significance-tests.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(differential <span class="sc">~</span> COVID, <span class="at">data=</span>homecourt)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="significance-tests.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(differential <span class="sc">~</span> COVID, <span class="at">data=</span>homecourt)</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 

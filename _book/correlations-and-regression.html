@@ -77,6 +77,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -356,9 +357,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>Then load the tidyverse.</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="correlations-and-regression.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="correlations-and-regression.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p>Now import the data.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="correlations-and-regression.html#cb98-1" aria-hidden="true" tabindex="-1"></a>correlations <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/footballlogs20.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="correlations-and-regression.html#cb97-1" aria-hidden="true" tabindex="-1"></a>correlations <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/footballlogs20.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## ── Column specification ────────────────────────────────────────────────────────
 ## cols(
@@ -379,98 +380,98 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>We’re going to use two different methods here and they’re closely related. Correlations – specifically the Pearson Correlation Coefficient – is a measure of how related two numbers are in a linear fashion. In other words – if our X value goes up one, what happens to Y? If it also goes up 1, that’s a perfect correlation. X goes up 1, Y goes up 1. Every time. Correlation coefficients are a number between 0 and 1, with zero being no correlation and 1 being perfect correlation <strong>if our data is linear</strong>. We’ll soon go over scatterplots to visually determine if our data is linear, but for now, we have a hypothesis: More penalties are bad. Penalties hurt. So if a team gets lots of them, they should have worse outcomes than teams that get few of them. That is an argument for a linear relationship between them.</p>
 <p>But is there one?</p>
 <p>We’re going create a new dataframe called newcorrelations that takes our data that we imported and adds a column called <code>differential</code> because we don’t have separate offense and defense penalties, and then we’ll use correlations to see how related those two things are.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="correlations-and-regression.html#cb100-1" aria-hidden="true" tabindex="-1"></a>newcorrelations <span class="ot">&lt;-</span> correlations <span class="sc">%&gt;%</span> </span>
-<span id="cb100-2"><a href="correlations-and-regression.html#cb100-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb100-3"><a href="correlations-and-regression.html#cb100-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">differential =</span> TeamScore <span class="sc">-</span> OpponentScore, </span>
-<span id="cb100-4"><a href="correlations-and-regression.html#cb100-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotalPenalties =</span> Penalties<span class="sc">+</span>DefPenalties, </span>
-<span id="cb100-5"><a href="correlations-and-regression.html#cb100-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotalPenaltyYards =</span> PenaltyYds<span class="sc">+</span>DefPenaltyYds</span>
-<span id="cb100-6"><a href="correlations-and-regression.html#cb100-6" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="correlations-and-regression.html#cb99-1" aria-hidden="true" tabindex="-1"></a>newcorrelations <span class="ot">&lt;-</span> correlations <span class="sc">%&gt;%</span> </span>
+<span id="cb99-2"><a href="correlations-and-regression.html#cb99-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb99-3"><a href="correlations-and-regression.html#cb99-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">differential =</span> TeamScore <span class="sc">-</span> OpponentScore, </span>
+<span id="cb99-4"><a href="correlations-and-regression.html#cb99-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotalPenalties =</span> Penalties<span class="sc">+</span>DefPenalties, </span>
+<span id="cb99-5"><a href="correlations-and-regression.html#cb99-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotalPenaltyYards =</span> PenaltyYds<span class="sc">+</span>DefPenaltyYds</span>
+<span id="cb99-6"><a href="correlations-and-regression.html#cb99-6" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
 <p>In R, there is a <code>cor</code> function, and it works much the same as <code>mean</code> or <code>median</code>. So we want to see if <code>differential</code> is correlated with <code>TotalPenaltyYards</code>, which is the yards of penalties a team gets in a game. We do that by referencing <code>differential</code> and <code>TotalPenaltyYards</code> and specifying we want a <code>pearson</code> correlation. The number we get back is the correlation coefficient.</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="correlations-and-regression.html#cb101-1" aria-hidden="true" tabindex="-1"></a>newcorrelations <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">correlation =</span> <span class="fu">cor</span>(differential, TotalPenaltyYards, <span class="at">method=</span><span class="st">&quot;pearson&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="correlations-and-regression.html#cb100-1" aria-hidden="true" tabindex="-1"></a>newcorrelations <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">correlation =</span> <span class="fu">cor</span>(differential, TotalPenaltyYards, <span class="at">method=</span><span class="st">&quot;pearson&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   correlation
 ##         &lt;dbl&gt;
-## 1    -0.00655</code></pre>
-<p>So on a scale of -1 to 1, where 0 means there’s no relationship at all and 1 or -1 means a perfect relationship, penalty yards and whether or not the team scores more points than it give up are at -0.0065. You could say they’re .7 percent related toward the negative – more penalties, the lower your differential. Another way to say it? They’re 99.3 percent not related.</p>
+## 1    -0.00677</code></pre>
+<p>So on a scale of -1 to 1, where 0 means there’s no relationship at all and 1 or -1 means a perfect relationship, penalty yards and whether or not the team scores more points than it give up are at -0.0068. You could say they’re .7 percent related toward the negative – more penalties, the lower your differential. Another way to say it? They’re 99.3 percent not related.</p>
 <p>What about the number of penalties instead of the yards?</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="correlations-and-regression.html#cb103-1" aria-hidden="true" tabindex="-1"></a>newcorrelations <span class="sc">%&gt;%</span> </span>
-<span id="cb103-2"><a href="correlations-and-regression.html#cb103-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">correlation =</span> <span class="fu">cor</span>(differential, TotalPenalties, <span class="at">method=</span><span class="st">&quot;pearson&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="correlations-and-regression.html#cb102-1" aria-hidden="true" tabindex="-1"></a>newcorrelations <span class="sc">%&gt;%</span> </span>
+<span id="cb102-2"><a href="correlations-and-regression.html#cb102-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">correlation =</span> <span class="fu">cor</span>(differential, TotalPenalties, <span class="at">method=</span><span class="st">&quot;pearson&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   correlation
 ##         &lt;dbl&gt;
-## 1    0.000676</code></pre>
+## 1    0.000296</code></pre>
 <p>So wait, what does this all mean?</p>
-<p>It means that when you look at every game in college football, the number of penalties and penalty yards does have a negative impact on the score difference between your team and the other team. But the relationship between penalties, penalty yards and the difference between scores is barely anything at all. Like 99 percent plus not related.</p>
+<p>It means that when you look at every game in college football, the number of penalties and penalty yards does have a negative impact on the score difference between your team and the other team. But the relationship between penalties, penalty yards and the difference between scores is barely anything at all. Like 99+ percent plus not related.</p>
 <p>Normally, at this point, you’d quit while you were ahead. A correlation coefficient that shows there’s no relationship between two things means stop. It’s pointless to go on. But let’s beat a dead horse a bit for the sake of talk radio callers who want to complain about undisciplined football teams.</p>
 <p>Enter regression. Regression is how we try to fit our data into a line that explains the relationship the best. Regressions will help us predict things as well – if we have a team that has so many penalties, what kind of point differential could we expect? So regressions are about prediction, correlations are about description. Correlations describe a relationship. Regressions help us predict what that relationship means and what it might look like in the real world. Specifically, it tells us how much of the change in a dependent variable can be explained by the independent variable.</p>
 <p>Another thing regressions do is give us some other tools to evaluate if the relationship is real or not.</p>
 <p>Here’s an example of using linear modeling to look at penalty yards. Think of the <code>~</code> character as saying “is predicted by.” The output looks like a lot, but what we need is a small part of it.</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="correlations-and-regression.html#cb105-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(differential <span class="sc">~</span> TotalPenaltyYards, <span class="at">data =</span> newcorrelations)</span>
-<span id="cb105-2"><a href="correlations-and-regression.html#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="correlations-and-regression.html#cb104-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(differential <span class="sc">~</span> TotalPenaltyYards, <span class="at">data =</span> newcorrelations)</span>
+<span id="cb104-2"><a href="correlations-and-regression.html#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = differential ~ TotalPenaltyYards, data = newcorrelations)
 ## 
 ## Residuals:
-##    Min     1Q Median     3Q    Max 
-## -67.02 -14.68   0.24  14.04  64.98 
+##     Min      1Q  Median      3Q     Max 
+## -67.007 -14.699   0.265  14.047  64.993 
 ## 
 ## Coefficients:
-##                    Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)        1.226995   1.817342   0.675    0.500
-## TotalPenaltyYards -0.003383   0.015816  -0.214    0.831
+##                   Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)        1.21614    1.79282   0.678    0.498
+## TotalPenaltyYards -0.00349    0.01556  -0.224    0.823
 ## 
-## Residual standard error: 21.46 on 1068 degrees of freedom
-## Multiple R-squared:  4.284e-05,  Adjusted R-squared:  -0.0008935 
-## F-statistic: 0.04575 on 1 and 1068 DF,  p-value: 0.8307</code></pre>
+## Residual standard error: 21.36 on 1098 degrees of freedom
+## Multiple R-squared:  4.58e-05,   Adjusted R-squared:  -0.0008649 
+## F-statistic: 0.05029 on 1 and 1098 DF,  p-value: 0.8226</code></pre>
 <p>There’s three things we need here:</p>
 <ol style="list-style-type: decimal">
-<li>First we want to look at the p-value. It’s at the bottom right corner of the output. In the case of Total Penalty Yards, the p-value is .8307. The threshold we’re looking for here is .05. If it’s less than .05, then the relationship is considered to be <em>statistically significant</em>. Significance here does not mean it’s a big deal. It means it’s not random. That’s it. Just that. Not random. So in our case, the relationship between total penalty yards and a team’s aggregate point differential are <strong>not statistically significant</strong>. The differences in score difference and penalty yards could be completely random. This is another sign we should just stop with this.</li>
+<li>First we want to look at the p-value. It’s at the bottom right corner of the output. In the case of Total Penalty Yards, the p-value is .8226. The threshold we’re looking for here is .05. If it’s less than .05, then the relationship is considered to be <em>statistically significant</em>. Significance here does not mean it’s a big deal. It means it’s not random. That’s it. Just that. Not random. So in our case, the relationship between total penalty yards and a team’s aggregate point differential are <strong>not statistically significant</strong>. The differences in score difference and penalty yards could be completely random. This is another sign we should just stop with this.</li>
 <li>Second, we look at the Adjusted R-squared value. It’s right above the p-value. Adjusted R-squared is a measure of how much of the difference between teams aggregate point values can be explained by penalty yards. Our correlation coefficient said they’re .7 percent related to each other, but penalty yard’s ability to explain the difference between teams? About .08 percent. That’s … not much. It’s really nothing. Again, we should quit.</li>
-<li>The third thing we can look at, and we only bother if the first two are meaningful, is the coefficients. In the middle, you can see the (Intercept) is 1.226995 and the TotalPenaltyYards coefficient is -0.003383. Remember high school algebra? Remember learning the equation of a line? Remember swearing that learning <code>y=mx+b</code> is stupid because you’ll never need it again? Surprise. It’s useful again. In this case, we could try to predict a team’s score differential in a game – will they score more than they give up – by using <code>y=mx+b</code>. In this case, y is the aggregate score, m is -0.003383 and b is 1.226995. So we would multiply a teams total penalty yards by -0.003383 and then add 1.226995 to it. The result would tell you what the total aggregate score in the game would be, according to our model. Chance that your even close with this? About .08 percent. In other words, you’ve got a 99.92 percent chance of being completely wrong. Did I say we should quit? Yeah.</li>
+<li>The third thing we can look at, and we only bother if the first two are meaningful, is the coefficients. In the middle, you can see the (Intercept) is 1.21614 and the TotalPenaltyYards coefficient is -0.00349. Remember high school algebra? Remember learning the equation of a line? Remember swearing that learning <code>y=mx+b</code> is stupid because you’ll never need it again? Surprise. It’s useful again. In this case, we could try to predict a team’s score differential in a game – will they score more than they give up – by using <code>y=mx+b</code>. In this case, y is the aggregate score, m is -0.00349 and b is 1.21614. So we would multiply a teams total penalty yards by -0.00349 and then add 1.21614 to it. The result would tell you what the total aggregate score in the game would be, according to our model. Chance that your even close with this? About .08 percent. In other words, you’ve got a 99.92 percent chance of being completely wrong. Did I say we should quit? Yeah.</li>
 </ol>
 <p>So penalty yards are totally meaningless to the outcome of a game.</p>
 <p>You can see the problem in a graph. On the X axis is penalty yards, on the y is aggregate score. If these elements had a strong relationship, we’d see a clear pattern moving from right to left, sloping down. On the left would be the teams with few penalties and a positive point differential. On right would be teams with high penalty yards and negative point differentials. Do you see that below?</p>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
 <div id="a-more-predictive-example" class="section level2" number="9.1">
 <h2><span class="header-section-number">9.1</span> A more predictive example</h2>
 <p>So we’ve <strong>firmly</strong> established that penalties aren’t predictive. But what is?</p>
 <p>So instead of looking at penalty yards, let’s make a new metric: Net Yards. Can we predict the score differential by looking at the yards a team gained minus the yards they gave up.</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="correlations-and-regression.html#cb107-1" aria-hidden="true" tabindex="-1"></a>regressions <span class="ot">&lt;-</span> newcorrelations <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">NetYards =</span> OffensiveYards <span class="sc">-</span> DefYards)</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="correlations-and-regression.html#cb106-1" aria-hidden="true" tabindex="-1"></a>regressions <span class="ot">&lt;-</span> newcorrelations <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">NetYards =</span> OffensiveYards <span class="sc">-</span> DefYards)</span></code></pre></div>
 <p>First, let’s look at the correlation coefficent.</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="correlations-and-regression.html#cb108-1" aria-hidden="true" tabindex="-1"></a>regressions <span class="sc">%&gt;%</span> </span>
-<span id="cb108-2"><a href="correlations-and-regression.html#cb108-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">correlation =</span> <span class="fu">cor</span>(differential, NetYards, <span class="at">method=</span><span class="st">&quot;pearson&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="correlations-and-regression.html#cb107-1" aria-hidden="true" tabindex="-1"></a>regressions <span class="sc">%&gt;%</span> </span>
+<span id="cb107-2"><a href="correlations-and-regression.html#cb107-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">correlation =</span> <span class="fu">cor</span>(differential, NetYards, <span class="at">method=</span><span class="st">&quot;pearson&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   correlation
 ##         &lt;dbl&gt;
-## 1       0.806</code></pre>
-<p>Answer: 81 percent. Not a perfect relationship, but very good. But how meaningful is that relationship and how predictive is it?</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="correlations-and-regression.html#cb110-1" aria-hidden="true" tabindex="-1"></a>net <span class="ot">&lt;-</span> <span class="fu">lm</span>(differential <span class="sc">~</span> NetYards, <span class="at">data =</span> regressions)</span>
-<span id="cb110-2"><a href="correlations-and-regression.html#cb110-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(net)</span></code></pre></div>
+## 1       0.801</code></pre>
+<p>Answer: 80 percent. Not a perfect relationship, but very good. But how meaningful is that relationship and how predictive is it?</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="correlations-and-regression.html#cb109-1" aria-hidden="true" tabindex="-1"></a>net <span class="ot">&lt;-</span> <span class="fu">lm</span>(differential <span class="sc">~</span> NetYards, <span class="at">data =</span> regressions)</span>
+<span id="cb109-2"><a href="correlations-and-regression.html#cb109-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(net)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = differential ~ NetYards, data = regressions)
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -49.379  -8.520   0.059   8.487  48.748 
+## -49.479  -8.593   0.128   8.551  48.857 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 0.315632   0.388994   0.811    0.417    
-## NetYards    0.102473   0.002307  44.427   &lt;2e-16 ***
+## (Intercept) 0.311030   0.385651   0.807     0.42    
+## NetYards    0.101704   0.002293  44.345   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 12.72 on 1068 degrees of freedom
-## Multiple R-squared:  0.6489, Adjusted R-squared:  0.6486 
-## F-statistic:  1974 on 1 and 1068 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 12.78 on 1098 degrees of freedom
+## Multiple R-squared:  0.6417, Adjusted R-squared:  0.6414 
+## F-statistic:  1967 on 1 and 1098 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>First we check p-value. See that e-16? That means scientific notation. That means our number is 2.2 times 10 to the -16 power. So -.000000000000000022. That’s sixteen zeros between the decimal and 22. Is that less than .05? Uh, yeah. So this is really, really, really not random. But anyone who has watched a game of football knows this is true. It makes intuitive sense.</p>
-<p>Second, Adjusted R-squared: 0.6486. So we can predict a whopping 65 percent of the difference in the score differential by simply looking at the net yards the team has.</p>
-<p>Third, the coefficients: In this case, our <code>y=mx+b</code> formula looks like <code>y = 0.102473x + 0.315632</code>. So if we were applying this, let’s look at Nebraska’s 26-20 loss to Iowa in 2020. Nebraska’s net yards that game? 16. That’s right – we outgained them.</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="correlations-and-regression.html#cb112-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.102473</span><span class="sc">*</span><span class="dv">16</span>)<span class="sc">+</span><span class="fl">0.315632</span> </span></code></pre></div>
-<pre><code>## [1] 1.9552</code></pre>
-<p>So by our model, Nebraska should have won by 1.96 points. Some games are closer than others. But when you can explain 65 percent of the difference, this is the kind of result you get. What would improve the model? Using more data to start. And using more inputs.</p>
+<p>Second, Adjusted R-squared: 0.6414. So we can predict a whopping 64 percent of the difference in the score differential by simply looking at the net yards the team has.</p>
+<p>Third, the coefficients: In this case, our <code>y=mx+b</code> formula looks like <code>y = 0.101704x + 0.311030</code>. So if we were applying this, let’s look at Nebraska’s 26-20 loss to Iowa in 2020. Nebraska’s net yards that game? 16. That’s right – we outgained them.</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="correlations-and-regression.html#cb111-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.101704</span><span class="sc">*</span><span class="dv">16</span>)<span class="sc">+</span><span class="fl">0.311030</span> </span></code></pre></div>
+<pre><code>## [1] 1.938294</code></pre>
+<p>So by our model, Nebraska should have won by 1.94 points. Some games are closer than others. But when you can explain 65 percent of the difference, this is the kind of result you get. What would improve the model? Using more data to start. And using more inputs.</p>
 
 </div>
 </div>

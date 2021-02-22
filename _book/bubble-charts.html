@@ -77,6 +77,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -399,7 +400,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## `summarise()` regrouping output by &#39;Team&#39; (override with `.groups` argument)</code></pre>
 <p>A bubble chart is just a scatterplot with one additional element in the aesthetic – a size. Here’s the scatterplot version.</p>
 <div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="bubble-charts.html#cb357-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">data=</span>ypp, <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP))</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-262-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-261-1.png" width="672" /></p>
 <p>Looks kind of random, eh? In this case, that’s not that bad because we’re not claiming a relationship. We’re saying the location on the chart has meaning. So, do teams on the bottom right – good offense, good defense – win more games?</p>
 <p>Let’s add the size element.</p>
 <div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="bubble-charts.html#cb358-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
@@ -407,7 +408,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb358-3"><a href="bubble-charts.html#cb358-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>ypp, </span>
 <span id="cb358-4"><a href="bubble-charts.html#cb358-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">size=</span>TotalWins)</span>
 <span id="cb358-5"><a href="bubble-charts.html#cb358-5" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-263-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-262-1.png" width="672" /></p>
 <p>What does this chart tell you? We can see a general pattern that there are more big dots on the bottom right than the upper left. But we can make this more readable by adding an alpha element outside the aesthetic – alpha in this case is transparency – and we can manually change the size of the dots by adding <code>scale_size</code> and a <code>range</code>.</p>
 <div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="bubble-charts.html#cb359-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb359-2"><a href="bubble-charts.html#cb359-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
@@ -415,7 +416,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb359-4"><a href="bubble-charts.html#cb359-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">size=</span>TotalWins),</span>
 <span id="cb359-5"><a href="bubble-charts.html#cb359-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> .<span class="dv">3</span>) <span class="sc">+</span> </span>
 <span id="cb359-6"><a href="bubble-charts.html#cb359-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">8</span>), <span class="at">name=</span><span class="st">&quot;Wins&quot;</span>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-264-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-263-1.png" width="672" /></p>
 <p>And by now, you now know to add in the Big Ten as a layer, I would hope.</p>
 <div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="bubble-charts.html#cb360-1" aria-hidden="true" tabindex="-1"></a>bigten <span class="ot">&lt;-</span> ypp <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">==</span> <span class="st">&quot;Big Ten Conference&quot;</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="bubble-charts.html#cb361-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
@@ -428,7 +429,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb361-8"><a href="bubble-charts.html#cb361-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>bigten, </span>
 <span id="cb361-9"><a href="bubble-charts.html#cb361-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">size=</span>TotalWins), </span>
 <span id="cb361-10"><a href="bubble-charts.html#cb361-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-266-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-265-1.png" width="672" /></p>
 <p>Let’s add some things to this chart to help us out. First, let’s add lines that show us the average of all teams for those two metrics. So first, we need to calculate those. Because I have grouped data, it’s going to require me to ungroup it so I can get just the total average of those two numbers.</p>
 <div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="bubble-charts.html#cb362-1" aria-hidden="true" tabindex="-1"></a>ypp <span class="sc">%&gt;%</span> </span>
 <span id="cb362-2"><a href="bubble-charts.html#cb362-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
@@ -439,7 +440,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 1 x 2
 ##   offense defense
 ##     &lt;dbl&gt;   &lt;dbl&gt;
-## 1    5.74    5.73</code></pre>
+## 1    5.73    5.75</code></pre>
 <p>Now we can use those averages to add two more geoms – geom_vline and geom_hline, for vertical lines and horizontal lines.</p>
 <div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="bubble-charts.html#cb364-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb364-2"><a href="bubble-charts.html#cb364-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
@@ -453,7 +454,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb364-10"><a href="bubble-charts.html#cb364-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb364-11"><a href="bubble-charts.html#cb364-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">5.820543</span>) <span class="sc">+</span> </span>
 <span id="cb364-12"><a href="bubble-charts.html#cb364-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">5.673263</span>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-268-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-267-1.png" width="672" /></p>
 <p>Now, let’s add another new geom for us, using a new library called <code>ggrepel</code>, which will help us label the dots without overwriting other labels. So we’ll have to install that in the console:</p>
 <p>`install.packages(“ggrepel”)</p>
 <div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="bubble-charts.html#cb365-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span></code></pre></div>
@@ -474,7 +475,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb366-14"><a href="bubble-charts.html#cb366-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>bigten, </span>
 <span id="cb366-15"><a href="bubble-charts.html#cb366-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">label=</span>Team)</span>
 <span id="cb366-16"><a href="bubble-charts.html#cb366-16" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-270-1.png" width="672" />
+<p><img src="SportsData_files/figure-html/unnamed-chunk-269-1.png" width="672" />
 Well, what do you know about that? Nebraska was … really a mixed bag this season.</p>
 <p>All that’s left is some labels and some finishing touches.</p>
 <div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="bubble-charts.html#cb367-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
@@ -500,7 +501,7 @@ Well, what do you know about that? Nebraska was … really a mixed bag this seas
 <span id="cb367-21"><a href="bubble-charts.html#cb367-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
 <span id="cb367-22"><a href="bubble-charts.html#cb367-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
 <span id="cb367-23"><a href="bubble-charts.html#cb367-23" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-271-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-270-1.png" width="672" /></p>
 
 </div>
             </section>

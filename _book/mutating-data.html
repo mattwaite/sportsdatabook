@@ -77,6 +77,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -442,18 +443,16 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>There’s metric in basketball that’s easy to understand – shooting percentage. It’s the number of shots made divided by the number of shots attempted. Simple, right? Except it’s a little too simple. Because what about three point shooters? They tend to be more vailable because the three point shot is worth more. What about players who get to the line? In shooting percentage, free throws are nowhere to be found.</p>
 <p>Basketball nerds, because of these weaknesses, have created a new metric called <a href="https://en.wikipedia.org/wiki/True_shooting_percentage">True Shooting Percentage</a>. True shooting percentage takes into account all aspects of a players shooting to determine who the real shooters are.</p>
 <p>Using <code>dplyr</code> and <code>mutate</code>, we can calculate true shooting percentage. So let’s look at a new dataset, one of every college basketball player’s season stats in 2018-19 season. It’s a dataset of 5,386 players, and we’ve got 59 variables – one of them is True Shooting Percentage, but we’re going to ignore that.</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="http://mattwaite.github.io/sportsdatafiles/players19.csv">
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="http://mattwaite.github.io/sportsdatafiles/players20.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>Import it like this:</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="mutating-data.html#cb46-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/players19.csv&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning: Missing column names filled in: &#39;X1&#39; [1]</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="mutating-data.html#cb46-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/players20.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## ── Column specification ────────────────────────────────────────────────────────
 ## cols(
 ##   .default = col_double(),
 ##   Team = col_character(),
-##   Conference = col_character(),
 ##   Player = col_character(),
 ##   Class = col_character(),
 ##   Pos = col_character(),
@@ -468,33 +467,32 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="images/environment.png" width="653" /></p>
 <p>So what does True Shooting Percentage look like in code?</p>
 <p>Let’s think about this differently. Who had the best true shooting season last year?</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="mutating-data.html#cb49-1" aria-hidden="true" tabindex="-1"></a>players <span class="sc">%&gt;%</span></span>
-<span id="cb49-2"><a href="mutating-data.html#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">trueshooting =</span> (PTS<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>(FGA <span class="sc">+</span> (.<span class="dv">44</span><span class="sc">*</span>FTA))))<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb49-3"><a href="mutating-data.html#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(trueshooting))</span></code></pre></div>
-<pre><code>## # A tibble: 5,386 x 60
-##       X1 Team  Conference Player   `#` Class Pos   Height Weight Hometown
-##    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;   
-##  1   579 Texa… Big 12     Drayt…     4 JR    G     6-0       156 Austin,…
-##  2   843 Ston… AEC        Nick …    42 FR    F     6-7       240 Port Je…
-##  3  1059 Sout… Southland  Patri…    22 SO    F     6-3       210 Folsom,…
-##  4  4269 Dayt… A-10       Camro…    52 SO    G     5-7       160 Country…
-##  5  4681 Cali… Pac-12     David…    21 JR    G     6-4       185 Newbury…
-##  6   326 Virg… ACC        Grant…     1 FR    G     &lt;NA&gt;       NA Charlot…
-##  7   410 Vand… SEC        Mac H…    42 FR    G     6-6       182 Chattan…
-##  8  1390 Sain… A-10       Jack …    31 JR    G     6-6       205 Mattoon…
-##  9  2230 NJIT… A-Sun      Patri…     3 SO    G     5-9       160 West Or…
-## 10   266 Wash… Pac-12     Reaga…    34 FR    F     6-6       225 Santa A…
-## # … with 5,376 more rows, and 50 more variables: `High School` &lt;chr&gt;,
-## #   Summary &lt;chr&gt;, Rk.x &lt;dbl&gt;, G &lt;dbl&gt;, GS &lt;dbl&gt;, MP &lt;dbl&gt;, FG &lt;dbl&gt;,
-## #   FGA &lt;dbl&gt;, `FG%` &lt;dbl&gt;, `2P` &lt;dbl&gt;, `2PA` &lt;dbl&gt;, `2P%` &lt;dbl&gt;, `3P` &lt;dbl&gt;,
-## #   `3PA` &lt;dbl&gt;, `3P%` &lt;dbl&gt;, FT &lt;dbl&gt;, FTA &lt;dbl&gt;, `FT%` &lt;dbl&gt;, ORB &lt;dbl&gt;,
-## #   DRB &lt;dbl&gt;, TRB &lt;dbl&gt;, AST &lt;dbl&gt;, STL &lt;dbl&gt;, BLK &lt;dbl&gt;, TOV &lt;dbl&gt;, PF &lt;dbl&gt;,
-## #   PTS &lt;dbl&gt;, Rk.y &lt;dbl&gt;, PER &lt;dbl&gt;, `TS%` &lt;dbl&gt;, `eFG%` &lt;dbl&gt;, `3PAr` &lt;dbl&gt;,
-## #   FTr &lt;dbl&gt;, PProd &lt;dbl&gt;, `ORB%` &lt;dbl&gt;, `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;,
-## #   `AST%` &lt;dbl&gt;, `STL%` &lt;dbl&gt;, `BLK%` &lt;dbl&gt;, `TOV%` &lt;dbl&gt;, `USG%` &lt;dbl&gt;,
-## #   OWS &lt;dbl&gt;, DWS &lt;dbl&gt;, WS &lt;dbl&gt;, `WS/40` &lt;dbl&gt;, OBPM &lt;dbl&gt;, DBPM &lt;dbl&gt;,
-## #   BPM &lt;dbl&gt;, trueshooting &lt;dbl&gt;</code></pre>
-<p>You’ll be forgiven if you did not hear about Texas Longhorns shooting sensation Drayton Whiteside. He played in six games, took one shot and <a href="https://youtu.be/QNviQf9X4rM?t=186">actually hit it</a>. It happened to be a three pointer, which is one more three pointer than I’ve hit in college basketball. So props to him. Does that mean he had the best true shooting season in college basketball last year?</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="mutating-data.html#cb48-1" aria-hidden="true" tabindex="-1"></a>players <span class="sc">%&gt;%</span></span>
+<span id="cb48-2"><a href="mutating-data.html#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">trueshooting =</span> (PTS<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>(FGA <span class="sc">+</span> (.<span class="dv">44</span><span class="sc">*</span>FTA))))<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb48-3"><a href="mutating-data.html#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(trueshooting))</span></code></pre></div>
+<pre><code>## # A tibble: 5,452 x 58
+##    Team  Player   `#` Class Pos   Height Weight Hometown `High School` Summary
+##    &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;  
+##  1 Vand… Trace…    20 JR    G     6-2       170 Carmel,… Park Tudor HS 3.0 Pt…
+##  2 Stet… Alex …    11 SO    G     6-2       195 Houston… New Hampton … 0.5 Pt…
+##  3 Sout… Mark …    11 SO    G     6-2       190 Hudson,… Hudson HS     0.6 Pt…
+##  4 Samf… Jack …    11 FR    G     5-10      155 Homewoo… Homewood HS   2.0 Pt…
+##  5 Sain… Brand…    12 SO    G     6-3       180 Tremont… Wesclin HS    3.0 Pt…
+##  6 Prov… Tommy…    22 FR    G     6-2       175 Bingham… Seton Cathol… 0.6 Pt…
+##  7 Old … Quish…    24 SO    G     5-10      140 Hampton… Hampton HS    1.0 Pt…
+##  8 Okla… J.K. …    54 SR    G     6-1       185 Fairfax… Glencoe HS    1.0 Pt…
+##  9 Navy… Chris…    10 FR    G     6-1       183 Bowie, … Annapolis HS  3.0 Pt…
+## 10 Miss… Brook…    25 SO    G     6-0       187 St. Lou… De Smet HS    0.6 Pt…
+## # … with 5,442 more rows, and 48 more variables: Rk.x &lt;dbl&gt;, G &lt;dbl&gt;, GS &lt;dbl&gt;,
+## #   MP &lt;dbl&gt;, FG &lt;dbl&gt;, FGA &lt;dbl&gt;, `FG%` &lt;dbl&gt;, `2P` &lt;dbl&gt;, `2PA` &lt;dbl&gt;,
+## #   `2P%` &lt;dbl&gt;, `3P` &lt;dbl&gt;, `3PA` &lt;dbl&gt;, `3P%` &lt;dbl&gt;, FT &lt;dbl&gt;, FTA &lt;dbl&gt;,
+## #   `FT%` &lt;dbl&gt;, ORB &lt;dbl&gt;, DRB &lt;dbl&gt;, TRB &lt;dbl&gt;, AST &lt;dbl&gt;, STL &lt;dbl&gt;,
+## #   BLK &lt;dbl&gt;, TOV &lt;dbl&gt;, PF &lt;dbl&gt;, PTS &lt;dbl&gt;, Rk.y &lt;dbl&gt;, PER &lt;dbl&gt;,
+## #   `TS%` &lt;dbl&gt;, `eFG%` &lt;dbl&gt;, `3PAr` &lt;dbl&gt;, FTr &lt;dbl&gt;, PProd &lt;dbl&gt;,
+## #   `ORB%` &lt;dbl&gt;, `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;, `AST%` &lt;dbl&gt;, `STL%` &lt;dbl&gt;,
+## #   `BLK%` &lt;dbl&gt;, `TOV%` &lt;dbl&gt;, `USG%` &lt;dbl&gt;, OWS &lt;dbl&gt;, DWS &lt;dbl&gt;, WS &lt;dbl&gt;,
+## #   `WS/40` &lt;dbl&gt;, OBPM &lt;dbl&gt;, DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;, trueshooting &lt;dbl&gt;</code></pre>
+<p>You’ll be forgiven if you did not hear about Vanderbilt’s shooting sensation Trace Arbuckle. He played in one game, took one shot and actually hit it. It happened to be a three pointer, which is one more three pointer than I’ve hit in college basketball. So props to him. Does that mean he had the best true shooting season in college basketball last year?</p>
 <p>Not hardly.</p>
 <p>We’ll talk about how to narrow the pile and filter out data in the next chapter.</p>
 

@@ -77,6 +77,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -395,8 +396,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Uh oh. Error. What does it say? It’s … not clear, but a hint is that our first column doesn’t have a name. Each column must be named. If you look at our data in the environment tab in the upper right corner, you’ll see that indeed, the first column has no name. It’s the FBS rank of each team. So we can fix that and mutate in the same step. We’ll do that using <code>rename</code> and since the field doesn’t have a name to rename it, we’ll use a position argument. We’ll say rename column 1 as Rank.</p>
 <div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb587-1"><a href="intro-to-rvest.html#cb587-1" aria-hidden="true" tabindex="-1"></a>scoringoffense19 <span class="ot">&lt;-</span> scoringoffense <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Rank =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">YEAR =</span> <span class="dv">2019</span>)</span>
 <span id="cb587-2"><a href="intro-to-rvest.html#cb587-2" aria-hidden="true" tabindex="-1"></a>scoringoffense18 <span class="ot">&lt;-</span> scoringoffense18 <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Rank =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">YEAR =</span> <span class="dv">2018</span>)</span></code></pre></div>
-<p>And now, to combine the two tables together length-wise – we need to make long data – we’ll use a base R function called <code>rbind</code>. The good thing is rbind is simple. The bad part is it can only do two tables at a time, so if you have more than that, you’ll need to do it in steps.</p>
-<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb588-1"><a href="intro-to-rvest.html#cb588-1" aria-hidden="true" tabindex="-1"></a>combined <span class="ot">&lt;-</span> <span class="fu">rbind</span>(scoringoffense19, scoringoffense18)</span></code></pre></div>
+<p>And now, to combine the two tables together length-wise – we need to make long data – we’ll use a dpylr function called <code>bind_rows</code>. The good thing is bind_rows is simple.</p>
+<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb588-1"><a href="intro-to-rvest.html#cb588-1" aria-hidden="true" tabindex="-1"></a>combined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(scoringoffense19, scoringoffense18)</span></code></pre></div>
 <p>Note in the environment tab we now have a data frame called combined that has 260 observations – which just so happens to be what 130 from 2019 and 130 from 2018 add up to.</p>
 <div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb589-1"><a href="intro-to-rvest.html#cb589-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(combined)</span></code></pre></div>
 <pre><code>##   Rank       Name  G TD FG 1XP 2XP Safety Points Points/G YEAR

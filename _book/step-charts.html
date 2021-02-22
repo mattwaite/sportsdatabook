@@ -77,6 +77,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -384,10 +385,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="step-charts.html#cb298-1" aria-hidden="true" tabindex="-1"></a>bigdiff <span class="ot">&lt;-</span> difflogs <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">==</span> <span class="st">&quot;Big Ten&quot;</span>)</span></code></pre></div>
 <p>The step chart is it’s own geom, so we can employ it just like we have the others. It works almost exactly the same as a line chart, but it uses the cumulative sum instead of a regular value and, as the name implies, creates a step like shape to the line instead of a curve.</p>
 <div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="step-charts.html#cb299-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_step</span>(<span class="at">data=</span>bigdiff, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>CumDiff, <span class="at">group=</span>Team))</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-220-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-219-1.png" width="672" /></p>
 <p>Let’s try a different element of the aesthetic: color, but this time inside the aesthetic. Last time, we did the color outside. When you put it inside, you pass it a column name and ggplot will color each line based on what thing that is, and it will create a legend that labels each line that thing.</p>
 <div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="step-charts.html#cb300-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_step</span>(<span class="at">data=</span>bigdiff, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>CumDiff, <span class="at">group=</span>Team, <span class="at">color=</span>Team))</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-221-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-220-1.png" width="672" /></p>
 <p>From this, we can see two teams in the Big Ten had negative point differentials last season – Nebraska and Northwestern. But which is which?</p>
 <p>Let’s look at the top team plus Nebraska.</p>
 <div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="step-charts.html#cb301-1" aria-hidden="true" tabindex="-1"></a>nu <span class="ot">&lt;-</span> bigdiff <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">&quot;Nebraska Cornhuskers&quot;</span>)</span>
@@ -407,7 +408,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb302-11"><a href="step-charts.html#cb302-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle=</span><span class="st">&quot;The Huskers started slow and never got going&quot;</span>, </span>
 <span id="cb302-12"><a href="step-charts.html#cb302-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption=</span><span class="st">&quot;Source: Sports-Reference.com | By Matt Waite&quot;</span>) <span class="sc">+</span></span>
 <span id="cb302-13"><a href="step-charts.html#cb302-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-223-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-222-1.png" width="672" /></p>
 
 </div>
             </section>

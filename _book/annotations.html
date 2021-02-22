@@ -77,6 +77,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -348,7 +349,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="annotations" class="section level1" number="34">
 <h1><span class="header-section-number">Chapter 34</span> Annotations</h1>
-<p>Some of the best sports data visualizations start with a provocative question. How about this one: Why does Oklahoma always blow it in the college football playoffs?</p>
+<p>Some of the best sports data visualizations start with a provocative question. How about this one: Who really belongs in the college football playoffs and why is it never Notre Dame?</p>
 <p>For this, we’re going to go back to some code we started in Bubble Charts and we’re going to add some annotations to it. Annotations help us draw attention to things, or help the reader understand what they’re looking at. They’re labels on things, be that the teams we want to highlight or regions of the chart or lines or all of those things.</p>
 <p>For this, we’ll need to add a new library to the mix called <code>ggrepel</code>. You’ll need to install it in the console with <code>install.packages("ggrepel")</code>.</p>
 <div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb512-1"><a href="annotations.html#cb512-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -393,7 +394,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 1 x 2
 ##   AvgOffYardsPer AvgDefYardsPer
 ##            &lt;dbl&gt;          &lt;dbl&gt;
-## 1           5.74           5.73</code></pre>
+## 1           5.73           5.75</code></pre>
 <p>I also want to highlight playoff teams.</p>
 <div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb519-1"><a href="annotations.html#cb519-1" aria-hidden="true" tabindex="-1"></a>playoff_teams <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Notre Dame&quot;</span>, <span class="st">&quot;Alabama&quot;</span>, <span class="st">&quot;Clemson&quot;</span>, <span class="st">&quot;Ohio State&quot;</span>)</span>
 <span id="cb519-2"><a href="annotations.html#cb519-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -418,7 +419,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb520-16"><a href="annotations.html#cb520-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb520-17"><a href="annotations.html#cb520-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>()</span>
 <span id="cb520-18"><a href="annotations.html#cb520-18" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-382-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-381-1.png" width="672" /></p>
 
 </div>
             </section>

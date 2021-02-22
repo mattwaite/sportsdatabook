@@ -77,6 +77,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -388,10 +389,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## `summarise()` regrouping output by &#39;Date&#39; (override with `.groups` argument)</code></pre>
 <p>Earlier, we did stacked bar charts. We have what we need to do that now.</p>
 <div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="circular-bar-plots.html#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">data=</span>dates, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">weight=</span>wins, <span class="at">fill=</span>Conference)) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-170-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-169-1.png" width="672" /></p>
 <p>Eeek. This is already looking not great. But to make it a circular bar chart, we add <code>coord_polar()</code> to our chart.</p>
 <div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="circular-bar-plots.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">data=</span>dates, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">weight=</span>wins, <span class="at">fill=</span>Conference)) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">coord_polar</span>()</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-171-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-170-1.png" width="672" /></p>
 <p>Based on that, the day is probably too thin a slice, and there’s way too many conferences in college basketball. Let’s group this by months and filter out all but the power five conferences.</p>
 <div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="circular-bar-plots.html#cb243-1" aria-hidden="true" tabindex="-1"></a>p5 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SEC&quot;</span>, <span class="st">&quot;Big Ten&quot;</span>, <span class="st">&quot;Pac-12&quot;</span>, <span class="st">&quot;Big 12&quot;</span>, <span class="st">&quot;ACC&quot;</span>)</span></code></pre></div>
 <p>To get months, we’re going to use a function in the library <code>lubridate</code> called <code>floor_date</code>, which combine with mutate will give us a field of just months.</p>
@@ -399,12 +400,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## `summarise()` regrouping output by &#39;month&#39; (override with `.groups` argument)</code></pre>
 <p>Now we can use wins to make our circular bar chart of wins by month in the Power Five.</p>
 <div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="circular-bar-plots.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">data=</span>wins, <span class="fu">aes</span>(<span class="at">x=</span>month, <span class="at">weight=</span>wins, <span class="at">fill=</span>Conference)) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">coord_polar</span>()</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-174-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-173-1.png" width="672" /></p>
 <p>Yikes. That looks a lot like a broken pie chart. So months are too thick of a slice. Let’s use weeks in our floor date to see what that gives us.</p>
 <div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="circular-bar-plots.html#cb247-1" aria-hidden="true" tabindex="-1"></a>wins <span class="ot">&lt;-</span> winlosslogs <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">week =</span> <span class="fu">floor_date</span>(Date, <span class="at">unit=</span><span class="st">&quot;weeks&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(week, Conference) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">wins=</span><span class="fu">sum</span>(winloss)) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">%in%</span> p5) </span></code></pre></div>
 <pre><code>## `summarise()` regrouping output by &#39;week&#39; (override with `.groups` argument)</code></pre>
 <div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="circular-bar-plots.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">data=</span>wins, <span class="fu">aes</span>(<span class="at">x=</span>week, <span class="at">weight=</span>wins, <span class="at">fill=</span>Conference)) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">coord_polar</span>()</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-176-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-175-1.png" width="672" /></p>
 <p>That looks better. But what does it say? Does November basketball matter? What this is saying is … yeah, it kinda does. The reason? Lots of wins get piled up in November and December, during non-conference play. So if you are a team with NCAA tournament dreams, you need to win games in November to make sure your tournament resume is where it needs to be come March. Does an individual win or loss matter? Probably not. But your record in November does.</p>
 </div>
 <div id="does-it-show-you-where-you-are" class="section level2" number="17.2">
@@ -437,7 +438,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## `summarise()` regrouping output by &#39;week&#39; (override with `.groups` argument)</code></pre>
 <p>Now with our dataframe called qualitywins, we can chart it again.</p>
 <div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="circular-bar-plots.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">data=</span>qualitywins, <span class="fu">aes</span>(<span class="at">x=</span>week, <span class="at">weight=</span>wins, <span class="at">fill=</span>Conference)) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">coord_polar</span>()</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-183-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-182-1.png" width="672" /></p>
 <p>Look at this chart and compare it to the first one.</p>
 
 </div>

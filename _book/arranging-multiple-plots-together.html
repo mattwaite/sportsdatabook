@@ -77,6 +77,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -382,10 +383,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="arranging-multiple-plots-together.html#cb432-1" aria-hidden="true" tabindex="-1"></a>bar2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">data=</span>bottom10, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(Institution, change), <span class="at">weight=</span>change)) <span class="sc">+</span> <span class="fu">coord_flip</span>()</span></code></pre></div>
 <p>With cowplot, we can use a function called <code>plot_grid</code> to arrange the charts:</p>
 <div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="arranging-multiple-plots-together.html#cb433-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(bar1, bar2) </span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-327-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-326-1.png" width="672" /></p>
 <p>We can also stack them on top of each other:</p>
 <div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="arranging-multiple-plots-together.html#cb434-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(bar1, bar2, <span class="at">ncol=</span><span class="dv">1</span>) </span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-328-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-327-1.png" width="672" /></p>
 <p>To make these publishable, we should add headlines, chatter, decent labels, credit lines, etc. But to do this, we’ll have to figure out which labels go on which charts, so we can make it look decent. For example – both charts don’t need x or y labels. If you don’t have a title and subtitle on both, the spacing is off, so you need to leave one blank or the other blank. You’ll just have to fiddle with it until you get it looking right.</p>
 <div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="arranging-multiple-plots-together.html#cb435-1" aria-hidden="true" tabindex="-1"></a>bar1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">data=</span>top10, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(Institution, change), <span class="at">weight=</span>change)) <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;College football winners...&quot;</span>, <span class="at">subtitle =</span> <span class="st">&quot;Not every football program saw attendance shrink in 2018. But some really did.&quot;</span>,  <span class="at">x=</span><span class="st">&quot;&quot;</span>, <span class="at">y=</span><span class="st">&quot;Percent change&quot;</span>, <span class="at">caption =</span> <span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
 <span id="cb435-2"><a href="arranging-multiple-plots-together.html#cb435-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>

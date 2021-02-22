@@ -77,6 +77,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -378,12 +379,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Because this data has just Nebraska data in it, the dates are formatted correctly, and the data is long data (instead of wide), we have what we need to make line charts.</p>
 <p>Line charts, unlike bar charts, do have a y-axis. So in our ggplot step, we have to define what our x and y axes are. In this case, the x axis is our Date – the most common x axis in line charts is going to be a date of some variety – and y in this case is up to us. We’ve seen from previous walkthroughs that how well a team shoots the ball has a lot to do with how well a team does in a season, so let’s chart that.</p>
 <div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="line-charts.html#cb283-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>TeamFGPCT))</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-205-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-204-1.png" width="672" /></p>
 <p>See a problem here? Note the Y axis doesn’t start with zero. That makes this look worse than it is (and that February swoon is pretty bad). To make the axis what you want, you can use <code>scale_x_continuous</code> or <code>scale_y_continuous</code> and pass in a list with the bottom and top value you want. You do that like this:</p>
 <div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="line-charts.html#cb284-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb284-2"><a href="line-charts.html#cb284-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>TeamFGPCT)) <span class="sc">+</span> </span>
 <span id="cb284-3"><a href="line-charts.html#cb284-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">6</span>))</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-206-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-205-1.png" width="672" /></p>
 <p>Note also that our X axis labels are automated. It knows it’s a date and it just labels it by month.</p>
 <div id="this-is-too-simple." class="section level2" number="19.1">
 <h2><span class="header-section-number">19.1</span> This is too simple.</h2>
@@ -392,18 +393,18 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>In this case, because we have two different datasets, we’re going to put everything in the geom instead of the ggplot step. We also have to explicitly state what dataset we’re using by saying <code>data=</code> in the geom step.</p>
 <p>First, let’s chart Nebraska. Read carefully. First we set the data. Then we set our aesthetic. Unlike bars, we need an X and a Y variable. In this case, our X is the date of the game, Y is the thing we want the lines to move with. In this case, the Team Field Goal Percentage – TeamFGPCT.</p>
 <div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="line-charts.html#cb286-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>TeamFGPCT), <span class="at">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-208-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-207-1.png" width="672" /></p>
 <p>Now, by using +, we can add Michigan State to it. REMEMBER COPY AND PASTE IS A THING. Nothing changes except what data you are using.</p>
 <div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="line-charts.html#cb287-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb287-2"><a href="line-charts.html#cb287-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>TeamFGPCT), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb287-3"><a href="line-charts.html#cb287-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>msu, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>TeamFGPCT), <span class="at">color=</span><span class="st">&quot;green&quot;</span>)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-209-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-208-1.png" width="672" /></p>
 <p>Let’s flatten our lines out by zeroing the Y axis.</p>
 <div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="line-charts.html#cb288-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb288-2"><a href="line-charts.html#cb288-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>TeamFGPCT), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb288-3"><a href="line-charts.html#cb288-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>msu, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>TeamFGPCT), <span class="at">color=</span><span class="st">&quot;green&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb288-4"><a href="line-charts.html#cb288-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">65</span>))</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-210-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-209-1.png" width="672" /></p>
 <p>So visually speaking, the difference between Nebraska and Michigan State’s season is that Michigan State stayed mostly on an even keel, and Nebraska went on a two month swoon.</p>
 </div>
 <div id="but-what-if-i-wanted-to-add-a-lot-of-lines." class="section level2" number="19.2">
@@ -418,7 +419,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb290-3"><a href="line-charts.html#cb290-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>TeamFGPCT), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb290-4"><a href="line-charts.html#cb290-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>msu, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>TeamFGPCT), <span class="at">color=</span><span class="st">&quot;green&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb290-5"><a href="line-charts.html#cb290-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">65</span>))</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-212-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-211-1.png" width="672" /></p>
 <p>What do we see here? How has Nebraska and Michigan State’s season evolved against all the rest of the teams in college basketball?</p>
 <p>But how does that compare to the average? We can add that pretty easily by creating a new dataframe with it and add another geom_line.</p>
 <div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="line-charts.html#cb291-1" aria-hidden="true" tabindex="-1"></a>average <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Date) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">mean_shooting=</span><span class="fu">mean</span>(TeamFGPCT))</span></code></pre></div>
@@ -429,7 +430,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb293-4"><a href="line-charts.html#cb293-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>msu, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>TeamFGPCT), <span class="at">color=</span><span class="st">&quot;green&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb293-5"><a href="line-charts.html#cb293-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>average, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>mean_shooting), <span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb293-6"><a href="line-charts.html#cb293-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">65</span>))</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-214-1.png" width="672" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-213-1.png" width="672" /></p>
 
 </div>
 </div>
