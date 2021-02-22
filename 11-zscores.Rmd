@@ -101,7 +101,8 @@ But closer to home, how is Nebraska doing.
 ```{r}
 teamzscore %>% 
   filter(Conference == "Big Ten") %>% 
-  arrange(desc(TotalZscore))
+  arrange(desc(TotalZscore)) %>%
+  select(Team, TotalZscore)
 ```
 
 So, as we can see, with our composite Z Score, Nebraska is ... not good. Not good at all. 

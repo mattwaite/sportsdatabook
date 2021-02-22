@@ -97,6 +97,6 @@ ggplot(yardswide, aes(x=reorder(Team, Yards), weight=Yards, fill=Type)) +
   coord_flip()
 ```
 
-And just like that ... Penn State comes out on top? Huh. And look who is third.
+And just like that ... Penn State comes out on top? Huh. And look who is fourth.
 
 What else is the problem here? Hint: there was a global pandemic going on.

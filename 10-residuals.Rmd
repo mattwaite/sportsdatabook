@@ -48,9 +48,9 @@ fit <- lm(differential ~ NetYards, data = residualmodel)
 summary(fit)
 ```
 
-We've seen this output before, but let's review because if you are using scatterplots to make a point, you should do this. First, note the Min and Max residual at the top. A team has underperformed the model by 39 points (!), and a team has overperformed it by 39 points (!!). The median residual, where half are above and half are below, is just slightly above the fit line. Close here is good. 
+We've seen this output before, but let's review because if you are using scatterplots to make a point, you should do this. First, note the Min and Max residual at the top. A team has underperformed the model by nearly 50 points (!), and a team has overperformed it by 49 points (!!). The median residual, where half are above and half are below, is just slightly above the fit line. Close here is good. 
 
-Next: Look at the Adjusted R-squared value. What that says is that 72 percent of a team's scoring output can be predicted by their net yards.  
+Next: Look at the Adjusted R-squared value. What that says is that 64 percent of a team's scoring output can be predicted by their net yards.  
 
 Last: Look at the p-value. We are looking for a p-value smaller than .05. At .05, we can say that our correlation didn't happen at random. And, in this case, it REALLY didn't happen at random. But if you know a little bit about football, it doesn't surprise you that the more you outgain your opponent, the more you win by. It's an intuitive result.
 
@@ -64,11 +64,11 @@ residualmodel$residuals <- residuals(fit)
 Now we can sort our data by those residuals. Sorting in descending order gives us the games where teams overperformed the model. To make it easier to read, I'm going to use select to give us just the columns we need to see.
 
 ```{r}
-residualmodel %>% arrange(desc(residuals)) %>% select(Team, Opponent, Result, NetYards, residuals)
+residualmodel %>% arrange(desc(residuals)) %>% select(Team, Opponent, Result, differential, NetYards, predicted, residuals)
 ```
 So looking at this table, what you see here are the teams who scored more than their net yards would indicate. One of them should jump off the page at you.
 
-Remember Nebraska vs Rutgers? We won and everyone was happy and rel*ieved the season was over? We outgained Rutgers by **368 yards** in that game and won by 7. Our model predicted Nebraska should have won that game by **37** points. We should have blown Rutgers out of their own barn. But Rutgers isn't as hard done as Arizona, which should have lost by 48, but ended up losing by 63.  
+Remember Nebraska vs Rutgers? We won and everyone was happy and relieved the season was over? We outgained Rutgers by **368 yards** in that game and won by 7. Our model predicted Nebraska should have won that game by **37** points. We should have blown Rutgers out of their own barn. But Rutgers isn't as hard done as Arizona, which should have lost by 48, but ended up losing by 63.  
 
 But, before we can bestow any validity on this model, we need to see if this linear model is appropriate. We've done that some looking at our p-values and R-squared values. But one more check is to look at the residuals themselves. We do that by plotting the residuals with the predictor. We'll get into plotting soon, but for now just seeing it is enough.
 
