@@ -47,8 +47,7 @@ circular-bar-plots
 does-november-basketball-matter
 does-it-show-you-where-you-are
 waffle-charts
-waffles-two-ways-part-1
-waffles-two-ways-part-2
+making-waffles-with-vectors
 line-charts
 this-is-too-simple.
 but-what-if-i-wanted-to-add-a-lot-of-lines.
@@ -101,6 +100,7 @@ advanced-rvest
 one-last-bit
 building-your-own-blog-with-blogdown
 setup
+seeing-your-site
 editing-existing-markdown-content
 creating-a-new-post-in-r-markdown
 publishing-your-site

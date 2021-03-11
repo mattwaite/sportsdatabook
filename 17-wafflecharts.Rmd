@@ -16,7 +16,7 @@ Now load it:
 library(waffle)
 ```
 
-## Waffles two ways: Part 1
+## Making waffles with vectors
 
 Let's look at the debacle that was Nebraska vs. Ohio State this past fall in college football. [Here's the box score](https://www.espn.com/college-football/matchup?gameId=401112241), which we'll use for this part of the walkthrough. 
 
@@ -124,87 +124,3 @@ iron(
 ```
 
 News flash: Ohio State beat Nebraska. 
-
-## Waffles two ways: Part 2
-
-For this part, we want a newer version of the `waffle` library than is in CRAN -- where you normally get libraries from. 
-
-**WARNING: This didn't work in a variety of environments, so it may not work on yours.**
-
-Copy and paste this into your console: 
-
-`install.packages("waffle", repos = "https://cinc.rud.is")`
-
-At first, this way might seem harder than doing it the way we just walked through, but the benefits will come later when it's far, far easier to style this chart, where the previous charts are harder.
-
-We have the log of every game in college football -- [you can get it here](https://unl.box.com/s/2prgq48ctoxlukn6kmfjw0u1opda5s0m) -- and we can find this game with some simple filtering. 
-
-```{r}
-fblogs <- read_csv("data/footballlogs19.csv")
-```
-
-```{r}
-fblogs %>% filter(Team == "Nebraska" & Opponent == "Ohio State")
-```
-That's the game. So now we need to make this long data -- same as we did with the stacked bar charts -- and we'll focus on total yards. 
-
-```{r}
-fblogs %>% 
-        filter(Team == "Nebraska" & Opponent == "Ohio State") %>% 
-        select(Team, OffensiveYards, DefYards) %>% 
-        pivot_longer(
-                cols=c("OffensiveYards", "DefYards"), 
-                names_to="Type", 
-                values_to="Yards"
-                )
-```
-That does what we want, so let's save that to a new dataframe. 
-
-```{r}
-nuoh <- fblogs %>% 
-        filter(Team == "Nebraska" & Opponent == "Ohio State") %>% 
-        select(Team, OffensiveYards, DefYards) %>% 
-        pivot_longer(
-                cols=c("OffensiveYards", "DefYards"), 
-                names_to="Type", 
-                values_to="Yards"
-                )
-```
-
-Now we can use a new geom -- `geom_waffle` -- that the `waffle` library has added to `ggplot`. The `geom_waffle` takes two required inputs: `fill` and `value`, but otherwise, it looks the same as previous things we've done.
-
-```{r}
-ggplot() + geom_waffle(
-  data=nuoh,
-  aes(fill=Type, values=Yards))
-```
-First, we can see that going this route changes the boxes to narrow rectangles. That's to fill the space given. 
-
-If we want to split them, we can use something called a `facet_wrap` which we will spend a whole class on later, so don't worry about this now. Just know we can split it by `Type` this way.
-
-```{r}
-ggplot() + geom_waffle(
-  data=nuoh,
-  aes(fill=Type, values=Yards)
-) + facet_wrap(~Type)
-```
-Now we can stack the two charts so they aren't side by side using `ncol` inside the `facet_wrap`.
-
-```{r}
-ggplot() + geom_waffle(
-  data=nuoh,
-  aes(fill=Type, values=Yards)
-) + facet_wrap(~Type, ncol=1)
-```
-Now it's just a matter of formatting, labeling and general cleanup. We'll focus on that later as well, but here's a quick way to get started, which we did in the bar chart chapter.
-
-
-```{r}
-ggplot() + geom_waffle(
-  data=nuoh,
-  aes(fill=Type, values=Yards)
-) +  
-    facet_wrap(~Type, ncol=1) + 
-    theme_minimal() + 
-    theme_enhance_waffle()
-```
