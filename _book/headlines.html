@@ -408,7 +408,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb483-11"><a href="headlines.html#cb483-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb483-12"><a href="headlines.html#cb483-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>, <span class="at">label=</span><span class="st">&quot;Nebraska 2018&quot;</span>))</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-362-1.png" width="480" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-363-1.png" width="480" /></p>
 <p>First, let’s start with some headline basics:</p>
 <ul>
 <li>Your headline should be about what the chart is about, not what makes up the chart. What story is the chart telling? What made it interesting to you? Don’t tell me what the stats are, tell me what it says.</li>
@@ -431,7 +431,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb485-11"><a href="headlines.html#cb485-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb485-12"><a href="headlines.html#cb485-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>, <span class="at">label=</span><span class="st">&quot;Nebraska 2018&quot;</span>))</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-363-1.png" width="480" />
+<p><img src="SportsData_files/figure-html/unnamed-chunk-364-1.png" width="480" />
 The problems here:</p>
 <ul>
 <li>No verb.</li>
@@ -453,7 +453,7 @@ The problems here:</p>
 <span id="cb487-11"><a href="headlines.html#cb487-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb487-12"><a href="headlines.html#cb487-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>, <span class="at">label=</span><span class="st">&quot;Nebraska 2018&quot;</span>))</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-364-1.png" width="480" />
+<p><img src="SportsData_files/figure-html/unnamed-chunk-365-1.png" width="480" />
 What’s wrong here?</p>
 <ul>
 <li>The headline is about the stats, not the story.</li>
@@ -476,7 +476,7 @@ What’s wrong here?</p>
 <span id="cb489-11"><a href="headlines.html#cb489-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb489-12"><a href="headlines.html#cb489-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>, <span class="at">label=</span><span class="st">&quot;Nebraska 2018&quot;</span>))</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-365-1.png" width="528" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-366-1.png" width="528" /></p>
 <p>What works here:</p>
 <ul>
 <li>Provokes a reaction by asking a question. Drives at what the story is about.</li>
@@ -497,7 +497,7 @@ What’s wrong here?</p>
 <span id="cb491-11"><a href="headlines.html#cb491-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb491-12"><a href="headlines.html#cb491-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>, <span class="at">label=</span><span class="st">&quot;Nebraska 2018&quot;</span>))</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-366-1.png" width="528" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-367-1.png" width="528" /></p>
 <p>What works here:</p>
 <ul>
 <li>Strong verb: underperformed.</li>

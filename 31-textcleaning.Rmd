@@ -80,7 +80,23 @@ Just like that, the trash is gone.
 
 Text cleaning is really just a set of logic puzzles. What do I need to do? How can I get there step by step?
 
-The NCAA does some very interesting things with data, making it pretty useless. [Here's an example](https://unl.box.com/s/kxjh8k7bm95i8eeovao18nqiky860j1s). 
+The NCAA does some very interesting things with data, making it pretty useless.
+
+```{r echo=FALSE, class.output="bg-info", results="asis",  message=FALSE,  warning=FALSE}
+library(downloadthis)
+library(glue)
+
+dllink <- download_link(
+  link = "http://mattwaite.github.io/sportsdatafiles/killsperset.csv",
+  button_label = "Download csv file",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
+```
 
 Let's import it and take a look.
 
