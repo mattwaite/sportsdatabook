@@ -1,0 +1,45 @@
+# Project Checklist
+
+The main projects in SPMC350 Sports Data Analysis and Visualization involve writing a blog post, created on GitHub pages, about a sports topic that uses code, data and three graphics to tell a story. The assignment is worth 20 percent of the semester grade. 
+
+An example of a B+/A- post: [Is Nebraska the best worst team in college basketball?](http://mattwaite.github.io/2021/03/28/is-nebraska-the-best-worst-team-in-college-basketball/)
+
+## Writing checklist
+
+1. Have you spell checked your writing?
+2. Have you read what you have written out loud? Reading it out loud will help you find bad writing.
+3. No really. Read it out loud. It makes a huge difference. If you stumble over your own words, you should rewrite it.
+4. If what you read out loud doesn't sound like you, rewrite it.
+5. Do you have complete sentences? Do you have active verbs? 
+
+## Headline checklist
+
+1. Are your headlines just labels? Example: Nebraska's offense. NBA's Best Shooters. The best NFL punters. Those are labels, not headlines.
+2. Do your headlines tell a story, or attempt to draw me into one?
+3. Do your headlines include words that are what the chart is about?
+4. Do your headlines point me toward what I should see in the chart?
+
+## Graphics checklist
+
+1. Do you have the required parts? They are: headline, chatter, credit line, source line.
+2. Do your graphics have annotations that help me determine what is going on? Example: Are important dots labeled on a scatterplot? 
+3. Are there lines to show me averages? Are those lines labeled? 
+4. Can I read bar chart axis text?  
+5. Do each one of your charts tell a story? Can I tell what that story is in a glance?
+6. Do you use color sparingly to draw my attention to something specific? 
+7. Is there separation between your headline size and your chatter size?
+8. Does your typography have a hierarchy? Does your headline stand out from your chatter? Are your axis labels smaller than your data labels?
+9. Have you simplified the theme (i.e. dropped the default grey background)?
+10. Are your axis labels something anyone can understand? 
+
+## Code checklist
+
+1. Are your variables named what they are? Meaning, did you call your data logs when it's made up of players? That's bad.
+2. Is spaced out so it's one line per command? Look at the example post for guidance.
+3. Is your code in the proper order? Libraries at the top. Data preparation before the graphics? 
+
+## Last thing
+
+Can you see your blog post on the internet? 
+
+The link you are turning in starts with YourGitHubUserNameHere.github.io. If you are turning in a GitHub.com url, you are turning in the wrong thing. 

@@ -104,6 +104,11 @@ seeing-your-site
 editing-existing-markdown-content
 creating-a-new-post-in-r-markdown
 publishing-your-site
-assignments
+project-checklist
+writing-checklist
+headline-checklist
+graphics-checklist
+code-checklist
+last-thing
 appendix
 how-to-get-help-in-this-class
