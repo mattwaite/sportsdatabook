@@ -82,8 +82,8 @@ yards %>%
 Building on what we learned in the last chapter, we know we can turn this into a bar chart with an x value, a weight and a geom_bar. What we are going to add is a `fill`. The `fill` will stack bars on each other based on which element it is. In this case, we can fill the bar by Type, which means it will stack the number of rushing yards on top of passing yards and we can see how they compare. 
 
 ```{r}
-ggplot(yardswide, aes(x=Team, weight=Yards, fill=Type)) + 
-  geom_bar() + 
+ggplot() + 
+  geom_bar(data=yardswide, aes(x=Team, weight=Yards, fill=Type)) + 
   coord_flip()
 ```
 
@@ -92,8 +92,8 @@ What's the problem with this chart?
 There's a couple of things, one of which we'll deal with now: The ordering is alphabetical (from the bottom up). So let's `reorder` the teams by Yards.
 
 ```{r}
-ggplot(yardswide, aes(x=reorder(Team, Yards), weight=Yards, fill=Type)) + 
-  geom_bar() + 
+ggplot() + 
+  geom_bar(data=yardswide, aes(x=reorder(Team, Yards), weight=Yards, fill=Type)) + 
   coord_flip()
 ```
 
