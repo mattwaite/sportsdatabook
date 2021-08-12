@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 33 Headlines | Sports Data Analysis and Visualization</title>
   <meta name="description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 33 Headlines | Sports Data Analysis and Visualization" />
   <meta property="og:type" content="book" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="text-cleaning.html"/>
 <link rel="next" href="annotations.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,10 +51,10 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.3/plotly.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
@@ -134,6 +134,7 @@ code span.va { color: #000000; } /* Variable */
 code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -252,10 +253,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="25.1" data-path="beeswarm-plots.html"><a href="beeswarm-plots.html#a-few-other-options"><i class="fa fa-check"></i><b>25.1</b> A few other options</a></li>
 </ul></li>
 <li class="chapter" data-level="26" data-path="bump-charts.html"><a href="bump-charts.html"><i class="fa fa-check"></i><b>26</b> Bump charts</a></li>
-<li class="chapter" data-level="27" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>27</b> Tables</a>
-<ul>
-<li class="chapter" data-level="27.1" data-path="tables.html"><a href="tables.html#exporting-tables"><i class="fa fa-check"></i><b>27.1</b> Exporting tables</a></li>
-</ul></li>
+<li class="chapter" data-level="27" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>27</b> Tables</a></li>
 <li class="chapter" data-level="28" data-path="facet-wraps.html"><a href="facet-wraps.html"><i class="fa fa-check"></i><b>28</b> Facet wraps</a>
 <ul>
 <li class="chapter" data-level="28.1" data-path="facet-wraps.html"><a href="facet-wraps.html#facet-grid-vs-facet-wraps"><i class="fa fa-check"></i><b>28.1</b> Facet grid vs facet wraps</a></li>
@@ -367,53 +365,42 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>The first on that list is the first for a reason. The headline is an incredibly important part of any graphic: it’s often the first thing a reader will see. It’s got to entice people in, tell them a little bit about what they’re going to see, and help tell the story.</p>
 <p>The second item is the chatter – the text underneath that headline. It needs to work with the headline to further the story, drive people toward the point, maybe add some context.</p>
 <p>The two bits of text are extremely important. Let’s set up a chart and talk about how to do it wrong and how to do it better.</p>
-<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="headlines.html#cb477-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb477-2"><a href="headlines.html#cb477-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span></code></pre></div>
+<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb531-1"><a href="headlines.html#cb531-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb531-2"><a href="headlines.html#cb531-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span></code></pre></div>
 <p>The data and the chart code isn’t important for you to follow along. The code is nothing special. The issues will be with the words that you’ll see below.</p>
-<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="headlines.html#cb478-1" aria-hidden="true" tabindex="-1"></a>scoring <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/scoringoffense.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb532-1"><a href="headlines.html#cb532-1" aria-hidden="true" tabindex="-1"></a>scoring <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/scoringoffense.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Rows: 1253 Columns: 10</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (1): Name
+## dbl (9): G, TD, FG, 1XP, 2XP, Safety, Points, Points/G, Year</code></pre>
 <pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
-## cols(
-##   Name = col_character(),
-##   G = col_double(),
-##   TD = col_double(),
-##   FG = col_double(),
-##   `1XP` = col_double(),
-##   `2XP` = col_double(),
-##   Safety = col_double(),
-##   Points = col_double(),
-##   `Points/G` = col_double(),
-##   Year = col_double()
-## )</code></pre>
-<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="headlines.html#cb480-1" aria-hidden="true" tabindex="-1"></a>total <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/totaloffense.csv&quot;</span>)</span></code></pre></div>
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb536-1"><a href="headlines.html#cb536-1" aria-hidden="true" tabindex="-1"></a>total <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/totaloffense.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Rows: 1253 Columns: 9</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (1): Name
+## dbl (8): G, Rush Yards, Pass Yards, Plays, Total Yards, Yards/Play, Yards/G,...</code></pre>
 <pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
-## cols(
-##   Name = col_character(),
-##   G = col_double(),
-##   `Rush Yards` = col_double(),
-##   `Pass Yards` = col_double(),
-##   Plays = col_double(),
-##   `Total Yards` = col_double(),
-##   `Yards/Play` = col_double(),
-##   `Yards/G` = col_double(),
-##   Year = col_double()
-## )</code></pre>
-<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="headlines.html#cb482-1" aria-hidden="true" tabindex="-1"></a>offense <span class="ot">&lt;-</span> total <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(scoring, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;Name&quot;</span>, <span class="st">&quot;Year&quot;</span>))</span>
-<span id="cb482-2"><a href="headlines.html#cb482-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb482-3"><a href="headlines.html#cb482-3" aria-hidden="true" tabindex="-1"></a>nu <span class="ot">&lt;-</span> offense <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Name <span class="sc">==</span> <span class="st">&quot;Nebraska&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Year <span class="sc">==</span> <span class="dv">2018</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="headlines.html#cb483-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(offense, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>)) <span class="sc">+</span> </span>
-<span id="cb483-2"><a href="headlines.html#cb483-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb483-3"><a href="headlines.html#cb483-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Total yards per game&quot;</span>, <span class="at">y=</span><span class="st">&quot;Points per game&quot;</span>, <span class="at">title=</span><span class="st">&quot;Headline here&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;This is the chatter. It is chatter. Chatter.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb483-4"><a href="headlines.html#cb483-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
-<span id="cb483-5"><a href="headlines.html#cb483-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb483-6"><a href="headlines.html#cb483-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb483-7"><a href="headlines.html#cb483-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
-<span id="cb483-8"><a href="headlines.html#cb483-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
-<span id="cb483-9"><a href="headlines.html#cb483-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb483-10"><a href="headlines.html#cb483-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb483-11"><a href="headlines.html#cb483-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb483-12"><a href="headlines.html#cb483-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>, <span class="at">label=</span><span class="st">&quot;Nebraska 2018&quot;</span>))</span></code></pre></div>
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb540-1"><a href="headlines.html#cb540-1" aria-hidden="true" tabindex="-1"></a>offense <span class="ot">&lt;-</span> total <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(scoring, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;Name&quot;</span>, <span class="st">&quot;Year&quot;</span>))</span>
+<span id="cb540-2"><a href="headlines.html#cb540-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb540-3"><a href="headlines.html#cb540-3" aria-hidden="true" tabindex="-1"></a>nu <span class="ot">&lt;-</span> offense <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Name <span class="sc">==</span> <span class="st">&quot;Nebraska&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Year <span class="sc">==</span> <span class="dv">2018</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb541"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb541-1"><a href="headlines.html#cb541-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(offense, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>)) <span class="sc">+</span> </span>
+<span id="cb541-2"><a href="headlines.html#cb541-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb541-3"><a href="headlines.html#cb541-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Total yards per game&quot;</span>, <span class="at">y=</span><span class="st">&quot;Points per game&quot;</span>, <span class="at">title=</span><span class="st">&quot;Headline here&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;This is the chatter. It is chatter. Chatter.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb541-4"><a href="headlines.html#cb541-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb541-5"><a href="headlines.html#cb541-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb541-6"><a href="headlines.html#cb541-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb541-7"><a href="headlines.html#cb541-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
+<span id="cb541-8"><a href="headlines.html#cb541-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
+<span id="cb541-9"><a href="headlines.html#cb541-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb541-10"><a href="headlines.html#cb541-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb541-11"><a href="headlines.html#cb541-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb541-12"><a href="headlines.html#cb541-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>, <span class="at">label=</span><span class="st">&quot;Nebraska 2018&quot;</span>))</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-363-1.png" width="480" /></p>
 <p>First, let’s start with some headline basics:</p>
@@ -425,18 +412,18 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>Your headline should provoke a reaction.</li>
 </ul>
 <p>Given our graph, here’s a few that don’t work.</p>
-<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="headlines.html#cb485-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(offense, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>)) <span class="sc">+</span> </span>
-<span id="cb485-2"><a href="headlines.html#cb485-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb485-3"><a href="headlines.html#cb485-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Total yards per game&quot;</span>, <span class="at">y=</span><span class="st">&quot;Points per game&quot;</span>, <span class="at">title=</span><span class="st">&quot;Nebraska&#39;s offense&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;Nebraska&#39;s 2018 offense is the red dot.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb485-4"><a href="headlines.html#cb485-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
-<span id="cb485-5"><a href="headlines.html#cb485-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb485-6"><a href="headlines.html#cb485-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb485-7"><a href="headlines.html#cb485-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
-<span id="cb485-8"><a href="headlines.html#cb485-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
-<span id="cb485-9"><a href="headlines.html#cb485-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb485-10"><a href="headlines.html#cb485-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb485-11"><a href="headlines.html#cb485-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb485-12"><a href="headlines.html#cb485-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>, <span class="at">label=</span><span class="st">&quot;Nebraska 2018&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb543"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb543-1"><a href="headlines.html#cb543-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(offense, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>)) <span class="sc">+</span> </span>
+<span id="cb543-2"><a href="headlines.html#cb543-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb543-3"><a href="headlines.html#cb543-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Total yards per game&quot;</span>, <span class="at">y=</span><span class="st">&quot;Points per game&quot;</span>, <span class="at">title=</span><span class="st">&quot;Nebraska&#39;s offense&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;Nebraska&#39;s 2018 offense is the red dot.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb543-4"><a href="headlines.html#cb543-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb543-5"><a href="headlines.html#cb543-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb543-6"><a href="headlines.html#cb543-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb543-7"><a href="headlines.html#cb543-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
+<span id="cb543-8"><a href="headlines.html#cb543-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
+<span id="cb543-9"><a href="headlines.html#cb543-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb543-10"><a href="headlines.html#cb543-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb543-11"><a href="headlines.html#cb543-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb543-12"><a href="headlines.html#cb543-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>, <span class="at">label=</span><span class="st">&quot;Nebraska 2018&quot;</span>))</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-364-1.png" width="480" />
 The problems here:</p>
@@ -447,18 +434,18 @@ The problems here:</p>
 <li>Don’t repeat words from the headline in the chatter. Nebraska Nebraska looks bad. Make one of the Huskers if you’re going to do this.</li>
 </ul>
 <p>Another example:</p>
-<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="headlines.html#cb487-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(offense, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>)) <span class="sc">+</span> </span>
-<span id="cb487-2"><a href="headlines.html#cb487-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb487-3"><a href="headlines.html#cb487-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Total yards per game&quot;</span>, <span class="at">y=</span><span class="st">&quot;Points per game&quot;</span>, <span class="at">title=</span><span class="st">&quot;Points per game vs total yards per game&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;Nebraska&#39;s 2018 offense is below the blue line, which is bad.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb487-4"><a href="headlines.html#cb487-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
-<span id="cb487-5"><a href="headlines.html#cb487-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb487-6"><a href="headlines.html#cb487-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb487-7"><a href="headlines.html#cb487-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
-<span id="cb487-8"><a href="headlines.html#cb487-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
-<span id="cb487-9"><a href="headlines.html#cb487-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb487-10"><a href="headlines.html#cb487-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb487-11"><a href="headlines.html#cb487-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb487-12"><a href="headlines.html#cb487-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>, <span class="at">label=</span><span class="st">&quot;Nebraska 2018&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb545-1"><a href="headlines.html#cb545-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(offense, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>)) <span class="sc">+</span> </span>
+<span id="cb545-2"><a href="headlines.html#cb545-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb545-3"><a href="headlines.html#cb545-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Total yards per game&quot;</span>, <span class="at">y=</span><span class="st">&quot;Points per game&quot;</span>, <span class="at">title=</span><span class="st">&quot;Points per game vs total yards per game&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;Nebraska&#39;s 2018 offense is below the blue line, which is bad.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb545-4"><a href="headlines.html#cb545-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb545-5"><a href="headlines.html#cb545-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb545-6"><a href="headlines.html#cb545-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb545-7"><a href="headlines.html#cb545-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
+<span id="cb545-8"><a href="headlines.html#cb545-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
+<span id="cb545-9"><a href="headlines.html#cb545-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb545-10"><a href="headlines.html#cb545-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb545-11"><a href="headlines.html#cb545-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb545-12"><a href="headlines.html#cb545-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>, <span class="at">label=</span><span class="st">&quot;Nebraska 2018&quot;</span>))</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-365-1.png" width="480" />
 What’s wrong here?</p>
@@ -470,18 +457,18 @@ What’s wrong here?</p>
 <li>The chatter adds more flavor to it, but what does “below the blue line” even mean? We’re leaving the reader with a lot of questions and no real answers. That;s bad.</li>
 </ul>
 <p>Let’s try to do this better.</p>
-<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="headlines.html#cb489-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(offense, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>)) <span class="sc">+</span> </span>
-<span id="cb489-2"><a href="headlines.html#cb489-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb489-3"><a href="headlines.html#cb489-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Total yards per game&quot;</span>, <span class="at">y=</span><span class="st">&quot;Points per game&quot;</span>, <span class="at">title=</span><span class="st">&quot;Nebraska&#39;s strength?&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;The Husker&#39;s offense was supposed to power the team. It underperformed.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb489-4"><a href="headlines.html#cb489-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
-<span id="cb489-5"><a href="headlines.html#cb489-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb489-6"><a href="headlines.html#cb489-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb489-7"><a href="headlines.html#cb489-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
-<span id="cb489-8"><a href="headlines.html#cb489-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
-<span id="cb489-9"><a href="headlines.html#cb489-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb489-10"><a href="headlines.html#cb489-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb489-11"><a href="headlines.html#cb489-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb489-12"><a href="headlines.html#cb489-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>, <span class="at">label=</span><span class="st">&quot;Nebraska 2018&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb547-1"><a href="headlines.html#cb547-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(offense, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>)) <span class="sc">+</span> </span>
+<span id="cb547-2"><a href="headlines.html#cb547-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb547-3"><a href="headlines.html#cb547-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Total yards per game&quot;</span>, <span class="at">y=</span><span class="st">&quot;Points per game&quot;</span>, <span class="at">title=</span><span class="st">&quot;Nebraska&#39;s strength?&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;The Husker&#39;s offense was supposed to power the team. It underperformed.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb547-4"><a href="headlines.html#cb547-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb547-5"><a href="headlines.html#cb547-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb547-6"><a href="headlines.html#cb547-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb547-7"><a href="headlines.html#cb547-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
+<span id="cb547-8"><a href="headlines.html#cb547-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
+<span id="cb547-9"><a href="headlines.html#cb547-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb547-10"><a href="headlines.html#cb547-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb547-11"><a href="headlines.html#cb547-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb547-12"><a href="headlines.html#cb547-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>, <span class="at">label=</span><span class="st">&quot;Nebraska 2018&quot;</span>))</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-366-1.png" width="528" /></p>
 <p>What works here:</p>
@@ -491,18 +478,18 @@ What’s wrong here?</p>
 <li>Simple, precise, direct language.</li>
 </ul>
 <p>One more, same chart.</p>
-<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="headlines.html#cb491-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(offense, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>)) <span class="sc">+</span> </span>
-<span id="cb491-2"><a href="headlines.html#cb491-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb491-3"><a href="headlines.html#cb491-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Total yards per game&quot;</span>, <span class="at">y=</span><span class="st">&quot;Points per game&quot;</span>, <span class="at">title=</span><span class="st">&quot;Nebraska&#39;s offense underperformed&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;The Husker&#39;s should have scored nearly a touchdown more given their output.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb491-4"><a href="headlines.html#cb491-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
-<span id="cb491-5"><a href="headlines.html#cb491-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb491-6"><a href="headlines.html#cb491-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb491-7"><a href="headlines.html#cb491-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
-<span id="cb491-8"><a href="headlines.html#cb491-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
-<span id="cb491-9"><a href="headlines.html#cb491-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb491-10"><a href="headlines.html#cb491-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb491-11"><a href="headlines.html#cb491-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb491-12"><a href="headlines.html#cb491-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>, <span class="at">label=</span><span class="st">&quot;Nebraska 2018&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb549-1"><a href="headlines.html#cb549-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(offense, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>)) <span class="sc">+</span> </span>
+<span id="cb549-2"><a href="headlines.html#cb549-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb549-3"><a href="headlines.html#cb549-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Total yards per game&quot;</span>, <span class="at">y=</span><span class="st">&quot;Points per game&quot;</span>, <span class="at">title=</span><span class="st">&quot;Nebraska&#39;s offense underperformed&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;The Husker&#39;s should have scored nearly a touchdown more given their output.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb549-4"><a href="headlines.html#cb549-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb549-5"><a href="headlines.html#cb549-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb549-6"><a href="headlines.html#cb549-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb549-7"><a href="headlines.html#cb549-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
+<span id="cb549-8"><a href="headlines.html#cb549-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
+<span id="cb549-9"><a href="headlines.html#cb549-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb549-10"><a href="headlines.html#cb549-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb549-11"><a href="headlines.html#cb549-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb549-12"><a href="headlines.html#cb549-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>, <span class="at">label=</span><span class="st">&quot;Nebraska 2018&quot;</span>))</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-367-1.png" width="528" /></p>
 <p>What works here:</p>
@@ -543,6 +530,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 8 Significance tests | Sports Data Analysis and Visualization</title>
   <meta name="description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 8 Significance tests | Sports Data Analysis and Visualization" />
   <meta property="og:type" content="book" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="transforming-data.html"/>
 <link rel="next" href="correlations-and-regression.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,10 +51,10 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.3/plotly.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
@@ -134,6 +134,7 @@ code span.va { color: #000000; } /* Variable */
 code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -252,10 +253,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="25.1" data-path="beeswarm-plots.html"><a href="beeswarm-plots.html#a-few-other-options"><i class="fa fa-check"></i><b>25.1</b> A few other options</a></li>
 </ul></li>
 <li class="chapter" data-level="26" data-path="bump-charts.html"><a href="bump-charts.html"><i class="fa fa-check"></i><b>26</b> Bump charts</a></li>
-<li class="chapter" data-level="27" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>27</b> Tables</a>
-<ul>
-<li class="chapter" data-level="27.1" data-path="tables.html"><a href="tables.html#exporting-tables"><i class="fa fa-check"></i><b>27.1</b> Exporting tables</a></li>
-</ul></li>
+<li class="chapter" data-level="27" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>27</b> Tables</a></li>
 <li class="chapter" data-level="28" data-path="facet-wraps.html"><a href="facet-wraps.html"><i class="fa fa-check"></i><b>28</b> Facet wraps</a>
 <ul>
 <li class="chapter" data-level="28.1" data-path="facet-wraps.html"><a href="facet-wraps.html#facet-grid-vs-facet-wraps"><i class="fa fa-check"></i><b>28.1</b> Facet grid vs facet wraps</a></li>
@@ -369,28 +367,23 @@ If it is, then we know certain things about it. Like the mean – the average �
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>Load the tidyverse.</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="significance-tests.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="significance-tests.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p>And import the data.</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="significance-tests.html#cb84-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/nbabubble.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="significance-tests.html#cb96-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/nbabubble.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Rows: 2118 Columns: 43</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr   (7): Season, Conference, Team, HomeAway, Opponent, W_L, COVID
+## dbl  (35): Game, TeamScore, OpponentScore, TeamFG, TeamFGA, TeamFGPCT, Team3...
+## date  (1): Date</code></pre>
 <pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
-## cols(
-##   .default = col_double(),
-##   Season = col_character(),
-##   Conference = col_character(),
-##   Team = col_character(),
-##   Date = col_date(format = &quot;&quot;),
-##   HomeAway = col_character(),
-##   Opponent = col_character(),
-##   W_L = col_character(),
-##   COVID = col_character()
-## )
-## ℹ Use `spec()` for the full column specifications.</code></pre>
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <p>First, let’s just look at scoring. Here’s a theory: fans make players nervous. The screaming makes players tense up, and tension makes for bad shooting. An alternative to this: screaming fans make you defend harder. So my hypothesis is that not only is the scoring different, it’s lower.</p>
 <p>First things first, let’s create a new field, called <code>totalpoints</code> and add the two scores together. We’ll need this, so we’re going to make this a new dataframe called <code>points</code>.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="significance-tests.html#cb86-1" aria-hidden="true" tabindex="-1"></a>points <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">totalpoints =</span> TeamScore <span class="sc">+</span> OpponentScore )</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="significance-tests.html#cb100-1" aria-hidden="true" tabindex="-1"></a>points <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">totalpoints =</span> TeamScore <span class="sc">+</span> OpponentScore )</span></code></pre></div>
 <p>Typically speaking, with significance tests, the process involves creating two different means and then running a bunch of formulas on them. R makes this easy by giving you a <code>t.test</code> function, which does all the work for you. What we have to tell it is what is the value we are testing, over which groups, and from what data. It looks like this:</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="significance-tests.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(totalpoints <span class="sc">~</span> COVID, <span class="at">data=</span>points)</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="significance-tests.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(totalpoints <span class="sc">~</span> COVID, <span class="at">data=</span>points)</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
@@ -412,9 +405,9 @@ If it is, then we know certain things about it. Like the mean – the average �
 <p>Let’s test another thing that may have been impacted by bubble games: home court advantage. If you’re the home team, but you’re not at home, does it affect you? It has to, right? Your fans aren’t there. Home and away are just positions on the scoreboard. It can’t matter, can it?</p>
 <p>My hypothesis is that home court is no longer an advantage, and the home team will score less relative to the away team.</p>
 <p>First things first: We need to make a dataframe where Team is the home team. And then we’ll create a differential between the home team and away team. If home court is an advantage, the differential should average out to be positive – the home team scores more than the away team.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="significance-tests.html#cb89-1" aria-hidden="true" tabindex="-1"></a>homecourt <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">is.na</span>(HomeAway) <span class="sc">==</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">differential =</span> TeamScore <span class="sc">-</span> OpponentScore)</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="significance-tests.html#cb103-1" aria-hidden="true" tabindex="-1"></a>homecourt <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">is.na</span>(HomeAway) <span class="sc">==</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">differential =</span> TeamScore <span class="sc">-</span> OpponentScore)</span></code></pre></div>
 <p>Now let’s test it.</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="significance-tests.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(differential <span class="sc">~</span> COVID, <span class="at">data=</span>homecourt)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="significance-tests.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(differential <span class="sc">~</span> COVID, <span class="at">data=</span>homecourt)</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
@@ -464,6 +457,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

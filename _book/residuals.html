@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 11 Residuals | Sports Data Analysis and Visualization</title>
   <meta name="description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 11 Residuals | Sports Data Analysis and Visualization" />
   <meta property="og:type" content="book" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="multiple-regression.html"/>
 <link rel="next" href="z-scores.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,10 +51,10 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.3/plotly.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
@@ -134,6 +134,7 @@ code span.va { color: #000000; } /* Variable */
 code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -252,10 +253,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="25.1" data-path="beeswarm-plots.html"><a href="beeswarm-plots.html#a-few-other-options"><i class="fa fa-check"></i><b>25.1</b> A few other options</a></li>
 </ul></li>
 <li class="chapter" data-level="26" data-path="bump-charts.html"><a href="bump-charts.html"><i class="fa fa-check"></i><b>26</b> Bump charts</a></li>
-<li class="chapter" data-level="27" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>27</b> Tables</a>
-<ul>
-<li class="chapter" data-level="27.1" data-path="tables.html"><a href="tables.html#exporting-tables"><i class="fa fa-check"></i><b>27.1</b> Exporting tables</a></li>
-</ul></li>
+<li class="chapter" data-level="27" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>27</b> Tables</a></li>
 <li class="chapter" data-level="28" data-path="facet-wraps.html"><a href="facet-wraps.html"><i class="fa fa-check"></i><b>28</b> Facet wraps</a>
 <ul>
 <li class="chapter" data-level="28.1" data-path="facet-wraps.html"><a href="facet-wraps.html#facet-grid-vs-facet-wraps"><i class="fa fa-check"></i><b>28.1</b> Facet grid vs facet wraps</a></li>
@@ -362,28 +360,22 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>Then load the tidyverse.</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="residuals.html#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="residuals.html#cb132-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/footballlogs20.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="residuals.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="residuals.html#cb150-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/footballlogs20.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Rows: 1100 Columns: 54</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr   (8): HomeAway, Opponent, Result, TeamFull, TeamURL, Outcome, Team, Con...
+## dbl  (45): Game, PassingCmp, PassingAtt, PassingPct, PassingYds, PassingTD, ...
+## date  (1): Date</code></pre>
 <pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
-## cols(
-##   .default = col_double(),
-##   Date = col_date(format = &quot;&quot;),
-##   HomeAway = col_character(),
-##   Opponent = col_character(),
-##   Result = col_character(),
-##   TeamFull = col_character(),
-##   TeamURL = col_character(),
-##   Outcome = col_character(),
-##   Team = col_character(),
-##   Conference = col_character()
-## )
-## ℹ Use `spec()` for the full column specifications.</code></pre>
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <p>First, let’s make the columns we’ll need.</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="residuals.html#cb134-1" aria-hidden="true" tabindex="-1"></a>residualmodel <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">differential =</span> TeamScore <span class="sc">-</span> OpponentScore, <span class="at">NetYards =</span> OffensiveYards <span class="sc">-</span> DefYards)</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="residuals.html#cb154-1" aria-hidden="true" tabindex="-1"></a>residualmodel <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">differential =</span> TeamScore <span class="sc">-</span> OpponentScore, <span class="at">NetYards =</span> OffensiveYards <span class="sc">-</span> DefYards)</span></code></pre></div>
 <p>Now let’s create our model.</p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="residuals.html#cb135-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(differential <span class="sc">~</span> NetYards, <span class="at">data =</span> residualmodel)</span>
-<span id="cb135-2"><a href="residuals.html#cb135-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="residuals.html#cb155-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(differential <span class="sc">~</span> NetYards, <span class="at">data =</span> residualmodel)</span>
+<span id="cb155-2"><a href="residuals.html#cb155-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = differential ~ NetYards, data = residualmodel)
@@ -406,11 +398,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Next: Look at the Adjusted R-squared value. What that says is that 64 percent of a team’s scoring output can be predicted by their net yards.</p>
 <p>Last: Look at the p-value. We are looking for a p-value smaller than .05. At .05, we can say that our correlation didn’t happen at random. And, in this case, it REALLY didn’t happen at random. But if you know a little bit about football, it doesn’t surprise you that the more you outgain your opponent, the more you win by. It’s an intuitive result.</p>
 <p>What we want to do now is look at those residuals. We want to add them to our individual game records. We can do that by creating two new fields – predicted and residuals – to our dataframe like this:</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="residuals.html#cb137-1" aria-hidden="true" tabindex="-1"></a>residualmodel<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit)</span>
-<span id="cb137-2"><a href="residuals.html#cb137-2" aria-hidden="true" tabindex="-1"></a>residualmodel<span class="sc">$</span>residuals <span class="ot">&lt;-</span> <span class="fu">residuals</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="residuals.html#cb157-1" aria-hidden="true" tabindex="-1"></a>residualmodel<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit)</span>
+<span id="cb157-2"><a href="residuals.html#cb157-2" aria-hidden="true" tabindex="-1"></a>residualmodel<span class="sc">$</span>residuals <span class="ot">&lt;-</span> <span class="fu">residuals</span>(fit)</span></code></pre></div>
 <p>Now we can sort our data by those residuals. Sorting in descending order gives us the games where teams overperformed the model. To make it easier to read, I’m going to use select to give us just the columns we need to see.</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="residuals.html#cb138-1" aria-hidden="true" tabindex="-1"></a>residualmodel <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(residuals)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Team, Opponent, Result, differential, NetYards, predicted, residuals)</span></code></pre></div>
-<pre><code>## # A tibble: 1,100 x 7
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="residuals.html#cb158-1" aria-hidden="true" tabindex="-1"></a>residualmodel <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(residuals)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Team, Opponent, Result, differential, NetYards, predicted, residuals)</span></code></pre></div>
+<pre><code>## # A tibble: 1,100 × 7
 ##    Team         Opponent       Result  differential NetYards predicted residuals
 ##    &lt;chr&gt;        &lt;chr&gt;          &lt;chr&gt;          &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
 ##  1 Arizona Sta… Arizona        W (70-…           63      136     14.1       48.9
@@ -436,14 +428,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="penalties" class="section level2" number="11.1">
 <h2><span class="header-section-number">11.1</span> Penalties</h2>
 <p>Now let’s look at it where it doesn’t work: Penalties.</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="residuals.html#cb141-1" aria-hidden="true" tabindex="-1"></a>penalties <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> </span>
-<span id="cb141-2"><a href="residuals.html#cb141-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb141-3"><a href="residuals.html#cb141-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">differential =</span> TeamScore <span class="sc">-</span> OpponentScore, </span>
-<span id="cb141-4"><a href="residuals.html#cb141-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotalPenalties =</span> Penalties<span class="sc">+</span>DefPenalties,</span>
-<span id="cb141-5"><a href="residuals.html#cb141-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotalPenaltyYards =</span> PenaltyYds<span class="sc">+</span>DefPenaltyYds</span>
-<span id="cb141-6"><a href="residuals.html#cb141-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="residuals.html#cb142-1" aria-hidden="true" tabindex="-1"></a>pfit <span class="ot">&lt;-</span> <span class="fu">lm</span>(differential <span class="sc">~</span> TotalPenaltyYards, <span class="at">data =</span> penalties)</span>
-<span id="cb142-2"><a href="residuals.html#cb142-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pfit)</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="residuals.html#cb161-1" aria-hidden="true" tabindex="-1"></a>penalties <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> </span>
+<span id="cb161-2"><a href="residuals.html#cb161-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb161-3"><a href="residuals.html#cb161-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">differential =</span> TeamScore <span class="sc">-</span> OpponentScore, </span>
+<span id="cb161-4"><a href="residuals.html#cb161-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotalPenalties =</span> Penalties<span class="sc">+</span>DefPenalties,</span>
+<span id="cb161-5"><a href="residuals.html#cb161-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotalPenaltyYards =</span> PenaltyYds<span class="sc">+</span>DefPenaltyYds</span>
+<span id="cb161-6"><a href="residuals.html#cb161-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="residuals.html#cb162-1" aria-hidden="true" tabindex="-1"></a>pfit <span class="ot">&lt;-</span> <span class="fu">lm</span>(differential <span class="sc">~</span> TotalPenaltyYards, <span class="at">data =</span> penalties)</span>
+<span id="cb162-2"><a href="residuals.html#cb162-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pfit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = differential ~ TotalPenaltyYards, data = penalties)
@@ -467,10 +459,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>Our p-value is … 0.8307, which is more than than .05.</li>
 </ul>
 <p>So what we can say about this model is that it’s statistically insignificant and utterly meaningless. Normally, we’d stop right here – why bother going forward with a predictive model that isn’t predictive? But let’s do it anyway.</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="residuals.html#cb144-1" aria-hidden="true" tabindex="-1"></a>penalties<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(pfit)</span>
-<span id="cb144-2"><a href="residuals.html#cb144-2" aria-hidden="true" tabindex="-1"></a>penalties<span class="sc">$</span>residuals <span class="ot">&lt;-</span> <span class="fu">residuals</span>(pfit)</span></code></pre></div>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="residuals.html#cb145-1" aria-hidden="true" tabindex="-1"></a>penalties <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(residuals)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Team, Opponent, Result, TotalPenaltyYards, residuals)</span></code></pre></div>
-<pre><code>## # A tibble: 1,100 x 5
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="residuals.html#cb164-1" aria-hidden="true" tabindex="-1"></a>penalties<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(pfit)</span>
+<span id="cb164-2"><a href="residuals.html#cb164-2" aria-hidden="true" tabindex="-1"></a>penalties<span class="sc">$</span>residuals <span class="ot">&lt;-</span> <span class="fu">residuals</span>(pfit)</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="residuals.html#cb165-1" aria-hidden="true" tabindex="-1"></a>penalties <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(residuals)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Team, Opponent, Result, TotalPenaltyYards, residuals)</span></code></pre></div>
+<pre><code>## # A tibble: 1,100 × 5
 ##    Team          Opponent         Result    TotalPenaltyYards residuals
 ##    &lt;chr&gt;         &lt;chr&gt;            &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;
 ##  1 Clemson       Georgia Tech     W (73-7)                 60      65.0
@@ -522,6 +514,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

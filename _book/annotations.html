@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 34 Annotations | Sports Data Analysis and Visualization</title>
   <meta name="description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 34 Annotations | Sports Data Analysis and Visualization" />
   <meta property="og:type" content="book" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="headlines.html"/>
 <link rel="next" href="finishing-touches.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,10 +51,10 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.3/plotly.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
@@ -134,6 +134,7 @@ code span.va { color: #000000; } /* Variable */
 code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -252,10 +253,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="25.1" data-path="beeswarm-plots.html"><a href="beeswarm-plots.html#a-few-other-options"><i class="fa fa-check"></i><b>25.1</b> A few other options</a></li>
 </ul></li>
 <li class="chapter" data-level="26" data-path="bump-charts.html"><a href="bump-charts.html"><i class="fa fa-check"></i><b>26</b> Bump charts</a></li>
-<li class="chapter" data-level="27" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>27</b> Tables</a>
-<ul>
-<li class="chapter" data-level="27.1" data-path="tables.html"><a href="tables.html#exporting-tables"><i class="fa fa-check"></i><b>27.1</b> Exporting tables</a></li>
-</ul></li>
+<li class="chapter" data-level="27" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>27</b> Tables</a></li>
 <li class="chapter" data-level="28" data-path="facet-wraps.html"><a href="facet-wraps.html"><i class="fa fa-check"></i><b>28</b> Facet wraps</a>
 <ul>
 <li class="chapter" data-level="28.1" data-path="facet-wraps.html"><a href="facet-wraps.html#facet-grid-vs-facet-wraps"><i class="fa fa-check"></i><b>28.1</b> Facet grid vs facet wraps</a></li>
@@ -357,73 +355,67 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Some of the best sports data visualizations start with a provocative question. How about this one: Who really belongs in the college football playoffs and why is it never Notre Dame?</p>
 <p>For this, we’re going to go back to some code we started in Bubble Charts and we’re going to add some annotations to it. Annotations help us draw attention to things, or help the reader understand what they’re looking at. They’re labels on things, be that the teams we want to highlight or regions of the chart or lines or all of those things.</p>
 <p>For this, we’ll need to add a new library to the mix called <code>ggrepel</code>. You’ll need to install it in the console with <code>install.packages("ggrepel")</code>.</p>
-<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="annotations.html#cb493-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb493-2"><a href="annotations.html#cb493-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span></code></pre></div>
+<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="annotations.html#cb551-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb551-2"><a href="annotations.html#cb551-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span></code></pre></div>
 <p>Now we’ll grab the data, each football game in 2020.</p>
 <pre><p><strong>For this walkthrough:</strong></p><p><a href="http://mattwaite.github.io/sportsdatafiles/footballlogs20.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>Now load it.</p>
-<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="annotations.html#cb494-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/footballlogs20.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb552"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb552-1"><a href="annotations.html#cb552-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/footballlogs20.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Rows: 1100 Columns: 54</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr   (8): HomeAway, Opponent, Result, TeamFull, TeamURL, Outcome, Team, Con...
+## dbl  (45): Game, PassingCmp, PassingAtt, PassingPct, PassingYds, PassingTD, ...
+## date  (1): Date</code></pre>
 <pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
-## cols(
-##   .default = col_double(),
-##   Date = col_date(format = &quot;&quot;),
-##   HomeAway = col_character(),
-##   Opponent = col_character(),
-##   Result = col_character(),
-##   TeamFull = col_character(),
-##   TeamURL = col_character(),
-##   Outcome = col_character(),
-##   Team = col_character(),
-##   Conference = col_character()
-## )
-## ℹ Use `spec()` for the full column specifications.</code></pre>
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <p>I’m going to set up a point chart that places teams on two-axes – yards per play on offense on the x axis, and yards per play on defense. We did this in the bubble charts example.</p>
-<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="annotations.html#cb496-1" aria-hidden="true" tabindex="-1"></a>logs <span class="sc">%&gt;%</span> </span>
-<span id="cb496-2"><a href="annotations.html#cb496-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Team, Conference) <span class="sc">%&gt;%</span> </span>
-<span id="cb496-3"><a href="annotations.html#cb496-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb496-4"><a href="annotations.html#cb496-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotalPlays =</span> <span class="fu">sum</span>(OffensivePlays), </span>
-<span id="cb496-5"><a href="annotations.html#cb496-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotalYards =</span> <span class="fu">sum</span>(OffensiveYards), </span>
-<span id="cb496-6"><a href="annotations.html#cb496-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">DefensivePlays =</span> <span class="fu">sum</span>(DefPlays), </span>
-<span id="cb496-7"><a href="annotations.html#cb496-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">DefensiveYards =</span> <span class="fu">sum</span>(DefYards)) <span class="sc">%&gt;%</span> </span>
-<span id="cb496-8"><a href="annotations.html#cb496-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb496-9"><a href="annotations.html#cb496-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">OffensiveYPP =</span> TotalYards<span class="sc">/</span>TotalPlays, </span>
-<span id="cb496-10"><a href="annotations.html#cb496-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">DefensiveYPP =</span> DefensiveYards<span class="sc">/</span>DefensivePlays) <span class="ot">-&gt;</span> ypp</span></code></pre></div>
+<div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb556-1"><a href="annotations.html#cb556-1" aria-hidden="true" tabindex="-1"></a>logs <span class="sc">%&gt;%</span> </span>
+<span id="cb556-2"><a href="annotations.html#cb556-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Team, Conference) <span class="sc">%&gt;%</span> </span>
+<span id="cb556-3"><a href="annotations.html#cb556-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb556-4"><a href="annotations.html#cb556-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotalPlays =</span> <span class="fu">sum</span>(OffensivePlays), </span>
+<span id="cb556-5"><a href="annotations.html#cb556-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotalYards =</span> <span class="fu">sum</span>(OffensiveYards), </span>
+<span id="cb556-6"><a href="annotations.html#cb556-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">DefensivePlays =</span> <span class="fu">sum</span>(DefPlays), </span>
+<span id="cb556-7"><a href="annotations.html#cb556-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">DefensiveYards =</span> <span class="fu">sum</span>(DefYards)) <span class="sc">%&gt;%</span> </span>
+<span id="cb556-8"><a href="annotations.html#cb556-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb556-9"><a href="annotations.html#cb556-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">OffensiveYPP =</span> TotalYards<span class="sc">/</span>TotalPlays, </span>
+<span id="cb556-10"><a href="annotations.html#cb556-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">DefensiveYPP =</span> DefensiveYards<span class="sc">/</span>DefensivePlays) <span class="ot">-&gt;</span> ypp</span></code></pre></div>
 <pre><code>## `summarise()` has grouped output by &#39;Team&#39;. You can override using the `.groups` argument.</code></pre>
 <p>To build the annotations, I want the average for offensive yards per play and defensive yards per play. We’re going to use those as a proxy for quality. If your team averages more yards per play on offense, that’s good. If they average fewer yards per play on defense, that too is good. So that sets up a situation where we have four corners, anchored by good at both and bad at both. The averages will create lines to divide those four corners up.</p>
-<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="annotations.html#cb498-1" aria-hidden="true" tabindex="-1"></a>averages <span class="ot">&lt;-</span> ypp <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">AvgOffYardsPer =</span> <span class="fu">mean</span>(OffensiveYPP), <span class="at">AvgDefYardsPer =</span> <span class="fu">mean</span>(DefensiveYPP))</span>
-<span id="cb498-2"><a href="annotations.html#cb498-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb498-3"><a href="annotations.html#cb498-3" aria-hidden="true" tabindex="-1"></a>averages</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 2
+<div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb558-1"><a href="annotations.html#cb558-1" aria-hidden="true" tabindex="-1"></a>averages <span class="ot">&lt;-</span> ypp <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">AvgOffYardsPer =</span> <span class="fu">mean</span>(OffensiveYPP), <span class="at">AvgDefYardsPer =</span> <span class="fu">mean</span>(DefensiveYPP))</span>
+<span id="cb558-2"><a href="annotations.html#cb558-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb558-3"><a href="annotations.html#cb558-3" aria-hidden="true" tabindex="-1"></a>averages</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 2
 ##   AvgOffYardsPer AvgDefYardsPer
 ##            &lt;dbl&gt;          &lt;dbl&gt;
 ## 1           5.73           5.75</code></pre>
 <p>I also want to highlight playoff teams.</p>
-<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="annotations.html#cb500-1" aria-hidden="true" tabindex="-1"></a>playoff_teams <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Notre Dame&quot;</span>, <span class="st">&quot;Alabama&quot;</span>, <span class="st">&quot;Clemson&quot;</span>, <span class="st">&quot;Ohio State&quot;</span>)</span>
-<span id="cb500-2"><a href="annotations.html#cb500-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb500-3"><a href="annotations.html#cb500-3" aria-hidden="true" tabindex="-1"></a>playoffs <span class="ot">&lt;-</span> ypp <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Team <span class="sc">%in%</span> playoff_teams)</span></code></pre></div>
+<div class="sourceCode" id="cb560"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb560-1"><a href="annotations.html#cb560-1" aria-hidden="true" tabindex="-1"></a>playoff_teams <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Notre Dame&quot;</span>, <span class="st">&quot;Alabama&quot;</span>, <span class="st">&quot;Clemson&quot;</span>, <span class="st">&quot;Ohio State&quot;</span>)</span>
+<span id="cb560-2"><a href="annotations.html#cb560-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb560-3"><a href="annotations.html#cb560-3" aria-hidden="true" tabindex="-1"></a>playoffs <span class="ot">&lt;-</span> ypp <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Team <span class="sc">%in%</span> playoff_teams)</span></code></pre></div>
 <p>Now we create the plot. We have two geom_points, starting with everyone, then playoff teams. I alter the colors on each to separate them. Next, I add a geom_hline to add the horizontal line of my defensive average and a geom_vline for my offensive average. Next, I want to add some text annotations, labeling two corners of my chart (the other two, in my opinion, become obvious). Then, I want to label all the playoff teams. I use <code>geom_text_repel</code> to do that – it’s using the ggrepel library to push the text away from the dots, respective of other labels and other dots. It means you don’t have to move them around so you can read them, or so they don’t cover up the dots.</p>
 <p>The rest is just adding labels and messing with the theme.</p>
-<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="annotations.html#cb501-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb501-2"><a href="annotations.html#cb501-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>ypp, <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP), <span class="at">color=</span><span class="st">&quot;light grey&quot;</span>) <span class="sc">+</span></span>
-<span id="cb501-3"><a href="annotations.html#cb501-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>playoffs, <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP)) <span class="sc">+</span></span>
-<span id="cb501-4"><a href="annotations.html#cb501-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="fl">5.7</span>, <span class="at">color=</span><span class="st">&quot;dark grey&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb501-5"><a href="annotations.html#cb501-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fl">5.7</span>, <span class="at">color=</span><span class="st">&quot;dark grey&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb501-6"><a href="annotations.html#cb501-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fl">6.8</span>, <span class="at">y=</span><span class="dv">5</span>, <span class="at">label=</span><span class="st">&quot;Good Offense, Good Defense&quot;</span>), <span class="at">color=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
-<span id="cb501-7"><a href="annotations.html#cb501-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="dv">5</span>, <span class="at">y=</span><span class="dv">6</span>, <span class="at">label=</span><span class="st">&quot;Bad Defense, Bad Offense&quot;</span>), <span class="at">color=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
-<span id="cb501-8"><a href="annotations.html#cb501-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>playoffs, <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">label=</span>Team)) <span class="sc">+</span></span>
-<span id="cb501-9"><a href="annotations.html#cb501-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Offensive Yards Per Play&quot;</span>, <span class="at">y=</span><span class="st">&quot;Defensive Points Per Play&quot;</span>, <span class="at">title=</span><span class="st">&quot;All four playoff teams are good&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;Each of the four have above average offenses and defenses.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: Sports-Reference.com | By Matt Waite&quot;</span>) <span class="sc">+</span></span>
-<span id="cb501-10"><a href="annotations.html#cb501-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
-<span id="cb501-11"><a href="annotations.html#cb501-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb501-12"><a href="annotations.html#cb501-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb501-13"><a href="annotations.html#cb501-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
-<span id="cb501-14"><a href="annotations.html#cb501-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>),</span>
-<span id="cb501-15"><a href="annotations.html#cb501-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb501-16"><a href="annotations.html#cb501-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb501-17"><a href="annotations.html#cb501-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb501-18"><a href="annotations.html#cb501-18" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb561"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb561-1"><a href="annotations.html#cb561-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb561-2"><a href="annotations.html#cb561-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>ypp, <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP), <span class="at">color=</span><span class="st">&quot;light grey&quot;</span>) <span class="sc">+</span></span>
+<span id="cb561-3"><a href="annotations.html#cb561-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>playoffs, <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP)) <span class="sc">+</span></span>
+<span id="cb561-4"><a href="annotations.html#cb561-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="fl">5.7</span>, <span class="at">color=</span><span class="st">&quot;dark grey&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb561-5"><a href="annotations.html#cb561-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fl">5.7</span>, <span class="at">color=</span><span class="st">&quot;dark grey&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb561-6"><a href="annotations.html#cb561-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fl">6.8</span>, <span class="at">y=</span><span class="dv">5</span>, <span class="at">label=</span><span class="st">&quot;Good Offense, Good Defense&quot;</span>), <span class="at">color=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb561-7"><a href="annotations.html#cb561-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="dv">5</span>, <span class="at">y=</span><span class="dv">6</span>, <span class="at">label=</span><span class="st">&quot;Bad Defense, Bad Offense&quot;</span>), <span class="at">color=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb561-8"><a href="annotations.html#cb561-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>playoffs, <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">label=</span>Team)) <span class="sc">+</span></span>
+<span id="cb561-9"><a href="annotations.html#cb561-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Offensive Yards Per Play&quot;</span>, <span class="at">y=</span><span class="st">&quot;Defensive Points Per Play&quot;</span>, <span class="at">title=</span><span class="st">&quot;All four playoff teams are good&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;Each of the four have above average offenses and defenses.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: Sports-Reference.com | By Matt Waite&quot;</span>) <span class="sc">+</span></span>
+<span id="cb561-10"><a href="annotations.html#cb561-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb561-11"><a href="annotations.html#cb561-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb561-12"><a href="annotations.html#cb561-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb561-13"><a href="annotations.html#cb561-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb561-14"><a href="annotations.html#cb561-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>),</span>
+<span id="cb561-15"><a href="annotations.html#cb561-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb561-16"><a href="annotations.html#cb561-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb561-17"><a href="annotations.html#cb561-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb561-18"><a href="annotations.html#cb561-18" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-374-1.png" width="672" /></p>
 
 </div>
@@ -456,6 +448,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

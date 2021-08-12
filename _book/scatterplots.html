@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 23 Scatterplots | Sports Data Analysis and Visualization</title>
   <meta name="description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 23 Scatterplots | Sports Data Analysis and Visualization" />
   <meta property="og:type" content="book" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="dumbbell-and-lollipop-charts.html"/>
 <link rel="next" href="bubble-charts.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,10 +51,10 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.3/plotly.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
@@ -134,6 +134,7 @@ code span.va { color: #000000; } /* Variable */
 code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -252,10 +253,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="25.1" data-path="beeswarm-plots.html"><a href="beeswarm-plots.html#a-few-other-options"><i class="fa fa-check"></i><b>25.1</b> A few other options</a></li>
 </ul></li>
 <li class="chapter" data-level="26" data-path="bump-charts.html"><a href="bump-charts.html"><i class="fa fa-check"></i><b>26</b> Bump charts</a></li>
-<li class="chapter" data-level="27" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>27</b> Tables</a>
-<ul>
-<li class="chapter" data-level="27.1" data-path="tables.html"><a href="tables.html#exporting-tables"><i class="fa fa-check"></i><b>27.1</b> Exporting tables</a></li>
-</ul></li>
+<li class="chapter" data-level="27" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>27</b> Tables</a></li>
 <li class="chapter" data-level="28" data-path="facet-wraps.html"><a href="facet-wraps.html"><i class="fa fa-check"></i><b>28</b> Facet wraps</a>
 <ul>
 <li class="chapter" data-level="28.1" data-path="facet-wraps.html"><a href="facet-wraps.html#facet-grid-vs-facet-wraps"><i class="fa fa-check"></i><b>28.1</b> Facet grid vs facet wraps</a></li>
@@ -364,52 +362,48 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>Load the tidyverse.</p>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="scatterplots.html#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="scatterplots.html#cb356-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p>And the data.</p>
-<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="scatterplots.html#cb321-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/logs20.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="scatterplots.html#cb357-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/logs20.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Rows: 11097 Columns: 43</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr   (6): HomeAway, Opponent, W_L, Team, Conference, season
+## dbl  (35): Game, TeamScore, OpponentScore, TeamFG, TeamFGA, TeamFGPCT, Team3...
+## lgl   (1): Blank
+## date  (1): Date</code></pre>
 <pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
-## cols(
-##   .default = col_double(),
-##   Date = col_date(format = &quot;&quot;),
-##   HomeAway = col_character(),
-##   Opponent = col_character(),
-##   W_L = col_character(),
-##   Blank = col_logical(),
-##   Team = col_character(),
-##   Conference = col_character(),
-##   season = col_character()
-## )
-## ℹ Use `spec()` for the full column specifications.</code></pre>
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <p>To do this, we need all teams and their season stats. How much, team to team, does a thing matter? That’s the question you’re going to answer.</p>
 <p>In our case, we want to know how much do three point shots made influence wins? How much difference can we explain in wins by knowing how many threes the other team made against you? We’re going to total up the number of threes each team allowed and their season wins in one swoop.</p>
 <p>To do this, we need to use conditional logic – <code>case_when</code> in this case – to determine if the team won or lost the game. In this case, we’ll create a new column called <code>winloss</code>. Case when statements can be read like this: When This is True, Do This. This bit of code – which you can use in a lot of contexts in this class – uses the <code>grepl</code> function to look for the letter W in the W_L column and, if it finds it, makes winloss 1. If it finds an L, it makes it 0. Sum your winloss column and you have your season win total. The reason we have to use <code>grepl</code> to find W or L is because Sports Reference will record overtime wins differently than regular wins. Same with losses.</p>
-<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="scatterplots.html#cb323-1" aria-hidden="true" tabindex="-1"></a>winlosslogs <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> </span>
-<span id="cb323-2"><a href="scatterplots.html#cb323-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb323-3"><a href="scatterplots.html#cb323-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">winloss =</span> <span class="fu">case_when</span>(</span>
-<span id="cb323-4"><a href="scatterplots.html#cb323-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">grepl</span>(<span class="st">&quot;W&quot;</span>, W_L) <span class="sc">~</span> <span class="dv">1</span>, </span>
-<span id="cb323-5"><a href="scatterplots.html#cb323-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">grepl</span>(<span class="st">&quot;L&quot;</span>, W_L) <span class="sc">~</span> <span class="dv">0</span>)</span>
-<span id="cb323-6"><a href="scatterplots.html#cb323-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="scatterplots.html#cb361-1" aria-hidden="true" tabindex="-1"></a>winlosslogs <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> </span>
+<span id="cb361-2"><a href="scatterplots.html#cb361-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb361-3"><a href="scatterplots.html#cb361-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">winloss =</span> <span class="fu">case_when</span>(</span>
+<span id="cb361-4"><a href="scatterplots.html#cb361-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">grepl</span>(<span class="st">&quot;W&quot;</span>, W_L) <span class="sc">~</span> <span class="dv">1</span>, </span>
+<span id="cb361-5"><a href="scatterplots.html#cb361-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">grepl</span>(<span class="st">&quot;L&quot;</span>, W_L) <span class="sc">~</span> <span class="dv">0</span>)</span>
+<span id="cb361-6"><a href="scatterplots.html#cb361-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>Now we can get a dataframe together that gives us the total wins for each team, and the total three point shots made. We’ll call that new dataframe <code>threedef</code>.</p>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="scatterplots.html#cb324-1" aria-hidden="true" tabindex="-1"></a>threedef <span class="ot">&lt;-</span> winlosslogs <span class="sc">%&gt;%</span> </span>
-<span id="cb324-2"><a href="scatterplots.html#cb324-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Team) <span class="sc">%&gt;%</span> </span>
-<span id="cb324-3"><a href="scatterplots.html#cb324-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb324-4"><a href="scatterplots.html#cb324-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Wins =</span> <span class="fu">sum</span>(winloss), </span>
-<span id="cb324-5"><a href="scatterplots.html#cb324-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotalOpp3P =</span> <span class="fu">sum</span>(Opponent3P)</span>
-<span id="cb324-6"><a href="scatterplots.html#cb324-6" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="scatterplots.html#cb362-1" aria-hidden="true" tabindex="-1"></a>threedef <span class="ot">&lt;-</span> winlosslogs <span class="sc">%&gt;%</span> </span>
+<span id="cb362-2"><a href="scatterplots.html#cb362-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Team) <span class="sc">%&gt;%</span> </span>
+<span id="cb362-3"><a href="scatterplots.html#cb362-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb362-4"><a href="scatterplots.html#cb362-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Wins =</span> <span class="fu">sum</span>(winloss), </span>
+<span id="cb362-5"><a href="scatterplots.html#cb362-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotalOpp3P =</span> <span class="fu">sum</span>(Opponent3P)</span>
+<span id="cb362-6"><a href="scatterplots.html#cb362-6" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
 <p>Now let’s look at the scatterplot. With a scatterplot, we put what predicts the thing on the X axis, and the thing being predicted on the Y axis. In this case, X is our three pointers given up, y is our wins.</p>
-<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="scatterplots.html#cb325-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">data=</span>threedef, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins))</span></code></pre></div>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="scatterplots.html#cb363-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">data=</span>threedef, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins))</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-243-1.png" width="672" /></p>
 <p>Let’s talk about this. This seems kind of random, but clustered around the middle and maybe sloping down to the right. That would mean the more threes you give up, the less you win. And that makes intuitive sense. But can we get a better sense of this? Yes, by adding another geom – <code>geom_smooth</code>. It’s identical to our <code>geom_point</code>, but we add a method to the end, which in this case we’re using the linear method or <code>lm</code>.</p>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="scatterplots.html#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb326-2"><a href="scatterplots.html#cb326-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>threedef, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins)) <span class="sc">+</span></span>
-<span id="cb326-3"><a href="scatterplots.html#cb326-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data=</span>threedef, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins), <span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="scatterplots.html#cb364-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb364-2"><a href="scatterplots.html#cb364-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>threedef, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins)) <span class="sc">+</span></span>
+<span id="cb364-3"><a href="scatterplots.html#cb364-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data=</span>threedef, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins), <span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-244-1.png" width="672" /></p>
 <p>So it does slope down to the right like we expect, but this still doesn’t look good to me. It’s very spread out. Which is a clue that you should be asking a question here: how strong of a relationship is this? How much can threes given up explain wins? Can we put some numbers to this?</p>
 <p>Of course we can. We can apply a linear model to this – remember Chapter 9? We’re going to create an object called fit, and then we’re going to put into that object a linear model – <code>lm</code> – and the way to read this is “wins are predicted by opponent threes.” Then we just want the summary of that model.</p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="scatterplots.html#cb328-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(Wins <span class="sc">~</span> TotalOpp3P, <span class="at">data =</span> threedef)</span>
-<span id="cb328-2"><a href="scatterplots.html#cb328-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="scatterplots.html#cb366-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(Wins <span class="sc">~</span> TotalOpp3P, <span class="at">data =</span> threedef)</span>
+<span id="cb366-2"><a href="scatterplots.html#cb366-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Wins ~ TotalOpp3P, data = threedef)
@@ -437,11 +431,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>How many wins did Nebraska have? 7.</p>
 <p>What does that mean? It means that as disappointing a season as it was, Nebraska UNDERPERFORMED according to this model. But our R-squared is only 6.5 percent. Put another way: 93.5 percent of the difference in wins between teams is predicted by something else.</p>
 <p>Where is Nebraska on the plot? We know we can use layering for that.</p>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="scatterplots.html#cb330-1" aria-hidden="true" tabindex="-1"></a>nu <span class="ot">&lt;-</span> threedef <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">&quot;Nebraska Cornhuskers&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="scatterplots.html#cb331-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb331-2"><a href="scatterplots.html#cb331-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>threedef, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins)) <span class="sc">+</span></span>
-<span id="cb331-3"><a href="scatterplots.html#cb331-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data=</span>threedef, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins), <span class="at">method=</span><span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
-<span id="cb331-4"><a href="scatterplots.html#cb331-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins), <span class="at">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="scatterplots.html#cb368-1" aria-hidden="true" tabindex="-1"></a>nu <span class="ot">&lt;-</span> threedef <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">&quot;Nebraska Cornhuskers&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="scatterplots.html#cb369-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb369-2"><a href="scatterplots.html#cb369-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>threedef, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins)) <span class="sc">+</span></span>
+<span id="cb369-3"><a href="scatterplots.html#cb369-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data=</span>threedef, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins), <span class="at">method=</span><span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
+<span id="cb369-4"><a href="scatterplots.html#cb369-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins), <span class="at">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-247-1.png" width="672" /></p>
 
@@ -475,6 +469,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

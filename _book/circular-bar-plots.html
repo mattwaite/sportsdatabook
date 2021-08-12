@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 17 Circular bar plots | Sports Data Analysis and Visualization</title>
   <meta name="description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 17 Circular bar plots | Sports Data Analysis and Visualization" />
   <meta property="og:type" content="book" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="stacked-bar-charts.html"/>
 <link rel="next" href="waffle-charts.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,10 +51,10 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.3/plotly.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
@@ -134,6 +134,7 @@ code span.va { color: #000000; } /* Variable */
 code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -252,10 +253,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="25.1" data-path="beeswarm-plots.html"><a href="beeswarm-plots.html#a-few-other-options"><i class="fa fa-check"></i><b>25.1</b> A few other options</a></li>
 </ul></li>
 <li class="chapter" data-level="26" data-path="bump-charts.html"><a href="bump-charts.html"><i class="fa fa-check"></i><b>26</b> Bump charts</a></li>
-<li class="chapter" data-level="27" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>27</b> Tables</a>
-<ul>
-<li class="chapter" data-level="27.1" data-path="tables.html"><a href="tables.html#exporting-tables"><i class="fa fa-check"></i><b>27.1</b> Exporting tables</a></li>
-</ul></li>
+<li class="chapter" data-level="27" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>27</b> Tables</a></li>
 <li class="chapter" data-level="28" data-path="facet-wraps.html"><a href="facet-wraps.html"><i class="fa fa-check"></i><b>28</b> Facet wraps</a>
 <ul>
 <li class="chapter" data-level="28.1" data-path="facet-wraps.html"><a href="facet-wraps.html#facet-grid-vs-facet-wraps"><i class="fa fa-check"></i><b>28.1</b> Facet grid vs facet wraps</a></li>
@@ -363,53 +361,49 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>Load your libraries.</p>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="circular-bar-plots.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb231-2"><a href="circular-bar-plots.html#cb231-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="circular-bar-plots.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb257-2"><a href="circular-bar-plots.html#cb257-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code></pre></div>
 <p>And load your data.</p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="circular-bar-plots.html#cb232-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/logs20.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="circular-bar-plots.html#cb258-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/logs20.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Rows: 11097 Columns: 43</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr   (6): HomeAway, Opponent, W_L, Team, Conference, season
+## dbl  (35): Game, TeamScore, OpponentScore, TeamFG, TeamFGA, TeamFGPCT, Team3...
+## lgl   (1): Blank
+## date  (1): Date</code></pre>
 <pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
-## cols(
-##   .default = col_double(),
-##   Date = col_date(format = &quot;&quot;),
-##   HomeAway = col_character(),
-##   Opponent = col_character(),
-##   W_L = col_character(),
-##   Blank = col_logical(),
-##   Team = col_character(),
-##   Conference = col_character(),
-##   season = col_character()
-## )
-## ℹ Use `spec()` for the full column specifications.</code></pre>
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <div id="does-november-basketball-matter" class="section level2" number="17.1">
 <h2><span class="header-section-number">17.1</span> Does November basketball matter?</h2>
 <p>So let’s test the notion of November Basketball Doesn’t Matter. What matters in basketball? Let’s start simple: Wins.</p>
 <p>Sports Reference’s win columns are weird, so we need to scan through them and find W and L and we’ll give them numbers using <code>case_when</code>. I’m also going to filter out tournament basketball.</p>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="circular-bar-plots.html#cb234-1" aria-hidden="true" tabindex="-1"></a>winlosslogs <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">winloss =</span> <span class="fu">case_when</span>(</span>
-<span id="cb234-2"><a href="circular-bar-plots.html#cb234-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grepl</span>(<span class="st">&quot;W&quot;</span>, W_L) <span class="sc">~</span> <span class="dv">1</span>, </span>
-<span id="cb234-3"><a href="circular-bar-plots.html#cb234-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grepl</span>(<span class="st">&quot;L&quot;</span>, W_L) <span class="sc">~</span> <span class="dv">0</span>)</span>
-<span id="cb234-4"><a href="circular-bar-plots.html#cb234-4" aria-hidden="true" tabindex="-1"></a>) </span></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="circular-bar-plots.html#cb262-1" aria-hidden="true" tabindex="-1"></a>winlosslogs <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">winloss =</span> <span class="fu">case_when</span>(</span>
+<span id="cb262-2"><a href="circular-bar-plots.html#cb262-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grepl</span>(<span class="st">&quot;W&quot;</span>, W_L) <span class="sc">~</span> <span class="dv">1</span>, </span>
+<span id="cb262-3"><a href="circular-bar-plots.html#cb262-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grepl</span>(<span class="st">&quot;L&quot;</span>, W_L) <span class="sc">~</span> <span class="dv">0</span>)</span>
+<span id="cb262-4"><a href="circular-bar-plots.html#cb262-4" aria-hidden="true" tabindex="-1"></a>) </span></code></pre></div>
 <p>Now we can group by date and conference and sum up the wins. How many wins by day does each conference get?</p>
-<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="circular-bar-plots.html#cb235-1" aria-hidden="true" tabindex="-1"></a>dates <span class="ot">&lt;-</span> winlosslogs <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Date, Conference) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">wins =</span> <span class="fu">sum</span>(winloss))</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="circular-bar-plots.html#cb263-1" aria-hidden="true" tabindex="-1"></a>dates <span class="ot">&lt;-</span> winlosslogs <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Date, Conference) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">wins =</span> <span class="fu">sum</span>(winloss))</span></code></pre></div>
 <pre><code>## `summarise()` has grouped output by &#39;Date&#39;. You can override using the `.groups` argument.</code></pre>
 <p>Earlier, we did stacked bar charts. We have what we need to do that now.</p>
-<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="circular-bar-plots.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">data=</span>dates, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">weight=</span>wins, <span class="at">fill=</span>Conference)) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="circular-bar-plots.html#cb265-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">data=</span>dates, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">weight=</span>wins, <span class="at">fill=</span>Conference)) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-169-1.png" width="672" /></p>
 <p>Eeek. This is already looking not great. But to make it a circular bar chart, we add <code>coord_polar()</code> to our chart.</p>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="circular-bar-plots.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">data=</span>dates, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">weight=</span>wins, <span class="at">fill=</span>Conference)) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">coord_polar</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="circular-bar-plots.html#cb266-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">data=</span>dates, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">weight=</span>wins, <span class="at">fill=</span>Conference)) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">coord_polar</span>()</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-170-1.png" width="672" /></p>
 <p>Based on that, the day is probably too thin a slice, and there’s way too many conferences in college basketball. Let’s group this by months and filter out all but the power five conferences.</p>
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="circular-bar-plots.html#cb239-1" aria-hidden="true" tabindex="-1"></a>p5 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SEC&quot;</span>, <span class="st">&quot;Big Ten&quot;</span>, <span class="st">&quot;Pac-12&quot;</span>, <span class="st">&quot;Big 12&quot;</span>, <span class="st">&quot;ACC&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="circular-bar-plots.html#cb267-1" aria-hidden="true" tabindex="-1"></a>p5 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SEC&quot;</span>, <span class="st">&quot;Big Ten&quot;</span>, <span class="st">&quot;Pac-12&quot;</span>, <span class="st">&quot;Big 12&quot;</span>, <span class="st">&quot;ACC&quot;</span>)</span></code></pre></div>
 <p>To get months, we’re going to use a function in the library <code>lubridate</code> called <code>floor_date</code>, which combine with mutate will give us a field of just months.</p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="circular-bar-plots.html#cb240-1" aria-hidden="true" tabindex="-1"></a>wins <span class="ot">&lt;-</span> winlosslogs <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">floor_date</span>(Date, <span class="at">unit=</span><span class="st">&quot;months&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(month, Conference) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">wins=</span><span class="fu">sum</span>(winloss)) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">%in%</span> p5) </span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="circular-bar-plots.html#cb268-1" aria-hidden="true" tabindex="-1"></a>wins <span class="ot">&lt;-</span> winlosslogs <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">floor_date</span>(Date, <span class="at">unit=</span><span class="st">&quot;months&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(month, Conference) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">wins=</span><span class="fu">sum</span>(winloss)) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">%in%</span> p5) </span></code></pre></div>
 <pre><code>## `summarise()` has grouped output by &#39;month&#39;. You can override using the `.groups` argument.</code></pre>
 <p>Now we can use wins to make our circular bar chart of wins by month in the Power Five.</p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="circular-bar-plots.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">data=</span>wins, <span class="fu">aes</span>(<span class="at">x=</span>month, <span class="at">weight=</span>wins, <span class="at">fill=</span>Conference)) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">coord_polar</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="circular-bar-plots.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">data=</span>wins, <span class="fu">aes</span>(<span class="at">x=</span>month, <span class="at">weight=</span>wins, <span class="at">fill=</span>Conference)) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">coord_polar</span>()</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-173-1.png" width="672" /></p>
 <p>Yikes. That looks a lot like a broken pie chart. So months are too thick of a slice. Let’s use weeks in our floor date to see what that gives us.</p>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="circular-bar-plots.html#cb243-1" aria-hidden="true" tabindex="-1"></a>wins <span class="ot">&lt;-</span> winlosslogs <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">week =</span> <span class="fu">floor_date</span>(Date, <span class="at">unit=</span><span class="st">&quot;weeks&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(week, Conference) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">wins=</span><span class="fu">sum</span>(winloss)) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">%in%</span> p5) </span></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="circular-bar-plots.html#cb271-1" aria-hidden="true" tabindex="-1"></a>wins <span class="ot">&lt;-</span> winlosslogs <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">week =</span> <span class="fu">floor_date</span>(Date, <span class="at">unit=</span><span class="st">&quot;weeks&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(week, Conference) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">wins=</span><span class="fu">sum</span>(winloss)) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">%in%</span> p5) </span></code></pre></div>
 <pre><code>## `summarise()` has grouped output by &#39;week&#39;. You can override using the `.groups` argument.</code></pre>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="circular-bar-plots.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">data=</span>wins, <span class="fu">aes</span>(<span class="at">x=</span>week, <span class="at">weight=</span>wins, <span class="at">fill=</span>Conference)) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">coord_polar</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="circular-bar-plots.html#cb273-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">data=</span>wins, <span class="fu">aes</span>(<span class="at">x=</span>week, <span class="at">weight=</span>wins, <span class="at">fill=</span>Conference)) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">coord_polar</span>()</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-175-1.png" width="672" /></p>
 <p>That looks better. But what does it say? Does November basketball matter? What this is saying is … yeah, it kinda does. The reason? Lots of wins get piled up in November and December, during non-conference play. So if you are a team with NCAA tournament dreams, you need to win games in November to make sure your tournament resume is where it needs to be come March. Does an individual win or loss matter? Probably not. But your record in November does.</p>
 </div>
@@ -423,25 +417,25 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>So what we have to do is invert the process that we’ve done before. We need to group by the Opponent – because the names will be consistent then – and we need to invert the wins and losses. A win in the W_L column is a win for the Team. That means each loss in the W_L column is a WIN for the Opponent.</p>
 <p>Once we invert, the data looks very similar to what we’ve done before. One other thing: I noticed there’s some tournament games in here, so the filter at the end strips them out.</p>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="circular-bar-plots.html#cb246-1" aria-hidden="true" tabindex="-1"></a>oppwinlosslogs <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">winloss =</span> <span class="fu">case_when</span>(</span>
-<span id="cb246-2"><a href="circular-bar-plots.html#cb246-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grepl</span>(<span class="st">&quot;W&quot;</span>, W_L) <span class="sc">~</span> <span class="dv">0</span>, </span>
-<span id="cb246-3"><a href="circular-bar-plots.html#cb246-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grepl</span>(<span class="st">&quot;L&quot;</span>, W_L) <span class="sc">~</span> <span class="dv">1</span>)</span>
-<span id="cb246-4"><a href="circular-bar-plots.html#cb246-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Date <span class="sc">&lt;</span> <span class="st">&quot;2020-03-19&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="circular-bar-plots.html#cb274-1" aria-hidden="true" tabindex="-1"></a>oppwinlosslogs <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">winloss =</span> <span class="fu">case_when</span>(</span>
+<span id="cb274-2"><a href="circular-bar-plots.html#cb274-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grepl</span>(<span class="st">&quot;W&quot;</span>, W_L) <span class="sc">~</span> <span class="dv">0</span>, </span>
+<span id="cb274-3"><a href="circular-bar-plots.html#cb274-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grepl</span>(<span class="st">&quot;L&quot;</span>, W_L) <span class="sc">~</span> <span class="dv">1</span>)</span>
+<span id="cb274-4"><a href="circular-bar-plots.html#cb274-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Date <span class="sc">&lt;</span> <span class="st">&quot;2020-03-19&quot;</span>)</span></code></pre></div>
 <p>So now we have a dataframe called oppwinlosslogs that has an inverted winloss column. So now we can group by the Opponent and sum the wins and it will tell us how many games the Opponent won. We can also count the wins and get a winning percentage.</p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="circular-bar-plots.html#cb247-1" aria-hidden="true" tabindex="-1"></a>oppwinlosslogs <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Opponent) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">games=</span><span class="fu">n</span>(), <span class="at">wins=</span><span class="fu">sum</span>(winloss)) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">winpct =</span> wins<span class="sc">/</span>games) <span class="ot">-&gt;</span> opprecord</span></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="circular-bar-plots.html#cb275-1" aria-hidden="true" tabindex="-1"></a>oppwinlosslogs <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Opponent) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">games=</span><span class="fu">n</span>(), <span class="at">wins=</span><span class="fu">sum</span>(winloss)) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">winpct =</span> wins<span class="sc">/</span>games) <span class="ot">-&gt;</span> opprecord</span></code></pre></div>
 <p>Now we have a dataframe of 659 opponent winning records. Wait, what? There’s 353 teams in major college basketball, so why 659? If you look through it, there’s a bunch of teams playing lower level teams. Given that they are lower level, they’re likely cannon fodder and will lose the game, and we’re going to filter them out in a minute.</p>
 <p>Now we can join the opponent winning percentage to our winlosslogs data so we can answer our question about quality wins.</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="circular-bar-plots.html#cb248-1" aria-hidden="true" tabindex="-1"></a>winlosslogs <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">winloss =</span> <span class="fu">case_when</span>(</span>
-<span id="cb248-2"><a href="circular-bar-plots.html#cb248-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grepl</span>(<span class="st">&quot;W&quot;</span>, W_L) <span class="sc">~</span> <span class="dv">1</span>, </span>
-<span id="cb248-3"><a href="circular-bar-plots.html#cb248-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grepl</span>(<span class="st">&quot;L&quot;</span>, W_L) <span class="sc">~</span> <span class="dv">0</span>)</span>
-<span id="cb248-4"><a href="circular-bar-plots.html#cb248-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Date <span class="sc">&lt;</span> <span class="st">&quot;2020-03-19&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="circular-bar-plots.html#cb249-1" aria-hidden="true" tabindex="-1"></a>winlosslogs <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(opprecord, <span class="at">by=</span>(<span class="st">&quot;Opponent&quot;</span>)) <span class="ot">-&gt;</span> winswithopppct</span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="circular-bar-plots.html#cb276-1" aria-hidden="true" tabindex="-1"></a>winlosslogs <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">winloss =</span> <span class="fu">case_when</span>(</span>
+<span id="cb276-2"><a href="circular-bar-plots.html#cb276-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grepl</span>(<span class="st">&quot;W&quot;</span>, W_L) <span class="sc">~</span> <span class="dv">1</span>, </span>
+<span id="cb276-3"><a href="circular-bar-plots.html#cb276-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grepl</span>(<span class="st">&quot;L&quot;</span>, W_L) <span class="sc">~</span> <span class="dv">0</span>)</span>
+<span id="cb276-4"><a href="circular-bar-plots.html#cb276-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Date <span class="sc">&lt;</span> <span class="st">&quot;2020-03-19&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="circular-bar-plots.html#cb277-1" aria-hidden="true" tabindex="-1"></a>winlosslogs <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(opprecord, <span class="at">by=</span>(<span class="st">&quot;Opponent&quot;</span>)) <span class="ot">-&gt;</span> winswithopppct</span></code></pre></div>
 <p>Now that we have a table called winswithopppct, we can filter out teams non power 5 teams and teams that won less than 60 percent of their games and run the same calculations in the book.</p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="circular-bar-plots.html#cb250-1" aria-hidden="true" tabindex="-1"></a>p5 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SEC&quot;</span>, <span class="st">&quot;Big Ten&quot;</span>, <span class="st">&quot;Pac-12&quot;</span>, <span class="st">&quot;Big 12&quot;</span>, <span class="st">&quot;ACC&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="circular-bar-plots.html#cb251-1" aria-hidden="true" tabindex="-1"></a>winswithopppct <span class="sc">%&gt;%</span> <span class="fu">filter</span>(winpct <span class="sc">&gt;</span> .<span class="dv">6</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">week =</span> <span class="fu">floor_date</span>(Date, <span class="at">unit=</span><span class="st">&quot;weeks&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(week, Conference) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">wins=</span><span class="fu">sum</span>(winloss)) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">%in%</span> p5) <span class="ot">-&gt;</span> qualitywins</span></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="circular-bar-plots.html#cb278-1" aria-hidden="true" tabindex="-1"></a>p5 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SEC&quot;</span>, <span class="st">&quot;Big Ten&quot;</span>, <span class="st">&quot;Pac-12&quot;</span>, <span class="st">&quot;Big 12&quot;</span>, <span class="st">&quot;ACC&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="circular-bar-plots.html#cb279-1" aria-hidden="true" tabindex="-1"></a>winswithopppct <span class="sc">%&gt;%</span> <span class="fu">filter</span>(winpct <span class="sc">&gt;</span> .<span class="dv">6</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">week =</span> <span class="fu">floor_date</span>(Date, <span class="at">unit=</span><span class="st">&quot;weeks&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(week, Conference) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">wins=</span><span class="fu">sum</span>(winloss)) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">%in%</span> p5) <span class="ot">-&gt;</span> qualitywins</span></code></pre></div>
 <pre><code>## `summarise()` has grouped output by &#39;week&#39;. You can override using the `.groups` argument.</code></pre>
 <p>Now with our dataframe called qualitywins, we can chart it again.</p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="circular-bar-plots.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">data=</span>qualitywins, <span class="fu">aes</span>(<span class="at">x=</span>week, <span class="at">weight=</span>wins, <span class="at">fill=</span>Conference)) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">coord_polar</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="circular-bar-plots.html#cb281-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">data=</span>qualitywins, <span class="fu">aes</span>(<span class="at">x=</span>week, <span class="at">weight=</span>wins, <span class="at">fill=</span>Conference)) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">coord_polar</span>()</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-182-1.png" width="672" /></p>
 <p>Look at this chart and compare it to the first one.</p>
 
@@ -476,6 +470,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

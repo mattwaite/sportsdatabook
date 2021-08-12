@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 Transforming data | Sports Data Analysis and Visualization</title>
   <meta name="description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 Transforming data | Sports Data Analysis and Visualization" />
   <meta property="og:type" content="book" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="filters-and-selections.html"/>
 <link rel="next" href="significance-tests.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,10 +51,10 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.3/plotly.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
@@ -134,6 +134,7 @@ code span.va { color: #000000; } /* Variable */
 code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -252,10 +253,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="25.1" data-path="beeswarm-plots.html"><a href="beeswarm-plots.html#a-few-other-options"><i class="fa fa-check"></i><b>25.1</b> A few other options</a></li>
 </ul></li>
 <li class="chapter" data-level="26" data-path="bump-charts.html"><a href="bump-charts.html"><i class="fa fa-check"></i><b>26</b> Bump charts</a></li>
-<li class="chapter" data-level="27" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>27</b> Tables</a>
-<ul>
-<li class="chapter" data-level="27.1" data-path="tables.html"><a href="tables.html#exporting-tables"><i class="fa fa-check"></i><b>27.1</b> Exporting tables</a></li>
-</ul></li>
+<li class="chapter" data-level="27" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>27</b> Tables</a></li>
 <li class="chapter" data-level="28" data-path="facet-wraps.html"><a href="facet-wraps.html"><i class="fa fa-check"></i><b>28</b> Facet wraps</a>
 <ul>
 <li class="chapter" data-level="28.1" data-path="facet-wraps.html"><a href="facet-wraps.html#facet-grid-vs-facet-wraps"><i class="fa fa-check"></i><b>28.1</b> Facet grid vs facet wraps</a></li>
@@ -362,23 +360,19 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>First we need some libraries.</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="transforming-data.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="transforming-data.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p>Now we’ll load the data.</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="transforming-data.html#cb71-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;data/attendance.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="transforming-data.html#cb81-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;data/attendance.csv&#39;</span>)</span></code></pre></div>
+<pre><code>## Rows: 150 Columns: 8</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (2): Institution, Conference
+## dbl (6): 2013, 2014, 2015, 2016, 2017, 2018</code></pre>
 <pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
-## cols(
-##   Institution = col_character(),
-##   Conference = col_character(),
-##   `2013` = col_double(),
-##   `2014` = col_double(),
-##   `2015` = col_double(),
-##   `2016` = col_double(),
-##   `2017` = col_double(),
-##   `2018` = col_double()
-## )</code></pre>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="transforming-data.html#cb73-1" aria-hidden="true" tabindex="-1"></a>attendance</span></code></pre></div>
-<pre><code>## # A tibble: 150 x 8
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="transforming-data.html#cb85-1" aria-hidden="true" tabindex="-1"></a>attendance</span></code></pre></div>
+<pre><code>## # A tibble: 150 × 8
 ##    Institution     Conference      `2013` `2014` `2015` `2016` `2017` `2018`
 ##    &lt;chr&gt;           &lt;chr&gt;            &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
 ##  1 Air Force       MWC             228562 168967 156158 177519 174924 166205
@@ -394,8 +388,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## # … with 140 more rows</code></pre>
 <p>So as you can see, each row represents a school, and then each column represents a year. This is great for calculating the percent change – we can subtract a column from a column and divide by that column. But later, when we want to chart each school’s attendance over the years, we have to have each row be one team for one year. Nebraska in 2013, then Nebraska in 2014, and Nebraska in 2015 and so on.</p>
 <p>To do that, we use <code>pivot_longer</code> because we’re making wide data long. Since all of the columns we want to make rows start with 20, we can use that in our <code>cols</code> directive. Then we give that column a name – Year – and the values for each year need a name too. Those are the attendance figure. We can see right away how this works.</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="transforming-data.html#cb75-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;20&quot;</span>), <span class="at">names_to =</span> <span class="st">&quot;Year&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;Attendance&quot;</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 900 x 4
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="transforming-data.html#cb87-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;20&quot;</span>), <span class="at">names_to =</span> <span class="st">&quot;Year&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;Attendance&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 900 × 4
 ##    Institution Conference Year  Attendance
 ##    &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt;
 ##  1 Air Force   MWC        2013      228562
@@ -416,10 +410,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Why do any of this?</p>
 <p>In some cases, you’re going to be given long data and you need to calculate some metric using two of the years – a percent change for instance. So you’ll need to make the data wide to do that. You might then have to re-lengthen the data now with the percent change. Some project require you to do all kinds of flexing like this. It just depends on the data.</p>
 <p>So let’s take what we made above and turn it back into wide data.</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="transforming-data.html#cb77-1" aria-hidden="true" tabindex="-1"></a>longdata <span class="ot">&lt;-</span> attendance <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;20&quot;</span>), <span class="at">names_to =</span> <span class="st">&quot;Year&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;Attendance&quot;</span>)</span>
-<span id="cb77-2"><a href="transforming-data.html#cb77-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-3"><a href="transforming-data.html#cb77-3" aria-hidden="true" tabindex="-1"></a>longdata</span></code></pre></div>
-<pre><code>## # A tibble: 900 x 4
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="transforming-data.html#cb89-1" aria-hidden="true" tabindex="-1"></a>longdata <span class="ot">&lt;-</span> attendance <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;20&quot;</span>), <span class="at">names_to =</span> <span class="st">&quot;Year&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;Attendance&quot;</span>)</span>
+<span id="cb89-2"><a href="transforming-data.html#cb89-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-3"><a href="transforming-data.html#cb89-3" aria-hidden="true" tabindex="-1"></a>longdata</span></code></pre></div>
+<pre><code>## # A tibble: 900 × 4
 ##    Institution Conference Year  Attendance
 ##    &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt;
 ##  1 Air Force   MWC        2013      228562
@@ -434,8 +428,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 10 Akron       MAC        2016       62021
 ## # … with 890 more rows</code></pre>
 <p>To <code>pivot_wider</code>, we just need to say where our column names are coming from – the Year – and where the data under it should come from – Attendance.</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="transforming-data.html#cb79-1" aria-hidden="true" tabindex="-1"></a>longdata <span class="sc">%&gt;%</span> <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Year, <span class="at">values_from =</span> Attendance)</span></code></pre></div>
-<pre><code>## # A tibble: 150 x 8
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="transforming-data.html#cb91-1" aria-hidden="true" tabindex="-1"></a>longdata <span class="sc">%&gt;%</span> <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Year, <span class="at">values_from =</span> Attendance)</span></code></pre></div>
+<pre><code>## # A tibble: 150 × 8
 ##    Institution     Conference      `2013` `2014` `2015` `2016` `2017` `2018`
 ##    &lt;chr&gt;           &lt;chr&gt;            &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
 ##  1 Air Force       MWC             228562 168967 156158 177519 174924 166205
@@ -456,23 +450,23 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>This matters because certain visualization types need wide or long data. A significant hurdle you will face for the rest of the semester is getting the data in the right format for what you want to do.</p>
 <p>So let me walk you through an example using this data.</p>
 <p>Let’s look at Nebraska’s attendance over the time period. In order to do that, I need long data because that’s what the charting library, <code>ggplot2</code>, needs. You’re going to learn a lot more about ggplot later.</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="transforming-data.html#cb81-1" aria-hidden="true" tabindex="-1"></a>nebraska <span class="ot">&lt;-</span> longdata <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">&quot;Nebraska&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="transforming-data.html#cb93-1" aria-hidden="true" tabindex="-1"></a>nebraska <span class="ot">&lt;-</span> longdata <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">&quot;Nebraska&quot;</span>)</span></code></pre></div>
 <p>Now that we have long data for just Nebraska, we can chart it.</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="transforming-data.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nebraska, <span class="fu">aes</span>(<span class="at">x=</span>Year, <span class="at">y=</span>Attendance, <span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span> </span>
-<span id="cb82-2"><a href="transforming-data.html#cb82-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
-<span id="cb82-3"><a href="transforming-data.html#cb82-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma) <span class="sc">+</span> </span>
-<span id="cb82-4"><a href="transforming-data.html#cb82-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Year&quot;</span>, <span class="at">y=</span><span class="st">&quot;Attendance&quot;</span>, <span class="at">title=</span><span class="st">&quot;We&#39;ll all stick together?&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;It&#39;s not as bad as you think -- they widened the seats, cutting the number.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>, <span class="at">color =</span> <span class="st">&quot;Outcome&quot;</span>) <span class="sc">+</span></span>
-<span id="cb82-5"><a href="transforming-data.html#cb82-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
-<span id="cb82-6"><a href="transforming-data.html#cb82-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb82-7"><a href="transforming-data.html#cb82-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb82-8"><a href="transforming-data.html#cb82-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
-<span id="cb82-9"><a href="transforming-data.html#cb82-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb82-10"><a href="transforming-data.html#cb82-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>),</span>
-<span id="cb82-11"><a href="transforming-data.html#cb82-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb82-12"><a href="transforming-data.html#cb82-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb82-13"><a href="transforming-data.html#cb82-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb82-14"><a href="transforming-data.html#cb82-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position=</span><span class="st">&quot;bottom&quot;</span></span>
-<span id="cb82-15"><a href="transforming-data.html#cb82-15" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="transforming-data.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nebraska, <span class="fu">aes</span>(<span class="at">x=</span>Year, <span class="at">y=</span>Attendance, <span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb94-2"><a href="transforming-data.html#cb94-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb94-3"><a href="transforming-data.html#cb94-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma) <span class="sc">+</span> </span>
+<span id="cb94-4"><a href="transforming-data.html#cb94-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Year&quot;</span>, <span class="at">y=</span><span class="st">&quot;Attendance&quot;</span>, <span class="at">title=</span><span class="st">&quot;We&#39;ll all stick together?&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;It&#39;s not as bad as you think -- they widened the seats, cutting the number.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>, <span class="at">color =</span> <span class="st">&quot;Outcome&quot;</span>) <span class="sc">+</span></span>
+<span id="cb94-5"><a href="transforming-data.html#cb94-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb94-6"><a href="transforming-data.html#cb94-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb94-7"><a href="transforming-data.html#cb94-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb94-8"><a href="transforming-data.html#cb94-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb94-9"><a href="transforming-data.html#cb94-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb94-10"><a href="transforming-data.html#cb94-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>),</span>
+<span id="cb94-11"><a href="transforming-data.html#cb94-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb94-12"><a href="transforming-data.html#cb94-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb94-13"><a href="transforming-data.html#cb94-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb94-14"><a href="transforming-data.html#cb94-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position=</span><span class="st">&quot;bottom&quot;</span></span>
+<span id="cb94-15"><a href="transforming-data.html#cb94-15" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
 
 </div>
@@ -506,6 +500,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

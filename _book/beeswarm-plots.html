@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 25 Beeswarm plots | Sports Data Analysis and Visualization</title>
   <meta name="description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 25 Beeswarm plots | Sports Data Analysis and Visualization" />
   <meta property="og:type" content="book" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="bubble-charts.html"/>
 <link rel="next" href="bump-charts.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,10 +51,10 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.3/plotly.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
@@ -134,6 +134,7 @@ code span.va { color: #000000; } /* Variable */
 code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -252,10 +253,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="25.1" data-path="beeswarm-plots.html"><a href="beeswarm-plots.html#a-few-other-options"><i class="fa fa-check"></i><b>25.1</b> A few other options</a></li>
 </ul></li>
 <li class="chapter" data-level="26" data-path="bump-charts.html"><a href="bump-charts.html"><i class="fa fa-check"></i><b>26</b> Bump charts</a></li>
-<li class="chapter" data-level="27" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>27</b> Tables</a>
-<ul>
-<li class="chapter" data-level="27.1" data-path="tables.html"><a href="tables.html#exporting-tables"><i class="fa fa-check"></i><b>27.1</b> Exporting tables</a></li>
-</ul></li>
+<li class="chapter" data-level="27" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>27</b> Tables</a></li>
 <li class="chapter" data-level="28" data-path="facet-wraps.html"><a href="facet-wraps.html"><i class="fa fa-check"></i><b>28</b> Facet wraps</a>
 <ul>
 <li class="chapter" data-level="28.1" data-path="facet-wraps.html"><a href="facet-wraps.html#facet-grid-vs-facet-wraps"><i class="fa fa-check"></i><b>28.1</b> Facet grid vs facet wraps</a></li>
@@ -358,107 +356,101 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>An example will help.</p>
 <p>First things first: Install ggbeeswarm with <code>install.packages("ggbeeswarm")</code></p>
 <p>Like ggalt and ggrepel, ggbeeswarm adds a couple new geoms to ggplot. We’ll need to load it, the tidyverse and, for later, ggrepel.</p>
-<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="beeswarm-plots.html#cb350-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb350-2"><a href="beeswarm-plots.html#cb350-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggbeeswarm)</span>
-<span id="cb350-3"><a href="beeswarm-plots.html#cb350-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="beeswarm-plots.html#cb390-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb390-2"><a href="beeswarm-plots.html#cb390-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggbeeswarm)</span>
+<span id="cb390-3"><a href="beeswarm-plots.html#cb390-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span></code></pre></div>
 <p>Another bit of setup: we need to set the seed for the random number generator. The library “jitters” the dots in the beeswarm randomly. If we don’t set the seed, we’ll get different results each time. Setting the seed means we get the same look.</p>
-<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="beeswarm-plots.html#cb351-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="beeswarm-plots.html#cb391-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span></code></pre></div>
 <p>So let’s look at last year’s basketball team as a group of shooters. The team was disappointing – we know that – but what kind of a problem is it going to be that we’re returning basically no one from it?</p>
 <pre><p><strong>For this walkthrough:</strong></p><p><a href="http://mattwaite.github.io/sportsdatafiles/players20.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>First we’ll load our player data.</p>
-<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="beeswarm-plots.html#cb352-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/players20.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="beeswarm-plots.html#cb392-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/players20.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Rows: 5452 Columns: 57</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr  (8): Team, Player, Class, Pos, Height, Hometown, High School, Summary
+## dbl (49): #, Weight, Rk.x, G, GS, MP, FG, FGA, FG%, 2P, 2PA, 2P%, 3P, 3PA, 3...</code></pre>
 <pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
-## cols(
-##   .default = col_double(),
-##   Team = col_character(),
-##   Player = col_character(),
-##   Class = col_character(),
-##   Pos = col_character(),
-##   Height = col_character(),
-##   Hometown = col_character(),
-##   `High School` = col_character(),
-##   Summary = col_character()
-## )
-## ℹ Use `spec()` for the full column specifications.</code></pre>
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <p>We know this data has a lot of players who didn’t play, so let’s get rid of them.</p>
-<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="beeswarm-plots.html#cb354-1" aria-hidden="true" tabindex="-1"></a>activeplayers <span class="ot">&lt;-</span> players <span class="sc">%&gt;%</span> <span class="fu">filter</span>(MP<span class="sc">&gt;</span><span class="dv">0</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="beeswarm-plots.html#cb396-1" aria-hidden="true" tabindex="-1"></a>activeplayers <span class="ot">&lt;-</span> players <span class="sc">%&gt;%</span> <span class="fu">filter</span>(MP<span class="sc">&gt;</span><span class="dv">0</span>) </span></code></pre></div>
 <p>Now let’s ask what makes a good shooter? The best measure, in my book, is True Shooting Percentage. It’s a combination of weighted field goal shooting – to account for three pointers – and free throws. Our data has <code>TS%</code>, but if we include <em>all</em> players, we’ll have too many dots. So let’s narrow it down. A decent tool for cutoffs? Field goal attempts. Let’s get a quick look at them.</p>
-<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="beeswarm-plots.html#cb355-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(activeplayers<span class="sc">$</span>FGA)</span></code></pre></div>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="beeswarm-plots.html#cb397-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(activeplayers<span class="sc">$</span>FGA)</span></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##    0.00   23.25   96.00  121.90  197.00  611.00</code></pre>
 <p>The median number of shots is 96, but we only really care about good ones. So let’s use 197 attempts as our cutoff.</p>
-<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="beeswarm-plots.html#cb357-1" aria-hidden="true" tabindex="-1"></a>shooters <span class="ot">&lt;-</span> activeplayers <span class="sc">%&gt;%</span> <span class="fu">filter</span>(FGA <span class="sc">&gt;</span> <span class="dv">197</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="beeswarm-plots.html#cb399-1" aria-hidden="true" tabindex="-1"></a>shooters <span class="ot">&lt;-</span> activeplayers <span class="sc">%&gt;%</span> <span class="fu">filter</span>(FGA <span class="sc">&gt;</span> <span class="dv">197</span>)</span></code></pre></div>
 <p>Now we’ve got enough for a beeswarm plot. It works very much like you would expect – the group value is the x, the number is the y. We’re going to beeswarm by position, and the dots will be true shooting percentage.</p>
-<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="beeswarm-plots.html#cb358-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_beeswarm</span>(<span class="at">data=</span>shooters, <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;grey&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="beeswarm-plots.html#cb400-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_beeswarm</span>(<span class="at">data=</span>shooters, <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;grey&quot;</span>)</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-270-1.png" width="672" /></p>
 <p>You can see that there’s a lot fewer centers who have attempted more than 197 shots than guards, but then there’s a lot more guards in college basketball than anything else. In the guards column, note that fat width of the swarm is between .5 and .55. So that means most guards who shoot more than 197 shots end up in that area. They’re the average shooter at that level. You can see, some are better, some are worse.</p>
 <p>So where are the Nebraska players in that mix?</p>
 <p>We’ll filter players on Nebraska who meet our criteria.</p>
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="beeswarm-plots.html#cb359-1" aria-hidden="true" tabindex="-1"></a>nu <span class="ot">&lt;-</span> players <span class="sc">%&gt;%</span> </span>
-<span id="cb359-2"><a href="beeswarm-plots.html#cb359-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">&quot;Nebraska Cornhuskers&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb359-3"><a href="beeswarm-plots.html#cb359-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(FGA<span class="sc">&gt;</span><span class="dv">197</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb359-4"><a href="beeswarm-plots.html#cb359-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="st">`</span><span class="at">TS%</span><span class="st">`</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="beeswarm-plots.html#cb401-1" aria-hidden="true" tabindex="-1"></a>nu <span class="ot">&lt;-</span> players <span class="sc">%&gt;%</span> </span>
+<span id="cb401-2"><a href="beeswarm-plots.html#cb401-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">&quot;Nebraska Cornhuskers&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb401-3"><a href="beeswarm-plots.html#cb401-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(FGA<span class="sc">&gt;</span><span class="dv">197</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb401-4"><a href="beeswarm-plots.html#cb401-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="st">`</span><span class="at">TS%</span><span class="st">`</span>))</span></code></pre></div>
 <p>Four Cornhuskers took more than 197 shots. Number returning this season? Zero.</p>
 <p>That’s … not a good start. Nothing coming back. But how good are they as true shooters?</p>
 <p>When you add another beeswarm, we need to pass another element in – we need to tell it if we’re grouping on the x value. Not sure why, but you’ll get a warning if you don’t.</p>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="beeswarm-plots.html#cb360-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb360-2"><a href="beeswarm-plots.html#cb360-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_beeswarm</span>(</span>
-<span id="cb360-3"><a href="beeswarm-plots.html#cb360-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>shooters, </span>
-<span id="cb360-4"><a href="beeswarm-plots.html#cb360-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">groupOnX=</span><span class="cn">TRUE</span>, </span>
-<span id="cb360-5"><a href="beeswarm-plots.html#cb360-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb360-6"><a href="beeswarm-plots.html#cb360-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_beeswarm</span>(</span>
-<span id="cb360-7"><a href="beeswarm-plots.html#cb360-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>nu, </span>
-<span id="cb360-8"><a href="beeswarm-plots.html#cb360-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">groupOnX=</span><span class="cn">TRUE</span>, </span>
-<span id="cb360-9"><a href="beeswarm-plots.html#cb360-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="beeswarm-plots.html#cb402-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb402-2"><a href="beeswarm-plots.html#cb402-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_beeswarm</span>(</span>
+<span id="cb402-3"><a href="beeswarm-plots.html#cb402-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>shooters, </span>
+<span id="cb402-4"><a href="beeswarm-plots.html#cb402-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">groupOnX=</span><span class="cn">TRUE</span>, </span>
+<span id="cb402-5"><a href="beeswarm-plots.html#cb402-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb402-6"><a href="beeswarm-plots.html#cb402-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_beeswarm</span>(</span>
+<span id="cb402-7"><a href="beeswarm-plots.html#cb402-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>nu, </span>
+<span id="cb402-8"><a href="beeswarm-plots.html#cb402-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">groupOnX=</span><span class="cn">TRUE</span>, </span>
+<span id="cb402-9"><a href="beeswarm-plots.html#cb402-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-272-1.png" width="672" />
 Ooof. Best we can muster is middle of the fat part. Who is that?</p>
 <p>This is where we can use ggrepel. Let’s add a text layer and label the dots.</p>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="beeswarm-plots.html#cb361-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb361-2"><a href="beeswarm-plots.html#cb361-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_beeswarm</span>(</span>
-<span id="cb361-3"><a href="beeswarm-plots.html#cb361-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>shooters, </span>
-<span id="cb361-4"><a href="beeswarm-plots.html#cb361-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">groupOnX=</span><span class="cn">TRUE</span>, </span>
-<span id="cb361-5"><a href="beeswarm-plots.html#cb361-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb361-6"><a href="beeswarm-plots.html#cb361-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_beeswarm</span>(</span>
-<span id="cb361-7"><a href="beeswarm-plots.html#cb361-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>nu, </span>
-<span id="cb361-8"><a href="beeswarm-plots.html#cb361-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">groupOnX=</span><span class="cn">TRUE</span>, </span>
-<span id="cb361-9"><a href="beeswarm-plots.html#cb361-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb361-10"><a href="beeswarm-plots.html#cb361-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(</span>
-<span id="cb361-11"><a href="beeswarm-plots.html#cb361-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>nu, </span>
-<span id="cb361-12"><a href="beeswarm-plots.html#cb361-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>, <span class="at">label=</span>Player))</span></code></pre></div>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="beeswarm-plots.html#cb403-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb403-2"><a href="beeswarm-plots.html#cb403-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_beeswarm</span>(</span>
+<span id="cb403-3"><a href="beeswarm-plots.html#cb403-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>shooters, </span>
+<span id="cb403-4"><a href="beeswarm-plots.html#cb403-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">groupOnX=</span><span class="cn">TRUE</span>, </span>
+<span id="cb403-5"><a href="beeswarm-plots.html#cb403-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb403-6"><a href="beeswarm-plots.html#cb403-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_beeswarm</span>(</span>
+<span id="cb403-7"><a href="beeswarm-plots.html#cb403-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>nu, </span>
+<span id="cb403-8"><a href="beeswarm-plots.html#cb403-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">groupOnX=</span><span class="cn">TRUE</span>, </span>
+<span id="cb403-9"><a href="beeswarm-plots.html#cb403-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb403-10"><a href="beeswarm-plots.html#cb403-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(</span>
+<span id="cb403-11"><a href="beeswarm-plots.html#cb403-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>nu, </span>
+<span id="cb403-12"><a href="beeswarm-plots.html#cb403-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>, <span class="at">label=</span>Player))</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-273-1.png" width="672" /></p>
 <p>So Haanif Cheatham was our best shooter by true shooting percentage. The rest were below average shooters for that volume of shooting.</p>
 <div id="a-few-other-options" class="section level2" number="25.1">
 <h2><span class="header-section-number">25.1</span> A few other options</h2>
 <p>The ggbeeswarm library has a couple of variations on the geom_beeswarm that may work better for your application. They are <code>geom_quasirandom</code> and <code>geom_jitter</code>.</p>
 <p>There’s not a lot to change from our example to see what they do.</p>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="beeswarm-plots.html#cb362-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb362-2"><a href="beeswarm-plots.html#cb362-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_quasirandom</span>(</span>
-<span id="cb362-3"><a href="beeswarm-plots.html#cb362-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>shooters, </span>
-<span id="cb362-4"><a href="beeswarm-plots.html#cb362-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">groupOnX=</span><span class="cn">TRUE</span>, </span>
-<span id="cb362-5"><a href="beeswarm-plots.html#cb362-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb362-6"><a href="beeswarm-plots.html#cb362-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_quasirandom</span>(</span>
-<span id="cb362-7"><a href="beeswarm-plots.html#cb362-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>nu, </span>
-<span id="cb362-8"><a href="beeswarm-plots.html#cb362-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">groupOnX=</span><span class="cn">TRUE</span>, </span>
-<span id="cb362-9"><a href="beeswarm-plots.html#cb362-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb362-10"><a href="beeswarm-plots.html#cb362-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(</span>
-<span id="cb362-11"><a href="beeswarm-plots.html#cb362-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>nu, </span>
-<span id="cb362-12"><a href="beeswarm-plots.html#cb362-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>, <span class="at">label=</span>Player))</span></code></pre></div>
+<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="beeswarm-plots.html#cb404-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb404-2"><a href="beeswarm-plots.html#cb404-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_quasirandom</span>(</span>
+<span id="cb404-3"><a href="beeswarm-plots.html#cb404-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>shooters, </span>
+<span id="cb404-4"><a href="beeswarm-plots.html#cb404-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">groupOnX=</span><span class="cn">TRUE</span>, </span>
+<span id="cb404-5"><a href="beeswarm-plots.html#cb404-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb404-6"><a href="beeswarm-plots.html#cb404-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_quasirandom</span>(</span>
+<span id="cb404-7"><a href="beeswarm-plots.html#cb404-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>nu, </span>
+<span id="cb404-8"><a href="beeswarm-plots.html#cb404-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">groupOnX=</span><span class="cn">TRUE</span>, </span>
+<span id="cb404-9"><a href="beeswarm-plots.html#cb404-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb404-10"><a href="beeswarm-plots.html#cb404-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(</span>
+<span id="cb404-11"><a href="beeswarm-plots.html#cb404-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>nu, </span>
+<span id="cb404-12"><a href="beeswarm-plots.html#cb404-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>, <span class="at">label=</span>Player))</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-274-1.png" width="672" /></p>
 <p>Quasirandom spreads out the dots you see in beeswarm using – you guessed it – quasirandom spacing.</p>
 <p>For <code>geom_jitter</code>, we need to remove the groupOnX value. Why? No clue.</p>
-<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="beeswarm-plots.html#cb363-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb363-2"><a href="beeswarm-plots.html#cb363-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(</span>
-<span id="cb363-3"><a href="beeswarm-plots.html#cb363-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>shooters, </span>
-<span id="cb363-4"><a href="beeswarm-plots.html#cb363-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb363-5"><a href="beeswarm-plots.html#cb363-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(</span>
-<span id="cb363-6"><a href="beeswarm-plots.html#cb363-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>nu, </span>
-<span id="cb363-7"><a href="beeswarm-plots.html#cb363-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb363-8"><a href="beeswarm-plots.html#cb363-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(</span>
-<span id="cb363-9"><a href="beeswarm-plots.html#cb363-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>nu, </span>
-<span id="cb363-10"><a href="beeswarm-plots.html#cb363-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>, <span class="at">label=</span>Player))</span></code></pre></div>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="beeswarm-plots.html#cb405-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb405-2"><a href="beeswarm-plots.html#cb405-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(</span>
+<span id="cb405-3"><a href="beeswarm-plots.html#cb405-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>shooters, </span>
+<span id="cb405-4"><a href="beeswarm-plots.html#cb405-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb405-5"><a href="beeswarm-plots.html#cb405-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(</span>
+<span id="cb405-6"><a href="beeswarm-plots.html#cb405-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>nu, </span>
+<span id="cb405-7"><a href="beeswarm-plots.html#cb405-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb405-8"><a href="beeswarm-plots.html#cb405-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(</span>
+<span id="cb405-9"><a href="beeswarm-plots.html#cb405-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>nu, </span>
+<span id="cb405-10"><a href="beeswarm-plots.html#cb405-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>, <span class="at">label=</span>Player))</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-275-1.png" width="672" /></p>
 <p><code>geom_jitter</code> spreads out the dots evenly across the width of the column, randomly deciding where in the line of the true shooting percentage they appear.</p>
 <p>Which one is right for you? You’re going to have to experiment and decide. This is the art in the art and a science.</p>
@@ -494,6 +486,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

@@ -62,7 +62,6 @@ beeswarm-plots
 a-few-other-options
 bump-charts
 tables
-exporting-tables
 facet-wraps
 facet-grid-vs-facet-wraps
 other-types

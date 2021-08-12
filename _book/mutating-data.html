@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Mutating data | Sports Data Analysis and Visualization</title>
   <meta name="description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Mutating data | Sports Data Analysis and Visualization" />
   <meta property="og:type" content="book" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="aggregates.html"/>
 <link rel="next" href="filters-and-selections.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,10 +51,10 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.3/plotly.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
@@ -134,6 +134,7 @@ code span.va { color: #000000; } /* Variable */
 code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -252,10 +253,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="25.1" data-path="beeswarm-plots.html"><a href="beeswarm-plots.html#a-few-other-options"><i class="fa fa-check"></i><b>25.1</b> A few other options</a></li>
 </ul></li>
 <li class="chapter" data-level="26" data-path="bump-charts.html"><a href="bump-charts.html"><i class="fa fa-check"></i><b>26</b> Bump charts</a></li>
-<li class="chapter" data-level="27" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>27</b> Tables</a>
-<ul>
-<li class="chapter" data-level="27.1" data-path="tables.html"><a href="tables.html#exporting-tables"><i class="fa fa-check"></i><b>27.1</b> Exporting tables</a></li>
-</ul></li>
+<li class="chapter" data-level="27" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>27</b> Tables</a></li>
 <li class="chapter" data-level="28" data-path="facet-wraps.html"><a href="facet-wraps.html"><i class="fa fa-check"></i><b>28</b> Facet wraps</a>
 <ul>
 <li class="chapter" data-level="28.1" data-path="facet-wraps.html"><a href="facet-wraps.html#facet-grid-vs-facet-wraps"><i class="fa fa-check"></i><b>28.1</b> Facet grid vs facet wraps</a></li>
@@ -358,28 +356,24 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><code>(new - old) / old</code></p>
 <p>Or new minus old divided by old. Your new number minus the old number, the result of which is divided by the old number. To do that in R, we can use <code>dplyr</code> and <code>mutate</code> to calculate new metrics in a new field using existing fields of data.</p>
 <p>So first we’ll import the tidyverse so we can read in our data and begin to work with it.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="mutating-data.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="mutating-data.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p>Now you’ll need a common and simple dataset of total attendance at NCAA football games over the last few seasons.</p>
 <pre><p><strong>For this walkthrough:</strong></p><p><a href="http://mattwaite.github.io/sportsdatafiles/attendance.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>You’ll import it something like this.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="mutating-data.html#cb32-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;data/attendance.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="mutating-data.html#cb34-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;data/attendance.csv&#39;</span>)</span></code></pre></div>
+<pre><code>## Rows: 150 Columns: 8</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (2): Institution, Conference
+## dbl (6): 2013, 2014, 2015, 2016, 2017, 2018</code></pre>
 <pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
-## cols(
-##   Institution = col_character(),
-##   Conference = col_character(),
-##   `2013` = col_double(),
-##   `2014` = col_double(),
-##   `2015` = col_double(),
-##   `2016` = col_double(),
-##   `2017` = col_double(),
-##   `2018` = col_double()
-## )</code></pre>
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <p>If you want to see the first six rows – handy to take a peek at your data – you can use the function <code>head</code>.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="mutating-data.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(attendance)</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 8
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="mutating-data.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(attendance)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 8
 ##   Institution     Conference      `2013` `2014` `2015` `2016` `2017` `2018`
 ##   &lt;chr&gt;           &lt;chr&gt;            &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
 ## 1 Air Force       MWC             228562 168967 156158 177519 174924 166205
@@ -389,10 +383,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 5 Appalachian St. Sun Belt            NA 138995 128755 156916 154722 131716
 ## 6 Arizona         Pac-12          285713 354973 308355 338017 255791 318051</code></pre>
 <p>The code to calculate percent change is pretty simple. Remember, with <code>summarize</code>, we used <code>n()</code> to count things. With <code>mutate</code>, we use very similar syntax to calculate a new value using other values in our dataset. So in this case, we’re trying to do (new-old)/old, but we’re doing it with fields. If we look at what we got when we did <code>head</code>, you’ll see there’s `2018` as the new data, and we’ll use `2017` as the old data. So we’re looking at one year. Then, to help us, we’ll use arrange again to sort it, so we get the fastest growing school over one year.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="mutating-data.html#cb36-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
-<span id="cb36-2"><a href="mutating-data.html#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">change =</span> (<span class="st">`</span><span class="at">2018</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">2017</span><span class="st">`</span>)<span class="sc">/</span><span class="st">`</span><span class="at">2017</span><span class="st">`</span></span>
-<span id="cb36-3"><a href="mutating-data.html#cb36-3" aria-hidden="true" tabindex="-1"></a>) </span></code></pre></div>
-<pre><code>## # A tibble: 150 x 9
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="mutating-data.html#cb40-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb40-2"><a href="mutating-data.html#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">change =</span> (<span class="st">`</span><span class="at">2018</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">2017</span><span class="st">`</span>)<span class="sc">/</span><span class="st">`</span><span class="at">2017</span><span class="st">`</span></span>
+<span id="cb40-3"><a href="mutating-data.html#cb40-3" aria-hidden="true" tabindex="-1"></a>) </span></code></pre></div>
+<pre><code>## # A tibble: 150 × 9
 ##    Institution   Conference   `2013` `2014` `2015` `2016` `2017` `2018`   change
 ##    &lt;chr&gt;         &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
 ##  1 Air Force     MWC          228562 168967 156158 177519 174924 166205 -0.0498 
@@ -407,10 +401,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 10 Army West Po… FBS Indepen… 169781 171310 185946 163267 185543 190156  0.0249 
 ## # … with 140 more rows</code></pre>
 <p>What do we see right away? Do those numbers look like we expect them to? No. They’re a decimal expressed as a percentage. So let’s fix that by multiplying by 100.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="mutating-data.html#cb38-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
-<span id="cb38-2"><a href="mutating-data.html#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">change =</span> ((<span class="st">`</span><span class="at">2018</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">2017</span><span class="st">`</span>)<span class="sc">/</span><span class="st">`</span><span class="at">2017</span><span class="st">`</span>)<span class="sc">*</span><span class="dv">100</span></span>
-<span id="cb38-3"><a href="mutating-data.html#cb38-3" aria-hidden="true" tabindex="-1"></a>) </span></code></pre></div>
-<pre><code>## # A tibble: 150 x 9
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="mutating-data.html#cb42-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb42-2"><a href="mutating-data.html#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">change =</span> ((<span class="st">`</span><span class="at">2018</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">2017</span><span class="st">`</span>)<span class="sc">/</span><span class="st">`</span><span class="at">2017</span><span class="st">`</span>)<span class="sc">*</span><span class="dv">100</span></span>
+<span id="cb42-3"><a href="mutating-data.html#cb42-3" aria-hidden="true" tabindex="-1"></a>) </span></code></pre></div>
+<pre><code>## # A tibble: 150 × 9
 ##    Institution    Conference   `2013` `2014` `2015` `2016` `2017` `2018`  change
 ##    &lt;chr&gt;          &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
 ##  1 Air Force      MWC          228562 168967 156158 177519 174924 166205  -4.98 
@@ -425,10 +419,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 10 Army West Poi… FBS Indepen… 169781 171310 185946 163267 185543 190156   2.49 
 ## # … with 140 more rows</code></pre>
 <p>Now, does this ordering do anything for us? No. Let’s fix that with arrange.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="mutating-data.html#cb40-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
-<span id="cb40-2"><a href="mutating-data.html#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">change =</span> ((<span class="st">`</span><span class="at">2018</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">2017</span><span class="st">`</span>)<span class="sc">/</span><span class="st">`</span><span class="at">2017</span><span class="st">`</span>)<span class="sc">*</span><span class="dv">100</span></span>
-<span id="cb40-3"><a href="mutating-data.html#cb40-3" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(change))</span></code></pre></div>
-<pre><code>## # A tibble: 150 x 9
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="mutating-data.html#cb44-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb44-2"><a href="mutating-data.html#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">change =</span> ((<span class="st">`</span><span class="at">2018</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">2017</span><span class="st">`</span>)<span class="sc">/</span><span class="st">`</span><span class="at">2017</span><span class="st">`</span>)<span class="sc">*</span><span class="dv">100</span></span>
+<span id="cb44-3"><a href="mutating-data.html#cb44-3" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(change))</span></code></pre></div>
+<pre><code>## # A tibble: 150 × 9
 ##    Institution   Conference `2013` `2014` `2015` `2016` `2017` `2018` change
 ##    &lt;chr&gt;         &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
 ##  1 Ga. Southern  Sun Belt       NA 105510 124681 104095  61031 100814   65.2
@@ -452,30 +446,24 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>Import it like this:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="mutating-data.html#cb42-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/players20.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="mutating-data.html#cb46-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/players20.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Rows: 5452 Columns: 57</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr  (8): Team, Player, Class, Pos, Height, Hometown, High School, Summary
+## dbl (49): #, Weight, Rk.x, G, GS, MP, FG, FGA, FG%, 2P, 2PA, 2P%, 3P, 3PA, 3...</code></pre>
 <pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
-## cols(
-##   .default = col_double(),
-##   Team = col_character(),
-##   Player = col_character(),
-##   Class = col_character(),
-##   Pos = col_character(),
-##   Height = col_character(),
-##   Hometown = col_character(),
-##   `High School` = col_character(),
-##   Summary = col_character()
-## )
-## ℹ Use `spec()` for the full column specifications.</code></pre>
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <p>The basic true shooting percentage formula is <code>(Points / (2*(FieldGoalAttempts + (.44 * FreeThrowAttempts)))) * 100</code>. Let’s talk that through. Points divided by a lot. It’s really field goal attempts plus 44 percent of the free throw attempts. Why? Because that’s about what a free throw is worth, compared to other ways to score. After adding those things together, you double it. And after you divide points by that number, you multiply the whole lot by 100.</p>
 <p>In our data, we need to be able to find the fields so we can complete the formula. To do that, one way is to use the Environment tab in R Studio. In the Environment tab is a listing of all the data you’ve imported, and if you click the triangle next to it, it’ll list all the field names, giving you a bit of information about each one.</p>
 <p><img src="images/environment.png" width="653" /></p>
 <p>So what does True Shooting Percentage look like in code?</p>
 <p>Let’s think about this differently. Who had the best true shooting season last year?</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="mutating-data.html#cb44-1" aria-hidden="true" tabindex="-1"></a>players <span class="sc">%&gt;%</span></span>
-<span id="cb44-2"><a href="mutating-data.html#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">trueshooting =</span> (PTS<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>(FGA <span class="sc">+</span> (.<span class="dv">44</span><span class="sc">*</span>FTA))))<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb44-3"><a href="mutating-data.html#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(trueshooting))</span></code></pre></div>
-<pre><code>## # A tibble: 5,452 x 58
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="mutating-data.html#cb50-1" aria-hidden="true" tabindex="-1"></a>players <span class="sc">%&gt;%</span></span>
+<span id="cb50-2"><a href="mutating-data.html#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">trueshooting =</span> (PTS<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>(FGA <span class="sc">+</span> (.<span class="dv">44</span><span class="sc">*</span>FTA))))<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb50-3"><a href="mutating-data.html#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(trueshooting))</span></code></pre></div>
+<pre><code>## # A tibble: 5,452 × 58
 ##    Team   Player    `#` Class Pos   Height Weight Hometown `High School` Summary
 ##    &lt;chr&gt;  &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;  
 ##  1 Vande… Trace …    20 JR    G     6-2       170 Carmel,… Park Tudor HS 3.0 Pt…
@@ -532,6 +520,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

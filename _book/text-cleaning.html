@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 32 Text cleaning | Sports Data Analysis and Visualization</title>
   <meta name="description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 32 Text cleaning | Sports Data Analysis and Visualization" />
   <meta property="og:type" content="book" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="plotly.html"/>
 <link rel="next" href="headlines.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,10 +51,10 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.3/plotly.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
@@ -134,6 +134,7 @@ code span.va { color: #000000; } /* Variable */
 code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -252,10 +253,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="25.1" data-path="beeswarm-plots.html"><a href="beeswarm-plots.html#a-few-other-options"><i class="fa fa-check"></i><b>25.1</b> A few other options</a></li>
 </ul></li>
 <li class="chapter" data-level="26" data-path="bump-charts.html"><a href="bump-charts.html"><i class="fa fa-check"></i><b>26</b> Bump charts</a></li>
-<li class="chapter" data-level="27" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>27</b> Tables</a>
-<ul>
-<li class="chapter" data-level="27.1" data-path="tables.html"><a href="tables.html#exporting-tables"><i class="fa fa-check"></i><b>27.1</b> Exporting tables</a></li>
-</ul></li>
+<li class="chapter" data-level="27" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>27</b> Tables</a></li>
 <li class="chapter" data-level="28" data-path="facet-wraps.html"><a href="facet-wraps.html"><i class="fa fa-check"></i><b>28</b> Facet wraps</a>
 <ul>
 <li class="chapter" data-level="28.1" data-path="facet-wraps.html"><a href="facet-wraps.html#facet-grid-vs-facet-wraps"><i class="fa fa-check"></i><b>28.1</b> Facet grid vs facet wraps</a></li>
@@ -357,7 +355,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>On occasion, you’ll get some data from someone that … isn’t quite what you need it to be. There’s something flawed in it. Some extra text, some choice that the data provider made that you just don’t agree with.</p>
 <p>There’s a ton of tools in the tidyverse to fix this, and you already have some tools in your toolboxt. Let’s take a look at a couple.</p>
 <p>First, you know what you need.</p>
-<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="text-cleaning.html#cb449-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="text-cleaning.html#cb502-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p>Now, two examples.</p>
 <div id="stripping-out-text" class="section level2" number="32.1">
 <h2><span class="header-section-number">32.1</span> Stripping out text</h2>
@@ -366,22 +364,22 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>Now load it.</p>
-<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="text-cleaning.html#cb450-1" aria-hidden="true" tabindex="-1"></a>nbaplayers <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/nbaplayers.csv&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning: Missing column names filled in: &#39;X20&#39; [20], &#39;X25&#39; [25]</code></pre>
+<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb503-1"><a href="text-cleaning.html#cb503-1" aria-hidden="true" tabindex="-1"></a>nbaplayers <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/nbaplayers.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## New names:
+## * `` -&gt; ...20
+## * `` -&gt; ...25</code></pre>
+<pre><code>## Rows: 624 Columns: 29</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr  (3): Player, Pos, Tm
+## dbl (24): Rk, Age, G, MP, PER, TS%, 3PAr, FTr, ORB%, DRB%, TRB%, AST%, STL%,...
+## lgl  (2): ...20, ...25</code></pre>
 <pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
-## cols(
-##   .default = col_double(),
-##   Player = col_character(),
-##   Pos = col_character(),
-##   Tm = col_character(),
-##   X20 = col_logical(),
-##   X25 = col_logical()
-## )
-## ℹ Use `spec()` for the full column specifications.</code></pre>
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <p>Let’s take a look:</p>
-<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="text-cleaning.html#cb453-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(nbaplayers)</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 29
+<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="text-cleaning.html#cb508-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(nbaplayers)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 29
 ##      Rk Player     Pos     Age Tm        G    MP   PER `TS%` `3PAr`   FTr `ORB%`
 ##   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
 ## 1     1 &quot;Steven A… C        26 OKC      58  1564  20.8 0.605  0.007 0.413   14.4
@@ -391,25 +389,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 5     5 &quot;Grayson … SG       24 MEM      30   498  11.4 0.577  0.517 0.199    1.1
 ## 6     6 &quot;Jarrett … C        21 BRK      64  1647  20.3 0.658  0.012 0.574   12.5
 ## # … with 17 more variables: DRB% &lt;dbl&gt;, TRB% &lt;dbl&gt;, AST% &lt;dbl&gt;, STL% &lt;dbl&gt;,
-## #   BLK% &lt;dbl&gt;, TOV% &lt;dbl&gt;, USG% &lt;dbl&gt;, X20 &lt;lgl&gt;, OWS &lt;dbl&gt;, DWS &lt;dbl&gt;,
-## #   WS &lt;dbl&gt;, WS/48 &lt;dbl&gt;, X25 &lt;lgl&gt;, OBPM &lt;dbl&gt;, DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;,
+## #   BLK% &lt;dbl&gt;, TOV% &lt;dbl&gt;, USG% &lt;dbl&gt;, ...20 &lt;lgl&gt;, OWS &lt;dbl&gt;, DWS &lt;dbl&gt;,
+## #   WS &lt;dbl&gt;, WS/48 &lt;dbl&gt;, ...25 &lt;lgl&gt;, OBPM &lt;dbl&gt;, DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;,
 ## #   VORP &lt;dbl&gt;</code></pre>
-<p>For starters, see the two empty columns that don’t have any names? X20 and X25. We can get rid of them. They’re empty.</p>
-<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="text-cleaning.html#cb455-1" aria-hidden="true" tabindex="-1"></a>nbaplayers <span class="ot">&lt;-</span> nbaplayers <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>X20, <span class="sc">-</span>X25)</span></code></pre></div>
-<p>Now let’s look at those names:</p>
-<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="text-cleaning.html#cb456-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(nbaplayers)</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 27
-##      Rk Player     Pos     Age Tm        G    MP   PER `TS%` `3PAr`   FTr `ORB%`
-##   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-## 1     1 &quot;Steven A… C        26 OKC      58  1564  20.8 0.605  0.007 0.413   14.4
-## 2     2 &quot;Bam Adeb… PF       22 MIA      65  2235  20.6 0.606  0.018 0.476    8.7
-## 3     3 &quot;LaMarcus… C        34 SAS      53  1754  19.8 0.571  0.198 0.241    6.3
-## 4     4 &quot;Nickeil … SG       21 NOP      41   501   7.6 0.441  0.515 0.123    1.7
-## 5     5 &quot;Grayson … SG       24 MEM      30   498  11.4 0.577  0.517 0.199    1.1
-## 6     6 &quot;Jarrett … C        21 BRK      64  1647  20.3 0.658  0.012 0.574   12.5
-## # … with 15 more variables: DRB% &lt;dbl&gt;, TRB% &lt;dbl&gt;, AST% &lt;dbl&gt;, STL% &lt;dbl&gt;,
-## #   BLK% &lt;dbl&gt;, TOV% &lt;dbl&gt;, USG% &lt;dbl&gt;, OWS &lt;dbl&gt;, DWS &lt;dbl&gt;, WS &lt;dbl&gt;,
-## #   WS/48 &lt;dbl&gt;, OBPM &lt;dbl&gt;, DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;, VORP &lt;dbl&gt;</code></pre>
 <p>You can see that every players name is their name, then two backslashes, then some version of their name that must have meaning to Sports Reference, but not to us. So we need to get rid of that.</p>
 <p>To do this, we’re going to use a little regular expression magic. Regular expressions are a programmatic way to find any pattern in text. What we’re looking for is that <code>\\</code> business. But, that presents a problem, because the <code>\</code> is a special character. It’s called an escape character. That escape character means what comes next is potentially special. For instance, if you see <code>\n</code>, that’s a newline character. So normally, if you see that, it would add a return.</p>
 <p>So for us to get rid of the <code>\</code> we’re going to have to escape the escape character with an escape character. And we have two of them. So we have to do it twice.</p>
@@ -417,8 +399,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>So if we wanted to find two backslashes, we need <code>\\\\</code>. Then, using regular expressions, we can say “and then everything else after this” with this: .*</p>
 <p>No really. That’s it. So we’re looking for <code>\\\\.*</code>. That’ll find two backslashes and then everything after it. If you think this is hard … you’re right. Regular expressions are an entire month of a programming course by themselves. They are EXTREMELY powerful.</p>
 <p>To find something in text, we’ll use a function called <code>gsub</code>. The pattern in <code>gsub</code> is <code>pattern, what we want to replace it with, what column this can all be found in</code>. So in our example, the pattern is <code>\\\\.*</code>, what we want to replace it with is … nothing, and this is all in the Player column. Here’s the code.</p>
-<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="text-cleaning.html#cb458-1" aria-hidden="true" tabindex="-1"></a>nbaplayers <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Player=</span><span class="fu">gsub</span>(<span class="st">&quot;</span><span class="sc">\\\\</span><span class="st">.*&quot;</span>,<span class="st">&quot;&quot;</span>,Player)) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 27
+<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb510-1"><a href="text-cleaning.html#cb510-1" aria-hidden="true" tabindex="-1"></a>nbaplayers <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Player=</span><span class="fu">gsub</span>(<span class="st">&quot;</span><span class="sc">\\\\</span><span class="st">.*&quot;</span>,<span class="st">&quot;&quot;</span>,Player)) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 29
 ##      Rk Player     Pos     Age Tm        G    MP   PER `TS%` `3PAr`   FTr `ORB%`
 ##   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
 ## 1     1 Steven Ad… C        26 OKC      58  1564  20.8 0.605  0.007 0.413   14.4
@@ -427,9 +409,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 4     4 Nickeil A… SG       21 NOP      41   501   7.6 0.441  0.515 0.123    1.7
 ## 5     5 Grayson A… SG       24 MEM      30   498  11.4 0.577  0.517 0.199    1.1
 ## 6     6 Jarrett A… C        21 BRK      64  1647  20.3 0.658  0.012 0.574   12.5
-## # … with 15 more variables: DRB% &lt;dbl&gt;, TRB% &lt;dbl&gt;, AST% &lt;dbl&gt;, STL% &lt;dbl&gt;,
-## #   BLK% &lt;dbl&gt;, TOV% &lt;dbl&gt;, USG% &lt;dbl&gt;, OWS &lt;dbl&gt;, DWS &lt;dbl&gt;, WS &lt;dbl&gt;,
-## #   WS/48 &lt;dbl&gt;, OBPM &lt;dbl&gt;, DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;, VORP &lt;dbl&gt;</code></pre>
+## # … with 17 more variables: DRB% &lt;dbl&gt;, TRB% &lt;dbl&gt;, AST% &lt;dbl&gt;, STL% &lt;dbl&gt;,
+## #   BLK% &lt;dbl&gt;, TOV% &lt;dbl&gt;, USG% &lt;dbl&gt;, ...20 &lt;lgl&gt;, OWS &lt;dbl&gt;, DWS &lt;dbl&gt;,
+## #   WS &lt;dbl&gt;, WS/48 &lt;dbl&gt;, ...25 &lt;lgl&gt;, OBPM &lt;dbl&gt;, DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;,
+## #   VORP &lt;dbl&gt;</code></pre>
 <p>Just like that, the trash is gone.</p>
 </div>
 <div id="another-example-splitting-columns" class="section level2" number="32.2">
@@ -440,22 +423,17 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>Let’s import it and take a look.</p>
-<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="text-cleaning.html#cb460-1" aria-hidden="true" tabindex="-1"></a>kills <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/killsperset.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb512-1"><a href="text-cleaning.html#cb512-1" aria-hidden="true" tabindex="-1"></a>kills <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/killsperset.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Rows: 150 Columns: 9</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (5): Player, Cl, Ht, Pos, Season
+## dbl (4): Rank, S, Kills, Per Set</code></pre>
 <pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
-## cols(
-##   Rank = col_double(),
-##   Player = col_character(),
-##   Cl = col_character(),
-##   Ht = col_character(),
-##   Pos = col_character(),
-##   S = col_double(),
-##   Kills = col_double(),
-##   `Per Set` = col_double(),
-##   Season = col_character()
-## )</code></pre>
-<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="text-cleaning.html#cb462-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(kills)</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 9
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb516-1"><a href="text-cleaning.html#cb516-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(kills)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 9
 ##    Rank Player                   Cl    Ht    Pos       S Kills `Per Set` Season 
 ##   &lt;dbl&gt; &lt;chr&gt;                    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;  
 ## 1     1 Lindsey Ruddins, UC San… So.   6-2   OH       90   526      5.84 2017-2…
@@ -468,8 +446,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>So … this is a mess. But there is a pattern. See it? A comma after the player’s name. The Conference is in parens. We can use that.</p>
 <p>For this, we’re going to use a <code>tidyr</code> function called <code>separate</code> to split columns into multiple columns based on a character. We’ll do this step by step.</p>
 <p>First, let’s use that comma to split the player and the rest. Ignore the head at the end. That’s just to keep it from showing you all 150.</p>
-<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="text-cleaning.html#cb464-1" aria-hidden="true" tabindex="-1"></a>kills <span class="sc">%&gt;%</span> <span class="fu">separate</span>(Player, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;Player&quot;</span>, <span class="st">&quot;School&quot;</span>), <span class="at">sep=</span><span class="st">&quot;,&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 10
+<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb518-1"><a href="text-cleaning.html#cb518-1" aria-hidden="true" tabindex="-1"></a>kills <span class="sc">%&gt;%</span> <span class="fu">separate</span>(Player, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;Player&quot;</span>, <span class="st">&quot;School&quot;</span>), <span class="at">sep=</span><span class="st">&quot;,&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 10
 ##    Rank Player     School         Cl    Ht    Pos       S Kills `Per Set` Season
 ##   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
 ## 1     1 Lindsey R… &quot; UC Santa Ba… So.   6-2   OH       90   526      5.84 2017-…
@@ -480,12 +458,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 6     6 Torrey Va… &quot; Cal Poly (B… So.   6-3   OH      101   477      4.72 2017-…</code></pre>
 <p>Good start.</p>
 <p>Now, let’s get the conference separated. A problem is going to crop up here – the paren is a special character, so we have to escape it with the <code>\\</code>.</p>
-<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="text-cleaning.html#cb466-1" aria-hidden="true" tabindex="-1"></a>kills <span class="sc">%&gt;%</span> </span>
-<span id="cb466-2"><a href="text-cleaning.html#cb466-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(Player, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;Player&quot;</span>, <span class="st">&quot;School&quot;</span>), <span class="at">sep=</span><span class="st">&quot;,&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb466-3"><a href="text-cleaning.html#cb466-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(School, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;School&quot;</span>, <span class="st">&quot;Conference&quot;</span>), <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\\</span><span class="st">(&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb466-4"><a href="text-cleaning.html#cb466-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb520"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb520-1"><a href="text-cleaning.html#cb520-1" aria-hidden="true" tabindex="-1"></a>kills <span class="sc">%&gt;%</span> </span>
+<span id="cb520-2"><a href="text-cleaning.html#cb520-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(Player, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;Player&quot;</span>, <span class="st">&quot;School&quot;</span>), <span class="at">sep=</span><span class="st">&quot;,&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb520-3"><a href="text-cleaning.html#cb520-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(School, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;School&quot;</span>, <span class="st">&quot;Conference&quot;</span>), <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\\</span><span class="st">(&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb520-4"><a href="text-cleaning.html#cb520-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
 <pre><code>## Warning: Expected 2 pieces. Additional pieces discarded in 3 rows [15, 42, 83].</code></pre>
-<pre><code>## # A tibble: 6 x 11
+<pre><code>## # A tibble: 6 × 11
 ##    Rank Player  School Conference Cl    Ht    Pos       S Kills `Per Set` Season
 ##   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
 ## 1     1 Lindse… &quot; UC … Big West)  So.   6-2   OH       90   526      5.84 2017-…
@@ -495,14 +473,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 5     5 Veroni… &quot; BYU… WCC)       Jr.   6-0   OH      118   569      4.82 2017-…
 ## 6     6 Torrey… &quot; Cal… Big West)  So.   6-3   OH      101   477      4.72 2017-…</code></pre>
 <p>Uh oh. Says we have problems in rows 15, 42 and 83. What are they? The NCAA has decided to put (FL), (NY) and (PA) into three teams to tell you they’re in Florida, New York and Pennsylvania respectively. Well, we can fix that with some gsub and we’ll use a switch called <code>fixed</code>, which when set to TRUE it means this literal string, no special characters.</p>
-<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="text-cleaning.html#cb469-1" aria-hidden="true" tabindex="-1"></a>kills <span class="sc">%&gt;%</span> </span>
-<span id="cb469-2"><a href="text-cleaning.html#cb469-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(Player, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;Player&quot;</span>, <span class="st">&quot;School&quot;</span>), <span class="at">sep=</span><span class="st">&quot;,&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb469-3"><a href="text-cleaning.html#cb469-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">&quot;(FL)&quot;</span>, <span class="st">&quot;FL&quot;</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb469-4"><a href="text-cleaning.html#cb469-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">&quot;(NY)&quot;</span>, <span class="st">&quot;NY&quot;</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb469-5"><a href="text-cleaning.html#cb469-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">&quot;(PA)&quot;</span>, <span class="st">&quot;PA&quot;</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb469-6"><a href="text-cleaning.html#cb469-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(School, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;School&quot;</span>, <span class="st">&quot;Conference&quot;</span>), <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\\</span><span class="st">(&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb469-7"><a href="text-cleaning.html#cb469-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 11
+<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb523-1"><a href="text-cleaning.html#cb523-1" aria-hidden="true" tabindex="-1"></a>kills <span class="sc">%&gt;%</span> </span>
+<span id="cb523-2"><a href="text-cleaning.html#cb523-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(Player, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;Player&quot;</span>, <span class="st">&quot;School&quot;</span>), <span class="at">sep=</span><span class="st">&quot;,&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb523-3"><a href="text-cleaning.html#cb523-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">&quot;(FL)&quot;</span>, <span class="st">&quot;FL&quot;</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb523-4"><a href="text-cleaning.html#cb523-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">&quot;(NY)&quot;</span>, <span class="st">&quot;NY&quot;</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb523-5"><a href="text-cleaning.html#cb523-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">&quot;(PA)&quot;</span>, <span class="st">&quot;PA&quot;</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb523-6"><a href="text-cleaning.html#cb523-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(School, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;School&quot;</span>, <span class="st">&quot;Conference&quot;</span>), <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\\</span><span class="st">(&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb523-7"><a href="text-cleaning.html#cb523-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 11
 ##    Rank Player  School Conference Cl    Ht    Pos       S Kills `Per Set` Season
 ##   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
 ## 1     1 Lindse… &quot; UC … Big West)  So.   6-2   OH       90   526      5.84 2017-…
@@ -512,15 +490,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 5     5 Veroni… &quot; BYU… WCC)       Jr.   6-0   OH      118   569      4.82 2017-…
 ## 6     6 Torrey… &quot; Cal… Big West)  So.   6-3   OH      101   477      4.72 2017-…</code></pre>
 <p>One last thing: see the trailing paren?</p>
-<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="text-cleaning.html#cb471-1" aria-hidden="true" tabindex="-1"></a>kills <span class="sc">%&gt;%</span> </span>
-<span id="cb471-2"><a href="text-cleaning.html#cb471-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(Player, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;Player&quot;</span>, <span class="st">&quot;School&quot;</span>), <span class="at">sep=</span><span class="st">&quot;,&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb471-3"><a href="text-cleaning.html#cb471-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">&quot;(FL)&quot;</span>, <span class="st">&quot;FL&quot;</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb471-4"><a href="text-cleaning.html#cb471-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">&quot;(NY)&quot;</span>, <span class="st">&quot;NY&quot;</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb471-5"><a href="text-cleaning.html#cb471-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">&quot;(PA)&quot;</span>, <span class="st">&quot;PA&quot;</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb471-6"><a href="text-cleaning.html#cb471-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(School, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;School&quot;</span>, <span class="st">&quot;Conference&quot;</span>), <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\\</span><span class="st">(&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb471-7"><a href="text-cleaning.html#cb471-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Conference=</span><span class="fu">gsub</span>(<span class="st">&quot;)&quot;</span>, <span class="st">&quot;&quot;</span>, Conference)) <span class="sc">%&gt;%</span></span>
-<span id="cb471-8"><a href="text-cleaning.html#cb471-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 11
+<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb525-1"><a href="text-cleaning.html#cb525-1" aria-hidden="true" tabindex="-1"></a>kills <span class="sc">%&gt;%</span> </span>
+<span id="cb525-2"><a href="text-cleaning.html#cb525-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(Player, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;Player&quot;</span>, <span class="st">&quot;School&quot;</span>), <span class="at">sep=</span><span class="st">&quot;,&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb525-3"><a href="text-cleaning.html#cb525-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">&quot;(FL)&quot;</span>, <span class="st">&quot;FL&quot;</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb525-4"><a href="text-cleaning.html#cb525-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">&quot;(NY)&quot;</span>, <span class="st">&quot;NY&quot;</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb525-5"><a href="text-cleaning.html#cb525-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">&quot;(PA)&quot;</span>, <span class="st">&quot;PA&quot;</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb525-6"><a href="text-cleaning.html#cb525-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(School, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;School&quot;</span>, <span class="st">&quot;Conference&quot;</span>), <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\\</span><span class="st">(&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb525-7"><a href="text-cleaning.html#cb525-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Conference=</span><span class="fu">gsub</span>(<span class="st">&quot;)&quot;</span>, <span class="st">&quot;&quot;</span>, Conference)) <span class="sc">%&gt;%</span></span>
+<span id="cb525-8"><a href="text-cleaning.html#cb525-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 11
 ##    Rank Player  School Conference Cl    Ht    Pos       S Kills `Per Set` Season
 ##   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
 ## 1     1 Lindse… &quot; UC … Big West   So.   6-2   OH       90   526      5.84 2017-…
@@ -532,17 +510,17 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Looking good, no errors.</p>
 <p>Now, what should we do about Ht? 6-2 is not going to tell me much when I want to run a regression of height to kills per set. And it’s a character field. So we need to convert it to numbers.</p>
 <p>Separate again comes to the rescue.</p>
-<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="text-cleaning.html#cb473-1" aria-hidden="true" tabindex="-1"></a>kills <span class="sc">%&gt;%</span> </span>
-<span id="cb473-2"><a href="text-cleaning.html#cb473-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(Player, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;Player&quot;</span>, <span class="st">&quot;School&quot;</span>), <span class="at">sep=</span><span class="st">&quot;,&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb473-3"><a href="text-cleaning.html#cb473-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">&quot;(FL)&quot;</span>, <span class="st">&quot;FL&quot;</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb473-4"><a href="text-cleaning.html#cb473-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">&quot;(NY)&quot;</span>, <span class="st">&quot;NY&quot;</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb473-5"><a href="text-cleaning.html#cb473-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">&quot;(PA)&quot;</span>, <span class="st">&quot;PA&quot;</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb473-6"><a href="text-cleaning.html#cb473-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(School, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;School&quot;</span>, <span class="st">&quot;Conference&quot;</span>), <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\\</span><span class="st">(&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb473-7"><a href="text-cleaning.html#cb473-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Conference=</span><span class="fu">gsub</span>(<span class="st">&quot;)&quot;</span>, <span class="st">&quot;&quot;</span>, Conference)) <span class="sc">%&gt;%</span></span>
-<span id="cb473-8"><a href="text-cleaning.html#cb473-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(Ht, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;Feet&quot;</span>, <span class="st">&quot;Inches&quot;</span>), <span class="at">sep=</span><span class="st">&quot;-&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb473-9"><a href="text-cleaning.html#cb473-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Feet =</span> <span class="fu">as.numeric</span>(Feet), <span class="at">Inches =</span> <span class="fu">as.numeric</span>(Inches)) <span class="sc">%&gt;%</span></span>
-<span id="cb473-10"><a href="text-cleaning.html#cb473-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 12
+<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="text-cleaning.html#cb527-1" aria-hidden="true" tabindex="-1"></a>kills <span class="sc">%&gt;%</span> </span>
+<span id="cb527-2"><a href="text-cleaning.html#cb527-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(Player, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;Player&quot;</span>, <span class="st">&quot;School&quot;</span>), <span class="at">sep=</span><span class="st">&quot;,&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb527-3"><a href="text-cleaning.html#cb527-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">&quot;(FL)&quot;</span>, <span class="st">&quot;FL&quot;</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb527-4"><a href="text-cleaning.html#cb527-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">&quot;(NY)&quot;</span>, <span class="st">&quot;NY&quot;</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb527-5"><a href="text-cleaning.html#cb527-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">&quot;(PA)&quot;</span>, <span class="st">&quot;PA&quot;</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb527-6"><a href="text-cleaning.html#cb527-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(School, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;School&quot;</span>, <span class="st">&quot;Conference&quot;</span>), <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\\</span><span class="st">(&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb527-7"><a href="text-cleaning.html#cb527-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Conference=</span><span class="fu">gsub</span>(<span class="st">&quot;)&quot;</span>, <span class="st">&quot;&quot;</span>, Conference)) <span class="sc">%&gt;%</span></span>
+<span id="cb527-8"><a href="text-cleaning.html#cb527-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(Ht, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;Feet&quot;</span>, <span class="st">&quot;Inches&quot;</span>), <span class="at">sep=</span><span class="st">&quot;-&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb527-9"><a href="text-cleaning.html#cb527-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Feet =</span> <span class="fu">as.numeric</span>(Feet), <span class="at">Inches =</span> <span class="fu">as.numeric</span>(Inches)) <span class="sc">%&gt;%</span></span>
+<span id="cb527-10"><a href="text-cleaning.html#cb527-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 12
 ##    Rank Player  School Conference Cl     Feet Inches Pos       S Kills `Per Set`
 ##   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
 ## 1     1 Lindse… &quot; UC … Big West   So.       6      2 OH       90   526      5.84
@@ -553,18 +531,18 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 6     6 Torrey… &quot; Cal… Big West   So.       6      3 OH      101   477      4.72
 ## # … with 1 more variable: Season &lt;chr&gt;</code></pre>
 <p>But how do we turn that into a height? Math!</p>
-<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="text-cleaning.html#cb475-1" aria-hidden="true" tabindex="-1"></a>kills <span class="sc">%&gt;%</span> </span>
-<span id="cb475-2"><a href="text-cleaning.html#cb475-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(Player, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;Player&quot;</span>, <span class="st">&quot;School&quot;</span>), <span class="at">sep=</span><span class="st">&quot;,&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb475-3"><a href="text-cleaning.html#cb475-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">&quot;(FL)&quot;</span>, <span class="st">&quot;FL&quot;</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb475-4"><a href="text-cleaning.html#cb475-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">&quot;(NY)&quot;</span>, <span class="st">&quot;NY&quot;</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb475-5"><a href="text-cleaning.html#cb475-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">&quot;(PA)&quot;</span>, <span class="st">&quot;PA&quot;</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb475-6"><a href="text-cleaning.html#cb475-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(School, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;School&quot;</span>, <span class="st">&quot;Conference&quot;</span>), <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\\</span><span class="st">(&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb475-7"><a href="text-cleaning.html#cb475-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Conference=</span><span class="fu">gsub</span>(<span class="st">&quot;)&quot;</span>, <span class="st">&quot;&quot;</span>, Conference)) <span class="sc">%&gt;%</span></span>
-<span id="cb475-8"><a href="text-cleaning.html#cb475-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(Ht, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;Feet&quot;</span>, <span class="st">&quot;Inches&quot;</span>), <span class="at">sep=</span><span class="st">&quot;-&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb475-9"><a href="text-cleaning.html#cb475-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Feet =</span> <span class="fu">as.numeric</span>(Feet), <span class="at">Inches =</span> <span class="fu">as.numeric</span>(Inches)) <span class="sc">%&gt;%</span></span>
-<span id="cb475-10"><a href="text-cleaning.html#cb475-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Height =</span> (Feet<span class="sc">*</span><span class="dv">12</span>)<span class="sc">+</span>Inches) <span class="sc">%&gt;%</span></span>
-<span id="cb475-11"><a href="text-cleaning.html#cb475-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 13
+<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="text-cleaning.html#cb529-1" aria-hidden="true" tabindex="-1"></a>kills <span class="sc">%&gt;%</span> </span>
+<span id="cb529-2"><a href="text-cleaning.html#cb529-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(Player, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;Player&quot;</span>, <span class="st">&quot;School&quot;</span>), <span class="at">sep=</span><span class="st">&quot;,&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb529-3"><a href="text-cleaning.html#cb529-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">&quot;(FL)&quot;</span>, <span class="st">&quot;FL&quot;</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb529-4"><a href="text-cleaning.html#cb529-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">&quot;(NY)&quot;</span>, <span class="st">&quot;NY&quot;</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb529-5"><a href="text-cleaning.html#cb529-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">&quot;(PA)&quot;</span>, <span class="st">&quot;PA&quot;</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb529-6"><a href="text-cleaning.html#cb529-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(School, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;School&quot;</span>, <span class="st">&quot;Conference&quot;</span>), <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\\</span><span class="st">(&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb529-7"><a href="text-cleaning.html#cb529-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Conference=</span><span class="fu">gsub</span>(<span class="st">&quot;)&quot;</span>, <span class="st">&quot;&quot;</span>, Conference)) <span class="sc">%&gt;%</span></span>
+<span id="cb529-8"><a href="text-cleaning.html#cb529-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(Ht, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;Feet&quot;</span>, <span class="st">&quot;Inches&quot;</span>), <span class="at">sep=</span><span class="st">&quot;-&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb529-9"><a href="text-cleaning.html#cb529-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Feet =</span> <span class="fu">as.numeric</span>(Feet), <span class="at">Inches =</span> <span class="fu">as.numeric</span>(Inches)) <span class="sc">%&gt;%</span></span>
+<span id="cb529-10"><a href="text-cleaning.html#cb529-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Height =</span> (Feet<span class="sc">*</span><span class="dv">12</span>)<span class="sc">+</span>Inches) <span class="sc">%&gt;%</span></span>
+<span id="cb529-11"><a href="text-cleaning.html#cb529-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 13
 ##    Rank Player  School Conference Cl     Feet Inches Pos       S Kills `Per Set`
 ##   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
 ## 1     1 Lindse… &quot; UC … Big West   So.       6      2 OH       90   526      5.84
@@ -608,6 +586,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

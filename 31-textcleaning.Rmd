@@ -44,18 +44,6 @@ Let's take a look:
 head(nbaplayers)
 ```
 
-For starters, see the two empty columns that don't have any names? X20 and X25. We can get rid of them. They're empty. 
-
-```{r}
-nbaplayers <- nbaplayers %>% select(-X20, -X25)
-```
-
-Now let's look at those names:
-
-```{r}
-head(nbaplayers)
-```
-
 You can see that every players name is their name, then two backslashes, then some version of their name that must have meaning to Sports Reference, but not to us. So we need to get rid of that. 
 
 To do this, we're going to use a little regular expression magic. Regular expressions are a programmatic way to find any pattern in text. What we're looking for is that `\\` business. But, that presents a problem, because the `\` is a special character. It's called an escape character. That escape character means what comes next is potentially special. For instance, if you see `\n`, that's a newline character. So normally, if you see that, it would add a return. 

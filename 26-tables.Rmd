@@ -2,16 +2,12 @@
 
 But not a table. A table with features. 
 
-Sometimes, the best way to show your data is with a table -- simple rows and columns. It allows a reader to compare whatever they want to compare a little easier than a graph where you've chosen what to highlight. R has a neat package called `kableExtra`.
+Sometimes, the best way to show your data is with a table -- simple rows and columns. It allows a reader to compare whatever they want to compare a little easier than a graph where you've chosen what to highlight. The folks that made R Studio and the tidyverse have a neat package called `gt`.
 
-For this assignment, we're going to need a bunch of new libraries. Go over to the console and run these: 
+For this assignment, we'll need `gt` so go over to the console and run: 
 
 ```
-install.packages("kableExtra")
-install.packages("formattable")
-install.packages("htmltools")
-install.packages("webshot")
-webshot::install_phantomjs()
+install.packages("gt")
 ```
 
 So what does all of these libraries do? Let's gather a few and use data of every game in the last 5 years.
@@ -36,7 +32,7 @@ Load libraries.
 
 ```{r, message=FALSE,  warning=FALSE}
 library(tidyverse)
-library(kableExtra)
+library(gt)
 ```
 
 And the data.
@@ -45,7 +41,7 @@ And the data.
 logs <- read_csv("data/logs1520.csv")
 ```
 
-Let's ask this question: Which college basketball team saw the greatest increase in three point attempts last season as a percentage of shots? The simplest way to calculate that is by percent change. 
+Let's ask this question: Fred Ball is supposed to be play fast and shoot threes -- a pro-style offense. How much did Nebraska change in that regard from Tim Miles? In other words, which college basketball team saw the greatest increase in three point attempts last season as a percentage of shots? The simplest way to calculate that is by percent change. 
 
 We've got a little work to do, putting together ideas we've used before. What we need to end up with is some data that looks like this:
 
@@ -64,117 +60,255 @@ threechange <- logs %>%
   ungroup() %>%
   top_n(10) # just want a top 10 list
 ```
-We've output tables to the screen a thousand times in this class with `head`, but kable makes them look decent with very little code. 
+We've output tables to the screen a thousand times in this class with `head`, but `gt` makes them look decent with very little code. 
 
 ```{r}
-threechange %>% kable()
+threechange %>% gt()
 ```
 
-So there you have it. Mississippi Valley State changed their team so much they took 51 percent more threes last season from the season before. Where did Nebraska come out? Isn't Fred Ball supposed to be a lot of threes? We ranked 111th in college basketball in terms of change from the season before. Believe it or not, Nebraska took four fewer threes last season under Fred Ball than the last season of Tim Miles.  
+So there you have it. Mississippi Valley State changed their team so much they took 51 percent more threes last season from the season before. Where did Nebraska come out? Isn't Fred Ball supposed to be a lot of threes? We ranked 111th in college basketball in terms of change from the season before. Believe it or not, Nebraska took four fewer threes in the first season of Fred Ball than the last season of Tim Miles.  
 
-Kable has a mountain of customization options. The good news is that it works in a very familiar pattern. We'll start with default styling.
-
-```{r}
-threechange %>% 
-  kable() %>% 
-  kable_styling()
-```
-Let's do more than the defaults, which you can see are pretty decent. Let's stripe every other row with a little bit of grey, and let's smush the width of the rows.
+`gt` has a mountain of customization options. The good news is that it works in a very familiar pattern. We'll start with fixing headers. What we have isn't bad, but PercentChange isn't good either. Let's fix that.
 
 ```{r}
 threechange %>% 
-  kable() %>% 
-  kable_styling(bootstrap_options = c("striped", "condensed"))
+  gt() %>% 
+  cols_label(
+    PercentChange = "Percent Change"
+  )
 ```
+Better. Note the pattern: Actual header name = "What we want to see". So if we wanted to change Team to School, we'd do this: `Team = "School"` inside the `cols_label` bits.
 
-Throughout the semester, we've been using color and other signals to highlight things. Let's pretend we're doing a project on Minnesota. We can use row_spec to highlight things.
-
-What row_spec is doing here is we're specifying which row -- 6 -- and making all the text on that row bold. We're making the color of the text white, because we're going to set the background to a color -- in this case, the hex color for Minnesota gold.
+Now we can start working with styling. The truth is most of your code in tables is going to be dedicated to styling specific things. The first thing we need: A headline and some chatter. They're required parts of a graphic, so they're a good place to start. We do that with `tab_header`
 
 ```{r}
 threechange %>% 
-  kable() %>% 
-  kable_styling(bootstrap_options = c("striped", "condensed")) %>%
-  row_spec(6, bold = T, color = "white", background = "#FBB93C")
+  gt() %>% 
+  cols_label(
+    PercentChange = "Percent Change"
+  ) %>%
+  tab_header(
+    title = "Does Hoiberg's offense push threes more than Miles?",
+    subtitle = "Nebraska wasn't in the top 100 of teams shooting more threes. These 10 teams completely changed their offense."
+  )
 ```
 
-There's also something called column_spec where we can change the styling on individual columns. What if we wanted to make all the team names bold?
+We have a headline and some chatter, but ... gross. Centered? The extra lines? No real difference in font weight? We can do better. We can style individual elements using `tab_style`. First, let's make the main headline -- the `title` -- bold and left aligned.
 
 ```{r}
 threechange %>% 
-  kable() %>% 
-  kable_styling(bootstrap_options = c("striped", "condensed")) %>%
-  row_spec(6, bold = T, color = "white", background = "#FBB93C") %>%
-  column_spec(1, bold=T)
+  gt() %>% 
+  cols_label(
+    PercentChange = "Percent Change"
+  ) %>%
+  tab_header(
+    title = "Does Hoiberg's offense push threes more than Miles?",
+    subtitle = "Nebraska wasn't in the top 100 of teams shooting more threes. These 10 teams completely changed their offense."
+  ) %>% tab_style(
+    style = cell_text(color = "black", weight = "bold", align = "left"),
+    locations = cells_title("title")
+  )
 ```
-
-Honestly, this is really good right here. You'd see this published ... except for one thing: the percentages.
-
-We could go back up to the top and multiply by 100, but we'd still be missing the percent sign. Well, there's another library for making interesting tables that, in my opinion, has some flaws but does some interesting things too called `formattable`. 
-
-Go to the console and install `formattable` with `install.packages("formattable")`. 
-
-```{r}
-library(formattable)
-```
-
-Then, we're going to use mutate here to use formattables `percent()` function to fix Change. Because it uses some HTML wizardry under the hood, we have to set kable to not `escape` the HTML.
-
-```{r}
-threechange %>%
-  mutate(Change = percent(PercentChange)) %>%
-  kable(escape=F) %>% 
-  kable_styling(bootstrap_options = c("striped", "condensed")) %>%
-  row_spec(6, bold = T, color = "white", background = "#FBB93C") %>%
-  column_spec(1, bold=T)
-```
-
-Another way to highlight things: color ramps. We can change the color of the box covering the percentage using another mutate like this:
+It's hard to see here, but the chatter below is also centered (it doesn't look like it because it fills the space). We can left align that too, but leave it normal weight (i.e. not bold).
 
 ```{r}
 threechange %>% 
-  mutate(Change = percent(PercentChange)) %>%
-  mutate(Change = cell_spec(
-    Change, color = "white", bold = T,
-    background = spec_color(1:10, end = 0.75, option = "B", direction = -1)
-  )) %>%
-  kable(escape=F) %>% 
-  kable_styling(bootstrap_options = c("striped", "condensed")) %>%
-  row_spec(6, bold = T, color = "white", background = "#FBB93C") %>%
-  column_spec(1, bold=T)
+  gt() %>% 
+  cols_label(
+    PercentChange = "Percent Change"
+  ) %>%
+  tab_header(
+    title = "Does Hoiberg's offense push threes more than Miles?",
+    subtitle = "Nebraska wasn't in the top 100 of teams shooting more threes. These 10 teams completely changed their offense."
+  ) %>% tab_style(
+    style = cell_text(color = "black", weight = "bold", align = "left"),
+    locations = cells_title("title")
+  ) %>% tab_style(
+    style = cell_text(color = "black", align = "left"),
+    locations = cells_title("subtitle")
+  )
 ```
-
-If this is intersting to you, [there's more you can do](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html#overview).
-
-## Exporting tables
-
-One of the major shortcomings with `formattable` is a very limited ability to export tables. Fortunately, `kable` appears to have somewhat solved that problem.
-
-But, for this to be a finished product, we need to add a headline, credit line and source line. 
-
-Good news bad news: The bad news is that `kable` doesn't have a good way to add a headline. The good news is we can do that in illustrator pretty easily.
-
-The other good news bad news: `kable` isn't going to export this as an actual vector file. It's going to make it an image and embed that into a pdf. That has consequences if we want to edit it.
-
-To export it, we merely add a save_kable to the end and give it a file path.
-
-```
+The next item on the required elements list: Source and credit lines. In `gt`, those are called `tab_source_notes` and we can add them like this:
+```{r}
 threechange %>% 
-  mutate(Change = percent(PercentChange)) %>%
-  mutate(Change = cell_spec(
-    Change, color = "white", bold = T,
-    background = spec_color(1:10, end = 0.75, option = "B", direction = -1)
-  )) %>%
-  kable(escape=F) %>% 
-  kable_styling(bootstrap_options = c("striped", "condensed")) %>%
-  row_spec(6, bold = T, color = "white", background = "#FBB93C") %>%
-  column_spec(1, bold=T) %>%
-  save_kable("minnesota.pdf")
+  gt() %>% 
+  cols_label(
+    PercentChange = "Percent Change"
+  ) %>%
+  tab_header(
+    title = "Does Hoiberg's offense push threes more than Miles?",
+    subtitle = "Nebraska wasn't in the top 100 of teams shooting more threes. These 10 teams completely changed their offense."
+  ) %>% tab_style(
+    style = cell_text(color = "black", weight = "bold", align = "left"),
+    locations = cells_title("title")
+  ) %>% tab_style(
+    style = cell_text(color = "black", align = "left"),
+    locations = cells_title("subtitle")
+  ) %>%
+  tab_source_note(
+    source_note = "By Matt Waite"
+  ) %>%
+  tab_source_note(
+    source_note = md("Source: [Sports Reference](https://www.sports-reference.com/cbb/seasons/)")
+  ) 
 ```
-To fix this, we need to pull it into Illustrator. In there, we're going to expand the artboard, add a headline and chatter, then add source and credit lines at the bottom, and finish with touching up the artboards.
+We can do a lot with `tab_style`. For instance, we can make the headers bold and reduce the size a bit to reduce font congestion in the area.
+```{r}
+threechange %>% 
+  gt() %>% 
+  cols_label(
+    PercentChange = "Percent Change"
+  ) %>%
+  tab_header(
+    title = "Does Hoiberg's offense push threes more than Miles?",
+    subtitle = "Nebraska wasn't in the top 100 of teams shooting more threes. These 10 teams completely changed their offense."
+  ) %>% 
+  tab_style(
+    style = cell_text(color = "black", weight = "bold", align = "left"),
+    locations = cells_title("title")
+  ) %>% 
+  tab_style(
+    style = cell_text(color = "black", align = "left"),
+    locations = cells_title("subtitle")
+  ) %>%
+  tab_style(
+     locations = cells_column_labels(columns = everything()),
+     style = list(
+       cell_borders(sides = "bottom", weight = px(3)),
+       cell_text(weight = "bold", size=12)
+     )
+   ) %>%
+  tab_source_note(
+    source_note = "By Matt Waite"
+  ) %>%
+  tab_source_note(
+    source_note = md("Source: [Sports Reference](https://www.sports-reference.com/cbb/seasons/)")
+  ) 
+```
+Next up: There's a lot of lines in this that don't need to be there. `gt` has some tools to get rid of them easily and add in some other readability improvements. 
+```{r}
+threechange %>% 
+  gt() %>% 
+  cols_label(
+    PercentChange = "Percent Change"
+  ) %>%
+  tab_header(
+    title = "Does Hoiberg's offense push threes more than Miles?",
+    subtitle = "Nebraska wasn't in the top 100 of teams shooting more threes. These 10 teams completely changed their offense."
+  ) %>%
+  tab_source_note(
+    source_note = "By Matt Waite"
+  ) %>%
+  tab_source_note(
+    source_note = md("Source: [Sports Reference](https://www.sports-reference.com/cbb/seasons/)")
+  ) %>% 
+  tab_style(
+    style = cell_text(color = "black", weight = "bold", align = "left"),
+    locations = cells_title("title")
+  ) %>% 
+  tab_style(
+    style = cell_text(color = "black", align = "left"),
+    locations = cells_title("subtitle")
+  ) %>%
+  tab_style(
+     locations = cells_column_labels(columns = everything()),
+     style = list(
+       cell_borders(sides = "bottom", weight = px(3)),
+       cell_text(weight = "bold", size=12)
+     )
+   ) %>%
+  opt_row_striping() %>% 
+  opt_table_lines("none")
+```
+We're in pretty good shape here, but look closer. What else makes this table sub-par? How about the formatting of the percent change? We can fix that with a formatter.
+```{r}
+threechange %>% 
+  gt() %>% 
+  cols_label(
+    PercentChange = "Percent Change"
+  ) %>%
+  tab_header(
+    title = "Does Hoiberg's offense push threes more than Miles?",
+    subtitle = "Nebraska wasn't in the top 100 of teams shooting more threes. These 10 teams completely changed their offense."
+  ) %>%
+  tab_source_note(
+    source_note = "By Matt Waite"
+  ) %>%
+  tab_source_note(
+    source_note = md("Source: [Sports Reference](https://www.sports-reference.com/cbb/seasons/)")
+  ) %>% 
+  tab_style(
+    style = cell_text(color = "black", weight = "bold", align = "left"),
+    locations = cells_title("title")
+  ) %>% 
+  tab_style(
+    style = cell_text(color = "black", align = "left"),
+    locations = cells_title("subtitle")
+  ) %>%
+  tab_style(
+     locations = cells_column_labels(columns = everything()),
+     style = list(
+       cell_borders(sides = "bottom", weight = px(3)),
+       cell_text(weight = "bold", size=12)
+     )
+   ) %>%
+  opt_row_striping() %>% 
+  opt_table_lines("none") %>%
+    fmt_percent(
+    columns = c(PercentChange),
+    decimals = 1
+  )
+```
+Throughout the semester, we've been using color and other signals to highlight things. Let's pretend we're doing a project on Minnesota. Note they're the only Big Ten team on this list. With a little `tab_style` magic, we can change individual rows and add color. The last `tab_style` block here will first pass off the styles we want to use -- we're going to make the rows maroon and the text gold -- and then for locations we specify where with a simple filter. What that means is that any rows we can address with logic -- all rows with a value greater than X, for example -- we can change the styling. 
 
-Here's a video walkthrough:
+```{r}
+threechange %>% 
+  gt() %>% 
+  cols_label(
+    PercentChange = "Percent Change"
+  ) %>%
+  tab_header(
+    title = "Does Hoiberg's offense push threes more than Miles?",
+    subtitle = "Nebraska wasn't in the top 100 of teams shooting more threes. These 10 teams completely changed their offense."
+  ) %>%
+  tab_source_note(
+    source_note = "By Matt Waite"
+  ) %>%
+  tab_source_note(
+    source_note = md("Source: [Sports Reference](https://www.sports-reference.com/cbb/seasons/)")
+  ) %>% 
+  tab_style(
+    style = cell_text(color = "black", weight = "bold", align = "left"),
+    locations = cells_title("title")
+  ) %>% 
+  tab_style(
+    style = cell_text(color = "black", align = "left"),
+    locations = cells_title("subtitle")
+  ) %>%
+  tab_style(
+     locations = cells_column_labels(columns = everything()),
+     style = list(
+       cell_borders(sides = "bottom", weight = px(3)),
+       cell_text(weight = "bold", size=12)
+     )
+   ) %>%
+  opt_row_striping() %>% 
+  opt_table_lines("none") %>%
+    fmt_percent(
+    columns = c(PercentChange),
+    decimals = 1
+  ) %>%
+  tab_style(
+    style = list(
+      cell_fill(color = "maroon"),
+      cell_text(color = "gold")
+      ),
+    locations = cells_body(
+      rows = Team == "Minnesota Golden Gophers")
+  )
+  
+```
+Two things here:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/AeZ5uiCpJro" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-
+1. Dear God that color scheme is awful, which is fitting for a school that worships a lawn-wrecking varmint.
+2. We've arrived where we want to be: We've created a clear table that allows a reader to compare schools at will while also using color to draw attention to the thing we want to draw attention to. We've kept it simple so the color has impact.

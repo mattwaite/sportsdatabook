@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 28 Facet wraps | Sports Data Analysis and Visualization</title>
   <meta name="description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 28 Facet wraps | Sports Data Analysis and Visualization" />
   <meta property="og:type" content="book" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="tables.html"/>
 <link rel="next" href="arranging-multiple-plots-together.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,10 +51,10 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.3/plotly.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
@@ -134,6 +134,7 @@ code span.va { color: #000000; } /* Variable */
 code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -252,10 +253,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="25.1" data-path="beeswarm-plots.html"><a href="beeswarm-plots.html#a-few-other-options"><i class="fa fa-check"></i><b>25.1</b> A few other options</a></li>
 </ul></li>
 <li class="chapter" data-level="26" data-path="bump-charts.html"><a href="bump-charts.html"><i class="fa fa-check"></i><b>26</b> Bump charts</a></li>
-<li class="chapter" data-level="27" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>27</b> Tables</a>
-<ul>
-<li class="chapter" data-level="27.1" data-path="tables.html"><a href="tables.html#exporting-tables"><i class="fa fa-check"></i><b>27.1</b> Exporting tables</a></li>
-</ul></li>
+<li class="chapter" data-level="27" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>27</b> Tables</a></li>
 <li class="chapter" data-level="28" data-path="facet-wraps.html"><a href="facet-wraps.html"><i class="fa fa-check"></i><b>28</b> Facet wraps</a>
 <ul>
 <li class="chapter" data-level="28.1" data-path="facet-wraps.html"><a href="facet-wraps.html#facet-grid-vs-facet-wraps"><i class="fa fa-check"></i><b>28.1</b> Facet grid vs facet wraps</a></li>
@@ -357,80 +355,76 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Sometimes the easiest way to spot a trend is to chart a bunch of small things side by side. Edward Tufte, one of the most well known data visualization thinkers on the planet, calls this “small multiples” where ggplot calls this a facet wrap or a facet grid, depending.</p>
 <p>One thing we noticed earlier in the semester – it seems that a lot of teams shoot worse as the season goes on. Do they? We could answer this a number of ways, but the best way to show people would be visually. Let’s use Small Multiples.</p>
 <p>As always, we start with libraries.</p>
-<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="facet-wraps.html#cb396-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="facet-wraps.html#cb441-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p>We’re going to use the logs of college basketball games last season.</p>
 <pre><p><strong>For this walkthrough:</strong></p><p><a href="http://mattwaite.github.io/sportsdatafiles/logs20.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>And load it.</p>
-<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="facet-wraps.html#cb397-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/logs20.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="facet-wraps.html#cb442-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/logs20.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Rows: 11097 Columns: 43</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr   (6): HomeAway, Opponent, W_L, Team, Conference, season
+## dbl  (35): Game, TeamScore, OpponentScore, TeamFG, TeamFGA, TeamFGPCT, Team3...
+## lgl   (1): Blank
+## date  (1): Date</code></pre>
 <pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
-## cols(
-##   .default = col_double(),
-##   Date = col_date(format = &quot;&quot;),
-##   HomeAway = col_character(),
-##   Opponent = col_character(),
-##   W_L = col_character(),
-##   Blank = col_logical(),
-##   Team = col_character(),
-##   Conference = col_character(),
-##   season = col_character()
-## )
-## ℹ Use `spec()` for the full column specifications.</code></pre>
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <p>Let’s narrow our pile and look just at the Big Ten.</p>
-<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="facet-wraps.html#cb399-1" aria-hidden="true" tabindex="-1"></a>big10 <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">==</span> <span class="st">&quot;Big Ten&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="facet-wraps.html#cb446-1" aria-hidden="true" tabindex="-1"></a>big10 <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">==</span> <span class="st">&quot;Big Ten&quot;</span>)</span></code></pre></div>
 <p>The first thing we can do is look at a line chart, like we have done in previous chapters.</p>
-<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="facet-wraps.html#cb400-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb400-2"><a href="facet-wraps.html#cb400-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>big10, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>TeamFGPCT, <span class="at">group=</span>Team)) <span class="sc">+</span> </span>
-<span id="cb400-3"><a href="facet-wraps.html#cb400-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">7</span>))</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-304-1.png" width="672" /></p>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="facet-wraps.html#cb447-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb447-2"><a href="facet-wraps.html#cb447-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>big10, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>TeamFGPCT, <span class="at">group=</span>Team)) <span class="sc">+</span> </span>
+<span id="cb447-3"><a href="facet-wraps.html#cb447-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">7</span>))</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-306-1.png" width="672" /></p>
 <p>And, not surprisingly, we get a hairball. We could color certain lines, but that would limit us to focus on one team. What if we did all of them at once? We do that with a <code>facet_wrap</code>. The only thing we MUST pass into a <code>facet_wrap</code> is what thing we’re going to separate them out by. In this case, we precede that field with a tilde, so in our case we want the Team field. It looks like this:</p>
-<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="facet-wraps.html#cb401-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb401-2"><a href="facet-wraps.html#cb401-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>big10, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>TeamFGPCT, <span class="at">group=</span>Team)) <span class="sc">+</span> </span>
-<span id="cb401-3"><a href="facet-wraps.html#cb401-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">7</span>)) <span class="sc">+</span> </span>
-<span id="cb401-4"><a href="facet-wraps.html#cb401-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Team)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-305-1.png" width="672" /></p>
+<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="facet-wraps.html#cb448-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb448-2"><a href="facet-wraps.html#cb448-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>big10, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>TeamFGPCT, <span class="at">group=</span>Team)) <span class="sc">+</span> </span>
+<span id="cb448-3"><a href="facet-wraps.html#cb448-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">7</span>)) <span class="sc">+</span> </span>
+<span id="cb448-4"><a href="facet-wraps.html#cb448-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Team)</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-307-1.png" width="672" /></p>
 <p>Answer: Not immediately clear, but we can look at this and analyze it. We could add a piece of annotation to help us out.</p>
-<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="facet-wraps.html#cb402-1" aria-hidden="true" tabindex="-1"></a>big10 <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="fu">mean</span>(TeamFGPCT))</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 1
+<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="facet-wraps.html#cb449-1" aria-hidden="true" tabindex="-1"></a>big10 <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="fu">mean</span>(TeamFGPCT))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 1
 ##   `mean(TeamFGPCT)`
 ##               &lt;dbl&gt;
 ## 1             0.436</code></pre>
-<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="facet-wraps.html#cb404-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb404-2"><a href="facet-wraps.html#cb404-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span>.<span class="dv">4361078</span>, <span class="at">color=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb404-3"><a href="facet-wraps.html#cb404-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>big10, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>TeamFGPCT, <span class="at">group=</span>Team)) <span class="sc">+</span> </span>
-<span id="cb404-4"><a href="facet-wraps.html#cb404-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">7</span>)) <span class="sc">+</span> </span>
-<span id="cb404-5"><a href="facet-wraps.html#cb404-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Team)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-307-1.png" width="672" /></p>
+<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="facet-wraps.html#cb451-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb451-2"><a href="facet-wraps.html#cb451-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span>.<span class="dv">4361078</span>, <span class="at">color=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb451-3"><a href="facet-wraps.html#cb451-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>big10, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>TeamFGPCT, <span class="at">group=</span>Team)) <span class="sc">+</span> </span>
+<span id="cb451-4"><a href="facet-wraps.html#cb451-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">7</span>)) <span class="sc">+</span> </span>
+<span id="cb451-5"><a href="facet-wraps.html#cb451-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Team)</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-309-1.png" width="672" /></p>
 <p>What do you see here? How do teams compare? How do they change over time? I’m not asking you these questions because they’re an assignment – I’m asking because that’s exactly what this chart helps answer. Your brain will immediately start making those connections.</p>
 <div id="facet-grid-vs-facet-wraps" class="section level2" number="28.1">
 <h2><span class="header-section-number">28.1</span> Facet grid vs facet wraps</h2>
 <p>Facet grids allow us to put teams on the same plane, versus just repeating them. And we can specify that plane as vertical or horizontal. For example, here’s our chart from above, but using facet_grid to stack them.</p>
-<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="facet-wraps.html#cb405-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb405-2"><a href="facet-wraps.html#cb405-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span>.<span class="dv">4361078</span>, <span class="at">color=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb405-3"><a href="facet-wraps.html#cb405-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>big10, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>TeamFGPCT, <span class="at">group=</span>Team)) <span class="sc">+</span> </span>
-<span id="cb405-4"><a href="facet-wraps.html#cb405-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">7</span>)) <span class="sc">+</span> </span>
-<span id="cb405-5"><a href="facet-wraps.html#cb405-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Team <span class="sc">~</span> .)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-308-1.png" width="480" /></p>
+<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="facet-wraps.html#cb452-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb452-2"><a href="facet-wraps.html#cb452-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span>.<span class="dv">4361078</span>, <span class="at">color=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb452-3"><a href="facet-wraps.html#cb452-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>big10, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>TeamFGPCT, <span class="at">group=</span>Team)) <span class="sc">+</span> </span>
+<span id="cb452-4"><a href="facet-wraps.html#cb452-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">7</span>)) <span class="sc">+</span> </span>
+<span id="cb452-5"><a href="facet-wraps.html#cb452-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Team <span class="sc">~</span> .)</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-310-1.png" width="480" /></p>
 <p>And here they are next to each other:</p>
-<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="facet-wraps.html#cb406-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb406-2"><a href="facet-wraps.html#cb406-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span>.<span class="dv">4361078</span>, <span class="at">color=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb406-3"><a href="facet-wraps.html#cb406-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>big10, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>TeamFGPCT, <span class="at">group=</span>Team)) <span class="sc">+</span> </span>
-<span id="cb406-4"><a href="facet-wraps.html#cb406-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">7</span>)) <span class="sc">+</span> </span>
-<span id="cb406-5"><a href="facet-wraps.html#cb406-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> Team)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-309-1.png" width="672" /></p>
+<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="facet-wraps.html#cb453-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb453-2"><a href="facet-wraps.html#cb453-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span>.<span class="dv">4361078</span>, <span class="at">color=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb453-3"><a href="facet-wraps.html#cb453-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>big10, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>TeamFGPCT, <span class="at">group=</span>Team)) <span class="sc">+</span> </span>
+<span id="cb453-4"><a href="facet-wraps.html#cb453-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">7</span>)) <span class="sc">+</span> </span>
+<span id="cb453-5"><a href="facet-wraps.html#cb453-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> Team)</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-311-1.png" width="672" /></p>
 <p>Note: We’d have some work to do with the labeling on this – we’ll get to that – but you can see where this is valuable comparing a group of things. One warning: Don’t go too crazy with this or it loses it’s visual power.</p>
 </div>
 <div id="other-types" class="section level2" number="28.2">
 <h2><span class="header-section-number">28.2</span> Other types</h2>
 <p>Line charts aren’t the only things we can do. We can do any kind of chart in ggplot. Staying with shooting, where are team’s winning and losing performances coming from when we talk about team shooting and opponent shooting?</p>
-<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="facet-wraps.html#cb407-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb407-2"><a href="facet-wraps.html#cb407-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>big10, <span class="fu">aes</span>(<span class="at">x=</span>TeamFGPCT, <span class="at">y=</span>OpponentFGPCT, <span class="at">color=</span>W_L)) <span class="sc">+</span></span>
-<span id="cb407-3"><a href="facet-wraps.html#cb407-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">7</span>)) <span class="sc">+</span> </span>
-<span id="cb407-4"><a href="facet-wraps.html#cb407-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">7</span>)) <span class="sc">+</span> </span>
-<span id="cb407-5"><a href="facet-wraps.html#cb407-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Team)</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-310-1.png" width="672" /></p>
+<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="facet-wraps.html#cb454-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb454-2"><a href="facet-wraps.html#cb454-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>big10, <span class="fu">aes</span>(<span class="at">x=</span>TeamFGPCT, <span class="at">y=</span>OpponentFGPCT, <span class="at">color=</span>W_L)) <span class="sc">+</span></span>
+<span id="cb454-3"><a href="facet-wraps.html#cb454-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">7</span>)) <span class="sc">+</span> </span>
+<span id="cb454-4"><a href="facet-wraps.html#cb454-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">7</span>)) <span class="sc">+</span> </span>
+<span id="cb454-5"><a href="facet-wraps.html#cb454-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Team)</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-312-1.png" width="672" /></p>
 
 </div>
 </div>
@@ -463,6 +457,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

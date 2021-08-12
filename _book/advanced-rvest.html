@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 38 Advanced rvest | Sports Data Analysis and Visualization</title>
   <meta name="description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 38 Advanced rvest | Sports Data Analysis and Visualization" />
   <meta property="og:type" content="book" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="intro-to-rvest.html"/>
 <link rel="next" href="building-your-own-blog-with-blogdown.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,10 +51,10 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.3/plotly.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
@@ -134,6 +134,7 @@ code span.va { color: #000000; } /* Variable */
 code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -252,10 +253,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="25.1" data-path="beeswarm-plots.html"><a href="beeswarm-plots.html#a-few-other-options"><i class="fa fa-check"></i><b>25.1</b> A few other options</a></li>
 </ul></li>
 <li class="chapter" data-level="26" data-path="bump-charts.html"><a href="bump-charts.html"><i class="fa fa-check"></i><b>26</b> Bump charts</a></li>
-<li class="chapter" data-level="27" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>27</b> Tables</a>
-<ul>
-<li class="chapter" data-level="27.1" data-path="tables.html"><a href="tables.html#exporting-tables"><i class="fa fa-check"></i><b>27.1</b> Exporting tables</a></li>
-</ul></li>
+<li class="chapter" data-level="27" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>27</b> Tables</a></li>
 <li class="chapter" data-level="28" data-path="facet-wraps.html"><a href="facet-wraps.html"><i class="fa fa-check"></i><b>28</b> Facet wraps</a>
 <ul>
 <li class="chapter" data-level="28.1" data-path="facet-wraps.html"><a href="facet-wraps.html#facet-grid-vs-facet-wraps"><i class="fa fa-check"></i><b>28.1</b> Facet grid vs facet wraps</a></li>
@@ -365,19 +363,19 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>And how do we get each one of those urls without having to copy them all into some horrible list?</li>
 </ol>
 <p>So let’s start with that last question first and grab libraries we need.</p>
-<div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb581-1"><a href="advanced-rvest.html#cb581-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb581-2"><a href="advanced-rvest.html#cb581-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span>
-<span id="cb581-3"><a href="advanced-rvest.html#cb581-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code></pre></div>
+<div class="sourceCode" id="cb650"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb650-1"><a href="advanced-rvest.html#cb650-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb650-2"><a href="advanced-rvest.html#cb650-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span>
+<span id="cb650-3"><a href="advanced-rvest.html#cb650-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code></pre></div>
 <p>First things first, we need to grab the url to each team from that first link.</p>
-<div class="sourceCode" id="cb582"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb582-1"><a href="advanced-rvest.html#cb582-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&quot;https://www.sports-reference.com/cbb/seasons/2019-school-stats.html&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb651"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb651-1"><a href="advanced-rvest.html#cb651-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&quot;https://www.sports-reference.com/cbb/seasons/2019-school-stats.html&quot;</span></span></code></pre></div>
 <p>But notice first, we don’t want to grab the table. The table doesn’t help us. We need to grab the only <em>link</em> in the table. So we can do that by using the table xpath node, then grabbing the anchor tags in the table, then get only the link out of them (instead of the linked text).</p>
-<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb583-1"><a href="advanced-rvest.html#cb583-1" aria-hidden="true" tabindex="-1"></a>schools <span class="ot">&lt;-</span> url <span class="sc">%&gt;%</span></span>
-<span id="cb583-2"><a href="advanced-rvest.html#cb583-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb583-3"><a href="advanced-rvest.html#cb583-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">&#39;//*[@id=&quot;basic_school_stats&quot;]&#39;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb583-4"><a href="advanced-rvest.html#cb583-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">&quot;a&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb583-5"><a href="advanced-rvest.html#cb583-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_attr</span>(<span class="st">&#39;href&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb652"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb652-1"><a href="advanced-rvest.html#cb652-1" aria-hidden="true" tabindex="-1"></a>schools <span class="ot">&lt;-</span> url <span class="sc">%&gt;%</span></span>
+<span id="cb652-2"><a href="advanced-rvest.html#cb652-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb652-3"><a href="advanced-rvest.html#cb652-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">&#39;//*[@id=&quot;basic_school_stats&quot;]&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb652-4"><a href="advanced-rvest.html#cb652-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">&quot;a&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb652-5"><a href="advanced-rvest.html#cb652-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_attr</span>(<span class="st">&#39;href&#39;</span>)</span></code></pre></div>
 <p>Notice we now have a list called schools with … 353 elements. That’s the number of teams in college basketball, so we’re off to a good start. Here’s what the fourth element is.</p>
-<div class="sourceCode" id="cb584"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb584-1"><a href="advanced-rvest.html#cb584-1" aria-hidden="true" tabindex="-1"></a>schools[<span class="dv">4</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb653"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb653-1"><a href="advanced-rvest.html#cb653-1" aria-hidden="true" tabindex="-1"></a>schools[<span class="dv">4</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;/cbb/schools/alabama-am/2019.html&quot;</code></pre>
 <p>So note, that’s the relative path to Alabama A&amp;M’s team page. By relative path, I mean it doesn’t have the root domain. So we need to add that to each request or we’ll get no where.</p>
 <p>So that’s a problem to note.</p>
@@ -388,53 +386,53 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>The second part is we’re grabbing the team name based on it’s location in the page.</p>
 <p>Third: The conference.</p>
 <p>Fourth is the table itself, noting to ignore the headers. The last bit fixes the headers, removes the garbage header data from the table, converts the data to numbers, fixes the date and mutates a team and conference value. It looks like a lot, and it took a bit of twiddling to get it done, but it’s no different from what you did for your last homework.</p>
-<div class="sourceCode" id="cb586"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb586-1"><a href="advanced-rvest.html#cb586-1" aria-hidden="true" tabindex="-1"></a>page <span class="ot">&lt;-</span> <span class="fu">read_html</span>(<span class="st">&quot;https://www.sports-reference.com/cbb/schools/abilene-christian/2019-gamelogs.html&quot;</span>)</span>
-<span id="cb586-2"><a href="advanced-rvest.html#cb586-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb586-3"><a href="advanced-rvest.html#cb586-3" aria-hidden="true" tabindex="-1"></a>team <span class="ot">&lt;-</span> page <span class="sc">%&gt;%</span></span>
-<span id="cb586-4"><a href="advanced-rvest.html#cb586-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">&#39;//*[@id=&quot;meta&quot;]/div[2]/h1/span[2]&#39;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb586-5"><a href="advanced-rvest.html#cb586-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>()</span>
-<span id="cb586-6"><a href="advanced-rvest.html#cb586-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb586-7"><a href="advanced-rvest.html#cb586-7" aria-hidden="true" tabindex="-1"></a>conference <span class="ot">&lt;-</span> page <span class="sc">%&gt;%</span></span>
-<span id="cb586-8"><a href="advanced-rvest.html#cb586-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">&#39;//*[@id=&quot;meta&quot;]/div[2]/p[1]/a&#39;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb586-9"><a href="advanced-rvest.html#cb586-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_text</span>()</span>
-<span id="cb586-10"><a href="advanced-rvest.html#cb586-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb586-11"><a href="advanced-rvest.html#cb586-11" aria-hidden="true" tabindex="-1"></a>table <span class="ot">&lt;-</span> page <span class="sc">%&gt;%</span></span>
-<span id="cb586-12"><a href="advanced-rvest.html#cb586-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">&#39;//*[@id=&quot;sgl-basic&quot;]&#39;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb586-13"><a href="advanced-rvest.html#cb586-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_table</span>(<span class="at">header=</span><span class="cn">FALSE</span>)</span>
-<span id="cb586-14"><a href="advanced-rvest.html#cb586-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb586-15"><a href="advanced-rvest.html#cb586-15" aria-hidden="true" tabindex="-1"></a>table <span class="ot">&lt;-</span> table[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Game=</span>X1, <span class="at">Date=</span>X2, <span class="at">HomeAway=</span>X3, <span class="at">Opponent=</span>X4, <span class="at">W_L=</span>X5, <span class="at">TeamScore=</span>X6, <span class="at">OpponentScore=</span>X7, <span class="at">TeamFG=</span>X8, <span class="at">TeamFGA=</span>X9, <span class="at">TeamFGPCT=</span>X10, <span class="at">Team3P=</span>X11, <span class="at">Team3PA=</span>X12, <span class="at">Team3PPCT=</span>X13, <span class="at">TeamFT=</span>X14, <span class="at">TeamFTA=</span>X15, <span class="at">TeamFTPCT=</span>X16, <span class="at">TeamOffRebounds=</span>X17, <span class="at">TeamTotalRebounds=</span>X18, <span class="at">TeamAssists=</span>X19, <span class="at">TeamSteals=</span>X20, <span class="at">TeamBlocks=</span>X21, <span class="at">TeamTurnovers=</span>X22, <span class="at">TeamPersonalFouls=</span>X23, <span class="at">Blank=</span>X24, <span class="at">OpponentFG=</span>X25, <span class="at">OpponentFGA=</span>X26, <span class="at">OpponentFGPCT=</span>X27, <span class="at">Opponent3P=</span>X28, <span class="at">Opponent3PA=</span>X29, <span class="at">Opponent3PPCT=</span>X30, <span class="at">OpponentFT=</span>X31, <span class="at">OpponentFTA=</span>X32, <span class="at">OpponentFTPCT=</span>X33, <span class="at">OpponentOffRebounds=</span>X34, <span class="at">OpponentTotalRebounds=</span>X35, <span class="at">OpponentAssists=</span>X36, <span class="at">OpponentSteals=</span>X37, <span class="at">OpponentBlocks=</span>X38, <span class="at">OpponentTurnovers=</span>X39, <span class="at">OpponentPersonalFouls=</span>X40) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Game <span class="sc">!=</span> <span class="st">&quot;&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Game <span class="sc">!=</span> <span class="st">&quot;G&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Team=</span>team, <span class="at">Conference=</span>conference) <span class="sc">%&gt;%</span> <span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="sc">-</span>Team, <span class="sc">-</span>Conference, <span class="sc">-</span>Date, <span class="sc">-</span>Opponent, <span class="sc">-</span>HomeAway, <span class="sc">-</span>W_L), as.numeric) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">ymd</span>(Date)) </span></code></pre></div>
+<div class="sourceCode" id="cb655"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb655-1"><a href="advanced-rvest.html#cb655-1" aria-hidden="true" tabindex="-1"></a>page <span class="ot">&lt;-</span> <span class="fu">read_html</span>(<span class="st">&quot;https://www.sports-reference.com/cbb/schools/abilene-christian/2019-gamelogs.html&quot;</span>)</span>
+<span id="cb655-2"><a href="advanced-rvest.html#cb655-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb655-3"><a href="advanced-rvest.html#cb655-3" aria-hidden="true" tabindex="-1"></a>team <span class="ot">&lt;-</span> page <span class="sc">%&gt;%</span></span>
+<span id="cb655-4"><a href="advanced-rvest.html#cb655-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">&#39;//*[@id=&quot;meta&quot;]/div[2]/h1/span[2]&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb655-5"><a href="advanced-rvest.html#cb655-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>()</span>
+<span id="cb655-6"><a href="advanced-rvest.html#cb655-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb655-7"><a href="advanced-rvest.html#cb655-7" aria-hidden="true" tabindex="-1"></a>conference <span class="ot">&lt;-</span> page <span class="sc">%&gt;%</span></span>
+<span id="cb655-8"><a href="advanced-rvest.html#cb655-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">&#39;//*[@id=&quot;meta&quot;]/div[2]/p[1]/a&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb655-9"><a href="advanced-rvest.html#cb655-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_text</span>()</span>
+<span id="cb655-10"><a href="advanced-rvest.html#cb655-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb655-11"><a href="advanced-rvest.html#cb655-11" aria-hidden="true" tabindex="-1"></a>table <span class="ot">&lt;-</span> page <span class="sc">%&gt;%</span></span>
+<span id="cb655-12"><a href="advanced-rvest.html#cb655-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">&#39;//*[@id=&quot;sgl-basic&quot;]&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb655-13"><a href="advanced-rvest.html#cb655-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_table</span>(<span class="at">header=</span><span class="cn">FALSE</span>)</span>
+<span id="cb655-14"><a href="advanced-rvest.html#cb655-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb655-15"><a href="advanced-rvest.html#cb655-15" aria-hidden="true" tabindex="-1"></a>table <span class="ot">&lt;-</span> table[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Game=</span>X1, <span class="at">Date=</span>X2, <span class="at">HomeAway=</span>X3, <span class="at">Opponent=</span>X4, <span class="at">W_L=</span>X5, <span class="at">TeamScore=</span>X6, <span class="at">OpponentScore=</span>X7, <span class="at">TeamFG=</span>X8, <span class="at">TeamFGA=</span>X9, <span class="at">TeamFGPCT=</span>X10, <span class="at">Team3P=</span>X11, <span class="at">Team3PA=</span>X12, <span class="at">Team3PPCT=</span>X13, <span class="at">TeamFT=</span>X14, <span class="at">TeamFTA=</span>X15, <span class="at">TeamFTPCT=</span>X16, <span class="at">TeamOffRebounds=</span>X17, <span class="at">TeamTotalRebounds=</span>X18, <span class="at">TeamAssists=</span>X19, <span class="at">TeamSteals=</span>X20, <span class="at">TeamBlocks=</span>X21, <span class="at">TeamTurnovers=</span>X22, <span class="at">TeamPersonalFouls=</span>X23, <span class="at">Blank=</span>X24, <span class="at">OpponentFG=</span>X25, <span class="at">OpponentFGA=</span>X26, <span class="at">OpponentFGPCT=</span>X27, <span class="at">Opponent3P=</span>X28, <span class="at">Opponent3PA=</span>X29, <span class="at">Opponent3PPCT=</span>X30, <span class="at">OpponentFT=</span>X31, <span class="at">OpponentFTA=</span>X32, <span class="at">OpponentFTPCT=</span>X33, <span class="at">OpponentOffRebounds=</span>X34, <span class="at">OpponentTotalRebounds=</span>X35, <span class="at">OpponentAssists=</span>X36, <span class="at">OpponentSteals=</span>X37, <span class="at">OpponentBlocks=</span>X38, <span class="at">OpponentTurnovers=</span>X39, <span class="at">OpponentPersonalFouls=</span>X40) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Game <span class="sc">!=</span> <span class="st">&quot;&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Game <span class="sc">!=</span> <span class="st">&quot;G&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Team=</span>team, <span class="at">Conference=</span>conference) <span class="sc">%&gt;%</span> <span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="sc">-</span>Team, <span class="sc">-</span>Conference, <span class="sc">-</span>Date, <span class="sc">-</span>Opponent, <span class="sc">-</span>HomeAway, <span class="sc">-</span>W_L), as.numeric) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">ymd</span>(Date)) </span></code></pre></div>
 <p>Now what we’re left with is how do we do this for ALL the teams. We need to send 353 requests to their servers to get each page. And each url is not the one we have – we need to alter it.</p>
 <p>First we have to add the root domain to each request. And, each request needs to go to /2019-gamelogs.html instead of /2019.html. If you look at the urls two the page we have and the page we need, that’s all that changes.</p>
 <p>What we’re going to use is what is known in programming as a loop. We can loop through a list and have it do something to each element in the loop. And once it’s done, we can move on to the next thing.</p>
 <p>Think of it like a program that will go though a list of your classmates and ask each one of them for their year in school. It will start at one end of the list and move through asking each one “What year in school are you?” and will move on after getting an answer.</p>
 <p>Except we want to take a url, add something to it, alter it, then request it and grab a bunch of data from it. Once we’re done doing all that, we’ll take all that info and cram it into a bigger dataset and then move on to the next one. Here’s what that looks like:</p>
-<div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb587-1"><a href="advanced-rvest.html#cb587-1" aria-hidden="true" tabindex="-1"></a>uri <span class="ot">&lt;-</span> <span class="st">&quot;https://www.sports-reference.com&quot;</span></span>
-<span id="cb587-2"><a href="advanced-rvest.html#cb587-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb587-3"><a href="advanced-rvest.html#cb587-3" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">tibble</span>()</span>
-<span id="cb587-4"><a href="advanced-rvest.html#cb587-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb587-5"><a href="advanced-rvest.html#cb587-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> schools){</span>
-<span id="cb587-6"><a href="advanced-rvest.html#cb587-6" aria-hidden="true" tabindex="-1"></a>  log_url <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;/2019.html&quot;</span>,<span class="st">&quot;/2019-gamelogs.html&quot;</span>, i)</span>
-<span id="cb587-7"><a href="advanced-rvest.html#cb587-7" aria-hidden="true" tabindex="-1"></a>  school_url <span class="ot">&lt;-</span> <span class="fu">paste</span>(uri, log_url, <span class="at">sep=</span><span class="st">&quot;&quot;</span>)  <span class="co"># creating the url to fetch</span></span>
-<span id="cb587-8"><a href="advanced-rvest.html#cb587-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb587-9"><a href="advanced-rvest.html#cb587-9" aria-hidden="true" tabindex="-1"></a>  page <span class="ot">&lt;-</span> <span class="fu">read_html</span>(school_url)</span>
-<span id="cb587-10"><a href="advanced-rvest.html#cb587-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb587-11"><a href="advanced-rvest.html#cb587-11" aria-hidden="true" tabindex="-1"></a>  team <span class="ot">&lt;-</span> page <span class="sc">%&gt;%</span></span>
-<span id="cb587-12"><a href="advanced-rvest.html#cb587-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">&#39;//*[@id=&quot;meta&quot;]/div[2]/h1/span[2]&#39;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb587-13"><a href="advanced-rvest.html#cb587-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_text</span>()</span>
-<span id="cb587-14"><a href="advanced-rvest.html#cb587-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb587-15"><a href="advanced-rvest.html#cb587-15" aria-hidden="true" tabindex="-1"></a>  conference <span class="ot">&lt;-</span> page <span class="sc">%&gt;%</span></span>
-<span id="cb587-16"><a href="advanced-rvest.html#cb587-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">&#39;//*[@id=&quot;meta&quot;]/div[2]/p[1]/a&#39;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb587-17"><a href="advanced-rvest.html#cb587-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_text</span>()</span>
-<span id="cb587-18"><a href="advanced-rvest.html#cb587-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb587-19"><a href="advanced-rvest.html#cb587-19" aria-hidden="true" tabindex="-1"></a>  table <span class="ot">&lt;-</span> page <span class="sc">%&gt;%</span></span>
-<span id="cb587-20"><a href="advanced-rvest.html#cb587-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">&#39;//*[@id=&quot;sgl-basic&quot;]&#39;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb587-21"><a href="advanced-rvest.html#cb587-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_table</span>(<span class="at">header=</span><span class="cn">FALSE</span>)</span>
-<span id="cb587-22"><a href="advanced-rvest.html#cb587-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb587-23"><a href="advanced-rvest.html#cb587-23" aria-hidden="true" tabindex="-1"></a>table <span class="ot">&lt;-</span> table[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Game=</span>X1, <span class="at">Date=</span>X2, <span class="at">HomeAway=</span>X3, <span class="at">Opponent=</span>X4, <span class="at">W_L=</span>X5, <span class="at">TeamScore=</span>X6, <span class="at">OpponentScore=</span>X7, <span class="at">TeamFG=</span>X8, <span class="at">TeamFGA=</span>X9, <span class="at">TeamFGPCT=</span>X10, <span class="at">Team3P=</span>X11, <span class="at">Team3PA=</span>X12, <span class="at">Team3PPCT=</span>X13, <span class="at">TeamFT=</span>X14, <span class="at">TeamFTA=</span>X15, <span class="at">TeamFTPCT=</span>X16, <span class="at">TeamOffRebounds=</span>X17, <span class="at">TeamTotalRebounds=</span>X18, <span class="at">TeamAssists=</span>X19, <span class="at">TeamSteals=</span>X20, <span class="at">TeamBlocks=</span>X21, <span class="at">TeamTurnovers=</span>X22, <span class="at">TeamPersonalFouls=</span>X23, <span class="at">Blank=</span>X24, <span class="at">OpponentFG=</span>X25, <span class="at">OpponentFGA=</span>X26, <span class="at">OpponentFGPCT=</span>X27, <span class="at">Opponent3P=</span>X28, <span class="at">Opponent3PA=</span>X29, <span class="at">Opponent3PPCT=</span>X30, <span class="at">OpponentFT=</span>X31, <span class="at">OpponentFTA=</span>X32, <span class="at">OpponentFTPCT=</span>X33, <span class="at">OpponentOffRebounds=</span>X34, <span class="at">OpponentTotalRebounds=</span>X35, <span class="at">OpponentAssists=</span>X36, <span class="at">OpponentSteals=</span>X37, <span class="at">OpponentBlocks=</span>X38, <span class="at">OpponentTurnovers=</span>X39, <span class="at">OpponentPersonalFouls=</span>X40) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Game <span class="sc">!=</span> <span class="st">&quot;&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Game <span class="sc">!=</span> <span class="st">&quot;G&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Team=</span>team, <span class="at">Conference=</span>conference) <span class="sc">%&gt;%</span> <span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="sc">-</span>Team, <span class="sc">-</span>Conference, <span class="sc">-</span>Date, <span class="sc">-</span>Opponent, <span class="sc">-</span>HomeAway, <span class="sc">-</span>W_L), as.numeric) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">ymd</span>(Date))</span>
-<span id="cb587-24"><a href="advanced-rvest.html#cb587-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb587-25"><a href="advanced-rvest.html#cb587-25" aria-hidden="true" tabindex="-1"></a>  logs <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(logs, table)  <span class="co"># binding them all together</span></span>
-<span id="cb587-26"><a href="advanced-rvest.html#cb587-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Sys.sleep</span>(<span class="dv">3</span>)  <span class="co"># Sys.sleep(3) pauses the loop for 3s so as not to overwhelm website&#39;s server</span></span>
-<span id="cb587-27"><a href="advanced-rvest.html#cb587-27" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb656"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb656-1"><a href="advanced-rvest.html#cb656-1" aria-hidden="true" tabindex="-1"></a>uri <span class="ot">&lt;-</span> <span class="st">&quot;https://www.sports-reference.com&quot;</span></span>
+<span id="cb656-2"><a href="advanced-rvest.html#cb656-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb656-3"><a href="advanced-rvest.html#cb656-3" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">tibble</span>()</span>
+<span id="cb656-4"><a href="advanced-rvest.html#cb656-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb656-5"><a href="advanced-rvest.html#cb656-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> schools){</span>
+<span id="cb656-6"><a href="advanced-rvest.html#cb656-6" aria-hidden="true" tabindex="-1"></a>  log_url <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;/2019.html&quot;</span>,<span class="st">&quot;/2019-gamelogs.html&quot;</span>, i)</span>
+<span id="cb656-7"><a href="advanced-rvest.html#cb656-7" aria-hidden="true" tabindex="-1"></a>  school_url <span class="ot">&lt;-</span> <span class="fu">paste</span>(uri, log_url, <span class="at">sep=</span><span class="st">&quot;&quot;</span>)  <span class="co"># creating the url to fetch</span></span>
+<span id="cb656-8"><a href="advanced-rvest.html#cb656-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb656-9"><a href="advanced-rvest.html#cb656-9" aria-hidden="true" tabindex="-1"></a>  page <span class="ot">&lt;-</span> <span class="fu">read_html</span>(school_url)</span>
+<span id="cb656-10"><a href="advanced-rvest.html#cb656-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb656-11"><a href="advanced-rvest.html#cb656-11" aria-hidden="true" tabindex="-1"></a>  team <span class="ot">&lt;-</span> page <span class="sc">%&gt;%</span></span>
+<span id="cb656-12"><a href="advanced-rvest.html#cb656-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">&#39;//*[@id=&quot;meta&quot;]/div[2]/h1/span[2]&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb656-13"><a href="advanced-rvest.html#cb656-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_text</span>()</span>
+<span id="cb656-14"><a href="advanced-rvest.html#cb656-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb656-15"><a href="advanced-rvest.html#cb656-15" aria-hidden="true" tabindex="-1"></a>  conference <span class="ot">&lt;-</span> page <span class="sc">%&gt;%</span></span>
+<span id="cb656-16"><a href="advanced-rvest.html#cb656-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">&#39;//*[@id=&quot;meta&quot;]/div[2]/p[1]/a&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb656-17"><a href="advanced-rvest.html#cb656-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_text</span>()</span>
+<span id="cb656-18"><a href="advanced-rvest.html#cb656-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb656-19"><a href="advanced-rvest.html#cb656-19" aria-hidden="true" tabindex="-1"></a>  table <span class="ot">&lt;-</span> page <span class="sc">%&gt;%</span></span>
+<span id="cb656-20"><a href="advanced-rvest.html#cb656-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">&#39;//*[@id=&quot;sgl-basic&quot;]&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb656-21"><a href="advanced-rvest.html#cb656-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_table</span>(<span class="at">header=</span><span class="cn">FALSE</span>)</span>
+<span id="cb656-22"><a href="advanced-rvest.html#cb656-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb656-23"><a href="advanced-rvest.html#cb656-23" aria-hidden="true" tabindex="-1"></a>table <span class="ot">&lt;-</span> table[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Game=</span>X1, <span class="at">Date=</span>X2, <span class="at">HomeAway=</span>X3, <span class="at">Opponent=</span>X4, <span class="at">W_L=</span>X5, <span class="at">TeamScore=</span>X6, <span class="at">OpponentScore=</span>X7, <span class="at">TeamFG=</span>X8, <span class="at">TeamFGA=</span>X9, <span class="at">TeamFGPCT=</span>X10, <span class="at">Team3P=</span>X11, <span class="at">Team3PA=</span>X12, <span class="at">Team3PPCT=</span>X13, <span class="at">TeamFT=</span>X14, <span class="at">TeamFTA=</span>X15, <span class="at">TeamFTPCT=</span>X16, <span class="at">TeamOffRebounds=</span>X17, <span class="at">TeamTotalRebounds=</span>X18, <span class="at">TeamAssists=</span>X19, <span class="at">TeamSteals=</span>X20, <span class="at">TeamBlocks=</span>X21, <span class="at">TeamTurnovers=</span>X22, <span class="at">TeamPersonalFouls=</span>X23, <span class="at">Blank=</span>X24, <span class="at">OpponentFG=</span>X25, <span class="at">OpponentFGA=</span>X26, <span class="at">OpponentFGPCT=</span>X27, <span class="at">Opponent3P=</span>X28, <span class="at">Opponent3PA=</span>X29, <span class="at">Opponent3PPCT=</span>X30, <span class="at">OpponentFT=</span>X31, <span class="at">OpponentFTA=</span>X32, <span class="at">OpponentFTPCT=</span>X33, <span class="at">OpponentOffRebounds=</span>X34, <span class="at">OpponentTotalRebounds=</span>X35, <span class="at">OpponentAssists=</span>X36, <span class="at">OpponentSteals=</span>X37, <span class="at">OpponentBlocks=</span>X38, <span class="at">OpponentTurnovers=</span>X39, <span class="at">OpponentPersonalFouls=</span>X40) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Game <span class="sc">!=</span> <span class="st">&quot;&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Game <span class="sc">!=</span> <span class="st">&quot;G&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Team=</span>team, <span class="at">Conference=</span>conference) <span class="sc">%&gt;%</span> <span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="sc">-</span>Team, <span class="sc">-</span>Conference, <span class="sc">-</span>Date, <span class="sc">-</span>Opponent, <span class="sc">-</span>HomeAway, <span class="sc">-</span>W_L), as.numeric) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">ymd</span>(Date))</span>
+<span id="cb656-24"><a href="advanced-rvest.html#cb656-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb656-25"><a href="advanced-rvest.html#cb656-25" aria-hidden="true" tabindex="-1"></a>  logs <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(logs, table)  <span class="co"># binding them all together</span></span>
+<span id="cb656-26"><a href="advanced-rvest.html#cb656-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Sys.sleep</span>(<span class="dv">3</span>)  <span class="co"># Sys.sleep(3) pauses the loop for 3s so as not to overwhelm website&#39;s server</span></span>
+<span id="cb656-27"><a href="advanced-rvest.html#cb656-27" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>The magic here is in <code>for (i in schools){</code>. What that says is for each iterator in schools – for each school in schools – do what follows each time. So we take the code we wrote for one school and use it for every school.</p>
 <p>This part:</p>
 <pre><code>  log_url &lt;- gsub(&quot;/2019.html&quot;,&quot;/2019-gamelogs.html&quot;, i)
@@ -445,7 +443,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>What follows that is taken straight from our example of just doing one.</p>
 <p>The last bits are using bind_rows to take our data and mash it into a bigger table, over and over and over again until we have them all in a single table. Then, we tell our scraper to wait a few seconds because we don’t want our script to machine gun requests at their server as fast as it can go. That’s a guaranteed way to get them to block scrapers, and could knock them off the internet. Aggressive scrapers aren’t cool. Don’t do it.</p>
 <p>Lastly, we write it out to a csv file.</p>
-<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb589-1"><a href="advanced-rvest.html#cb589-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(logs, <span class="st">&quot;logs.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb658"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb658-1"><a href="advanced-rvest.html#cb658-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(logs, <span class="st">&quot;logs.csv&quot;</span>)</span></code></pre></div>
 <p>So with a little programming knowhow, a little bit of problem solving and the stubbornness not to quit on it, you can get a whole lot of data scattered all over the place with not a lot of code.</p>
 <div id="one-last-bit" class="section level2" number="38.1">
 <h2><span class="header-section-number">38.1</span> One last bit</h2>
@@ -456,14 +454,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>Then read that text as html.</li>
 <li>Proceed as normal.</li>
 </ol>
-<div class="sourceCode" id="cb590"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb590-1"><a href="advanced-rvest.html#cb590-1" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fu">read_html</span>(<span class="st">&#39;https://www.baseball-reference.com/leagues/MLB/2017-standard-pitching.shtml&#39;</span>)</span>
-<span id="cb590-2"><a href="advanced-rvest.html#cb590-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb590-3"><a href="advanced-rvest.html#cb590-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> h <span class="sc">%&gt;%</span> <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">&#39;//comment()&#39;</span>) <span class="sc">%&gt;%</span>    <span class="co"># select comment nodes</span></span>
-<span id="cb590-4"><a href="advanced-rvest.html#cb590-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_text</span>() <span class="sc">%&gt;%</span>    <span class="co"># extract comment text</span></span>
-<span id="cb590-5"><a href="advanced-rvest.html#cb590-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste</span>(<span class="at">collapse =</span> <span class="st">&#39;&#39;</span>) <span class="sc">%&gt;%</span>    <span class="co"># collapse to a single string</span></span>
-<span id="cb590-6"><a href="advanced-rvest.html#cb590-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">read_html</span>() <span class="sc">%&gt;%</span>    <span class="co"># reparse to HTML</span></span>
-<span id="cb590-7"><a href="advanced-rvest.html#cb590-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_node</span>(<span class="st">&#39;table&#39;</span>) <span class="sc">%&gt;%</span>    <span class="co"># select the desired table</span></span>
-<span id="cb590-8"><a href="advanced-rvest.html#cb590-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_table</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb659"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb659-1"><a href="advanced-rvest.html#cb659-1" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fu">read_html</span>(<span class="st">&#39;https://www.baseball-reference.com/leagues/MLB/2017-standard-pitching.shtml&#39;</span>)</span>
+<span id="cb659-2"><a href="advanced-rvest.html#cb659-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb659-3"><a href="advanced-rvest.html#cb659-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> h <span class="sc">%&gt;%</span> <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">&#39;//comment()&#39;</span>) <span class="sc">%&gt;%</span>    <span class="co"># select comment nodes</span></span>
+<span id="cb659-4"><a href="advanced-rvest.html#cb659-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_text</span>() <span class="sc">%&gt;%</span>    <span class="co"># extract comment text</span></span>
+<span id="cb659-5"><a href="advanced-rvest.html#cb659-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste</span>(<span class="at">collapse =</span> <span class="st">&#39;&#39;</span>) <span class="sc">%&gt;%</span>    <span class="co"># collapse to a single string</span></span>
+<span id="cb659-6"><a href="advanced-rvest.html#cb659-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">read_html</span>() <span class="sc">%&gt;%</span>    <span class="co"># reparse to HTML</span></span>
+<span id="cb659-7"><a href="advanced-rvest.html#cb659-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_node</span>(<span class="st">&#39;table&#39;</span>) <span class="sc">%&gt;%</span>    <span class="co"># select the desired table</span></span>
+<span id="cb659-8"><a href="advanced-rvest.html#cb659-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_table</span>() </span></code></pre></div>
 
 </div>
 </div>
@@ -496,6 +494,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 37 Intro to rvest | Sports Data Analysis and Visualization</title>
   <meta name="description" content="This book is the companion to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 37 Intro to rvest | Sports Data Analysis and Visualization" />
   <meta property="og:type" content="book" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="rtweet-and-text-analysis.html"/>
 <link rel="next" href="advanced-rvest.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,10 +51,10 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.3/plotly.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
@@ -134,6 +134,7 @@ code span.va { color: #000000; } /* Variable */
 code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -252,10 +253,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="25.1" data-path="beeswarm-plots.html"><a href="beeswarm-plots.html#a-few-other-options"><i class="fa fa-check"></i><b>25.1</b> A few other options</a></li>
 </ul></li>
 <li class="chapter" data-level="26" data-path="bump-charts.html"><a href="bump-charts.html"><i class="fa fa-check"></i><b>26</b> Bump charts</a></li>
-<li class="chapter" data-level="27" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>27</b> Tables</a>
-<ul>
-<li class="chapter" data-level="27.1" data-path="tables.html"><a href="tables.html#exporting-tables"><i class="fa fa-check"></i><b>27.1</b> Exporting tables</a></li>
-</ul></li>
+<li class="chapter" data-level="27" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>27</b> Tables</a></li>
 <li class="chapter" data-level="28" data-path="facet-wraps.html"><a href="facet-wraps.html"><i class="fa fa-check"></i><b>28</b> Facet wraps</a>
 <ul>
 <li class="chapter" data-level="28.1" data-path="facet-wraps.html"><a href="facet-wraps.html#facet-grid-vs-facet-wraps"><i class="fa fa-check"></i><b>28.1</b> Facet grid vs facet wraps</a></li>
@@ -357,23 +355,23 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>All the way back in Chapter 2, we used Google Sheets and importHTML to get our own data out of a website. For me, that’s a lot of pointing and clicking and copying and pasting. R has a library that can automate the harvesting of data from HTML on the internet. It’s called <code>rvest</code>.</p>
 <p>Let’s grab <a href="http://www.cfbstats.com/2019/leader/national/team/offense/split01/category09/sort01.html">a simple, basic HTML table from College Football Stats</a>. This is scoring offense for 2019. There’s nothing particularly strange about this table – it’s simply formatted and easy to scrape.</p>
 <p>First we’ll need some libraries. We’re going to use a library called <code>rvest</code>, which you can get by running <code>install.packages('rvest')</code> in the console.</p>
-<div class="sourceCode" id="cb557"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb557-1"><a href="intro-to-rvest.html#cb557-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span>
-<span id="cb557-2"><a href="intro-to-rvest.html#cb557-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb626"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb626-1"><a href="intro-to-rvest.html#cb626-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span>
+<span id="cb626-2"><a href="intro-to-rvest.html#cb626-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p>The rvest package has functions that make fetching, reading and parsing HTML simple. The first thing we need to do is specify a url that we’re going to scrape.</p>
-<div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb558-1"><a href="intro-to-rvest.html#cb558-1" aria-hidden="true" tabindex="-1"></a>scoringoffenseurl <span class="ot">&lt;-</span> <span class="st">&quot;http://www.cfbstats.com/2019/leader/national/team/offense/split01/category09/sort01.html&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb627"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb627-1"><a href="intro-to-rvest.html#cb627-1" aria-hidden="true" tabindex="-1"></a>scoringoffenseurl <span class="ot">&lt;-</span> <span class="st">&quot;http://www.cfbstats.com/2019/leader/national/team/offense/split01/category09/sort01.html&quot;</span></span></code></pre></div>
 <p>Now, the most difficult part of scraping data from any website is knowing what exact HTML tag you need to grab. In this case, we want a <code>&lt;table&gt;</code> tag that has all of our data table in it. But how do you tell R which one that is? Well, it’s easy, once you know what to do. But it’s not simple. So I’ve made a short video to show you how to find it.</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/kYkSE3zWa9Y" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 </iframe>
 <p>When you have simple tables, the code is very simple. You create a variable to receive the data, then pass it the url, read the html that was fetched, find the node you need using your XPath value you just copied and you tell rvest that it’s a table.</p>
-<div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb559-1"><a href="intro-to-rvest.html#cb559-1" aria-hidden="true" tabindex="-1"></a>scoringoffense <span class="ot">&lt;-</span> scoringoffenseurl <span class="sc">%&gt;%</span></span>
-<span id="cb559-2"><a href="intro-to-rvest.html#cb559-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb559-3"><a href="intro-to-rvest.html#cb559-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">&#39;//*[@id=&quot;content&quot;]/div[2]/table&#39;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb559-4"><a href="intro-to-rvest.html#cb559-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_table</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb628"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb628-1"><a href="intro-to-rvest.html#cb628-1" aria-hidden="true" tabindex="-1"></a>scoringoffense <span class="ot">&lt;-</span> scoringoffenseurl <span class="sc">%&gt;%</span></span>
+<span id="cb628-2"><a href="intro-to-rvest.html#cb628-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb628-3"><a href="intro-to-rvest.html#cb628-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">&#39;//*[@id=&quot;content&quot;]/div[2]/table&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb628-4"><a href="intro-to-rvest.html#cb628-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_table</span>()</span></code></pre></div>
 <p>What we get from this is … not a dataframe. It’s a list with one element in it, which just so happens to be our dataframe. When you get this, the solution is simple: just overwrite the variable you created with the first list element.</p>
-<div class="sourceCode" id="cb560"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb560-1"><a href="intro-to-rvest.html#cb560-1" aria-hidden="true" tabindex="-1"></a>scoringoffense <span class="ot">&lt;-</span> scoringoffense[[<span class="dv">1</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb629"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb629-1"><a href="intro-to-rvest.html#cb629-1" aria-hidden="true" tabindex="-1"></a>scoringoffense <span class="ot">&lt;-</span> scoringoffense[[<span class="dv">1</span>]]</span></code></pre></div>
 <p>And what do we have?</p>
-<div class="sourceCode" id="cb561"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb561-1"><a href="intro-to-rvest.html#cb561-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(scoringoffense)</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 10
+<div class="sourceCode" id="cb630"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb630-1"><a href="intro-to-rvest.html#cb630-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(scoringoffense)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 10
 ##      `` Name           G    TD    FG `1XP` `2XP` Safety Points `Points/G`
 ##   &lt;int&gt; &lt;chr&gt;      &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt;      &lt;dbl&gt;
 ## 1     1 LSU           15    95    21    89     1      1    726       48.4
@@ -389,25 +387,25 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>This is a common problem. What if we want to look at every scoring offense going back several years? The website has them going back to 2009. How can we combine them?</p>
 <p>First, we should note, that the data does not have anything in it to indicate what year it comes from. So we’re going to have to add that. And we’re going to have to figure out a way to stack two dataframes on top of each other.</p>
 <p>So let’s grab 2018.</p>
-<div class="sourceCode" id="cb563"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb563-1"><a href="intro-to-rvest.html#cb563-1" aria-hidden="true" tabindex="-1"></a>scoringoffenseurl18 <span class="ot">&lt;-</span> <span class="st">&quot;http://www.cfbstats.com/2018/leader/national/team/offense/split01/category09/sort01.html&quot;</span></span>
-<span id="cb563-2"><a href="intro-to-rvest.html#cb563-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb563-3"><a href="intro-to-rvest.html#cb563-3" aria-hidden="true" tabindex="-1"></a>scoringoffense18 <span class="ot">&lt;-</span> scoringoffenseurl18 <span class="sc">%&gt;%</span></span>
-<span id="cb563-4"><a href="intro-to-rvest.html#cb563-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb563-5"><a href="intro-to-rvest.html#cb563-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">&#39;//*[@id=&quot;content&quot;]/div[2]/table&#39;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb563-6"><a href="intro-to-rvest.html#cb563-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_table</span>()</span>
-<span id="cb563-7"><a href="intro-to-rvest.html#cb563-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb563-8"><a href="intro-to-rvest.html#cb563-8" aria-hidden="true" tabindex="-1"></a>scoringoffense18 <span class="ot">&lt;-</span> scoringoffense18[[<span class="dv">1</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb632"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb632-1"><a href="intro-to-rvest.html#cb632-1" aria-hidden="true" tabindex="-1"></a>scoringoffenseurl18 <span class="ot">&lt;-</span> <span class="st">&quot;http://www.cfbstats.com/2018/leader/national/team/offense/split01/category09/sort01.html&quot;</span></span>
+<span id="cb632-2"><a href="intro-to-rvest.html#cb632-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb632-3"><a href="intro-to-rvest.html#cb632-3" aria-hidden="true" tabindex="-1"></a>scoringoffense18 <span class="ot">&lt;-</span> scoringoffenseurl18 <span class="sc">%&gt;%</span></span>
+<span id="cb632-4"><a href="intro-to-rvest.html#cb632-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb632-5"><a href="intro-to-rvest.html#cb632-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">&#39;//*[@id=&quot;content&quot;]/div[2]/table&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb632-6"><a href="intro-to-rvest.html#cb632-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_table</span>()</span>
+<span id="cb632-7"><a href="intro-to-rvest.html#cb632-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb632-8"><a href="intro-to-rvest.html#cb632-8" aria-hidden="true" tabindex="-1"></a>scoringoffense18 <span class="ot">&lt;-</span> scoringoffense18[[<span class="dv">1</span>]]</span></code></pre></div>
 <p>First, how are we going to know, in the data, which year our data is from? We can use mutate.</p>
-<div class="sourceCode" id="cb564"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb564-1"><a href="intro-to-rvest.html#cb564-1" aria-hidden="true" tabindex="-1"></a>scoringoffense18 <span class="ot">&lt;-</span> scoringoffense <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">YEAR =</span> <span class="dv">2019</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb633"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb633-1"><a href="intro-to-rvest.html#cb633-1" aria-hidden="true" tabindex="-1"></a>scoringoffense18 <span class="ot">&lt;-</span> scoringoffense <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">YEAR =</span> <span class="dv">2019</span>)</span></code></pre></div>
 <pre><code>## Error in initialize(...): attempt to use zero-length variable name</code></pre>
 <p>Uh oh. Error. What does it say? It’s … not clear, but a hint is that our first column doesn’t have a name. Each column must be named. If you look at our data in the environment tab in the upper right corner, you’ll see that indeed, the first column has no name. It’s the FBS rank of each team. So we can fix that and mutate in the same step. We’ll do that using <code>rename</code> and since the field doesn’t have a name to rename it, we’ll use a position argument. We’ll say rename column 1 as Rank.</p>
-<div class="sourceCode" id="cb566"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb566-1"><a href="intro-to-rvest.html#cb566-1" aria-hidden="true" tabindex="-1"></a>scoringoffense19 <span class="ot">&lt;-</span> scoringoffense <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Rank =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">YEAR =</span> <span class="dv">2019</span>)</span>
-<span id="cb566-2"><a href="intro-to-rvest.html#cb566-2" aria-hidden="true" tabindex="-1"></a>scoringoffense18 <span class="ot">&lt;-</span> scoringoffense18 <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Rank =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">YEAR =</span> <span class="dv">2018</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb635"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb635-1"><a href="intro-to-rvest.html#cb635-1" aria-hidden="true" tabindex="-1"></a>scoringoffense19 <span class="ot">&lt;-</span> scoringoffense <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Rank =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">YEAR =</span> <span class="dv">2019</span>)</span>
+<span id="cb635-2"><a href="intro-to-rvest.html#cb635-2" aria-hidden="true" tabindex="-1"></a>scoringoffense18 <span class="ot">&lt;-</span> scoringoffense18 <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Rank =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">YEAR =</span> <span class="dv">2018</span>)</span></code></pre></div>
 <p>And now, to combine the two tables together length-wise – we need to make long data – we’ll use a dpylr function called <code>bind_rows</code>. The good thing is bind_rows is simple.</p>
-<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb567-1"><a href="intro-to-rvest.html#cb567-1" aria-hidden="true" tabindex="-1"></a>combined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(scoringoffense19, scoringoffense18)</span></code></pre></div>
+<div class="sourceCode" id="cb636"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb636-1"><a href="intro-to-rvest.html#cb636-1" aria-hidden="true" tabindex="-1"></a>combined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(scoringoffense19, scoringoffense18)</span></code></pre></div>
 <p>Note in the environment tab we now have a data frame called combined that has 260 observations – which just so happens to be what 130 from 2019 and 130 from 2018 add up to.</p>
-<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb568-1"><a href="intro-to-rvest.html#cb568-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(combined)</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 11
+<div class="sourceCode" id="cb637"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb637-1"><a href="intro-to-rvest.html#cb637-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(combined)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 11
 ##    Rank Name           G    TD    FG `1XP` `2XP` Safety Points `Points/G`  YEAR
 ##   &lt;int&gt; &lt;chr&gt;      &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt;      &lt;dbl&gt; &lt;dbl&gt;
 ## 1     1 LSU           15    95    21    89     1      1    726       48.4  2019
@@ -424,17 +422,17 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>I’ll explain.</p>
 <p>Let’s try to get <a href="https://www.sports-reference.com/cbb/seasons/2019-school-stats.html">season team stats from Sports Reference</a>. If you look at that page, you’ll see the problem right away – the headers span two rows, and they repeat. That’s going to be all kinds of no good. You can’t import that. Dataframes must have names all in one row. If you have two-line headers, you have a problem you have to fix before you can do anything else with it.</p>
 <p>First we’ll grab the page.</p>
-<div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb570-1"><a href="intro-to-rvest.html#cb570-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&quot;https://www.sports-reference.com/cbb/seasons/2019-school-stats.html&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb639"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb639-1"><a href="intro-to-rvest.html#cb639-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&quot;https://www.sports-reference.com/cbb/seasons/2019-school-stats.html&quot;</span></span></code></pre></div>
 <p>Now, similar to our example above, we’ll read the html, use XPath to find the table, and then read that table with a directive passed to it setting the header to FALSE. That tells rvest that there isn’t a header row. Just import it as data.</p>
-<div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb571-1"><a href="intro-to-rvest.html#cb571-1" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> url <span class="sc">%&gt;%</span></span>
-<span id="cb571-2"><a href="intro-to-rvest.html#cb571-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb571-3"><a href="intro-to-rvest.html#cb571-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">&#39;//*[@id=&quot;basic_school_stats&quot;]&#39;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb571-4"><a href="intro-to-rvest.html#cb571-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_table</span>(<span class="at">header=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb640"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb640-1"><a href="intro-to-rvest.html#cb640-1" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> url <span class="sc">%&gt;%</span></span>
+<span id="cb640-2"><a href="intro-to-rvest.html#cb640-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb640-3"><a href="intro-to-rvest.html#cb640-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">&#39;//*[@id=&quot;basic_school_stats&quot;]&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb640-4"><a href="intro-to-rvest.html#cb640-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_table</span>(<span class="at">header=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 <p>What we get back is a list of one element (similar to above). So let’s pop it out into a data frame.</p>
-<div class="sourceCode" id="cb572"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb572-1"><a href="intro-to-rvest.html#cb572-1" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> stats[[<span class="dv">1</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb641-1"><a href="intro-to-rvest.html#cb641-1" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> stats[[<span class="dv">1</span>]]</span></code></pre></div>
 <p>And we’ll take a look at what we have.</p>
-<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb573-1"><a href="intro-to-rvest.html#cb573-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(stats)</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 38
+<div class="sourceCode" id="cb642"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb642-1"><a href="intro-to-rvest.html#cb642-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(stats)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 38
 ##   X1    X2     X3    X4    X5    X6    X7    X8    X9    X10   X11   X12   X13  
 ##   &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;lgl&gt; &lt;chr&gt; &lt;chr&gt; &lt;lgl&gt; &lt;chr&gt;
 ## 1 &quot;&quot;    &quot;&quot;     Over… Over… Over… Over… Over… Over… NA    Conf. Conf. NA    Home 
@@ -449,16 +447,16 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## #   X30 &lt;chr&gt;, X31 &lt;chr&gt;, X32 &lt;chr&gt;, X33 &lt;chr&gt;, X34 &lt;chr&gt;, X35 &lt;chr&gt;,
 ## #   X36 &lt;chr&gt;, X37 &lt;chr&gt;, X38 &lt;chr&gt;</code></pre>
 <p>So, that’s not ideal. We have headers and data mixed together, and our columns are named X1 to X38. Also note: They’re all character fields. Because the headers are interspersed with data, it all gets called character data. So we’ve got to first rename each field.</p>
-<div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb575-1"><a href="intro-to-rvest.html#cb575-1" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> stats <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Rank=</span>X1, <span class="at">School=</span>X2, <span class="at">Games=</span>X3, <span class="at">OverallWins=</span>X4, <span class="at">OverallLosses=</span>X5, <span class="at">WinPct=</span>X6, <span class="at">OverallSRS=</span>X7, <span class="at">OverallSOS=</span>X8, <span class="at">Blank1=</span>X9, <span class="at">ConferenceWins=</span>X10, <span class="at">ConferenceLosses=</span>X11, <span class="at">Blank2=</span>X12, <span class="at">HomeWins=</span>X13, <span class="at">HomeLosses=</span>X14, <span class="at">Blank3=</span>X15, <span class="at">AwayWins=</span>X16, <span class="at">AwayLosses=</span>X17, <span class="at">Blank4=</span>X18, <span class="at">ForPoints=</span>X19, <span class="at">OppPoints=</span>X20, <span class="at">Blank5=</span>X21, <span class="at">Minutes=</span>X22, <span class="at">FieldGoalsMade=</span>X23, <span class="at">FieldGoalsAttempted=</span>X24, <span class="at">FieldGoalPCT=</span>X25, <span class="at">ThreePointMade=</span>X26, <span class="at">ThreePointAttempts=</span>X27, <span class="at">ThreePointPct=</span>X28, <span class="at">FreeThrowsMade=</span>X29, <span class="at">FreeThrowsAttempted=</span>X30, <span class="at">FreeThrowPCT=</span>X31, <span class="at">OffensiveRebounds=</span>X32, <span class="at">TotalRebounds=</span>X33, <span class="at">Assists=</span>X34, <span class="at">Steals=</span>X35, <span class="at">Blocks=</span>X36, <span class="at">Turnovers=</span>X37, <span class="at">PersonalFouls=</span>X38)</span></code></pre></div>
+<div class="sourceCode" id="cb644"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb644-1"><a href="intro-to-rvest.html#cb644-1" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> stats <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Rank=</span>X1, <span class="at">School=</span>X2, <span class="at">Games=</span>X3, <span class="at">OverallWins=</span>X4, <span class="at">OverallLosses=</span>X5, <span class="at">WinPct=</span>X6, <span class="at">OverallSRS=</span>X7, <span class="at">OverallSOS=</span>X8, <span class="at">Blank1=</span>X9, <span class="at">ConferenceWins=</span>X10, <span class="at">ConferenceLosses=</span>X11, <span class="at">Blank2=</span>X12, <span class="at">HomeWins=</span>X13, <span class="at">HomeLosses=</span>X14, <span class="at">Blank3=</span>X15, <span class="at">AwayWins=</span>X16, <span class="at">AwayLosses=</span>X17, <span class="at">Blank4=</span>X18, <span class="at">ForPoints=</span>X19, <span class="at">OppPoints=</span>X20, <span class="at">Blank5=</span>X21, <span class="at">Minutes=</span>X22, <span class="at">FieldGoalsMade=</span>X23, <span class="at">FieldGoalsAttempted=</span>X24, <span class="at">FieldGoalPCT=</span>X25, <span class="at">ThreePointMade=</span>X26, <span class="at">ThreePointAttempts=</span>X27, <span class="at">ThreePointPct=</span>X28, <span class="at">FreeThrowsMade=</span>X29, <span class="at">FreeThrowsAttempted=</span>X30, <span class="at">FreeThrowPCT=</span>X31, <span class="at">OffensiveRebounds=</span>X32, <span class="at">TotalRebounds=</span>X33, <span class="at">Assists=</span>X34, <span class="at">Steals=</span>X35, <span class="at">Blocks=</span>X36, <span class="at">Turnovers=</span>X37, <span class="at">PersonalFouls=</span>X38)</span></code></pre></div>
 <p>Now we have to get rid of those headers interspersed in the data. We can do that with filter that say keep all the stuff that isn’t this.</p>
-<div class="sourceCode" id="cb576"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb576-1"><a href="intro-to-rvest.html#cb576-1" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> stats <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Rank <span class="sc">!=</span> <span class="st">&quot;Rk&quot;</span> <span class="sc">&amp;</span> Games <span class="sc">!=</span> <span class="st">&quot;Overall&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb645"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb645-1"><a href="intro-to-rvest.html#cb645-1" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> stats <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Rank <span class="sc">!=</span> <span class="st">&quot;Rk&quot;</span> <span class="sc">&amp;</span> Games <span class="sc">!=</span> <span class="st">&quot;Overall&quot;</span>) </span></code></pre></div>
 <p>And finally, we need to change the file type of all the fields that need it. We’re going to use a clever little trick, which goes like this: We’re going to use <code>mutate_at</code>, which means mutate these fields. The pattern for <code>mutate_at</code> is <code>mutate_at</code> these variables and do this thing to them. But instead of specifying which of 38 variables we’re going to mutate, we’re going to specify the one we don’t want to change, which is the name of the school. And we just want to convert them to numeric, which is simple. Here’s what it looks like:</p>
-<div class="sourceCode" id="cb577"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb577-1"><a href="intro-to-rvest.html#cb577-1" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> stats <span class="sc">%&gt;%</span> <span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="sc">-</span>School), as.numeric)</span></code></pre></div>
+<div class="sourceCode" id="cb646"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb646-1"><a href="intro-to-rvest.html#cb646-1" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> stats <span class="sc">%&gt;%</span> <span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="sc">-</span>School), as.numeric)</span></code></pre></div>
 <p>One last thing: Who needs columns called Blank1, Blank2, Blank3, etc?</p>
-<div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb578-1"><a href="intro-to-rvest.html#cb578-1" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> stats <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">&quot;Blank&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb647"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb647-1"><a href="intro-to-rvest.html#cb647-1" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> stats <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">&quot;Blank&quot;</span>))</span></code></pre></div>
 <p>And just like that, we have a method for getting up to the minute season stats for every team in Division I.</p>
-<div class="sourceCode" id="cb579"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb579-1"><a href="intro-to-rvest.html#cb579-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(stats)</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 33
+<div class="sourceCode" id="cb648"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb648-1"><a href="intro-to-rvest.html#cb648-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(stats)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 33
 ##    Rank School      Games OverallWins OverallLosses WinPct OverallSRS OverallSOS
 ##   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
 ## 1     1 Abilene Ch…    34          27             7  0.794      -1.91      -7.34
@@ -507,6 +505,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
