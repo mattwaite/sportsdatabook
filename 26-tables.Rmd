@@ -146,11 +146,8 @@ threechange %>%
     locations = cells_title("subtitle")
   ) %>%
   tab_source_note(
-    source_note = "By Matt Waite"
-  ) %>%
-  tab_source_note(
-    source_note = md("Source: [Sports Reference](https://www.sports-reference.com/cbb/seasons/)")
-  ) 
+    source_note = md("**By:** Matt Waite  |  **Source:** [Sports Reference](https://www.sports-reference.com/cbb/seasons/)")
+  )
 ```
 We can do a lot with `tab_style`. For instance, we can make the headers bold and reduce the size a bit to reduce font congestion in the area.
 ```{r}
@@ -170,6 +167,9 @@ threechange %>%
   tab_style(
     style = cell_text(color = "black", align = "left"),
     locations = cells_title("subtitle")
+  ) %>%  
+  tab_source_note(
+    source_note = md("**By:** Matt Waite  |  **Source:** [Sports Reference](https://www.sports-reference.com/cbb/seasons/)")
   ) %>%
   tab_style(
      locations = cells_column_labels(columns = everything()),
@@ -177,13 +177,7 @@ threechange %>%
        cell_borders(sides = "bottom", weight = px(3)),
        cell_text(weight = "bold", size=12)
      )
-   ) %>%
-  tab_source_note(
-    source_note = "By Matt Waite"
-  ) %>%
-  tab_source_note(
-    source_note = md("Source: [Sports Reference](https://www.sports-reference.com/cbb/seasons/)")
-  ) 
+   ) 
 ```
 Next up: There's a lot of lines in this that don't need to be there. `gt` has some tools to get rid of them easily and add in some other readability improvements. 
 ```{r}
@@ -195,12 +189,9 @@ threechange %>%
   tab_header(
     title = "Does Hoiberg's offense push threes more than Miles?",
     subtitle = "Nebraska wasn't in the top 100 of teams shooting more threes. These 10 teams completely changed their offense."
-  ) %>%
+  ) %>%  
   tab_source_note(
-    source_note = "By Matt Waite"
-  ) %>%
-  tab_source_note(
-    source_note = md("Source: [Sports Reference](https://www.sports-reference.com/cbb/seasons/)")
+    source_note = md("**By:** Matt Waite  |  **Source:** [Sports Reference](https://www.sports-reference.com/cbb/seasons/)")
   ) %>% 
   tab_style(
     style = cell_text(color = "black", weight = "bold", align = "left"),
@@ -230,12 +221,9 @@ threechange %>%
   tab_header(
     title = "Does Hoiberg's offense push threes more than Miles?",
     subtitle = "Nebraska wasn't in the top 100 of teams shooting more threes. These 10 teams completely changed their offense."
-  ) %>%
+  ) %>%  
   tab_source_note(
-    source_note = "By Matt Waite"
-  ) %>%
-  tab_source_note(
-    source_note = md("Source: [Sports Reference](https://www.sports-reference.com/cbb/seasons/)")
+    source_note = md("**By:** Matt Waite  |  **Source:** [Sports Reference](https://www.sports-reference.com/cbb/seasons/)")
   ) %>% 
   tab_style(
     style = cell_text(color = "black", weight = "bold", align = "left"),
@@ -270,12 +258,9 @@ threechange %>%
   tab_header(
     title = "Does Hoiberg's offense push threes more than Miles?",
     subtitle = "Nebraska wasn't in the top 100 of teams shooting more threes. These 10 teams completely changed their offense."
-  ) %>%
+  ) %>%  
   tab_source_note(
-    source_note = "By Matt Waite"
-  ) %>%
-  tab_source_note(
-    source_note = md("Source: [Sports Reference](https://www.sports-reference.com/cbb/seasons/)")
+    source_note = md("**By:** Matt Waite  |  **Source:** [Sports Reference](https://www.sports-reference.com/cbb/seasons/)")
   ) %>% 
   tab_style(
     style = cell_text(color = "black", weight = "bold", align = "left"),

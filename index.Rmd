@@ -1,11 +1,13 @@
 --- 
 title: "Sports Data Analysis and Visualization"
-subtitle: "Code, data, visuals and the Tidyverse for journalists and other storytellers"
-author: "By Matt Waite"
-date: July 29, 2019
+subtitle: "Code, data and visuals for storytellers"
+author:
+- Matt Waite
+date: '`r Sys.Date()`'
 bibliography:
 - packages.bib
-description: "This book is the companion to the University of Nebraska-Lincoln's SPMC350 course in the College of Journalism and Mass Communications."
+description: "The companion book to the University of Nebraska-Lincoln's SPMC350 course in the College of Journalism and Mass Communications."
+favicon: images/favicon.ico
 documentclass: book
 link-citations: yes
 site: bookdown::bookdown_site
@@ -14,6 +16,8 @@ output:
   bookdown::gitbook:
     highlight: tango
 always_allow_html: yes
+github-repo: mattwaite/sportsdatabook
+url: http://mattwaite.github.io/sports/
 ---
 
 # Throwing cold water on hot takes

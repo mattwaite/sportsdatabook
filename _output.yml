@@ -1,4 +1,5 @@
 bookdown::gitbook:
+  highlight: tango
   includes:
     in_header: [google_analytics.html]
   css: style.css
@@ -9,4 +10,9 @@ bookdown::gitbook:
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
     download: ["epub"]
+  sharing:
+    github: yes
+    facebook: no
+    twitter: no
+    all: no
 bookdown::epub_book: default

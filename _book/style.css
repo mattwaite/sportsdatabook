@@ -12,3 +12,24 @@ pre {
 pre code {
   white-space: inherit;
 }
+
+/*____Code Chunks____*/
+
+.sourceCode pre {
+  margin: 0 !important; /* makes space above and below symmetrical*/
+}
+
+.sourceCode {
+  margin-bottom: 0.85em; /* adds same amount of margin as a <p> would */
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto:ital,wght@0,100;1,100&display=swap');
+
+.book.font-family-1 {
+  font-family: 'Roboto', sans-serif;
+ }
+ 
+h1, h2, h3, h4 {
+  font-family: 'Poppins', sans-serif;
+  color: #2f5275;
+}
