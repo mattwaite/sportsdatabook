@@ -24,7 +24,7 @@
 <meta name="author" content="Matt Waite" />
 
 
-<meta name="date" content="2021-08-12" />
+<meta name="date" content="2021-09-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -358,9 +358,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>Load the tidyverse.</p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="stacked-bar-charts.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="stacked-bar-charts.html#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p>And the data.</p>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="stacked-bar-charts.html#cb243-1" aria-hidden="true" tabindex="-1"></a>football <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/footballlogs20.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="stacked-bar-charts.html#cb242-1" aria-hidden="true" tabindex="-1"></a>football <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/footballlogs20.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Rows: 1100 Columns: 54</code></pre>
 <pre><code>## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
@@ -373,12 +373,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>What we have here is every game in college football this season. The question we want to answer is this: Who had the most prolific offenses in the Big Ten? And how did they get there?</p>
 <p>So to make this chart, we have to just add one thing to a bar chart like we did in the previous chapter. However, it’s not that simple.</p>
 <p>We have game data, and we need season data. To get that, we need to do some group by and sum work. And since we’re only interested in the Big Ten, we have some filtering to do too. For this, we’re going to measure offensive production by rushing yards and passing yards. So if we have all the games a team played, and the rushing and passing yards for each of those games, what we need to do to get the season totals is just add them up.</p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="stacked-bar-charts.html#cb247-1" aria-hidden="true" tabindex="-1"></a>football <span class="sc">%&gt;%</span> </span>
-<span id="cb247-2"><a href="stacked-bar-charts.html#cb247-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Conference, Team) <span class="sc">%&gt;%</span> </span>
-<span id="cb247-3"><a href="stacked-bar-charts.html#cb247-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb247-4"><a href="stacked-bar-charts.html#cb247-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">SeasonRushingYards =</span> <span class="fu">sum</span>(RushingYds),</span>
-<span id="cb247-5"><a href="stacked-bar-charts.html#cb247-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">SeasonPassingYards =</span> <span class="fu">sum</span>(PassingYds),</span>
-<span id="cb247-6"><a href="stacked-bar-charts.html#cb247-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">==</span> <span class="st">&quot;Big Ten Conference&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="stacked-bar-charts.html#cb246-1" aria-hidden="true" tabindex="-1"></a>football <span class="sc">%&gt;%</span> </span>
+<span id="cb246-2"><a href="stacked-bar-charts.html#cb246-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Conference, Team) <span class="sc">%&gt;%</span> </span>
+<span id="cb246-3"><a href="stacked-bar-charts.html#cb246-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb246-4"><a href="stacked-bar-charts.html#cb246-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">SeasonRushingYards =</span> <span class="fu">sum</span>(RushingYds),</span>
+<span id="cb246-5"><a href="stacked-bar-charts.html#cb246-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">SeasonPassingYards =</span> <span class="fu">sum</span>(PassingYds),</span>
+<span id="cb246-6"><a href="stacked-bar-charts.html#cb246-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">==</span> <span class="st">&quot;Big Ten Conference&quot;</span>)</span></code></pre></div>
 <pre><code>## `summarise()` has grouped output by &#39;Conference&#39;. You can override using the `.groups` argument.</code></pre>
 <pre><code>## # A tibble: 14 × 4
 ## # Groups:   Conference [1]
@@ -399,19 +399,19 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 13 Big Ten Conference Rutgers                      1259               1786
 ## 14 Big Ten Conference Wisconsin                    1152               1267</code></pre>
 <p>By looking at this, we can see we got what we needed. We have 14 teams and numbers that look like season totals for yards. Save that to a new dataframe.</p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="stacked-bar-charts.html#cb250-1" aria-hidden="true" tabindex="-1"></a>football <span class="sc">%&gt;%</span> </span>
-<span id="cb250-2"><a href="stacked-bar-charts.html#cb250-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Conference, Team) <span class="sc">%&gt;%</span> </span>
-<span id="cb250-3"><a href="stacked-bar-charts.html#cb250-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb250-4"><a href="stacked-bar-charts.html#cb250-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">SeasonRushingYards =</span> <span class="fu">sum</span>(RushingYds),</span>
-<span id="cb250-5"><a href="stacked-bar-charts.html#cb250-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">SeasonPassingYards =</span> <span class="fu">sum</span>(PassingYds),</span>
-<span id="cb250-6"><a href="stacked-bar-charts.html#cb250-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">==</span> <span class="st">&quot;Big Ten Conference&quot;</span>) <span class="ot">-&gt;</span> yards</span></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="stacked-bar-charts.html#cb249-1" aria-hidden="true" tabindex="-1"></a>football <span class="sc">%&gt;%</span> </span>
+<span id="cb249-2"><a href="stacked-bar-charts.html#cb249-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Conference, Team) <span class="sc">%&gt;%</span> </span>
+<span id="cb249-3"><a href="stacked-bar-charts.html#cb249-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb249-4"><a href="stacked-bar-charts.html#cb249-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">SeasonRushingYards =</span> <span class="fu">sum</span>(RushingYds),</span>
+<span id="cb249-5"><a href="stacked-bar-charts.html#cb249-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">SeasonPassingYards =</span> <span class="fu">sum</span>(PassingYds),</span>
+<span id="cb249-6"><a href="stacked-bar-charts.html#cb249-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">==</span> <span class="st">&quot;Big Ten Conference&quot;</span>) <span class="ot">-&gt;</span> yards</span></code></pre></div>
 <pre><code>## `summarise()` has grouped output by &#39;Conference&#39;. You can override using the `.groups` argument.</code></pre>
 <p>Now, the problem we have is that ggplot wants long data and this data is wide. So we need to use <code>tidyr</code> to make it long, just like we did in the transforming data chapter.</p>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="stacked-bar-charts.html#cb252-1" aria-hidden="true" tabindex="-1"></a>yards <span class="sc">%&gt;%</span> </span>
-<span id="cb252-2"><a href="stacked-bar-charts.html#cb252-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb252-3"><a href="stacked-bar-charts.html#cb252-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols=</span><span class="fu">starts_with</span>(<span class="st">&quot;Season&quot;</span>), </span>
-<span id="cb252-4"><a href="stacked-bar-charts.html#cb252-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to=</span><span class="st">&quot;Type&quot;</span>, </span>
-<span id="cb252-5"><a href="stacked-bar-charts.html#cb252-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to=</span><span class="st">&quot;Yards&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="stacked-bar-charts.html#cb251-1" aria-hidden="true" tabindex="-1"></a>yards <span class="sc">%&gt;%</span> </span>
+<span id="cb251-2"><a href="stacked-bar-charts.html#cb251-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb251-3"><a href="stacked-bar-charts.html#cb251-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols=</span><span class="fu">starts_with</span>(<span class="st">&quot;Season&quot;</span>), </span>
+<span id="cb251-4"><a href="stacked-bar-charts.html#cb251-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to=</span><span class="st">&quot;Type&quot;</span>, </span>
+<span id="cb251-5"><a href="stacked-bar-charts.html#cb251-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to=</span><span class="st">&quot;Yards&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 28 × 4
 ## # Groups:   Conference [1]
 ##    Conference         Team     Type               Yards
@@ -428,21 +428,21 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 10 Big Ten Conference Michigan SeasonPassingYards  1502
 ## # … with 18 more rows</code></pre>
 <p>What you can see now is that we have two rows for each team: One for rushing yards, one for passing yards. This is what ggplot needs. Save it to a new dataframe.</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="stacked-bar-charts.html#cb254-1" aria-hidden="true" tabindex="-1"></a>yards <span class="sc">%&gt;%</span> </span>
-<span id="cb254-2"><a href="stacked-bar-charts.html#cb254-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb254-3"><a href="stacked-bar-charts.html#cb254-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols=</span><span class="fu">starts_with</span>(<span class="st">&quot;Season&quot;</span>), </span>
-<span id="cb254-4"><a href="stacked-bar-charts.html#cb254-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to=</span><span class="st">&quot;Type&quot;</span>, </span>
-<span id="cb254-5"><a href="stacked-bar-charts.html#cb254-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to=</span><span class="st">&quot;Yards&quot;</span>) <span class="ot">-&gt;</span> yardswide</span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="stacked-bar-charts.html#cb253-1" aria-hidden="true" tabindex="-1"></a>yards <span class="sc">%&gt;%</span> </span>
+<span id="cb253-2"><a href="stacked-bar-charts.html#cb253-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb253-3"><a href="stacked-bar-charts.html#cb253-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols=</span><span class="fu">starts_with</span>(<span class="st">&quot;Season&quot;</span>), </span>
+<span id="cb253-4"><a href="stacked-bar-charts.html#cb253-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to=</span><span class="st">&quot;Type&quot;</span>, </span>
+<span id="cb253-5"><a href="stacked-bar-charts.html#cb253-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to=</span><span class="st">&quot;Yards&quot;</span>) <span class="ot">-&gt;</span> yardswide</span></code></pre></div>
 <p>Building on what we learned in the last chapter, we know we can turn this into a bar chart with an x value, a weight and a geom_bar. What we are going to add is a <code>fill</code>. The <code>fill</code> will stack bars on each other based on which element it is. In this case, we can fill the bar by Type, which means it will stack the number of rushing yards on top of passing yards and we can see how they compare.</p>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="stacked-bar-charts.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb255-2"><a href="stacked-bar-charts.html#cb255-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">data=</span>yardswide, <span class="fu">aes</span>(<span class="at">x=</span>Team, <span class="at">weight=</span>Yards, <span class="at">fill=</span>Type)) <span class="sc">+</span> </span>
-<span id="cb255-3"><a href="stacked-bar-charts.html#cb255-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="stacked-bar-charts.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb254-2"><a href="stacked-bar-charts.html#cb254-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">data=</span>yardswide, <span class="fu">aes</span>(<span class="at">x=</span>Team, <span class="at">weight=</span>Yards, <span class="at">fill=</span>Type)) <span class="sc">+</span> </span>
+<span id="cb254-3"><a href="stacked-bar-charts.html#cb254-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-162-1.png" width="672" /></p>
 <p>What’s the problem with this chart?</p>
 <p>There’s a couple of things, one of which we’ll deal with now: The ordering is alphabetical (from the bottom up). So let’s <code>reorder</code> the teams by Yards.</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="stacked-bar-charts.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb256-2"><a href="stacked-bar-charts.html#cb256-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">data=</span>yardswide, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(Team, Yards), <span class="at">weight=</span>Yards, <span class="at">fill=</span>Type)) <span class="sc">+</span> </span>
-<span id="cb256-3"><a href="stacked-bar-charts.html#cb256-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="stacked-bar-charts.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb255-2"><a href="stacked-bar-charts.html#cb255-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">data=</span>yardswide, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(Team, Yards), <span class="at">weight=</span>Yards, <span class="at">fill=</span>Type)) <span class="sc">+</span> </span>
+<span id="cb255-3"><a href="stacked-bar-charts.html#cb255-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-163-1.png" width="672" /></p>
 <p>And just like that … Penn State comes out on top? Huh. And look who is fourth.</p>
 <p>What else is the problem here? Hint: there was a global pandemic going on.</p>

@@ -86,14 +86,14 @@ If you have truly massive data, Select has tools to help you select fields that 
 
 ## Using conditional filters to set limits
 
-Let's return to the blistering season of Drayton Whiteside using our dataset of every college basketball player's season stats in 2018-19 season. How can we set limits in something like a question of who had the best season? 
+Let's return to the problem of one-hit wonders in basketball mucking up our true shooting analysis. How can we set limits in something like a question of who had the best season? Let's grab every player from last season.
 
 ```{r echo=FALSE, class.output="bg-info", results="asis",  message=FALSE,  warning=FALSE}
 library(downloadthis)
 library(glue)
 
 dllink <- download_link(
-  link = "http://mattwaite.github.io/sportsdatafiles/players19.csv",
+  link = "http://mattwaite.github.io/sportsdatafiles/players21.csv",
   button_label = "Download csv file",
   button_type = "danger",
   has_icon = TRUE,
@@ -105,15 +105,16 @@ glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
 
 ```
 
-Let's get our Drayton Whiteside data from the previous chapter back up.
+Let's get set up similar to the previous chapter.
 
 ```{r}
-players <- read_csv("data/players19.csv")
+players <- read_csv("data/players21.csv")
 
 players %>%
   mutate(trueshooting = (PTS/(2*(FGA + (.44*FTA))))*100) %>%
   arrange(desc(trueshooting))
 ```
+And ine the COVID season, Weber State's Jake Furgerson is your One Shot One Three True Shooting champion.
 
 In most contests, like the batting title in Major League Baseball, there's a minimum number of X to qualify. In baseball, it's at bats. In basketball, it attempts. So let's set a floor and see how it changes. What if we said you had to have played 100 minutes in a season? The top players in college basketball play more than 1000 minutes in a season. So 100 is not that much. Let's try it and see.
 
@@ -124,7 +125,7 @@ players %>%
   filter(MP > 100)
 ```
 
-Now you get Central Arkansas Bears Junior Jordan Grant, who played in 25 games and was on the floor for 152 minutes. So he played regularly. But in that time, he only attempted 16 shots, and made 68 percent of them. In other words, when he shot, he probably scored. He just rarely shot. 
+Now you get South Carolina's Nathan Nelson, who played in 15 games and was on the floor for 113 minutes. So he played regularly, but not a lot. But in that time, he only attempted 14 shots, and made 64 percent of them. In other words, when he shot, he probably scored. He just rarely shot. 
 
 So is 100 minutes our level? Here's the truth -- there's not really an answer here. We're picking a cutoff. If you can cite a reason for it and defend it, then it probably works. 
 

@@ -24,7 +24,7 @@
 <meta name="author" content="Matt Waite" />
 
 
-<meta name="date" content="2021-08-12" />
+<meta name="date" content="2021-09-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -358,9 +358,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>We need the tidyverse.</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="multiple-regression.html#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="multiple-regression.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p>And the data.</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="multiple-regression.html#cb126-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/footballlogs1120.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="multiple-regression.html#cb125-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/footballlogs1120.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Rows: 15637 Columns: 55</code></pre>
 <pre><code>## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
@@ -371,13 +371,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <p>One way to show how successful a footballl team was for a game is to show the differential between the team’s score and the opponent’s score. Score a lot more than the opponent = good, score a lot less than the opponent = bad. And, relatively speaking, the more the better. So let’s create that differential. Let’s also get our net yardage stat back. And because we’ll need it later, let’s add the turnover margin.</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="multiple-regression.html#cb130-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
-<span id="cb130-2"><a href="multiple-regression.html#cb130-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Differential =</span> TeamScore <span class="sc">-</span> OpponentScore, </span>
-<span id="cb130-3"><a href="multiple-regression.html#cb130-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">NetYards =</span> OffensiveYards <span class="sc">-</span> DefYards, </span>
-<span id="cb130-4"><a href="multiple-regression.html#cb130-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">TurnoverMargin =</span> DefTotalTurnovers <span class="sc">-</span> TotalTurnovers)</span></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="multiple-regression.html#cb129-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb129-2"><a href="multiple-regression.html#cb129-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Differential =</span> TeamScore <span class="sc">-</span> OpponentScore, </span>
+<span id="cb129-3"><a href="multiple-regression.html#cb129-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">NetYards =</span> OffensiveYards <span class="sc">-</span> DefYards, </span>
+<span id="cb129-4"><a href="multiple-regression.html#cb129-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">TurnoverMargin =</span> DefTotalTurnovers <span class="sc">-</span> TotalTurnovers)</span></code></pre></div>
 <p>The linear model code we used before is pretty straight forward. Its <code>field</code> is predicted by <code>field</code>. Here’s a simple linear model that looks at predicting a team’s point differential by looking at their net yards.</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="multiple-regression.html#cb131-1" aria-hidden="true" tabindex="-1"></a>yards <span class="ot">&lt;-</span> <span class="fu">lm</span>(Differential <span class="sc">~</span> NetYards, <span class="at">data=</span>logs)</span>
-<span id="cb131-2"><a href="multiple-regression.html#cb131-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(yards)</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="multiple-regression.html#cb130-1" aria-hidden="true" tabindex="-1"></a>yards <span class="ot">&lt;-</span> <span class="fu">lm</span>(Differential <span class="sc">~</span> NetYards, <span class="at">data=</span>logs)</span>
+<span id="cb130-2"><a href="multiple-regression.html#cb130-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(yards)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Differential ~ NetYards, data = logs)
@@ -398,8 +398,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## F-statistic: 3.165e+04 on 1 and 15635 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Remember: There’s a lot here, but only some of it we care about. What is the Adjusted R-squared value? What’s the p-value and is it less than .05? In this case, we can predict 67 percent of the difference in differential with the net yardage in the game.</p>
 <p>To add more predictors to this mix, we merely add them. But it’s not that simple, as you’ll see in a moment. So first, let’s look at adding how well the other team shot to our prediction model:</p>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="multiple-regression.html#cb133-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Differential <span class="sc">~</span> NetYards <span class="sc">+</span> TurnoverMargin, <span class="at">data=</span>logs)</span>
-<span id="cb133-2"><a href="multiple-regression.html#cb133-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="multiple-regression.html#cb132-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Differential <span class="sc">~</span> NetYards <span class="sc">+</span> TurnoverMargin, <span class="at">data=</span>logs)</span>
+<span id="cb132-2"><a href="multiple-regression.html#cb132-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Differential ~ NetYards + TurnoverMargin, data = logs)
@@ -424,14 +424,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Third: Compare the residual standard error. We went from 13.12 to 10.55. The meaning of this is both really opaque and also simple – by adding data, we reduced the amount of error in our model. Residual standard error is the total distance between what our model would predict and what we actually have in the data. So lots of residual error means the distance between reality and our model is wider. So the width of our predictive range in this example shrank while we improved the amount of the difference we could predict. That’s good, and not always going to be the case.</p>
 <p>One of the more difficult things to understand about multiple regression is the issue of multicollinearity. What that means is that there is significant correlation overlap between two variables – the two are related to each other as well as to the target output – and all you are doing by adding both of them is adding error with no real value to the R-squared. In pure statistics, we don’t want any multicollinearity at all. Violating that assumption limits the applicability of what you are doing. So if we have some multicollinearity, it limits our scope of application to college football We can’t say this will work for every football league and level everywhere. What we need to do is see how correlated each value is to each other and throw out ones that are highly co-correlated.</p>
 <p>So to find those, we have to create a correlation matrix that shows us how each value is correlated to our outcome variable, but also with each other. We can do that in the <code>Hmisc</code> library. We install that in the console with <code>install.packages("Hmisc")</code></p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="multiple-regression.html#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="multiple-regression.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span></code></pre></div>
 <p>We can pass in every numeric value to the Hmisc library and get a correlation matrix out of it, but since we have a large number of values – and many of them character values – we should strip that down and reorder them. So that’s what I’m doing here. I’m saying give me differential first, and then columns 9-24, and then 26-41. Why the skip? There’s a blank column in the middle of the data – a remnant of the scraper I used.</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="multiple-regression.html#cb136-1" aria-hidden="true" tabindex="-1"></a>simplelogs <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">select_if</span>(is.numeric) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>Game) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Differential, NetYards, TurnoverMargin, <span class="fu">everything</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="multiple-regression.html#cb135-1" aria-hidden="true" tabindex="-1"></a>simplelogs <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">select_if</span>(is.numeric) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>Game) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Differential, NetYards, TurnoverMargin, <span class="fu">everything</span>())</span></code></pre></div>
 <p>Before we proceed, what we’re looking to do is follow the Differential column down, looking for correlation values near 1 or -1. Correlations go from -1, meaning perfect negative correlation, to 0, meaning no correlation, to 1, meaning perfect positive correlation. So we’re looking for numbers near 1 or -1 for their predictive value. BUT: We then need to see if that value is also highly correlated with something else. If it is, we have a decision to make.</p>
 <p>We get our correlation matrix like this:</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="multiple-regression.html#cb137-1" aria-hidden="true" tabindex="-1"></a>cormatrix <span class="ot">&lt;-</span> <span class="fu">rcorr</span>(<span class="fu">as.matrix</span>(simplelogs))</span>
-<span id="cb137-2"><a href="multiple-regression.html#cb137-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb137-3"><a href="multiple-regression.html#cb137-3" aria-hidden="true" tabindex="-1"></a>cormatrix<span class="sc">$</span>r</span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="multiple-regression.html#cb136-1" aria-hidden="true" tabindex="-1"></a>cormatrix <span class="ot">&lt;-</span> <span class="fu">rcorr</span>(<span class="fu">as.matrix</span>(simplelogs))</span>
+<span id="cb136-2"><a href="multiple-regression.html#cb136-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb136-3"><a href="multiple-regression.html#cb136-3" aria-hidden="true" tabindex="-1"></a>cormatrix<span class="sc">$</span>r</span></code></pre></div>
 <pre><code>##                   Differential      NetYards TurnoverMargin  PassingCmp
 ## Differential       1.000000000  0.8181275628   0.4840557093  0.03073777
 ## NetYards           0.818127563  1.0000000000   0.1807370954  0.19266394
@@ -1025,8 +1025,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Your turn</strong>: What else do you see? What other values have predictive power and aren’t co-correlated?</p>
 </blockquote>
 <p>We can add more just by simply adding them. Let’s add the average yard per play for both offense and defense. They’re correlated to NetYards, but not as much as you might expect.</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="multiple-regression.html#cb139-1" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Differential <span class="sc">~</span> NetYards <span class="sc">+</span> TurnoverMargin <span class="sc">+</span> DefAvg <span class="sc">+</span> OffenseAvg, <span class="at">data=</span>logs)</span>
-<span id="cb139-2"><a href="multiple-regression.html#cb139-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="multiple-regression.html#cb138-1" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Differential <span class="sc">~</span> NetYards <span class="sc">+</span> TurnoverMargin <span class="sc">+</span> DefAvg <span class="sc">+</span> OffenseAvg, <span class="at">data=</span>logs)</span>
+<span id="cb138-2"><a href="multiple-regression.html#cb138-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Differential ~ NetYards + TurnoverMargin + DefAvg + 
@@ -1057,38 +1057,38 @@ What is the Residual standard error?</p>
 <p>The final thing we can do with this is predict things. Look at our coefficients table. See the Estimates? We can build a formula from that, same as we did with linear regressions.</p>
 <p>How does this apply in the real world? Let’s pretend for a minute that you are Scott Frost, and you have a mess on your hands. Your job is to win conference titles. To do that, we need to know what attributes of a team should we emphasize. We can do that by looking at what previous Big Ten conference champions looked like.</p>
 <p>So if our goal is to predict a conference champion team, we need to know what those teams did. Here’s the regular season conference champions in this dataset.</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="multiple-regression.html#cb141-1" aria-hidden="true" tabindex="-1"></a>logs <span class="sc">%&gt;%</span> </span>
-<span id="cb141-2"><a href="multiple-regression.html#cb141-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">&quot;Ohio State&quot;</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="dv">2020</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">&quot;Ohio State&quot;</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="dv">2019</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">&quot;Ohio State&quot;</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="dv">2018</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb141-3"><a href="multiple-regression.html#cb141-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb141-4"><a href="multiple-regression.html#cb141-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanNetYards =</span> <span class="fu">mean</span>(NetYards),</span>
-<span id="cb141-5"><a href="multiple-regression.html#cb141-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanTurnoverMargin =</span> <span class="fu">mean</span>(TurnoverMargin),</span>
-<span id="cb141-6"><a href="multiple-regression.html#cb141-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanDefAvg =</span> <span class="fu">mean</span>(DefAvg),</span>
-<span id="cb141-7"><a href="multiple-regression.html#cb141-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanOffenseAvg =</span> <span class="fu">mean</span>(OffenseAvg)</span>
-<span id="cb141-8"><a href="multiple-regression.html#cb141-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="multiple-regression.html#cb140-1" aria-hidden="true" tabindex="-1"></a>logs <span class="sc">%&gt;%</span> </span>
+<span id="cb140-2"><a href="multiple-regression.html#cb140-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">&quot;Ohio State&quot;</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="dv">2020</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">&quot;Ohio State&quot;</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="dv">2019</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">&quot;Ohio State&quot;</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="dv">2018</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb140-3"><a href="multiple-regression.html#cb140-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb140-4"><a href="multiple-regression.html#cb140-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanNetYards =</span> <span class="fu">mean</span>(NetYards),</span>
+<span id="cb140-5"><a href="multiple-regression.html#cb140-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanTurnoverMargin =</span> <span class="fu">mean</span>(TurnoverMargin),</span>
+<span id="cb140-6"><a href="multiple-regression.html#cb140-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanDefAvg =</span> <span class="fu">mean</span>(DefAvg),</span>
+<span id="cb140-7"><a href="multiple-regression.html#cb140-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanOffenseAvg =</span> <span class="fu">mean</span>(OffenseAvg)</span>
+<span id="cb140-8"><a href="multiple-regression.html#cb140-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 4
 ##   meanNetYards meanTurnoverMargin meanDefAvg meanOffenseAvg
 ##          &lt;dbl&gt;              &lt;dbl&gt;      &lt;dbl&gt;          &lt;dbl&gt;
 ## 1         196.              0.686       5.08           6.97</code></pre>
 <p>Now it’s just plug and chug.</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="multiple-regression.html#cb143-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.0547465</span><span class="sc">*</span><span class="fl">195.8824</span>) <span class="sc">+</span> (<span class="fl">3.8806793</span><span class="sc">*</span><span class="fl">0.6764706</span>) <span class="sc">+</span> (<span class="sc">-</span><span class="fl">3.9374905</span><span class="sc">*</span><span class="fl">5.044118</span> ) <span class="sc">+</span> (<span class="fl">3.9152803</span><span class="sc">*</span><span class="fl">6.908824</span>) <span class="sc">+</span> <span class="fl">0.4960303</span></span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="multiple-regression.html#cb142-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.0547465</span><span class="sc">*</span><span class="fl">195.8824</span>) <span class="sc">+</span> (<span class="fl">3.8806793</span><span class="sc">*</span><span class="fl">0.6764706</span>) <span class="sc">+</span> (<span class="sc">-</span><span class="fl">3.9374905</span><span class="sc">*</span><span class="fl">5.044118</span> ) <span class="sc">+</span> (<span class="fl">3.9152803</span><span class="sc">*</span><span class="fl">6.908824</span>) <span class="sc">+</span> <span class="fl">0.4960303</span></span></code></pre></div>
 <pre><code>## [1] 21.03389</code></pre>
 <p>So a team with those numbers is going to average scoring 21 more points per game than their opponent. Sound like Ohio State in the last three years?</p>
 <p>How does that compare to Nebraska this season?</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="multiple-regression.html#cb145-1" aria-hidden="true" tabindex="-1"></a>logs <span class="sc">%&gt;%</span> </span>
-<span id="cb145-2"><a href="multiple-regression.html#cb145-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
-<span id="cb145-3"><a href="multiple-regression.html#cb145-3" aria-hidden="true" tabindex="-1"></a>    Team <span class="sc">==</span> <span class="st">&quot;Nebraska&quot;</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="dv">2020</span></span>
-<span id="cb145-4"><a href="multiple-regression.html#cb145-4" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
-<span id="cb145-5"><a href="multiple-regression.html#cb145-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb145-6"><a href="multiple-regression.html#cb145-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanNetYards =</span> <span class="fu">mean</span>(NetYards),</span>
-<span id="cb145-7"><a href="multiple-regression.html#cb145-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanTurnoverMargin =</span> <span class="fu">mean</span>(TurnoverMargin),</span>
-<span id="cb145-8"><a href="multiple-regression.html#cb145-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanDefAvg =</span> <span class="fu">mean</span>(DefAvg),</span>
-<span id="cb145-9"><a href="multiple-regression.html#cb145-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanOffenseAvg =</span> <span class="fu">mean</span>(OffenseAvg)</span>
-<span id="cb145-10"><a href="multiple-regression.html#cb145-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="multiple-regression.html#cb144-1" aria-hidden="true" tabindex="-1"></a>logs <span class="sc">%&gt;%</span> </span>
+<span id="cb144-2"><a href="multiple-regression.html#cb144-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb144-3"><a href="multiple-regression.html#cb144-3" aria-hidden="true" tabindex="-1"></a>    Team <span class="sc">==</span> <span class="st">&quot;Nebraska&quot;</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="dv">2020</span></span>
+<span id="cb144-4"><a href="multiple-regression.html#cb144-4" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb144-5"><a href="multiple-regression.html#cb144-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb144-6"><a href="multiple-regression.html#cb144-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanNetYards =</span> <span class="fu">mean</span>(NetYards),</span>
+<span id="cb144-7"><a href="multiple-regression.html#cb144-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanTurnoverMargin =</span> <span class="fu">mean</span>(TurnoverMargin),</span>
+<span id="cb144-8"><a href="multiple-regression.html#cb144-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanDefAvg =</span> <span class="fu">mean</span>(DefAvg),</span>
+<span id="cb144-9"><a href="multiple-regression.html#cb144-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanOffenseAvg =</span> <span class="fu">mean</span>(OffenseAvg)</span>
+<span id="cb144-10"><a href="multiple-regression.html#cb144-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 4
 ##   meanNetYards meanTurnoverMargin meanDefAvg meanOffenseAvg
 ##          &lt;dbl&gt;              &lt;dbl&gt;      &lt;dbl&gt;          &lt;dbl&gt;
 ## 1            5              -1.38       5.44           5.54</code></pre>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="multiple-regression.html#cb147-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.0547465</span><span class="sc">*</span><span class="dv">5</span>) <span class="sc">+</span> (<span class="fl">3.8806793</span><span class="sc">*-</span><span class="fl">1.375</span>) <span class="sc">+</span> (<span class="sc">-</span><span class="fl">3.9374905</span><span class="sc">*</span><span class="fl">5.4375</span>) <span class="sc">+</span> (<span class="fl">3.9152803</span><span class="sc">*</span><span class="fl">5.5375</span>) <span class="sc">+</span> <span class="fl">0.4960303</span></span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="multiple-regression.html#cb146-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.0547465</span><span class="sc">*</span><span class="dv">5</span>) <span class="sc">+</span> (<span class="fl">3.8806793</span><span class="sc">*-</span><span class="fl">1.375</span>) <span class="sc">+</span> (<span class="sc">-</span><span class="fl">3.9374905</span><span class="sc">*</span><span class="fl">5.4375</span>) <span class="sc">+</span> (<span class="fl">3.9152803</span><span class="sc">*</span><span class="fl">5.5375</span>) <span class="sc">+</span> <span class="fl">0.4960303</span></span></code></pre></div>
 <pre><code>## [1] -4.295411</code></pre>
 <p>By this model, it predicted we would average being outscored by our opponents by 4.3 points over the season. Reality? We were outscored by 6.25 on average.</p>
 

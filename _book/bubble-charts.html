@@ -24,7 +24,7 @@
 <meta name="author" content="Matt Waite" />
 
 
-<meta name="date" content="2021-08-12" />
+<meta name="date" content="2021-09-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -357,7 +357,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>And since then, people have wanted bubble charts. And we’re back to the original problem: They’re hard. There’s a finite set of circumstances where they work.</p>
 <p>First, I’m going to show you an example of them not working to illustrate the point.</p>
 <p>I’m going to load up my libraries.</p>
-<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="bubble-charts.html#cb371-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="bubble-charts.html#cb370-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p>So for this example, I want to look at where Big Ten teams compare to the rest of college football last season. Is the Big Ten’s reputation for tough games and defenses earned? Can we see patterns in good team vs bad teams?</p>
 <p>I’m going to create a scatterplot with offensive yards per play on the X axis and defensive yards per play on the y axis. We can then divide the grid into four quadrants. Teams with high yards per offensive play and low defensive yards per play are teams with good offenses and good defenses. The opposite means bad defense, bad offense. Then, to drive the point home, I’m going to make the dot the size of the total wins on the season – the bubble in my bubble charts.</p>
 <p>We’ll use this season’s college football games.</p>
@@ -365,7 +365,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>And load it.</p>
-<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="bubble-charts.html#cb372-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/footballlogs20.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="bubble-charts.html#cb371-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/footballlogs20.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Rows: 1100 Columns: 54</code></pre>
 <pre><code>## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
@@ -376,86 +376,105 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <p>To do this, I’ve got some work to do. First, I need to mutate the outcomes of the games into 1s and 0s so I can add up the wins. We’ve done this before, so this won’t be new to you, just adjusted slightly from basketball data.</p>
-<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="bubble-charts.html#cb376-1" aria-hidden="true" tabindex="-1"></a>winlosslogs <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> </span>
-<span id="cb376-2"><a href="bubble-charts.html#cb376-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb376-3"><a href="bubble-charts.html#cb376-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">wins =</span> <span class="fu">case_when</span>(</span>
-<span id="cb376-4"><a href="bubble-charts.html#cb376-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">grepl</span>(<span class="st">&quot;W&quot;</span>, Outcome) <span class="sc">~</span> <span class="dv">1</span>, </span>
-<span id="cb376-5"><a href="bubble-charts.html#cb376-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">grepl</span>(<span class="st">&quot;L&quot;</span>, Outcome) <span class="sc">~</span> <span class="dv">0</span>)</span>
-<span id="cb376-6"><a href="bubble-charts.html#cb376-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="bubble-charts.html#cb375-1" aria-hidden="true" tabindex="-1"></a>winlosslogs <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> </span>
+<span id="cb375-2"><a href="bubble-charts.html#cb375-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb375-3"><a href="bubble-charts.html#cb375-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">wins =</span> <span class="fu">case_when</span>(</span>
+<span id="cb375-4"><a href="bubble-charts.html#cb375-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">grepl</span>(<span class="st">&quot;W&quot;</span>, Outcome) <span class="sc">~</span> <span class="dv">1</span>, </span>
+<span id="cb375-5"><a href="bubble-charts.html#cb375-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">grepl</span>(<span class="st">&quot;L&quot;</span>, Outcome) <span class="sc">~</span> <span class="dv">0</span>)</span>
+<span id="cb375-6"><a href="bubble-charts.html#cb375-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>Now I have some more work to do. My football logs data has the yards per play of each game, and I could average those together and get something very close to what I’m going to do, but averaging each games yards per play is not the same thing as calculating it, so we’re going to calculate it.</p>
-<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="bubble-charts.html#cb377-1" aria-hidden="true" tabindex="-1"></a>winlosslogs <span class="sc">%&gt;%</span> </span>
-<span id="cb377-2"><a href="bubble-charts.html#cb377-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Team, Conference) <span class="sc">%&gt;%</span> </span>
-<span id="cb377-3"><a href="bubble-charts.html#cb377-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb377-4"><a href="bubble-charts.html#cb377-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotalPlays =</span> <span class="fu">sum</span>(OffensivePlays), </span>
-<span id="cb377-5"><a href="bubble-charts.html#cb377-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotalYards =</span> <span class="fu">sum</span>(OffensiveYards), </span>
-<span id="cb377-6"><a href="bubble-charts.html#cb377-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">DefensivePlays =</span> <span class="fu">sum</span>(DefPlays), </span>
-<span id="cb377-7"><a href="bubble-charts.html#cb377-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">DefensiveYards =</span> <span class="fu">sum</span>(DefYards), </span>
-<span id="cb377-8"><a href="bubble-charts.html#cb377-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotalWins =</span> <span class="fu">sum</span>(wins)) <span class="sc">%&gt;%</span> </span>
-<span id="cb377-9"><a href="bubble-charts.html#cb377-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb377-10"><a href="bubble-charts.html#cb377-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">OffensiveYPP =</span> TotalYards<span class="sc">/</span>TotalPlays, </span>
-<span id="cb377-11"><a href="bubble-charts.html#cb377-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">DefensiveYPP =</span> DefensiveYards<span class="sc">/</span>DefensivePlays) <span class="ot">-&gt;</span> ypp</span></code></pre></div>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="bubble-charts.html#cb376-1" aria-hidden="true" tabindex="-1"></a>winlosslogs <span class="sc">%&gt;%</span> </span>
+<span id="cb376-2"><a href="bubble-charts.html#cb376-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Team, Conference) <span class="sc">%&gt;%</span> </span>
+<span id="cb376-3"><a href="bubble-charts.html#cb376-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb376-4"><a href="bubble-charts.html#cb376-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotalPlays =</span> <span class="fu">sum</span>(OffensivePlays), </span>
+<span id="cb376-5"><a href="bubble-charts.html#cb376-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotalYards =</span> <span class="fu">sum</span>(OffensiveYards), </span>
+<span id="cb376-6"><a href="bubble-charts.html#cb376-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">DefensivePlays =</span> <span class="fu">sum</span>(DefPlays), </span>
+<span id="cb376-7"><a href="bubble-charts.html#cb376-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">DefensiveYards =</span> <span class="fu">sum</span>(DefYards), </span>
+<span id="cb376-8"><a href="bubble-charts.html#cb376-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotalWins =</span> <span class="fu">sum</span>(wins)) <span class="sc">%&gt;%</span> </span>
+<span id="cb376-9"><a href="bubble-charts.html#cb376-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb376-10"><a href="bubble-charts.html#cb376-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">OffensiveYPP =</span> TotalYards<span class="sc">/</span>TotalPlays, </span>
+<span id="cb376-11"><a href="bubble-charts.html#cb376-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">DefensiveYPP =</span> DefensiveYards<span class="sc">/</span>DefensivePlays) <span class="ot">-&gt;</span> ypp</span></code></pre></div>
 <pre><code>## `summarise()` has grouped output by &#39;Team&#39;. You can override using the `.groups` argument.</code></pre>
 <p>A bubble chart is just a scatterplot with one additional element in the aesthetic – a size. Here’s the scatterplot version.</p>
-<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="bubble-charts.html#cb379-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">data=</span>ypp, <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP))</span></code></pre></div>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="bubble-charts.html#cb378-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">data=</span>ypp, <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP))</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-253-1.png" width="672" /></p>
 <p>Looks kind of random, eh? In this case, that’s not that bad because we’re not claiming a relationship. We’re saying the location on the chart has meaning. So, do teams on the bottom right – good offense, good defense – win more games?</p>
 <p>Let’s add the size element.</p>
+<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="bubble-charts.html#cb379-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb379-2"><a href="bubble-charts.html#cb379-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb379-3"><a href="bubble-charts.html#cb379-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>ypp, </span>
+<span id="cb379-4"><a href="bubble-charts.html#cb379-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">size=</span>TotalWins)</span>
+<span id="cb379-5"><a href="bubble-charts.html#cb379-5" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-254-1.png" width="672" /></p>
+<p>What does this chart tell you? We can see a general pattern that there are more big dots on the bottom right than the upper left. But we can make this more readable by adding an alpha element outside the aesthetic – alpha in this case is transparency – and we can manually change the size of the dots by adding <code>scale_size</code> and a <code>range</code>.</p>
 <div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="bubble-charts.html#cb380-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb380-2"><a href="bubble-charts.html#cb380-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
 <span id="cb380-3"><a href="bubble-charts.html#cb380-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>ypp, </span>
-<span id="cb380-4"><a href="bubble-charts.html#cb380-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">size=</span>TotalWins)</span>
-<span id="cb380-5"><a href="bubble-charts.html#cb380-5" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-254-1.png" width="672" /></p>
-<p>What does this chart tell you? We can see a general pattern that there are more big dots on the bottom right than the upper left. But we can make this more readable by adding an alpha element outside the aesthetic – alpha in this case is transparency – and we can manually change the size of the dots by adding <code>scale_size</code> and a <code>range</code>.</p>
-<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="bubble-charts.html#cb381-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb381-2"><a href="bubble-charts.html#cb381-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb381-3"><a href="bubble-charts.html#cb381-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>ypp, </span>
-<span id="cb381-4"><a href="bubble-charts.html#cb381-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">size=</span>TotalWins),</span>
-<span id="cb381-5"><a href="bubble-charts.html#cb381-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> .<span class="dv">3</span>) <span class="sc">+</span> </span>
-<span id="cb381-6"><a href="bubble-charts.html#cb381-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">8</span>), <span class="at">name=</span><span class="st">&quot;Wins&quot;</span>)</span></code></pre></div>
+<span id="cb380-4"><a href="bubble-charts.html#cb380-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">size=</span>TotalWins),</span>
+<span id="cb380-5"><a href="bubble-charts.html#cb380-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> .<span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb380-6"><a href="bubble-charts.html#cb380-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">8</span>), <span class="at">name=</span><span class="st">&quot;Wins&quot;</span>)</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-255-1.png" width="672" /></p>
 <p>And by now, you now know to add in the Big Ten as a layer, I would hope.</p>
-<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="bubble-charts.html#cb382-1" aria-hidden="true" tabindex="-1"></a>bigten <span class="ot">&lt;-</span> ypp <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">==</span> <span class="st">&quot;Big Ten Conference&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="bubble-charts.html#cb383-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb383-2"><a href="bubble-charts.html#cb383-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb383-3"><a href="bubble-charts.html#cb383-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>ypp, </span>
-<span id="cb383-4"><a href="bubble-charts.html#cb383-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">size=</span>TotalWins), </span>
-<span id="cb383-5"><a href="bubble-charts.html#cb383-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">&quot;grey&quot;</span>, </span>
-<span id="cb383-6"><a href="bubble-charts.html#cb383-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha=</span>.<span class="dv">5</span>) <span class="sc">+</span> </span>
-<span id="cb383-7"><a href="bubble-charts.html#cb383-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb383-8"><a href="bubble-charts.html#cb383-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>bigten, </span>
-<span id="cb383-9"><a href="bubble-charts.html#cb383-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">size=</span>TotalWins), </span>
-<span id="cb383-10"><a href="bubble-charts.html#cb383-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="bubble-charts.html#cb381-1" aria-hidden="true" tabindex="-1"></a>bigten <span class="ot">&lt;-</span> ypp <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">==</span> <span class="st">&quot;Big Ten Conference&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="bubble-charts.html#cb382-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb382-2"><a href="bubble-charts.html#cb382-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb382-3"><a href="bubble-charts.html#cb382-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>ypp, </span>
+<span id="cb382-4"><a href="bubble-charts.html#cb382-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">size=</span>TotalWins), </span>
+<span id="cb382-5"><a href="bubble-charts.html#cb382-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">&quot;grey&quot;</span>, </span>
+<span id="cb382-6"><a href="bubble-charts.html#cb382-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha=</span>.<span class="dv">5</span>) <span class="sc">+</span> </span>
+<span id="cb382-7"><a href="bubble-charts.html#cb382-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb382-8"><a href="bubble-charts.html#cb382-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>bigten, </span>
+<span id="cb382-9"><a href="bubble-charts.html#cb382-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">size=</span>TotalWins), </span>
+<span id="cb382-10"><a href="bubble-charts.html#cb382-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-257-1.png" width="672" /></p>
 <p>Let’s add some things to this chart to help us out. First, let’s add lines that show us the average of all teams for those two metrics. So first, we need to calculate those. Because I have grouped data, it’s going to require me to ungroup it so I can get just the total average of those two numbers.</p>
-<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="bubble-charts.html#cb384-1" aria-hidden="true" tabindex="-1"></a>ypp <span class="sc">%&gt;%</span> </span>
-<span id="cb384-2"><a href="bubble-charts.html#cb384-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb384-3"><a href="bubble-charts.html#cb384-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb384-4"><a href="bubble-charts.html#cb384-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">offense =</span> <span class="fu">mean</span>(OffensiveYPP), </span>
-<span id="cb384-5"><a href="bubble-charts.html#cb384-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">defense =</span> <span class="fu">mean</span>(DefensiveYPP)</span>
-<span id="cb384-6"><a href="bubble-charts.html#cb384-6" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="bubble-charts.html#cb383-1" aria-hidden="true" tabindex="-1"></a>ypp <span class="sc">%&gt;%</span> </span>
+<span id="cb383-2"><a href="bubble-charts.html#cb383-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb383-3"><a href="bubble-charts.html#cb383-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb383-4"><a href="bubble-charts.html#cb383-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">offense =</span> <span class="fu">mean</span>(OffensiveYPP), </span>
+<span id="cb383-5"><a href="bubble-charts.html#cb383-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">defense =</span> <span class="fu">mean</span>(DefensiveYPP)</span>
+<span id="cb383-6"><a href="bubble-charts.html#cb383-6" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 2
 ##   offense defense
 ##     &lt;dbl&gt;   &lt;dbl&gt;
 ## 1    5.73    5.75</code></pre>
 <p>Now we can use those averages to add two more geoms – geom_vline and geom_hline, for vertical lines and horizontal lines.</p>
-<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="bubble-charts.html#cb386-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb386-2"><a href="bubble-charts.html#cb386-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb386-3"><a href="bubble-charts.html#cb386-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>ypp, </span>
-<span id="cb386-4"><a href="bubble-charts.html#cb386-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">size=</span>TotalWins), </span>
-<span id="cb386-5"><a href="bubble-charts.html#cb386-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">&quot;grey&quot;</span>, </span>
-<span id="cb386-6"><a href="bubble-charts.html#cb386-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha=</span>.<span class="dv">5</span>) <span class="sc">+</span> </span>
-<span id="cb386-7"><a href="bubble-charts.html#cb386-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb386-8"><a href="bubble-charts.html#cb386-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>bigten, </span>
-<span id="cb386-9"><a href="bubble-charts.html#cb386-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">size=</span>TotalWins), </span>
-<span id="cb386-10"><a href="bubble-charts.html#cb386-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb386-11"><a href="bubble-charts.html#cb386-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">5.820543</span>) <span class="sc">+</span> </span>
-<span id="cb386-12"><a href="bubble-charts.html#cb386-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">5.673263</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="bubble-charts.html#cb385-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb385-2"><a href="bubble-charts.html#cb385-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb385-3"><a href="bubble-charts.html#cb385-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>ypp, </span>
+<span id="cb385-4"><a href="bubble-charts.html#cb385-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">size=</span>TotalWins), </span>
+<span id="cb385-5"><a href="bubble-charts.html#cb385-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">&quot;grey&quot;</span>, </span>
+<span id="cb385-6"><a href="bubble-charts.html#cb385-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha=</span>.<span class="dv">5</span>) <span class="sc">+</span> </span>
+<span id="cb385-7"><a href="bubble-charts.html#cb385-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb385-8"><a href="bubble-charts.html#cb385-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>bigten, </span>
+<span id="cb385-9"><a href="bubble-charts.html#cb385-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">size=</span>TotalWins), </span>
+<span id="cb385-10"><a href="bubble-charts.html#cb385-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb385-11"><a href="bubble-charts.html#cb385-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">5.820543</span>) <span class="sc">+</span> </span>
+<span id="cb385-12"><a href="bubble-charts.html#cb385-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">5.673263</span>)</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-259-1.png" width="672" /></p>
 <p>Now, let’s add another new geom for us, using a new library called <code>ggrepel</code>, which will help us label the dots without overwriting other labels. So we’ll have to install that in the console:</p>
 <p>`install.packages(“ggrepel”)</p>
-<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="bubble-charts.html#cb387-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span></code></pre></div>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="bubble-charts.html#cb386-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span></code></pre></div>
 <p>And with that, we can add labels to the dots. The <code>geom_text_repel</code> is pretty much the exact same thing as your Big Ten geom point, but instead of a size, you include a label.</p>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="bubble-charts.html#cb387-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb387-2"><a href="bubble-charts.html#cb387-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb387-3"><a href="bubble-charts.html#cb387-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>ypp, </span>
+<span id="cb387-4"><a href="bubble-charts.html#cb387-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">size=</span>TotalWins), </span>
+<span id="cb387-5"><a href="bubble-charts.html#cb387-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">&quot;grey&quot;</span>, </span>
+<span id="cb387-6"><a href="bubble-charts.html#cb387-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha=</span>.<span class="dv">5</span>) <span class="sc">+</span> </span>
+<span id="cb387-7"><a href="bubble-charts.html#cb387-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb387-8"><a href="bubble-charts.html#cb387-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>bigten, </span>
+<span id="cb387-9"><a href="bubble-charts.html#cb387-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">size=</span>TotalWins), </span>
+<span id="cb387-10"><a href="bubble-charts.html#cb387-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb387-11"><a href="bubble-charts.html#cb387-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">5.820543</span>) <span class="sc">+</span> </span>
+<span id="cb387-12"><a href="bubble-charts.html#cb387-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">5.673263</span>) <span class="sc">+</span> </span>
+<span id="cb387-13"><a href="bubble-charts.html#cb387-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(</span>
+<span id="cb387-14"><a href="bubble-charts.html#cb387-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>bigten, </span>
+<span id="cb387-15"><a href="bubble-charts.html#cb387-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">label=</span>Team)</span>
+<span id="cb387-16"><a href="bubble-charts.html#cb387-16" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-261-1.png" width="672" />
+Well, what do you know about that? Nebraska was … really a mixed bag this season.</p>
+<p>All that’s left is some labels and some finishing touches.</p>
 <div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="bubble-charts.html#cb388-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb388-2"><a href="bubble-charts.html#cb388-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
 <span id="cb388-3"><a href="bubble-charts.html#cb388-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>ypp, </span>
@@ -471,33 +490,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb388-13"><a href="bubble-charts.html#cb388-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(</span>
 <span id="cb388-14"><a href="bubble-charts.html#cb388-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>bigten, </span>
 <span id="cb388-15"><a href="bubble-charts.html#cb388-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">label=</span>Team)</span>
-<span id="cb388-16"><a href="bubble-charts.html#cb388-16" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-261-1.png" width="672" />
-Well, what do you know about that? Nebraska was … really a mixed bag this season.</p>
-<p>All that’s left is some labels and some finishing touches.</p>
-<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="bubble-charts.html#cb389-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb389-2"><a href="bubble-charts.html#cb389-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb389-3"><a href="bubble-charts.html#cb389-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>ypp, </span>
-<span id="cb389-4"><a href="bubble-charts.html#cb389-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">size=</span>TotalWins), </span>
-<span id="cb389-5"><a href="bubble-charts.html#cb389-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">&quot;grey&quot;</span>, </span>
-<span id="cb389-6"><a href="bubble-charts.html#cb389-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha=</span>.<span class="dv">5</span>) <span class="sc">+</span> </span>
-<span id="cb389-7"><a href="bubble-charts.html#cb389-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb389-8"><a href="bubble-charts.html#cb389-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>bigten, </span>
-<span id="cb389-9"><a href="bubble-charts.html#cb389-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">size=</span>TotalWins), </span>
-<span id="cb389-10"><a href="bubble-charts.html#cb389-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb389-11"><a href="bubble-charts.html#cb389-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">5.820543</span>) <span class="sc">+</span> </span>
-<span id="cb389-12"><a href="bubble-charts.html#cb389-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">5.673263</span>) <span class="sc">+</span> </span>
-<span id="cb389-13"><a href="bubble-charts.html#cb389-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(</span>
-<span id="cb389-14"><a href="bubble-charts.html#cb389-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>bigten, </span>
-<span id="cb389-15"><a href="bubble-charts.html#cb389-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">label=</span>Team)</span>
-<span id="cb389-16"><a href="bubble-charts.html#cb389-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb389-17"><a href="bubble-charts.html#cb389-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Nebraska: Average at football?&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;The Huskers were kinda in the middle of everything, neither good nor bad at anything.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>)  <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
-<span id="cb389-18"><a href="bubble-charts.html#cb389-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb389-19"><a href="bubble-charts.html#cb389-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb389-20"><a href="bubble-charts.html#cb389-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
-<span id="cb389-21"><a href="bubble-charts.html#cb389-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
-<span id="cb389-22"><a href="bubble-charts.html#cb389-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb389-23"><a href="bubble-charts.html#cb389-23" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
+<span id="cb388-16"><a href="bubble-charts.html#cb388-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb388-17"><a href="bubble-charts.html#cb388-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Nebraska: Average at football?&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;The Huskers were kinda in the middle of everything, neither good nor bad at anything.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>)  <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb388-18"><a href="bubble-charts.html#cb388-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb388-19"><a href="bubble-charts.html#cb388-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb388-20"><a href="bubble-charts.html#cb388-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
+<span id="cb388-21"><a href="bubble-charts.html#cb388-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
+<span id="cb388-22"><a href="bubble-charts.html#cb388-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb388-23"><a href="bubble-charts.html#cb388-23" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-262-1.png" width="672" /></p>
 
 </div>

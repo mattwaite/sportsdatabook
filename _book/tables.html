@@ -24,7 +24,7 @@
 <meta name="author" content="Matt Waite" />
 
 
-<meta name="date" content="2021-08-12" />
+<meta name="date" content="2021-09-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -361,10 +361,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>Load libraries.</p>
-<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="tables.html#cb423-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb423-2"><a href="tables.html#cb423-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span></code></pre></div>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="tables.html#cb422-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb422-2"><a href="tables.html#cb422-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span></code></pre></div>
 <p>And the data.</p>
-<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="tables.html#cb424-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/logs1520.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="tables.html#cb423-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/logs1520.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Rows: 68617 Columns: 44</code></pre>
 <pre><code>## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
@@ -379,19 +379,19 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>We’ve got a little work to do, putting together ideas we’ve used before. What we need to end up with is some data that looks like this:</p>
 <p><code>Team | 2018-2019 season threes | 2019-2020 season threes | pct change</code></p>
 <p>To get that, we’ll need to do some filtering to get the right seasons, some grouping and summarizing to get the right number, some pivoting to get it organized correctly so we can mutate the percent change.</p>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="tables.html#cb428-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span></span>
-<span id="cb428-2"><a href="tables.html#cb428-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(season <span class="sc">==</span> <span class="st">&quot;2018-2019&quot;</span> <span class="sc">|</span> season <span class="sc">==</span> <span class="st">&quot;2019-2020&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb428-3"><a href="tables.html#cb428-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Team, Conference, season) <span class="sc">%&gt;%</span></span>
-<span id="cb428-4"><a href="tables.html#cb428-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Total3PA =</span> <span class="fu">sum</span>(Team3PA)) <span class="sc">%&gt;%</span></span>
-<span id="cb428-5"><a href="tables.html#cb428-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from=</span>season, <span class="at">values_from =</span> Total3PA) <span class="sc">%&gt;%</span></span>
-<span id="cb428-6"><a href="tables.html#cb428-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">PercentChange =</span> (<span class="st">`</span><span class="at">2019-2020</span><span class="st">`</span><span class="sc">-</span><span class="st">`</span><span class="at">2018-2019</span><span class="st">`</span>)<span class="sc">/</span><span class="st">`</span><span class="at">2018-2019</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb428-7"><a href="tables.html#cb428-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(PercentChange)) <span class="sc">%&gt;%</span> </span>
-<span id="cb428-8"><a href="tables.html#cb428-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb428-9"><a href="tables.html#cb428-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">10</span>) <span class="co"># just want a top 10 list</span></span></code></pre></div>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="tables.html#cb427-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span></span>
+<span id="cb427-2"><a href="tables.html#cb427-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(season <span class="sc">==</span> <span class="st">&quot;2018-2019&quot;</span> <span class="sc">|</span> season <span class="sc">==</span> <span class="st">&quot;2019-2020&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb427-3"><a href="tables.html#cb427-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Team, Conference, season) <span class="sc">%&gt;%</span></span>
+<span id="cb427-4"><a href="tables.html#cb427-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Total3PA =</span> <span class="fu">sum</span>(Team3PA)) <span class="sc">%&gt;%</span></span>
+<span id="cb427-5"><a href="tables.html#cb427-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from=</span>season, <span class="at">values_from =</span> Total3PA) <span class="sc">%&gt;%</span></span>
+<span id="cb427-6"><a href="tables.html#cb427-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">PercentChange =</span> (<span class="st">`</span><span class="at">2019-2020</span><span class="st">`</span><span class="sc">-</span><span class="st">`</span><span class="at">2018-2019</span><span class="st">`</span>)<span class="sc">/</span><span class="st">`</span><span class="at">2018-2019</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb427-7"><a href="tables.html#cb427-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(PercentChange)) <span class="sc">%&gt;%</span> </span>
+<span id="cb427-8"><a href="tables.html#cb427-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb427-9"><a href="tables.html#cb427-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">10</span>) <span class="co"># just want a top 10 list</span></span></code></pre></div>
 <pre><code>## `summarise()` has grouped output by &#39;Team&#39;, &#39;Conference&#39;. You can override using the `.groups` argument.</code></pre>
 <pre><code>## Selecting by PercentChange</code></pre>
 <p>We’ve output tables to the screen a thousand times in this class with <code>head</code>, but <code>gt</code> makes them look decent with very little code.</p>
-<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="tables.html#cb431-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> <span class="fu">gt</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="tables.html#cb430-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> <span class="fu">gt</span>()</span></code></pre></div>
 <div id="jkbuovqfxs" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
@@ -799,11 +799,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>So there you have it. Mississippi Valley State changed their team so much they took 51 percent more threes last season from the season before. Where did Nebraska come out? Isn’t Fred Ball supposed to be a lot of threes? We ranked 111th in college basketball in terms of change from the season before. Believe it or not, Nebraska took four fewer threes in the first season of Fred Ball than the last season of Tim Miles.</p>
 <p><code>gt</code> has a mountain of customization options. The good news is that it works in a very familiar pattern. We’ll start with fixing headers. What we have isn’t bad, but PercentChange isn’t good either. Let’s fix that.</p>
-<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="tables.html#cb432-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> </span>
-<span id="cb432-2"><a href="tables.html#cb432-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb432-3"><a href="tables.html#cb432-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb432-4"><a href="tables.html#cb432-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">PercentChange =</span> <span class="st">&quot;Percent Change&quot;</span></span>
-<span id="cb432-5"><a href="tables.html#cb432-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="tables.html#cb431-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> </span>
+<span id="cb431-2"><a href="tables.html#cb431-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb431-3"><a href="tables.html#cb431-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb431-4"><a href="tables.html#cb431-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">PercentChange =</span> <span class="st">&quot;Percent Change&quot;</span></span>
+<span id="cb431-5"><a href="tables.html#cb431-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div id="fqqyhzqhjo" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
@@ -1211,15 +1211,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Better. Note the pattern: Actual header name = “What we want to see.” So if we wanted to change Team to School, we’d do this: <code>Team = "School"</code> inside the <code>cols_label</code> bits.</p>
 <p>Now we can start working with styling. The truth is most of your code in tables is going to be dedicated to styling specific things. The first thing we need: A headline and some chatter. They’re required parts of a graphic, so they’re a good place to start. We do that with <code>tab_header</code></p>
-<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="tables.html#cb433-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> </span>
-<span id="cb433-2"><a href="tables.html#cb433-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb433-3"><a href="tables.html#cb433-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb433-4"><a href="tables.html#cb433-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">PercentChange =</span> <span class="st">&quot;Percent Change&quot;</span></span>
-<span id="cb433-5"><a href="tables.html#cb433-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb433-6"><a href="tables.html#cb433-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb433-7"><a href="tables.html#cb433-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Does Hoiberg&#39;s offense push threes more than Miles?&quot;</span>,</span>
-<span id="cb433-8"><a href="tables.html#cb433-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Nebraska wasn&#39;t in the top 100 of teams shooting more threes. These 10 teams completely changed their offense.&quot;</span></span>
-<span id="cb433-9"><a href="tables.html#cb433-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="tables.html#cb432-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> </span>
+<span id="cb432-2"><a href="tables.html#cb432-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb432-3"><a href="tables.html#cb432-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb432-4"><a href="tables.html#cb432-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">PercentChange =</span> <span class="st">&quot;Percent Change&quot;</span></span>
+<span id="cb432-5"><a href="tables.html#cb432-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb432-6"><a href="tables.html#cb432-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb432-7"><a href="tables.html#cb432-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Does Hoiberg&#39;s offense push threes more than Miles?&quot;</span>,</span>
+<span id="cb432-8"><a href="tables.html#cb432-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Nebraska wasn&#39;t in the top 100 of teams shooting more threes. These 10 teams completely changed their offense.&quot;</span></span>
+<span id="cb432-9"><a href="tables.html#cb432-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div id="vcipcvyjwv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
@@ -1633,18 +1633,18 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </table>
 </div>
 <p>We have a headline and some chatter, but … gross. Centered? The extra lines? No real difference in font weight? We can do better. We can style individual elements using <code>tab_style</code>. First, let’s make the main headline – the <code>title</code> – bold and left aligned.</p>
-<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="tables.html#cb434-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> </span>
-<span id="cb434-2"><a href="tables.html#cb434-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb434-3"><a href="tables.html#cb434-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb434-4"><a href="tables.html#cb434-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">PercentChange =</span> <span class="st">&quot;Percent Change&quot;</span></span>
-<span id="cb434-5"><a href="tables.html#cb434-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb434-6"><a href="tables.html#cb434-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb434-7"><a href="tables.html#cb434-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Does Hoiberg&#39;s offense push threes more than Miles?&quot;</span>,</span>
-<span id="cb434-8"><a href="tables.html#cb434-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Nebraska wasn&#39;t in the top 100 of teams shooting more threes. These 10 teams completely changed their offense.&quot;</span></span>
-<span id="cb434-9"><a href="tables.html#cb434-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">tab_style</span>(</span>
-<span id="cb434-10"><a href="tables.html#cb434-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">weight =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>),</span>
-<span id="cb434-11"><a href="tables.html#cb434-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">&quot;title&quot;</span>)</span>
-<span id="cb434-12"><a href="tables.html#cb434-12" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="tables.html#cb433-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> </span>
+<span id="cb433-2"><a href="tables.html#cb433-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb433-3"><a href="tables.html#cb433-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb433-4"><a href="tables.html#cb433-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">PercentChange =</span> <span class="st">&quot;Percent Change&quot;</span></span>
+<span id="cb433-5"><a href="tables.html#cb433-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb433-6"><a href="tables.html#cb433-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb433-7"><a href="tables.html#cb433-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Does Hoiberg&#39;s offense push threes more than Miles?&quot;</span>,</span>
+<span id="cb433-8"><a href="tables.html#cb433-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Nebraska wasn&#39;t in the top 100 of teams shooting more threes. These 10 teams completely changed their offense.&quot;</span></span>
+<span id="cb433-9"><a href="tables.html#cb433-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">tab_style</span>(</span>
+<span id="cb433-10"><a href="tables.html#cb433-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">weight =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>),</span>
+<span id="cb433-11"><a href="tables.html#cb433-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">&quot;title&quot;</span>)</span>
+<span id="cb433-12"><a href="tables.html#cb433-12" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div id="xmycsruxzw" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
@@ -2058,21 +2058,21 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </table>
 </div>
 <p>It’s hard to see here, but the chatter below is also centered (it doesn’t look like it because it fills the space). We can left align that too, but leave it normal weight (i.e. not bold).</p>
-<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="tables.html#cb435-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> </span>
-<span id="cb435-2"><a href="tables.html#cb435-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb435-3"><a href="tables.html#cb435-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb435-4"><a href="tables.html#cb435-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">PercentChange =</span> <span class="st">&quot;Percent Change&quot;</span></span>
-<span id="cb435-5"><a href="tables.html#cb435-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb435-6"><a href="tables.html#cb435-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb435-7"><a href="tables.html#cb435-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Does Hoiberg&#39;s offense push threes more than Miles?&quot;</span>,</span>
-<span id="cb435-8"><a href="tables.html#cb435-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Nebraska wasn&#39;t in the top 100 of teams shooting more threes. These 10 teams completely changed their offense.&quot;</span></span>
-<span id="cb435-9"><a href="tables.html#cb435-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">tab_style</span>(</span>
-<span id="cb435-10"><a href="tables.html#cb435-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">weight =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>),</span>
-<span id="cb435-11"><a href="tables.html#cb435-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">&quot;title&quot;</span>)</span>
-<span id="cb435-12"><a href="tables.html#cb435-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">tab_style</span>(</span>
-<span id="cb435-13"><a href="tables.html#cb435-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>),</span>
-<span id="cb435-14"><a href="tables.html#cb435-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">&quot;subtitle&quot;</span>)</span>
-<span id="cb435-15"><a href="tables.html#cb435-15" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="tables.html#cb434-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> </span>
+<span id="cb434-2"><a href="tables.html#cb434-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb434-3"><a href="tables.html#cb434-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb434-4"><a href="tables.html#cb434-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">PercentChange =</span> <span class="st">&quot;Percent Change&quot;</span></span>
+<span id="cb434-5"><a href="tables.html#cb434-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb434-6"><a href="tables.html#cb434-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb434-7"><a href="tables.html#cb434-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Does Hoiberg&#39;s offense push threes more than Miles?&quot;</span>,</span>
+<span id="cb434-8"><a href="tables.html#cb434-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Nebraska wasn&#39;t in the top 100 of teams shooting more threes. These 10 teams completely changed their offense.&quot;</span></span>
+<span id="cb434-9"><a href="tables.html#cb434-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">tab_style</span>(</span>
+<span id="cb434-10"><a href="tables.html#cb434-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">weight =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>),</span>
+<span id="cb434-11"><a href="tables.html#cb434-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">&quot;title&quot;</span>)</span>
+<span id="cb434-12"><a href="tables.html#cb434-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">tab_style</span>(</span>
+<span id="cb434-13"><a href="tables.html#cb434-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>),</span>
+<span id="cb434-14"><a href="tables.html#cb434-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">&quot;subtitle&quot;</span>)</span>
+<span id="cb434-15"><a href="tables.html#cb434-15" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div id="ftigsfelhp" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
@@ -2486,24 +2486,24 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </table>
 </div>
 <p>The next item on the required elements list: Source and credit lines. In <code>gt</code>, those are called <code>tab_source_notes</code> and we can add them like this:</p>
-<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="tables.html#cb436-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> </span>
-<span id="cb436-2"><a href="tables.html#cb436-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb436-3"><a href="tables.html#cb436-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb436-4"><a href="tables.html#cb436-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">PercentChange =</span> <span class="st">&quot;Percent Change&quot;</span></span>
-<span id="cb436-5"><a href="tables.html#cb436-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb436-6"><a href="tables.html#cb436-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb436-7"><a href="tables.html#cb436-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Does Hoiberg&#39;s offense push threes more than Miles?&quot;</span>,</span>
-<span id="cb436-8"><a href="tables.html#cb436-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Nebraska wasn&#39;t in the top 100 of teams shooting more threes. These 10 teams completely changed their offense.&quot;</span></span>
-<span id="cb436-9"><a href="tables.html#cb436-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">tab_style</span>(</span>
-<span id="cb436-10"><a href="tables.html#cb436-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">weight =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>),</span>
-<span id="cb436-11"><a href="tables.html#cb436-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">&quot;title&quot;</span>)</span>
-<span id="cb436-12"><a href="tables.html#cb436-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">tab_style</span>(</span>
-<span id="cb436-13"><a href="tables.html#cb436-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>),</span>
-<span id="cb436-14"><a href="tables.html#cb436-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">&quot;subtitle&quot;</span>)</span>
-<span id="cb436-15"><a href="tables.html#cb436-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb436-16"><a href="tables.html#cb436-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
-<span id="cb436-17"><a href="tables.html#cb436-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="fu">md</span>(<span class="st">&quot;**By:** Matt Waite  |  **Source:** [Sports Reference](https://www.sports-reference.com/cbb/seasons/)&quot;</span>)</span>
-<span id="cb436-18"><a href="tables.html#cb436-18" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="tables.html#cb435-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> </span>
+<span id="cb435-2"><a href="tables.html#cb435-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb435-3"><a href="tables.html#cb435-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb435-4"><a href="tables.html#cb435-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">PercentChange =</span> <span class="st">&quot;Percent Change&quot;</span></span>
+<span id="cb435-5"><a href="tables.html#cb435-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb435-6"><a href="tables.html#cb435-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb435-7"><a href="tables.html#cb435-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Does Hoiberg&#39;s offense push threes more than Miles?&quot;</span>,</span>
+<span id="cb435-8"><a href="tables.html#cb435-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Nebraska wasn&#39;t in the top 100 of teams shooting more threes. These 10 teams completely changed their offense.&quot;</span></span>
+<span id="cb435-9"><a href="tables.html#cb435-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">tab_style</span>(</span>
+<span id="cb435-10"><a href="tables.html#cb435-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">weight =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>),</span>
+<span id="cb435-11"><a href="tables.html#cb435-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">&quot;title&quot;</span>)</span>
+<span id="cb435-12"><a href="tables.html#cb435-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">tab_style</span>(</span>
+<span id="cb435-13"><a href="tables.html#cb435-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>),</span>
+<span id="cb435-14"><a href="tables.html#cb435-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">&quot;subtitle&quot;</span>)</span>
+<span id="cb435-15"><a href="tables.html#cb435-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb435-16"><a href="tables.html#cb435-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
+<span id="cb435-17"><a href="tables.html#cb435-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="fu">md</span>(<span class="st">&quot;**By:** Matt Waite  |  **Source:** [Sports Reference](https://www.sports-reference.com/cbb/seasons/)&quot;</span>)</span>
+<span id="cb435-18"><a href="tables.html#cb435-18" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div id="adwsitqfvz" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
@@ -2921,33 +2921,33 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </table>
 </div>
 <p>We can do a lot with <code>tab_style</code>. For instance, we can make the headers bold and reduce the size a bit to reduce font congestion in the area.</p>
-<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="tables.html#cb437-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> </span>
-<span id="cb437-2"><a href="tables.html#cb437-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb437-3"><a href="tables.html#cb437-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb437-4"><a href="tables.html#cb437-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">PercentChange =</span> <span class="st">&quot;Percent Change&quot;</span></span>
-<span id="cb437-5"><a href="tables.html#cb437-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb437-6"><a href="tables.html#cb437-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb437-7"><a href="tables.html#cb437-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Does Hoiberg&#39;s offense push threes more than Miles?&quot;</span>,</span>
-<span id="cb437-8"><a href="tables.html#cb437-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Nebraska wasn&#39;t in the top 100 of teams shooting more threes. These 10 teams completely changed their offense.&quot;</span></span>
-<span id="cb437-9"><a href="tables.html#cb437-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb437-10"><a href="tables.html#cb437-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb437-11"><a href="tables.html#cb437-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">weight =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>),</span>
-<span id="cb437-12"><a href="tables.html#cb437-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">&quot;title&quot;</span>)</span>
-<span id="cb437-13"><a href="tables.html#cb437-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb437-14"><a href="tables.html#cb437-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb437-15"><a href="tables.html#cb437-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>),</span>
-<span id="cb437-16"><a href="tables.html#cb437-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">&quot;subtitle&quot;</span>)</span>
-<span id="cb437-17"><a href="tables.html#cb437-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span>  </span>
-<span id="cb437-18"><a href="tables.html#cb437-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
-<span id="cb437-19"><a href="tables.html#cb437-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="fu">md</span>(<span class="st">&quot;**By:** Matt Waite  |  **Source:** [Sports Reference](https://www.sports-reference.com/cbb/seasons/)&quot;</span>)</span>
-<span id="cb437-20"><a href="tables.html#cb437-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb437-21"><a href="tables.html#cb437-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb437-22"><a href="tables.html#cb437-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">locations =</span> <span class="fu">cells_column_labels</span>(<span class="at">columns =</span> <span class="fu">everything</span>()),</span>
-<span id="cb437-23"><a href="tables.html#cb437-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">style =</span> <span class="fu">list</span>(</span>
-<span id="cb437-24"><a href="tables.html#cb437-24" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cell_borders</span>(<span class="at">sides =</span> <span class="st">&quot;bottom&quot;</span>, <span class="at">weight =</span> <span class="fu">px</span>(<span class="dv">3</span>)),</span>
-<span id="cb437-25"><a href="tables.html#cb437-25" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size=</span><span class="dv">12</span>)</span>
-<span id="cb437-26"><a href="tables.html#cb437-26" aria-hidden="true" tabindex="-1"></a>     )</span>
-<span id="cb437-27"><a href="tables.html#cb437-27" aria-hidden="true" tabindex="-1"></a>   ) </span></code></pre></div>
+<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="tables.html#cb436-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> </span>
+<span id="cb436-2"><a href="tables.html#cb436-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb436-3"><a href="tables.html#cb436-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb436-4"><a href="tables.html#cb436-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">PercentChange =</span> <span class="st">&quot;Percent Change&quot;</span></span>
+<span id="cb436-5"><a href="tables.html#cb436-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb436-6"><a href="tables.html#cb436-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb436-7"><a href="tables.html#cb436-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Does Hoiberg&#39;s offense push threes more than Miles?&quot;</span>,</span>
+<span id="cb436-8"><a href="tables.html#cb436-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Nebraska wasn&#39;t in the top 100 of teams shooting more threes. These 10 teams completely changed their offense.&quot;</span></span>
+<span id="cb436-9"><a href="tables.html#cb436-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb436-10"><a href="tables.html#cb436-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb436-11"><a href="tables.html#cb436-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">weight =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>),</span>
+<span id="cb436-12"><a href="tables.html#cb436-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">&quot;title&quot;</span>)</span>
+<span id="cb436-13"><a href="tables.html#cb436-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb436-14"><a href="tables.html#cb436-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb436-15"><a href="tables.html#cb436-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>),</span>
+<span id="cb436-16"><a href="tables.html#cb436-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">&quot;subtitle&quot;</span>)</span>
+<span id="cb436-17"><a href="tables.html#cb436-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span>  </span>
+<span id="cb436-18"><a href="tables.html#cb436-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
+<span id="cb436-19"><a href="tables.html#cb436-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="fu">md</span>(<span class="st">&quot;**By:** Matt Waite  |  **Source:** [Sports Reference](https://www.sports-reference.com/cbb/seasons/)&quot;</span>)</span>
+<span id="cb436-20"><a href="tables.html#cb436-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb436-21"><a href="tables.html#cb436-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb436-22"><a href="tables.html#cb436-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">locations =</span> <span class="fu">cells_column_labels</span>(<span class="at">columns =</span> <span class="fu">everything</span>()),</span>
+<span id="cb436-23"><a href="tables.html#cb436-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">style =</span> <span class="fu">list</span>(</span>
+<span id="cb436-24"><a href="tables.html#cb436-24" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cell_borders</span>(<span class="at">sides =</span> <span class="st">&quot;bottom&quot;</span>, <span class="at">weight =</span> <span class="fu">px</span>(<span class="dv">3</span>)),</span>
+<span id="cb436-25"><a href="tables.html#cb436-25" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size=</span><span class="dv">12</span>)</span>
+<span id="cb436-26"><a href="tables.html#cb436-26" aria-hidden="true" tabindex="-1"></a>     )</span>
+<span id="cb436-27"><a href="tables.html#cb436-27" aria-hidden="true" tabindex="-1"></a>   ) </span></code></pre></div>
 <div id="fuumqbfzbu" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
@@ -3365,35 +3365,35 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </table>
 </div>
 <p>Next up: There’s a lot of lines in this that don’t need to be there. <code>gt</code> has some tools to get rid of them easily and add in some other readability improvements.</p>
-<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="tables.html#cb438-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> </span>
-<span id="cb438-2"><a href="tables.html#cb438-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb438-3"><a href="tables.html#cb438-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb438-4"><a href="tables.html#cb438-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">PercentChange =</span> <span class="st">&quot;Percent Change&quot;</span></span>
-<span id="cb438-5"><a href="tables.html#cb438-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb438-6"><a href="tables.html#cb438-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb438-7"><a href="tables.html#cb438-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Does Hoiberg&#39;s offense push threes more than Miles?&quot;</span>,</span>
-<span id="cb438-8"><a href="tables.html#cb438-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Nebraska wasn&#39;t in the top 100 of teams shooting more threes. These 10 teams completely changed their offense.&quot;</span></span>
-<span id="cb438-9"><a href="tables.html#cb438-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span>  </span>
-<span id="cb438-10"><a href="tables.html#cb438-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
-<span id="cb438-11"><a href="tables.html#cb438-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="fu">md</span>(<span class="st">&quot;**By:** Matt Waite  |  **Source:** [Sports Reference](https://www.sports-reference.com/cbb/seasons/)&quot;</span>)</span>
-<span id="cb438-12"><a href="tables.html#cb438-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb438-13"><a href="tables.html#cb438-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb438-14"><a href="tables.html#cb438-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">weight =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>),</span>
-<span id="cb438-15"><a href="tables.html#cb438-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">&quot;title&quot;</span>)</span>
-<span id="cb438-16"><a href="tables.html#cb438-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb438-17"><a href="tables.html#cb438-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb438-18"><a href="tables.html#cb438-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>),</span>
-<span id="cb438-19"><a href="tables.html#cb438-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">&quot;subtitle&quot;</span>)</span>
-<span id="cb438-20"><a href="tables.html#cb438-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb438-21"><a href="tables.html#cb438-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb438-22"><a href="tables.html#cb438-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">locations =</span> <span class="fu">cells_column_labels</span>(<span class="at">columns =</span> <span class="fu">everything</span>()),</span>
-<span id="cb438-23"><a href="tables.html#cb438-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">style =</span> <span class="fu">list</span>(</span>
-<span id="cb438-24"><a href="tables.html#cb438-24" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cell_borders</span>(<span class="at">sides =</span> <span class="st">&quot;bottom&quot;</span>, <span class="at">weight =</span> <span class="fu">px</span>(<span class="dv">3</span>)),</span>
-<span id="cb438-25"><a href="tables.html#cb438-25" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size=</span><span class="dv">12</span>)</span>
-<span id="cb438-26"><a href="tables.html#cb438-26" aria-hidden="true" tabindex="-1"></a>     )</span>
-<span id="cb438-27"><a href="tables.html#cb438-27" aria-hidden="true" tabindex="-1"></a>   ) <span class="sc">%&gt;%</span></span>
-<span id="cb438-28"><a href="tables.html#cb438-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_row_striping</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb438-29"><a href="tables.html#cb438-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_table_lines</span>(<span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="tables.html#cb437-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> </span>
+<span id="cb437-2"><a href="tables.html#cb437-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb437-3"><a href="tables.html#cb437-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb437-4"><a href="tables.html#cb437-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">PercentChange =</span> <span class="st">&quot;Percent Change&quot;</span></span>
+<span id="cb437-5"><a href="tables.html#cb437-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb437-6"><a href="tables.html#cb437-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb437-7"><a href="tables.html#cb437-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Does Hoiberg&#39;s offense push threes more than Miles?&quot;</span>,</span>
+<span id="cb437-8"><a href="tables.html#cb437-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Nebraska wasn&#39;t in the top 100 of teams shooting more threes. These 10 teams completely changed their offense.&quot;</span></span>
+<span id="cb437-9"><a href="tables.html#cb437-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span>  </span>
+<span id="cb437-10"><a href="tables.html#cb437-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
+<span id="cb437-11"><a href="tables.html#cb437-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="fu">md</span>(<span class="st">&quot;**By:** Matt Waite  |  **Source:** [Sports Reference](https://www.sports-reference.com/cbb/seasons/)&quot;</span>)</span>
+<span id="cb437-12"><a href="tables.html#cb437-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb437-13"><a href="tables.html#cb437-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb437-14"><a href="tables.html#cb437-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">weight =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>),</span>
+<span id="cb437-15"><a href="tables.html#cb437-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">&quot;title&quot;</span>)</span>
+<span id="cb437-16"><a href="tables.html#cb437-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb437-17"><a href="tables.html#cb437-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb437-18"><a href="tables.html#cb437-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>),</span>
+<span id="cb437-19"><a href="tables.html#cb437-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">&quot;subtitle&quot;</span>)</span>
+<span id="cb437-20"><a href="tables.html#cb437-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb437-21"><a href="tables.html#cb437-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb437-22"><a href="tables.html#cb437-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">locations =</span> <span class="fu">cells_column_labels</span>(<span class="at">columns =</span> <span class="fu">everything</span>()),</span>
+<span id="cb437-23"><a href="tables.html#cb437-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">style =</span> <span class="fu">list</span>(</span>
+<span id="cb437-24"><a href="tables.html#cb437-24" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cell_borders</span>(<span class="at">sides =</span> <span class="st">&quot;bottom&quot;</span>, <span class="at">weight =</span> <span class="fu">px</span>(<span class="dv">3</span>)),</span>
+<span id="cb437-25"><a href="tables.html#cb437-25" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size=</span><span class="dv">12</span>)</span>
+<span id="cb437-26"><a href="tables.html#cb437-26" aria-hidden="true" tabindex="-1"></a>     )</span>
+<span id="cb437-27"><a href="tables.html#cb437-27" aria-hidden="true" tabindex="-1"></a>   ) <span class="sc">%&gt;%</span></span>
+<span id="cb437-28"><a href="tables.html#cb437-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_row_striping</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb437-29"><a href="tables.html#cb437-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_table_lines</span>(<span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 <div id="pkdczdujff" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
@@ -3811,39 +3811,39 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </table>
 </div>
 <p>We’re in pretty good shape here, but look closer. What else makes this table sub-par? How about the formatting of the percent change? We can fix that with a formatter.</p>
-<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="tables.html#cb439-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> </span>
-<span id="cb439-2"><a href="tables.html#cb439-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb439-3"><a href="tables.html#cb439-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb439-4"><a href="tables.html#cb439-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">PercentChange =</span> <span class="st">&quot;Percent Change&quot;</span></span>
-<span id="cb439-5"><a href="tables.html#cb439-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb439-6"><a href="tables.html#cb439-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb439-7"><a href="tables.html#cb439-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Does Hoiberg&#39;s offense push threes more than Miles?&quot;</span>,</span>
-<span id="cb439-8"><a href="tables.html#cb439-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Nebraska wasn&#39;t in the top 100 of teams shooting more threes. These 10 teams completely changed their offense.&quot;</span></span>
-<span id="cb439-9"><a href="tables.html#cb439-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span>  </span>
-<span id="cb439-10"><a href="tables.html#cb439-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
-<span id="cb439-11"><a href="tables.html#cb439-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="fu">md</span>(<span class="st">&quot;**By:** Matt Waite  |  **Source:** [Sports Reference](https://www.sports-reference.com/cbb/seasons/)&quot;</span>)</span>
-<span id="cb439-12"><a href="tables.html#cb439-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb439-13"><a href="tables.html#cb439-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb439-14"><a href="tables.html#cb439-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">weight =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>),</span>
-<span id="cb439-15"><a href="tables.html#cb439-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">&quot;title&quot;</span>)</span>
-<span id="cb439-16"><a href="tables.html#cb439-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb439-17"><a href="tables.html#cb439-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb439-18"><a href="tables.html#cb439-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>),</span>
-<span id="cb439-19"><a href="tables.html#cb439-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">&quot;subtitle&quot;</span>)</span>
-<span id="cb439-20"><a href="tables.html#cb439-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb439-21"><a href="tables.html#cb439-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb439-22"><a href="tables.html#cb439-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">locations =</span> <span class="fu">cells_column_labels</span>(<span class="at">columns =</span> <span class="fu">everything</span>()),</span>
-<span id="cb439-23"><a href="tables.html#cb439-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">style =</span> <span class="fu">list</span>(</span>
-<span id="cb439-24"><a href="tables.html#cb439-24" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cell_borders</span>(<span class="at">sides =</span> <span class="st">&quot;bottom&quot;</span>, <span class="at">weight =</span> <span class="fu">px</span>(<span class="dv">3</span>)),</span>
-<span id="cb439-25"><a href="tables.html#cb439-25" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size=</span><span class="dv">12</span>)</span>
-<span id="cb439-26"><a href="tables.html#cb439-26" aria-hidden="true" tabindex="-1"></a>     )</span>
-<span id="cb439-27"><a href="tables.html#cb439-27" aria-hidden="true" tabindex="-1"></a>   ) <span class="sc">%&gt;%</span></span>
-<span id="cb439-28"><a href="tables.html#cb439-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_row_striping</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb439-29"><a href="tables.html#cb439-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_table_lines</span>(<span class="st">&quot;none&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb439-30"><a href="tables.html#cb439-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fmt_percent</span>(</span>
-<span id="cb439-31"><a href="tables.html#cb439-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(PercentChange),</span>
-<span id="cb439-32"><a href="tables.html#cb439-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">1</span></span>
-<span id="cb439-33"><a href="tables.html#cb439-33" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="tables.html#cb438-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> </span>
+<span id="cb438-2"><a href="tables.html#cb438-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb438-3"><a href="tables.html#cb438-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb438-4"><a href="tables.html#cb438-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">PercentChange =</span> <span class="st">&quot;Percent Change&quot;</span></span>
+<span id="cb438-5"><a href="tables.html#cb438-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb438-6"><a href="tables.html#cb438-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb438-7"><a href="tables.html#cb438-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Does Hoiberg&#39;s offense push threes more than Miles?&quot;</span>,</span>
+<span id="cb438-8"><a href="tables.html#cb438-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Nebraska wasn&#39;t in the top 100 of teams shooting more threes. These 10 teams completely changed their offense.&quot;</span></span>
+<span id="cb438-9"><a href="tables.html#cb438-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span>  </span>
+<span id="cb438-10"><a href="tables.html#cb438-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
+<span id="cb438-11"><a href="tables.html#cb438-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="fu">md</span>(<span class="st">&quot;**By:** Matt Waite  |  **Source:** [Sports Reference](https://www.sports-reference.com/cbb/seasons/)&quot;</span>)</span>
+<span id="cb438-12"><a href="tables.html#cb438-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb438-13"><a href="tables.html#cb438-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb438-14"><a href="tables.html#cb438-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">weight =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>),</span>
+<span id="cb438-15"><a href="tables.html#cb438-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">&quot;title&quot;</span>)</span>
+<span id="cb438-16"><a href="tables.html#cb438-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb438-17"><a href="tables.html#cb438-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb438-18"><a href="tables.html#cb438-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>),</span>
+<span id="cb438-19"><a href="tables.html#cb438-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">&quot;subtitle&quot;</span>)</span>
+<span id="cb438-20"><a href="tables.html#cb438-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb438-21"><a href="tables.html#cb438-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb438-22"><a href="tables.html#cb438-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">locations =</span> <span class="fu">cells_column_labels</span>(<span class="at">columns =</span> <span class="fu">everything</span>()),</span>
+<span id="cb438-23"><a href="tables.html#cb438-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">style =</span> <span class="fu">list</span>(</span>
+<span id="cb438-24"><a href="tables.html#cb438-24" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cell_borders</span>(<span class="at">sides =</span> <span class="st">&quot;bottom&quot;</span>, <span class="at">weight =</span> <span class="fu">px</span>(<span class="dv">3</span>)),</span>
+<span id="cb438-25"><a href="tables.html#cb438-25" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size=</span><span class="dv">12</span>)</span>
+<span id="cb438-26"><a href="tables.html#cb438-26" aria-hidden="true" tabindex="-1"></a>     )</span>
+<span id="cb438-27"><a href="tables.html#cb438-27" aria-hidden="true" tabindex="-1"></a>   ) <span class="sc">%&gt;%</span></span>
+<span id="cb438-28"><a href="tables.html#cb438-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_row_striping</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb438-29"><a href="tables.html#cb438-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_table_lines</span>(<span class="st">&quot;none&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb438-30"><a href="tables.html#cb438-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fmt_percent</span>(</span>
+<span id="cb438-31"><a href="tables.html#cb438-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(PercentChange),</span>
+<span id="cb438-32"><a href="tables.html#cb438-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">1</span></span>
+<span id="cb438-33"><a href="tables.html#cb438-33" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div id="iksyvnhqmy" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
@@ -4261,47 +4261,47 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </table>
 </div>
 <p>Throughout the semester, we’ve been using color and other signals to highlight things. Let’s pretend we’re doing a project on Minnesota. Note they’re the only Big Ten team on this list. With a little <code>tab_style</code> magic, we can change individual rows and add color. The last <code>tab_style</code> block here will first pass off the styles we want to use – we’re going to make the rows maroon and the text gold – and then for locations we specify where with a simple filter. What that means is that any rows we can address with logic – all rows with a value greater than X, for example – we can change the styling.</p>
-<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="tables.html#cb440-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> </span>
-<span id="cb440-2"><a href="tables.html#cb440-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb440-3"><a href="tables.html#cb440-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb440-4"><a href="tables.html#cb440-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">PercentChange =</span> <span class="st">&quot;Percent Change&quot;</span></span>
-<span id="cb440-5"><a href="tables.html#cb440-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb440-6"><a href="tables.html#cb440-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb440-7"><a href="tables.html#cb440-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Does Hoiberg&#39;s offense push threes more than Miles?&quot;</span>,</span>
-<span id="cb440-8"><a href="tables.html#cb440-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Nebraska wasn&#39;t in the top 100 of teams shooting more threes. These 10 teams completely changed their offense.&quot;</span></span>
-<span id="cb440-9"><a href="tables.html#cb440-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span>  </span>
-<span id="cb440-10"><a href="tables.html#cb440-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
-<span id="cb440-11"><a href="tables.html#cb440-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="fu">md</span>(<span class="st">&quot;**By:** Matt Waite  |  **Source:** [Sports Reference](https://www.sports-reference.com/cbb/seasons/)&quot;</span>)</span>
-<span id="cb440-12"><a href="tables.html#cb440-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb440-13"><a href="tables.html#cb440-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb440-14"><a href="tables.html#cb440-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">weight =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>),</span>
-<span id="cb440-15"><a href="tables.html#cb440-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">&quot;title&quot;</span>)</span>
-<span id="cb440-16"><a href="tables.html#cb440-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb440-17"><a href="tables.html#cb440-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb440-18"><a href="tables.html#cb440-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>),</span>
-<span id="cb440-19"><a href="tables.html#cb440-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">&quot;subtitle&quot;</span>)</span>
-<span id="cb440-20"><a href="tables.html#cb440-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb440-21"><a href="tables.html#cb440-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb440-22"><a href="tables.html#cb440-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">locations =</span> <span class="fu">cells_column_labels</span>(<span class="at">columns =</span> <span class="fu">everything</span>()),</span>
-<span id="cb440-23"><a href="tables.html#cb440-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">style =</span> <span class="fu">list</span>(</span>
-<span id="cb440-24"><a href="tables.html#cb440-24" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cell_borders</span>(<span class="at">sides =</span> <span class="st">&quot;bottom&quot;</span>, <span class="at">weight =</span> <span class="fu">px</span>(<span class="dv">3</span>)),</span>
-<span id="cb440-25"><a href="tables.html#cb440-25" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size=</span><span class="dv">12</span>)</span>
-<span id="cb440-26"><a href="tables.html#cb440-26" aria-hidden="true" tabindex="-1"></a>     )</span>
-<span id="cb440-27"><a href="tables.html#cb440-27" aria-hidden="true" tabindex="-1"></a>   ) <span class="sc">%&gt;%</span></span>
-<span id="cb440-28"><a href="tables.html#cb440-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_row_striping</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb440-29"><a href="tables.html#cb440-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_table_lines</span>(<span class="st">&quot;none&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb440-30"><a href="tables.html#cb440-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fmt_percent</span>(</span>
-<span id="cb440-31"><a href="tables.html#cb440-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(PercentChange),</span>
-<span id="cb440-32"><a href="tables.html#cb440-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">1</span></span>
-<span id="cb440-33"><a href="tables.html#cb440-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb440-34"><a href="tables.html#cb440-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb440-35"><a href="tables.html#cb440-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">list</span>(</span>
-<span id="cb440-36"><a href="tables.html#cb440-36" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">&quot;maroon&quot;</span>),</span>
-<span id="cb440-37"><a href="tables.html#cb440-37" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;gold&quot;</span>)</span>
-<span id="cb440-38"><a href="tables.html#cb440-38" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb440-39"><a href="tables.html#cb440-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(</span>
-<span id="cb440-40"><a href="tables.html#cb440-40" aria-hidden="true" tabindex="-1"></a>      <span class="at">rows =</span> Team <span class="sc">==</span> <span class="st">&quot;Minnesota Golden Gophers&quot;</span>)</span>
-<span id="cb440-41"><a href="tables.html#cb440-41" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="tables.html#cb439-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> </span>
+<span id="cb439-2"><a href="tables.html#cb439-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb439-3"><a href="tables.html#cb439-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb439-4"><a href="tables.html#cb439-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">PercentChange =</span> <span class="st">&quot;Percent Change&quot;</span></span>
+<span id="cb439-5"><a href="tables.html#cb439-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb439-6"><a href="tables.html#cb439-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb439-7"><a href="tables.html#cb439-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Does Hoiberg&#39;s offense push threes more than Miles?&quot;</span>,</span>
+<span id="cb439-8"><a href="tables.html#cb439-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Nebraska wasn&#39;t in the top 100 of teams shooting more threes. These 10 teams completely changed their offense.&quot;</span></span>
+<span id="cb439-9"><a href="tables.html#cb439-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span>  </span>
+<span id="cb439-10"><a href="tables.html#cb439-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
+<span id="cb439-11"><a href="tables.html#cb439-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="fu">md</span>(<span class="st">&quot;**By:** Matt Waite  |  **Source:** [Sports Reference](https://www.sports-reference.com/cbb/seasons/)&quot;</span>)</span>
+<span id="cb439-12"><a href="tables.html#cb439-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb439-13"><a href="tables.html#cb439-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb439-14"><a href="tables.html#cb439-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">weight =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>),</span>
+<span id="cb439-15"><a href="tables.html#cb439-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">&quot;title&quot;</span>)</span>
+<span id="cb439-16"><a href="tables.html#cb439-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb439-17"><a href="tables.html#cb439-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb439-18"><a href="tables.html#cb439-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>),</span>
+<span id="cb439-19"><a href="tables.html#cb439-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">&quot;subtitle&quot;</span>)</span>
+<span id="cb439-20"><a href="tables.html#cb439-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb439-21"><a href="tables.html#cb439-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb439-22"><a href="tables.html#cb439-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">locations =</span> <span class="fu">cells_column_labels</span>(<span class="at">columns =</span> <span class="fu">everything</span>()),</span>
+<span id="cb439-23"><a href="tables.html#cb439-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">style =</span> <span class="fu">list</span>(</span>
+<span id="cb439-24"><a href="tables.html#cb439-24" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cell_borders</span>(<span class="at">sides =</span> <span class="st">&quot;bottom&quot;</span>, <span class="at">weight =</span> <span class="fu">px</span>(<span class="dv">3</span>)),</span>
+<span id="cb439-25"><a href="tables.html#cb439-25" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size=</span><span class="dv">12</span>)</span>
+<span id="cb439-26"><a href="tables.html#cb439-26" aria-hidden="true" tabindex="-1"></a>     )</span>
+<span id="cb439-27"><a href="tables.html#cb439-27" aria-hidden="true" tabindex="-1"></a>   ) <span class="sc">%&gt;%</span></span>
+<span id="cb439-28"><a href="tables.html#cb439-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_row_striping</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb439-29"><a href="tables.html#cb439-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_table_lines</span>(<span class="st">&quot;none&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb439-30"><a href="tables.html#cb439-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fmt_percent</span>(</span>
+<span id="cb439-31"><a href="tables.html#cb439-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(PercentChange),</span>
+<span id="cb439-32"><a href="tables.html#cb439-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">1</span></span>
+<span id="cb439-33"><a href="tables.html#cb439-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb439-34"><a href="tables.html#cb439-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb439-35"><a href="tables.html#cb439-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">list</span>(</span>
+<span id="cb439-36"><a href="tables.html#cb439-36" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">&quot;maroon&quot;</span>),</span>
+<span id="cb439-37"><a href="tables.html#cb439-37" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">&quot;gold&quot;</span>)</span>
+<span id="cb439-38"><a href="tables.html#cb439-38" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb439-39"><a href="tables.html#cb439-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(</span>
+<span id="cb439-40"><a href="tables.html#cb439-40" aria-hidden="true" tabindex="-1"></a>      <span class="at">rows =</span> Team <span class="sc">==</span> <span class="st">&quot;Minnesota Golden Gophers&quot;</span>)</span>
+<span id="cb439-41"><a href="tables.html#cb439-41" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div id="pbfxkfswou" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;

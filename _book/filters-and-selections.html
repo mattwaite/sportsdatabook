@@ -24,7 +24,7 @@
 <meta name="author" content="Matt Waite" />
 
 
-<meta name="date" content="2021-08-12" />
+<meta name="date" content="2021-09-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -459,82 +459,81 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="using-conditional-filters-to-set-limits" class="section level2" number="6.2">
 <h2><span class="header-section-number">6.2</span> Using conditional filters to set limits</h2>
-<p>Let’s return to the blistering season of Drayton Whiteside using our dataset of every college basketball player’s season stats in 2018-19 season. How can we set limits in something like a question of who had the best season?</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="http://mattwaite.github.io/sportsdatafiles/players19.csv">
+<p>Let’s return to the problem of one-hit wonders in basketball mucking up our true shooting analysis. How can we set limits in something like a question of who had the best season? Let’s grab every player from last season.</p>
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="http://mattwaite.github.io/sportsdatafiles/players21.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
-<p>Let’s get our Drayton Whiteside data from the previous chapter back up.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="filters-and-selections.html#cb68-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/players19.csv&quot;</span>)</span></code></pre></div>
-<pre><code>## New names:
-## * `` -&gt; ...1</code></pre>
-<pre><code>## Rows: 5386 Columns: 59</code></pre>
+<p>Let’s get set up similar to the previous chapter.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="filters-and-selections.html#cb68-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/players21.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Rows: 5410 Columns: 58</code></pre>
 <pre><code>## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
-## chr  (9): Team, Conference, Player, Class, Pos, Height, Hometown, High Schoo...
-## dbl (50): ...1, #, Weight, Rk.x, G, GS, MP, FG, FGA, FG%, 2P, 2PA, 2P%, 3P, ...</code></pre>
+## chr  (9): Team, Player, Class, Pos, Height, Hometown, High School, Summary, ...
+## dbl (49): #, Weight, Rk.x, G, GS, MP, FG, FGA, FG%, 2P, 2PA, 2P%, 3P, 3PA, 3...</code></pre>
 <pre><code>## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="filters-and-selections.html#cb73-1" aria-hidden="true" tabindex="-1"></a>players <span class="sc">%&gt;%</span></span>
-<span id="cb73-2"><a href="filters-and-selections.html#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">trueshooting =</span> (PTS<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>(FGA <span class="sc">+</span> (.<span class="dv">44</span><span class="sc">*</span>FTA))))<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb73-3"><a href="filters-and-selections.html#cb73-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(trueshooting))</span></code></pre></div>
-<pre><code>## # A tibble: 5,386 × 60
-##     ...1 Team      Conference Player    `#` Class Pos   Height Weight Hometown  
-##    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;     
-##  1   579 Texas Lo… Big 12     Drayto…     4 JR    G     6-0       156 Austin, TX
-##  2   843 Stony Br… AEC        Nick A…    42 FR    F     6-7       240 Port Jeff…
-##  3  1059 Southeas… Southland  Patric…    22 SO    F     6-3       210 Folsom, LA
-##  4  4269 Dayton F… A-10       Camron…    52 SO    G     5-7       160 Country C…
-##  5  4681 Californ… Pac-12     David …    21 JR    G     6-4       185 Newbury P…
-##  6   326 Virginia… ACC        Grant …     1 FR    G     &lt;NA&gt;       NA Charlotte…
-##  7   410 Vanderbi… SEC        Mac Hu…    42 FR    G     6-6       182 Chattanoo…
-##  8  1390 Saint Lo… A-10       Jack R…    31 JR    G     6-6       205 Mattoon, …
-##  9  2230 NJIT Hig… A-Sun      Patric…     3 SO    G     5-9       160 West Oran…
-## 10   266 Washingt… Pac-12     Reagan…    34 FR    F     6-6       225 Santa Ana…
-## # … with 5,376 more rows, and 50 more variables: High School &lt;chr&gt;,
-## #   Summary &lt;chr&gt;, Rk.x &lt;dbl&gt;, G &lt;dbl&gt;, GS &lt;dbl&gt;, MP &lt;dbl&gt;, FG &lt;dbl&gt;,
-## #   FGA &lt;dbl&gt;, FG% &lt;dbl&gt;, 2P &lt;dbl&gt;, 2PA &lt;dbl&gt;, 2P% &lt;dbl&gt;, 3P &lt;dbl&gt;, 3PA &lt;dbl&gt;,
-## #   3P% &lt;dbl&gt;, FT &lt;dbl&gt;, FTA &lt;dbl&gt;, FT% &lt;dbl&gt;, ORB &lt;dbl&gt;, DRB &lt;dbl&gt;, TRB &lt;dbl&gt;,
-## #   AST &lt;dbl&gt;, STL &lt;dbl&gt;, BLK &lt;dbl&gt;, TOV &lt;dbl&gt;, PF &lt;dbl&gt;, PTS &lt;dbl&gt;,
-## #   Rk.y &lt;dbl&gt;, PER &lt;dbl&gt;, TS% &lt;dbl&gt;, eFG% &lt;dbl&gt;, 3PAr &lt;dbl&gt;, FTr &lt;dbl&gt;,
-## #   PProd &lt;dbl&gt;, ORB% &lt;dbl&gt;, DRB% &lt;dbl&gt;, TRB% &lt;dbl&gt;, AST% &lt;dbl&gt;, STL% &lt;dbl&gt;,
-## #   BLK% &lt;dbl&gt;, TOV% &lt;dbl&gt;, USG% &lt;dbl&gt;, OWS &lt;dbl&gt;, DWS &lt;dbl&gt;, WS &lt;dbl&gt;,
-## #   WS/40 &lt;dbl&gt;, OBPM &lt;dbl&gt;, DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;, trueshooting &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="filters-and-selections.html#cb72-1" aria-hidden="true" tabindex="-1"></a>players <span class="sc">%&gt;%</span></span>
+<span id="cb72-2"><a href="filters-and-selections.html#cb72-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">trueshooting =</span> (PTS<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>(FGA <span class="sc">+</span> (.<span class="dv">44</span><span class="sc">*</span>FTA))))<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb72-3"><a href="filters-and-selections.html#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(trueshooting))</span></code></pre></div>
+<pre><code>## # A tibble: 5,410 × 59
+##    Team   Player    `#` Class Pos   Height Weight Hometown `High School` Summary
+##    &lt;chr&gt;  &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;  
+##  1 Weber… Jake F…    25 SO    F     6-7       185 Star, ID Eagle (ID)    3.0 Pt…
+##  2 Utah … Karson…    21 FR    G     6-4       175 Celina,… Celina HS     0.4 Pt…
+##  3 UNLV … Trey H…     2 JR    G     5-11      175 Henders… Coronado (NV) 1.0 Pt…
+##  4 Missi… Justin…    21 JR    G     6-5       215 Birming… Hoover (AL)   3.0 Pt…
+##  5 Louis… Hogan …     3 SO    C     6-8       235 Zionsvi… Zionsville HS 1.0 Pt…
+##  6 Gonza… Matthe…    23 JR    G     6-3       185 Portlan… Jesuit HS     0.5 Pt…
+##  7 Fresn… Alec H…    20 JR    G     6-4       190 Riversi… Junipero Ser… 3.0 Pt…
+##  8 ETSU … Morrel…    22 FR    G     6-2       210 Clevela… Cleveland HS  0.6 Pt…
+##  9 UConn… Andrew…    20 FR    G     6-1       175 Glaston… St. Anthony … 0.8 Pt…
+## 10 Bella… Hunter…    23 &lt;NA&gt;  G     6-4       185 Mount W… Bullitt East… 0.8 Pt…
+## # … with 5,400 more rows, and 49 more variables: Rk.x &lt;dbl&gt;, G &lt;dbl&gt;, GS &lt;dbl&gt;,
+## #   MP &lt;dbl&gt;, FG &lt;dbl&gt;, FGA &lt;dbl&gt;, FG% &lt;dbl&gt;, 2P &lt;dbl&gt;, 2PA &lt;dbl&gt;, 2P% &lt;dbl&gt;,
+## #   3P &lt;dbl&gt;, 3PA &lt;dbl&gt;, 3P% &lt;dbl&gt;, FT &lt;dbl&gt;, FTA &lt;dbl&gt;, FT% &lt;dbl&gt;, ORB &lt;dbl&gt;,
+## #   DRB &lt;dbl&gt;, TRB &lt;dbl&gt;, AST &lt;dbl&gt;, STL &lt;dbl&gt;, BLK &lt;dbl&gt;, TOV &lt;dbl&gt;, PF &lt;dbl&gt;,
+## #   PTS &lt;dbl&gt;, Rk.y &lt;dbl&gt;, PER &lt;dbl&gt;, TS% &lt;dbl&gt;, eFG% &lt;dbl&gt;, 3PAr &lt;dbl&gt;,
+## #   FTr &lt;dbl&gt;, PProd &lt;dbl&gt;, ORB% &lt;dbl&gt;, DRB% &lt;dbl&gt;, TRB% &lt;dbl&gt;, AST% &lt;dbl&gt;,
+## #   STL% &lt;dbl&gt;, BLK% &lt;dbl&gt;, TOV% &lt;dbl&gt;, USG% &lt;dbl&gt;, OWS &lt;dbl&gt;, DWS &lt;dbl&gt;,
+## #   WS &lt;dbl&gt;, WS/40 &lt;dbl&gt;, OBPM &lt;dbl&gt;, DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;, Conference &lt;chr&gt;,
+## #   trueshooting &lt;dbl&gt;</code></pre>
+<p>And ine the COVID season, Weber State’s Jake Furgerson is your One Shot One Three True Shooting champion.</p>
 <p>In most contests, like the batting title in Major League Baseball, there’s a minimum number of X to qualify. In baseball, it’s at bats. In basketball, it attempts. So let’s set a floor and see how it changes. What if we said you had to have played 100 minutes in a season? The top players in college basketball play more than 1000 minutes in a season. So 100 is not that much. Let’s try it and see.</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="filters-and-selections.html#cb75-1" aria-hidden="true" tabindex="-1"></a>players <span class="sc">%&gt;%</span></span>
-<span id="cb75-2"><a href="filters-and-selections.html#cb75-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">trueshooting =</span> (PTS<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>(FGA <span class="sc">+</span> (.<span class="dv">44</span><span class="sc">*</span>FTA))))<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb75-3"><a href="filters-and-selections.html#cb75-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(trueshooting)) <span class="sc">%&gt;%</span></span>
-<span id="cb75-4"><a href="filters-and-selections.html#cb75-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(MP <span class="sc">&gt;</span> <span class="dv">100</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 3,659 × 60
-##     ...1 Team     Conference Player     `#` Class Pos   Height Weight Hometown  
-##    &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;      &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;     
-##  1  4634 Central… Southland  Jordan …    33 JR    G     6-1       185 Harrison,…
-##  2  3623 Hartfor… AEC        Max Twy…    20 SR    G     6-5       200 Rye, NY   
-##  3  2675 Michiga… Big Ten    Thomas …    15 FR    F     6-8       225 Clarkston…
-##  4  5175 Little … Sun Belt   Kris Ba…    32 SO    F     6-8       194 Dewitt, AR
-##  5  5205 Arizona… Pac-12     De&#39;Quon…    32 SR    F     6-10      225 St. Thoma…
-##  6  4099 ETSU Bu… Southern   Lucas N…    25 JR    C     7-0       220 De Lier, …
-##  7  3006 Louisia… Sun Belt   Brandon…     0 SR    G     6-4       180 Hawthorne…
-##  8   570 Texas L… Big 12     Jaxson …    10 FR    F     6-11      220 Loveland,…
-##  9  1704 Pepperd… WCC        Victor …    34 FR    C     6-9       200 Owerri, N…
-## 10  4056 Eastern… MAC        Jalen K…    30 SO    F     6-9       215 Pasco, WA 
-## # … with 3,649 more rows, and 50 more variables: High School &lt;chr&gt;,
-## #   Summary &lt;chr&gt;, Rk.x &lt;dbl&gt;, G &lt;dbl&gt;, GS &lt;dbl&gt;, MP &lt;dbl&gt;, FG &lt;dbl&gt;,
-## #   FGA &lt;dbl&gt;, FG% &lt;dbl&gt;, 2P &lt;dbl&gt;, 2PA &lt;dbl&gt;, 2P% &lt;dbl&gt;, 3P &lt;dbl&gt;, 3PA &lt;dbl&gt;,
-## #   3P% &lt;dbl&gt;, FT &lt;dbl&gt;, FTA &lt;dbl&gt;, FT% &lt;dbl&gt;, ORB &lt;dbl&gt;, DRB &lt;dbl&gt;, TRB &lt;dbl&gt;,
-## #   AST &lt;dbl&gt;, STL &lt;dbl&gt;, BLK &lt;dbl&gt;, TOV &lt;dbl&gt;, PF &lt;dbl&gt;, PTS &lt;dbl&gt;,
-## #   Rk.y &lt;dbl&gt;, PER &lt;dbl&gt;, TS% &lt;dbl&gt;, eFG% &lt;dbl&gt;, 3PAr &lt;dbl&gt;, FTr &lt;dbl&gt;,
-## #   PProd &lt;dbl&gt;, ORB% &lt;dbl&gt;, DRB% &lt;dbl&gt;, TRB% &lt;dbl&gt;, AST% &lt;dbl&gt;, STL% &lt;dbl&gt;,
-## #   BLK% &lt;dbl&gt;, TOV% &lt;dbl&gt;, USG% &lt;dbl&gt;, OWS &lt;dbl&gt;, DWS &lt;dbl&gt;, WS &lt;dbl&gt;,
-## #   WS/40 &lt;dbl&gt;, OBPM &lt;dbl&gt;, DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;, trueshooting &lt;dbl&gt;</code></pre>
-<p>Now you get Central Arkansas Bears Junior Jordan Grant, who played in 25 games and was on the floor for 152 minutes. So he played regularly. But in that time, he only attempted 16 shots, and made 68 percent of them. In other words, when he shot, he probably scored. He just rarely shot.</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="filters-and-selections.html#cb74-1" aria-hidden="true" tabindex="-1"></a>players <span class="sc">%&gt;%</span></span>
+<span id="cb74-2"><a href="filters-and-selections.html#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">trueshooting =</span> (PTS<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>(FGA <span class="sc">+</span> (.<span class="dv">44</span><span class="sc">*</span>FTA))))<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb74-3"><a href="filters-and-selections.html#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(trueshooting)) <span class="sc">%&gt;%</span></span>
+<span id="cb74-4"><a href="filters-and-selections.html#cb74-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(MP <span class="sc">&gt;</span> <span class="dv">100</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 3,490 × 59
+##    Team   Player    `#` Class Pos   Height Weight Hometown `High School` Summary
+##    &lt;chr&gt;  &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;  
+##  1 South… Nathan…    14 JR    F     6-6       189 Murfree… Blackman HS   1.7 Pt…
+##  2 Idaho… Emmitt…     4 JR    G     6-4       195 Lapwai,… Lapwai (ID)   3.8 Pt…
+##  3 Sacra… Spence…    34 SR    F     6-6       195 Woodbri… Lodi (CA)     2.2 Pt…
+##  4 LSU F… Mwani …     0 FR    F     6-5       215 Las Veg… Bishop Gorma… 3.6 Pt…
+##  5 Sacre… Mike S…     3 FR    G     6-0       170 Hicksvi… Holy Trinity… 8.0 Pt…
+##  6 North… Bryce …    21 FR    F     6-7       205 Allen, … Allen HS      2.9 Pt…
+##  7 Quinn… Seth P…     4 SO    C     7-1       200 Warmins… Archbishop W… 8.0 Pt…
+##  8 Utah … Lahat …    32 SO    F     6-10      243 Dakar, … Florida Prep  1.4 Pt…
+##  9 Colga… Oliver…    33 JR    G     6-2       190 Chapel … Oak Hill Aca… 3.7 Pt…
+## 10 Akron… Enriqu…    25 SO    F     6-7       205 Clevela… St Martin De… 7.9 Pt…
+## # … with 3,480 more rows, and 49 more variables: Rk.x &lt;dbl&gt;, G &lt;dbl&gt;, GS &lt;dbl&gt;,
+## #   MP &lt;dbl&gt;, FG &lt;dbl&gt;, FGA &lt;dbl&gt;, FG% &lt;dbl&gt;, 2P &lt;dbl&gt;, 2PA &lt;dbl&gt;, 2P% &lt;dbl&gt;,
+## #   3P &lt;dbl&gt;, 3PA &lt;dbl&gt;, 3P% &lt;dbl&gt;, FT &lt;dbl&gt;, FTA &lt;dbl&gt;, FT% &lt;dbl&gt;, ORB &lt;dbl&gt;,
+## #   DRB &lt;dbl&gt;, TRB &lt;dbl&gt;, AST &lt;dbl&gt;, STL &lt;dbl&gt;, BLK &lt;dbl&gt;, TOV &lt;dbl&gt;, PF &lt;dbl&gt;,
+## #   PTS &lt;dbl&gt;, Rk.y &lt;dbl&gt;, PER &lt;dbl&gt;, TS% &lt;dbl&gt;, eFG% &lt;dbl&gt;, 3PAr &lt;dbl&gt;,
+## #   FTr &lt;dbl&gt;, PProd &lt;dbl&gt;, ORB% &lt;dbl&gt;, DRB% &lt;dbl&gt;, TRB% &lt;dbl&gt;, AST% &lt;dbl&gt;,
+## #   STL% &lt;dbl&gt;, BLK% &lt;dbl&gt;, TOV% &lt;dbl&gt;, USG% &lt;dbl&gt;, OWS &lt;dbl&gt;, DWS &lt;dbl&gt;,
+## #   WS &lt;dbl&gt;, WS/40 &lt;dbl&gt;, OBPM &lt;dbl&gt;, DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;, Conference &lt;chr&gt;,
+## #   trueshooting &lt;dbl&gt;</code></pre>
+<p>Now you get South Carolina’s Nathan Nelson, who played in 15 games and was on the floor for 113 minutes. So he played regularly, but not a lot. But in that time, he only attempted 14 shots, and made 64 percent of them. In other words, when he shot, he probably scored. He just rarely shot.</p>
 <p>So is 100 minutes our level? Here’s the truth – there’s not really an answer here. We’re picking a cutoff. If you can cite a reason for it and defend it, then it probably works.</p>
 </div>
 <div id="top-list" class="section level2" number="6.3">
 <h2><span class="header-section-number">6.3</span> Top list</h2>
 <p>One last little dplyr trick that’s nice to have in the toolbox is a shortcut for selecting only the top values for your dataset. Want to make a Top 10 List? Or Top 25? Or Top Whatever You Want? It’s easy.</p>
 <p>So what are the top 10 Power Five schools by season attendance. All we’re doing here is chaining commands together with what we’ve already got. We’re <em>filtering</em> by our list of Power Five conferences, we’re <em>selecting</em> the three fields we need, now we’re going to <em>arrange</em> it by total attendance and then we’ll introduce the new function: <code>top_n</code>. The <code>top_n</code> function just takes a number. So we want a top 10 list? We do it like this:</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="filters-and-selections.html#cb77-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">%in%</span> powerfive) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Institution, Conference, <span class="st">`</span><span class="at">2018</span><span class="st">`</span>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="st">`</span><span class="at">2018</span><span class="st">`</span>)) <span class="sc">%&gt;%</span> <span class="fu">top_n</span>(<span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="filters-and-selections.html#cb76-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">%in%</span> powerfive) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Institution, Conference, <span class="st">`</span><span class="at">2018</span><span class="st">`</span>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="st">`</span><span class="at">2018</span><span class="st">`</span>)) <span class="sc">%&gt;%</span> <span class="fu">top_n</span>(<span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## Selecting by 2018</code></pre>
 <pre><code>## # A tibble: 10 × 3
 ##    Institution Conference `2018`

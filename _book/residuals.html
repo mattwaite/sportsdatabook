@@ -24,7 +24,7 @@
 <meta name="author" content="Matt Waite" />
 
 
-<meta name="date" content="2021-08-12" />
+<meta name="date" content="2021-09-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -360,8 +360,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>Then load the tidyverse.</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="residuals.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="residuals.html#cb150-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/footballlogs20.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="residuals.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="residuals.html#cb149-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/footballlogs20.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Rows: 1100 Columns: 54</code></pre>
 <pre><code>## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
@@ -372,10 +372,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <p>First, let’s make the columns we’ll need.</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="residuals.html#cb154-1" aria-hidden="true" tabindex="-1"></a>residualmodel <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">differential =</span> TeamScore <span class="sc">-</span> OpponentScore, <span class="at">NetYards =</span> OffensiveYards <span class="sc">-</span> DefYards)</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="residuals.html#cb153-1" aria-hidden="true" tabindex="-1"></a>residualmodel <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">differential =</span> TeamScore <span class="sc">-</span> OpponentScore, <span class="at">NetYards =</span> OffensiveYards <span class="sc">-</span> DefYards)</span></code></pre></div>
 <p>Now let’s create our model.</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="residuals.html#cb155-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(differential <span class="sc">~</span> NetYards, <span class="at">data =</span> residualmodel)</span>
-<span id="cb155-2"><a href="residuals.html#cb155-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="residuals.html#cb154-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(differential <span class="sc">~</span> NetYards, <span class="at">data =</span> residualmodel)</span>
+<span id="cb154-2"><a href="residuals.html#cb154-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = differential ~ NetYards, data = residualmodel)
@@ -398,10 +398,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Next: Look at the Adjusted R-squared value. What that says is that 64 percent of a team’s scoring output can be predicted by their net yards.</p>
 <p>Last: Look at the p-value. We are looking for a p-value smaller than .05. At .05, we can say that our correlation didn’t happen at random. And, in this case, it REALLY didn’t happen at random. But if you know a little bit about football, it doesn’t surprise you that the more you outgain your opponent, the more you win by. It’s an intuitive result.</p>
 <p>What we want to do now is look at those residuals. We want to add them to our individual game records. We can do that by creating two new fields – predicted and residuals – to our dataframe like this:</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="residuals.html#cb157-1" aria-hidden="true" tabindex="-1"></a>residualmodel<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit)</span>
-<span id="cb157-2"><a href="residuals.html#cb157-2" aria-hidden="true" tabindex="-1"></a>residualmodel<span class="sc">$</span>residuals <span class="ot">&lt;-</span> <span class="fu">residuals</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="residuals.html#cb156-1" aria-hidden="true" tabindex="-1"></a>residualmodel<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit)</span>
+<span id="cb156-2"><a href="residuals.html#cb156-2" aria-hidden="true" tabindex="-1"></a>residualmodel<span class="sc">$</span>residuals <span class="ot">&lt;-</span> <span class="fu">residuals</span>(fit)</span></code></pre></div>
 <p>Now we can sort our data by those residuals. Sorting in descending order gives us the games where teams overperformed the model. To make it easier to read, I’m going to use select to give us just the columns we need to see.</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="residuals.html#cb158-1" aria-hidden="true" tabindex="-1"></a>residualmodel <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(residuals)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Team, Opponent, Result, differential, NetYards, predicted, residuals)</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="residuals.html#cb157-1" aria-hidden="true" tabindex="-1"></a>residualmodel <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(residuals)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Team, Opponent, Result, differential, NetYards, predicted, residuals)</span></code></pre></div>
 <pre><code>## # A tibble: 1,100 × 7
 ##    Team         Opponent       Result  differential NetYards predicted residuals
 ##    &lt;chr&gt;        &lt;chr&gt;          &lt;chr&gt;          &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
@@ -428,14 +428,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="penalties" class="section level2" number="11.1">
 <h2><span class="header-section-number">11.1</span> Penalties</h2>
 <p>Now let’s look at it where it doesn’t work: Penalties.</p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="residuals.html#cb161-1" aria-hidden="true" tabindex="-1"></a>penalties <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> </span>
-<span id="cb161-2"><a href="residuals.html#cb161-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb161-3"><a href="residuals.html#cb161-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">differential =</span> TeamScore <span class="sc">-</span> OpponentScore, </span>
-<span id="cb161-4"><a href="residuals.html#cb161-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotalPenalties =</span> Penalties<span class="sc">+</span>DefPenalties,</span>
-<span id="cb161-5"><a href="residuals.html#cb161-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotalPenaltyYards =</span> PenaltyYds<span class="sc">+</span>DefPenaltyYds</span>
-<span id="cb161-6"><a href="residuals.html#cb161-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="residuals.html#cb162-1" aria-hidden="true" tabindex="-1"></a>pfit <span class="ot">&lt;-</span> <span class="fu">lm</span>(differential <span class="sc">~</span> TotalPenaltyYards, <span class="at">data =</span> penalties)</span>
-<span id="cb162-2"><a href="residuals.html#cb162-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pfit)</span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="residuals.html#cb160-1" aria-hidden="true" tabindex="-1"></a>penalties <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> </span>
+<span id="cb160-2"><a href="residuals.html#cb160-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb160-3"><a href="residuals.html#cb160-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">differential =</span> TeamScore <span class="sc">-</span> OpponentScore, </span>
+<span id="cb160-4"><a href="residuals.html#cb160-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotalPenalties =</span> Penalties<span class="sc">+</span>DefPenalties,</span>
+<span id="cb160-5"><a href="residuals.html#cb160-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotalPenaltyYards =</span> PenaltyYds<span class="sc">+</span>DefPenaltyYds</span>
+<span id="cb160-6"><a href="residuals.html#cb160-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="residuals.html#cb161-1" aria-hidden="true" tabindex="-1"></a>pfit <span class="ot">&lt;-</span> <span class="fu">lm</span>(differential <span class="sc">~</span> TotalPenaltyYards, <span class="at">data =</span> penalties)</span>
+<span id="cb161-2"><a href="residuals.html#cb161-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pfit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = differential ~ TotalPenaltyYards, data = penalties)
@@ -459,9 +459,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>Our p-value is … 0.8307, which is more than than .05.</li>
 </ul>
 <p>So what we can say about this model is that it’s statistically insignificant and utterly meaningless. Normally, we’d stop right here – why bother going forward with a predictive model that isn’t predictive? But let’s do it anyway.</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="residuals.html#cb164-1" aria-hidden="true" tabindex="-1"></a>penalties<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(pfit)</span>
-<span id="cb164-2"><a href="residuals.html#cb164-2" aria-hidden="true" tabindex="-1"></a>penalties<span class="sc">$</span>residuals <span class="ot">&lt;-</span> <span class="fu">residuals</span>(pfit)</span></code></pre></div>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="residuals.html#cb165-1" aria-hidden="true" tabindex="-1"></a>penalties <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(residuals)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Team, Opponent, Result, TotalPenaltyYards, residuals)</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="residuals.html#cb163-1" aria-hidden="true" tabindex="-1"></a>penalties<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(pfit)</span>
+<span id="cb163-2"><a href="residuals.html#cb163-2" aria-hidden="true" tabindex="-1"></a>penalties<span class="sc">$</span>residuals <span class="ot">&lt;-</span> <span class="fu">residuals</span>(pfit)</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="residuals.html#cb164-1" aria-hidden="true" tabindex="-1"></a>penalties <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(residuals)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Team, Opponent, Result, TotalPenaltyYards, residuals)</span></code></pre></div>
 <pre><code>## # A tibble: 1,100 × 5
 ##    Team          Opponent         Result    TotalPenaltyYards residuals
 ##    &lt;chr&gt;         &lt;chr&gt;            &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;
