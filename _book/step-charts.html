@@ -24,7 +24,7 @@
 <meta name="author" content="Matt Waite" />
 
 
-<meta name="date" content="2021-09-03" />
+<meta name="date" content="2021-10-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -356,20 +356,19 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>There’s great examples out there. First is the Washignton Post looking at <a href="https://www.washingtonpost.com/graphics/sports/lebron-james-michael-jordan-nba-scoring-list/?utm_term=.481074150849">Lebron passing Jordan’s career point total</a>. Another is John Burn-Murdoch’s work at the Financial Times (which is paywalled) about soccer stars. <a href="http://johnburnmurdoch.github.io/projects/goal-lines/CL/">Here’s an example of his work outside the paywall</a>.</p>
 <p>To replicate this, we need cumulative data – data that is the running total of data at a given point. So think of it this way – Nebraska scores 50 points in a basketball game and then 50 more the next, their cumulative total at two games is 100 points.</p>
 <p>Step charts can be used for all kinds of things – showing how a player’s career has evolved over time, how a team fares over a season, or franchise history. Let’s walk through an example.</p>
-<p>Let’s look at Fred Hoiberg’s first team.</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="http://mattwaite.github.io/sportsdatafiles/logs20.csv">
+<p>Let’s look at Fred Hoiberg’s team last season.</p>
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="http://mattwaite.github.io/sportsdatafiles/logs21.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>We’ll need the tidyverse.</p>
 <div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="step-charts.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p>And we need to load our logs data we just downloaded.</p>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="step-charts.html#cb307-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/logs20.csv&quot;</span>)</span></code></pre></div>
-<pre><code>## Rows: 11097 Columns: 43</code></pre>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="step-charts.html#cb307-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/logs21.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Rows: 8229 Columns: 48</code></pre>
 <pre><code>## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
-## chr   (6): HomeAway, Opponent, W_L, Team, Conference, season
-## dbl  (35): Game, TeamScore, OpponentScore, TeamFG, TeamFGA, TeamFGPCT, Team3...
-## lgl   (1): Blank
+## chr   (8): Season, TeamFull, Opponent, HomeAway, W_L, URL, Conference, Team
+## dbl  (39): Game, TeamScore, OpponentScore, TeamFG, TeamFGA, TeamFGPCT, Team3...
 ## date  (1): Date</code></pre>
 <pre><code>## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
@@ -388,23 +387,23 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Let’s try a different element of the aesthetic: color, but this time inside the aesthetic. Last time, we did the color outside. When you put it inside, you pass it a column name and ggplot will color each line based on what thing that is, and it will create a legend that labels each line that thing.</p>
 <div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="step-charts.html#cb314-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_step</span>(<span class="at">data=</span>bigdiff, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>CumDiff, <span class="at">group=</span>Team, <span class="at">color=</span>Team))</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-212-1.png" width="672" /></p>
-<p>From this, we can see two teams in the Big Ten had negative point differentials last season – Nebraska and Northwestern. But which is which?</p>
+<p>From this, we can see a handful of teams in the Big Ten had negative point differentials last season. But which is which? And which one is Nebraska? Too many colors and it’s too hard to tell. How to sort that out? Let’s add some helpers beyond layering.</p>
 <p>Let’s look at the top team plus Nebraska.</p>
-<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="step-charts.html#cb315-1" aria-hidden="true" tabindex="-1"></a>nu <span class="ot">&lt;-</span> bigdiff <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">&quot;Nebraska Cornhuskers&quot;</span>)</span>
-<span id="cb315-2"><a href="step-charts.html#cb315-2" aria-hidden="true" tabindex="-1"></a>ms <span class="ot">&lt;-</span> bigdiff <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">&quot;Michigan State Spartans&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="step-charts.html#cb315-1" aria-hidden="true" tabindex="-1"></a>nu <span class="ot">&lt;-</span> bigdiff <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">&quot;Nebraska&quot;</span>)</span>
+<span id="cb315-2"><a href="step-charts.html#cb315-2" aria-hidden="true" tabindex="-1"></a>il <span class="ot">&lt;-</span> bigdiff <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">&quot;Illinois&quot;</span>)</span></code></pre></div>
 <p>Let’s introduce a couple of new things here. First, note when I take the color OUT of the aesthetic, the legend disappears.</p>
 <p>The second thing I’m going to add is the annotation layer. In this case, I am adding a text annotation layer, and I can specify where by adding in a x and a y value where I want to put it. This takes some finesse. After that, I’m going to add labels and a theme.</p>
 <div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="step-charts.html#cb316-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb316-2"><a href="step-charts.html#cb316-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_step</span>(<span class="at">data=</span>bigdiff, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>CumDiff, <span class="at">group=</span>Team), <span class="at">color=</span><span class="st">&quot;light grey&quot;</span>) <span class="sc">+</span></span>
 <span id="cb316-3"><a href="step-charts.html#cb316-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_step</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>CumDiff, <span class="at">group=</span>Team), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb316-4"><a href="step-charts.html#cb316-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_step</span>(<span class="at">data=</span>ms, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>CumDiff, <span class="at">group=</span>Team), <span class="at">color=</span><span class="st">&quot;green&quot;</span>) <span class="sc">+</span></span>
-<span id="cb316-5"><a href="step-charts.html#cb316-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">x=</span>(<span class="fu">as.Date</span>(<span class="st">&quot;2019-12-10&quot;</span>)), <span class="at">y=</span><span class="sc">-</span><span class="dv">70</span>, <span class="at">label=</span><span class="st">&quot;Nebraska&quot;</span>) <span class="sc">+</span></span>
-<span id="cb316-6"><a href="step-charts.html#cb316-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">x=</span>(<span class="fu">as.Date</span>(<span class="st">&quot;2020-02-01&quot;</span>)), <span class="at">y=</span><span class="dv">330</span>, <span class="at">label=</span><span class="st">&quot;Michigan State&quot;</span>) <span class="sc">+</span></span>
+<span id="cb316-4"><a href="step-charts.html#cb316-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_step</span>(<span class="at">data=</span>il, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>CumDiff, <span class="at">group=</span>Team), <span class="at">color=</span><span class="st">&quot;orange&quot;</span>) <span class="sc">+</span></span>
+<span id="cb316-5"><a href="step-charts.html#cb316-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">x=</span>(<span class="fu">as.Date</span>(<span class="st">&quot;2021-02-10&quot;</span>)), <span class="at">y=</span><span class="sc">-</span><span class="dv">70</span>, <span class="at">label=</span><span class="st">&quot;Nebraska&quot;</span>) <span class="sc">+</span></span>
+<span id="cb316-6"><a href="step-charts.html#cb316-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">x=</span>(<span class="fu">as.Date</span>(<span class="st">&quot;2021-03-01&quot;</span>)), <span class="at">y=</span><span class="dv">330</span>, <span class="at">label=</span><span class="st">&quot;Illinois&quot;</span>) <span class="sc">+</span></span>
 <span id="cb316-7"><a href="step-charts.html#cb316-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb316-8"><a href="step-charts.html#cb316-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="st">&quot;Date&quot;</span>, </span>
 <span id="cb316-9"><a href="step-charts.html#cb316-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y=</span><span class="st">&quot;Cumulative Point Differential&quot;</span>, </span>
 <span id="cb316-10"><a href="step-charts.html#cb316-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title=</span><span class="st">&quot;Nebraska&#39;s season long slide&quot;</span>, </span>
-<span id="cb316-11"><a href="step-charts.html#cb316-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle=</span><span class="st">&quot;The Huskers started slow and never got going&quot;</span>, </span>
+<span id="cb316-11"><a href="step-charts.html#cb316-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle=</span><span class="st">&quot;The Huskers started solidly but ended up being outscored by more than any other Big Ten team.&quot;</span>, </span>
 <span id="cb316-12"><a href="step-charts.html#cb316-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption=</span><span class="st">&quot;Source: Sports-Reference.com | By Matt Waite&quot;</span>) <span class="sc">+</span></span>
 <span id="cb316-13"><a href="step-charts.html#cb316-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-214-1.png" width="672" /></p>

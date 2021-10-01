@@ -24,7 +24,7 @@
 <meta name="author" content="Matt Waite" />
 
 
-<meta name="date" content="2021-09-03" />
+<meta name="date" content="2021-10-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -356,30 +356,29 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Line charts are good for showing change over time.</strong></p>
 <p>Let’s look at how we can answer this question: Why was Nebraska terrible at basketball last season?</p>
 <p>We’ll need the logs of every game in college basketball for this.</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="http://mattwaite.github.io/sportsdatafiles/logs20.csv">
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="http://mattwaite.github.io/sportsdatafiles/logs21.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>Let’s start getting all that we need. We can use the tidyverse shortcut.</p>
 <div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="line-charts.html#cb290-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p>And now load the data.</p>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="line-charts.html#cb291-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/logs20.csv&quot;</span>)</span></code></pre></div>
-<pre><code>## Rows: 11097 Columns: 43</code></pre>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="line-charts.html#cb291-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/logs21.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Rows: 8229 Columns: 48</code></pre>
 <pre><code>## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
-## chr   (6): HomeAway, Opponent, W_L, Team, Conference, season
-## dbl  (35): Game, TeamScore, OpponentScore, TeamFG, TeamFGA, TeamFGPCT, Team3...
-## lgl   (1): Blank
+## chr   (8): Season, TeamFull, Opponent, HomeAway, W_L, URL, Conference, Team
+## dbl  (39): Game, TeamScore, OpponentScore, TeamFG, TeamFGA, TeamFGPCT, Team3...
 ## date  (1): Date</code></pre>
 <pre><code>## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <p>This data has every game from every team in it, so we need to use filtering to limit it, because we just want to look at Nebraska. If you don’t remember, flip back to chapter 6.</p>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="line-charts.html#cb295-1" aria-hidden="true" tabindex="-1"></a>nu <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">&quot;Nebraska Cornhuskers&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="line-charts.html#cb295-1" aria-hidden="true" tabindex="-1"></a>nu <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">&quot;Nebraska&quot;</span>)</span></code></pre></div>
 <p>Because this data has just Nebraska data in it, the dates are formatted correctly, and the data is long data (instead of wide), we have what we need to make line charts.</p>
 <p>Line charts, unlike bar charts, do have a y-axis. So in our ggplot step, we have to define what our x and y axes are. In this case, the x axis is our Date – the most common x axis in line charts is going to be a date of some variety – and y in this case is up to us. We’ve seen from previous walkthroughs that how well a team shoots the ball has a lot to do with how well a team does in a season, so let’s chart that.</p>
 <div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="line-charts.html#cb296-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>TeamFGPCT))</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-196-1.png" width="672" /></p>
-<p>See a problem here? Note the Y axis doesn’t start with zero. That makes this look worse than it is (and that February swoon is pretty bad). To make the axis what you want, you can use <code>scale_x_continuous</code> or <code>scale_y_continuous</code> and pass in a list with the bottom and top value you want. You do that like this:</p>
+<p>See some problems here? The first you’ll probably see is the long COVID pause the team had to take. The real problem, though is that the Y axis doesn’t start with zero. That makes this look more dramatic than it is. To make the axis what you want, you can use <code>scale_x_continuous</code> or <code>scale_y_continuous</code> and pass in a list with the bottom and top value you want. You do that like this:</p>
 <div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="line-charts.html#cb297-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb297-2"><a href="line-charts.html#cb297-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>TeamFGPCT)) <span class="sc">+</span> </span>
 <span id="cb297-3"><a href="line-charts.html#cb297-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">6</span>))</span></code></pre></div>
@@ -387,8 +386,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Note also that our X axis labels are automated. It knows it’s a date and it just labels it by month.</p>
 <div id="this-is-too-simple." class="section level2" number="19.1">
 <h2><span class="header-section-number">19.1</span> This is too simple.</h2>
-<p>With datasets, we want to invite comparison. So let’s answer the question visually. Let’s put two lines on the same chart. How does Nebraska compare to Michigan State and Purdue, the eventual regular season co-champions?</p>
-<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="line-charts.html#cb298-1" aria-hidden="true" tabindex="-1"></a>msu <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">&quot;Michigan State Spartans&quot;</span>)</span></code></pre></div>
+<p>With datasets, we want to invite comparison. So let’s answer the question visually. Let’s put two lines on the same chart. How does Nebraska compare to Michigan State, for example?</p>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="line-charts.html#cb298-1" aria-hidden="true" tabindex="-1"></a>msu <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">&quot;Michigan State&quot;</span>)</span></code></pre></div>
 <p>In this case, because we have two different datasets, we’re going to put everything in the geom instead of the ggplot step. We also have to explicitly state what dataset we’re using by saying <code>data=</code> in the geom step.</p>
 <p>First, let’s chart Nebraska. Read carefully. First we set the data. Then we set our aesthetic. Unlike bars, we need an X and a Y variable. In this case, our X is the date of the game, Y is the thing we want the lines to move with. In this case, the Team Field Goal Percentage – TeamFGPCT.</p>
 <div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="line-charts.html#cb299-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>TeamFGPCT), <span class="at">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>

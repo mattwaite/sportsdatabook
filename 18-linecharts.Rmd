@@ -13,7 +13,7 @@ library(downloadthis)
 library(glue)
 
 dllink <- download_link(
-  link = "http://mattwaite.github.io/sportsdatafiles/logs20.csv",
+  link = "http://mattwaite.github.io/sportsdatafiles/logs21.csv",
   button_label = "Download csv file",
   button_type = "danger",
   has_icon = TRUE,
@@ -34,13 +34,13 @@ library(tidyverse)
 And now load the data.
 
 ```{r}
-logs <- read_csv("data/logs20.csv")
+logs <- read_csv("data/logs21.csv")
 ```
 
 This data has every game from every team in it, so we need to use filtering to limit it, because we just want to look at Nebraska. If you don't remember, flip back to chapter 6. 
 
 ```{r}
-nu <- logs %>% filter(Team == "Nebraska Cornhuskers")
+nu <- logs %>% filter(Team == "Nebraska")
 ```
 
 Because this data has just Nebraska data in it, the dates are formatted correctly, and the data is long data (instead of wide), we have what we need to make line charts.
@@ -51,7 +51,7 @@ Line charts, unlike bar charts, do have a y-axis. So in our ggplot step, we have
 ggplot() + geom_line(data=nu, aes(x=Date, y=TeamFGPCT))
 ```
 
-See a problem here? Note the Y axis doesn't start with zero. That makes this look worse than it is (and that February swoon is pretty bad). To make the axis what you want, you can use `scale_x_continuous` or `scale_y_continuous` and pass in a list with the bottom and top value you want. You do that like this:
+See some problems here? The first you'll probably see is the long COVID pause the team had to take. The real problem, though is that the Y axis doesn't start with zero. That makes this look more dramatic than it is. To make the axis what you want, you can use `scale_x_continuous` or `scale_y_continuous` and pass in a list with the bottom and top value you want. You do that like this:
 
 ```{r}
 ggplot() + 
@@ -63,10 +63,10 @@ Note also that our X axis labels are automated. It knows it's a date and it just
 
 ## This is too simple. 
 
-With datasets, we want to invite comparison. So let's answer the question visually. Let's put two lines on the same chart. How does Nebraska compare to Michigan State and Purdue, the eventual regular season co-champions? 
+With datasets, we want to invite comparison. So let's answer the question visually. Let's put two lines on the same chart. How does Nebraska compare to Michigan State, for example? 
 
 ```{r}
-msu <- logs %>% filter(Team == "Michigan State Spartans")
+msu <- logs %>% filter(Team == "Michigan State")
 ```
 
 In this case, because we have two different datasets, we're going to put everything in the geom instead of the ggplot step. We also have to explicitly state what dataset we're using by saying `data=` in the geom step.
