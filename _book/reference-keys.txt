@@ -57,6 +57,7 @@ dumbbell-and-lollipop-charts
 dumbbell-plots
 lollipop-charts
 scatterplots
+lets-see-it-work
 bubble-charts
 beeswarm-plots
 a-few-other-options

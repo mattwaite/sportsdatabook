@@ -246,7 +246,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="22.1" data-path="dumbbell-and-lollipop-charts.html"><a href="dumbbell-and-lollipop-charts.html#dumbbell-plots"><i class="fa fa-check"></i><b>22.1</b> Dumbbell plots</a></li>
 <li class="chapter" data-level="22.2" data-path="dumbbell-and-lollipop-charts.html"><a href="dumbbell-and-lollipop-charts.html#lollipop-charts"><i class="fa fa-check"></i><b>22.2</b> Lollipop charts</a></li>
 </ul></li>
-<li class="chapter" data-level="23" data-path="scatterplots.html"><a href="scatterplots.html"><i class="fa fa-check"></i><b>23</b> Scatterplots</a></li>
+<li class="chapter" data-level="23" data-path="scatterplots.html"><a href="scatterplots.html"><i class="fa fa-check"></i><b>23</b> Scatterplots</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="scatterplots.html"><a href="scatterplots.html#lets-see-it-work"><i class="fa fa-check"></i><b>23.1</b> Let’s see it work</a></li>
+</ul></li>
 <li class="chapter" data-level="24" data-path="bubble-charts.html"><a href="bubble-charts.html"><i class="fa fa-check"></i><b>24</b> Bubble charts</a></li>
 <li class="chapter" data-level="25" data-path="beeswarm-plots.html"><a href="beeswarm-plots.html"><i class="fa fa-check"></i><b>25</b> Beeswarm plots</a>
 <ul>
@@ -359,18 +362,18 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>But the question before you is this: is what McKewon said true? Does keeping a lid on your opponent’s ability to score three pointers mean more wins?</p>
 <p>This is what we’re going to start to answer today. And we’ll do it with scatterplots and regressions. Scatterplots are very good at showing <strong>relationships between two numbers</strong>.</p>
 <p>First, we need libraries and every college basketball game from the 2019-2020 season. Why that season? Because I did this with the COVID season and everything was wonky and made no sense. To make it make sense, you had to do a ton of twisting and turning and that was pointless. <strong>What we’re interested in is less about a specific team and more about a general point: Are these numbers related and by how much? What can they tell you about your team in general?</strong></p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="http://mattwaite.github.io/sportsdatafiles/logs20.csv">
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="http://mattwaite.github.io/sportsdatafiles/logs1520.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>Load the tidyverse.</p>
 <div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="scatterplots.html#cb355-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p>And the data.</p>
-<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="scatterplots.html#cb356-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/logs20.csv&quot;</span>)</span></code></pre></div>
-<pre><code>## Rows: 11097 Columns: 43</code></pre>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="scatterplots.html#cb356-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/logs1520.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Rows: 68617 Columns: 44</code></pre>
 <pre><code>## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr   (6): HomeAway, Opponent, W_L, Team, Conference, season
-## dbl  (35): Game, TeamScore, OpponentScore, TeamFG, TeamFGA, TeamFGPCT, Team3...
+## dbl  (36): X1, Game, TeamScore, OpponentScore, TeamFG, TeamFGA, TeamFGPCT, T...
 ## lgl   (1): Blank
 ## date  (1): Date</code></pre>
 <pre><code>## 
@@ -387,59 +390,108 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb360-6"><a href="scatterplots.html#cb360-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>Now we can get a dataframe together that gives us the total wins for each team, and the total three point shots made. We’ll call that new dataframe <code>threedef</code>.</p>
 <div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="scatterplots.html#cb361-1" aria-hidden="true" tabindex="-1"></a>threedef <span class="ot">&lt;-</span> winlosslogs <span class="sc">%&gt;%</span> </span>
-<span id="cb361-2"><a href="scatterplots.html#cb361-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Team) <span class="sc">%&gt;%</span> </span>
+<span id="cb361-2"><a href="scatterplots.html#cb361-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Team, season) <span class="sc">%&gt;%</span> </span>
 <span id="cb361-3"><a href="scatterplots.html#cb361-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb361-4"><a href="scatterplots.html#cb361-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Wins =</span> <span class="fu">sum</span>(winloss), </span>
 <span id="cb361-5"><a href="scatterplots.html#cb361-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">TotalOpp3P =</span> <span class="fu">sum</span>(Opponent3P)</span>
-<span id="cb361-6"><a href="scatterplots.html#cb361-6" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
+<span id="cb361-6"><a href="scatterplots.html#cb361-6" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> <span class="fu">na.omit</span>()</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;Team&#39;. You can override using the `.groups` argument.</code></pre>
 <p>Now let’s look at the scatterplot. With a scatterplot, we put what predicts the thing on the X axis, and the thing being predicted on the Y axis. In this case, X is our three pointers given up, y is our wins.</p>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="scatterplots.html#cb362-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">data=</span>threedef, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins))</span></code></pre></div>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="scatterplots.html#cb363-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">data=</span>threedef, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins))</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-243-1.png" width="672" /></p>
-<p>Let’s talk about this. This seems kind of random, but clustered around the middle and maybe sloping down to the right. That would mean the more threes you give up, the less you win. And that makes intuitive sense. But can we get a better sense of this? Yes, by adding another geom – <code>geom_smooth</code>. It’s identical to our <code>geom_point</code>, but we add a method to the end, which in this case we’re using the linear method or <code>lm</code>.</p>
-<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="scatterplots.html#cb363-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb363-2"><a href="scatterplots.html#cb363-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>threedef, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins)) <span class="sc">+</span></span>
-<span id="cb363-3"><a href="scatterplots.html#cb363-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data=</span>threedef, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins), <span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
+<p>Let’s talk about this. This seems kind of random, but clustered around the middle. There’s not really a clear pattern here. But can we get a better sense of this? Yes, by adding another geom – <code>geom_smooth</code>. It’s identical to our <code>geom_point</code>, but we add a method to the end, which in this case we’re using the linear method or <code>lm</code>.</p>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="scatterplots.html#cb364-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb364-2"><a href="scatterplots.html#cb364-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>threedef, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins)) <span class="sc">+</span></span>
+<span id="cb364-3"><a href="scatterplots.html#cb364-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data=</span>threedef, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins), <span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-244-1.png" width="672" /></p>
-<p>So it does slope down to the right like we expect, but this still doesn’t look good to me. It’s very spread out. Which is a clue that you should be asking a question here: how strong of a relationship is this? How much can threes given up explain wins? Can we put some numbers to this?</p>
+<p>A straight line across is bad. It means there’s no pattern here. The numbers don’t suggest anything. The dots are very spread out. Which is a clue that you should be asking a question here: how strong of a relationship is this? How much can threes given up explain wins? Can we put some numbers to this?</p>
 <p>Of course we can. We can apply a linear model to this – remember Chapter 9? We’re going to create an object called fit, and then we’re going to put into that object a linear model – <code>lm</code> – and the way to read this is “wins are predicted by opponent threes.” Then we just want the summary of that model.</p>
-<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="scatterplots.html#cb365-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(Wins <span class="sc">~</span> TotalOpp3P, <span class="at">data =</span> threedef)</span>
-<span id="cb365-2"><a href="scatterplots.html#cb365-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="scatterplots.html#cb366-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(Wins <span class="sc">~</span> TotalOpp3P, <span class="at">data =</span> threedef)</span>
+<span id="cb366-2"><a href="scatterplots.html#cb366-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Wins ~ TotalOpp3P, data = threedef)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
-## -14.9345  -3.4593   0.3006   3.6036  14.5274 
+## -15.8715  -4.8477   0.0676   4.1383  21.0459 
 ## 
 ## Coefficients:
 ##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 25.619712   1.859947  13.774  &lt; 2e-16 ***
-## TotalOpp3P  -0.041390   0.008184  -5.057 6.87e-07 ***
+## (Intercept) 17.199150   0.893730  19.244   &lt;2e-16 ***
+## TotalOpp3P  -0.001400   0.003773  -0.371    0.711    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 5.313 on 351 degrees of freedom
-## Multiple R-squared:  0.06792,    Adjusted R-squared:  0.06526 
-## F-statistic: 25.58 on 1 and 351 DF,  p-value: 6.869e-07</code></pre>
+## Residual standard error: 6.265 on 2104 degrees of freedom
+## Multiple R-squared:  6.547e-05,  Adjusted R-squared:  -0.0004098 
+## F-statistic: 0.1378 on 1 and 2104 DF,  p-value: 0.7106</code></pre>
 <p>Remember from Chapter 9: There’s just a few things you really need.</p>
-<p>The first thing: R-squared. In this case, the Adjusted R-squared value is 0.06526, which we can interpret as shooting percentage predicts about 6.5 percent of the variance in wins. Which sounds not great.</p>
-<p>Second: The P-value. We want anything less than .05. If it’s above .05, the change between them is not statistically significant – it’s probably explained by random chance. In our case, we have 6.869e-07, which is to say 6.869 with 7 zeros in front of it, or .00000006869. Is that less than .05? Yes. Yes it is. So this is not random. Again, we would expect this, so it’s a good logic test.</p>
-<p>Third: The coefficient. In this case, the coefficient for TeamOpp3P is -0.041390. What this model predicts, given that and the intercept of 25.619712, is this: Every team starts with about 26 wins. For every 100 three pointers the other team makes, you lose 4.139 games off that total. So if you give up 100 threes in a season, you’ll be a 20 win team. Give up 200, you’re a 17 win team, and so on. How am I doing that? Remember your algebra and y = mx + b. In this case, y is the wins, m is the coefficient, x is the number of threes given up and b is the intercept.</p>
-<p>Let’s use Nebraska as an example. They had 276 threes scored on them in the last season.</p>
-<p>y = -0.041390 * 276 + 25.619712 or 14.19 wins.</p>
+<p>The first thing: R-squared. In this case, the Adjusted R-squared value is -0.0004098, which we can interpret as the number of threes the opponent makes predicts about a teeny tiny percent of the variance in wins. Which sounds not great.</p>
+<p>Second: The P-value. We want anything less than .05. If it’s above .05, the difference between them is not statistically significant – it’s probably explained by random chance. In our case, we have 0.7106. Is that more than .05? Yes. Yes it is. So this is random. There’s no relationship between the number of threes the opponent makes and the number of wins a team has.</p>
+<p>Normally, we’d stop here, but let’s look at the third element: The coefficient. In this case, the coefficient for TeamOpp3P is -0.001400. What this model predicts, given that and the intercept of 17.199150, is this: Every team starts with about 17 wins. For every 100 three pointers the other team makes, you lose .14 games off that total. So if you give up 100 threes in a season, you’ll be a 17 win team. Give up 200, you’re closer to a 16 win team, and so on. How am I doing that? Remember your algebra and y = mx + b. In this case, y is the wins, m is the coefficient, x is the number of threes given up and b is the intercept.</p>
+<p>Let’s use Nebraska as an example. They had 276 threes scored on them in the 2019-2020 season.</p>
+<p>y = -0.001400 * 276 + 17.199150 or 16.8 wins.</p>
 <p>How many wins did Nebraska have? 7.</p>
-<p>What does that mean? It means that as disappointing a season as it was, Nebraska UNDERPERFORMED according to this model. But our R-squared is only 6.5 percent. Put another way: 93.5 percent of the difference in wins between teams is predicted by something else.</p>
+<p>What does that mean? It means that as disappointing a season as it was, Nebraska UNDERPERFORMED according to this model. But our R-squared is so small that even if this weren’t random, it would be largely pointless. Put another way: more than 99 percent of the difference in wins between teams is predicted by something else.</p>
 <p>Where is Nebraska on the plot? We know we can use layering for that.</p>
-<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="scatterplots.html#cb367-1" aria-hidden="true" tabindex="-1"></a>nu <span class="ot">&lt;-</span> threedef <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">&quot;Nebraska Cornhuskers&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="scatterplots.html#cb368-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb368-2"><a href="scatterplots.html#cb368-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>threedef, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins)) <span class="sc">+</span></span>
-<span id="cb368-3"><a href="scatterplots.html#cb368-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data=</span>threedef, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins), <span class="at">method=</span><span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
-<span id="cb368-4"><a href="scatterplots.html#cb368-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins), <span class="at">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="scatterplots.html#cb368-1" aria-hidden="true" tabindex="-1"></a>nu <span class="ot">&lt;-</span> threedef <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">&quot;Nebraska Cornhuskers&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="scatterplots.html#cb369-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb369-2"><a href="scatterplots.html#cb369-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>threedef, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins)) <span class="sc">+</span></span>
+<span id="cb369-3"><a href="scatterplots.html#cb369-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data=</span>threedef, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins), <span class="at">method=</span><span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
+<span id="cb369-4"><a href="scatterplots.html#cb369-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span>TotalOpp3P, <span class="at">y=</span>Wins), <span class="at">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-247-1.png" width="672" /></p>
+<div id="lets-see-it-work" class="section level2" number="23.1">
+<h2><span class="header-section-number">23.1</span> Let’s see it work</h2>
+<p>One thing we do know is related is shooting percentage. Shoot better, win games. Simple. But how well does that work?</p>
+<p>We could just average together each team’s shooting night, but this isn’t the same thing as the season shooting average. It’s the average of shooting percentages. To get the season average, we have to sum attempts and makes and do the math ourselves. Averaging the percentages will get us close, but be careful when you do things like this that you’re describing your number correctly.</p>
+<p>Let’s do this the hard – read: correct – way.</p>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="scatterplots.html#cb371-1" aria-hidden="true" tabindex="-1"></a>shooting <span class="ot">&lt;-</span> winlosslogs <span class="sc">%&gt;%</span> </span>
+<span id="cb371-2"><a href="scatterplots.html#cb371-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Team, season) <span class="sc">%&gt;%</span> </span>
+<span id="cb371-3"><a href="scatterplots.html#cb371-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb371-4"><a href="scatterplots.html#cb371-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Wins =</span> <span class="fu">sum</span>(winloss), </span>
+<span id="cb371-5"><a href="scatterplots.html#cb371-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Shots =</span> <span class="fu">sum</span>(TeamFGA),</span>
+<span id="cb371-6"><a href="scatterplots.html#cb371-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Makes =</span> <span class="fu">sum</span>(TeamFG)</span>
+<span id="cb371-7"><a href="scatterplots.html#cb371-7" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb371-8"><a href="scatterplots.html#cb371-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AvgShootingPct =</span> Makes<span class="sc">/</span>Shots) <span class="sc">%&gt;%</span> </span>
+<span id="cb371-9"><a href="scatterplots.html#cb371-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>()</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;Team&#39;. You can override using the `.groups` argument.</code></pre>
+<p>Now we can chart it and see what our relationship looks like.</p>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="scatterplots.html#cb373-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb373-2"><a href="scatterplots.html#cb373-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>shooting, <span class="fu">aes</span>(<span class="at">x=</span>AvgShootingPct, <span class="at">y=</span>Wins)) <span class="sc">+</span></span>
+<span id="cb373-3"><a href="scatterplots.html#cb373-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data=</span>shooting, <span class="fu">aes</span>(<span class="at">x=</span>AvgShootingPct, <span class="at">y=</span>Wins), <span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-249-1.png" width="672" /></p>
+<p>This is what a positive relationship looks like – sloping up and to the right. The better you shoot, the more you win. If it were reversed – the better you shot, the fewer wins you got, the line would start at the top left and go down to the right. The direction of the line indicates the relationship between the numbers.</p>
+<p>Let’s get our linear regression stats.</p>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="scatterplots.html#cb375-1" aria-hidden="true" tabindex="-1"></a>shootfit <span class="ot">&lt;-</span> <span class="fu">lm</span>(Wins <span class="sc">~</span> AvgShootingPct, <span class="at">data =</span> shooting)</span>
+<span id="cb375-2"><a href="scatterplots.html#cb375-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(shootfit)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Wins ~ AvgShootingPct, data = shooting)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -14.6777  -3.3738  -0.0529   3.0892  17.2843 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)     -50.733      1.862  -27.24   &lt;2e-16 ***
+## AvgShootingPct  153.367      4.218   36.36   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 4.91 on 2106 degrees of freedom
+## Multiple R-squared:  0.3857, Adjusted R-squared:  0.3854 
+## F-statistic:  1322 on 1 and 2106 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>The p-value isn’t random. The adjusted R-squared is pushing 40 percent. We’ve got something here. Let’s use our coefficents to look at Nebraska’s 2019-2020 season (not the COVID season, because all the nunmbers are super weird in that season).</p>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="scatterplots.html#cb377-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">153.942</span> <span class="sc">*</span> .<span class="dv">405</span>) <span class="sc">+</span> <span class="sc">-</span><span class="fl">51.155</span> </span></code></pre></div>
+<pre><code>## [1] 11.19151</code></pre>
+<p>So this model says that based only on Nebraska’s shooting percentage, they should have won 11 games. They won 7. So per our model, Nebraska underperformed. Obviously there’s room for improvement here, but you can see the power in scatterplots + regression.</p>
 
+</div>
 </div>
             </section>
 

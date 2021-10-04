@@ -19,7 +19,7 @@ library(downloadthis)
 library(glue)
 
 dllink <- download_link(
-  link = "http://mattwaite.github.io/sportsdatafiles/logs20.csv",
+  link = "http://mattwaite.github.io/sportsdatafiles/logs1520.csv",
   button_label = "Download csv file",
   button_type = "danger",
   has_icon = TRUE,
@@ -39,7 +39,7 @@ library(tidyverse)
 And the data.
 
 ```{r}
-logs <- read_csv("data/logs20.csv")
+logs <- read_csv("data/logs1520.csv")
 ```
 
 To do this, we need all teams and their season stats. How much, team to team, does a thing matter? That's the question you're going to answer. 
@@ -61,11 +61,11 @@ Now we can get a dataframe together that gives us the total wins for each team, 
 
 ```{r}
 threedef <- winlosslogs %>% 
-  group_by(Team) %>% 
+  group_by(Team, season) %>% 
   summarise(
     Wins = sum(winloss), 
     TotalOpp3P = sum(Opponent3P)
-    )
+    ) %>% na.omit()
 ```
 
 Now let's look at the scatterplot. With a scatterplot, we put what predicts the thing on the X axis, and the thing being predicted on the Y axis. In this case, X is our three pointers given up, y is our wins.
@@ -74,7 +74,7 @@ Now let's look at the scatterplot. With a scatterplot, we put what predicts the 
 ggplot() + geom_point(data=threedef, aes(x=TotalOpp3P, y=Wins))
 ```
 
-Let's talk about this. This seems kind of random, but clustered around the middle and maybe sloping down to the right. That would mean the more threes you give up, the less you win. And that makes intuitive sense. But can we get a better sense of this? Yes, by adding another geom -- `geom_smooth`. It's identical to our `geom_point`, but we add a method to the end, which in this case we're using the linear method or `lm`.
+Let's talk about this. This seems kind of random, but clustered around the middle. There's not really a clear pattern here. But can we get a better sense of this? Yes, by adding another geom -- `geom_smooth`. It's identical to our `geom_point`, but we add a method to the end, which in this case we're using the linear method or `lm`.
 
 ```{r}
 ggplot() + 
@@ -82,7 +82,7 @@ ggplot() +
   geom_smooth(data=threedef, aes(x=TotalOpp3P, y=Wins), method="lm")
 ```
 
-So it does slope down to the right like we expect, but this still doesn't look good to me. It's very spread out. Which is a clue that you should be asking a question here: how strong of a relationship is this? How much can threes given up explain wins? Can we put some numbers to this?
+A straight line across is bad. It means there's no pattern here. The numbers don't suggest anything. The dots are very spread out. Which is a clue that you should be asking a question here: how strong of a relationship is this? How much can threes given up explain wins? Can we put some numbers to this?
 
 Of course we can. We can apply a linear model to this -- remember Chapter 9? We're going to create an object called fit, and then we're going to put into that object a linear model -- `lm` -- and the way to read this is "wins are predicted by opponent threes". Then we just want the summary of that model.
 
@@ -93,19 +93,20 @@ summary(fit)
 
 Remember from Chapter 9: There's just a few things you really need.
 
-The first thing: R-squared. In this case, the Adjusted R-squared value is 0.06526, which we can interpret as shooting percentage predicts about 6.5 percent of the variance in wins. Which sounds not great.
+The first thing: R-squared. In this case, the Adjusted R-squared value is -0.0004098, which we can interpret as the number of threes the opponent makes predicts about a teeny tiny percent of the variance in wins. Which sounds not great.
 
-Second: The P-value. We want anything less than .05. If it's above .05, the change between them is not statistically significant -- it's probably explained by random chance. In our case, we have 6.869e-07, which is to say 6.869 with 7 zeros in front of it, or .00000006869. Is that less than .05? Yes. Yes it is. So this is not random. Again, we would expect this, so it's a good logic test.
+Second: The P-value. We want anything less than .05. If it's above .05, the difference between them is not statistically significant -- it's probably explained by random chance. In our case, we have 0.7106. Is that more than .05? Yes. Yes it is. So this is random. There's no relationship between the number of threes the opponent makes and the number of wins a team has.
 
-Third: The coefficient. In this case, the coefficient for TeamOpp3P is -0.041390. What this model predicts, given that and the intercept of 25.619712, is this: Every team starts with about 26 wins. For every 100 three pointers the other team makes, you lose 4.139 games off that total. So if you give up 100 threes in a season, you'll be a 20 win team. Give up 200, you're a 17 win team, and so on. How am I doing that? Remember your algebra and y = mx + b. In this case, y is the wins, m is the coefficient, x is the number of threes given up and b is the intercept. 
 
-Let's use Nebraska as an example. They had 276 threes scored on them in the last season. 
+Normally, we'd stop here, but let's look at the third element: The coefficient. In this case, the coefficient for TeamOpp3P is -0.001400. What this model predicts, given that and the intercept of 17.199150, is this: Every team starts with about 17 wins. For every 100 three pointers the other team makes, you lose .14 games off that total. So if you give up 100 threes in a season, you'll be a 17 win team. Give up 200, you're closer to a 16 win team, and so on. How am I doing that? Remember your algebra and y = mx + b. In this case, y is the wins, m is the coefficient, x is the number of threes given up and b is the intercept. 
 
-y = -0.041390 * 276 + 25.619712 or 14.19 wins. 
+Let's use Nebraska as an example. They had 276 threes scored on them in the 2019-2020 season. 
+
+y = -0.001400 * 276 + 17.199150 or 16.8 wins. 
 
 How many wins did Nebraska have? 7. 
 
-What does that mean? It means that as disappointing a season as it was, Nebraska UNDERPERFORMED according to this model. But our R-squared is only 6.5 percent. Put another way: 93.5 percent of the difference in wins between teams is predicted by something else.
+What does that mean? It means that as disappointing a season as it was, Nebraska UNDERPERFORMED according to this model. But our R-squared is so small that even if this weren't random, it would be largely pointless. Put another way: more than 99 percent of the difference in wins between teams is predicted by something else.
 
 Where is Nebraska on the plot? We know we can use layering for that. 
 
@@ -119,3 +120,48 @@ ggplot() +
   geom_smooth(data=threedef, aes(x=TotalOpp3P, y=Wins), method="lm") +
   geom_point(data=nu, aes(x=TotalOpp3P, y=Wins), color="red")
 ```
+
+## Let's see it work
+
+One thing we do know is related is shooting percentage. Shoot better, win games. Simple. But how well does that work?
+
+We could just average together each team's shooting night, but this isn't the same thing as the season shooting average. It's the average of shooting percentages. To get the season average, we have to sum attempts and makes and do the math ourselves. Averaging the percentages will get us close, but be careful when you do things like this that you're describing your number correctly.
+
+Let's do this the hard -- read: correct -- way. 
+
+```{r}
+shooting <- winlosslogs %>% 
+  group_by(Team, season) %>% 
+  summarise(
+    Wins = sum(winloss), 
+    Shots = sum(TeamFGA),
+    Makes = sum(TeamFG)
+    ) %>% 
+  mutate(AvgShootingPct = Makes/Shots) %>% 
+  na.omit()
+```
+
+Now we can chart it and see what our relationship looks like.
+
+```{r}
+ggplot() + 
+  geom_point(data=shooting, aes(x=AvgShootingPct, y=Wins)) +
+  geom_smooth(data=shooting, aes(x=AvgShootingPct, y=Wins), method="lm")
+```
+
+This is what a positive relationship looks like -- sloping up and to the right. The better you shoot, the more you win. If it were reversed -- the better you shot, the fewer wins you got, the line would start at the top left and go down to the right. The direction of the line indicates the relationship between the numbers. 
+
+Let's get our linear regression stats. 
+
+```{r}
+shootfit <- lm(Wins ~ AvgShootingPct, data = shooting)
+summary(shootfit)
+```
+
+The p-value isn't random. The adjusted R-squared is pushing 40 percent. We've got something here. Let's use our coefficents to look at Nebraska's 2019-2020 season (not the COVID season, because all the nunmbers are super weird in that season).
+
+```{r}
+(153.942 * .405) + -51.155 
+```
+
+So this model says that based only on Nebraska's shooting percentage, they should have won 11 games. They won 7. So per our model, Nebraska underperformed. Obviously there's room for improvement here, but you can see the power in scatterplots + regression. 
