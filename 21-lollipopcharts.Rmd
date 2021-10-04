@@ -17,14 +17,14 @@ library(ggalt)
 
 ## Dumbbell plots
 
-For this, let's use college football game logs.
+For this, let's use college football game logs from this season so far.
 
 ```{r echo=FALSE, class.output="bg-info", results="asis",  message=FALSE,  warning=FALSE}
 library(downloadthis)
 library(glue)
 
 dllink <- download_link(
-  link = "http://mattwaite.github.io/sportsdatafiles/footballlogs20.csv",
+  link = "http://mattwaite.github.io/sportsdatafiles/footballlogs21.csv",
   button_label = "Download csv file",
   button_type = "danger",
   has_icon = TRUE,
@@ -38,7 +38,7 @@ glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
 And load it.
 
 ```{r}
-logs <- read_csv("data/footballlogs20.csv")
+logs <- read_csv("data/footballlogs21.csv")
 ```
 
 For the first example, let's look at the difference between a team's giveaways -- turnovers lost -- versus takeaways, turnovers gained. To get this, we're going to add up all offensive turnovers and defensive turnovers for a team in a season and take a look at where they come out. To make this readable, I'm going to focus on the Big Ten.
@@ -108,7 +108,7 @@ ggplot() +
   theme_minimal()
 ```
 
-Believe it or not, Indiana had the most takeaways in the Big Ten last season. Don't sleep on the Fighting Basketball School.
+Believe it or not, Iowa had the most takeaways in the Big Ten this season.
 
 ## Lollipop charts
 

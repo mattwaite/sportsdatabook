@@ -6,11 +6,13 @@ Why is that important? One reason, McKewon posited, is that teams made a lot of 
 
 Better perimeter defense, better team.
 
-The question before you is this: is that true? Does keeping a lid on your opponent's ability to score three pointers mean more wins?
+Well, we know how the season went: 7 wins, same as the previous year.
+
+But the question before you is this: is what McKewon said true? Does keeping a lid on your opponent's ability to score three pointers mean more wins?
 
 This is what we're going to start to answer today. And we'll do it with scatterplots and regressions. Scatterplots are very good at showing **relationships between two numbers**. 
 
-First, we need libraries and every college basketball game last year.
+First, we need libraries and every college basketball game from the 2019-2020 season. Why that season? Because I did this with the COVID season and everything was wonky and made no sense. To make it make sense, you had to do a ton of twisting and turning and that was pointless. **What we're interested in is less about a specific team and more about a general point: Are these numbers related and by how much? What can they tell you about your team in general?**
 
 ```{r echo=FALSE, class.output="bg-info", results="asis",  message=FALSE,  warning=FALSE}
 library(downloadthis)

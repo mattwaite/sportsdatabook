@@ -24,7 +24,7 @@
 <meta name="author" content="Matt Waite" />
 
 
-<meta name="date" content="2021-10-01" />
+<meta name="date" content="2021-10-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -361,13 +361,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb340-2"><a href="dumbbell-and-lollipop-charts.html#cb340-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggalt)</span></code></pre></div>
 <div id="dumbbell-plots" class="section level2" number="22.1">
 <h2><span class="header-section-number">22.1</span> Dumbbell plots</h2>
-<p>For this, let’s use college football game logs.</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="http://mattwaite.github.io/sportsdatafiles/footballlogs20.csv">
+<p>For this, let’s use college football game logs from this season so far.</p>
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="http://mattwaite.github.io/sportsdatafiles/footballlogs21.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>And load it.</p>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="dumbbell-and-lollipop-charts.html#cb341-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/footballlogs20.csv&quot;</span>)</span></code></pre></div>
-<pre><code>## Rows: 1100 Columns: 54</code></pre>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="dumbbell-and-lollipop-charts.html#cb341-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/footballlogs21.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Rows: 638 Columns: 54</code></pre>
 <pre><code>## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr   (8): HomeAway, Opponent, Result, TeamFull, TeamURL, Outcome, Team, Con...
@@ -425,7 +425,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb350-8"><a href="dumbbell-and-lollipop-charts.html#cb350-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour_xend =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb350-9"><a href="dumbbell-and-lollipop-charts.html#cb350-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-233-1.png" width="672" /></p>
-<p>Believe it or not, Indiana had the most takeaways in the Big Ten last season. Don’t sleep on the Fighting Basketball School.</p>
+<p>Believe it or not, Iowa had the most takeaways in the Big Ten this season.</p>
 </div>
 <div id="lollipop-charts" class="section level2" number="22.2">
 <h2><span class="header-section-number">22.2</span> Lollipop charts</h2>
