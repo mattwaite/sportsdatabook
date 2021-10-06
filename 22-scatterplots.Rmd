@@ -164,4 +164,4 @@ The p-value isn't random. The adjusted R-squared is pushing 40 percent. We've go
 (153.942 * .405) + -51.155 
 ```
 
-So this model says that based only on Nebraska's shooting percentage, they should have won 11 games. They won 7. So per our model, Nebraska underperformed. Obviously there's room for improvement here, but you can see the power in scatterplots + regression. 
+So this model says that based only on Nebraska's shooting percentage, they should have won 11 games. They won 7. So per our model, Nebraska underperformed. Obviously there's room for improvement here, but you can see the power in scatterplots + regression.

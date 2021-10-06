@@ -24,7 +24,7 @@
 <meta name="author" content="Matt Waite" />
 
 
-<meta name="date" content="2021-10-04" />
+<meta name="date" content="2021-10-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -364,12 +364,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>So for this example, I want to look at where Big Ten teams compare to the rest of college football last season. Is the Big Ten’s reputation for tough games and defenses earned? Can we see patterns in good team vs bad teams?</p>
 <p>I’m going to create a scatterplot with offensive yards per play on the X axis and defensive yards per play on the y axis. We can then divide the grid into four quadrants. Teams with high yards per offensive play and low defensive yards per play are teams with good offenses and good defenses. The opposite means bad defense, bad offense. Then, to drive the point home, I’m going to make the dot the size of the total wins on the season – the bubble in my bubble charts.</p>
 <p>We’ll use this season’s college football games.</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="http://mattwaite.github.io/sportsdatafiles/footballlogs20.csv">
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="http://mattwaite.github.io/sportsdatafiles/footballlogs21.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>And load it.</p>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="bubble-charts.html#cb380-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/footballlogs20.csv&quot;</span>)</span></code></pre></div>
-<pre><code>## Rows: 1100 Columns: 54</code></pre>
+<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="bubble-charts.html#cb380-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/footballlogs21.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Rows: 638 Columns: 54</code></pre>
 <pre><code>## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr   (8): HomeAway, Opponent, Result, TeamFull, TeamURL, Outcome, Team, Con...
@@ -440,7 +440,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 1 × 2
 ##   offense defense
 ##     &lt;dbl&gt;   &lt;dbl&gt;
-## 1    5.73    5.75</code></pre>
+## 1    5.86    5.45</code></pre>
 <p>Now we can use those averages to add two more geoms – geom_vline and geom_hline, for vertical lines and horizontal lines.</p>
 <div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="bubble-charts.html#cb394-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb394-2"><a href="bubble-charts.html#cb394-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
@@ -494,7 +494,7 @@ Well, what do you know about that? Nebraska was … really a mixed bag this seas
 <span id="cb397-14"><a href="bubble-charts.html#cb397-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>bigten, </span>
 <span id="cb397-15"><a href="bubble-charts.html#cb397-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">label=</span>Team)</span>
 <span id="cb397-16"><a href="bubble-charts.html#cb397-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb397-17"><a href="bubble-charts.html#cb397-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Nebraska: Average at football?&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;The Huskers were kinda in the middle of everything, neither good nor bad at anything.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>)  <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb397-17"><a href="bubble-charts.html#cb397-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Is Nebraska moving up to the Big Ten&#39;s best?&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;The Huskers offense and defense puts it among ranked teams in the conference.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>)  <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
 <span id="cb397-18"><a href="bubble-charts.html#cb397-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
 <span id="cb397-19"><a href="bubble-charts.html#cb397-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
 <span id="cb397-20"><a href="bubble-charts.html#cb397-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>

@@ -25,7 +25,7 @@ library(downloadthis)
 library(glue)
 
 dllink <- download_link(
-  link = "http://mattwaite.github.io/sportsdatafiles/footballlogs20.csv",
+  link = "http://mattwaite.github.io/sportsdatafiles/footballlogs21.csv",
   button_label = "Download csv file",
   button_type = "danger",
   has_icon = TRUE,
@@ -39,7 +39,7 @@ glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
 And load it.
 
 ```{r}
-logs <- read_csv("data/footballlogs20.csv")
+logs <- read_csv("data/footballlogs21.csv")
 ```
 
 To do this, I've got some work to do. First, I need to mutate the outcomes of the games into 1s and 0s so I can add up the wins. We've done this before, so this won't be new to you, just adjusted slightly from basketball data.
@@ -194,7 +194,7 @@ ggplot() +
     data=bigten, 
     aes(x=OffensiveYPP, y=DefensiveYPP, label=Team)
   ) +
-  labs(title="Nebraska: Average at football?", subtitle="The Huskers were kinda in the middle of everything, neither good nor bad at anything.", caption="Source: NCAA | By Matt Waite")  + theme_minimal() + 
+  labs(title="Is Nebraska moving up to the Big Ten's best?", subtitle="The Huskers offense and defense puts it among ranked teams in the conference.", caption="Source: NCAA | By Matt Waite")  + theme_minimal() + 
   theme(
     plot.title = element_text(size = 16, face = "bold"),
     axis.title = element_text(size = 8), 
