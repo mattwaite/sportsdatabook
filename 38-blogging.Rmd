@@ -46,10 +46,10 @@ Now for the big decision: What theme to use. There's four choices, but the defau
 
 Here's the easiest themes to work with:
 
--   [yihui/hugo-lithium](https://github.com/yihui/hugo-lithium)
--   [yihui/hugo-prose](https://github.com/yihui/hugo-prose)
--   [yihui/hugo-ivy](https://github.com/yihui/hugo-ivy)
--   [yihui/hugo-xmin](https://github.com/yihui/hugo-xmin)
+-   [yihui/hugo-lithium](https://GitHub.com/yihui/hugo-lithium)
+-   [yihui/hugo-prose](https://GitHub.com/yihui/hugo-prose)
+-   [yihui/hugo-ivy](https://GitHub.com/yihui/hugo-ivy)
+-   [yihui/hugo-xmin](https://GitHub.com/yihui/hugo-xmin)
 
 ```{r, echo=FALSE}
 knitr::include_graphics(rep("images/blog3.png"))
@@ -59,7 +59,7 @@ When you hit Create Project, you should get an R Studio screen with a file open 
 
     baseurl: http://mattwaite.github.io/
     languageCode: en-us
-    title: Matt Waite's Github Site
+    title: Matt Waite's GitHub Site
     theme: hugo-lithium
     googleAnalytics: ''
     disqusShortname: ''
@@ -77,7 +77,7 @@ When you hit Create Project, you should get an R Studio screen with a file open 
         - name: About
           url: /about/
         - name: GitHub
-          url: https://github.com/mattwaite
+          url: https://GitHub.com/mattwaite
         - name: Twitter
           url: https://twitter.com/mattwaite
     params:
@@ -90,7 +90,7 @@ When you hit Create Project, you should get an R Studio screen with a file open 
       highlightjsLang:
         - r
         - yaml
-      highlightjsTheme: github
+      highlightjsTheme: GitHub
       highlightjsVersion: 9.12.0
       logo:
         alt: Logo
@@ -176,61 +176,51 @@ Blogdown is built on top of the Hugo static site generator. What that means is t
 
 Publishing takes a lot of steps to get set up, but once it is, it's easy.
 
-**Step 1: Get a Github account**
+**Step 1: Get a GitHub account**
 
-Go to [Github](https://github.com/) and sign up for an account. NOTE: Your username will be part of your website address, and you could potentially be sending this to employers. I'm sure blaze420rryday has been your handle since middle school, but do you want an employer to see that? My Github user name is mattwaite. See what I'm getting at here?
+Go to [GitHub](https://GitHub.com/) and sign up for an account. NOTE: Your username will be part of your website address, and you could potentially be sending this to employers. I'm sure blaze420rryday has been your handle since middle school, but do you want an employer to see that? My GitHub user name is mattwaite. See what I'm getting at here?
 
 **Step 2: Set up your website repository**
 
-For the low low price of nothing, Github will host a website for you, and we are going to take them up on that bargain. There's several tricks to getting this to work, but none of them are hard. They just require you to be specific.
+For the low low price of nothing, GitHub will host a website for you, and we are going to take them up on that bargain. There's several tricks to getting this to work, but none of them are hard. They just require you to be specific.
 
-To start, you can click on the plus sign in the top right corner or hit the green new button, depending on what your page looks like vs mine (I'm reasonably active github user, so mine will look different from yours).
+To start, you can click on the plus sign in the top right corner or hit the green new button, depending on what your page looks like vs mine (I'm reasonably active GitHub user, so mine will look different from yours).
 
 ```{r, echo=FALSE}
 knitr::include_graphics(rep("images/blog7.png"))
 ```
 
-In the create a new repository page, the name of your respository needs to follow this pattern: yourusernamehere.github.io where yourusernamehere is ... your username. So my site is mattwaite.github.io because my username is mattwaite. This is why you do not want to select swaggylovedoctor as your username, no matter how attached to it you are. Your employment chances are zero with something dumb like that.
+In the create a new repository page, **the name of your respository needs to follow this pattern**: yourusernamehere.github.io where yourusernamehere is ... your username. So my site is mattwaite.github.io because my username is mattwaite. This is why you do not want to select swaggylovedoctor as your username, no matter how attached to it you are. Your employment chances are zero with something dumb like that.
 
 After you've named the repository correctly, leave it public, check add .gitignore, and then select a gitignore template. Type R into the search, select it, and the create repository button will become active. Click create repository.
 
 **Step 3:**
 
-Before you close the tab with github on it, copy the url of the repository. For example, mine looks like this: <https://github.com/mattwaite/mattwaite.github.io>
+Don't close your GitHub window.
 
-Github is a version control system and a social network mixed together. Version control is like Track Changes in Word, but on steroids. If you plan on a career in analytics or data science, Github is a skill you will have to learn, but it's beyond the scope of this book.
+In a new tab, [download the GitHub Desktop App](https://desktop.github.com/) and install it.
 
-To work around this, we're going to use R Studio to manage our interactions with Github. The first thing we need to do is create a new project for our website repository. Go to File \> New Project
+GitHub is a version control system and a social network mixed together. Version control is like Track Changes in Word, but on steroids. If you plan on a career in analytics or data science, GitHub is a skill you will have to learn, but it's beyond the scope of this book.
 
-First: Choose Version Control
+To work around this, we're going to use GitHub Desktop to manage our interactions with GitHub. Open GitHub Desktop and log into your GitHub account in the app. 
+
+To get your repository into GitHub Desktop, go back to your tab with your GitHub repository in it. Find the Code button and click it. Click on the Open With GitHub Desktop button.
+
+In the window that pops up, we need to set the Local Path. **This path needs to be the same place your blog project is located.** Click the Choose button and navigate to where your blog project is located. Then, just click Clone.
 
 ```{r, echo=FALSE}
 knitr::include_graphics(rep("images/blog9.png"))
-```
-
-Second: Choose Github.
-
-Third: Paste your github repository url into the Repository URL box. That will autofill the Project Director Name.
-
-**MOST IMPORTANTLY** here, you need to put your website project in the same directory as your blog project. So if your blog project is in your Documents folder, put your website in your Documents folder. If you've got your blog project in some homework folder somewhere, put the website there too. But when you're done, you should have a place on your computer somewhere that has two folders:
-
-blog-project-name/ username.github.io/
-
-After you've put it in the right place, check the Open in new session box and hit Create Project.
-
-```{r, echo=FALSE}
-knitr::include_graphics(rep("images/blog11.png"))
 ```
 
 **Step 4:**
 
 Let's get your site on the internet.
 
-Switch back to your blog project. We're going to output your site and upload it to github.
+Switch back to your blog project in R Studio. We're going to output your site and upload it to GitHub.
 
-To do this, we need to change config.yaml. We need to tell your website project that you want to publish to your github folder, not the default.
+To do this, we need to change config.yaml. We need to tell your website project that you want to publish to your GitHub folder, not the default.
 
-Open config.yaml in your blog project. Near the top, above ignoreFiles, add this line, replacing yourusername with ... your user name. This says publish to your github project that you put in the same folder as your blog project:
+Open config.yaml in your blog project. Near the top, above ignoreFiles, add this line, replacing yourusername with ... your user name. This says publish to your GitHub project that you put in the same folder as your blog project:
 
     publishDir: "../yourusername.github.io"
 
@@ -250,22 +240,16 @@ knitr::include_graphics(rep("images/blog14.png"))
 
 **Step 5**
 
-Now switch back to your github.io project. Click on the Git tab.
+Now go to the GitHub Desktop App. You should see something that looks like this, though yours will be different from mine.
 
 ```{r, echo=FALSE}
 knitr::include_graphics(rep("images/blog12.png"))
 ```
 
-This is where you will commit files to your repository. Github is a two step process for getting files from your computer to Github. The first is committing the files -- click on Commit. Committing files is a three step process. You first have to check the box next to all the files you are committing, then write a commit message -- a note to yourself what this is -- and then hitting commit.
+This is where you will commit files to your repository. GitHub is a two-step process for getting files from your computer to GitHub. The first is committing the files. To do that, add a message in the box next to your avatar (where it says update index.html in the screenshot above). Then click Commit to main (mine says master because it's an older repository before GitHub switched to using main by default). The second step is to push it to GitHub. You do that on the screen that appears after you have committed your files. Click Push origin.
 
 ```{r, echo=FALSE}
 knitr::include_graphics(rep("images/blog13.png"))
 ```
-
-In your commit message, type "First commit to my new site"
-
-Click commit. A window should pop up with some information. Unless you get an error saying the commit failed, you can close this window.
-
-You're halfway home. Now **click the Push button in the top right**. Once you do that, your new files will be on Github. Congrats, you've sent your first files to version control.
 
 In a few minutes, you should be able to go to username.github.io in a browser and you'll see your site. [Here's mine](http://mattwaite.github.io/).
