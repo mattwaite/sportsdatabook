@@ -452,8 +452,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb394-8"><a href="bubble-charts.html#cb394-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>bigten, </span>
 <span id="cb394-9"><a href="bubble-charts.html#cb394-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">size=</span>TotalWins), </span>
 <span id="cb394-10"><a href="bubble-charts.html#cb394-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb394-11"><a href="bubble-charts.html#cb394-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">5.820543</span>) <span class="sc">+</span> </span>
-<span id="cb394-12"><a href="bubble-charts.html#cb394-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">5.673263</span>)</span></code></pre></div>
+<span id="cb394-11"><a href="bubble-charts.html#cb394-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">5.863151</span>) <span class="sc">+</span> </span>
+<span id="cb394-12"><a href="bubble-charts.html#cb394-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">5.448228</span>)</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-263-1.png" width="672" /></p>
 <p>Now, let’s add another new geom for us, using a new library called <code>ggrepel</code>, which will help us label the dots without overwriting other labels. So we’ll have to install that in the console:</p>
 <p>`install.packages(“ggrepel”)</p>
@@ -469,8 +469,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb396-8"><a href="bubble-charts.html#cb396-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>bigten, </span>
 <span id="cb396-9"><a href="bubble-charts.html#cb396-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">size=</span>TotalWins), </span>
 <span id="cb396-10"><a href="bubble-charts.html#cb396-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb396-11"><a href="bubble-charts.html#cb396-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">5.820543</span>) <span class="sc">+</span> </span>
-<span id="cb396-12"><a href="bubble-charts.html#cb396-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">5.673263</span>) <span class="sc">+</span> </span>
+<span id="cb396-11"><a href="bubble-charts.html#cb396-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">5.863151</span>) <span class="sc">+</span> </span>
+<span id="cb396-12"><a href="bubble-charts.html#cb396-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">5.448228</span>) <span class="sc">+</span></span>
 <span id="cb396-13"><a href="bubble-charts.html#cb396-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(</span>
 <span id="cb396-14"><a href="bubble-charts.html#cb396-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>bigten, </span>
 <span id="cb396-15"><a href="bubble-charts.html#cb396-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">label=</span>Team)</span>
@@ -488,8 +488,8 @@ Well, what do you know about that? Nebraska was … really a mixed bag this seas
 <span id="cb397-8"><a href="bubble-charts.html#cb397-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>bigten, </span>
 <span id="cb397-9"><a href="bubble-charts.html#cb397-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">size=</span>TotalWins), </span>
 <span id="cb397-10"><a href="bubble-charts.html#cb397-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb397-11"><a href="bubble-charts.html#cb397-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">5.820543</span>) <span class="sc">+</span> </span>
-<span id="cb397-12"><a href="bubble-charts.html#cb397-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">5.673263</span>) <span class="sc">+</span> </span>
+<span id="cb397-11"><a href="bubble-charts.html#cb397-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">5.863151</span>) <span class="sc">+</span> </span>
+<span id="cb397-12"><a href="bubble-charts.html#cb397-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">5.448228</span>) <span class="sc">+</span></span>
 <span id="cb397-13"><a href="bubble-charts.html#cb397-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(</span>
 <span id="cb397-14"><a href="bubble-charts.html#cb397-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>bigten, </span>
 <span id="cb397-15"><a href="bubble-charts.html#cb397-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">label=</span>Team)</span>

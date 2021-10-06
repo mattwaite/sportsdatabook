@@ -141,8 +141,8 @@ ggplot() +
     data=bigten, 
     aes(x=OffensiveYPP, y=DefensiveYPP, size=TotalWins), 
     color="red") + 
-  geom_vline(xintercept = 5.820543) + 
-  geom_hline(yintercept = 5.673263)
+  geom_vline(xintercept = 5.863151) + 
+  geom_hline(yintercept = 5.448228)
 ```
 
 Now, let's add another new geom for us, using a new library called `ggrepel`, which will help us label the dots without overwriting other labels. So we'll have to install that in the console:
@@ -166,8 +166,8 @@ ggplot() +
     data=bigten, 
     aes(x=OffensiveYPP, y=DefensiveYPP, size=TotalWins), 
     color="red") + 
-  geom_vline(xintercept = 5.820543) + 
-  geom_hline(yintercept = 5.673263) + 
+  geom_vline(xintercept = 5.863151) + 
+  geom_hline(yintercept = 5.448228) +
   geom_text_repel(
     data=bigten, 
     aes(x=OffensiveYPP, y=DefensiveYPP, label=Team)
@@ -188,8 +188,8 @@ ggplot() +
     data=bigten, 
     aes(x=OffensiveYPP, y=DefensiveYPP, size=TotalWins), 
     color="red") + 
-  geom_vline(xintercept = 5.820543) + 
-  geom_hline(yintercept = 5.673263) + 
+  geom_vline(xintercept = 5.863151) + 
+  geom_hline(yintercept = 5.448228) +
   geom_text_repel(
     data=bigten, 
     aes(x=OffensiveYPP, y=DefensiveYPP, label=Team)
