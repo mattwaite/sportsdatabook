@@ -24,7 +24,7 @@
 <meta name="author" content="Matt Waite" />
 
 
-<meta name="date" content="2021-10-06" />
+<meta name="date" content="2021-10-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -365,15 +365,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Another bit of setup: we need to set the seed for the random number generator. The library “jitters” the dots in the beeswarm randomly. If we don’t set the seed, we’ll get different results each time. Setting the seed means we get the same look.</p>
 <div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="beeswarm-plots.html#cb399-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span></code></pre></div>
 <p>So let’s look at last year’s basketball team as a group of shooters. The team was disappointing – we know that – but what kind of a problem is it going to be that we’re returning basically no one from it?</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="http://mattwaite.github.io/sportsdatafiles/players20.csv">
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="http://mattwaite.github.io/sportsdatafiles/players21.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>First we’ll load our player data.</p>
-<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="beeswarm-plots.html#cb400-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/players20.csv&quot;</span>)</span></code></pre></div>
-<pre><code>## Rows: 5452 Columns: 57</code></pre>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="beeswarm-plots.html#cb400-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/players21.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Rows: 5410 Columns: 58</code></pre>
 <pre><code>## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
-## chr  (8): Team, Player, Class, Pos, Height, Hometown, High School, Summary
+## chr  (9): Team, Player, Class, Pos, Height, Hometown, High School, Summary, ...
 ## dbl (49): #, Weight, Rk.x, G, GS, MP, FG, FGA, FG%, 2P, 2PA, 2P%, 3P, 3PA, 3...</code></pre>
 <pre><code>## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
@@ -383,21 +383,21 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Now let’s ask what makes a good shooter? The best measure, in my book, is True Shooting Percentage. It’s a combination of weighted field goal shooting – to account for three pointers – and free throws. Our data has <code>TS%</code>, but if we include <em>all</em> players, we’ll have too many dots. So let’s narrow it down. A decent tool for cutoffs? Field goal attempts. Let’s get a quick look at them.</p>
 <div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="beeswarm-plots.html#cb405-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(activeplayers<span class="sc">$</span>FGA)</span></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    0.00   23.25   96.00  121.90  197.00  611.00</code></pre>
-<p>The median number of shots is 96, but we only really care about good ones. So let’s use 197 attempts as our cutoff.</p>
-<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="beeswarm-plots.html#cb407-1" aria-hidden="true" tabindex="-1"></a>shooters <span class="ot">&lt;-</span> activeplayers <span class="sc">%&gt;%</span> <span class="fu">filter</span>(FGA <span class="sc">&gt;</span> <span class="dv">197</span>)</span></code></pre></div>
+##    0.00   14.00   69.00   95.38  152.00  512.00</code></pre>
+<p>The median number of shots is 69, but we only really care about good ones. So let’s use 152 attempts – the third quartile – as our cutoff.</p>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="beeswarm-plots.html#cb407-1" aria-hidden="true" tabindex="-1"></a>shooters <span class="ot">&lt;-</span> activeplayers <span class="sc">%&gt;%</span> <span class="fu">filter</span>(FGA <span class="sc">&gt;</span> <span class="dv">152</span>)</span></code></pre></div>
 <p>Now we’ve got enough for a beeswarm plot. It works very much like you would expect – the group value is the x, the number is the y. We’re going to beeswarm by position, and the dots will be true shooting percentage.</p>
 <div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="beeswarm-plots.html#cb408-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_beeswarm</span>(<span class="at">data=</span>shooters, <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;grey&quot;</span>)</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-274-1.png" width="672" /></p>
-<p>You can see that there’s a lot fewer centers who have attempted more than 197 shots than guards, but then there’s a lot more guards in college basketball than anything else. In the guards column, note that fat width of the swarm is between .5 and .55. So that means most guards who shoot more than 197 shots end up in that area. They’re the average shooter at that level. You can see, some are better, some are worse.</p>
+<p>You can see that there’s a lot fewer centers who have attempted more than 152 shots than guards, but then there’s a lot more guards in college basketball than anything else. In the guards column, note that fat width of the swarm is between .5 and .6. So that means most guards who shoot more than 152 shots end up in that area. They’re the average shooter at that level. You can see, some are better, some are worse.</p>
 <p>So where are the Nebraska players in that mix?</p>
 <p>We’ll filter players on Nebraska who meet our criteria.</p>
 <div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="beeswarm-plots.html#cb409-1" aria-hidden="true" tabindex="-1"></a>nu <span class="ot">&lt;-</span> players <span class="sc">%&gt;%</span> </span>
 <span id="cb409-2"><a href="beeswarm-plots.html#cb409-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">&quot;Nebraska Cornhuskers&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb409-3"><a href="beeswarm-plots.html#cb409-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(FGA<span class="sc">&gt;</span><span class="dv">197</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb409-3"><a href="beeswarm-plots.html#cb409-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(FGA<span class="sc">&gt;</span><span class="dv">152</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb409-4"><a href="beeswarm-plots.html#cb409-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="st">`</span><span class="at">TS%</span><span class="st">`</span>))</span></code></pre></div>
-<p>Four Cornhuskers took more than 197 shots. Number returning this season? Zero.</p>
-<p>That’s … not a good start. Nothing coming back. But how good are they as true shooters?</p>
+<p>Five Cornhuskers took more than 152 shots. Number returning this season? Three.</p>
+<p>But how good are they as true shooters?</p>
 <p>When you add another beeswarm, we need to pass another element in – we need to tell it if we’re grouping on the x value. Not sure why, but you’ll get a warning if you don’t.</p>
 <div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="beeswarm-plots.html#cb410-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb410-2"><a href="beeswarm-plots.html#cb410-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_beeswarm</span>(</span>
@@ -424,7 +424,7 @@ Ooof. Best we can muster is middle of the fat part. Who is that?</p>
 <span id="cb411-11"><a href="beeswarm-plots.html#cb411-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>nu, </span>
 <span id="cb411-12"><a href="beeswarm-plots.html#cb411-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Pos, <span class="at">y=</span><span class="st">`</span><span class="at">TS%</span><span class="st">`</span>, <span class="at">label=</span>Player))</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-277-1.png" width="672" /></p>
-<p>So Haanif Cheatham was our best shooter by true shooting percentage. The rest were below average shooters for that volume of shooting.</p>
+<p>So Teddy Allen was our best shooter by true shooting percentage. The rest were below average shooters for that volume of shooting.</p>
 <div id="a-few-other-options" class="section level2" number="25.1">
 <h2><span class="header-section-number">25.1</span> A few other options</h2>
 <p>The ggbeeswarm library has a couple of variations on the geom_beeswarm that may work better for your application. They are <code>geom_quasirandom</code> and <code>geom_jitter</code>.</p>

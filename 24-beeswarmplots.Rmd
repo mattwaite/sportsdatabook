@@ -27,7 +27,7 @@ library(downloadthis)
 library(glue)
 
 dllink <- download_link(
-  link = "http://mattwaite.github.io/sportsdatafiles/players20.csv",
+  link = "http://mattwaite.github.io/sportsdatafiles/players21.csv",
   button_label = "Download csv file",
   button_type = "danger",
   has_icon = TRUE,
@@ -41,7 +41,7 @@ glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
 First we'll load our player data.
 
 ```{r}
-players <- read_csv("data/players20.csv")
+players <- read_csv("data/players21.csv")
 ```
 
 We know this data has a lot of players who didn't play, so let's get rid of them.
@@ -56,10 +56,10 @@ Now let's ask what makes a good shooter? The best measure, in my book, is True S
 summary(activeplayers$FGA)
 ```
 
-The median number of shots is 96, but we only really care about good ones. So let's use 197 attempts as our cutoff. 
+The median number of shots is 69, but we only really care about good ones. So let's use 152 attempts -- the third quartile -- as our cutoff. 
 
 ```{r}
-shooters <- activeplayers %>% filter(FGA > 197)
+shooters <- activeplayers %>% filter(FGA > 152)
 ```
 
 Now we've got enough for a beeswarm plot. It works very much like you would expect -- the group value is the x, the number is the y. We're going to beeswarm by position, and the dots will be true shooting percentage.
@@ -68,7 +68,7 @@ Now we've got enough for a beeswarm plot. It works very much like you would expe
 ggplot() + geom_beeswarm(data=shooters, aes(x=Pos, y=`TS%`), color="grey")
 ```
 
-You can see that there's a lot fewer centers who have attempted more than 197 shots than guards, but then there's a lot more guards in college basketball than anything else. In the guards column, note that fat width of the swarm is between .5 and .55. So that means most guards who shoot more than 197 shots end up in that area. They're the average shooter at that level. You can see, some are better, some are worse. 
+You can see that there's a lot fewer centers who have attempted more than 152 shots than guards, but then there's a lot more guards in college basketball than anything else. In the guards column, note that fat width of the swarm is between .5 and .6. So that means most guards who shoot more than 152 shots end up in that area. They're the average shooter at that level. You can see, some are better, some are worse. 
 
 So where are the Nebraska players in that mix? 
 
@@ -77,13 +77,13 @@ We'll filter players on Nebraska who meet our criteria.
 ```{r}
 nu <- players %>% 
   filter(Team == "Nebraska Cornhuskers") %>% 
-  filter(FGA>197) %>% 
+  filter(FGA>152) %>% 
   arrange(desc(`TS%`))
 ```
 
-Four Cornhuskers took more than 197 shots. Number returning this season? Zero.
+Five Cornhuskers took more than 152 shots. Number returning this season? Three.
 
-That's ... not a good start. Nothing coming back. But how good are they as true shooters?  
+But how good are they as true shooters?  
 
 When you add another beeswarm, we need to pass another element in -- we need to tell it if we're grouping on the x value. Not sure why, but you'll get a warning if you don't. 
 
@@ -117,7 +117,7 @@ ggplot() +
     aes(x=Pos, y=`TS%`, label=Player))
 ```
 
-So Haanif Cheatham was our best shooter by true shooting percentage. The rest were below average shooters for that volume of shooting. 
+So Teddy Allen was our best shooter by true shooting percentage. The rest were below average shooters for that volume of shooting. 
 
 ## A few other options
 
