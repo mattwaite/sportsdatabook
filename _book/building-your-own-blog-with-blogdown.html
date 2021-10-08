@@ -24,7 +24,7 @@
 <meta name="author" content="Matt Waite" />
 
 
-<meta name="date" content="2021-10-07" />
+<meta name="date" content="2021-10-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -375,7 +375,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>In the Project Type view, you may have to scroll down to find “Website using blogdown” but that’s your choice. Mine will probably look different than yours, but below is what the line you’re looking for looks like.</p>
 <p><img src="images/blog2.png" width="554" /></p>
 <p>And now we’ve come to our first decision point.</p>
-<p>First, name the directory you’re going to put this into. Keep it simple. Then decide where on your computer you’re going to put it.</p>
+<p>First, name the directory you’re going to put this into. Keep it simple. Blog is fine. Then decide where on your computer you’re going to put it. Put it somewhere you’re going to remember. Don’t put it on your Desktop. Put it in a folder. Remember what folder because you’re going to need this later.</p>
 <p>Now for the big decision: What theme to use. There’s four choices, but the default theme is the most fully documented. If you want to use another theme, you’ll be better off creating two projects: the one you’re going to publish, and the lithium theme you can steal stuff from.</p>
 <p>Here’s the easiest themes to work with:</p>
 <ul>
@@ -385,7 +385,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="https://GitHub.com/yihui/hugo-xmin">yihui/hugo-xmin</a></li>
 </ul>
 <p><img src="images/blog3.png" width="597" /></p>
-<p>When you hit Create Project, you should get an R Studio screen with a file open called config.yaml. This file will look different depending on which theme you used. This configuration file needs to have a few things on it. This is the config.yaml for my website, but you should use it as a guide for what yours will need:</p>
+<p>When you hit Create Project, you should get an R Studio screen. You might have a file open called config.yaml. If you don’t, open it (you can use the files pane in the bottom right). This file will look different depending on which theme you used. This configuration file needs to have a few things in it. This is the config.yaml for my website, but you should use it as a guide for what yours will need:</p>
 <pre><code>baseurl: http://mattwaite.github.io/
 languageCode: en-us
 title: Matt Waite&#39;s GitHub Site
@@ -406,7 +406,7 @@ menu:
     - name: About
       url: /about/
     - name: GitHub
-      url: https://GitHub.com/mattwaite
+      url: https://github.com/mattwaite
     - name: Twitter
       url: https://twitter.com/mattwaite
 params:
@@ -431,7 +431,7 @@ params:
 <div id="seeing-your-site" class="section level2" number="39.2">
 <h2><span class="header-section-number">39.2</span> Seeing your site</h2>
 <p>While you are creating your site, you’re going to want to see it. Now’s a good time to introduce serving your site in R Studio so you can see it before you deploy it.</p>
-<p>In the console, type this: <code>blogdown:: serve_site()</code></p>
+<p>In the console, type this: <code>blogdown:: serve_site()</code> or you can go to Addins &gt; Serve Site.</p>
 <p>Now, in the viewer tab on the right, you should see your site.</p>
 <p><img src="images/blog15.png" width="838" /></p>
 </div>
@@ -456,10 +456,11 @@ title: About Hugo Ivy
 <p>The magic here is how you name them. You’ll remember from config.yaml that we have a post url format that goes post / year / month / day / slug. The reason for that is that urls matter for Google. Clean urls with meaningful information in them rank higher.</p>
 <p>So in post, you’ll see the folders are named similarly – a date separated by dashes followed by a slug – the headline of your post in all lower case with dashes instead of spaces. So if I were writing a post called “I love sports data,” the slug version of that would be i-love-sports-data. If I were writing it on December 15, which I am, my folder would be 2020-12-15-i-love-sports-data.</p>
 <p><strong>NOTE: CAPITALIZATION MATTERS. AS IN, DON’T.</strong> You don’t see capitals in URLs, so don’t use them.</p>
-<p>So let’s create a post. You can name it what you want, but the folder name needs to be in the form of year-month-day-a-title-here. Start by creating the folder.</p>
-<p><img src="images/blog6.png" width="1182" /></p>
-<p>Then, start a new R notebook and save it into your new folder. It must be named index (which is a website thing, if you’re wondering).</p>
-<p>Your typical yaml header in an R notebook doesn’t have all the parts you need. For example, here’s one for a post about this book.</p>
+<p>So let’s create a post.</p>
+<p>The easiest way to do this is to click Addins &gt; New Post. You need to fill out four things on the page: The Title, Author, Date (if you’re changing it) and the Format. Be smart about the title – don’t but TEST TEST TEST or TITLE HERE because it will build with that and it’s hard to change later. Give some thought to the headline on your post before you hit done.</p>
+<p><img src="images/blog6.png" width="344" /></p>
+<p>When you’re done, hit Done and an RMarkdown file will appear, just as you have been using throughout this book.</p>
+<p>The first thing you’ll see is the yaml header. Typically, if we’ve filled out the previous screen correctly, we should be good. But if you need to fix something, you can do it here.</p>
 <pre><code>---
 title: &quot;Sports Data Analysis and Visualization&quot;
 author: &quot;Matt Waite&quot;
@@ -467,7 +468,6 @@ date: 2019-07-29T21:13:14-05:00
 categories: [&quot;Books&quot;]
 tags: [&quot;R&quot;, &quot;data&quot;, &quot;sports&quot;]
 ---</code></pre>
-<p>You need a title, an author and date. Categories and tags are optional, but I think they help people explore a site and aren’t that hard to deal with.</p>
 <p>Below the yaml header? That’s up to you. Go do some of that writing stuff you do.</p>
 </div>
 <div id="publishing-your-site" class="section level2" number="39.5">
