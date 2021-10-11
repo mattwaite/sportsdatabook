@@ -1,77 +1,81 @@
-﻿Week,Rank,Team
-1,1,Arsenal 
-1,2,Leicester City 
-1,3,Chelsea 
-1,4,Newcastle United 
-1,5,Wolverhampton Wanderers 
-1,6,Liverpool 
-1,7,Crystal Palace 
-1,8,Everton 
-1,9,Leeds United 
-1,10,Southampton 
-1,11,Tottenham Hotspur 
-1,12,Brighton and Hove Albion 
-1,13,Sheffield United 
-1,14,West Ham United 
-1,15,Fulham 
-1,16,West Bromwich Albion 
-2,1,Leicester City 
-2,2,Everton 
-2,3,Arsenal 
-2,4,Liverpool 
-2,5,Crystal Palace 
-2,6,Tottenham Hotspur 
-2,7,Manchester City 
-2,8,Brighton and Hove Albion 
-2,9,Aston Villa 
-2,10,Leeds United 
-2,11,Chelsea 
-2,12,Wolverhampton Wanderers 
-2,13,Newcastle United 
-2,14,Burnley 
-2,15,Manchester United 
-2,16,West Ham United 
-2,17,Sheffield United 
-2,18,Fulham 
-2,19,Southampton 
-2,20,West Bromwich Albion 
-3,1,Leicester City 
-3,2,Liverpool 
-3,3,Everton 
-3,4,Aston Villa 
-3,5,Arsenal 
-3,6,Crystal Palace 
-3,7,Leeds United 
-3,8,Tottenham Hotspur 
-3,9,Chelsea 
-3,10,Newcastle United 
-3,11,West Ham United 
-3,12,Brighton and Hove Albion 
-3,13,Manchester City 
-3,14,Manchester United 
-3,15,Southampton 
-3,16,Wolverhampton Wanderers 
-3,17,West Bromwich Albion 
-3,18,Burnley 
-3,19,Sheffield United 
-3,20,Fulham 
-4,1,Everton 
-4,2,Aston Villa 
-4,3,Leicester City 
-4,4,Arsenal 
-4,5,Liverpool 
-4,6,Tottenham Hotspur 
-4,7,Chelsea 
-4,8,Leeds United 
-4,9,Newcastle United 
-4,10,West Ham United 
-4,11,Southampton 
-4,12,Crystal Palace 
-4,13,Wolverhampton Wanderers 
-4,14,Manchester City 
-4,15,Brighton and Hove Albion 
-4,16,Manchester United 
-4,17,West Bromwich Albion 
-4,18,Burnley 
-4,19,Sheffield United 
-4,20,Fulham 
+﻿Week,Rank,Club
+1,1,Man Utd
+1,2,Chelsea 
+1,3,Liverpool
+1,4,West Ham
+1,5,Everton
+1,6,Brentford  
+1,7,Watford  
+1,8,Brighton
+1,9,Leicester 
+1,10,Spurs
+1,11,Aston Villa
+1,12,Burnley
+1,13,Man City 
+1,14,Wolves
+1,15,Newcastle
+1,16,Southampton
+1,17,Arsenal
+1,18,Crystal Palace
+1,19,Norwich  
+1,20,Leeds
+2,1,West Ham
+2,2,Chelsea 
+2,3,Liverpool
+2,4,Brighton
+2,5,Spurs
+2,6,Man Utd
+2,7,Everton
+2,8,Brentford  
+2,9,Man City 
+2,10,Aston Villa
+2,11,Watford  
+2,12,Leicester 
+2,13,Southampton
+2,14,Crystal Palace
+2,15,Leeds
+2,16,Wolves
+2,17,Burnley
+2,18,Newcastle
+2,19,Arsenal
+2,20,Norwich  
+3,1,Spurs
+3,2,West Ham
+3,3,Man Utd
+3,4,Chelsea 
+3,5,Liverpool
+3,6,Everton
+3,7,Man City 
+3,8,Brighton
+3,9,Leicester 
+3,10,Brentford  
+3,11,Aston Villa
+3,12,Watford  
+3,13,Southampton
+3,14,Crystal Palace
+3,15,Leeds
+3,16,Burnley
+3,17,Newcastle
+3,18,Wolves
+3,19,Norwich  
+3,20,Arsenal
+4,1,Man Utd
+4,2,Chelsea 
+4,3,Liverpool
+4,4,Everton
+4,5,Man City 
+4,6,Brighton
+4,7,Spurs
+4,8,West Ham
+4,9,Leicester 
+4,10,Brentford  
+4,11,Crystal Palace
+4,12,Aston Villa
+4,13,Wolves
+4,14,Southampton
+4,15,Watford  
+4,16,Arsenal
+4,17,Leeds
+4,18,Burnley
+4,19,Newcastle
+4,20,Norwich  
