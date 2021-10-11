@@ -1,61 +1,126 @@
-Rank,Team,Record,Week  ,ShortTeam
-9,Baylor University,1-Oct,13,Baylor
-7,Baylor University,1-Nov,14,Baylor
-7,Baylor University,2-Nov,15,Baylor
-5,Clemson University,Sep-00,10,Clem.
-3,Clemson University,Oct-00,11,Clem.
-3,Clemson University,Nov-00,12,Clem.
-3,Clemson University,Nov-00,13,Clem.
-3,Clemson University,Dec-00,14,Clem.
-3,Clemson University,13-0,15,Clem.
-2,Louisiana State University,Aug-00,10,LSU
-1,Louisiana State University,Sep-00,11,LSU
-1,Louisiana State University,Oct-00,12,LSU
-2,Louisiana State University,Nov-00,13,LSU
-2,Louisiana State University,Dec-00,14,LSU
-1,Louisiana State University,13-0,15,LSU
-1,Ohio State University,Aug-00,10,Ohio St.
-2,Ohio State University,Sep-00,11,Ohio St.
-2,Ohio State University,Oct-00,12,Ohio St.
-1,Ohio State University,Nov-00,13,Ohio St.
-1,Ohio State University,Dec-00,14,Ohio St.
-2,Ohio State University,13-0,15,Ohio St.
-4,Penn State University,Aug-00,10,Penn St.
-9,Penn State University,1-Aug,11,Penn St.
-8,Penn State University,1-Sep,12,Penn St.
-10,Penn State University,2-Sep,13,Penn St.
-10,Penn State University,2-Oct,14,Penn St.
-10,Penn State University,2-Oct,15,Penn St.
-3,University of Alabama,Aug-00,10,Ala.
-5,University of Alabama,1-Aug,11,Ala.
-5,University of Alabama,1-Sep,12,Ala.
-5,University of Alabama,1-Oct,13,Ala.
-10,University of Florida,2-Jul,10,Fla.
-9,University of Florida,2-Oct,14,Fla.
-9,University of Florida,2-Oct,15,Fla.
-6,University of Georgia,1-Jul,10,Ga.
-4,University of Georgia,1-Aug,11,Ga.
-4,University of Georgia,1-Sep,12,Ga.
-4,University of Georgia,1-Oct,13,Ga.
-4,University of Georgia,1-Nov,14,Ga.
-5,University of Georgia,2-Nov,15,Ga.
-8,University of Minnesota,Sep-00,11,Minn.
-10,University of Minnesota,1-Sep,12,Minn.
-8,University of Minnesota,1-Oct,13,Minn.
-9,University of Oklahoma,1-Jul,10,Okla.
-10,University of Oklahoma,1-Aug,11,Okla.
-9,University of Oklahoma,1-Sep,12,Okla.
-7,University of Oklahoma,1-Oct,13,Okla.
-6,University of Oklahoma,1-Nov,14,Okla.
-4,University of Oklahoma,1-Dec,15,Okla.
-7,University of Oregon,1-Aug,10,Ore.
-6,University of Oregon,1-Aug,11,Ore.
-6,University of Oregon,1-Sep,12,Ore.
-6,University of Oregon,2-Nov,15,Ore.
-8,University of Utah,1-Aug,10,Utah
-7,University of Utah,1-Aug,11,Utah
-7,University of Utah,1-Sep,12,Utah
-6,University of Utah,1-Oct,13,Utah
-5,University of Utah,1-Nov,14,Utah
-8,University of Wisconsin,2-Oct,14,Wisc.
-8,University of Wisconsin,3-Oct,15,Wisc.
+﻿Rank,Week,Team,ShortTeam
+1,17,Alabama,Ala.
+1,16,Alabama,Ala.
+1,15,Alabama,Ala.
+1,14,Alabama,Ala.
+1,13,Alabama,Ala.
+22,13,Auburn,Aub.
+16,17,BYU,BYU
+17,16,BYU,BYU
+18,15,BYU,BYU
+13,14,BYU,BYU
+14,13,BYU,BYU
+8,17,Cincinnati,Cin.
+9,16,Cincinnati,Cin.
+8,15,Cincinnati,Cin.
+7,14,Cincinnati,Cin.
+7,13,Cincinnati,Cin.
+2,17,Clemson,Clem.
+3,16,Clemson,Clem.
+3,15,Clemson,Clem.
+3,14,Clemson,Clem.
+3,13,Clemson,Clem.
+12,17,Coastal Carolina,Cst. Car.
+12,16,Coastal Carolina,Cst. Car.
+13,15,Coastal Carolina,Cst. Car.
+18,14,Coastal Carolina,Cst. Car.
+20,13,Coastal Carolina,Cst. Car.
+25,16,Colorado,Colo.
+21,15,Colorado,Colo.
+7,17,Florida,Fla.
+7,16,Florida,Fla.
+6,15,Florida,Fla.
+6,14,Florida,Fla.
+6,13,Florida,Fla.
+9,17,Georgia,Ga.
+8,16,Georgia,Ga.
+9,15,Georgia,Ga.
+8,14,Georgia,Ga.
+9,13,Georgia,Ga.
+11,17,Indiana,Ind.
+11,16,Indiana,Ind.
+12,15,Indiana,Ind.
+12,14,Indiana,Ind.
+12,13,Indiana,Ind.
+15,17,Iowa,Iowa
+16,16,Iowa,Iowa
+16,15,Iowa,Iowa
+19,14,Iowa,Iowa
+24,13,Iowa,Iowa
+10,17,Iowa State,Ia. St.
+6,16,Iowa State,Ia. St.
+7,15,Iowa State,Ia. St.
+9,14,Iowa State,Ia. St.
+13,13,Iowa State,Ia. St.
+19,17,Louisiana,La.
+19,16,Louisiana,La.
+19,15,Louisiana,La.
+25,14,Louisiana,La.
+21,14,Marshall,Marsh.
+21,13,Marshall,Marsh.
+18,17,Miami,Mia.
+18,16,Miami,Mia.
+10,15,Miami,Mia.
+10,14,Miami,Mia.
+10,13,Miami,Mia.
+25,15,Missouri,Miz.
+23,17,NC State,NC St.
+22,16,NC State,NC St.
+23,15,NC State,NC St.
+13,17,North Carolina,NC
+15,16,North Carolina,NC
+17,15,North Carolina,NC
+17,14,North Carolina,NC
+19,13,North Carolina,NC
+14,17,Northwestern,NW
+14,16,Northwestern,NW
+14,15,Northwestern,NW
+14,14,Northwestern,NW
+8,13,Northwestern,NW
+4,17,Notre Dame,ND
+2,16,Notre Dame,ND
+2,15,Notre Dame,ND
+2,14,Notre Dame,ND
+2,13,Notre Dame,ND
+3,17,Ohio State,Oh. St
+4,16,Ohio State,Oh. St
+4,15,Ohio State,Oh. St
+4,14,Ohio State,Oh. St
+4,13,Ohio State,Oh. St
+6,17,Oklahoma,Okla.
+10,16,Oklahoma,Okla.
+11,15,Oklahoma,Okla.
+11,14,Oklahoma,Okla.
+11,13,Oklahoma,Okla.
+21,17,Oklahoma State,Ok. St.
+21,16,Oklahoma State,Ok. St.
+22,15,Oklahoma State,Ok. St.
+15,14,Oklahoma State,Ok. St.
+23,13,Oklahoma State,Ok. St.
+25,17,Oregon,Ore.
+23,14,Oregon,Ore.
+15,13,Oregon,Ore.
+22,17,San Jose State,SJ St.
+24,16,San Jose State,SJ St.
+17,17,Southern California,USC
+13,16,Southern California,USC
+15,15,Southern California,USC
+20,14,Southern California,USC
+18,13,Southern California,USC
+20,17,Texas,Tex.
+20,16,Texas,Tex.
+20,15,Texas,Tex.
+17,13,Texas,Tex.
+5,17,Texas A&M,A&M
+5,16,Texas A&M,A&M
+5,15,Texas A&M,A&M
+5,14,Texas A&M,A&M
+5,13,Texas A&M,A&M
+24,17,Tulsa,Tulsa
+23,16,Tulsa,Tulsa
+24,15,Tulsa,Tulsa
+24,14,Tulsa,Tulsa
+25,13,Tulsa,Tulsa
+22,14,Washington,Wash.
+16,14,Wisconsin,Wisc.
+16,13,Wisconsin,
