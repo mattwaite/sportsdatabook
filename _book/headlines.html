@@ -24,7 +24,7 @@
 <meta name="author" content="Matt Waite" />
 
 
-<meta name="date" content="2021-10-11" />
+<meta name="date" content="2021-10-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -368,10 +368,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>The first on that list is the first for a reason. The headline is an incredibly important part of any graphic: it’s often the first thing a reader will see. It’s got to entice people in, tell them a little bit about what they’re going to see, and help tell the story.</p>
 <p>The second item is the chatter – the text underneath that headline. It needs to work with the headline to further the story, drive people toward the point, maybe add some context.</p>
 <p>The two bits of text are extremely important. Let’s set up a chart and talk about how to do it wrong and how to do it better.</p>
-<div class="sourceCode" id="cb541"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb541-1"><a href="headlines.html#cb541-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb541-2"><a href="headlines.html#cb541-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span></code></pre></div>
+<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb545-1"><a href="headlines.html#cb545-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb545-2"><a href="headlines.html#cb545-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span></code></pre></div>
 <p>The data and the chart code isn’t important for you to follow along. The code is nothing special. The issues will be with the words that you’ll see below.</p>
-<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb542-1"><a href="headlines.html#cb542-1" aria-hidden="true" tabindex="-1"></a>scoring <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/scoringoffense.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb546"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb546-1"><a href="headlines.html#cb546-1" aria-hidden="true" tabindex="-1"></a>scoring <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/scoringoffense.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Rows: 1253 Columns: 10</code></pre>
 <pre><code>## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
@@ -380,7 +380,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<div class="sourceCode" id="cb546"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb546-1"><a href="headlines.html#cb546-1" aria-hidden="true" tabindex="-1"></a>total <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/totaloffense.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb550"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb550-1"><a href="headlines.html#cb550-1" aria-hidden="true" tabindex="-1"></a>total <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/totaloffense.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Rows: 1253 Columns: 9</code></pre>
 <pre><code>## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
@@ -389,57 +389,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<div class="sourceCode" id="cb550"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb550-1"><a href="headlines.html#cb550-1" aria-hidden="true" tabindex="-1"></a>offense <span class="ot">&lt;-</span> total <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(scoring, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;Name&quot;</span>, <span class="st">&quot;Year&quot;</span>))</span>
-<span id="cb550-2"><a href="headlines.html#cb550-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb550-3"><a href="headlines.html#cb550-3" aria-hidden="true" tabindex="-1"></a>nu <span class="ot">&lt;-</span> offense <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Name <span class="sc">==</span> <span class="st">&quot;Nebraska&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Year <span class="sc">==</span> <span class="dv">2018</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="headlines.html#cb551-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(offense, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>)) <span class="sc">+</span> </span>
-<span id="cb551-2"><a href="headlines.html#cb551-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb551-3"><a href="headlines.html#cb551-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Total yards per game&quot;</span>, <span class="at">y=</span><span class="st">&quot;Points per game&quot;</span>, <span class="at">title=</span><span class="st">&quot;Headline here&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;This is the chatter. It is chatter. Chatter.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb551-4"><a href="headlines.html#cb551-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
-<span id="cb551-5"><a href="headlines.html#cb551-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb551-6"><a href="headlines.html#cb551-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb551-7"><a href="headlines.html#cb551-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
-<span id="cb551-8"><a href="headlines.html#cb551-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
-<span id="cb551-9"><a href="headlines.html#cb551-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb551-10"><a href="headlines.html#cb551-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb551-11"><a href="headlines.html#cb551-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb551-12"><a href="headlines.html#cb551-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>, <span class="at">label=</span><span class="st">&quot;Nebraska 2018&quot;</span>))</span></code></pre></div>
-<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-369-1.png" width="480" /></p>
-<p>First, let’s start with some headline basics:</p>
-<ul>
-<li>Your headline should be about what the chart is about, not what makes up the chart. What story is the chart telling? What made it interesting to you? Don’t tell me what the stats are, tell me what it says.</li>
-<li>Your headline should be specific. Generic headlines are boring and ignored.</li>
-<li>Your headline should, most often, have a verb. It’s not a 100 percent requirement, but a headline without a verb means you’re trying to be cute and …</li>
-<li>Your headline shouldn’t be overly cute. Trying to get away with slang, a very Of The Moment cultural reference that will be forgotten soon, or some inside joke is asking for trouble.</li>
-<li>Your headline should provoke a reaction.</li>
-</ul>
-<p>Given our graph, here’s a few that don’t work.</p>
-<div class="sourceCode" id="cb553"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb553-1"><a href="headlines.html#cb553-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(offense, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>)) <span class="sc">+</span> </span>
-<span id="cb553-2"><a href="headlines.html#cb553-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb553-3"><a href="headlines.html#cb553-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Total yards per game&quot;</span>, <span class="at">y=</span><span class="st">&quot;Points per game&quot;</span>, <span class="at">title=</span><span class="st">&quot;Nebraska&#39;s offense&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;Nebraska&#39;s 2018 offense is the red dot.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb553-4"><a href="headlines.html#cb553-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
-<span id="cb553-5"><a href="headlines.html#cb553-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb553-6"><a href="headlines.html#cb553-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb553-7"><a href="headlines.html#cb553-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
-<span id="cb553-8"><a href="headlines.html#cb553-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
-<span id="cb553-9"><a href="headlines.html#cb553-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb553-10"><a href="headlines.html#cb553-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb553-11"><a href="headlines.html#cb553-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb553-12"><a href="headlines.html#cb553-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>, <span class="at">label=</span><span class="st">&quot;Nebraska 2018&quot;</span>))</span></code></pre></div>
-<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-370-1.png" width="480" />
-The problems here:</p>
-<ul>
-<li>No verb.</li>
-<li>Generic, forgettable, doesn’t say anything.</li>
-<li>What is this chart about? What does it say? We have no idea from the headline and chatter.</li>
-<li>Don’t repeat words from the headline in the chatter. Nebraska Nebraska looks bad. Make one of the Huskers if you’re going to do this.</li>
-</ul>
-<p>Another example:</p>
+<div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb554-1"><a href="headlines.html#cb554-1" aria-hidden="true" tabindex="-1"></a>offense <span class="ot">&lt;-</span> total <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(scoring, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;Name&quot;</span>, <span class="st">&quot;Year&quot;</span>))</span>
+<span id="cb554-2"><a href="headlines.html#cb554-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb554-3"><a href="headlines.html#cb554-3" aria-hidden="true" tabindex="-1"></a>nu <span class="ot">&lt;-</span> offense <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Name <span class="sc">==</span> <span class="st">&quot;Nebraska&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Year <span class="sc">==</span> <span class="dv">2018</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb555-1"><a href="headlines.html#cb555-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(offense, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>)) <span class="sc">+</span> </span>
 <span id="cb555-2"><a href="headlines.html#cb555-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb555-3"><a href="headlines.html#cb555-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Total yards per game&quot;</span>, <span class="at">y=</span><span class="st">&quot;Points per game&quot;</span>, <span class="at">title=</span><span class="st">&quot;Points per game vs total yards per game&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;Nebraska&#39;s 2018 offense is below the blue line, which is bad.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb555-3"><a href="headlines.html#cb555-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Total yards per game&quot;</span>, <span class="at">y=</span><span class="st">&quot;Points per game&quot;</span>, <span class="at">title=</span><span class="st">&quot;Headline here&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;This is the chatter. It is chatter. Chatter.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb555-4"><a href="headlines.html#cb555-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
 <span id="cb555-5"><a href="headlines.html#cb555-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
 <span id="cb555-6"><a href="headlines.html#cb555-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
@@ -450,19 +405,19 @@ The problems here:</p>
 <span id="cb555-11"><a href="headlines.html#cb555-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb555-12"><a href="headlines.html#cb555-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>, <span class="at">label=</span><span class="st">&quot;Nebraska 2018&quot;</span>))</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-371-1.png" width="480" />
-What’s wrong here?</p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-373-1.png" width="480" /></p>
+<p>First, let’s start with some headline basics:</p>
 <ul>
-<li>The headline is about the stats, not the story.</li>
-<li>The headline lacks a verb.</li>
-<li>The headline lacks any interest, really.</li>
-<li>The headline at least moves in the direction of what this chart is about, but see the previous two.</li>
-<li>The chatter adds more flavor to it, but what does “below the blue line” even mean? We’re leaving the reader with a lot of questions and no real answers. That;s bad.</li>
+<li>Your headline should be about what the chart is about, not what makes up the chart. What story is the chart telling? What made it interesting to you? Don’t tell me what the stats are, tell me what it says.</li>
+<li>Your headline should be specific. Generic headlines are boring and ignored.</li>
+<li>Your headline should, most often, have a verb. It’s not a 100 percent requirement, but a headline without a verb means you’re trying to be cute and …</li>
+<li>Your headline shouldn’t be overly cute. Trying to get away with slang, a very Of The Moment cultural reference that will be forgotten soon, or some inside joke is asking for trouble.</li>
+<li>Your headline should provoke a reaction.</li>
 </ul>
-<p>Let’s try to do this better.</p>
+<p>Given our graph, here’s a few that don’t work.</p>
 <div class="sourceCode" id="cb557"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb557-1"><a href="headlines.html#cb557-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(offense, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>)) <span class="sc">+</span> </span>
 <span id="cb557-2"><a href="headlines.html#cb557-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb557-3"><a href="headlines.html#cb557-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Total yards per game&quot;</span>, <span class="at">y=</span><span class="st">&quot;Points per game&quot;</span>, <span class="at">title=</span><span class="st">&quot;Nebraska&#39;s strength?&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;The Husker&#39;s offense was supposed to power the team. It underperformed.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb557-3"><a href="headlines.html#cb557-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Total yards per game&quot;</span>, <span class="at">y=</span><span class="st">&quot;Points per game&quot;</span>, <span class="at">title=</span><span class="st">&quot;Nebraska&#39;s offense&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;Nebraska&#39;s 2018 offense is the red dot.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb557-4"><a href="headlines.html#cb557-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
 <span id="cb557-5"><a href="headlines.html#cb557-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
 <span id="cb557-6"><a href="headlines.html#cb557-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
@@ -473,17 +428,18 @@ What’s wrong here?</p>
 <span id="cb557-11"><a href="headlines.html#cb557-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb557-12"><a href="headlines.html#cb557-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>, <span class="at">label=</span><span class="st">&quot;Nebraska 2018&quot;</span>))</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-372-1.png" width="528" /></p>
-<p>What works here:</p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-374-1.png" width="480" />
+The problems here:</p>
 <ul>
-<li>Provokes a reaction by asking a question. Drives at what the story is about.</li>
-<li>The chatter answers the question in the headline without talking about the blue line, a model, anything. A reader can see it.</li>
-<li>Simple, precise, direct language.</li>
+<li>No verb.</li>
+<li>Generic, forgettable, doesn’t say anything.</li>
+<li>What is this chart about? What does it say? We have no idea from the headline and chatter.</li>
+<li>Don’t repeat words from the headline in the chatter. Nebraska Nebraska looks bad. Make one of the Huskers if you’re going to do this.</li>
 </ul>
-<p>One more, same chart.</p>
+<p>Another example:</p>
 <div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb559-1"><a href="headlines.html#cb559-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(offense, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>)) <span class="sc">+</span> </span>
 <span id="cb559-2"><a href="headlines.html#cb559-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb559-3"><a href="headlines.html#cb559-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Total yards per game&quot;</span>, <span class="at">y=</span><span class="st">&quot;Points per game&quot;</span>, <span class="at">title=</span><span class="st">&quot;Nebraska&#39;s offense underperformed&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;The Husker&#39;s should have scored nearly a touchdown more given their output.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb559-3"><a href="headlines.html#cb559-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Total yards per game&quot;</span>, <span class="at">y=</span><span class="st">&quot;Points per game&quot;</span>, <span class="at">title=</span><span class="st">&quot;Points per game vs total yards per game&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;Nebraska&#39;s 2018 offense is below the blue line, which is bad.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb559-4"><a href="headlines.html#cb559-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
 <span id="cb559-5"><a href="headlines.html#cb559-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
 <span id="cb559-6"><a href="headlines.html#cb559-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
@@ -494,7 +450,51 @@ What’s wrong here?</p>
 <span id="cb559-11"><a href="headlines.html#cb559-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb559-12"><a href="headlines.html#cb559-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>, <span class="at">label=</span><span class="st">&quot;Nebraska 2018&quot;</span>))</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-373-1.png" width="528" /></p>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-375-1.png" width="480" />
+What’s wrong here?</p>
+<ul>
+<li>The headline is about the stats, not the story.</li>
+<li>The headline lacks a verb.</li>
+<li>The headline lacks any interest, really.</li>
+<li>The headline at least moves in the direction of what this chart is about, but see the previous two.</li>
+<li>The chatter adds more flavor to it, but what does “below the blue line” even mean? We’re leaving the reader with a lot of questions and no real answers. That;s bad.</li>
+</ul>
+<p>Let’s try to do this better.</p>
+<div class="sourceCode" id="cb561"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb561-1"><a href="headlines.html#cb561-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(offense, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>)) <span class="sc">+</span> </span>
+<span id="cb561-2"><a href="headlines.html#cb561-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb561-3"><a href="headlines.html#cb561-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Total yards per game&quot;</span>, <span class="at">y=</span><span class="st">&quot;Points per game&quot;</span>, <span class="at">title=</span><span class="st">&quot;Nebraska&#39;s strength?&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;The Husker&#39;s offense was supposed to power the team. It underperformed.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb561-4"><a href="headlines.html#cb561-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb561-5"><a href="headlines.html#cb561-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb561-6"><a href="headlines.html#cb561-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb561-7"><a href="headlines.html#cb561-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
+<span id="cb561-8"><a href="headlines.html#cb561-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
+<span id="cb561-9"><a href="headlines.html#cb561-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb561-10"><a href="headlines.html#cb561-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb561-11"><a href="headlines.html#cb561-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb561-12"><a href="headlines.html#cb561-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>, <span class="at">label=</span><span class="st">&quot;Nebraska 2018&quot;</span>))</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-376-1.png" width="528" /></p>
+<p>What works here:</p>
+<ul>
+<li>Provokes a reaction by asking a question. Drives at what the story is about.</li>
+<li>The chatter answers the question in the headline without talking about the blue line, a model, anything. A reader can see it.</li>
+<li>Simple, precise, direct language.</li>
+</ul>
+<p>One more, same chart.</p>
+<div class="sourceCode" id="cb563"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb563-1"><a href="headlines.html#cb563-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(offense, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>)) <span class="sc">+</span> </span>
+<span id="cb563-2"><a href="headlines.html#cb563-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb563-3"><a href="headlines.html#cb563-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Total yards per game&quot;</span>, <span class="at">y=</span><span class="st">&quot;Points per game&quot;</span>, <span class="at">title=</span><span class="st">&quot;Nebraska&#39;s offense underperformed&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;The Husker&#39;s should have scored nearly a touchdown more given their output.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: NCAA | By Matt Waite&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb563-4"><a href="headlines.html#cb563-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb563-5"><a href="headlines.html#cb563-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb563-6"><a href="headlines.html#cb563-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb563-7"><a href="headlines.html#cb563-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
+<span id="cb563-8"><a href="headlines.html#cb563-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
+<span id="cb563-9"><a href="headlines.html#cb563-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb563-10"><a href="headlines.html#cb563-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb563-11"><a href="headlines.html#cb563-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb563-12"><a href="headlines.html#cb563-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>nu, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Yards/G</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Points/G</span><span class="st">`</span>, <span class="at">label=</span><span class="st">&quot;Nebraska 2018&quot;</span>))</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-377-1.png" width="528" /></p>
 <p>What works here:</p>
 <ul>
 <li>Strong verb: underperformed.</li>

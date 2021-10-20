@@ -24,7 +24,7 @@
 <meta name="author" content="Matt Waite" />
 
 
-<meta name="date" content="2021-10-11" />
+<meta name="date" content="2021-10-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -369,7 +369,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </a></p></pre>
 <p>And load it.</p>
 <div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="bubble-charts.html#cb380-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/footballlogs21.csv&quot;</span>)</span></code></pre></div>
-<pre><code>## Rows: 638 Columns: 54</code></pre>
+<pre><code>## Rows: 740 Columns: 54</code></pre>
 <pre><code>## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr   (8): HomeAway, Opponent, Result, TeamFull, TeamURL, Outcome, Team, Con...
@@ -440,7 +440,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 1 × 2
 ##   offense defense
 ##     &lt;dbl&gt;   &lt;dbl&gt;
-## 1    5.86    5.45</code></pre>
+## 1    5.87    5.52</code></pre>
 <p>Now we can use those averages to add two more geoms – geom_vline and geom_hline, for vertical lines and horizontal lines.</p>
 <div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="bubble-charts.html#cb394-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb394-2"><a href="bubble-charts.html#cb394-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
