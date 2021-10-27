@@ -37,6 +37,7 @@ An example of a B+/A- post: [Is Nebraska the best worst team in college basketba
 1. Are your variables named what they are? Meaning, did you call your data logs when it's made up of players? That's bad.
 2. Is spaced out so it's one line per command? Look at the example post for guidance.
 3. Is your code in the proper order? Libraries at the top. Data preparation before the graphics? 
+4. Did you add message=FALSE, warning=FALSE to any `{r}` blocks that spit out large amounts of automated text? Your library step doesn't need all that gibberish spitting out in your blog. 
 
 ## Last thing
 
