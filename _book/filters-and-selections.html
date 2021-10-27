@@ -24,7 +24,7 @@
 <meta name="author" content="Matt Waite" />
 
 
-<meta name="date" content="2021-10-20" />
+<meta name="date" content="2021-10-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -498,9 +498,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## #   DRB &lt;dbl&gt;, TRB &lt;dbl&gt;, AST &lt;dbl&gt;, STL &lt;dbl&gt;, BLK &lt;dbl&gt;, TOV &lt;dbl&gt;, PF &lt;dbl&gt;,
 ## #   PTS &lt;dbl&gt;, Rk.y &lt;dbl&gt;, PER &lt;dbl&gt;, TS% &lt;dbl&gt;, eFG% &lt;dbl&gt;, 3PAr &lt;dbl&gt;,
 ## #   FTr &lt;dbl&gt;, PProd &lt;dbl&gt;, ORB% &lt;dbl&gt;, DRB% &lt;dbl&gt;, TRB% &lt;dbl&gt;, AST% &lt;dbl&gt;,
-## #   STL% &lt;dbl&gt;, BLK% &lt;dbl&gt;, TOV% &lt;dbl&gt;, USG% &lt;dbl&gt;, OWS &lt;dbl&gt;, DWS &lt;dbl&gt;,
-## #   WS &lt;dbl&gt;, WS/40 &lt;dbl&gt;, OBPM &lt;dbl&gt;, DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;, Conference &lt;chr&gt;,
-## #   trueshooting &lt;dbl&gt;</code></pre>
+## #   STL% &lt;dbl&gt;, BLK% &lt;dbl&gt;, TOV% &lt;dbl&gt;, USG% &lt;dbl&gt;, OWS &lt;dbl&gt;, DWS &lt;dbl&gt;, …</code></pre>
 <p>And ine the COVID season, Weber State’s Jake Furgerson is your One Shot One Three True Shooting champion.</p>
 <p>In most contests, like the batting title in Major League Baseball, there’s a minimum number of X to qualify. In baseball, it’s at bats. In basketball, it attempts. So let’s set a floor and see how it changes. What if we said you had to have played 100 minutes in a season? The top players in college basketball play more than 1000 minutes in a season. So 100 is not that much. Let’s try it and see.</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="filters-and-selections.html#cb74-1" aria-hidden="true" tabindex="-1"></a>players <span class="sc">%&gt;%</span></span>
@@ -526,9 +524,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## #   DRB &lt;dbl&gt;, TRB &lt;dbl&gt;, AST &lt;dbl&gt;, STL &lt;dbl&gt;, BLK &lt;dbl&gt;, TOV &lt;dbl&gt;, PF &lt;dbl&gt;,
 ## #   PTS &lt;dbl&gt;, Rk.y &lt;dbl&gt;, PER &lt;dbl&gt;, TS% &lt;dbl&gt;, eFG% &lt;dbl&gt;, 3PAr &lt;dbl&gt;,
 ## #   FTr &lt;dbl&gt;, PProd &lt;dbl&gt;, ORB% &lt;dbl&gt;, DRB% &lt;dbl&gt;, TRB% &lt;dbl&gt;, AST% &lt;dbl&gt;,
-## #   STL% &lt;dbl&gt;, BLK% &lt;dbl&gt;, TOV% &lt;dbl&gt;, USG% &lt;dbl&gt;, OWS &lt;dbl&gt;, DWS &lt;dbl&gt;,
-## #   WS &lt;dbl&gt;, WS/40 &lt;dbl&gt;, OBPM &lt;dbl&gt;, DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;, Conference &lt;chr&gt;,
-## #   trueshooting &lt;dbl&gt;</code></pre>
+## #   STL% &lt;dbl&gt;, BLK% &lt;dbl&gt;, TOV% &lt;dbl&gt;, USG% &lt;dbl&gt;, OWS &lt;dbl&gt;, DWS &lt;dbl&gt;, …</code></pre>
 <p>Now you get South Carolina’s Nathan Nelson, who played in 15 games and was on the floor for 113 minutes. So he played regularly, but not a lot. But in that time, he only attempted 14 shots, and made 64 percent of them. In other words, when he shot, he probably scored. He just rarely shot.</p>
 <p>So is 100 minutes our level? Here’s the truth – there’s not really an answer here. We’re picking a cutoff. If you can cite a reason for it and defend it, then it probably works.</p>
 </div>

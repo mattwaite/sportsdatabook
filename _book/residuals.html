@@ -24,7 +24,7 @@
 <meta name="author" content="Matt Waite" />
 
 
-<meta name="date" content="2021-10-20" />
+<meta name="date" content="2021-10-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -406,18 +406,18 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Now we can sort our data by those residuals. Sorting in descending order gives us the games where teams overperformed the model. To make it easier to read, I’m going to use select to give us just the columns we need to see.</p>
 <div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="residuals.html#cb157-1" aria-hidden="true" tabindex="-1"></a>residualmodel <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(residuals)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Team, Opponent, Result, differential, NetYards, predicted, residuals)</span></code></pre></div>
 <pre><code>## # A tibble: 1,100 × 7
-##    Team         Opponent       Result  differential NetYards predicted residuals
-##    &lt;chr&gt;        &lt;chr&gt;          &lt;chr&gt;          &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-##  1 Arizona Sta… Arizona        W (70-…           63      136     14.1       48.9
-##  2 Wisconsin    Wake Forest*   W (42-…           14     -252    -25.3       39.3
-##  3 Kentucky     Mississippi S… W (24-…           22     -138    -13.7       35.7
-##  4 Mississippi… Vanderbilt     W (24-…            7     -274    -27.6       34.6
-##  5 Kansas State Kansas         W (55-…           41       61      6.51      34.5
-##  6 Boise State  Colorado State W (52-…           31      -24     -2.13      33.1
-##  7 Army         Mercer         W (49-…           46      139     14.4       31.6
-##  8 Notre Dame   South Florida  W (52-…           52      198     20.4       31.6
-##  9 Texas        Oklahoma State W (41-…            7     -243    -24.4       31.4
-## 10 BYU          North Alabama  W (66-…           52      201     20.8       31.2
+##    Team              Opponent   Result differential NetYards predicted residuals
+##    &lt;chr&gt;             &lt;chr&gt;      &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+##  1 Arizona State     Arizona    W (70…           63      136     14.1       48.9
+##  2 Wisconsin         Wake Fore… W (42…           14     -252    -25.3       39.3
+##  3 Kentucky          Mississip… W (24…           22     -138    -13.7       35.7
+##  4 Mississippi State Vanderbilt W (24…            7     -274    -27.6       34.6
+##  5 Kansas State      Kansas     W (55…           41       61      6.51      34.5
+##  6 Boise State       Colorado … W (52…           31      -24     -2.13      33.1
+##  7 Army              Mercer     W (49…           46      139     14.4       31.6
+##  8 Notre Dame        South Flo… W (52…           52      198     20.4       31.6
+##  9 Texas             Oklahoma … W (41…            7     -243    -24.4       31.4
+## 10 BYU               North Ala… W (66…           52      201     20.8       31.2
 ## # … with 1,090 more rows</code></pre>
 <p>So looking at this table, what you see here are the teams who scored more than their net yards would indicate. One of them should jump off the page at you.</p>
 <p>Remember Nebraska vs Rutgers? We won and everyone was happy and relieved the season was over? We outgained Rutgers by <strong>368 yards</strong> in that game and won by 7. Our model predicted Nebraska should have won that game by <strong>37</strong> points. We should have blown Rutgers out of their own barn. But Rutgers isn’t as hard done as Arizona, which should have lost by 48, but ended up losing by 63.</p>

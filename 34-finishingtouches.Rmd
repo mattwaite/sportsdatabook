@@ -209,19 +209,6 @@ waffle(nu/10, rows = 5, xlab="1 square = 10 yards", colors = c("black", "red", "
   )
 ```
 
-Note: The alignment of text sucks. 
-
-How to fix that? We can use ggsave to a pdf and fix it in Illustrator.
-
-```{r eval = FALSE}
-waffle(nu/10, rows = 5, xlab="1 square = 10 yards", colors = c("black", "red")) + labs(title="Nebraska vs Wisconsin on offense", subtitle="The Huskers couldn't get much of a running game going.", caption="Source: NCAA | Graphic by Matt Waite") + 
-  theme(
-    plot.title = element_text(size = 16, face = "bold"),
-    axis.title = element_text(size = 10),
-    axis.title.y = element_blank()
-  ) + ggsave("waffle.pdf")
-```
-
 But what if we're using a waffle iron? And what if we want to change the output size? It gets tougher. 
 
 Truth is, I'm not sure what is going on with the sizing. You can try it and you'll find that the outputs are ... unpredictable. 
@@ -253,33 +240,3 @@ iron(
    colors = c("black", "red", "white")) + labs(caption="Source: NCAA | Graphic by Matt Waite")
 ) 
 ```
-
-If you try to use ggsave on that, you'll only get the last waffle chart. Like I said, irons aren't really anything, so ggplot ignores them. So to do this, we have to use R's pdf capability. 
-
-Here's the same code, but wrapped in the R pdf functions. The first line says we're going to output this as a pdf with this name. Then my code, then `dev.off` to tell R that's what I want as a PDF. Don't forget that. 
-
-```{r eval=FALSE}
-pdf("waffleiron.pdf")
-iron(
- waffle(
-   nu/10, 
-   rows = 2, 
-   colors = c("black", "red", "white")) + 
-   labs(title="Nebraska vs Wisconsin: By the numbers", subtitle="The Huskers couldn't run, Wisconsin could.") + 
-   theme(
-    plot.title = element_text(size = 16, face = "bold"),
-    axis.title = element_text(size = 10),
-    axis.title.y = element_blank()
-  ),
- waffle(
-   wi/10, 
-   rows = 2, 
-   xlab="1 square = 10 yards", 
-   colors = c("black", "red", "white")) + labs(caption="Source: NCAA | Graphic by Matt Waite")
-) 
-dev.off()
-```
-
-
-It probably still needs work in Illustrator, but less than before. 
-

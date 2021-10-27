@@ -24,7 +24,7 @@
 <meta name="author" content="Matt Waite" />
 
 
-<meta name="date" content="2021-10-20" />
+<meta name="date" content="2021-10-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -496,14 +496,6 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb603-5"><a href="finishing-touches.html#cb603-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>()</span>
 <span id="cb603-6"><a href="finishing-touches.html#cb603-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <p><img src="SportsData_files/figure-html/unnamed-chunk-400-1.png" width="672" /></p>
-<p>Note: The alignment of text sucks.</p>
-<p>How to fix that? We can use ggsave to a pdf and fix it in Illustrator.</p>
-<div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb604-1"><a href="finishing-touches.html#cb604-1" aria-hidden="true" tabindex="-1"></a><span class="fu">waffle</span>(nu<span class="sc">/</span><span class="dv">10</span>, <span class="at">rows =</span> <span class="dv">5</span>, <span class="at">xlab=</span><span class="st">&quot;1 square = 10 yards&quot;</span>, <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Nebraska vs Wisconsin on offense&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;The Huskers couldn&#39;t get much of a running game going.&quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source: NCAA | Graphic by Matt Waite&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb604-2"><a href="finishing-touches.html#cb604-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb604-3"><a href="finishing-touches.html#cb604-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb604-4"><a href="finishing-touches.html#cb604-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
-<span id="cb604-5"><a href="finishing-touches.html#cb604-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb604-6"><a href="finishing-touches.html#cb604-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> <span class="fu">ggsave</span>(<span class="st">&quot;waffle.pdf&quot;</span>)</span></code></pre></div>
 <p>But what if we’re using a waffle iron? And what if we want to change the output size? It gets tougher.</p>
 <p>Truth is, I’m not sure what is going on with the sizing. You can try it and you’ll find that the outputs are … unpredictable.</p>
 <p>Things you need to know about waffle irons:</p>
@@ -513,46 +505,24 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>Using ggsave doesn’t work either. So you’ll have to use R’s pdf output.</li>
 </ul>
 <p>Here is a full example. I start with my waffle iron code, but note that each waffle is pretty much a self contained thing. That’s because a waffle iron isn’t really a thing. It’s just a way to group waffles together, so you have to make each waffle individually. My first waffle has the title and subtitle but no x axis labels and the bottom one has not title or subtitle but the axis labels and the caption.</p>
-<div class="sourceCode" id="cb605"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb605-1"><a href="finishing-touches.html#cb605-1" aria-hidden="true" tabindex="-1"></a><span class="fu">iron</span>(</span>
-<span id="cb605-2"><a href="finishing-touches.html#cb605-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">waffle</span>(</span>
-<span id="cb605-3"><a href="finishing-touches.html#cb605-3" aria-hidden="true" tabindex="-1"></a>   nu<span class="sc">/</span><span class="dv">10</span>, </span>
-<span id="cb605-4"><a href="finishing-touches.html#cb605-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">rows =</span> <span class="dv">2</span>, </span>
-<span id="cb605-5"><a href="finishing-touches.html#cb605-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>)) <span class="sc">+</span> </span>
-<span id="cb605-6"><a href="finishing-touches.html#cb605-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Nebraska vs Wisconsin: By the numbers&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;The Huskers couldn&#39;t run, Wisconsin could.&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb605-7"><a href="finishing-touches.html#cb605-7" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme</span>(</span>
-<span id="cb605-8"><a href="finishing-touches.html#cb605-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb605-9"><a href="finishing-touches.html#cb605-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
-<span id="cb605-10"><a href="finishing-touches.html#cb605-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb605-11"><a href="finishing-touches.html#cb605-11" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb605-12"><a href="finishing-touches.html#cb605-12" aria-hidden="true" tabindex="-1"></a> <span class="fu">waffle</span>(</span>
-<span id="cb605-13"><a href="finishing-touches.html#cb605-13" aria-hidden="true" tabindex="-1"></a>   wi<span class="sc">/</span><span class="dv">10</span>, </span>
-<span id="cb605-14"><a href="finishing-touches.html#cb605-14" aria-hidden="true" tabindex="-1"></a>   <span class="at">rows =</span> <span class="dv">2</span>, </span>
-<span id="cb605-15"><a href="finishing-touches.html#cb605-15" aria-hidden="true" tabindex="-1"></a>   <span class="at">xlab=</span><span class="st">&quot;1 square = 10 yards&quot;</span>, </span>
-<span id="cb605-16"><a href="finishing-touches.html#cb605-16" aria-hidden="true" tabindex="-1"></a>   <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">caption=</span><span class="st">&quot;Source: NCAA | Graphic by Matt Waite&quot;</span>)</span>
-<span id="cb605-17"><a href="finishing-touches.html#cb605-17" aria-hidden="true" tabindex="-1"></a>) </span></code></pre></div>
-<p><img src="SportsData_files/figure-html/unnamed-chunk-402-1.png" width="672" /></p>
-<p>If you try to use ggsave on that, you’ll only get the last waffle chart. Like I said, irons aren’t really anything, so ggplot ignores them. So to do this, we have to use R’s pdf capability.</p>
-<p>Here’s the same code, but wrapped in the R pdf functions. The first line says we’re going to output this as a pdf with this name. Then my code, then <code>dev.off</code> to tell R that’s what I want as a PDF. Don’t forget that.</p>
-<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="finishing-touches.html#cb606-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(<span class="st">&quot;waffleiron.pdf&quot;</span>)</span>
-<span id="cb606-2"><a href="finishing-touches.html#cb606-2" aria-hidden="true" tabindex="-1"></a><span class="fu">iron</span>(</span>
-<span id="cb606-3"><a href="finishing-touches.html#cb606-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">waffle</span>(</span>
-<span id="cb606-4"><a href="finishing-touches.html#cb606-4" aria-hidden="true" tabindex="-1"></a>   nu<span class="sc">/</span><span class="dv">10</span>, </span>
-<span id="cb606-5"><a href="finishing-touches.html#cb606-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">rows =</span> <span class="dv">2</span>, </span>
-<span id="cb606-6"><a href="finishing-touches.html#cb606-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>)) <span class="sc">+</span> </span>
-<span id="cb606-7"><a href="finishing-touches.html#cb606-7" aria-hidden="true" tabindex="-1"></a>   <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Nebraska vs Wisconsin: By the numbers&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;The Huskers couldn&#39;t run, Wisconsin could.&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb606-8"><a href="finishing-touches.html#cb606-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme</span>(</span>
-<span id="cb606-9"><a href="finishing-touches.html#cb606-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb606-10"><a href="finishing-touches.html#cb606-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
-<span id="cb606-11"><a href="finishing-touches.html#cb606-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb606-12"><a href="finishing-touches.html#cb606-12" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb606-13"><a href="finishing-touches.html#cb606-13" aria-hidden="true" tabindex="-1"></a> <span class="fu">waffle</span>(</span>
-<span id="cb606-14"><a href="finishing-touches.html#cb606-14" aria-hidden="true" tabindex="-1"></a>   wi<span class="sc">/</span><span class="dv">10</span>, </span>
-<span id="cb606-15"><a href="finishing-touches.html#cb606-15" aria-hidden="true" tabindex="-1"></a>   <span class="at">rows =</span> <span class="dv">2</span>, </span>
-<span id="cb606-16"><a href="finishing-touches.html#cb606-16" aria-hidden="true" tabindex="-1"></a>   <span class="at">xlab=</span><span class="st">&quot;1 square = 10 yards&quot;</span>, </span>
-<span id="cb606-17"><a href="finishing-touches.html#cb606-17" aria-hidden="true" tabindex="-1"></a>   <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">caption=</span><span class="st">&quot;Source: NCAA | Graphic by Matt Waite&quot;</span>)</span>
-<span id="cb606-18"><a href="finishing-touches.html#cb606-18" aria-hidden="true" tabindex="-1"></a>) </span>
-<span id="cb606-19"><a href="finishing-touches.html#cb606-19" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
-<p>It probably still needs work in Illustrator, but less than before.</p>
+<div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb604-1"><a href="finishing-touches.html#cb604-1" aria-hidden="true" tabindex="-1"></a><span class="fu">iron</span>(</span>
+<span id="cb604-2"><a href="finishing-touches.html#cb604-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">waffle</span>(</span>
+<span id="cb604-3"><a href="finishing-touches.html#cb604-3" aria-hidden="true" tabindex="-1"></a>   nu<span class="sc">/</span><span class="dv">10</span>, </span>
+<span id="cb604-4"><a href="finishing-touches.html#cb604-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">rows =</span> <span class="dv">2</span>, </span>
+<span id="cb604-5"><a href="finishing-touches.html#cb604-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb604-6"><a href="finishing-touches.html#cb604-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Nebraska vs Wisconsin: By the numbers&quot;</span>, <span class="at">subtitle=</span><span class="st">&quot;The Huskers couldn&#39;t run, Wisconsin could.&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb604-7"><a href="finishing-touches.html#cb604-7" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme</span>(</span>
+<span id="cb604-8"><a href="finishing-touches.html#cb604-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb604-9"><a href="finishing-touches.html#cb604-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb604-10"><a href="finishing-touches.html#cb604-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb604-11"><a href="finishing-touches.html#cb604-11" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb604-12"><a href="finishing-touches.html#cb604-12" aria-hidden="true" tabindex="-1"></a> <span class="fu">waffle</span>(</span>
+<span id="cb604-13"><a href="finishing-touches.html#cb604-13" aria-hidden="true" tabindex="-1"></a>   wi<span class="sc">/</span><span class="dv">10</span>, </span>
+<span id="cb604-14"><a href="finishing-touches.html#cb604-14" aria-hidden="true" tabindex="-1"></a>   <span class="at">rows =</span> <span class="dv">2</span>, </span>
+<span id="cb604-15"><a href="finishing-touches.html#cb604-15" aria-hidden="true" tabindex="-1"></a>   <span class="at">xlab=</span><span class="st">&quot;1 square = 10 yards&quot;</span>, </span>
+<span id="cb604-16"><a href="finishing-touches.html#cb604-16" aria-hidden="true" tabindex="-1"></a>   <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">caption=</span><span class="st">&quot;Source: NCAA | Graphic by Matt Waite&quot;</span>)</span>
+<span id="cb604-17"><a href="finishing-touches.html#cb604-17" aria-hidden="true" tabindex="-1"></a>) </span></code></pre></div>
+<p><img src="SportsData_files/figure-html/unnamed-chunk-401-1.png" width="672" /></p>
 
 </div>
 </div>

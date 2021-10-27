@@ -24,7 +24,7 @@
 <meta name="author" content="Matt Waite" />
 
 
-<meta name="date" content="2021-10-20" />
+<meta name="date" content="2021-10-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -390,36 +390,36 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb40-2"><a href="mutating-data.html#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">change =</span> (<span class="st">`</span><span class="at">2018</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">2017</span><span class="st">`</span>)<span class="sc">/</span><span class="st">`</span><span class="at">2017</span><span class="st">`</span></span>
 <span id="cb40-3"><a href="mutating-data.html#cb40-3" aria-hidden="true" tabindex="-1"></a>) </span></code></pre></div>
 <pre><code>## # A tibble: 150 × 9
-##    Institution   Conference   `2013` `2014` `2015` `2016` `2017` `2018`   change
-##    &lt;chr&gt;         &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
-##  1 Air Force     MWC          228562 168967 156158 177519 174924 166205 -0.0498 
-##  2 Akron         MAC          107101  55019 108588  62021 117416  92575 -0.212  
-##  3 Alabama       SEC          710538 710736 707786 712747 712053 710931 -0.00158
-##  4 Appalachian … FBS Indepen… 149366     NA     NA     NA     NA     NA NA      
-##  5 Appalachian … Sun Belt         NA 138995 128755 156916 154722 131716 -0.149  
-##  6 Arizona       Pac-12       285713 354973 308355 338017 255791 318051  0.243  
-##  7 Arizona St.   Pac-12       501509 343073 368985 286417 359660 291091 -0.191  
-##  8 Arkansas      SEC          431174 399124 471279 487067 442569 367748 -0.169  
-##  9 Arkansas St.  Sun Belt     149477 149163 138043 136200 119538 119001 -0.00449
-## 10 Army West Po… FBS Indepen… 169781 171310 185946 163267 185543 190156  0.0249 
+##    Institution     Conference `2013` `2014` `2015` `2016` `2017` `2018`   change
+##    &lt;chr&gt;           &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+##  1 Air Force       MWC        228562 168967 156158 177519 174924 166205 -0.0498 
+##  2 Akron           MAC        107101  55019 108588  62021 117416  92575 -0.212  
+##  3 Alabama         SEC        710538 710736 707786 712747 712053 710931 -0.00158
+##  4 Appalachian St. FBS Indep… 149366     NA     NA     NA     NA     NA NA      
+##  5 Appalachian St. Sun Belt       NA 138995 128755 156916 154722 131716 -0.149  
+##  6 Arizona         Pac-12     285713 354973 308355 338017 255791 318051  0.243  
+##  7 Arizona St.     Pac-12     501509 343073 368985 286417 359660 291091 -0.191  
+##  8 Arkansas        SEC        431174 399124 471279 487067 442569 367748 -0.169  
+##  9 Arkansas St.    Sun Belt   149477 149163 138043 136200 119538 119001 -0.00449
+## 10 Army West Point FBS Indep… 169781 171310 185946 163267 185543 190156  0.0249 
 ## # … with 140 more rows</code></pre>
 <p>What do we see right away? Do those numbers look like we expect them to? No. They’re a decimal expressed as a percentage. So let’s fix that by multiplying by 100.</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="mutating-data.html#cb42-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
 <span id="cb42-2"><a href="mutating-data.html#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">change =</span> ((<span class="st">`</span><span class="at">2018</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">2017</span><span class="st">`</span>)<span class="sc">/</span><span class="st">`</span><span class="at">2017</span><span class="st">`</span>)<span class="sc">*</span><span class="dv">100</span></span>
 <span id="cb42-3"><a href="mutating-data.html#cb42-3" aria-hidden="true" tabindex="-1"></a>) </span></code></pre></div>
 <pre><code>## # A tibble: 150 × 9
-##    Institution    Conference   `2013` `2014` `2015` `2016` `2017` `2018`  change
-##    &lt;chr&gt;          &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Air Force      MWC          228562 168967 156158 177519 174924 166205  -4.98 
-##  2 Akron          MAC          107101  55019 108588  62021 117416  92575 -21.2  
-##  3 Alabama        SEC          710538 710736 707786 712747 712053 710931  -0.158
-##  4 Appalachian S… FBS Indepen… 149366     NA     NA     NA     NA     NA  NA    
-##  5 Appalachian S… Sun Belt         NA 138995 128755 156916 154722 131716 -14.9  
-##  6 Arizona        Pac-12       285713 354973 308355 338017 255791 318051  24.3  
-##  7 Arizona St.    Pac-12       501509 343073 368985 286417 359660 291091 -19.1  
-##  8 Arkansas       SEC          431174 399124 471279 487067 442569 367748 -16.9  
-##  9 Arkansas St.   Sun Belt     149477 149163 138043 136200 119538 119001  -0.449
-## 10 Army West Poi… FBS Indepen… 169781 171310 185946 163267 185543 190156   2.49 
+##    Institution     Conference  `2013` `2014` `2015` `2016` `2017` `2018`  change
+##    &lt;chr&gt;           &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Air Force       MWC         228562 168967 156158 177519 174924 166205  -4.98 
+##  2 Akron           MAC         107101  55019 108588  62021 117416  92575 -21.2  
+##  3 Alabama         SEC         710538 710736 707786 712747 712053 710931  -0.158
+##  4 Appalachian St. FBS Indepe… 149366     NA     NA     NA     NA     NA  NA    
+##  5 Appalachian St. Sun Belt        NA 138995 128755 156916 154722 131716 -14.9  
+##  6 Arizona         Pac-12      285713 354973 308355 338017 255791 318051  24.3  
+##  7 Arizona St.     Pac-12      501509 343073 368985 286417 359660 291091 -19.1  
+##  8 Arkansas        SEC         431174 399124 471279 487067 442569 367748 -16.9  
+##  9 Arkansas St.    Sun Belt    149477 149163 138043 136200 119538 119001  -0.449
+## 10 Army West Point FBS Indepe… 169781 171310 185946 163267 185543 190156   2.49 
 ## # … with 140 more rows</code></pre>
 <p>Now, does this ordering do anything for us? No. Let’s fix that with arrange.</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="mutating-data.html#cb44-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
@@ -485,9 +485,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## #   DRB &lt;dbl&gt;, TRB &lt;dbl&gt;, AST &lt;dbl&gt;, STL &lt;dbl&gt;, BLK &lt;dbl&gt;, TOV &lt;dbl&gt;, PF &lt;dbl&gt;,
 ## #   PTS &lt;dbl&gt;, Rk.y &lt;dbl&gt;, PER &lt;dbl&gt;, TS% &lt;dbl&gt;, eFG% &lt;dbl&gt;, 3PAr &lt;dbl&gt;,
 ## #   FTr &lt;dbl&gt;, PProd &lt;dbl&gt;, ORB% &lt;dbl&gt;, DRB% &lt;dbl&gt;, TRB% &lt;dbl&gt;, AST% &lt;dbl&gt;,
-## #   STL% &lt;dbl&gt;, BLK% &lt;dbl&gt;, TOV% &lt;dbl&gt;, USG% &lt;dbl&gt;, OWS &lt;dbl&gt;, DWS &lt;dbl&gt;,
-## #   WS &lt;dbl&gt;, WS/40 &lt;dbl&gt;, OBPM &lt;dbl&gt;, DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;,
-## #   trueshooting &lt;dbl&gt;</code></pre>
+## #   STL% &lt;dbl&gt;, BLK% &lt;dbl&gt;, TOV% &lt;dbl&gt;, USG% &lt;dbl&gt;, OWS &lt;dbl&gt;, DWS &lt;dbl&gt;, …</code></pre>
 <p>You’ll be forgiven if you did not hear about Vanderbilt’s shooting sensation Trace Arbuckle. He played in one game, took one shot and actually hit it. It happened to be a three pointer, which is one more three pointer than I’ve hit in college basketball. So props to him. Does that mean he had the best true shooting season in college basketball last year?</p>
 <p>Not hardly.</p>
 <p>We’ll talk about how to narrow the pile and filter out data in the next chapter.</p>
