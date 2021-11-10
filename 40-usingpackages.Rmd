@@ -85,7 +85,7 @@ nuplays %>%
   select(period, clock.minutes, def_pos_team, play_type, play_text)
 ```
 
-The most heartbreakinb play of the season? A fourth quarter fumble against Michigan. Next up: Basically the entire fourth quarter against Michigan State. 
+The most heartbreaking play of the season? A fourth quarter fumble against Michigan. Next up: Basically the entire fourth quarter against Michigan State. 
 
 ## Another example
 
