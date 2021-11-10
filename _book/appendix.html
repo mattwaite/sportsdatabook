@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 41 Appendix | Sports Data Analysis and Visualization</title>
+  <title>Chapter 42 Appendix | Sports Data Analysis and Visualization</title>
   <meta name="description" content="The companion book to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 41 Appendix | Sports Data Analysis and Visualization" />
+  <meta property="og:title" content="Chapter 42 Appendix | Sports Data Analysis and Visualization" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="http://mattwaite.github.io/sports/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="mattwaite/sportsdatabook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 41 Appendix | Sports Data Analysis and Visualization" />
+  <meta name="twitter:title" content="Chapter 42 Appendix | Sports Data Analysis and Visualization" />
   
   <meta name="twitter:description" content="The companion book to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
   
@@ -24,17 +24,18 @@
 <meta name="author" content="Matt Waite" />
 
 
-<meta name="date" content="2021-10-27" />
+<meta name="date" content="2021-11-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="project-checklist.html"/>
+<link rel="prev" href="using-packages-to-get-data.html"/>
 
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -42,7 +43,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -329,9 +329,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="40.4" data-path="project-checklist.html"><a href="project-checklist.html#code-checklist"><i class="fa fa-check"></i><b>40.4</b> Code checklist</a></li>
 <li class="chapter" data-level="40.5" data-path="project-checklist.html"><a href="project-checklist.html#last-thing"><i class="fa fa-check"></i><b>40.5</b> Last thing</a></li>
 </ul></li>
-<li class="chapter" data-level="41" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>41</b> Appendix</a>
+<li class="chapter" data-level="41" data-path="using-packages-to-get-data.html"><a href="using-packages-to-get-data.html"><i class="fa fa-check"></i><b>41</b> Using packages to get data</a>
 <ul>
-<li class="chapter" data-level="41.1" data-path="appendix.html"><a href="appendix.html#how-to-get-help-in-this-class"><i class="fa fa-check"></i><b>41.1</b> How to get help in this class</a></li>
+<li class="chapter" data-level="41.1" data-path="using-packages-to-get-data.html"><a href="using-packages-to-get-data.html#using-cfbfastr-as-a-cautionary-tale"><i class="fa fa-check"></i><b>41.1</b> Using cfbfastR as a cautionary tale</a></li>
+<li class="chapter" data-level="41.2" data-path="using-packages-to-get-data.html"><a href="using-packages-to-get-data.html#another-example"><i class="fa fa-check"></i><b>41.2</b> Another example</a></li>
+<li class="chapter" data-level="41.3" data-path="using-packages-to-get-data.html"><a href="using-packages-to-get-data.html#one-more-futbol-is-life"><i class="fa fa-check"></i><b>41.3</b> One more: Futbol is life</a></li>
+</ul></li>
+<li class="chapter" data-level="42" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>42</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="42.1" data-path="appendix.html"><a href="appendix.html#how-to-get-help-in-this-class"><i class="fa fa-check"></i><b>42.1</b> How to get help in this class</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -353,11 +359,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="appendix" class="section level1" number="41">
-<h1><span class="header-section-number">Chapter 41</span> Appendix</h1>
+<div id="appendix" class="section level1" number="42">
+<h1><span class="header-section-number">Chapter 42</span> Appendix</h1>
 <p>These are some additional materials I use in my classes.</p>
-<div id="how-to-get-help-in-this-class" class="section level2" number="41.1">
-<h2><span class="header-section-number">41.1</span> How to get help in this class</h2>
+<div id="how-to-get-help-in-this-class" class="section level2" number="42.1">
+<h2><span class="header-section-number">42.1</span> How to get help in this class</h2>
 <blockquote>
 <p>This is the contents of a document I send out every semester. I use Slack to help students with code problems outside of class. It’s much easier than other options, such as email. A suggestion: set ground rules on when you will and won’t answer Slack messages.</p>
 </blockquote>
@@ -386,12 +392,11 @@ table(simulations)</code></pre>
           </div>
         </div>
       </div>
-<a href="project-checklist.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="using-packages-to-get-data.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -431,6 +436,10 @@ gitbook.start({
 "text": null
 },
 "download": ["SportsData.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 10 Multiple regression | Sports Data Analysis and Visualization</title>
   <meta name="description" content="The companion book to the University of Nebraska-Lincoln’s SPMC350 course in the College of Journalism and Mass Communications." />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 10 Multiple regression | Sports Data Analysis and Visualization" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Matt Waite" />
 
 
-<meta name="date" content="2021-10-27" />
+<meta name="date" content="2021-11-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
 <link rel="prev" href="correlations-and-regression.html"/>
 <link rel="next" href="residuals.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -42,7 +43,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -329,9 +329,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="40.4" data-path="project-checklist.html"><a href="project-checklist.html#code-checklist"><i class="fa fa-check"></i><b>40.4</b> Code checklist</a></li>
 <li class="chapter" data-level="40.5" data-path="project-checklist.html"><a href="project-checklist.html#last-thing"><i class="fa fa-check"></i><b>40.5</b> Last thing</a></li>
 </ul></li>
-<li class="chapter" data-level="41" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>41</b> Appendix</a>
+<li class="chapter" data-level="41" data-path="using-packages-to-get-data.html"><a href="using-packages-to-get-data.html"><i class="fa fa-check"></i><b>41</b> Using packages to get data</a>
 <ul>
-<li class="chapter" data-level="41.1" data-path="appendix.html"><a href="appendix.html#how-to-get-help-in-this-class"><i class="fa fa-check"></i><b>41.1</b> How to get help in this class</a></li>
+<li class="chapter" data-level="41.1" data-path="using-packages-to-get-data.html"><a href="using-packages-to-get-data.html#using-cfbfastr-as-a-cautionary-tale"><i class="fa fa-check"></i><b>41.1</b> Using cfbfastR as a cautionary tale</a></li>
+<li class="chapter" data-level="41.2" data-path="using-packages-to-get-data.html"><a href="using-packages-to-get-data.html#another-example"><i class="fa fa-check"></i><b>41.2</b> Another example</a></li>
+<li class="chapter" data-level="41.3" data-path="using-packages-to-get-data.html"><a href="using-packages-to-get-data.html#one-more-futbol-is-life"><i class="fa fa-check"></i><b>41.3</b> One more: Futbol is life</a></li>
+</ul></li>
+<li class="chapter" data-level="42" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>42</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="42.1" data-path="appendix.html"><a href="appendix.html#how-to-get-help-in-this-class"><i class="fa fa-check"></i><b>42.1</b> How to get help in this class</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -1106,7 +1112,6 @@ What is the Residual standard error?</p>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -1146,6 +1151,10 @@ gitbook.start({
 "text": null
 },
 "download": ["SportsData.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

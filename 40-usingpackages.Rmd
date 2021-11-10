@@ -1,0 +1,170 @@
+# Using packages to get data
+
+There is a growing number of packages and repositories of sports data, largely because there's a growing number of people who want to analyze that data. We've [done it ourselves with simple Google Sheets tricks](http://mattwaite.github.io/sports/data-structures-and-types.html#a-simple-way-to-get-data). Then there's [RVest, which is a method of scraping the data yourself from websites](http://mattwaite.github.io/sports/intro-to-rvest.html). But with these packages, someone has done the work of gathering the data for you. All you have to learn are the commands to get it.
+
+One very promising collection of libraries is something called the [SportsDataverse](https://sportsdataverse.org/), which has a collection of packages covering specific sports, all of which are in various stages of development. Some are more complete than others, but they are all being actively worked on by developers. Packages of interest in this class are: 
+
+* [cfbfastR, for college football](https://saiemgilani.github.io/cfbfastR/).
+* [hoopR, for men's professional and college basketball](https://saiemgilani.github.io/hoopR/).
+* [wehoop, for women's professional and college basketball](https://saiemgilani.github.io/wehoop/).
+* [baseballr, for professional and college baseball](https://billpetti.github.io/baseballr/).
+* [worldfootballR, for soccer data from around the world](https://jaseziv.github.io/worldfootballR/).
+* [hockeyR, for NHL hockey data](https://hockeyr.netlify.app/)
+* [recruitR, for college sports recruiting](https://saiemgilani.github.io/recruitR/)
+
+Not part of the SportsDataverse, but in the same neighborhood, is [nflfastR](https://www.nflfastr.com/), which can provide NFL play-by-play data. 
+
+Because they're all under development, not all of them can be installed with just a simple `install.packages("something")`. Some require a little work, some require API keys. 
+
+The main issue for you is to read the documentation carefully. 
+
+## Using cfbfastR as a cautionary tale
+
+cfbfastR presents us a good view into the promise and peril of libraries like this. 
+
+[First, to make this work, follow the installation instructions](https://saiemgilani.github.io/cfbfastR/) and then follow how to get an API key from College Football Data and how to add that to your environment. But maybe wait to do that until you read the whole section. 
+
+After installations, we can load it up. 
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(cfbfastR)
+```
+
+You might be thinking, "Oh wow, I can get play by play data for college football. Let's look at what are the five most heartbreaking plays of this doomed Nebraska season." Because what better way to determine doom than by looking at the steepest dropoff in win probability, which is included in the data. 
+
+Great idea. Let's do it.
+
+The first thing to do is [read the documentation](https://saiemgilani.github.io/cfbfastR/reference/cfbd_pbp_data.html). You'll see that you can request data for each week. For example, here's week 2, which is actually Nebraska's third game (the week 0 game is lumped in with week 1).
+
+```{r}
+nebraska <- cfbd_pbp_data(
+ 2021,
+  week=2, 
+  season_type = "regular",
+  team = "Nebraska",
+  epa_wpa = TRUE,
+)
+```
+
+There's not an easy way to get all of a single team's games. A way to do it that's not very pretty but it works is like this:
+
+```{r warning =FALSE, message=FALSE}
+wk1 <- cfbd_pbp_data(2021, week=1, season_type = "regular", team = "Nebraska", epa_wpa = TRUE)
+Sys.sleep(2)
+wk2 <- cfbd_pbp_data(2021, week=2, season_type = "regular", team = "Nebraska", epa_wpa = TRUE)
+Sys.sleep(2)
+wk3 <- cfbd_pbp_data(2021, week=3, season_type = "regular", team = "Nebraska", epa_wpa = TRUE)
+Sys.sleep(2)
+wk4 <- cfbd_pbp_data(2021, week=4, season_type = "regular", team = "Nebraska", epa_wpa = TRUE)
+Sys.sleep(2)
+wk5 <- cfbd_pbp_data(2021, week=5, season_type = "regular", team = "Nebraska", epa_wpa = TRUE)
+Sys.sleep(2)
+wk6 <- cfbd_pbp_data(2021, week=6, season_type = "regular", team = "Nebraska", epa_wpa = TRUE)
+Sys.sleep(2)
+wk7 <- cfbd_pbp_data(2021, week=7, season_type = "regular", team = "Nebraska", epa_wpa = TRUE)
+Sys.sleep(2)
+wk9 <- cfbd_pbp_data(2021, week=9, season_type = "regular", team = "Nebraska", epa_wpa = TRUE)
+Sys.sleep(2)
+wk10 <- cfbd_pbp_data(2021, week=10, season_type = "regular", team = "Nebraska", epa_wpa = TRUE)
+
+nuplays <- bind_rows(wk1, wk2, wk3, wk4, wk5, wk6, wk7, wk9, wk10)
+```
+
+The sys.sleep bits just pauses for two seconds before running the next block. Since we're requesting data from someone else's computer, we want to be kind. Week 8 was a bye week for Nebraska, so if you request it, you'll get an empty request and a warning. The `bind_rows` parts puts all the dataframes into a single dataframe.
+
+Now you're ready to look at heartbreak. How do we define heartbreak? How about like this: you first have to lose the game, it comes in the third or fourth quarter, it involves a play (i.e. not a timeout), and it results in the biggest drop in win probability.
+
+```{r}
+nuplays %>% 
+  filter(pos_team == "Nebraska" & def_pos_team != "Fordham" & def_pos_team != "Buffalo" & def_pos_team != "Northwestern" & play_type != "Timeout") %>% 
+  filter(period == 3 | period == 4) %>% 
+  mutate(HeartbreakLevel = wp_before - wp_after) %>% 
+  arrange(desc(HeartbreakLevel)) %>% 
+  top_n(5, wt=HeartbreakLevel) %>%
+  select(period, clock.minutes, def_pos_team, play_type, play_text)
+```
+
+The most heartbreakinb play of the season? A fourth quarter fumble against Michigan. Next up: Basically the entire fourth quarter against Michigan State. 
+
+## Another example
+
+The wehoop package is mature enough to have a version on CRAN, so you can install it the usual way with `install.packages("wehoop")`. Another helpful library to install is progressr with `install.packages("progressr")`
+
+```{r}
+library(wehoop)
+```
+
+Many of these libraries have more than play-by-play data. For example, wehoop has box scores and player data for both the WNBA and college basketball. From personal experience, WNBA data isn't hard to get, but women's college basketball is a giant pain. 
+
+So, who is Nebraska's single season points champion over the last five seasons? 
+
+```{r}
+progressr::with_progress({
+  wbb_player_box <- wehoop::load_wbb_player_box(2017:2021)
+})
+```
+
+With progressr, you'll see a progress bar in the console, which lets you know that your command is still working, since some of these requests take minutes to complete. Player box scores is quicker -- five seasons was a matter of seconds. 
+
+If you look at the wbb_player_box data we now have, we have each player in each game over each season -- more than 300,000 records. Finding out who Nebraska's top 10 single-season scoring leaders are is a matter of grouping, summing and filtering.
+
+```{r message=FALSE}
+wbb_player_box %>% 
+  filter(team_short_display_name == "Nebraska") %>% 
+  group_by(athlete_display_name, season) %>% 
+  summarise(totalPoints = sum(as.numeric(pts))) %>% 
+  arrange(desc(totalPoints)) %>%
+  ungroup() %>%
+  top_n(10, wt=totalPoints)
+  
+```
+
+This just in: Sam Haiby is good at basketball.
+
+## One more: Futbol is life
+
+For more than a few of these libraries, you'll need the devtools library, which you can get with `install.packages("devtools")`.
+
+To get worldfootballR, you'll use devtools like this: `devtools::install_github("JaseZiv/worldfootballR")`
+
+```{r}
+library(worldfootballR)
+```
+
+Each library has a [reference page](https://jaseziv.github.io/worldfootballR/reference/index.html), which all of the functions in it. They also have articles that you can find in a menu bar at the top of the page. Those articles will walk you through examples of how to get the data. 
+
+Pretend for a moment that I'm doing a project on why Antonio Conte is primed for success at Tottenham. I want to look at possession metrics in the Premiere League, so I can get that like this:
+
+```{r}
+prem_2021_possessison <- get_season_team_stats(country = "ENG", gender = "M", season_end_year = "2021", tier = "1st", stat_type = "possession")
+```
+
+The data I get shows possession metrics for the team, and for their opponents, so I'm going to filter it to just what the team is mustering. And I'm going to separate Tottenham. 
+
+```{r}
+team_possession <- prem_2021_possessison %>% filter(Team_or_Opponent == "team")
+spurs <- team_possession %>% filter(Squad == "Tottenham")
+```
+
+And now I can go straight to charting: 
+
+```{r}
+ggplot() + 
+  geom_bar(data=team_possession, aes(x=reorder(Squad, Poss), weight=Poss)) +
+  geom_bar(data=spurs, aes(x=reorder(Squad, Poss), weight=Poss), fill="#132257") + 
+  coord_flip() + 
+  labs(
+    title="Conte's work ahead: more possesssion",
+    subtitle="Spurs new boss inherits a team mid-table in possessing the ball.",
+    caption="Source: FBRef.com | By Matt Waite",
+    y="Percent of minutes in possession"
+  ) + 
+  theme_minimal() + 
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    axis.title = element_text(size = 10),
+    axis.title.y = element_blank()
+  )
+```
+

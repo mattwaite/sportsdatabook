@@ -2,7 +2,7 @@
 
 All the way back in Chapter 2, we used Google Sheets and importHTML to get our own data out of a website. For me, that's a lot of pointing and clicking and copying and pasting. R has a library that can automate the harvesting of data from HTML on the internet. It's called `rvest`. 
 
-Let's grab [a simple, basic HTML table from College Football Stats](http://www.cfbstats.com/2019/leader/national/team/offense/split01/category09/sort01.html). This is scoring offense for 2019. There's nothing particularly strange about this table -- it's simply formatted and easy to scrape. 
+Let's grab [a simple, basic HTML table from College Football Stats](http://www.cfbstats.com/2021/leader/national/team/offense/split01/category09/sort01.html). There's nothing particularly strange about this table -- it's simply formatted and easy to scrape. 
 
 First we'll need some libraries. We're going to use a library called `rvest`, which you can get by running `install.packages('rvest')` in the console. 
 
@@ -14,7 +14,7 @@ library(tidyverse)
 The rvest package has functions that make fetching, reading and parsing HTML simple. The first thing we need to do is specify a url that we're going to scrape.
 
 ```{r}
-scoringoffenseurl <- "http://www.cfbstats.com/2019/leader/national/team/offense/split01/category09/sort01.html"
+scoringoffenseurl <- "http://www.cfbstats.com/2021/leader/national/team/offense/split01/category09/sort01.html"
 ```
 
 Now, the most difficult part of scraping data from any website is knowing what exact HTML tag you need to grab. In this case, we want a `<table>` tag that has all of our data table in it. But how do you tell R which one that is? Well, it's easy, once you know what to do. But it's not simple. So I've made a short video to show you how to find it. 
@@ -52,39 +52,39 @@ This is a common problem. What if we want to look at every scoring offense going
 
 First, we should note, that the data does not have anything in it to indicate what year it comes from. So we're going to have to add that. And we're going to have to figure out a way to stack two dataframes on top of each other. 
 
-So let's grab 2018.
+So let's grab 2020.
 
 ```{r}
-scoringoffenseurl18 <- "http://www.cfbstats.com/2018/leader/national/team/offense/split01/category09/sort01.html"
+scoringoffenseurl20 <- "http://www.cfbstats.com/2020/leader/national/team/offense/split01/category09/sort01.html"
 
-scoringoffense18 <- scoringoffenseurl18 %>%
+scoringoffense20 <- scoringoffenseurl20 %>%
   read_html() %>%
   html_nodes(xpath = '//*[@id="content"]/div[2]/table') %>%
   html_table()
 
-scoringoffense18 <- scoringoffense18[[1]]
+scoringoffense20 <- scoringoffense20[[1]]
 ```
 
 First, how are we going to know, in the data, which year our data is from? We can use mutate.
 
 ```{r error=TRUE}
-scoringoffense18 <- scoringoffense %>% mutate(YEAR = 2019)
+scoringoffense20 <- scoringoffense %>% mutate(YEAR = 2020)
 ```
 
 Uh oh. Error. What does it say? It's ... not clear, but a hint is that our first column doesn't have a name. Each column must be named. If you look at our data in the environment tab in the upper right corner, you'll see that indeed, the first column has no name. It's the FBS rank of each team. So we can fix that and mutate in the same step. We'll do that using `rename` and since the field doesn't have a name to rename it, we'll use a position argument. We'll say rename column 1 as Rank. 
 
 ```{r}
-scoringoffense19 <- scoringoffense %>% rename(Rank = 1) %>% mutate(YEAR = 2019)
-scoringoffense18 <- scoringoffense18 %>% rename(Rank = 1) %>% mutate(YEAR = 2018)
+scoringoffense21 <- scoringoffense %>% rename(Rank = 1) %>% mutate(YEAR = 2021)
+scoringoffense20 <- scoringoffense20 %>% rename(Rank = 1) %>% mutate(YEAR = 2020)
 ```
 
 And now, to combine the two tables together length-wise -- we need to make long data -- we'll use a dpylr function called `bind_rows`. The good thing is bind_rows is simple.
 
 ```{r}
-combined <- bind_rows(scoringoffense19, scoringoffense18)
+combined <- bind_rows(scoringoffense21, scoringoffense20)
 ```
 
-Note in the environment tab we now have a data frame called combined that has 260 observations -- which just so happens to be what 130 from 2019 and 130 from 2018 add up to. 
+Note in the environment tab we now have a data frame called combined that has 257 observations -- which just so happens to be what 127 from 2020 and 130 from 2021 add up to. 
 
 ```{r}
 head(combined)
@@ -98,11 +98,11 @@ Unfortunately, non-standard means there's no one way to do it -- it's going to d
 
 I'll explain.
 
-Let's try to get [season team stats from Sports Reference](https://www.sports-reference.com/cbb/seasons/2019-school-stats.html). If you look at that page, you'll see the problem right away -- the headers span two rows, and they repeat. That's going to be all kinds of no good. You can't import that. Dataframes must have names all in one row. If you have two-line headers, you have a problem you have to fix before you can do anything else with it.
+Let's try to get [season team stats from Sports Reference](https://www.sports-reference.com/cbb/seasons/2020-school-stats.html). If you look at that page, you'll see the problem right away -- the headers span two rows, and they repeat. That's going to be all kinds of no good. You can't import that. Dataframes must have names all in one row. If you have two-line headers, you have a problem you have to fix before you can do anything else with it.
 
 First we'll grab the page.
 ```{r}
-url <- "https://www.sports-reference.com/cbb/seasons/2019-school-stats.html"
+url <- "https://www.sports-reference.com/cbb/seasons/2020-school-stats.html"
 ```
 
 Now, similar to our example above, we'll read the html, use XPath to find the table, and then read that table with a directive passed to it setting the header to FALSE. That tells rvest that there isn't a header row. Just import it as data. 

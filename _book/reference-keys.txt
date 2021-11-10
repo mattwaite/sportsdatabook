@@ -110,5 +110,9 @@ headline-checklist
 graphics-checklist
 code-checklist
 last-thing
+using-packages-to-get-data
+using-cfbfastr-as-a-cautionary-tale
+another-example
+one-more-futbol-is-life
 appendix
 how-to-get-help-in-this-class
