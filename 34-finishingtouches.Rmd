@@ -218,7 +218,7 @@ Let's look at the offensive numbers from the 2018 Nebraska v. Wisconsin football
 I'm going to make two vectors for each team and record rushing yards and passing yards. 
 
 ```{r}
-nu <- c("Rushing"=111, "Passing"=407, 15)
+ne <- c("Rushing"=111, "Passing"=407, 15)
 wi <- c("Rushing"=370, "Passing"=163, 0)
 ```
 
@@ -231,7 +231,7 @@ The waffle library can break this down in a way that's easier on the eyes than a
 We can add labels and themes, but you have to be careful. The waffle library is applying it's own theme, but if we override something they are using in their theme, some things that are hidden come back and make it worse. So here is an example of how to use ggplot's `labs` and the theme to make a fully publication ready graphic. 
 
 ```{r}
-waffle(nu/10, rows = 5, xlab="1 square = 10 yards", colors = c("black", "red", "white")) + 
+waffle(ne/10, rows = 5, xlab="1 square = 10 yards", colors = c("black", "red", "white")) + 
   labs(
     title="Nebraska vs Wisconsin on offense", 
     subtitle="The Huskers couldn't get much of a running game going.",
@@ -258,7 +258,7 @@ Here is a full example. I start with my waffle iron code, but note that each waf
 ```{r}
 iron(
  waffle(
-   nu/10, 
+   ne/10, 
    rows = 2, 
    xlab="Nebraska",
    colors = c("black", "red", "white")) + 
@@ -278,3 +278,120 @@ iron(
    labs(caption="Source: NCAA | Graphic by Matt Waite")
 ) 
 ```
+
+## Advanced text wrangling
+
+Sometimes, you need a little more help with text than what is easily available. Sometimes you want a little more in your finishing touches. Let's work on some issues common in projects that can be fixed with new new libraries: multi-line chatter, axis labels that need more than just a word, axis labels that don't fit, and additional text boxes.
+
+First things first, we'll need to install `ggtext` with install.packages. Then we'll load it.
+
+```{r}
+library(ggtext)
+```
+
+Let's bo back to our scatterplot above. As created, it's very simple, and the chatter doesn't say much. Let's write chatter that instead of being super spare is more verbose.
+
+```{r fig.width=5, fig.height=2, message=FALSE}
+ggplot() + 
+  geom_point(data=offense, aes(x=`Yards/G`, y=`Points/G`), color="grey") + 
+  geom_smooth(data=offense, aes(x=`Yards/G`, y=`Points/G`), method=lm, se=FALSE) + 
+  labs(
+    x="Total yards per game", 
+    y="Points per game", 
+    title="Nebraska's underperforming offense", 
+    subtitle="The Husker's offense was the strength of the team, having to overcome a defense changing systems and struggling to stop opponents. But if you compare the offense to every other offense and how many points they score vs the number of yards they roll up, NU underperformed.", 
+    caption="Source: NCAA | By Matt Waite") + 
+  theme_minimal() + 
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    axis.title = element_text(size = 8), 
+    plot.subtitle = element_text(size=10), 
+    panel.grid.minor = element_blank()
+    ) +
+  geom_point(data=nu, aes(x=`Yards/G`, y=`Points/G`), color="red") + 
+  geom_text_repel(data=nu, aes(x=`Yards/G`, y=`Points/G`, label="Nebraska 2018"))
+```
+You can see the problem right away -- it's too long and gets cut off. One way to fix this is to put `\n` where you think the line break should be. That's a newline character, so it would add a return there. But with ggtext, you can use simple HTML to style the text, which opens up a lot of options. We can use a <br> to break the line and we can use `*` to italicize the word "underperformed" to add emphasis. The other thing we need to do is in the theme element, change the `element_text` for plot.subtitle to `element_markdown`.
+
+```{r fig.width=5, fig.height=2, message=FALSE}
+ggplot() + 
+  geom_point(data=offense, aes(x=`Yards/G`, y=`Points/G`), color="grey") + 
+  geom_smooth(data=offense, aes(x=`Yards/G`, y=`Points/G`), method=lm, se=FALSE) + 
+  labs(
+    x="Total yards per game", 
+    y="Points per game", 
+    title="Nebraska's underperforming offense", 
+    subtitle="The Husker's offense was the strength of the team, having to overcome a defense changing systems and struggling to stop opponents. But if you compare<br>the offense to every other offense and how many points they score vs the number of yards they roll up, NU *underperformed*.", 
+    caption="Source: NCAA | By Matt Waite") + 
+  theme_minimal() + 
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    axis.title = element_text(size = 8), 
+    plot.subtitle = element_markdown(size=10), 
+    panel.grid.minor = element_blank()
+    ) +
+  geom_point(data=nu, aes(x=`Yards/G`, y=`Points/G`), color="red") + 
+  geom_text_repel(data=nu, aes(x=`Yards/G`, y=`Points/G`, label="Nebraska 2018"))
+```
+With ggtext, there's a lot more you can do with CSS, like change the color of text, that I don't recommend. Also, there's only a few HTML tags that have been implemented. For example, you can't add links because the `a` tag hasn't been added. 
+
+Another sometimes useful thing you can do is add much more explanation to your axis labels. This is going to be a silly example because "Points per game" is pretty self-explanatory, but roll with it. First, we create an unusually long y axis label, then, in theme, we add some code to `axis.title.y`.
+
+```{r fig.width=5, fig.height=2, message=FALSE}
+ggplot() + 
+  geom_point(data=offense, aes(x=`Yards/G`, y=`Points/G`), color="grey") + 
+  geom_smooth(data=offense, aes(x=`Yards/G`, y=`Points/G`), method=lm, se=FALSE) + 
+  labs(
+    x="Total yards per game", 
+    y="Points per game is an imperfect metric of offensive efficiency because defenses and special teams score points as well.", 
+    title="Nebraska's underperforming offense", 
+    subtitle="The Husker's offense was the strength of the team, having to overcome a defense changing systems and struggling to stop opponents. But if you compare<br>the offense to every other offense and how many points they score vs the number of yards they roll up, NU *underperformed*.", 
+    caption="Source: NCAA | By Matt Waite") + 
+  theme_minimal() + 
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    axis.title = element_text(size = 8), 
+    plot.subtitle = element_markdown(size=10), 
+    panel.grid.minor = element_blank(),
+    axis.title.y = element_textbox_simple(
+      orientation = "left-rotated",
+      width = grid::unit(2.5, "in")
+    )
+    ) +
+  geom_point(data=nu, aes(x=`Yards/G`, y=`Points/G`), color="red") + 
+  geom_text_repel(data=nu, aes(x=`Yards/G`, y=`Points/G`, label="Nebraska 2018"))
+```
+One last advanced trick: Adding a text box explainer in the graphic. This should be used in somewhat rare circumstances -- you don't want to pollute your data space with lots of text. If your graphic needs so much explainer text, you should be asking yourself hard questions about if your chart is clearly telling a story.
+
+To add a text box explainer, you need to add a `geom_textbox` to your chart. The code below does that, and also adds a `geom_point` to anchor the box to a spot. 
+
+```{r fig.width=5, fig.height=2, message=FALSE}
+
+ggplot() + 
+  geom_point(data=offense, aes(x=`Yards/G`, y=`Points/G`), color="grey") + 
+  geom_smooth(data=offense, aes(x=`Yards/G`, y=`Points/G`), method=lm, se=FALSE) + 
+  geom_textbox(
+    aes(x=500, 
+        y=25, 
+        label="Dots below the blue line indicate offenses that scored fewer points than their yards per game would suggest they should.", 
+        orientation = "upright", 
+        hjust=0, 
+        vjust=1), width = unit(2.8, "in")) +
+  geom_point(aes(x=500, y=25), size=2) + 
+  labs(
+    x="Total yards per game", 
+    y="Points per game", 
+    title="Nebraska's underperforming offense", 
+    subtitle="The Husker's offense was the strength of the team, having to overcome a defense changing systems and struggling to stop opponents. But if you compare<br>the offense to every other offense and how many points they score vs the number of yards they roll up, NU *underperformed*.", 
+    caption="Source: NCAA | By Matt Waite") + 
+  theme_minimal() + 
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    axis.title = element_text(size = 8), 
+    plot.subtitle = element_markdown(size=10), 
+    panel.grid.minor = element_blank()
+    ) +
+  geom_point(data=nu, aes(x=`Yards/G`, y=`Points/G`), color="red") + 
+  geom_text_repel(data=nu, aes(x=`Yards/G`, y=`Points/G`, label="Nebraska 2018"))
+```
+
