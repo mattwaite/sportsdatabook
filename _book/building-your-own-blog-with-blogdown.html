@@ -24,7 +24,7 @@
 <meta name="author" content="Matt Waite" />
 
 
-<meta name="date" content="2021-11-09" />
+<meta name="date" content="2021-11-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -283,6 +283,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="35.1" data-path="finishing-touches.html"><a href="finishing-touches.html#graphics-vs-visual-stories"><i class="fa fa-check"></i><b>35.1</b> Graphics vs visual stories</a></li>
 <li class="chapter" data-level="35.2" data-path="finishing-touches.html"><a href="finishing-touches.html#getting-ggplot-closer-to-output"><i class="fa fa-check"></i><b>35.2</b> Getting ggplot closer to output</a></li>
 <li class="chapter" data-level="35.3" data-path="finishing-touches.html"><a href="finishing-touches.html#waffle-charts-require-special-attention"><i class="fa fa-check"></i><b>35.3</b> Waffle charts require special attention</a></li>
+<li class="chapter" data-level="35.4" data-path="finishing-touches.html"><a href="finishing-touches.html#advanced-text-wrangling"><i class="fa fa-check"></i><b>35.4</b> Advanced text wrangling</a></li>
 </ul></li>
 <li class="chapter" data-level="36" data-path="rtweet-and-text-analysis.html"><a href="rtweet-and-text-analysis.html"><i class="fa fa-check"></i><b>36</b> Rtweet and Text Analysis</a>
 <ul>
@@ -373,9 +374,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">39.1</span> Setup</h2>
 <p>With those requirements in mind, we’re going to use a library called Blogdown, which creates blog posts from R Markdown files, similar to what you’ve been working with in this book.</p>
 <p>It installs how you think it should. Go into the console and run this:</p>
-<div class="sourceCode" id="cb666"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb666-1"><a href="building-your-own-blog-with-blogdown.html#cb666-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&#39;blogdown&#39;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb671"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb671-1"><a href="building-your-own-blog-with-blogdown.html#cb671-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&#39;blogdown&#39;</span>) </span></code></pre></div>
 <p>After that, run this:</p>
-<div class="sourceCode" id="cb667"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb667-1"><a href="building-your-own-blog-with-blogdown.html#cb667-1" aria-hidden="true" tabindex="-1"></a>blogdown<span class="sc">::</span><span class="fu">install_hugo</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb672"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb672-1"><a href="building-your-own-blog-with-blogdown.html#cb672-1" aria-hidden="true" tabindex="-1"></a>blogdown<span class="sc">::</span><span class="fu">install_hugo</span>()</span></code></pre></div>
 <p>After that, we’re ready to start making a blog. To do that, go to File &gt; New Project and select New Directory (or Version Control if you know what you’re doing).</p>
 <p><img src="images/blog1.png" width="706" /></p>
 <p>In the Project Type view, you may have to scroll down to find “Website using blogdown” but that’s your choice. Mine will probably look different than yours, but below is what the line you’re looking for looks like.</p>

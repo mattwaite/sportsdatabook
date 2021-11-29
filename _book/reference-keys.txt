@@ -80,6 +80,7 @@ finishing-touches
 graphics-vs-visual-stories
 getting-ggplot-closer-to-output
 waffle-charts-require-special-attention
+advanced-text-wrangling
 rtweet-and-text-analysis
 prerequisites
 tools-for-text-analysis
