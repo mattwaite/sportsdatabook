@@ -57,8 +57,7 @@ Last: Look at the p-value. We are looking for a p-value smaller than .05. At .05
 What we want to do now is look at those residuals. We want to add them to our individual game records. We can do that by creating two new fields -- predicted and residuals -- to our dataframe like this:
 
 ```{r}
-residualmodel$predicted <- predict(fit)
-residualmodel$residuals <- residuals(fit)
+residualmodel <- residualmodel %>% mutate(predicted = predict(fit), residuals = residuals(fit))
 ```
 
 Now we can sort our data by those residuals. Sorting in descending order gives us the games where teams overperformed the model. To make it easier to read, I'm going to use select to give us just the columns we need to see.
