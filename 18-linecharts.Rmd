@@ -118,7 +118,7 @@ ggplot() +
 
 What do we see here? How has Nebraska and Michigan State's season evolved against all the rest of the teams in college basketball?
 
-But how does that compare to the average? We can add that pretty easily by creating a new dataframe with it and add another geom_line. 
+But how does that compare to the average? We can add that pretty easily by creating a new dataframe with it and add another geom_line.
 
 ```{r}
 average <- logs %>% group_by(Date) %>% summarise(mean_shooting=mean(TeamFGPCT))
